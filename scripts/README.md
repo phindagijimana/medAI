@@ -26,6 +26,22 @@ Scripts for initialization, testing, and deployment.
   python3 scripts/test_learning_loop.py
   ```
 
+- **`test_rag.py`**: RAG + few-shot loader smoke test (no LLM, fast)
+  - Verifies `sentence-transformers`, guideline index, and `data/few_shot_examples.json`
+  
+  ```bash
+  APP_HOME=$(pwd) python3 scripts/test_rag.py
+  ```
+
+- **`test_analyze_e2e.py`**: End-to-end `POST /analyze` via Flask test client
+  - Loads Med42 if not already in memory; uses RAG + few-shot in the real prompt path
+  - **Slow on CPU** (many minutes); use a GPU for shorter runs
+  - Exits 0 with a message if the model is unavailable (503)
+  
+  ```bash
+  APP_HOME=$(pwd) python3 scripts/test_analyze_e2e.py
+  ```
+
 ### Deployment Scripts
 
 - **`med42_service.slurm`**: SLURM job template

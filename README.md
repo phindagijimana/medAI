@@ -33,13 +33,19 @@ cd vecta
 
 ## CLI Commands
 
-### Local (vecta)
+### Local (`./vecta`)
 ```bash
-./vecta start          # Start service (auto GPU/CPU detection)
+./vecta install        # pip install -r requirements.txt
+./vecta start          # Gunicorn in background (production-style)
+./vecta start -f       # Flask dev server in foreground
+./vecta start -p 8090  # Port (also SERVICE_PORT)
 ./vecta status         # Check status
 ./vecta logs           # View logs
 ./vecta stop           # Stop service
+./vecta restart
 ```
+
+Use `VECTA_PIP_USER=0` when using a venv so `pip install` does not pass `--user`.
 
 ### HPC (vecta-hpc)
 ```bash
@@ -65,6 +71,8 @@ cd vecta
 ## Documentation
 
 See `DEPLOYMENT.md` for complete deployment guide, GPU setup, HPC configuration, and troubleshooting.
+
+**Self-hosting (Gunicorn, env vars, Docker):** see [`SELF_HOSTING.md`](SELF_HOSTING.md) and [`.env.example`](.env.example).
 
 ## Tech Stack
 

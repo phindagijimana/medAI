@@ -11,9 +11,31 @@ from pathlib import Path
 from datetime import datetime
 
 APP_DIR = Path(__file__).parent
+REQUIREMENTS = APP_DIR / "requirements.txt"
 JOB_SCRIPT = APP_DIR / "slurm_job.sh"
 JOB_ID_FILE = APP_DIR / ".hpc_job_id"
 INSTALL_MARKER = APP_DIR / ".hpc_installed"
+
+
+def _pip_user_args():
+    if sys.prefix != sys.base_prefix:
+        return []
+    v = os.environ.get("VECTA_PIP_USER", "1").lower()
+    return ["--user"] if v in ("1", "true", "yes") else []
+
+
+def _read_service_port_from_job_script():
+    """Port written into generated slurm_job.sh."""
+    if not JOB_SCRIPT.exists():
+        return 8085
+    try:
+        for line in JOB_SCRIPT.read_text().splitlines():
+            s = line.strip()
+            if s.startswith("export SERVICE_PORT="):
+                return int(s.split("=", 1)[1].strip().strip('"').strip("'"))
+    except Exception:
+        pass
+    return 8085
 
 
 def print_banner():
@@ -83,34 +105,29 @@ def cmd_install(args):
     print("Step 1/5: Loading required modules...")
     print("  [OK] Modules auto-loaded (cuda, python, gcc)")
     
-    print("\nStep 2/5: Installing Python dependencies...")
+    print("\nStep 2/5: Installing Python dependencies from requirements.txt...")
+    if not REQUIREMENTS.is_file():
+        print(f"  [ERROR] Missing {REQUIREMENTS}")
+        return 1
     try:
-        # Install base dependencies
-        subprocess.run([
-            sys.executable, '-m', 'pip', 'install', '--user',
-            'flask', 'flask-cors', 'pandas', 'numpy'
-        ], check=True)
-        print("  [OK] Base dependencies installed")
-        
-        # Ask about GPU dependencies
-        print("\nOptional: Install GPU dependencies (PyTorch, transformers)?")
-        print("  This enables full AI model (requires ~10GB download)")
-        gpu_response = input("Install GPU packages? (Y/n): ").strip().lower()
-        
-        if gpu_response != 'n':
-            print("  Installing PyTorch with CUDA support...")
+        subprocess.run(
+            [sys.executable, '-m', 'pip', 'install'] + _pip_user_args() + ['-r', str(REQUIREMENTS)],
+            check=True,
+        )
+        print("  [OK] requirements.txt installed")
+
+        print("\nOptional: Reinstall PyTorch with CUDA 12.1 wheels (for GPU nodes)?")
+        print("  Skip if CPU-only or if the default PyTorch already matches your CUDA.")
+        gpu_response = input("Install CUDA 12.1 PyTorch from pytorch.org? (y/N): ").strip().lower()
+
+        if gpu_response == 'y':
+            print("  Installing PyTorch (CUDA 12.1) + matching vision/audio...")
             subprocess.run([
-                sys.executable, '-m', 'pip', 'install', '--user',
+                sys.executable, '-m', 'pip', 'install', '--upgrade',
                 'torch', 'torchvision', 'torchaudio',
-                '--index-url', 'https://download.pytorch.org/whl/cu121'
-            ], check=True)
-            
-            print("  Installing transformers and accelerate...")
-            subprocess.run([
-                sys.executable, '-m', 'pip', 'install', '--user',
-                'transformers', 'accelerate', 'bitsandbytes'
-            ], check=True)
-            print("  [OK] GPU dependencies installed")
+                '--index-url', 'https://download.pytorch.org/whl/cu121',
+            ] + _pip_user_args(), check=True)
+            print("  [OK] CUDA PyTorch installed")
     except subprocess.CalledProcessError as e:
         print(f"  [ERROR] Installation failed: {e}")
         return 1
@@ -155,11 +172,13 @@ def create_slurm_job_script(args, resource_mode='gpu'):
     if resource_mode == 'cpu':
         partition = args.partition or 'standard'
         gpus = 0
+        gpu_type = None
         mem = args.memory or '32G'
         cpus = args.cpus or 16
     else:  # gpu mode
         partition = args.partition or 'general'  # Default GPU partition
         gpus = args.gpus or 1
+        gpu_type = getattr(args, 'gpu_type', 'l40s.12g')  # Default to 12GB
         mem = args.memory or '64G'
         cpus = args.cpus or 8
     
@@ -173,8 +192,9 @@ def create_slurm_job_script(args, resource_mode='gpu'):
     
     # Add GPU request only if in GPU mode
     if resource_mode == 'gpu' and gpus > 0:
+        # Request specific GPU type (l40s.6g, l40s.12g, or l40s.24g)
         sbatch_directives += f"""
-#SBATCH --gres=gpu:{gpus}"""
+#SBATCH --gres=gpu:{gpu_type}:{gpus}"""
     
     sbatch_directives += f"""
 #SBATCH --nodes=1
@@ -217,17 +237,30 @@ module load cuda 2>/dev/null || module load cuda/12.2 2>/dev/null || module load
 """
     
     script_content += f"""
-# Set environment variables
+# Set environment variables (app.py / gunicorn_config.py read these)
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export VECTA_PORT={port}
+export APP_HOME="$SLURM_SUBMIT_DIR"
+export SERVICE_HOST=0.0.0.0
+export SERVICE_PORT={port}
+# Prompt augmentation (defaults in app are also 1; set explicitly for clarity)
+export USE_RAG=1
+export USE_FEW_SHOT=1
 """
     
     # Add GPU-specific environment variables only for GPU mode
     if resource_mode == 'gpu':
-        script_content += """
-if [ -n "$SLURM_JOB_GPUS" ]; then
-    export CUDA_VISIBLE_DEVICES=$SLURM_JOB_GPUS
+        # Do NOT hardcode bare-metal GPU slot indices (e.g. "1" for 12GB L40S). Under SLURM + cgroups,
+        # the allocated GPU is typically visible to CUDA as device 0. Setting CUDA_VISIBLE_DEVICES=1 when
+        # only one GPU is assigned hides all devices and forces CPU PyTorch.
+        script_content += f"""
+# GPU type requested in SBATCH (--gres=gpu:{gpu_type}:...); visibility is handled by SLURM/cgroup.
+if [ -n "${{CUDA_VISIBLE_DEVICES:-}}" ]; then
+  echo "CUDA_VISIBLE_DEVICES (SLURM or preset): $CUDA_VISIBLE_DEVICES"
+else
+  echo "CUDA_VISIBLE_DEVICES unset — cgroup maps allocated GPU(s) to CUDA device index 0,1,..."
 fi
+# Fail model load if PyTorch still cannot see CUDA (CPU-only wheel on a GPU node)
+export VECTA_REQUIRE_GPU=1
 """
     
     script_content += """
@@ -255,11 +288,11 @@ echo ""
     
     # Add final part of script
     script_content += f"""
-# Start Vecta AI service
-echo "Starting Vecta AI on port {port}..."
-python3 app.py --host 0.0.0.0 --port {port}
+# Start Vecta AI (Gunicorn — see gunicorn_config.py; single worker for one model copy)
+echo "Starting Vecta AI on 0.0.0.0:{port} (Gunicorn)..."
+exec python3 -m gunicorn -c gunicorn_config.py app:app
 
-# Job completion
+# Job completion (unreachable if exec succeeds; kept for clarity)
 echo ""
 echo "=================================================="
 echo "Job completed: $(date)"
@@ -433,7 +466,7 @@ def cmd_status(args):
                     text=True
                 )
                 node = node_result.stdout.strip()
-                port = 8085  # Default, could be read from job script
+                port = _read_service_port_from_job_script()
                 
                 print(f"  1. From login node, forward port:")
                 print(f"     ssh -L {port}:{node}:{port} $USER@login-node")
@@ -657,6 +690,9 @@ Examples:
                           help='Resource mode: cpu (CPU-only) or gpu (CPU+GPU)')
     run_parser.add_argument('--partition', help='SLURM partition (default: standard for CPU, general for GPU)')
     run_parser.add_argument('--gpus', type=int, help='Number of GPUs (GPU mode only, default: 1)')
+    run_parser.add_argument('--gpu-type', choices=['l40s.6g', 'l40s.12g', 'l40s.24g'], 
+                          default='l40s.12g',
+                          help='GPU memory configuration (default: l40s.12g for 8B model)')
     run_parser.add_argument('--memory', help='Memory allocation (default: 32G for CPU, 64G for GPU)')
     run_parser.add_argument('--time', help='Time limit (default: 24:00:00)')
     run_parser.add_argument('--cpus', type=int, help='CPUs per task (default: 16 for CPU, 8 for GPU)')

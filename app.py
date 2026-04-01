@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-import os, time, json, logging, tempfile, uuid, traceback, sys
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+# Defaults match inference_augmentation_flags() when env is unset
+os.environ.setdefault("USE_RAG", "1")
+os.environ.setdefault("USE_FEW_SHOT", "1")
+import time, json, logging, tempfile, uuid, traceback, sys, re
+from logging.handlers import RotatingFileHandler
 from datetime import datetime
 from queue import Queue
 from pathlib import Path
@@ -20,25 +30,36 @@ except Exception:
     torch = None
     AutoTokenizer = AutoModelForCausalLM = None
 
-# File parsing (optional but installed)
+# File parsing (optional; import failures must not disable unrelated parsers)
 try:
     import pandas as pd
+except Exception:
+    pd = None
+try:
     import PyPDF2
+except Exception:
+    PyPDF2 = None
+try:
     from docx import Document
 except Exception:
-    pd = PyPDF2 = Document = None
+    Document = None
 
 APP_HOME = os.environ.get("APP_HOME", os.getcwd())
 SERVICE_LOG_DIR = os.environ.get("SERVICE_LOG_DIR", os.path.join(APP_HOME, "logs"))
 Path(SERVICE_LOG_DIR).mkdir(parents=True, exist_ok=True)
 
+_log_path = os.path.join(SERVICE_LOG_DIR, "med42_service.log")
+_file_handler = RotatingFileHandler(
+    _log_path,
+    maxBytes=int(os.environ.get("LOG_MAX_BYTES", str(10 * 1024 * 1024))),
+    backupCount=int(os.environ.get("LOG_BACKUP_COUNT", "5")),
+)
+_file_handler.setFormatter(logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s"))
+_stream_handler = logging.StreamHandler()
+_stream_handler.setFormatter(logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s"))
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    handlers=[
-        logging.FileHandler(os.path.join(SERVICE_LOG_DIR, "med42_service.log")),
-        logging.StreamHandler()
-    ]
+    level=getattr(logging, os.environ.get("LOG_LEVEL", "INFO").upper(), logging.INFO),
+    handlers=[_file_handler, _stream_handler],
 )
 logger = logging.getLogger("vectaai")
 
@@ -56,21 +77,39 @@ try:
     from utils.rag_system import get_rag_system
     rag_system = get_rag_system()
     if rag_system and rag_system.available:
-        logger.info("[OK] RAG system initialized successfully (ChromaDB + semantic search)")
+        logger.info("[OK] RAG system initialized (guideline semantic retrieval)")
     else:
         rag_system = None
-        logger.info("ℹ️ RAG system not initialized (install: pip install chromadb sentence-transformers)")
+        logger.info("ℹ️ RAG system not initialized (install: pip install sentence-transformers numpy)")
 except Exception as e:
     rag_system = None
     logger.info(f"ℹ️ RAG system not available: {e}")
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-CORS(app)
+
+_cors = os.environ.get("CORS_ORIGINS", "").strip()
+if _cors:
+    _origins = [o.strip() for o in _cors.split(",") if o.strip()]
+    if _origins:
+        CORS(app, origins=_origins, supports_credentials=True)
+    else:
+        CORS(app)
+else:
+    CORS(app)
+
+_secret_env = os.environ.get("SECRET_KEY") or os.environ.get("FLASK_SECRET_KEY")
+if _secret_env:
+    _flask_secret = _secret_env
+else:
+    _flask_secret = os.urandom(24)
+    logger.warning(
+        "SECRET_KEY not set; using ephemeral key (sessions reset on restart). Set SECRET_KEY for production."
+    )
 
 app.config.update({
     "UPLOAD_FOLDER": os.path.join(APP_HOME, "uploads"),
-    "MAX_CONTENT_LENGTH": 50 * 1024 * 1024,  # 50MB
-    "SECRET_KEY": os.urandom(24),
+    "MAX_CONTENT_LENGTH": int(os.environ.get("MAX_CONTENT_LENGTH", str(50 * 1024 * 1024))),
+    "SECRET_KEY": _flask_secret,
     "MAX_CONCURRENT_REQUESTS": int(os.environ.get("MAX_CONCURRENT_USERS", "10"))
 })
 
@@ -91,6 +130,140 @@ except Exception as e:
     logger.warning(f"⚠️ Database initialization failed: {e}")
 
 ALLOWED_EXT = {"txt", "pdf", "docx", "xlsx", "csv", "json"}
+
+# Short labels for tabular "Task" column (what analysis was performed)
+_ANALYSIS_TASK_LABELS = {
+    "epilepsy": "Epilepsy classification (ILAE 2017)",
+    "classification": "Clinical classification",
+    "diagnosis": "Diagnosis support",
+    "summary": "Clinical summarization",
+    "extraction": "Information extraction",
+    "custom": "Custom analysis",
+}
+
+
+def _task_column_value(analysis_type: str, user_prompt: str) -> str:
+    """Human-readable task description for tabular Task column cells."""
+    base = _ANALYSIS_TASK_LABELS.get(analysis_type, analysis_type.replace("_", " ").title())
+    p = (user_prompt or "").strip()
+    if not p:
+        return base
+    extra = p[:200] + ("…" if len(p) > 200 else "")
+    return f"{base} — {extra}"
+
+
+def parse_structured_bullets_from_analysis(analysis_text: str) -> dict:
+    """
+    Parse '- Label: value' bullets from model output.
+    Returns canonical keys plus raw label->value map.
+    """
+    raw = {}
+    for line in (analysis_text or "").splitlines():
+        line = line.strip()
+        if not line.startswith("- "):
+            continue
+        rest = line[2:].strip()
+        if ":" not in rest:
+            continue
+        lab, val = rest.split(":", 1)
+        raw[lab.strip()] = val.strip()
+
+    primary = None
+    for k in ("Classification", "Diagnosis Support", "Summarization", "Information Extraction"):
+        if k in raw:
+            primary = raw[k]
+            break
+
+    conf = raw.get("Clinical_Confidence") or raw.get("Confidence")
+    ev = raw.get("Evidence")
+    med = raw.get("Medication_Analysis")
+
+    return {
+        "classification": primary or "",
+        "clinical_confidence": conf or "",
+        "evidence": ev or "",
+        "medication_analysis": med or "",
+        "raw_bullets": raw,
+    }
+
+
+def confidence_string_to_score(conf_text: str):
+    """Map High/Medium/Low text to a 0.0–1.0 score; None if unknown."""
+    if not conf_text or not str(conf_text).strip():
+        return None
+    s = str(conf_text).lower()
+    if re.search(r"\bhigh\b", s):
+        return 0.85
+    if re.search(r"\blow\b", s):
+        return 0.25
+    if re.search(r"\bmedium\b", s):
+        return 0.5
+    return 0.5
+
+
+def inference_augmentation_flags():
+    """USE_RAG / USE_FEW_SHOT from env. Defaults: both enabled (1)."""
+    use_rag = os.environ.get("USE_RAG", "1").lower() not in ("0", "false", "no")
+    use_fs = os.environ.get("USE_FEW_SHOT", "1").lower() not in ("0", "false", "no")
+    return use_rag, use_fs
+
+
+def inference_require_gpu():
+    """If true, model load fails when CUDA is not available (production GPU nodes)."""
+    return os.environ.get("VECTA_REQUIRE_GPU", "").lower() in ("1", "true", "yes")
+
+
+def structured_tasks_from_parsed(parsed: dict) -> list:
+    """Build [{task, value}, ...] from parsed bullets for JSON responses."""
+    raw = parsed.get("raw_bullets") or {}
+    if raw:
+        return [{"task": k, "value": v} for k, v in raw.items()]
+    out = []
+    if parsed.get("classification"):
+        out.append({"task": "Classification", "value": parsed["classification"]})
+    if parsed.get("clinical_confidence"):
+        out.append({"task": "Clinical_Confidence", "value": parsed["clinical_confidence"]})
+    if parsed.get("evidence"):
+        out.append({"task": "Evidence", "value": parsed["evidence"]})
+    if parsed.get("medication_analysis"):
+        out.append({"task": "Medication_Analysis", "value": parsed["medication_analysis"]})
+    return out
+
+
+def _split_text_into_chunks(text: str, max_chars: int) -> list:
+    """
+    Split long medical text into chunks <= max_chars, preferring paragraph then sentence breaks.
+    """
+    if not text or max_chars <= 0:
+        return [text or ""]
+    text = text.strip()
+    if len(text) <= max_chars:
+        return [text]
+
+    chunks = []
+    start = 0
+    n = len(text)
+    while start < n:
+        end = min(start + max_chars, n)
+        if end < n:
+            window = text[start:end]
+            para = window.rfind("\n\n")
+            if para > max_chars * 0.45:
+                end = start + para + 2
+            else:
+                nl = window.rfind("\n")
+                if nl > max_chars * 0.45:
+                    end = start + nl + 1
+                else:
+                    dot = window.rfind(". ")
+                    if dot > max_chars * 0.45:
+                        end = start + dot + 2
+        piece = text[start:end].strip()
+        if piece:
+            chunks.append(piece)
+        start = end
+    return chunks if chunks else [text[:max_chars]]
+
 
 #############################
 # MED42-8B OPTIMIZED PROMPTING
@@ -216,6 +389,17 @@ For each classification:
 3. Assign confidence levels based on evidence strength
 4. Structure results for tabular integration""",
                 
+                "epilepsy": f"""{base_identity}{specialty_activation}
+
+Vecta AI: You are analyzing medical tabular data for a focused classification task (e.g. condition-specific or schema-driven).
+
+MANDATORY FORMAT REQUIREMENT: End with exactly 4 bullets: Classification, Clinical_Confidence, Evidence, Medication_Analysis (max 25 words each).
+
+TABULAR CLASSIFICATION PROTOCOL:
+• Summarize cohort-level conclusions that map cleanly to exported columns (task description + structured bullets)
+• State primary labels or categories supported by the data; use the Classification bullet for the main outcome wording
+• Apply confidence and evidence consistently with the user’s analysis request""",
+                
                 "diagnosis": f"""{base_identity}{specialty_activation}
 
 Vecta AI: You are providing diagnostic analysis for medical datasets.
@@ -298,6 +482,17 @@ For classification tasks:
 3. Provide step-by-step clinical reasoning
 4. Include confidence levels based on evidence strength""",
                 
+                "epilepsy": f"""{base_identity}{specialty_activation}
+
+Vecta AI: You are performing a focused classification task on clinical data; follow the user’s analysis request for the exact scheme.
+
+MANDATORY FORMAT REQUIREMENT: End with exactly 4 bullets: Classification, Clinical_Confidence, Evidence, Medication_Analysis (max 25 words each).
+
+CLASSIFICATION PROTOCOL:
+• Apply the criteria implied by the user prompt (e.g. staging, subtype, or rule-out)
+• Put the primary outcome wording in the Classification bullet so exports stay consistent
+• Reserve Evidence and Medication_Analysis for supporting facts and therapy notes""",
+                
                 "diagnosis": f"""{base_identity}{specialty_activation}
 
 Vecta AI: You are providing diagnostic support using your medical training.
@@ -365,7 +560,7 @@ ADAPTIVE MEDICAL ANALYSIS:
 
     @staticmethod
     def get_enhanced_context(condition=None, analysis_type="classification", num_examples=2, 
-                            query_text=None, use_rag=True):
+                            query_text=None, use_rag=True, use_few_shot=True):
         """
         Get enhanced context with few-shot examples, clinical guidelines, and RAG
         
@@ -373,14 +568,12 @@ ADAPTIVE MEDICAL ANALYSIS:
         Phase 2: Context Injection - Static Guidelines (Week 3-4)
         Phase 3: RAG - Dynamic Retrieval (Week 5-8)
         """
-        if not few_shot_loader:
-            return ""
-        
         context_parts = []
         
         try:
-            # Phase 1: Add few-shot examples if condition is specified
-            if condition:
+            # Phase 1–2 require few_shot_loader (static guidelines + examples live there)
+            if few_shot_loader and use_few_shot and condition:
+                # Phase 1: few-shot examples
                 examples = few_shot_loader.get_examples_by_condition(
                     condition=condition,
                     n=num_examples,
@@ -432,15 +625,16 @@ ADAPTIVE MEDICAL ANALYSIS:
         # Add clinical reasoning activation
         clinical_activation = VectaAIPromptEngine.get_clinical_reasoning_activation()
         
-        # Get enhanced context (few-shot + guidelines + RAG)
+        # Get enhanced context (few-shot + static guidelines + RAG)
         enhanced_context = ""
-        if use_few_shot and condition:
+        if medical_data and ((use_few_shot and condition) or use_rag):
             enhanced_context = VectaAIPromptEngine.get_enhanced_context(
                 condition=condition,
                 analysis_type=analysis_type,
                 num_examples=2,
-                query_text=medical_data,  # Use medical data for RAG query
-                use_rag=use_rag
+                query_text=medical_data,
+                use_rag=use_rag,
+                use_few_shot=use_few_shot,
             )
         
         # Minimal additional instructions to avoid conflicting with template-specific formatting
@@ -451,10 +645,16 @@ ADAPTIVE MEDICAL ANALYSIS:
         
         # Extract and prioritize format requirement if present
         format_instruction = ""
-        if "MANDATORY FORMAT REQUIREMENT" in system_prompt:
+        if (
+            "MANDATORY FORMAT REQUIREMENT" in system_prompt
+            or "MANDATORY OUTPUT FORMAT" in system_prompt
+            or analysis_type == "epilepsy"
+        ):
             # Extract the specific analysis type from the prompt
             analysis_type_label = "Classification"  # default
-            if "Diagnosis Support:" in system_prompt:
+            if analysis_type == "epilepsy":
+                analysis_type_label = "Classification"
+            elif "Diagnosis Support:" in system_prompt:
                 analysis_type_label = "Diagnosis Support"
             elif "Summarization:" in system_prompt:
                 analysis_type_label = "Summarization"
@@ -690,40 +890,48 @@ This dataset contains medical information that requires your specialized Vecta A
         logger.error(f"Tabular analysis failed: {e}")
         return None
 
-def _generate_tabular_output(analysis_result, original_df, analysis_type):
-    """Generate enhanced tabular output using Vecta AI insights"""
+def _generate_tabular_output(
+    analysis_result,
+    original_df,
+    analysis_type,
+    user_prompt="",
+):
+    """
+    Append cohort-level columns: task description (what was run) plus parsed structured bullets.
+    Same values on each row; binary or multi-class outcomes live in the Classification bullet text.
+    """
     try:
         output_df = original_df.copy()
-        
-        # Parse the analysis for structured results
-        analysis_text = analysis_result.get('analysis', '')
-        
-        # Add Vecta AI-enhanced analysis columns based on type
-        if analysis_type == "classification":
-            output_df['VectaAI_Classification'] = 'REQUIRES_REVIEW'
-            output_df['VectaAI_Confidence'] = 'MEDIUM'
-            output_df['VectaAI_Evidence'] = 'See Vecta AI analysis'
-            output_df['VectaAI_Clinical_Reasoning'] = 'Applied pathophysiology knowledge'
-                
-        elif analysis_type == "extraction":
-            output_df['VectaAI_Key_Findings'] = 'Extracted using clinical training'
-            output_df['VectaAI_Diagnoses'] = 'Identified conditions'
-            output_df['VectaAI_Medications'] = 'Analyzed using pharmacology knowledge'
-            output_df['VectaAI_Risk_Assessment'] = 'Clinical risk stratification applied'
-            
+        analysis_text = analysis_result.get("analysis", "")
+        parsed = parse_structured_bullets_from_analysis(analysis_text)
+
+        cls = parsed.get("classification") or ""
+        conf = parsed.get("clinical_confidence") or ""
+        ev = parsed.get("evidence") or ""
+        med = parsed.get("medication_analysis") or ""
+
+        task_cell = _task_column_value(analysis_type, user_prompt)
+        output_df["VectaAI_Task_Done"] = task_cell
+        output_df["VectaAI_Classification"] = cls or "See analysis text"
+        output_df["VectaAI_Clinical_Confidence"] = conf or "MEDIUM"
+        output_df["VectaAI_Evidence"] = ev or "See analysis text"
+        output_df["VectaAI_Medication_Analysis"] = med or "See analysis text"
+
+        if analysis_type == "extraction":
+            output_df["VectaAI_Key_Findings"] = cls or ev or "See analysis text"
+            output_df["VectaAI_Diagnoses"] = cls or "See analysis text"
+            output_df["VectaAI_Risk_Assessment"] = conf or "See analysis text"
         elif analysis_type == "diagnosis":
-            output_df['VectaAI_Primary_Diagnosis'] = 'Clinical reasoning applied'
-            output_df['VectaAI_Differential'] = 'Multiple diagnostic possibilities'
-            output_df['VectaAI_Confidence'] = 'MEDIUM'
-            output_df['VectaAI_Clinical_Correlations'] = 'Applied medical training'
-            
-        # Add standard Vecta AI metadata columns
-        output_df['VectaAI_Analysis_Date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        output_df['VectaAI_Model_Used'] = 'Vecta-AI-Optimized'
-        output_df['VectaAI_Prompt_Version'] = 'Enhanced-Clinical-Reasoning'
-        
+            output_df["VectaAI_Primary_Diagnosis"] = cls or "See analysis text"
+            output_df["VectaAI_Differential"] = ev or "See analysis text"
+            output_df["VectaAI_Clinical_Correlations"] = med or "See analysis text"
+
+        output_df["VectaAI_Analysis_Date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        output_df["VectaAI_Model_Used"] = "Vecta-AI-Optimized"
+        output_df["VectaAI_Prompt_Version"] = "Enhanced-Clinical-Reasoning"
+
         return output_df
-        
+
     except Exception as e:
         logger.error(f"Enhanced tabular output generation failed: {e}")
         return original_df
@@ -775,10 +983,41 @@ class VectaAIService:
     def __init__(self):
         self.model = None
         self.tokenizer = None
+        
+        # Debug GPU detection
+        logger.info(f"GPU Detection Debug:")
+        logger.info(f"  torch module: {torch}")
+        if torch:
+            # Force CUDA reinitialization
+            try:
+                torch.cuda.init()
+                logger.info("  Forced CUDA init")
+            except Exception as e:
+                logger.warning(f"  CUDA init failed: {e}")
+            
+            logger.info(f"  torch.cuda.is_available(): {torch.cuda.is_available()}")
+            logger.info(f"  torch.cuda.device_count(): {torch.cuda.device_count()}")
+            logger.info(f"  CUDA_VISIBLE_DEVICES: {os.environ.get('CUDA_VISIBLE_DEVICES', 'not set')}")
+            if torch.cuda.is_available():
+                for i in range(torch.cuda.device_count()):
+                    logger.info(f"  GPU {i}: {torch.cuda.get_device_name(i)}")
+        
         self.device = "cuda" if torch and torch.cuda.is_available() else "cpu"
+        logger.info(f"  Selected device: {self.device}")
+        self._gpu_required_but_unavailable = bool(
+            inference_require_gpu() and self.device != "cuda"
+        )
+        if self._gpu_required_but_unavailable:
+            self.load_error = (
+                "VECTA_REQUIRE_GPU=1 but CUDA is not available. "
+                "Use a CUDA build of PyTorch, GPU drivers, and a valid CUDA_VISIBLE_DEVICES on a GPU node."
+            )
+            logger.error(self.load_error)
+        
         self.model_name = os.environ.get("MODEL_NAME", "m42-health/Llama3-Med42-8B")
         self.model_loaded = False
-        self.load_error = None
+        if not self._gpu_required_but_unavailable:
+            self.load_error = None
         self.request_queue = Queue(maxsize=app.config["MAX_CONCURRENT_REQUESTS"])
         self.stats = {"requests": 0, "successes": 0, "avg_time": 0}
         self.prompt_engine = VectaAIPromptEngine()
@@ -786,7 +1025,9 @@ class VectaAIService:
     def load_model(self):
         if self.model_loaded:
             return True
-        
+        if getattr(self, "_gpu_required_but_unavailable", False):
+            return False
+
         if not torch or not AutoTokenizer:
             self.load_error = "PyTorch/Transformers not available"
             logger.error(self.load_error)
@@ -879,6 +1120,56 @@ class VectaAIService:
             return "epilepsy"
         
         return None
+
+    def _run_generation_pass(self, final_prompt, req_id, max_input_tokens):
+        """Single forward pass: tokenize, generate, decode."""
+        max_new = int(os.environ.get("VECTA_MAX_NEW_TOKENS", "512"))
+        max_new = max(64, min(max_new, 2048))
+        greedy_fast = os.environ.get("VECTA_GREEDY_FAST", "").lower() in ("1", "true", "yes")
+        toks = self.tokenizer(
+            final_prompt,
+            return_tensors="pt",
+            truncation=True,
+            max_length=max_input_tokens,
+        )
+        input_token_count = toks["input_ids"].shape[1]
+        logger.info(f"[{req_id}] Vecta AI tokenized - Input tokens: {input_token_count}")
+        if input_token_count >= max_input_tokens:
+            logger.warning(f"[{req_id}] Vecta AI input truncated to fit token limit")
+        if self.device == "cuda":
+            toks = {k: v.to("cuda") for k, v in toks.items()}
+        logger.info(
+            f"[{req_id}] Generating Vecta AI response (max_new_tokens={max_new}, greedy={greedy_fast})..."
+        )
+        with torch.no_grad():
+            if greedy_fast:
+                outputs = self.model.generate(
+                    toks["input_ids"],
+                    attention_mask=toks.get("attention_mask"),
+                    max_new_tokens=max_new,
+                    do_sample=False,
+                    pad_token_id=self.tokenizer.eos_token_id,
+                    eos_token_id=self.tokenizer.eos_token_id,
+                )
+            else:
+                outputs = self.model.generate(
+                    toks["input_ids"],
+                    attention_mask=toks.get("attention_mask"),
+                    max_new_tokens=max_new,
+                    min_new_tokens=min(30, max_new // 2),
+                    temperature=0.3,
+                    top_p=0.85,
+                    do_sample=True,
+                    repetition_penalty=1.05,
+                    pad_token_id=self.tokenizer.eos_token_id,
+                    eos_token_id=self.tokenizer.eos_token_id,
+                )
+        generated_text = self.tokenizer.decode(
+            outputs[0][input_token_count:],
+            skip_special_tokens=True,
+        ).strip()
+        tokens_generated = outputs.shape[1] - input_token_count
+        return generated_text, input_token_count, int(tokens_generated)
     
     def analyze(self, prompt, text, analysis_type="custom", user_id=None, tabular_data=None, specialty=None):
         if not self.model_loaded:
@@ -891,7 +1182,9 @@ class VectaAIService:
                 raise RuntimeError("Vecta AI service at capacity. Try again later.")
             self.request_queue.put(req_id, timeout=1)
 
-            logger.info(f"[{req_id}] Vecta AI analysis started - Type: {analysis_type}, Text: {len(text)} chars")
+            text_full_original = text
+            original_len = len(text_full_original)
+            logger.info(f"[{req_id}] Vecta AI analysis started - Type: {analysis_type}, Text: {original_len} chars")
             
             # Check if this is tabular data analysis
             is_tabular = tabular_data is not None and tabular_data.get("is_tabular", False)
@@ -909,107 +1202,142 @@ class VectaAIService:
                 specialty=specialty
             )
 
-            # Optimize text length based on model capacity
-            max_text_chars = 4000
-            if len(text) > max_text_chars:
-                truncated = text[:max_text_chars]
-                last_period = truncated.rfind('.')
-                if last_period > max_text_chars * 0.8:
-                    truncated = truncated[:last_period + 1]
-                text = truncated + "\n\n[Note: Text truncated for Vecta AI processing]"
-                logger.info(f"[{req_id}] Text truncated to {len(text)} characters for Vecta AI")
+            chunk_chars = int(os.environ.get("VECTA_CHUNK_CHARS", "3200"))
+            carry_chars = int(os.environ.get("VECTA_CHUNK_CARRY_CHARS", "1500"))
+            carry_chars = max(0, min(carry_chars, 8000))
 
-            # Detect condition from text or specialty for few-shot examples
-            detected_condition = self._detect_condition(text, specialty)
-            
-            # Construct optimized Vecta AI prompt with few-shot examples and guidelines
-            final_prompt = self.prompt_engine.construct_med42_prompt(
-                system_prompt=system_prompt,
-                user_prompt=prompt,
-                medical_data=text,
-                is_tabular=is_tabular,
-                analysis_type=analysis_type,
-                condition=detected_condition,
-                use_few_shot=True  # Enable few-shot examples and guidelines
-            )
-            
-            if detected_condition:
-                logger.info(f"[{req_id}] Enhanced with few-shot examples for condition: {detected_condition}")
-
-            logger.info(f"[{req_id}] Vecta AI prompt constructed - Total length: {len(final_prompt)} chars")
-
-            # Tokenize with appropriate limits
-            max_model_context = 4096
-            max_input_tokens = 3200
-            
-            toks = self.tokenizer(
-                final_prompt, 
-                return_tensors="pt", 
-                truncation=True, 
-                max_length=max_input_tokens
-            )
-            
-            input_token_count = toks["input_ids"].shape[1]
-            logger.info(f"[{req_id}] Vecta AI tokenized - Input tokens: {input_token_count}")
-            
-            if input_token_count >= max_input_tokens:
-                logger.warning(f"[{req_id}] Vecta AI input truncated to fit token limit")
-
-            if self.device == "cuda":
-                toks = {k: v.to("cuda") for k, v in toks.items()}
-
-            # Generate response using Vecta AI
-            logger.info(f"[{req_id}] Generating Vecta AI response...")
-            with torch.no_grad():
-                outputs = self.model.generate(
-                    toks["input_ids"],
-                    attention_mask=toks.get("attention_mask"),
-                    max_new_tokens=512,
-                    min_new_tokens=30,
-                    temperature=0.3,
-                    top_p=0.85,
-                    do_sample=True,
-                    repetition_penalty=1.05,
-                    pad_token_id=self.tokenizer.eos_token_id,
-                    eos_token_id=self.tokenizer.eos_token_id,
-                    early_stopping=True
+            if chunk_chars <= 0:
+                # Legacy: single pass with hard cap (no multi-chunk iteration)
+                max_text_chars = 4000
+                text = text_full_original
+                if len(text) > max_text_chars:
+                    truncated = text[:max_text_chars]
+                    last_period = truncated.rfind('.')
+                    if last_period > max_text_chars * 0.8:
+                        truncated = truncated[:last_period + 1]
+                    text = truncated + "\n\n[Note: Text truncated for Vecta AI processing]"
+                    logger.info(f"[{req_id}] Text truncated to {len(text)} characters for Vecta AI")
+                chunks = [text]
+                chunking_meta = {"enabled": False, "chunks": 1, "reason": "VECTA_CHUNK_CHARS<=0 (legacy single pass)"}
+            elif len(text_full_original) <= chunk_chars:
+                chunks = [text_full_original]
+                chunking_meta = {"enabled": False, "chunks": 1, "reason": "under VECTA_CHUNK_CHARS"}
+            else:
+                chunks = _split_text_into_chunks(text_full_original, chunk_chars)
+                chunking_meta = {
+                    "enabled": True,
+                    "chunks": len(chunks),
+                    "chunk_chars": chunk_chars,
+                    "carry_chars": carry_chars,
+                }
+                logger.info(
+                    f"[{req_id}] Input split into {len(chunks)} chunks (~{chunk_chars} chars each, carry={carry_chars})"
                 )
 
-            generated_text = self.tokenizer.decode(
-                outputs[0][input_token_count:], 
-                skip_special_tokens=True
-            ).strip()
+            # Detect condition from full text for few-shot / RAG (first pass only uses full signal)
+            detected_condition = self._detect_condition(text_full_original, specialty)
             
-            dt = time.time() - t0
-            tokens_generated = outputs.shape[1] - input_token_count
-            
-            logger.info(f"[{req_id}] Vecta AI response generated: {tokens_generated} tokens in {dt:.2f}s")
+            use_rag, use_fs = inference_augmentation_flags()
 
-            # Generate enhanced tabular output if applicable
+            max_input_tokens = 3200
+            chunk_outputs = []
+            prior_model_output = ""
+            sum_input_tokens = 0
+            sum_gen_tokens = 0
+            max_input_tokens_seen = 0
+
+            for i, chunk in enumerate(chunks):
+                if i == 0:
+                    medical_data = chunk
+                    rag_i = use_rag
+                    fs_i = use_fs
+                else:
+                    carry = (
+                        prior_model_output[-carry_chars:]
+                        if len(prior_model_output) > carry_chars
+                        else prior_model_output
+                    )
+                    medical_data = (
+                        f"[Continuation {i + 1}/{len(chunks)}]\n\n"
+                        f"Prior analysis excerpt (for context):\n{carry}\n\n"
+                        f"--- Current input section ---\n{chunk}"
+                    )
+                    # Avoid duplicate RAG/few-shot bloat on continuations; first chunk already grounded context
+                    rag_i = False
+                    fs_i = False
+
+                final_prompt = self.prompt_engine.construct_med42_prompt(
+                    system_prompt=system_prompt,
+                    user_prompt=prompt,
+                    medical_data=medical_data,
+                    is_tabular=is_tabular,
+                    analysis_type=analysis_type,
+                    condition=detected_condition,
+                    use_few_shot=fs_i,
+                    use_rag=rag_i,
+                )
+
+                if detected_condition and i == 0:
+                    logger.info(
+                        f"[{req_id}] Condition for context: {detected_condition} (few_shot={fs_i}, rag={rag_i})"
+                    )
+
+                logger.info(
+                    f"[{req_id}] Chunk {i + 1}/{len(chunks)} prompt length: {len(final_prompt)} chars"
+                )
+
+                gen_part, in_tok, out_tok = self._run_generation_pass(
+                    final_prompt, req_id, max_input_tokens
+                )
+                sum_input_tokens += in_tok
+                max_input_tokens_seen = max(max_input_tokens_seen, in_tok)
+                sum_gen_tokens += out_tok
+                chunk_outputs.append(gen_part)
+                prior_model_output = prior_model_output + "\n\n" + gen_part if prior_model_output else gen_part
+                logger.info(
+                    f"[{req_id}] Chunk {i + 1}/{len(chunks)} done: {out_tok} new tokens"
+                )
+
+            if len(chunks) == 1:
+                generated_text = chunk_outputs[0]
+            else:
+                generated_text = "\n\n".join(
+                    f"### Section {j + 1}/{len(chunks)}\n{p}" for j, p in enumerate(chunk_outputs)
+                )
+
+            dt = time.time() - t0
+            logger.info(
+                f"[{req_id}] Vecta AI all sections done: {sum_gen_tokens} new tokens total in {dt:.2f}s"
+            )
+
+            # Normalize trailing bullets before parsing (tabular + JSON tasks use the same text)
+            supported_types = ["classification", "diagnosis", "summary", "extraction", "epilepsy"]
+            if analysis_type in supported_types:
+                logger.info(f"[{req_id}] Applying bullet point extraction for analysis_type: {analysis_type}")
+                original_length = len(generated_text)
+                generated_text = self.prompt_engine._extract_structured_bullets(generated_text, analysis_type)
+                logger.info(f"[{req_id}] Bullet extraction completed - Original: {original_length} chars, Processed: {len(generated_text)} chars")
+
+            parsed_for_response = parse_structured_bullets_from_analysis(generated_text)
+
+            # Generate enhanced tabular output if applicable (uses normalized analysis text)
             tabular_output = None
             if is_tabular and tabular_data.get("dataframe") is not None:
                 try:
                     result_with_analysis = {"analysis": generated_text}
                     tabular_output = _generate_tabular_output(
-                        result_with_analysis, 
-                        tabular_data["dataframe"], 
-                        analysis_type
+                        result_with_analysis,
+                        tabular_data["dataframe"],
+                        analysis_type,
+                        user_prompt=prompt,
                     )
                     logger.info(f"[{req_id}] Vecta AI tabular output generated with shape: {tabular_output.shape}")
                 except Exception as e:
                     logger.error(f"[{req_id}] Vecta AI tabular output generation failed: {e}")
 
-            # Post-process response to extract structured bullet points for supported analysis types
-            supported_types = ["classification", "diagnosis", "summary", "extraction"]
-            if analysis_type in supported_types:
-                logger.info(f"[{req_id}] Applying bullet point extraction for analysis_type: {analysis_type}")
-                original_length = len(generated_text)
-                generated_text = self._extract_structured_bullets(generated_text, analysis_type)
-                logger.info(f"[{req_id}] Bullet extraction completed - Original: {original_length} chars, Processed: {len(generated_text)} chars")
-
             # Apply Vecta AI validation if needed
             validation_notes = ""
-            if tokens_generated < 30:
+            if sum_gen_tokens < 30:
                 validation_notes = "Vecta AI validation: Very short response - consider more specific medical context"
             
             self._stat(dt, True)
@@ -1021,16 +1349,21 @@ class VectaAIService:
                 "request_id": req_id,
                 "analysis": generated_text,
                 "execution_time": dt,
-                "tokens_generated": int(tokens_generated),
-                "input_tokens": input_token_count,
-                "text_length_original": len(text),
+                "tokens_generated": int(sum_gen_tokens),
+                "input_tokens": max_input_tokens_seen,
+                "text_length_original": original_len,
                 "model_used": f"{self.model_name}-Optimized",
                 "prompt_version": "Vecta-AI-Enhanced",
                 "timestamp": datetime.now().isoformat(),
                 "is_tabular": is_tabular,
-                "validation_notes": validation_notes
+                "validation_notes": validation_notes,
+                "tasks": structured_tasks_from_parsed(parsed_for_response),
+                "confidence_score": confidence_string_to_score(
+                    parsed_for_response.get("clinical_confidence")
+                ),
+                "chunking": {**chunking_meta, "input_tokens_sum": sum_input_tokens},
             }
-            
+
             if tabular_output is not None:
                 # Convert DataFrame to formats for frontend
                 result["tabular_output"] = {
@@ -1058,6 +1391,18 @@ class VectaAIService:
 # Global service instance
 svc = VectaAIService()
 
+_ur, _ufs = inference_augmentation_flags()
+_rag_ready = rag_system is not None and getattr(rag_system, "available", True)
+logger.info(
+    "Inference: USE_RAG=%s USE_FEW_SHOT=%s | RAG backend=%s | VECTA_REQUIRE_GPU=%s",
+    _ur,
+    _ufs,
+    "ready" if _rag_ready else "unavailable",
+    inference_require_gpu(),
+)
+if _ur and not _rag_ready:
+    logger.warning("USE_RAG=1 but RAG backend is unavailable; guideline retrieval is skipped.")
+
 def validate_analyze_request():
     """Validate analyze request parameters"""
     errors = []
@@ -1070,7 +1415,7 @@ def validate_analyze_request():
         errors.append("Prompt is required")
     
     analysis_type = request.form.get("analysisType", "").strip()
-    valid_types = ["classification", "diagnosis", "summary", "extraction", "custom"]
+    valid_types = ["classification", "diagnosis", "summary", "extraction", "custom", "epilepsy"]
     if analysis_type not in valid_types:
         errors.append(f"Invalid analysis type. Must be one of: {valid_types}")
     
@@ -2744,11 +3089,28 @@ def health():
             # Try to load model if not attempted
             svc.load_model()
         
+        _ur, _ufs = inference_augmentation_flags()
+        _cuda = bool(torch and torch.cuda.is_available())
+        _rag_ready = rag_system is not None and getattr(rag_system, "available", False)
+        _req_gpu = inference_require_gpu()
         return jsonify({
             "status": "healthy" if svc.model_loaded else "loading",
             "model_loaded": svc.model_loaded,
             "load_error": svc.load_error,
-            "device": svc.device if svc.model_loaded else None,
+            "device": svc.device,
+            "cuda_available": _cuda,
+            "use_rag": _ur,
+            "use_few_shot": _ufs,
+            "rag_backend_ready": _rag_ready,
+            "vecta_require_gpu": _req_gpu,
+            "inference_signals": {
+                "gpu_active": svc.device == "cuda",
+                "cuda_available": _cuda,
+                "rag_requested": _ur,
+                "rag_runtime_ready": _ur and _rag_ready,
+                "few_shot_requested": _ufs,
+                "gpu_requirement_met": (not _req_gpu) or _cuda,
+            },
             "model_name": svc.model_name,
             "prompt_engine": "Vecta-AI-Optimized",
             "stats": svc.stats,
@@ -2811,10 +3173,12 @@ def reload_examples():
     try:
         global few_shot_loader
         if few_shot_loader:
-            # Reload examples from file
+            few_shot_loader.reload()
+            logger.info("Few-shot examples and guideline cache reloaded after learning cycle")
+        else:
             from utils.few_shot_loader import FewShotExampleLoader
             few_shot_loader = FewShotExampleLoader()
-            logger.info("Few-shot examples reloaded after learning cycle")
+            logger.info("Few-shot loader initialized on reload")
         
         return jsonify({
             "success": True,
@@ -2996,6 +3360,17 @@ def analyze():
         logger.info(f"Vecta AI request completed in {request_duration:.2f}s")
 
 if __name__ == "__main__":
+    import argparse
+
+    _cli = argparse.ArgumentParser(add_help=True, description="Vecta AI dev server")
+    _cli.add_argument("--host", default=None, help="Bind address (sets SERVICE_HOST)")
+    _cli.add_argument("--port", type=int, default=None, help="Port (sets SERVICE_PORT)")
+    _args, _unknown = _cli.parse_known_args()
+    if _args.host:
+        os.environ["SERVICE_HOST"] = _args.host
+    if _args.port is not None:
+        os.environ["SERVICE_PORT"] = str(_args.port)
+
     logger.info("Starting Vecta AI service...")
     
     # Port selection logic: Default 8085, auto-find free port in 8085-8150 range

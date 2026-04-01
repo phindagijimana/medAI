@@ -1,6 +1,7 @@
 # Med42 Service Requirements
 Flask>=3.1
 Flask-CORS>=6.0
+python-dotenv>=1.0
 gunicorn>=22
 pandas>=2.2
 numpy>=1.26
@@ -18,8 +19,8 @@ torchvision>=2.7
 pydantic>=2.0
 pydantic-settings>=2.0
 
-# Phase 3: RAG System (Week 5-8)
-chromadb>=0.4.22
+# Phase 3: RAG (utils/rag_system.py — NumPy + sentence-transformers; no Chroma/SQLite)
+# chromadb>=0.4.22  # optional; not required for current RAG implementation
 sentence-transformers>=2.2.2
 
 # Future: Validation System

@@ -1,0 +1,27 @@
+# Self-hosting: copy .env.example to .env, set SECRET_KEY and optional HF_TOKEN, then:
+#   docker compose build && docker compose up -d
+#
+# GPU: use an NVIDIA CUDA base image and install the matching PyTorch CUDA wheel;
+# this compose file targets CPU by default.
+
+services:
+  med42:
+    build: .
+    ports:
+      - "${SERVICE_PORT:-8085}:8085"
+    env_file:
+      - .env
+    environment:
+      SERVICE_HOST: "0.0.0.0"
+      SERVICE_PORT: "${SERVICE_PORT:-8085}"
+    volumes:
+      - med42_data:/app/data
+      - med42_logs:/app/logs
+      - med42_uploads:/app/uploads
+      - huggingface_cache:/root/.cache/huggingface
+
+volumes:
+  med42_data:
+  med42_logs:
+  med42_uploads:
+  huggingface_cache:

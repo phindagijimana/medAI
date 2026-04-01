@@ -249,9 +249,12 @@ CMD ["python3", "app.py"]
 ### 4. Production Server
 
 **Using Gunicorn:**
+
+Use the checked-in `gunicorn_config.py` (defaults to **one worker** so only one copy of the LLM is loaded). Increase `GUNICORN_WORKERS` only if you intentionally run multiple model processes.
+
 ```bash
 pip3 install gunicorn
-gunicorn -w 4 -b 0.0.0.0:8085 app:app
+gunicorn -c gunicorn_config.py app:app
 ```
 
 **Systemd Service:**

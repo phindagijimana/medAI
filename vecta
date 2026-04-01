@@ -1,124 +1,100 @@
 #!/usr/bin/env python3
 """
-Vecta AI - Command Line Interface
-Manage Vecta AI service (start, stop, restart, status)
+Vecta AI — local CLI: install deps from requirements.txt, start/stop/status/logs.
+
+  ./vecta install          # pip install -r requirements.txt
+  ./vecta start            # Gunicorn in background (production-style)
+  ./vecta start -f         # Flask dev server in foreground (python app.py)
+  ./vecta stop | status | logs | restart
 """
+import argparse
 import os
-import sys
 import signal
-import time
 import subprocess
+import sys
+import time
 from pathlib import Path
 
-APP_DIR = Path(__file__).parent
+APP_DIR = Path(__file__).resolve().parent
+REQUIREMENTS = APP_DIR / "requirements.txt"
+GUNICORN_CFG = APP_DIR / "gunicorn_config.py"
+APP_PY = APP_DIR / "app.py"
 PID_FILE = APP_DIR / "vecta_ai.pid"
 LOG_FILE = APP_DIR / "logs" / "vecta_ai.log"
 
+# Prefer --user on shared clusters; set VECTA_PIP_USER=0 to disable
+def _pip_user_args():
+    v = os.environ.get("VECTA_PIP_USER", "1").lower()
+    return ["--user"] if v in ("1", "true", "yes") else []
 
-def check_dependencies():
-    """Check if required dependencies are installed"""
-    required = ['flask', 'flask_cors', 'pandas', 'numpy', 'torch']
+
+def check_imports():
+    """Return list of missing import names (empty if OK)."""
+    checks = [
+        ("flask", "flask"),
+        ("flask_cors", "flask_cors"),
+        ("pandas", "pandas"),
+        ("numpy", "numpy"),
+        ("torch", "torch"),
+        ("transformers", "transformers"),
+        ("gunicorn", "gunicorn"),
+    ]
     missing = []
-    
-    for package in required:
+    for mod, pip_hint in checks:
         try:
-            __import__(package)
+            __import__(mod)
         except ImportError:
-            missing.append(package)
-    
-    # Check PyTorch version if installed
-    if 'torch' not in missing:
-        try:
-            import torch
-            version = torch.__version__.split('+')[0]  # Remove +cu118 suffix
-            major, minor = map(int, version.split('.')[:2])
-            if major < 2 or (major == 2 and minor < 1):
-                print(f"[WARN] PyTorch {version} found, but >=2.1.0 required")
-                missing.append('torch')
-        except Exception:
-            pass
-    
+            missing.append(pip_hint)
     return missing
 
 
-def install_dependencies():
-    """Install missing dependencies"""
-    print("Checking dependencies...")
-    missing = check_dependencies()
-    
-    if not missing:
-        print("All required dependencies are installed.")
-        return True
-    
-    print(f"Missing dependencies: {', '.join(missing)}")
-    print("Installing required packages...")
-    
+def run_install():
+    """Install everything from requirements.txt."""
+    if not REQUIREMENTS.is_file():
+        print(f"[ERROR] Missing {REQUIREMENTS}")
+        return False
+    print(f"Installing from {REQUIREMENTS.name} ...")
+    cmd = [sys.executable, "-m", "pip", "install"] + _pip_user_args() + ["-r", str(REQUIREMENTS)]
     try:
-        # Install base dependencies
-        print("Installing Flask, pandas, numpy...")
-        subprocess.check_call([
-            sys.executable, '-m', 'pip', 'install', '--user',
-            'flask', 'flask-cors', 'pandas', 'numpy'
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-        
-        # Install PyTorch if needed
-        if 'torch' in missing:
-            print("Installing PyTorch >=2.1.0 (this may take a few minutes)...")
-            subprocess.check_call([
-                sys.executable, '-m', 'pip', 'install', '--user',
-                '--upgrade', 'torch>=2.1.0'
-            ], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-            print("PyTorch installed successfully.")
-        
-        # Install transformers and other AI packages
-        print("Installing transformers and AI packages...")
-        subprocess.check_call([
-            sys.executable, '-m', 'pip', 'install', '--user',
-            'transformers', 'accelerate', 'sentencepiece'
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-        
-        print("All dependencies installed successfully.")
+        subprocess.check_call(cmd, cwd=str(APP_DIR))
+        print("[OK] Dependencies installed.")
         return True
     except subprocess.CalledProcessError as e:
-        print("ERROR: Failed to install dependencies.")
-        print("Please run manually:")
-        print("  pip3 install --user flask flask-cors pandas numpy")
-        print("  pip3 install --user --upgrade 'torch>=2.1.0'")
-        print("  pip3 install --user transformers accelerate")
+        print(f"[ERROR] pip install failed (exit {e.returncode})")
         return False
 
 
-def print_banner():
-    print("")
-    print("=" * 70)
-    print("  Vecta AI - Medical Analysis Platform")
-    print("  Command Line Interface")
-    print("=" * 70)
-    print("")
+def ensure_dependencies():
+    """Install from requirements.txt if core imports are missing."""
+    missing = check_imports()
+    if not missing:
+        return True
+    print(f"Missing packages: {', '.join(missing)}")
+    if not run_install():
+        return False
+    still = check_imports()
+    if still:
+        print(f"[ERROR] Still missing after install: {', '.join(still)}")
+        return False
+    return True
 
 
 def get_pid_info():
-    """Get PID and port from PID file"""
     if not PID_FILE.exists():
         return None, None
-    
     try:
-        with open(PID_FILE, 'r') as f:
-            content = f.read().strip()
-            if ':' in content:
-                pid_str, port_str = content.split(':')
-                return int(pid_str), int(port_str)
-            else:
-                return int(content), None
+        content = PID_FILE.read_text().strip()
+        if ":" in content:
+            a, b = content.split(":", 1)
+            return int(a), int(b)
+        return int(content), None
     except Exception:
         return None, None
 
 
 def is_process_running(pid):
-    """Check if process is running"""
     if pid is None:
         return False
-    
     try:
         os.kill(pid, 0)
         return True
@@ -126,283 +102,247 @@ def is_process_running(pid):
         return False
 
 
-def start_service(background=False):
-    """Start Vecta AI service"""
-    # Check dependencies first
-    if not install_dependencies():
-        return
-    
-    pid, port = get_pid_info()
-    
+def cmd_install(_args):
+    print_banner()
+    ok = run_install()
+    return 0 if ok else 1
+
+
+def cmd_start(args):
+    print_banner()
+    port = args.port if args.port is not None else int(os.environ.get("SERVICE_PORT", "8085"))
+    os.environ["SERVICE_PORT"] = str(port)
+    os.environ.setdefault("SERVICE_HOST", "0.0.0.0")
+    os.environ.setdefault("APP_HOME", str(APP_DIR))
+
+    if not ensure_dependencies():
+        return 1
+
+    pid, _ = get_pid_info()
     if pid and is_process_running(pid):
-        print(f"[OK] Vecta AI is already running (PID: {pid}, Port: {port})")
-        if port:
-            print(f"\n   Main App:   http://localhost:{port}")
-            print(f"   Validator:  http://localhost:{port}/validate")
-        print("")
-        return
-    
-    print("Starting Vecta AI service...")
-    print("")
-    
-    if background:
-        # Start in background
-        log_path = APP_DIR / "logs"
-        log_path.mkdir(exist_ok=True)
-        
-        with open(LOG_FILE, 'a') as log:
-            process = subprocess.Popen(
-                [sys.executable, str(APP_DIR / "app.py")],
-                stdout=log,
-                stderr=log,
-                cwd=str(APP_DIR),
-                start_new_session=True
-            )
-        
-        # Wait a moment for startup
-        time.sleep(2)
-        
-        # Check if started successfully
-        pid, port = get_pid_info()
-        if pid and is_process_running(pid):
-            print(f"[OK] Vecta AI started successfully in background")
-            print(f"   PID: {pid}")
-            if port:
-                print(f"   Port: {port}")
-                print(f"\n   Main App:   http://localhost:{port}")
-                print(f"   Validator:  http://localhost:{port}/validate")
-            print(f"\n   Logs: {LOG_FILE}")
-            print(f"\n   Stop with: vecta stop")
-        else:
-            print("[ERROR] Failed to start Vecta AI")
-            print(f"   Check logs: {LOG_FILE}")
-    else:
-        # Start in foreground
-        print("Starting Vecta AI in foreground (Ctrl+C to stop)...")
-        print("")
+        print(f"[OK] Vecta AI is already running (PID: {pid}, port: {port})")
+        print(f"\n   Main App:   http://localhost:{port}")
+        print(f"   Validator:  http://localhost:{port}/validate\n")
+        return 0
+
+    (APP_DIR / "logs").mkdir(parents=True, exist_ok=True)
+
+    if args.foreground:
+        print("Starting Flask development server (foreground, Ctrl+C to stop)...\n")
         try:
-            os.execvp(sys.executable, [sys.executable, str(APP_DIR / "app.py")])
+            os.chdir(APP_DIR)
+            os.environ["SERVICE_PORT"] = str(port)
+            os.environ["SERVICE_HOST"] = os.environ.get("SERVICE_HOST", "0.0.0.0")
+            os.environ["APP_HOME"] = str(APP_DIR)
+            os.execvp(sys.executable, [sys.executable, str(APP_PY)])
         except Exception as e:
             print(f"[ERROR] Failed to start: {e}")
-            sys.exit(1)
+            return 1
+
+    # Background: Gunicorn (single worker in gunicorn_config.py)
+    print("Starting Gunicorn (see gunicorn_config.py)...\n")
+    env = os.environ.copy()
+    env["APP_HOME"] = str(APP_DIR)
+    env["SERVICE_HOST"] = env.get("SERVICE_HOST", "0.0.0.0")
+    env["SERVICE_PORT"] = str(port)
+
+    with open(LOG_FILE, "a", encoding="utf-8") as log:
+        proc = subprocess.Popen(
+            [
+                sys.executable,
+                "-m",
+                "gunicorn",
+                "-c",
+                str(GUNICORN_CFG),
+                "app:app",
+            ],
+            cwd=str(APP_DIR),
+            env=env,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+
+    time.sleep(2)
+    if proc.poll() is not None:
+        print("[ERROR] Gunicorn exited immediately. Check logs:")
+        print(f"        {LOG_FILE}\n")
+        return 1
+
+    try:
+        PID_FILE.write_text(f"{proc.pid}:{port}")
+    except OSError as e:
+        print(f"[WARN] Could not write PID file: {e}")
+
+    print(f"[OK] Vecta AI started (Gunicorn master PID {proc.pid}, port {port})")
+    print(f"\n   Main App:   http://localhost:{port}")
+    print(f"   Validator:  http://localhost:{port}/validate")
+    print(f"\n   Logs: {LOG_FILE}")
+    print(f"   Stop: ./vecta stop\n")
+    return 0
 
 
-def stop_service():
-    """Stop Vecta AI service"""
+def cmd_stop(_args):
+    print_banner()
     pid, port = get_pid_info()
-    
+
     if not pid:
-        print("[INFO] Vecta AI is not running (no PID file found)")
-        print("")
-        return
-    
+        print("[INFO] Not running (no PID file).\n")
+        return 0
+
     if not is_process_running(pid):
-        print(f"[INFO] Vecta AI is not running (stale PID: {pid})")
-        # Clean up stale PID file
+        print(f"[INFO] Stale PID {pid}; cleaning up.\n")
         try:
             PID_FILE.unlink()
-            print("   Cleaned up stale PID file")
-        except Exception:
+        except OSError:
             pass
-        print("")
-        return
-    
-    print(f"Stopping Vecta AI (PID: {pid}, Port: {port})...")
-    
+        return 0
+
+    print(f"Stopping Vecta AI (PID {pid}, port {port})...")
     try:
-        # Send SIGTERM for graceful shutdown
         os.kill(pid, signal.SIGTERM)
-        
-        # Wait for process to stop (up to 10 seconds)
-        for i in range(10):
+        for _ in range(15):
             time.sleep(1)
             if not is_process_running(pid):
-                print("[OK] Vecta AI stopped successfully")
-                print("")
-                # Clean up PID file
+                print("[OK] Stopped.\n")
                 try:
                     PID_FILE.unlink()
-                except Exception:
+                except OSError:
                     pass
-                return
-        
-        # Force kill if still running
-        print("[WARN] Process did not stop gracefully, forcing shutdown...")
+                return 0
+        print("[WARN] Forcing SIGKILL...")
         os.kill(pid, signal.SIGKILL)
         time.sleep(1)
-        
-        if not is_process_running(pid):
-            print("[OK] Vecta AI stopped (forced)")
-        else:
-            print("[ERROR] Failed to stop Vecta AI")
-        
-        # Clean up PID file
-        try:
-            PID_FILE.unlink()
-        except Exception:
-            pass
-        
     except Exception as e:
-        print(f"[ERROR] Error stopping Vecta AI: {e}")
-    
-    print("")
+        print(f"[ERROR] {e}\n")
+        return 1
+
+    try:
+        PID_FILE.unlink()
+    except OSError:
+        pass
+    print("[OK] Stopped.\n")
+    return 0
 
 
-def restart_service():
-    """Restart Vecta AI service"""
-    print("Restarting Vecta AI...")
-    print("")
-    stop_service()
+def cmd_restart(_args):
+    print_banner()
+    _, port_saved = get_pid_info()
+    cmd_stop(_args)
     time.sleep(1)
-    start_service(background=True)
+    ns = argparse.Namespace(foreground=False, port=port_saved)
+    return cmd_start(ns)
 
 
-def show_status():
-    """Show Vecta AI status"""
+def cmd_status(_args):
+    print_banner()
     pid, port = get_pid_info()
-    
     print("Vecta AI Status")
     print("─" * 70)
-    
+
     if not pid:
-        print("Status:  NOT RUNNING")
-        print("")
-        print("Start with: vecta start")
-    elif is_process_running(pid):
-        print(f"Status:  RUNNING")
+        print("Status:  NOT RUNNING\n")
+        print("Start:   ./vecta install   # first time")
+        print("         ./vecta start\n")
+        return 0
+
+    if is_process_running(pid):
+        print("Status:  RUNNING")
         print(f"PID:     {pid}")
-        print(f"Port:    {port}")
-        
+        print(f"Port:    {port or os.environ.get('SERVICE_PORT', '?')}")
         if port:
-            print("")
-            print("Access URLs:")
-            print(f"  Main App:   http://localhost:{port}")
-            print(f"  Validator:  http://localhost:{port}/validate")
-        
-        print("")
-        print("Stop with:    vecta stop")
-        print("Restart with: vecta restart")
+            print("\nAccess:")
+            print(f"  http://localhost:{port}/")
+        print("\nStop:    ./vecta stop")
+        print("Restart: ./vecta restart\n")
     else:
-        print(f"Status:  NOT RUNNING (stale PID: {pid})")
-        print("")
-        print("Clean up with: vecta stop")
-        print("Start with:    vecta start")
-    
-    print("")
+        print(f"Status:  NOT RUNNING (stale PID {pid})\n")
+        print("Run: ./vecta stop   # cleanup")
+        print("     ./vecta start\n")
+
+    return 0
 
 
-def show_logs(tail_lines=50):
-    """Show recent logs"""
-    if not LOG_FILE.exists():
-        print("No logs found")
-        print("")
-        return
-    
-    print(f"Recent logs (last {tail_lines} lines):")
-    print("─" * 70)
-    
-    try:
-        with open(LOG_FILE, 'r') as f:
-            lines = f.readlines()
-            for line in lines[-tail_lines:]:
-                print(line.rstrip())
-    except Exception as e:
-        print(f"Error reading logs: {e}")
-    
-    print("")
-    print(f"Full logs: {LOG_FILE}")
-    print("")
-
-
-def show_help():
-    """Show help message"""
+def cmd_logs(args):
     print_banner()
-    print("Usage: vecta <command> [options]")
+    lines = args.lines
+    if not LOG_FILE.exists():
+        print("No log file yet.\n")
+        return 0
+    print(f"Last {lines} lines of {LOG_FILE}:")
+    print("─" * 70)
+    try:
+        text = LOG_FILE.read_text(encoding="utf-8", errors="replace").splitlines()
+        for line in text[-lines:]:
+            print(line)
+    except Exception as e:
+        print(f"Error: {e}")
+    print(f"\nFull log: {LOG_FILE}\n")
+    return 0
+
+
+def print_banner():
     print("")
-    print("Commands:")
-    print("  start       Start Vecta AI service")
-    print("  stop        Stop Vecta AI service")
-    print("  restart     Restart Vecta AI service")
-    print("  status      Show service status")
-    print("  logs        Show recent logs (last 50 lines)")
-    print("  help        Show this help message")
-    print("")
-    print("Options:")
-    print("  -f, --foreground    Start in foreground (default: background)")
-    print("  -p, --port PORT     Specify port (default: 8085)")
-    print("")
-    print("Examples:")
-    print("  vecta start              # Start in background on port 8085")
-    print("  vecta start -f           # Start in foreground")
-    print("  vecta start -p 8090      # Start on port 8090")
-    print("  vecta stop               # Stop the service")
-    print("  vecta restart            # Restart the service")
-    print("  vecta status             # Check status")
-    print("  vecta logs               # View recent logs")
-    print("")
-    print("Port Range: 8085-8150 (auto-detects free port)")
+    print("=" * 70)
+    print("  Vecta AI — Medical Analysis Platform")
+    print("=" * 70)
     print("")
 
 
 def main():
-    if len(sys.argv) < 2:
-        show_help()
-        sys.exit(1)
-    
-    command = sys.argv[1].lower()
-    
-    if command in ['help', '-h', '--help']:
-        show_help()
-    
-    elif command == 'start':
-        background = True
-        
-        # Check for foreground flag
-        if len(sys.argv) > 2 and sys.argv[2] in ['-f', '--foreground']:
-            background = False
-        
-        # Check for port override
-        if '-p' in sys.argv or '--port' in sys.argv:
-            idx = sys.argv.index('-p') if '-p' in sys.argv else sys.argv.index('--port')
-            if len(sys.argv) > idx + 1:
-                try:
-                    port = int(sys.argv[idx + 1])
-                    os.environ['SERVICE_PORT'] = str(port)
-                except ValueError:
-                    print("[ERROR] Invalid port number")
-                    sys.exit(1)
-        
-        print_banner()
-        start_service(background=background)
-    
-    elif command == 'stop':
-        print_banner()
-        stop_service()
-    
-    elif command == 'restart':
-        print_banner()
-        restart_service()
-    
-    elif command == 'status':
-        print_banner()
-        show_status()
-    
-    elif command == 'logs':
-        print_banner()
-        tail_lines = 50
-        if len(sys.argv) > 2:
-            try:
-                tail_lines = int(sys.argv[2])
-            except ValueError:
-                pass
-        show_logs(tail_lines)
-    
-    else:
-        print(f"[ERROR] Unknown command: {command}")
-        print("")
-        show_help()
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description="Vecta AI local service (install, Gunicorn/Flask, stop, status, logs)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  ./vecta install
+  ./vecta start                 # Gunicorn in background
+  ./vecta start -f              # Flask dev server (foreground)
+  ./vecta start -p 8090
+  ./vecta stop && ./vecta status
+Environment:
+  VECTA_PIP_USER=0   Disable pip --user when using a venv
+  SERVICE_PORT       Default port if -p not passed
+        """,
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("install", help="pip install -r requirements.txt")
+
+    p_start = sub.add_parser("start", help="Start service (Gunicorn background, or -f for Flask dev)")
+    p_start.add_argument("-f", "--foreground", action="store_true", help="Run python app.py (dev server)")
+    p_start.add_argument("-p", "--port", type=int, default=None, metavar="PORT", help="Listen port (default 8085)")
+
+    sub.add_parser("stop", help="Stop Gunicorn / service using vecta_ai.pid")
+
+    sub.add_parser("restart", help="stop then start (background Gunicorn)")
+
+    sub.add_parser("status", help="Show PID and port")
+
+    p_logs = sub.add_parser("logs", help="Tail application log file")
+    p_logs.add_argument("-n", "--lines", type=int, default=50, help="Lines to show (default 50)")
+
+    args = parser.parse_args()
+
+    if args.command == "install":
+        return cmd_install(args)
+    if args.command == "start":
+        return cmd_start(args)
+    if args.command == "stop":
+        return cmd_stop(args)
+    if args.command == "restart":
+        return cmd_restart(args)
+    if args.command == "status":
+        return cmd_status(args)
+    if args.command == "logs":
+        return cmd_logs(args)
+    parser.error("unknown command")
+    return 2
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        print("\nInterrupted.")
+        sys.exit(130)

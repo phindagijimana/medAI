@@ -19,7 +19,7 @@ def validate_analyze_request(request) -> List[str]:
         errors.append("Prompt is required")
 
     analysis_type = request.form.get("analysisType", "").strip()
-    valid_types = ["classification", "diagnosis", "summary", "extraction", "custom"]
+    valid_types = ["classification", "diagnosis", "summary", "extraction", "custom", "epilepsy"]
     if analysis_type not in valid_types:
         errors.append(f"Invalid analysis type. Must be one of: {valid_types}")
 

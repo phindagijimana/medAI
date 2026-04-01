@@ -50,11 +50,14 @@ data/*.sqlite
 *_service_*.err
 *_service_*.out
 data/learning_history.json
+# RAG embedding cache (regenerable)
+data/rag_cache/
 
 # Documentation - Keep only README and DEPLOYMENT
 *.md
 !README.md
 !DEPLOYMENT.md
+!SELF_HOSTING.md
 
 # Environment
 .env
