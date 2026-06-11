@@ -8,7 +8,7 @@ except ImportError:
 # Defaults match inference_augmentation_flags() when env is unset
 os.environ.setdefault("USE_RAG", "1")
 os.environ.setdefault("USE_FEW_SHOT", "1")
-import time, json, logging, tempfile, uuid, traceback, sys, re
+import time, json, logging, tempfile, uuid, traceback, sys, re, threading
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
 from queue import Queue
@@ -1018,9 +1018,33 @@ class VectaAIService:
         self.model_loaded = False
         if not self._gpu_required_but_unavailable:
             self.load_error = None
+        self._model_load_lock = threading.Lock()
+        self._bg_loader_started = False
         self.request_queue = Queue(maxsize=app.config["MAX_CONCURRENT_REQUESTS"])
         self.stats = {"requests": 0, "successes": 0, "avg_time": 0}
         self.prompt_engine = VectaAIPromptEngine()
+
+    def ensure_model_load_started(self):
+        """Start loading the model in a background thread. Safe to call repeatedly."""
+        if self.model_loaded or self.load_error:
+            return
+        if getattr(self, "_gpu_required_but_unavailable", False):
+            return
+        if not torch or not AutoTokenizer:
+            self.load_error = "PyTorch/Transformers not available"
+            logger.error(self.load_error)
+            return
+        with self._model_load_lock:
+            if self.model_loaded or self.load_error:
+                return
+            if self._bg_loader_started:
+                return
+            self._bg_loader_started = True
+        threading.Thread(
+            target=self.load_model,
+            name="vecta-model-load",
+            daemon=True,
+        ).start()
 
     def load_model(self):
         if self.model_loaded:
@@ -1033,47 +1057,52 @@ class VectaAIService:
             logger.error(self.load_error)
             return False
 
-        try:
-            logger.info(f"Loading Vecta AI model: {self.model_name}")
-            logger.info(f"Device: {self.device}")
-            
-            # Load tokenizer
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name,
-                trust_remote_code=True,
-                padding_side="left"
-            )
-            
-            if not self.tokenizer.pad_token:
-                self.tokenizer.pad_token = self.tokenizer.eos_token
-            
-            # Load model
-            model_kwargs = {
-                "trust_remote_code": True,
-                "torch_dtype": torch.float16 if self.device == "cuda" else torch.float32,
-            }
-            
-            if self.device == "cuda":
-                model_kwargs["device_map"] = "auto"
-            
-            self.model = AutoModelForCausalLM.from_pretrained(
-                self.model_name,
-                **model_kwargs
-            )
-            
-            if self.device == "cpu":
-                self.model = self.model.to("cpu")
-            
-            self.model.eval()
-            self.model_loaded = True
-            logger.info("Vecta AI model loaded successfully with optimized prompting")
-            return True
-            
-        except Exception as e:
-            self.load_error = str(e)
-            logger.error(f"Vecta AI model loading failed: {e}")
-            logger.error(traceback.format_exc())
-            return False
+        with self._model_load_lock:
+            if self.model_loaded:
+                return True
+            if self.load_error:
+                return False
+            try:
+                logger.info(f"Loading Vecta AI model: {self.model_name}")
+                logger.info(f"Device: {self.device}")
+                
+                # Load tokenizer
+                self.tokenizer = AutoTokenizer.from_pretrained(
+                    self.model_name,
+                    trust_remote_code=True,
+                    padding_side="left"
+                )
+                
+                if not self.tokenizer.pad_token:
+                    self.tokenizer.pad_token = self.tokenizer.eos_token
+                
+                # Load model
+                model_kwargs = {
+                    "trust_remote_code": True,
+                    "torch_dtype": torch.float16 if self.device == "cuda" else torch.float32,
+                }
+                
+                if self.device == "cuda":
+                    model_kwargs["device_map"] = "auto"
+                
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    self.model_name,
+                    **model_kwargs
+                )
+                
+                if self.device == "cpu":
+                    self.model = self.model.to("cpu")
+                
+                self.model.eval()
+                self.model_loaded = True
+                logger.info("Vecta AI model loaded successfully with optimized prompting")
+                return True
+                
+            except Exception as e:
+                self.load_error = str(e)
+                logger.error(f"Vecta AI model loading failed: {e}")
+                logger.error(traceback.format_exc())
+                return False
 
     def _stat(self, dt, success):
         self.stats["requests"] += 1
@@ -2718,7 +2747,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
       const baseUrl = window.location.origin + window.location.pathname.replace(/\/$/, '');
       const healthUrl = baseUrl + '/health';
       
-      fetch(healthUrl)
+      fetch(healthUrl, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -2736,7 +2765,8 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
     }
 
     function updateServiceStatus(healthData) {
-      if (healthData.model_loaded) {
+      const ready = healthData.model_loaded === true || healthData.status === 'healthy';
+      if (ready) {
         serviceStatus.textContent = '';
         serviceStatus.className = 'status-indicator status-healthy';
         serviceStatus.style.display = 'none';
@@ -3062,15 +3092,23 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
 </body>
 </html>"""
 
+
+def _no_cache_response(resp):
+    """Avoid stale /health or HTML in browsers and reverse proxies after model becomes ready."""
+    resp.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    resp.headers["Pragma"] = "no-cache"
+    return resp
+
+
 # Route definitions
 @app.route("/", methods=["GET"])
 def index():
-    return render_template_string(UI_HTML)
+    return _no_cache_response(app.make_response(render_template_string(UI_HTML)))
 
 @app.route("/learning", methods=["GET"])
 def learning_dashboard():
     """Learning metrics and self-improvement dashboard"""
-    return render_template_string(LEARNING_DASHBOARD_HTML)
+    return _no_cache_response(app.make_response(render_template_string(LEARNING_DASHBOARD_HTML)))
 
 @app.route("/test", methods=["GET"])
 def test():
@@ -3086,14 +3124,14 @@ def test():
 def health():
     try:
         if not svc.model_loaded and not svc.load_error:
-            # Try to load model if not attempted
-            svc.load_model()
+            # Do not block: first load can take many minutes (HF download + weights)
+            svc.ensure_model_load_started()
         
         _ur, _ufs = inference_augmentation_flags()
         _cuda = bool(torch and torch.cuda.is_available())
         _rag_ready = rag_system is not None and getattr(rag_system, "available", False)
         _req_gpu = inference_require_gpu()
-        return jsonify({
+        return _no_cache_response(jsonify({
             "status": "healthy" if svc.model_loaded else "loading",
             "model_loaded": svc.model_loaded,
             "load_error": svc.load_error,
@@ -3117,15 +3155,15 @@ def health():
             "queue_size": svc.request_queue.qsize(),
             "max_concurrent": app.config["MAX_CONCURRENT_REQUESTS"],
             "timestamp": datetime.now().isoformat()
-        })
+        }))
     except Exception as e:
         logger.error(f"Health check error: {e}")
-        return jsonify({
+        return _no_cache_response(jsonify({
             "status": "error",
             "error": str(e),
             "model_loaded": False,
             "timestamp": datetime.now().isoformat()
-        }), 500
+        })), 500
 
 @app.route("/api/learning/metrics", methods=["GET"])
 def learning_metrics():
@@ -3396,13 +3434,8 @@ if __name__ == "__main__":
     except Exception as e:
         logger.warning("Could not create PID file: {}".format(e))
     
-    logger.info("Loading Vecta AI model with enhanced prompting on startup...")
-
-    if svc.load_model():
-        logger.info("Vecta AI model loaded successfully with optimized prompting!")
-    else:
-        logger.warning("Vecta AI model loading failed: {}".format(svc.load_error))
-        logger.info("Vecta AI service will continue - model loading will be attempted on first request")
+    logger.info("Starting background Vecta AI model load (server binds immediately)...")
+    svc.ensure_model_load_started()
     
     logger.info("Starting Vecta AI server on {}:{}".format(host, port))
     logger.info("Access URLs:")

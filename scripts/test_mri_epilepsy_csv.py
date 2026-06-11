@@ -7,18 +7,26 @@ In-process (loads model in this Python process — use on a GPU node with CUDA P
   export VECTA_MAX_NEW_TOKENS=384 VECTA_GREEDY_FAST=1
   python3 scripts/test_mri_epilepsy_csv.py
 
-HTTP (hit a running gunicorn, e.g. Slurm job on the compute node — RAG/few-shot/GPU follow server env):
+HTTP (hit a running gunicorn — RAG/few-shot/GPU follow server env; set USE_RAG/USE_FEW_SHOT on the server):
+  export USE_RAG=1 USE_FEW_SHOT=1
   export VECTA_SERVICE_URL=http://127.0.0.1:8085
-  # From login node, run curl inside the allocation:
-  srun --jobid=<id> --overlap bash -lc 'cd /path/to/med42_service && python3 scripts/test_mri_epilepsy_csv.py'
+  export CSV_PATH=data/sample_patient_visits/patient_visits_tiny.csv   # optional; faster smoke test
+  export VECTA_HTTP_TIMEOUT=3600
+  python3 scripts/test_mri_epilepsy_csv.py
 
-On GPU node, same command after activating CUDA PyTorch; much faster than CPU.
+On GPU node, same command; much faster than CPU for full patient_visits.csv.
+
+Long runs: raise Gunicorn timeout so the worker is not killed mid-inference, e.g.:
+  export GUNICORN_TIMEOUT=3600
+  ./vecta restart
 """
 import json
 import os
 import sys
 import uuid
 from typing import Optional, Tuple
+import socket
+
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -115,6 +123,13 @@ def _run_http(csv_path: str) -> int:
         resp = urlopen(req, timeout=timeout)
         raw = resp.read().decode("utf-8", errors="replace")
         code = resp.status
+    except socket.timeout:
+        print(
+            f"POST /analyze timed out after {timeout}s. On CPU, tabular 8B runs can exceed this; "
+            "raise VECTA_HTTP_TIMEOUT, use CSV_PATH=.../patient_visits_tiny.csv, or run on GPU.",
+            file=sys.stderr,
+        )
+        return 1
     except HTTPError as e:
         raw = e.read().decode("utf-8", errors="replace")
         code = e.code
@@ -139,7 +154,11 @@ def _run_http(csv_path: str) -> int:
 
 
 def main() -> int:
-    csv_path = os.path.join(ROOT, "data", "sample_patient_visits", "patient_visits.csv")
+    csv_path = os.environ.get("CSV_PATH")
+    if csv_path and not os.path.isabs(csv_path):
+        csv_path = os.path.join(ROOT, csv_path)
+    if not csv_path:
+        csv_path = os.path.join(ROOT, "data", "sample_patient_visits", "patient_visits.csv")
     if not os.path.isfile(csv_path):
         print("Missing:", csv_path, file=sys.stderr)
         return 1

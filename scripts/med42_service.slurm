@@ -20,8 +20,20 @@ set -euo pipefail
 #############################
 export SERVICE_PORT="${SERVICE_PORT:-8081}"
 export SERVICE_HOST="${SERVICE_HOST:-0.0.0.0}"
-export CUDA_VISIBLE_DEVICES=""  # Force CPU-only to avoid device conflicts
+# Do not set CUDA_VISIBLE_DEVICES to empty — that hides GPUs and forces CPU-only PyTorch.
+# With #SBATCH --gres=gpu:1, Slurm usually sets CUDA_VISIBLE_DEVICES to the allocated GPU(s).
+export USE_RAG="${USE_RAG:-1}"
+export USE_FEW_SHOT="${USE_FEW_SHOT:-1}"
 export MAX_CONCURRENT_USERS="${MAX_CONCURRENT_USERS:-10}"
+
+# Source .env from the submission directory so HF_TOKEN, SECRET_KEY, etc. reach
+# the gated model download and the pre-gunicorn smoke test. app.py also calls
+# load_dotenv() at import — this is the belt-and-suspenders pass.
+_ENV_FILE="${SLURM_SUBMIT_DIR:-$HOME/med42_service}/.env"
+if [[ -f "$_ENV_FILE" ]]; then
+  echo "[*] Sourcing $_ENV_FILE"
+  set -a; . "$_ENV_FILE"; set +a
+fi
 
 # Correct OOD hostname for your site
 export OOD_HOSTNAME="${OOD_HOSTNAME:-ood.urmc-sh.rochester.edu}"
@@ -122,6 +134,10 @@ echo "[*] Checking environment..."
 echo "[*] Current directory: $(pwd)"
 echo "[*] Python path: $(which python)"
 echo "[*] GPU available: $(nvidia-smi -L 2>/dev/null | wc -l) GPU(s)"
+echo "[*] CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-unset}"
+echo "[*] USE_RAG=$USE_RAG USE_FEW_SHOT=$USE_FEW_SHOT"
+echo "[*] HF_TOKEN: $([[ -n "${HF_TOKEN:-}" ]] && echo set || echo MISSING)"
+echo "[*] Optional: verify stack with: python3 scripts/test_gpu_rag_fewshot.py"
 
 # Test the app before starting gunicorn
 echo "[*] Testing app..."

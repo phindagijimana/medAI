@@ -245,6 +245,15 @@ export SERVICE_PORT={port}
 # Prompt augmentation (defaults in app are also 1; set explicitly for clarity)
 export USE_RAG=1
 export USE_FEW_SHOT=1
+
+# Source .env from the submission directory so HF_TOKEN (gated Med42 weights),
+# SECRET_KEY, CORS_ORIGINS, etc. reach gunicorn workers. app.py also calls
+# load_dotenv() at import; this exports them for any pre-gunicorn step too.
+if [ -f "$SLURM_SUBMIT_DIR/.env" ]; then
+  echo "Sourcing $SLURM_SUBMIT_DIR/.env"
+  set -a; . "$SLURM_SUBMIT_DIR/.env"; set +a
+fi
+echo "HF_TOKEN: $([ -n "${{HF_TOKEN:-}}" ] && echo set || echo MISSING)"
 """
     
     # Add GPU-specific environment variables only for GPU mode
