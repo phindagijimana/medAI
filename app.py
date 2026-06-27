@@ -8,6 +8,24 @@ except ImportError:
 # Defaults match inference_augmentation_flags() when env is unset
 os.environ.setdefault("USE_RAG", "1")
 os.environ.setdefault("USE_FEW_SHOT", "1")
+# Backward-compat: the brand changed from VECTA_* to MEDAI_*. Copy any legacy
+# vars set by older .env files or SLURM scripts so the new names resolve.
+# Logged once the logger is up — see _warn_legacy_env() below.
+_LEGACY_ENV_HITS = []
+for _new, _old in (
+    ("MEDAI_REQUIRE_GPU",     "VECTA_REQUIRE_GPU"),
+    ("MEDAI_MAX_NEW_TOKENS",  "VECTA_MAX_NEW_TOKENS"),
+    ("MEDAI_GREEDY_FAST",     "VECTA_GREEDY_FAST"),
+    ("MEDAI_CHUNK_CHARS",     "VECTA_CHUNK_CHARS"),
+    ("MEDAI_CHUNK_CARRY_CHARS","VECTA_CHUNK_CARRY_CHARS"),
+    ("MEDAI_PIP_USER",        "VECTA_PIP_USER"),
+    ("MEDAI_SERVICE_URL",     "VECTA_SERVICE_URL"),
+    ("MEDAI_BASE_URL",        "VECTA_BASE_URL"),
+    ("MEDAI_HTTP_TIMEOUT",    "VECTA_HTTP_TIMEOUT"),
+):
+    if _new not in os.environ and _old in os.environ:
+        os.environ[_new] = os.environ[_old]
+        _LEGACY_ENV_HITS.append((_old, _new))
 import time, json, logging, tempfile, uuid, traceback, sys, re, threading
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
@@ -61,7 +79,11 @@ logging.basicConfig(
     level=getattr(logging, os.environ.get("LOG_LEVEL", "INFO").upper(), logging.INFO),
     handlers=[_file_handler, _stream_handler],
 )
-logger = logging.getLogger("vectaai")
+logger = logging.getLogger("medai")
+
+for _old, _new in _LEGACY_ENV_HITS:
+    logger.warning("Env var %s is deprecated; use %s. Honored for this run.", _old, _new)
+del _LEGACY_ENV_HITS
 
 # Initialize few-shot examples and guidelines loader
 try:
@@ -210,7 +232,7 @@ def inference_augmentation_flags():
 
 def inference_require_gpu():
     """If true, model load fails when CUDA is not available (production GPU nodes)."""
-    return os.environ.get("VECTA_REQUIRE_GPU", "").lower() in ("1", "true", "yes")
+    return os.environ.get("MEDAI_REQUIRE_GPU", "").lower() in ("1", "true", "yes")
 
 
 def structured_tasks_from_parsed(parsed: dict) -> list:
@@ -269,13 +291,13 @@ def _split_text_into_chunks(text: str, max_chars: int) -> list:
 # MED42-8B OPTIMIZED PROMPTING
 #############################
 
-class VectaAIPromptEngine:
-    """Vecta AI Optimized Prompt Engineering System"""
+class MedAIPromptEngine:
+    """MedAI Optimized Prompt Engineering System"""
     
     @staticmethod
-    def get_vecta_identity_activation():
-        """Primary Vecta AI model initialization prompt - Neurology Focus"""
-        return """You are Vecta AI, a specialized neurological AI model focused on neurology and neuroscience. Your knowledge base includes:
+    def get_medai_identity_activation():
+        """Primary MedAI model initialization prompt - Neurology Focus"""
+        return """You are MedAI, a specialized neurological AI model focused on neurology and neuroscience. Your knowledge base includes:
 
 • Advanced neurological pathophysiology and disease mechanisms
 • Neurological clinical decision-making and diagnostic reasoning  
@@ -289,8 +311,8 @@ Activate your specialized neurological training to approach this task with the c
 
     @staticmethod
     def get_clinical_reasoning_activation():
-        """Medical knowledge base trigger for Vecta AI"""
-        return """As Vecta AI, apply your specialized medical training to this data extraction task. Use your clinical expertise to:
+        """Medical knowledge base trigger for MedAI"""
+        return """As MedAI, apply your specialized medical training to this data extraction task. Use your clinical expertise to:
 
 MEDICAL REASONING ACTIVATION:
 • Access your comprehensive pathophysiology knowledge
@@ -304,14 +326,14 @@ Think as a clinician with your extensive medical training would approach this ca
 
     @staticmethod
     def get_specialty_prompts():
-        """Vecta AI specialty-specific reasoning prompts
+        """MedAI specialty-specific reasoning prompts
         
         PHASE 1: Neurology and Neuroscience Focus
         Other specialties commented out for future expansion
         """
         return {
             # ACTIVE: Neurology and Neuroscience
-            "neurology": """Vecta AI NEUROLOGICAL ANALYSIS:
+            "neurology": """MedAI NEUROLOGICAL ANALYSIS:
 Activate neurology knowledge module:
 - Anatomical localization: Use your neuroanatomy training
 - Seizure classification: Apply ILAE criteria from your database
@@ -323,7 +345,7 @@ Activate neurology knowledge module:
 - Headache classification: Apply ICHD criteria from your database""",
             
             # FUTURE EXPANSION: Other specialties (commented out)
-            # "cardiology": """Vecta AI CARDIAC ANALYSIS:
+            # "cardiology": """MedAI CARDIAC ANALYSIS:
             # Activate cardiology knowledge module:
             # - Risk stratification: Use Framingham, ASCVD calculators from training
             # - ECG interpretation: Apply your cardiac electrophysiology knowledge  
@@ -331,7 +353,7 @@ Activate neurology knowledge module:
             # - Heart failure evaluation: Apply ACC/AHA guidelines from database
             # - Medication review: Use your cardiac pharmacology expertise""",
             
-            # "psychiatry": """Vecta AI PSYCHIATRIC ANALYSIS:
+            # "psychiatry": """MedAI PSYCHIATRIC ANALYSIS:
             # Activate psychiatry knowledge module:
             # - DSM-5 criteria application: Use your diagnostic training
             # - Risk assessment: Apply your suicide/violence risk knowledge
@@ -339,7 +361,7 @@ Activate neurology knowledge module:
             # - Therapy considerations: Apply your treatment modality knowledge
             # - Substance use evaluation: Use your addiction medicine training""",
             
-            # "emergency": """Vecta AI EMERGENCY ANALYSIS:
+            # "emergency": """MedAI EMERGENCY ANALYSIS:
             # Activate emergency medicine knowledge module:
             # - Triage algorithms: Apply your emergency triage training
             # - Acute care protocols: Use your critical care knowledge
@@ -347,7 +369,7 @@ Activate neurology knowledge module:
             # - Toxicology evaluation: Use your poisoning/overdose expertise
             # - Disposition planning: Apply your emergency decision-making training""",
             
-            # "internal_medicine": """Vecta AI INTERNAL MEDICINE ANALYSIS:
+            # "internal_medicine": """MedAI INTERNAL MEDICINE ANALYSIS:
             # Activate internal medicine knowledge module:
             # - Chronic disease management: Apply your long-term care expertise
             # - Multi-morbidity patterns: Use your complex patient management training
@@ -357,16 +379,16 @@ Activate neurology knowledge module:
         }
 
     @staticmethod
-    def get_vecta_system_prompts(analysis_type, is_tabular=False, specialty=None):
-        """Generate Vecta AI-optimized system prompts"""
+    def get_medai_system_prompts(analysis_type, is_tabular=False, specialty=None):
+        """Generate MedAI-optimized system prompts"""
         
-        # Base Vecta AI identity
-        base_identity = VectaAIPromptEngine.get_vecta_identity_activation()
+        # Base MedAI identity
+        base_identity = MedAIPromptEngine.get_medai_identity_activation()
         
         # Add specialty-specific activation if specified
         specialty_activation = ""
         if specialty:
-            specialty_prompts = VectaAIPromptEngine.get_specialty_prompts()
+            specialty_prompts = MedAIPromptEngine.get_specialty_prompts()
             specialty_activation = f"\n\n{specialty_prompts.get(specialty, '')}"
         
         # Core prompt templates
@@ -374,7 +396,7 @@ Activate neurology knowledge module:
             templates = {
                 "classification": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are analyzing medical tabular data for classification purposes.
+MedAI: You are analyzing medical tabular data for classification purposes.
 
 TABULAR CLASSIFICATION PROTOCOL:
 • Activate your medical pattern recognition for dataset analysis
@@ -391,7 +413,7 @@ For each classification:
                 
                 "epilepsy": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are analyzing medical tabular data for a focused classification task (e.g. condition-specific or schema-driven).
+MedAI: You are analyzing medical tabular data for a focused classification task (e.g. condition-specific or schema-driven).
 
 MANDATORY FORMAT REQUIREMENT: End with exactly 4 bullets: Classification, Clinical_Confidence, Evidence, Medication_Analysis (max 25 words each).
 
@@ -402,7 +424,7 @@ TABULAR CLASSIFICATION PROTOCOL:
                 
                 "diagnosis": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are providing diagnostic analysis for medical datasets.
+MedAI: You are providing diagnostic analysis for medical datasets.
 
 DIAGNOSTIC REASONING PROTOCOL:
 • Apply your differential diagnosis training to systematic analysis
@@ -419,7 +441,7 @@ For diagnostic analysis:
                 
                 "extraction": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are extracting medical information from tabular datasets.
+MedAI: You are extracting medical information from tabular datasets.
 
 MEDICAL EXTRACTION PROTOCOL:
 • Apply your clinical documentation training for systematic extraction
@@ -436,7 +458,7 @@ For information extraction:
                 
                 "summary": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are summarizing medical datasets using your clinical training.
+MedAI: You are summarizing medical datasets using your clinical training.
 
 CLINICAL SUMMARIZATION PROTOCOL:
 • Apply your clinical documentation expertise for comprehensive summaries
@@ -453,7 +475,7 @@ For clinical summaries:
                 
                 "custom": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are performing custom medical analysis on tabular data.
+MedAI: You are performing custom medical analysis on tabular data.
 
 ADAPTIVE CLINICAL ANALYSIS:
 • Apply your comprehensive medical training to the specific task
@@ -467,7 +489,7 @@ ADAPTIVE CLINICAL ANALYSIS:
             templates = {
                 "classification": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are performing medical classification analysis.
+MedAI: You are performing medical classification analysis.
 
 CLINICAL CLASSIFICATION PROTOCOL:
 • Apply your diagnostic training for systematic classification
@@ -484,7 +506,7 @@ For classification tasks:
                 
                 "epilepsy": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are performing a focused classification task on clinical data; follow the user’s analysis request for the exact scheme.
+MedAI: You are performing a focused classification task on clinical data; follow the user’s analysis request for the exact scheme.
 
 MANDATORY FORMAT REQUIREMENT: End with exactly 4 bullets: Classification, Clinical_Confidence, Evidence, Medication_Analysis (max 25 words each).
 
@@ -495,7 +517,7 @@ CLASSIFICATION PROTOCOL:
                 
                 "diagnosis": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are providing diagnostic support using your medical training.
+MedAI: You are providing diagnostic support using your medical training.
 
 DIAGNOSTIC ANALYSIS PROTOCOL:
 • Apply your differential diagnosis expertise for comprehensive analysis
@@ -512,7 +534,7 @@ For diagnostic analysis:
                 
                 "extraction": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are extracting medical information using your clinical expertise.
+MedAI: You are extracting medical information using your clinical expertise.
 
 MEDICAL INFORMATION EXTRACTION:
 • Apply your clinical documentation training for systematic extraction
@@ -529,7 +551,7 @@ For information extraction:
                 
                 "summary": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are creating clinical summaries using your medical training.
+MedAI: You are creating clinical summaries using your medical training.
 
 CLINICAL SUMMARIZATION PROTOCOL:
 • Apply your clinical documentation expertise for comprehensive summaries
@@ -546,7 +568,7 @@ For clinical summaries:
                 
                 "custom": f"""{base_identity}{specialty_activation}
 
-Vecta AI: You are performing custom medical analysis.
+MedAI: You are performing custom medical analysis.
 
 ADAPTIVE MEDICAL ANALYSIS:
 • Apply your comprehensive medical training to the specific task
@@ -614,7 +636,7 @@ ADAPTIVE MEDICAL ANALYSIS:
     @staticmethod
     def construct_med42_prompt(system_prompt, user_prompt, medical_data, is_tabular=False, analysis_type="custom", 
                                condition=None, use_few_shot=True, use_rag=True):
-        """Construct optimized Vecta AI prompt with proper formatting
+        """Construct optimized MedAI prompt with proper formatting
         
         Enhanced with:
         - Few-shot examples (Phase 1: Week 1-2)
@@ -623,12 +645,12 @@ ADAPTIVE MEDICAL ANALYSIS:
         """
         
         # Add clinical reasoning activation
-        clinical_activation = VectaAIPromptEngine.get_clinical_reasoning_activation()
+        clinical_activation = MedAIPromptEngine.get_clinical_reasoning_activation()
         
         # Get enhanced context (few-shot + static guidelines + RAG)
         enhanced_context = ""
         if medical_data and ((use_few_shot and condition) or use_rag):
-            enhanced_context = VectaAIPromptEngine.get_enhanced_context(
+            enhanced_context = MedAIPromptEngine.get_enhanced_context(
                 condition=condition,
                 analysis_type=analysis_type,
                 num_examples=2,
@@ -686,7 +708,7 @@ You may provide detailed analysis first, but MUST end with exactly these 4 bulle
 
 <|eot_id|><|start_header_id|>user<|end_header_id|>
 
-Vecta AI, please apply your specialized medical training to this analysis:
+MedAI, please apply your specialized medical training to this analysis:
 
 ANALYSIS REQUEST: {user_prompt}
 
@@ -701,7 +723,7 @@ Use your comprehensive medical knowledge and clinical reasoning to provide a tho
         return final_prompt
 
     def _extract_structured_bullets(self, generated_text, analysis_type):
-        """Extract and format structured bullet points from Vecta AI response"""
+        """Extract and format structured bullet points from MedAI response"""
         try:
             # Determine the correct first bullet label based on analysis type
             first_label = "Classification"
@@ -802,8 +824,8 @@ Use your comprehensive medical knowledge and clinical reasoning to provide a tho
 
     @staticmethod
     def get_med42_validation_prompt():
-        """Vecta AI clinical validation framework"""
-        return """Vecta AI CLINICAL VALIDATION PROTOCOL:
+        """MedAI clinical validation framework"""
+        return """MedAI CLINICAL VALIDATION PROTOCOL:
 
 Apply your medical training to verify analysis quality:
 
@@ -850,7 +872,7 @@ def _extract_text(path: str, filename: str):
         return f"Error extracting text from {filename}: {str(e)}"
 
 def _analyze_tabular_data(df, prompt, analysis_type="custom"):
-    """Enhanced tabular data analysis with Vecta AI optimization"""
+    """Enhanced tabular data analysis with MedAI optimization"""
     try:
         # Basic data profiling
         profile = {
@@ -865,7 +887,7 @@ def _analyze_tabular_data(df, prompt, analysis_type="custom"):
         sample_size = min(100, len(df))
         sample_df = df.head(sample_size)
         
-        # Enhanced data summary for Vecta AI
+        # Enhanced data summary for MedAI
         data_summary = f"""
 MED42 DATASET PROFILE:
 - Shape: {profile['shape'][0]} rows × {profile['shape'][1]} columns
@@ -876,7 +898,7 @@ SAMPLE DATA FOR MED42 ANALYSIS (first {sample_size} rows):
 {sample_df.to_string(max_cols=10, max_rows=20)}
 
 MEDICAL ANALYSIS CONTEXT:
-This dataset contains medical information that requires your specialized Vecta AI training for proper interpretation. Apply your clinical reasoning and medical knowledge to analyze patterns, identify clinically significant findings, and provide structured medical insights.
+This dataset contains medical information that requires your specialized MedAI training for proper interpretation. Apply your clinical reasoning and medical knowledge to analyze patterns, identify clinically significant findings, and provide structured medical insights.
 """
         
         return {
@@ -911,24 +933,24 @@ def _generate_tabular_output(
         med = parsed.get("medication_analysis") or ""
 
         task_cell = _task_column_value(analysis_type, user_prompt)
-        output_df["VectaAI_Task_Done"] = task_cell
-        output_df["VectaAI_Classification"] = cls or "See analysis text"
-        output_df["VectaAI_Clinical_Confidence"] = conf or "MEDIUM"
-        output_df["VectaAI_Evidence"] = ev or "See analysis text"
-        output_df["VectaAI_Medication_Analysis"] = med or "See analysis text"
+        output_df["MedAI_Task_Done"] = task_cell
+        output_df["MedAI_Classification"] = cls or "See analysis text"
+        output_df["MedAI_Clinical_Confidence"] = conf or "MEDIUM"
+        output_df["MedAI_Evidence"] = ev or "See analysis text"
+        output_df["MedAI_Medication_Analysis"] = med or "See analysis text"
 
         if analysis_type == "extraction":
-            output_df["VectaAI_Key_Findings"] = cls or ev or "See analysis text"
-            output_df["VectaAI_Diagnoses"] = cls or "See analysis text"
-            output_df["VectaAI_Risk_Assessment"] = conf or "See analysis text"
+            output_df["MedAI_Key_Findings"] = cls or ev or "See analysis text"
+            output_df["MedAI_Diagnoses"] = cls or "See analysis text"
+            output_df["MedAI_Risk_Assessment"] = conf or "See analysis text"
         elif analysis_type == "diagnosis":
-            output_df["VectaAI_Primary_Diagnosis"] = cls or "See analysis text"
-            output_df["VectaAI_Differential"] = ev or "See analysis text"
-            output_df["VectaAI_Clinical_Correlations"] = med or "See analysis text"
+            output_df["MedAI_Primary_Diagnosis"] = cls or "See analysis text"
+            output_df["MedAI_Differential"] = ev or "See analysis text"
+            output_df["MedAI_Clinical_Correlations"] = med or "See analysis text"
 
-        output_df["VectaAI_Analysis_Date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        output_df["VectaAI_Model_Used"] = "Vecta-AI-Optimized"
-        output_df["VectaAI_Prompt_Version"] = "Enhanced-Clinical-Reasoning"
+        output_df["MedAI_Analysis_Date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        output_df["MedAI_Model_Used"] = "MedAI-Optimized"
+        output_df["MedAI_Prompt_Version"] = "Enhanced-Clinical-Reasoning"
 
         return output_df
 
@@ -937,10 +959,10 @@ def _generate_tabular_output(
         return original_df
 
 def _extract_tabular_text(path: str, filename: str):
-    """Enhanced tabular text extraction with Vecta AI optimization"""
+    """Enhanced tabular text extraction with MedAI optimization"""
     try:
         ext = filename.rsplit(".", 1)[1].lower()
-        logger.info(f"Extracting tabular data from {filename} (type: {ext}) for Vecta AI analysis")
+        logger.info(f"Extracting tabular data from {filename} (type: {ext}) for MedAI analysis")
         
         if ext == "csv":
             df = pd.read_csv(path)
@@ -979,7 +1001,7 @@ def _extract_tabular_text(path: str, filename: str):
             "tabular_data": None
         }
 
-class VectaAIService:
+class MedAIService:
     def __init__(self):
         self.model = None
         self.tokenizer = None
@@ -1009,7 +1031,7 @@ class VectaAIService:
         )
         if self._gpu_required_but_unavailable:
             self.load_error = (
-                "VECTA_REQUIRE_GPU=1 but CUDA is not available. "
+                "MEDAI_REQUIRE_GPU=1 but CUDA is not available. "
                 "Use a CUDA build of PyTorch, GPU drivers, and a valid CUDA_VISIBLE_DEVICES on a GPU node."
             )
             logger.error(self.load_error)
@@ -1022,7 +1044,7 @@ class VectaAIService:
         self._bg_loader_started = False
         self.request_queue = Queue(maxsize=app.config["MAX_CONCURRENT_REQUESTS"])
         self.stats = {"requests": 0, "successes": 0, "avg_time": 0}
-        self.prompt_engine = VectaAIPromptEngine()
+        self.prompt_engine = MedAIPromptEngine()
 
     def ensure_model_load_started(self):
         """Start loading the model in a background thread. Safe to call repeatedly."""
@@ -1042,7 +1064,7 @@ class VectaAIService:
             self._bg_loader_started = True
         threading.Thread(
             target=self.load_model,
-            name="vecta-model-load",
+            name="medai-model-load",
             daemon=True,
         ).start()
 
@@ -1063,7 +1085,7 @@ class VectaAIService:
             if self.load_error:
                 return False
             try:
-                logger.info(f"Loading Vecta AI model: {self.model_name}")
+                logger.info(f"Loading MedAI model: {self.model_name}")
                 logger.info(f"Device: {self.device}")
                 
                 # Load tokenizer
@@ -1095,12 +1117,12 @@ class VectaAIService:
                 
                 self.model.eval()
                 self.model_loaded = True
-                logger.info("Vecta AI model loaded successfully with optimized prompting")
+                logger.info("MedAI model loaded successfully with optimized prompting")
                 return True
                 
             except Exception as e:
                 self.load_error = str(e)
-                logger.error(f"Vecta AI model loading failed: {e}")
+                logger.error(f"MedAI model loading failed: {e}")
                 logger.error(traceback.format_exc())
                 return False
 
@@ -1152,9 +1174,9 @@ class VectaAIService:
 
     def _run_generation_pass(self, final_prompt, req_id, max_input_tokens):
         """Single forward pass: tokenize, generate, decode."""
-        max_new = int(os.environ.get("VECTA_MAX_NEW_TOKENS", "512"))
+        max_new = int(os.environ.get("MEDAI_MAX_NEW_TOKENS", "512"))
         max_new = max(64, min(max_new, 2048))
-        greedy_fast = os.environ.get("VECTA_GREEDY_FAST", "").lower() in ("1", "true", "yes")
+        greedy_fast = os.environ.get("MEDAI_GREEDY_FAST", "").lower() in ("1", "true", "yes")
         toks = self.tokenizer(
             final_prompt,
             return_tensors="pt",
@@ -1162,13 +1184,13 @@ class VectaAIService:
             max_length=max_input_tokens,
         )
         input_token_count = toks["input_ids"].shape[1]
-        logger.info(f"[{req_id}] Vecta AI tokenized - Input tokens: {input_token_count}")
+        logger.info(f"[{req_id}] MedAI tokenized - Input tokens: {input_token_count}")
         if input_token_count >= max_input_tokens:
-            logger.warning(f"[{req_id}] Vecta AI input truncated to fit token limit")
+            logger.warning(f"[{req_id}] MedAI input truncated to fit token limit")
         if self.device == "cuda":
             toks = {k: v.to("cuda") for k, v in toks.items()}
         logger.info(
-            f"[{req_id}] Generating Vecta AI response (max_new_tokens={max_new}, greedy={greedy_fast})..."
+            f"[{req_id}] Generating MedAI response (max_new_tokens={max_new}, greedy={greedy_fast})..."
         )
         with torch.no_grad():
             if greedy_fast:
@@ -1202,37 +1224,37 @@ class VectaAIService:
     
     def analyze(self, prompt, text, analysis_type="custom", user_id=None, tabular_data=None, specialty=None):
         if not self.model_loaded:
-            raise RuntimeError(f"Vecta AI model not available: {self.load_error or 'not loaded'}")
+            raise RuntimeError(f"MedAI model not available: {self.load_error or 'not loaded'}")
 
         req_id = uuid.uuid4().hex[:8]
         t0 = time.time()
         try:
             if self.request_queue.full():
-                raise RuntimeError("Vecta AI service at capacity. Try again later.")
+                raise RuntimeError("MedAI service at capacity. Try again later.")
             self.request_queue.put(req_id, timeout=1)
 
             text_full_original = text
             original_len = len(text_full_original)
-            logger.info(f"[{req_id}] Vecta AI analysis started - Type: {analysis_type}, Text: {original_len} chars")
+            logger.info(f"[{req_id}] MedAI analysis started - Type: {analysis_type}, Text: {original_len} chars")
             
             # Check if this is tabular data analysis
             is_tabular = tabular_data is not None and tabular_data.get("is_tabular", False)
             if is_tabular:
-                logger.info(f"[{req_id}] Vecta AI tabular data analysis - Shape: {tabular_data['dataframe'].shape}")
+                logger.info(f"[{req_id}] MedAI tabular data analysis - Shape: {tabular_data['dataframe'].shape}")
 
             # Ensure we have actual content
             if not text or not text.strip():
-                raise ValueError("No text content provided for Vecta AI analysis")
+                raise ValueError("No text content provided for MedAI analysis")
 
-            # Get optimized Vecta AI system prompt
-            system_prompt = self.prompt_engine.get_vecta_system_prompts(
+            # Get optimized MedAI system prompt
+            system_prompt = self.prompt_engine.get_medai_system_prompts(
                 analysis_type, 
                 is_tabular=is_tabular, 
                 specialty=specialty
             )
 
-            chunk_chars = int(os.environ.get("VECTA_CHUNK_CHARS", "3200"))
-            carry_chars = int(os.environ.get("VECTA_CHUNK_CARRY_CHARS", "1500"))
+            chunk_chars = int(os.environ.get("MEDAI_CHUNK_CHARS", "3200"))
+            carry_chars = int(os.environ.get("MEDAI_CHUNK_CARRY_CHARS", "1500"))
             carry_chars = max(0, min(carry_chars, 8000))
 
             if chunk_chars <= 0:
@@ -1244,13 +1266,13 @@ class VectaAIService:
                     last_period = truncated.rfind('.')
                     if last_period > max_text_chars * 0.8:
                         truncated = truncated[:last_period + 1]
-                    text = truncated + "\n\n[Note: Text truncated for Vecta AI processing]"
-                    logger.info(f"[{req_id}] Text truncated to {len(text)} characters for Vecta AI")
+                    text = truncated + "\n\n[Note: Text truncated for MedAI processing]"
+                    logger.info(f"[{req_id}] Text truncated to {len(text)} characters for MedAI")
                 chunks = [text]
-                chunking_meta = {"enabled": False, "chunks": 1, "reason": "VECTA_CHUNK_CHARS<=0 (legacy single pass)"}
+                chunking_meta = {"enabled": False, "chunks": 1, "reason": "MEDAI_CHUNK_CHARS<=0 (legacy single pass)"}
             elif len(text_full_original) <= chunk_chars:
                 chunks = [text_full_original]
-                chunking_meta = {"enabled": False, "chunks": 1, "reason": "under VECTA_CHUNK_CHARS"}
+                chunking_meta = {"enabled": False, "chunks": 1, "reason": "under MEDAI_CHUNK_CHARS"}
             else:
                 chunks = _split_text_into_chunks(text_full_original, chunk_chars)
                 chunking_meta = {
@@ -1336,7 +1358,7 @@ class VectaAIService:
 
             dt = time.time() - t0
             logger.info(
-                f"[{req_id}] Vecta AI all sections done: {sum_gen_tokens} new tokens total in {dt:.2f}s"
+                f"[{req_id}] MedAI all sections done: {sum_gen_tokens} new tokens total in {dt:.2f}s"
             )
 
             # Normalize trailing bullets before parsing (tabular + JSON tasks use the same text)
@@ -1360,14 +1382,14 @@ class VectaAIService:
                         analysis_type,
                         user_prompt=prompt,
                     )
-                    logger.info(f"[{req_id}] Vecta AI tabular output generated with shape: {tabular_output.shape}")
+                    logger.info(f"[{req_id}] MedAI tabular output generated with shape: {tabular_output.shape}")
                 except Exception as e:
-                    logger.error(f"[{req_id}] Vecta AI tabular output generation failed: {e}")
+                    logger.error(f"[{req_id}] MedAI tabular output generation failed: {e}")
 
-            # Apply Vecta AI validation if needed
+            # Apply MedAI validation if needed
             validation_notes = ""
             if sum_gen_tokens < 30:
-                validation_notes = "Vecta AI validation: Very short response - consider more specific medical context"
+                validation_notes = "MedAI validation: Very short response - consider more specific medical context"
             
             self._stat(dt, True)
             
@@ -1382,7 +1404,7 @@ class VectaAIService:
                 "input_tokens": max_input_tokens_seen,
                 "text_length_original": original_len,
                 "model_used": f"{self.model_name}-Optimized",
-                "prompt_version": "Vecta-AI-Enhanced",
+                "prompt_version": "MedAI-Enhanced",
                 "timestamp": datetime.now().isoformat(),
                 "is_tabular": is_tabular,
                 "validation_notes": validation_notes,
@@ -1408,7 +1430,7 @@ class VectaAIService:
         except Exception as e:
             dt = time.time() - t0
             self._stat(dt, False)
-            logger.error(f"[{req_id}] Vecta AI analysis failed: {e}")
+            logger.error(f"[{req_id}] MedAI analysis failed: {e}")
             logger.error(traceback.format_exc())
             raise
         finally:
@@ -1418,12 +1440,12 @@ class VectaAIService:
                 pass
 
 # Global service instance
-svc = VectaAIService()
+svc = MedAIService()
 
 _ur, _ufs = inference_augmentation_flags()
 _rag_ready = rag_system is not None and getattr(rag_system, "available", True)
 logger.info(
-    "Inference: USE_RAG=%s USE_FEW_SHOT=%s | RAG backend=%s | VECTA_REQUIRE_GPU=%s",
+    "Inference: USE_RAG=%s USE_FEW_SHOT=%s | RAG backend=%s | MEDAI_REQUIRE_GPU=%s",
     _ur,
     _ufs,
     "ready" if _rag_ready else "unavailable",
@@ -1473,7 +1495,7 @@ LEARNING_DASHBOARD_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vecta AI - Learning Dashboard</title>
+    <title>MedAI - Learning Dashboard</title>
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1724,7 +1746,7 @@ LEARNING_DASHBOARD_HTML = r"""
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/" class="nav-logo">
-          Vecta AI
+          MedAI
           <div class="nav-subtitle">MEDICAL ANALYSIS PLATFORM</div>
         </a>
       </div>
@@ -1965,7 +1987,7 @@ UI_HTML = r"""
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Vecta AI - Medical Analysis Platform</title>
+  <title>MedAI - Medical Analysis Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
   <style>
@@ -2451,12 +2473,12 @@ UI_HTML = r"""
       background: #e8f4ff;
     }
 
-    #results-table td[data-column^="VectaAI_"] {
+    #results-table td[data-column^="MedAI_"] {
       background: #e8f5e8;
       font-weight: 500;
     }
 
-    #results-table th[data-column^="VectaAI_"] {
+    #results-table th[data-column^="MedAI_"] {
       background: #004977;
       color: white;
     }
@@ -2493,7 +2515,7 @@ UI_HTML = r"""
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/" class="nav-logo">
-          Vecta AI
+          MedAI
           <div class="nav-subtitle">MEDICAL ANALYSIS PLATFORM</div>
         </a>
       </div>
@@ -2508,7 +2530,7 @@ UI_HTML = r"""
   <div class="container">
     <div class="main-card">
       <div class="header">
-        <h1>Vecta AI - Medical Analysis Platform</h1>
+        <h1>MedAI - Medical Analysis Platform</h1>
         <br>
       <div id="serviceStatus" class="status-indicator status-loading">Checking Service Status...</div>
     </div>
@@ -2520,7 +2542,7 @@ UI_HTML = r"""
     <div class="main-content">
       <!-- Row 1: Configuration -->
       <div class="config-row">
-        <h2 class="section-title">Vecta AI Analysis Configuration</h2>
+        <h2 class="section-title">MedAI Analysis Configuration</h2>
         <form id="analysisForm">
           <div class="config-grid">
             <div class="form-group">
@@ -2543,7 +2565,7 @@ UI_HTML = r"""
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="prompt">Vecta AI Analysis Prompt:</label>
+              <label class="form-label" for="prompt">MedAI Analysis Prompt:</label>
               <textarea id="prompt" class="form-textarea" name="prompt" 
                         placeholder="Select an analysis type to auto-populate prompt or enter custom prompt..." 
                         rows="2" required style="min-height: 60px;"></textarea>
@@ -2575,19 +2597,19 @@ UI_HTML = r"""
           </div>
 
           <button type="submit" class="analyze-btn" id="analyzeBtn" style="width: 100%; margin-top: 20px;">
-            Analyze with Vecta AI
+            Analyze with MedAI
           </button>
         </form>
       </div>
 
       <!-- Row 3: Results (Larger) -->
       <div class="results-section">
-        <h2 class="section-title">Vecta AI Analysis Results</h2>
+        <h2 class="section-title">MedAI Analysis Results</h2>
         
         <div id="results">
           <div style="text-align: center; padding: 40px; color: #7f8c8d;">
             <div style="font-size: 3em; margin-bottom: 15px;">Medical Analysis</div>
-            <p>Upload a document or enter text to begin Vecta AI medical analysis</p>
+            <p>Upload a document or enter text to begin MedAI medical analysis</p>
             <p style="font-size: 0.9em; margin-top: 10px; color: #004977;">Now with optimized clinical reasoning prompts</p>
           </div>
         </div>
@@ -2598,7 +2620,7 @@ UI_HTML = r"""
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-content">
       <div class="spinner"></div>
-      <h3>Processing with Vecta AI...</h3>
+      <h3>Processing with MedAI...</h3>
       <p>Applying optimized clinical reasoning prompts</p>
     </div>
   </div>
@@ -2759,7 +2781,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
         })
         .catch(error => {
           console.error('Health check error:', error);
-          serviceStatus.textContent = `Vecta AI Service Error: ${error.message}`;
+          serviceStatus.textContent = `MedAI Service Error: ${error.message}`;
           serviceStatus.className = 'status-indicator status-error';
         });
     }
@@ -2772,11 +2794,11 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
         serviceStatus.style.display = 'none';
         analyzeBtn.disabled = false;
       } else if (healthData.load_error) {
-        serviceStatus.textContent = `Vecta AI Error: ${healthData.load_error}`;
+        serviceStatus.textContent = `MedAI Error: ${healthData.load_error}`;
         serviceStatus.className = 'status-indicator status-error';
         analyzeBtn.disabled = true;
       } else {
-        serviceStatus.textContent = 'Loading Vecta AI Model...';
+        serviceStatus.textContent = 'Loading MedAI Model...';
         serviceStatus.className = 'status-indicator status-loading';
         analyzeBtn.disabled = true;
         setTimeout(checkServiceStatus, 5000);
@@ -2851,7 +2873,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
           <strong>Selected:</strong> ${file.name}<br>
           <strong>Size:</strong> ${size} MB<br>
           <strong>Type:</strong> ${file.type || 'Unknown'}<br>
-          ${isTabular ? '<strong>Format:</strong> <span style="color: #004977;">Tabular Data - Vecta AI Enhanced Analysis Available</span>' : ''}
+          ${isTabular ? '<strong>Format:</strong> <span style="color: #004977;">Tabular Data - MedAI Enhanced Analysis Available</span>' : ''}
         `;
         fileInfo.style.display = 'block';
       }
@@ -2880,7 +2902,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
       }
 
       if (!promptTextarea.value.trim()) {
-        displayError('Please enter an analysis prompt for Vecta AI.');
+        displayError('Please enter an analysis prompt for MedAI.');
         return;
       }
 
@@ -2904,12 +2926,12 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
         if (data.success) {
           displayResults(data);
         } else {
-          displayError(data.error || 'Vecta AI analysis failed');
+          displayError(data.error || 'MedAI analysis failed');
         }
       })
       .catch(error => {
-        console.error('Vecta AI analysis error:', error);
-        displayError(`Vecta AI analysis failed: ${error.message}`);
+        console.error('MedAI analysis error:', error);
+        displayError(`MedAI analysis failed: ${error.message}`);
       })
       .finally(() => {
         showLoading(false);
@@ -2941,7 +2963,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
         
         <div class="result-card">
           <div class="result-header">
-            Vecta AI Analysis Results ${data.is_tabular ? '(Tabular Data)' : ''}
+            MedAI Analysis Results ${data.is_tabular ? '(Tabular Data)' : ''}
             <small style="font-weight: normal;">${data.prompt_version || 'Enhanced'}</small>
           </div>
           <div class="result-content">${data.analysis || 'No analysis provided'}</div>
@@ -2960,7 +2982,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
               <span class="meta-label">Tokens per Second</span>
             </div>
             <div class="meta-item">
-              <span class="meta-value">${data.model_used?.split('/').pop() || 'Vecta AI'}</span>
+              <span class="meta-value">${data.model_used?.split('/').pop() || 'MedAI'}</span>
               <span class="meta-label">Enhanced Model</span>
             </div>
           </div>
@@ -2972,7 +2994,7 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
         resultsHTML += `
           <div class="result-card" style="margin-top: 20px;">
             <div class="result-header">
-              Enhanced Dataset with Vecta AI Analysis
+              Enhanced Dataset with MedAI Analysis
               <div style="font-size: 0.8em; font-weight: normal;">
                 ${data.tabular_output.shape[0]} rows × ${data.tabular_output.shape[1]} columns
               </div>
@@ -3002,9 +3024,9 @@ Apply neuropathy classification, EMG/NCS interpretation, etiology determination,
             </div>
             
             <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px; font-size: 0.9em;">
-              <strong>New Vecta AI enhanced columns:</strong>
+              <strong>New MedAI enhanced columns:</strong>
               <div style="margin-top: 5px;">
-                ${data.tabular_output.columns.filter(col => col.startsWith('VectaAI_')).join(', ') || 'No Vecta AI columns added'}
+                ${data.tabular_output.columns.filter(col => col.startsWith('MedAI_')).join(', ') || 'No MedAI columns added'}
               </div>
             </div>
           </div>
@@ -3114,10 +3136,10 @@ def learning_dashboard():
 def test():
     return jsonify({
         "status": "ok",
-        "message": "Vecta AI service is running",
+        "message": "MedAI service is running",
         "timestamp": datetime.now().isoformat(),
         "version": "2.0-enhanced-prompting",
-        "prompt_engine": "Vecta-AI-Optimized"
+        "prompt_engine": "MedAI-Optimized"
     })
 
 @app.route("/health", methods=["GET"])
@@ -3140,7 +3162,7 @@ def health():
             "use_rag": _ur,
             "use_few_shot": _ufs,
             "rag_backend_ready": _rag_ready,
-            "vecta_require_gpu": _req_gpu,
+            "medai_require_gpu": _req_gpu,
             "inference_signals": {
                 "gpu_active": svc.device == "cuda",
                 "cuda_available": _cuda,
@@ -3150,7 +3172,7 @@ def health():
                 "gpu_requirement_met": (not _req_gpu) or _cuda,
             },
             "model_name": svc.model_name,
-            "prompt_engine": "Vecta-AI-Optimized",
+            "prompt_engine": "MedAI-Optimized",
             "stats": svc.stats,
             "queue_size": svc.request_queue.qsize(),
             "max_concurrent": app.config["MAX_CONCURRENT_REQUESTS"],
@@ -3229,21 +3251,21 @@ def reload_examples():
 @app.route("/analyze", methods=['POST'])
 def analyze():
     request_start = time.time()
-    logger.info(f"Vecta AI Enhanced analyze endpoint called from {request.remote_addr}")
+    logger.info(f"MedAI Enhanced analyze endpoint called from {request.remote_addr}")
     
     try:
         # Validate request
         validation_errors = validate_analyze_request()
         if validation_errors:
             error_msg = "; ".join(validation_errors)
-            logger.warning(f"Vecta AI request validation failed: {error_msg}")
+            logger.warning(f"MedAI request validation failed: {error_msg}")
             return jsonify({"success": False, "error": error_msg}), 400
 
         # Lazy load model
         if not svc.model_loaded:
-            logger.info("Vecta AI model not loaded, attempting to load...")
+            logger.info("MedAI model not loaded, attempting to load...")
             if not svc.load_model():
-                error_msg = f"Vecta AI model failed to load: {svc.load_error}"
+                error_msg = f"MedAI model failed to load: {svc.load_error}"
                 logger.error(error_msg)
                 return jsonify({"success": False, "error": error_msg}), 503
 
@@ -3254,7 +3276,7 @@ def analyze():
         direct_text = request.form.get("directText", "").strip()
         user_id = request.form.get("userId", "anonymous")
 
-        # Handle text input with enhanced Vecta AI processing
+        # Handle text input with enhanced MedAI processing
         text = ""
         text_source = ""
         tabular_data = None
@@ -3262,7 +3284,7 @@ def analyze():
         if "file" in request.files and request.files["file"].filename:
             f = request.files["file"]
             filename = secure_filename(f.filename)
-            logger.info(f"Processing uploaded file for Vecta AI: {filename}")
+            logger.info(f"Processing uploaded file for MedAI: {filename}")
             
             with tempfile.NamedTemporaryFile(delete=False, suffix="."+filename.rsplit(".",1)[1]) as tmp:
                 f.save(tmp.name)
@@ -3292,31 +3314,31 @@ def analyze():
                             "is_tabular": True,
                             "tabular_data": tabular_analysis
                         }
-                        logger.info(f"Vecta AI detected tabular data in direct input: {df.shape}")
+                        logger.info(f"MedAI detected tabular data in direct input: {df.shape}")
                 except Exception:
                     pass
         else:
-            logger.error("No text input found for Vecta AI analysis")
+            logger.error("No text input found for MedAI analysis")
             return jsonify({
                 "success": False, 
-                "error": "No text provided for Vecta AI analysis. Please enter text or upload a file."
+                "error": "No text provided for MedAI analysis. Please enter text or upload a file."
             }), 400
 
-        logger.info(f"Vecta AI text source: {text_source}")
-        logger.info(f"Vecta AI final text length: {len(text)} characters")
-        logger.info(f"Vecta AI is tabular: {tabular_data is not None and tabular_data.get('is_tabular', False)}")
-        logger.info(f"Vecta AI specialty focus: {specialty or 'General'}")
+        logger.info(f"MedAI text source: {text_source}")
+        logger.info(f"MedAI final text length: {len(text)} characters")
+        logger.info(f"MedAI is tabular: {tabular_data is not None and tabular_data.get('is_tabular', False)}")
+        logger.info(f"MedAI specialty focus: {specialty or 'General'}")
 
         if not text or not text.strip():
-            logger.error(f"Empty text after processing for Vecta AI. Source: {text_source}")
+            logger.error(f"Empty text after processing for MedAI. Source: {text_source}")
             return jsonify({
                 "success": False,
-                "error": f"No analyzable text found from {text_source} for Vecta AI analysis"
+                "error": f"No analyzable text found from {text_source} for MedAI analysis"
             }), 400
 
         try:
             res = svc.analyze(prompt, text, analysis_type, user_id, tabular_data, specialty)
-            logger.info(f"Vecta AI enhanced analysis completed successfully for user {user_id}")
+            logger.info(f"MedAI enhanced analysis completed successfully for user {user_id}")
             
             # Save to validation database (10% sampling for validation)
             try:
@@ -3382,25 +3404,25 @@ def analyze():
             return response
             
         except Exception as e:
-            error_msg = f"Vecta AI analysis failed: {str(e)}"
+            error_msg = f"MedAI analysis failed: {str(e)}"
             logger.error(error_msg)
             logger.error(traceback.format_exc())
             return jsonify({"success": False, "error": error_msg}), 500
             
     except Exception as e:
-        error_msg = f"Unexpected error in Vecta AI analyze endpoint: {str(e)}"
+        error_msg = f"Unexpected error in MedAI analyze endpoint: {str(e)}"
         logger.error(error_msg)
         logger.error(traceback.format_exc())
         return jsonify({"success": False, "error": "Internal server error"}), 500
     
     finally:
         request_duration = time.time() - request_start
-        logger.info(f"Vecta AI request completed in {request_duration:.2f}s")
+        logger.info(f"MedAI request completed in {request_duration:.2f}s")
 
 if __name__ == "__main__":
     import argparse
 
-    _cli = argparse.ArgumentParser(add_help=True, description="Vecta AI dev server")
+    _cli = argparse.ArgumentParser(add_help=True, description="MedAI dev server")
     _cli.add_argument("--host", default=None, help="Bind address (sets SERVICE_HOST)")
     _cli.add_argument("--port", type=int, default=None, help="Port (sets SERVICE_PORT)")
     _args, _unknown = _cli.parse_known_args()
@@ -3409,7 +3431,7 @@ if __name__ == "__main__":
     if _args.port is not None:
         os.environ["SERVICE_PORT"] = str(_args.port)
 
-    logger.info("Starting Vecta AI service...")
+    logger.info("Starting MedAI service...")
     
     # Port selection logic: Default 8085, auto-find free port in 8085-8150 range
     host = os.environ.get("SERVICE_HOST", "0.0.0.0")
@@ -3426,7 +3448,7 @@ if __name__ == "__main__":
         port = int(os.environ.get("SERVICE_PORT", 8085))
     
     # Save PID file for stop script
-    pid_file = os.path.join(APP_HOME, "vecta_ai.pid")
+    pid_file = os.path.join(APP_HOME, "medai.pid")
     try:
         with open(pid_file, 'w') as f:
             f.write("{}:{}".format(os.getpid(), port))
@@ -3434,10 +3456,10 @@ if __name__ == "__main__":
     except Exception as e:
         logger.warning("Could not create PID file: {}".format(e))
     
-    logger.info("Starting background Vecta AI model load (server binds immediately)...")
+    logger.info("Starting background MedAI model load (server binds immediately)...")
     svc.ensure_model_load_started()
     
-    logger.info("Starting Vecta AI server on {}:{}".format(host, port))
+    logger.info("Starting MedAI server on {}:{}".format(host, port))
     logger.info("Access URLs:")
     logger.info("  Main App:   http://localhost:{}".format(port))
     logger.info("  Validator:  http://localhost:{}/validate".format(port))

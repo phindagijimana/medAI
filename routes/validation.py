@@ -1,5 +1,5 @@
 """
-Validation Routes for Vecta AI
+Validation Routes for MedAI
 Neurologist validation interface
 """
 from flask import Blueprint, render_template_string, request, jsonify
@@ -183,7 +183,7 @@ VALIDATOR_HTML = """
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vecta AI - Validator</title>
+  <title>MedAI - Validator</title>
   <style>
     * {
       margin: 0;
@@ -596,7 +596,7 @@ VALIDATOR_HTML = """
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/" class="nav-logo">
-          Vecta AI
+          MedAI
           <div class="nav-subtitle">VALIDATOR PORTAL</div>
         </a>
       </div>
@@ -663,7 +663,7 @@ VALIDATOR_HTML = """
 
         <!-- AI Analysis -->
         <div class="case-section">
-          <div class="case-label">VECTA AI ANALYSIS:</div>
+          <div class="case-label">MEDAI AI ANALYSIS:</div>
           <div class="ai-output-box">
             {% if case.ai_classification %}
             <div class="output-item">

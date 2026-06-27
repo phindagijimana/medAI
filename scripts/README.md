@@ -49,7 +49,7 @@ Scripts for initialization, testing, and deployment.
   - Resource allocation
   - Module loading
   
-  Use via `vecta-hpc` CLI instead of directly.
+  Use via `medai-hpc` CLI instead of directly.
 
 ## Usage Examples
 
@@ -80,8 +80,8 @@ python3 scripts/test_learning_loop.py
 
 These scripts are primarily for development, testing, and initial setup. For production use:
 
-- Use `vecta` CLI for local deployment
-- Use `vecta-hpc` CLI for HPC deployment
+- Use `medai` CLI for local deployment
+- Use `medai-hpc` CLI for HPC deployment
 - Use web interfaces for validation and learning
 
 ## Integration

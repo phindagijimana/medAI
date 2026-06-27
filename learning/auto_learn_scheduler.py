@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Vecta AI Auto-Learning Scheduler
+MedAI Auto-Learning Scheduler
 Automatically runs learning cycles based on triggers
 """
 
@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 class AutoLearningScheduler:
-    """Automatic learning scheduler for Vecta AI"""
+    """Automatic learning scheduler for MedAI"""
     
     def __init__(self):
         self.engine = LearningEngine()

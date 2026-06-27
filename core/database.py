@@ -1,5 +1,5 @@
 """
-Database setup for Vecta AI Validation System
+Database setup for MedAI Validation System
 """
 import sqlite3
 import os
@@ -135,7 +135,7 @@ def init_db():
         # Create default demo neurologist
         cursor.execute("""
             INSERT OR IGNORE INTO neurologists (id, email, name, specialty, certification_level, is_active)
-            VALUES ('demo_neuro', 'demo@vecta.ai', 'Dr. Demo Neurologist', 'general_neurology', 'attending', 1)
+            VALUES ('demo_neuro', 'demo@medai.ai', 'Dr. Demo Neurologist', 'general_neurology', 'attending', 1)
         """)
         
         conn.commit()

@@ -22,7 +22,7 @@ from typing import Any, Iterator
 
 import numpy as np
 
-logger = logging.getLogger("vectaai")
+logger = logging.getLogger("medai")
 
 _GUIDELINES_REL = Path("data") / "guidelines" / "neurology_guidelines.json"
 

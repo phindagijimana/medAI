@@ -5,14 +5,14 @@
 From the repository root:
 
 ```bash
-chmod +x vecta vecta-hpc    # once
-./vecta install              # pip install -r requirements.txt (uses --user unless venv / VECTA_PIP_USER=0)
-./vecta start                # Gunicorn in background (writes vecta_ai.pid)
-./vecta start -f             # Flask dev server only (foreground)
-./vecta stop | ./vecta status | ./vecta logs
+chmod +x medai medai-hpc    # once
+./medai install              # pip install -r requirements.txt (uses --user unless venv / MEDAI_PIP_USER=0)
+./medai start                # Gunicorn in background (writes medai.pid)
+./medai start -f             # Flask dev server only (foreground)
+./medai stop | ./medai status | ./medai logs
 ```
 
-HPC (SLURM): `./vecta-hpc install` then `./vecta-hpc run gpu` or `run cpu`.
+HPC (SLURM): `./medai-hpc install` then `./medai-hpc run gpu` or `run cpu`.
 
 ## Manual install
 
@@ -33,7 +33,7 @@ HPC (SLURM): `./vecta-hpc install` then `./vecta-hpc run gpu` or `run cpu`.
 
    Or: `python app.py --host 127.0.0.1 --port 8085`
 
-5. Run with **Gunicorn** (production-style), or use **`./vecta start`** which does this for you:
+5. Run with **Gunicorn** (production-style), or use **`./medai start`** which does this for you:
 
    ```bash
    export SERVICE_PORT=8085

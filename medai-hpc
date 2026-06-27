@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Vecta AI - HPC Deployment CLI
-Manage Vecta AI deployment on HPC clusters with SLURM
+MedAI - HPC Deployment CLI
+Manage MedAI deployment on HPC clusters with SLURM
 """
 import os
 import sys
@@ -20,7 +20,7 @@ INSTALL_MARKER = APP_DIR / ".hpc_installed"
 def _pip_user_args():
     if sys.prefix != sys.base_prefix:
         return []
-    v = os.environ.get("VECTA_PIP_USER", "1").lower()
+    v = os.environ.get("MEDAI_PIP_USER", "1").lower()
     return ["--user"] if v in ("1", "true", "yes") else []
 
 
@@ -41,7 +41,7 @@ def _read_service_port_from_job_script():
 def print_banner():
     print("")
     print("=" * 70)
-    print("  Vecta AI - HPC Deployment CLI")
+    print("  MedAI - HPC Deployment CLI")
     print("  SLURM Cluster Management")
     print("=" * 70)
     print("")
@@ -80,9 +80,9 @@ def auto_load_modules():
 
 
 def cmd_install(args):
-    """Install Vecta AI on HPC cluster"""
+    """Install MedAI on HPC cluster"""
     print_banner()
-    print("Installing Vecta AI on HPC cluster...")
+    print("Installing MedAI on HPC cluster...")
     print("")
     
     # Auto-load required modules
@@ -95,7 +95,7 @@ def cmd_install(args):
     
     # Check if already installed
     if INSTALL_MARKER.exists():
-        print("[INFO] Vecta AI already installed.")
+        print("[INFO] MedAI already installed.")
         print("")
         response = input("Reinstall? (y/N): ").strip().lower()
         if response != 'y':
@@ -151,10 +151,10 @@ def cmd_install(args):
     print("=" * 70)
     print("\nNext steps:")
     print("  1. Submit job:")
-    print("     ./vecta-hpc run gpu    # GPU mode (default)")
-    print("     ./vecta-hpc run cpu    # CPU-only mode")
+    print("     ./medai-hpc run gpu    # GPU mode (default)")
+    print("     ./medai-hpc run cpu    # CPU-only mode")
     print("  2. Check status:")
-    print("     ./vecta-hpc status")
+    print("     ./medai-hpc status")
     print("")
     
     return 0
@@ -187,7 +187,7 @@ def create_slurm_job_script(args, resource_mode='gpu'):
     
     # Build SBATCH directives
     sbatch_directives = f"""#!/bin/bash
-#SBATCH --job-name=vecta-ai
+#SBATCH --job-name=medai
 #SBATCH --partition={partition}"""
     
     # Add GPU request only if in GPU mode
@@ -202,14 +202,14 @@ def create_slurm_job_script(args, resource_mode='gpu'):
 #SBATCH --cpus-per-task={cpus}
 #SBATCH --mem={mem}
 #SBATCH --time={time_limit}
-#SBATCH --output=logs/vecta_%j.out
-#SBATCH --error=logs/vecta_%j.err"""
+#SBATCH --output=logs/medai_%j.out
+#SBATCH --error=logs/medai_%j.err"""
     
     script_content = sbatch_directives + f"""
 
 # Print job information
 echo "=================================================="
-echo "Vecta AI - HPC Job ({resource_mode.upper()} Mode)"
+echo "MedAI - HPC Job ({resource_mode.upper()} Mode)"
 echo "=================================================="
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURM_NODELIST"
@@ -269,7 +269,7 @@ else
   echo "CUDA_VISIBLE_DEVICES unset — cgroup maps allocated GPU(s) to CUDA device index 0,1,..."
 fi
 # Fail model load if PyTorch still cannot see CUDA (CPU-only wheel on a GPU node)
-export VECTA_REQUIRE_GPU=1
+export MEDAI_REQUIRE_GPU=1
 """
     
     script_content += """
@@ -297,8 +297,8 @@ echo ""
     
     # Add final part of script
     script_content += f"""
-# Start Vecta AI (Gunicorn — see gunicorn_config.py; single worker for one model copy)
-echo "Starting Vecta AI on 0.0.0.0:{port} (Gunicorn)..."
+# Start MedAI (Gunicorn — see gunicorn_config.py; single worker for one model copy)
+echo "Starting MedAI on 0.0.0.0:{port} (Gunicorn)..."
 exec python3 -m gunicorn -c gunicorn_config.py app:app
 
 # Job completion (unreachable if exec succeeds; kept for clarity)
@@ -315,15 +315,15 @@ echo "=================================================="
 
 
 def cmd_run(args):
-    """Submit Vecta AI job to SLURM"""
+    """Submit MedAI job to SLURM"""
     print_banner()
     
     # Auto-load required modules
     auto_load_modules()
     
     if not INSTALL_MARKER.exists():
-        print("[ERROR] Vecta AI not installed on HPC.")
-        print("        Run: ./vecta-hpc install")
+        print("[ERROR] MedAI not installed on HPC.")
+        print("        Run: ./medai-hpc install")
         return 1
     
     if not check_slurm_available():
@@ -358,7 +358,7 @@ def cmd_run(args):
     # Recreate job script with current args and resource mode
     create_slurm_job_script(args, resource_mode)
     
-    print(f"Submitting Vecta AI job to SLURM ({resource_mode.upper()} mode)...")
+    print(f"Submitting MedAI job to SLURM ({resource_mode.upper()} mode)...")
     print("")
     
     try:
@@ -381,9 +381,9 @@ def cmd_run(args):
         print(f"     Job ID: {job_id}")
         print("")
         print("Next steps:")
-        print(f"  Check status: ./vecta-hpc status")
-        print(f"  View logs:    ./vecta-hpc logs")
-        print(f"  Cancel job:   ./vecta-hpc stop")
+        print(f"  Check status: ./medai-hpc status")
+        print(f"  View logs:    ./medai-hpc logs")
+        print(f"  Cancel job:   ./medai-hpc stop")
         print("")
         
         # Show initial queue status
@@ -403,7 +403,7 @@ def cmd_stop(args):
     
     if not JOB_ID_FILE.exists():
         print("[INFO] No job ID file found.")
-        print("       No Vecta AI job to cancel.")
+        print("       No MedAI job to cancel.")
         return 0
     
     with open(JOB_ID_FILE) as f:
@@ -466,7 +466,7 @@ def cmd_status(args):
             
             if state == 'RUNNING':
                 print("\n[OK] Job is RUNNING")
-                print("\nAccess Vecta AI:")
+                print("\nAccess MedAI:")
                 
                 # Get node name
                 node_result = subprocess.run(
@@ -516,7 +516,7 @@ def cmd_logs(args):
         
         logs_dir = APP_DIR / "logs"
         if logs_dir.exists():
-            log_files = sorted(logs_dir.glob("vecta_*.out"), reverse=True)
+            log_files = sorted(logs_dir.glob("medai_*.out"), reverse=True)
             if log_files:
                 print("Recent log files:")
                 for i, log_file in enumerate(log_files[:5], 1):
@@ -545,8 +545,8 @@ def cmd_logs(args):
     print("")
     
     # Determine log file
-    log_file = APP_DIR / "logs" / f"vecta_{job_id}.out"
-    err_file = APP_DIR / "logs" / f"vecta_{job_id}.err"
+    log_file = APP_DIR / "logs" / f"medai_{job_id}.out"
+    err_file = APP_DIR / "logs" / f"medai_{job_id}.err"
     
     lines = args.lines or 50
     
@@ -655,36 +655,36 @@ def cmd_config(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Vecta AI HPC Deployment CLI',
+        description='MedAI HPC Deployment CLI',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Initial setup
-  ./vecta-hpc install
+  ./medai-hpc install
 
   # Submit job (GPU mode - default)
-  ./vecta-hpc run gpu
-  ./vecta-hpc run gpu --gpus 2 --memory 128G
+  ./medai-hpc run gpu
+  ./medai-hpc run gpu --gpus 2 --memory 128G
 
   # Submit job (CPU-only mode)
-  ./vecta-hpc run cpu
-  ./vecta-hpc run cpu --cpus 32 --memory 64G
+  ./medai-hpc run cpu
+  ./medai-hpc run cpu --cpus 32 --memory 64G
 
   # Check job status
-  ./vecta-hpc status
+  ./medai-hpc status
 
   # View logs
-  ./vecta-hpc logs --follow
+  ./medai-hpc logs --follow
 
   # Cancel job
-  ./vecta-hpc stop
+  ./medai-hpc stop
         """
     )
     
     subparsers = parser.add_subparsers(dest='command', help='Command to execute')
     
     # Install command
-    install_parser = subparsers.add_parser('install', help='Install Vecta AI on HPC')
+    install_parser = subparsers.add_parser('install', help='Install MedAI on HPC')
     install_parser.add_argument('--partition', default='general', help='SLURM partition')
     install_parser.add_argument('--gpus', type=int, default=1, help='Number of GPUs')
     install_parser.add_argument('--memory', default='64G', help='Memory allocation')

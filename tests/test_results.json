@@ -15,7 +15,7 @@
         "max_concurrent": 10,
         "model_loaded": true,
         "model_name": "m42-health/Llama3-Med42-8B",
-        "prompt_engine": "Vecta-AI-Optimized",
+        "prompt_engine": "MedAI-Optimized",
         "queue_size": 0,
         "stats": {
           "avg_time": 0,

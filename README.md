@@ -1,10 +1,10 @@
-# Vecta AI - Medical Analysis Platform
+# MedAI - Medical Analysis Platform
 
 AI-powered medical analysis with clinical guidelines and expert validation system.
 
 ## Overview
 
-Vecta AI is a medical analysis platform featuring:
+MedAI is a medical analysis platform featuring:
 - Clinical examples across epilepsy, Parkinson's, stroke, dementia, and other neurological conditions
 - Integrated clinical guidelines (ILAE, AAN, AHA/ASA, MDS)
 - Expert validation system for continuous improvement
@@ -16,44 +16,44 @@ Vecta AI is a medical analysis platform featuring:
 
 ### Local
 ```bash
-git clone https://github.com/phindagijimana/vecta.git
-cd vecta
-./vecta start
+git clone https://github.com/phindagijimana/medai.git
+cd medai
+./medai start
 ```
 Access at http://localhost:8085
 
 ### HPC
 ```bash
-git clone https://github.com/phindagijimana/vecta.git
-cd vecta
-./vecta-hpc install
-./vecta-hpc run gpu    # or 'run cpu' for CPU-only
-./vecta-hpc status
+git clone https://github.com/phindagijimana/medai.git
+cd medai
+./medai-hpc install
+./medai-hpc run gpu    # or 'run cpu' for CPU-only
+./medai-hpc status
 ```
 
 ## CLI Commands
 
-### Local (`./vecta`)
+### Local (`./medai`)
 ```bash
-./vecta install        # pip install -r requirements.txt
-./vecta start          # Gunicorn in background (production-style)
-./vecta start -f       # Flask dev server in foreground
-./vecta start -p 8090  # Port (also SERVICE_PORT)
-./vecta status         # Check status
-./vecta logs           # View logs
-./vecta stop           # Stop service
-./vecta restart
+./medai install        # pip install -r requirements.txt
+./medai start          # Gunicorn in background (production-style)
+./medai start -f       # Flask dev server in foreground
+./medai start -p 8090  # Port (also SERVICE_PORT)
+./medai status         # Check status
+./medai logs           # View logs
+./medai stop           # Stop service
+./medai restart
 ```
 
-Use `VECTA_PIP_USER=0` when using a venv so `pip install` does not pass `--user`.
+Use `MEDAI_PIP_USER=0` when using a venv so `pip install` does not pass `--user`.
 
-### HPC (vecta-hpc)
+### HPC (medai-hpc)
 ```bash
-./vecta-hpc install             # Setup
-./vecta-hpc run gpu             # Submit GPU job
-./vecta-hpc run cpu             # Submit CPU job
-./vecta-hpc status              # Check status
-./vecta-hpc logs                # View logs
+./medai-hpc install             # Setup
+./medai-hpc run gpu             # Submit GPU job
+./medai-hpc run cpu             # Submit CPU job
+./medai-hpc status              # Check status
+./medai-hpc logs                # View logs
 ```
 
 ## Requirements
@@ -86,4 +86,4 @@ MIT
 
 ## Support
 
-GitHub Issues: https://github.com/phindagijimana/vecta/issues
+GitHub Issues: https://github.com/phindagijimana/medai/issues

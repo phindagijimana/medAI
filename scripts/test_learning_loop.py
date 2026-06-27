@@ -36,10 +36,10 @@ def add_test_validated_cases():
             """, (
                 'test_validator',
                 'Dr. Test Validator',
-                'test@vecta.ai',
+                'test@medai.ai',
                 'Epileptology',
                 'board_certified_epileptologist',
-                'Vecta AI Medical Center',
+                'MedAI Medical Center',
                 True
             ))
             db.commit()
@@ -114,7 +114,7 @@ def add_test_validated_cases():
 def test_full_learning_cycle():
     """Test the complete learning cycle"""
     print("\n" + "="*70)
-    print("TESTING VECTA AI SELF-IMPROVEMENT LOOP")
+    print("TESTING MEDAI AI SELF-IMPROVEMENT LOOP")
     print("="*70)
     
     # Step 1: Add validated test cases

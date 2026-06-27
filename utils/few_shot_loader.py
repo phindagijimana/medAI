@@ -11,7 +11,7 @@ import random
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger("vectaai")
+logger = logging.getLogger("medai")
 
 _CONDITION_TO_GUIDELINE = {
     "epilepsy": "epilepsy_guidelines",

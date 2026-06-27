@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Vecta AI Self-Improvement Engine
+MedAI Self-Improvement Engine
 Automatically learns from expert validations and updates prompts
 """
 
@@ -21,7 +21,7 @@ LEARNING_LOG_PATH = APP_DIR / "data" / "learning_history.json"
 
 
 class LearningEngine:
-    """Vecta AI Self-Improvement Engine"""
+    """MedAI Self-Improvement Engine"""
     
     def __init__(self, min_confidence_threshold=0.8, min_validations=1):
         """
@@ -253,7 +253,7 @@ class LearningEngine:
     def run_learning_cycle(self) -> Dict[str, Any]:
         """Execute a full learning cycle"""
         logger.info("=" * 70)
-        logger.info("STARTING VECTA AI LEARNING CYCLE")
+        logger.info("STARTING MEDAI AI LEARNING CYCLE")
         logger.info("=" * 70)
         
         cycle_start = datetime.now()
@@ -317,7 +317,7 @@ def run_learning_cycle_cli():
     result = engine.run_learning_cycle()
     
     print("\n" + "=" * 70)
-    print("VECTA AI LEARNING CYCLE RESULTS")
+    print("MEDAI AI LEARNING CYCLE RESULTS")
     print("=" * 70)
     print(f"Cases Processed: {result['cases_processed']}")
     print(f"Examples Added: {result['examples_added']}")

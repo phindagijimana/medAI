@@ -1,15 +1,15 @@
-# Deployment Guide - Vecta AI
+# Deployment Guide - MedAI
 
-Complete deployment guide for Vecta AI neurology analysis platform.
+Complete deployment guide for MedAI neurology analysis platform.
 
 ## Quick Start
 
 ### One-Command Setup (Local)
 
 ```bash
-git clone https://github.com/phindagijimana/vecta.git
-cd vecta
-./vecta start
+git clone https://github.com/phindagijimana/medai.git
+cd medai
+./medai start
 ```
 
 Access at http://localhost:8085
@@ -17,12 +17,12 @@ Access at http://localhost:8085
 ### One-Command Setup (HPC)
 
 ```bash
-git clone https://github.com/phindagijimana/vecta.git
-cd vecta
-./vecta-hpc install
-./vecta-hpc run gpu     # GPU mode (default)
+git clone https://github.com/phindagijimana/medai.git
+cd medai
+./medai-hpc install
+./medai-hpc run gpu     # GPU mode (default)
 # OR
-./vecta-hpc run cpu     # CPU-only mode
+./medai-hpc run cpu     # CPU-only mode
 ```
 
 ## Deployment Options
@@ -42,7 +42,7 @@ The local deployment automatically detects available resources:
 
 **Quick Start:**
 ```bash
-./vecta start          # Auto-installs dependencies & detects GPU/CPU
+./medai start          # Auto-installs dependencies & detects GPU/CPU
 ```
 
 **Manual Setup:**
@@ -53,11 +53,11 @@ python3 app.py
 
 **CLI Commands:**
 ```bash
-./vecta start          # Start service
-./vecta status         # Check status
-./vecta logs           # View logs
-./vecta stop           # Stop service
-./vecta restart        # Restart service
+./medai start          # Start service
+./medai status         # Check status
+./medai logs           # View logs
+./medai stop           # Stop service
+./medai restart        # Restart service
 ```
 
 **Features:**
@@ -86,25 +86,25 @@ Choose between CPU-only or GPU-accelerated deployment:
 **Installation:**
 ```bash
 # One-time setup (modules auto-loaded)
-./vecta-hpc install
+./medai-hpc install
 ```
 
 **Submit Job (GPU Mode - Default):**
 ```bash
 # Default GPU configuration
-./vecta-hpc run gpu
+./medai-hpc run gpu
 
 # Custom GPU resources
-./vecta-hpc run gpu --gpus 2 --memory 128G --cpus 8
+./medai-hpc run gpu --gpus 2 --memory 128G --cpus 8
 ```
 
 **Submit Job (CPU-Only Mode):**
 ```bash
 # Default CPU configuration
-./vecta-hpc run cpu
+./medai-hpc run cpu
 
 # Custom CPU resources
-./vecta-hpc run cpu --cpus 32 --memory 64G --time 48:00:00
+./medai-hpc run cpu --cpus 32 --memory 64G --time 48:00:00
 ```
 
 **Resource Defaults:**
@@ -117,23 +117,23 @@ Choose between CPU-only or GPU-accelerated deployment:
 **Additional Commands:**
 ```bash
 # Default resources (1 GPU, 64GB, 24h)
-./vecta-hpc run
+./medai-hpc run
 
 # Custom resources
-./vecta-hpc run --gpus 2 --memory 128G --time 48:00:00
+./medai-hpc run --gpus 2 --memory 128G --time 48:00:00
 ```
 
 **Monitor Job:**
 ```bash
-./vecta-hpc status     # Check job status
-./vecta-hpc logs       # View logs
-./vecta-hpc logs -f    # Follow logs
+./medai-hpc status     # Check job status
+./medai-hpc logs       # View logs
+./medai-hpc logs -f    # Follow logs
 ```
 
 **Access Application:**
 ```bash
 # Get node info
-./vecta-hpc status
+./medai-hpc status
 
 # Forward port (from local machine)
 ssh -L 8085:gpu-node-XX:8085 username@hpc-login.edu
@@ -144,14 +144,14 @@ http://localhost:8085
 
 **Stop Job:**
 ```bash
-./vecta-hpc stop
+./medai-hpc stop
 ```
 
 **HPC CLI Options:**
 
 Installation customization:
 ```bash
-./vecta-hpc install \
+./medai-hpc install \
   --partition gpu \
   --gpus 1 \
   --memory 64G \
@@ -163,20 +163,20 @@ Installation customization:
 Job submission:
 ```bash
 # Large memory job
-./vecta-hpc run --memory 256G --gpus 4
+./medai-hpc run --memory 256G --gpus 4
 
 # Extended time
-./vecta-hpc run --time 96:00:00
+./medai-hpc run --time 96:00:00
 
 # Specific partition
-./vecta-hpc run --partition gpu-a100
+./medai-hpc run --partition gpu-a100
 ```
 
 Monitoring:
 ```bash
-./vecta-hpc list       # List all jobs
-./vecta-hpc info       # Environment info
-./vecta-hpc config     # View configuration
+./medai-hpc list       # List all jobs
+./medai-hpc info       # Environment info
+./medai-hpc config     # View configuration
 ```
 
 **Troubleshooting HPC:**
@@ -189,8 +189,8 @@ sinfo -p gpu
 
 Job fails immediately:
 ```bash
-./vecta-hpc logs
-cat logs/vecta_JOBID.err
+./medai-hpc logs
+cat logs/medai_JOBID.err
 ```
 
 Port forwarding issues:
@@ -208,14 +208,14 @@ curl http://localhost:8085
 **With GPU:**
 ```bash
 # Build image
-docker build -t vecta-ai .
+docker build -t medai .
 
 # Run with GPU
 docker run -d \
   --gpus all \
   -p 8085:8085 \
   -v $(pwd)/data:/app/data \
-  vecta-ai
+  medai
 ```
 
 **CPU Only:**
@@ -223,7 +223,7 @@ docker run -d \
 docker run -d \
   -p 8085:8085 \
   -v $(pwd)/data:/app/data \
-  vecta-ai
+  medai
 ```
 
 **Dockerfile:**
@@ -259,17 +259,17 @@ gunicorn -c gunicorn_config.py app:app
 
 **Systemd Service:**
 
-Create `/etc/systemd/system/vecta.service`:
+Create `/etc/systemd/system/medai.service`:
 ```ini
 [Unit]
-Description=Vecta AI Service
+Description=MedAI Service
 After=network.target
 
 [Service]
 Type=simple
-User=vecta
-WorkingDirectory=/opt/vecta
-ExecStart=/usr/bin/python3 /opt/vecta/app.py
+User=medai
+WorkingDirectory=/opt/medai
+ExecStart=/usr/bin/python3 /opt/medai/app.py
 Restart=always
 RestartSec=10
 
@@ -279,18 +279,18 @@ WantedBy=multi-user.target
 
 Enable and start:
 ```bash
-sudo systemctl enable vecta
-sudo systemctl start vecta
-sudo systemctl status vecta
+sudo systemctl enable medai
+sudo systemctl start medai
+sudo systemctl status medai
 ```
 
 **Nginx Reverse Proxy:**
 
-Configure `/etc/nginx/sites-available/vecta`:
+Configure `/etc/nginx/sites-available/medai`:
 ```nginx
 server {
     listen 80;
-    server_name vecta.yourdomain.com;
+    server_name medai.yourdomain.com;
 
     location / {
         proxy_pass http://127.0.0.1:8085;
@@ -304,7 +304,7 @@ server {
 
 Enable:
 ```bash
-sudo ln -s /etc/nginx/sites-available/vecta /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/medai /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -319,15 +319,15 @@ sudo apt update
 sudo apt install nvidia-cuda-toolkit
 
 # Clone and run
-git clone https://github.com/phindagijimana/vecta.git
-cd vecta
-./vecta start
+git clone https://github.com/phindagijimana/medai.git
+cd medai
+./medai start
 ```
 
 **Google Cloud (A100/T4):**
 ```bash
 # Create GPU instance
-gcloud compute instances create vecta-gpu \
+gcloud compute instances create medai-gpu \
   --zone=us-central1-a \
   --machine-type=n1-standard-8 \
   --accelerator=type=nvidia-tesla-t4,count=1 \
@@ -335,20 +335,20 @@ gcloud compute instances create vecta-gpu \
   --image-project=deeplearning-platform-release
 
 # Deploy
-./vecta start
+./medai start
 ```
 
 **Azure (NC/ND series):**
 ```bash
 # Create GPU VM
 az vm create \
-  --resource-group vecta-rg \
-  --name vecta-gpu \
+  --resource-group medai-rg \
+  --name medai-gpu \
   --size Standard_NC6 \
   --image UbuntuLTS
 
 # Deploy
-./vecta start
+./medai start
 ```
 
 ## GPU Setup
@@ -455,8 +455,8 @@ model = AutoModelForCausalLM.from_pretrained(
 Create `.env` file:
 ```bash
 FLASK_ENV=production
-VECTA_PORT=8085
-VECTA_HOST=0.0.0.0
+MEDAI_PORT=8085
+MEDAI_HOST=0.0.0.0
 DEBUG=False
 MODEL_ID=m42-health/Llama3-Med42-8B
 MAX_TOKENS=512
@@ -468,8 +468,8 @@ Load in `app.py`:
 from dotenv import load_dotenv
 load_dotenv()
 
-port = int(os.getenv('VECTA_PORT', 8085))
-host = os.getenv('VECTA_HOST', '0.0.0.0')
+port = int(os.getenv('MEDAI_PORT', 8085))
+host = os.getenv('MEDAI_HOST', '0.0.0.0')
 ```
 
 ### Port Configuration
@@ -479,13 +479,13 @@ Fallback range: 8085-8150
 
 Override:
 ```bash
-export VECTA_PORT=9000
-./vecta start
+export MEDAI_PORT=9000
+./medai start
 ```
 
 Or in HPC:
 ```bash
-./vecta-hpc run --port 9000
+./medai-hpc run --port 9000
 ```
 
 ## Data Management
@@ -537,7 +537,7 @@ cp data/validation.db data/validation.db.backup
 cp data/validation.db data/validation_$(date +%Y%m%d_%H%M%S).db
 
 # Automated daily backup
-0 2 * * * cd /opt/vecta && cp data/validation.db data/validation_$(date +\%Y\%m\%d).db
+0 2 * * * cd /opt/medai && cp data/validation.db data/validation_$(date +\%Y\%m\%d).db
 ```
 
 ## System Requirements
@@ -617,13 +617,13 @@ curl http://localhost:8085/health
 Monitor logs:
 ```bash
 # Local
-./vecta logs
+./medai logs
 
 # HPC
-./vecta-hpc logs -f
+./medai-hpc logs -f
 
 # Direct
-tail -f vecta.log
+tail -f medai.log
 ```
 
 ### Performance Monitoring
@@ -673,8 +673,8 @@ lsof -ti:8085
 kill -9 $(lsof -ti:8085)
 
 # Or use different port
-export VECTA_PORT=8086
-./vecta start
+export MEDAI_PORT=8086
+./medai start
 ```
 
 **Module not found:**
@@ -713,13 +713,13 @@ pip3 install --user torch --index-url https://download.pytorch.org/whl/cu118
 pkill -f "python.*app.py"
 
 # Restart app
-./vecta restart
+./medai restart
 ```
 
 **HPC job fails:**
 ```bash
 # Check logs
-./vecta-hpc logs
+./medai-hpc logs
 
 # Verify modules
 module list
@@ -728,19 +728,19 @@ module list
 scontrol show job JOBID
 
 # Request different resources
-./vecta-hpc run --memory 128G
+./medai-hpc run --memory 128G
 ```
 
 ### Logs
 
 **Local:**
-- Application: `vecta.log`
-- PID file: `vecta.pid`
+- Application: `medai.log`
+- PID file: `medai.pid`
 - Location: Project root
 
 **HPC:**
-- Job output: `logs/vecta_JOBID.out`
-- Job errors: `logs/vecta_JOBID.err`
+- Job output: `logs/medai_JOBID.out`
+- Job errors: `logs/medai_JOBID.err`
 - SLURM script: `slurm_job.sh`
 
 ### Getting Help
@@ -760,7 +760,7 @@ scontrol show job JOBID
 git pull origin main
 
 # Restart service
-./vecta restart
+./medai restart
 ```
 
 ### Updating Dependencies
@@ -819,16 +819,16 @@ python3 migrate_db.py
 Multiple instances with load balancer:
 ```bash
 # Instance 1
-./vecta start --port 8085
+./medai start --port 8085
 
 # Instance 2
-./vecta start --port 8086
+./medai start --port 8086
 
 # Instance 3
-./vecta start --port 8087
+./medai start --port 8087
 
 # Nginx load balancer
-upstream vecta {
+upstream medai {
     server 127.0.0.1:8085;
     server 127.0.0.1:8086;
     server 127.0.0.1:8087;
@@ -840,14 +840,14 @@ upstream vecta {
 Increase resources:
 ```bash
 # HPC: More GPUs
-./vecta-hpc run --gpus 4 --memory 256G
+./medai-hpc run --gpus 4 --memory 256G
 
 # Docker: More resources
 docker run -d \
   --gpus all \
   --memory 64g \
   --cpus 16 \
-  vecta-ai
+  medai
 ```
 
 ## Cost Estimates
@@ -884,8 +884,8 @@ One-time hardware cost:
 - DEPLOYMENT.md (This file)
 
 **Resources:**
-- GitHub: https://github.com/phindagijimana/vecta
-- Issues: https://github.com/phindagijimana/vecta/issues
+- GitHub: https://github.com/phindagijimana/medai
+- Issues: https://github.com/phindagijimana/medai/issues
 
 **Community:**
 - Report bugs via GitHub Issues

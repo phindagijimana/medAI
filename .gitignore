@@ -81,5 +81,5 @@ models/
 .hpc_installed
 .hpc_job_id
 slurm_job.sh
-logs/vecta_*.out
-logs/vecta_*.err
+logs/medai_*.out
+logs/medai_*.err
