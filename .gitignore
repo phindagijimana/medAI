@@ -53,11 +53,12 @@ data/learning_history.json
 # RAG embedding cache (regenerable)
 data/rag_cache/
 
-# Documentation - Keep only README and DEPLOYMENT
+# Documentation - Keep only README and DEPLOYMENT + versioned schema docs
 *.md
 !README.md
 !DEPLOYMENT.md
 !SELF_HOSTING.md
+!docs/SCHEMA_*.md
 
 # Environment
 .env
@@ -83,3 +84,8 @@ models/
 slurm_job.sh
 logs/medai_*.out
 logs/medai_*.err
+logs/vecta_*.out
+logs/vecta_*.err
+
+# Extraction pipeline runtime output — commit specific locked-run manifests intentionally
+data/run_manifests/
