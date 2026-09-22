@@ -61,6 +61,7 @@ data/rag_cache/
 !docs/SCHEMA_*.md
 !docs/TRIPOD_*.md
 !docs/FONFERKO_*.md
+!docs/CORPUS_*.md
 
 # Environment
 .env
