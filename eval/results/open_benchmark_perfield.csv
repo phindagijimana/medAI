@@ -1,0 +1,8 @@
+arm,module,field,n_applicable,tp,fp,fn,tn,precision,recall,f1
+B0_rules,clinical_seizure,epilepsy_type,200,72,27,22,81,0.7273,0.766,0.7461
+B0_rules,clinical_seizure,predominant_seizure_type,200,62,53,61,62,0.5391,0.5041,0.521
+B0_rules,clinical_seizure,age_at_onset_years,200,9,33,6,154,0.2143,0.6,0.3158
+B0_rules,clinical_seizure,seizure_frequency,200,5,116,137,30,0.0413,0.0352,0.038
+B0_rules,clinical_seizure,etiology_category,200,20,41,8,132,0.3279,0.7143,0.4494
+B0_rules,medication,drug_resistance_status,200,0,1,0,199,0.0,0.0,0.0
+B0_rules,medication,asm_names_multiset,200,203,212,91,0,0.4892,0.6905,0.5726

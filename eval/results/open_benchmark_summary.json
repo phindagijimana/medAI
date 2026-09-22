@@ -1,0 +1,129 @@
+{
+  "B0_rules": {
+    "arm": "B0_rules",
+    "n_documents": 200,
+    "n_patients": 0,
+    "raw_validity_rate": 1.0,
+    "final_validity_rate": 1.0,
+    "raw_valid": 200,
+    "repaired_valid": 0,
+    "final_valid": 200,
+    "parse_failures": 0,
+    "repair_method_counts": {},
+    "unsupported_claim_rate": 0.0,
+    "evidence_precision": 1.0,
+    "total_evidence_objects": 3217,
+    "modules": {
+      "clinical_seizure": {
+        "module_name": "clinical_seizure",
+        "macro_f1": 0.4141,
+        "micro_f1": 0.4,
+        "fields": {
+          "epilepsy_type": {
+            "field_name": "epilepsy_type",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 72,
+            "fp": 27,
+            "fn": 22,
+            "tn": 81,
+            "precision": 0.7273,
+            "recall": 0.766,
+            "f1": 0.7461,
+            "accuracy": 0.7574
+          },
+          "predominant_seizure_type": {
+            "field_name": "predominant_seizure_type",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 62,
+            "fp": 53,
+            "fn": 61,
+            "tn": 62,
+            "precision": 0.5391,
+            "recall": 0.5041,
+            "f1": 0.521,
+            "accuracy": 0.521
+          },
+          "age_at_onset_years": {
+            "field_name": "age_at_onset_years",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 9,
+            "fp": 33,
+            "fn": 6,
+            "tn": 154,
+            "precision": 0.2143,
+            "recall": 0.6,
+            "f1": 0.3158,
+            "accuracy": 0.8069
+          },
+          "seizure_frequency": {
+            "field_name": "seizure_frequency",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 5,
+            "fp": 116,
+            "fn": 137,
+            "tn": 30,
+            "precision": 0.0413,
+            "recall": 0.0352,
+            "f1": 0.038,
+            "accuracy": 0.1215
+          },
+          "etiology_category": {
+            "field_name": "etiology_category",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 20,
+            "fp": 41,
+            "fn": 8,
+            "tn": 132,
+            "precision": 0.3279,
+            "recall": 0.7143,
+            "f1": 0.4494,
+            "accuracy": 0.7562
+          }
+        }
+      },
+      "medication": {
+        "module_name": "medication",
+        "macro_f1": 0.2863,
+        "micro_f1": 0.5718,
+        "fields": {
+          "drug_resistance_status": {
+            "field_name": "drug_resistance_status",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "tn": 199,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "accuracy": 0.995
+          },
+          "asm_names_multiset": {
+            "field_name": "asm_names_multiset",
+            "n": 200,
+            "n_applicable": 200,
+            "tp": 203,
+            "fp": 212,
+            "fn": 91,
+            "tn": 0,
+            "precision": 0.4892,
+            "recall": 0.6905,
+            "f1": 0.5726,
+            "accuracy": 0.4012
+          }
+        }
+      }
+    },
+    "efficiency": {
+      "total_duration_s": 0.0,
+      "total_tokens_generated": 0,
+      "avg_duration_s": 0.0
+    }
+  }
+}
