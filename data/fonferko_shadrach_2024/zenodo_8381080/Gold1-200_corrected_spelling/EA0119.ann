@@ -1,0 +1,86 @@
+T3	Diagnosis 58 72	focal-epilepsy
+A3	DiagCategory T3 Epilepsy
+A4	Certainty T3 5
+A5	Negation T3 Affirmed
+A6	CUIPhrase T3 focal-epilepsy
+A7	CUI T3 C0014547
+T7	SeizureFrequency 104 112	seizure-
+A15	NumberOfSeizures T7 1
+A16	TimePeriod T7 Week
+A17	NumberOfTimePeriods T7 1
+A18	CUIPhrase T7 seizure
+A19	CUI T7 C0036572
+T15	PatientHistory 104 111	seizure
+A41	Certainty T15 5
+A42	Negation T15 Affirmed
+A43	CUIPhrase T15 seizure
+A44	CUI T15 C0036572
+T9	SeizureFrequency 126 134	seizure-
+A21	NumberOfSeizures T9 1
+A22	TimePeriod T9 Month
+A23	NumberOfTimePeriods T9 1
+A24	CUIPhrase T9 seizure
+A25	CUI T9 C0036572
+T17	PatientHistory 126 133	seizure
+A46	Certainty T17 5
+A47	Negation T17 Affirmed
+A48	CUIPhrase T17 seizure
+A49	CUI T17 C0036572
+T5	Diagnosis 146 183	Focal-seizures-with-altered-awareness
+A9	DiagCategory T5 MultipleSeizures
+A10	Certainty T5 5
+A11	Negation T5 Affirmed
+A12	CUIPhrase T5 focal-seizures-with-altered-awareness
+A13	CUI T5 C0270834
+T11	Prescription 186 255	Current-anti-epileptic-medication:-Levetiracetam-1500-milligrammes-BD
+A27	DrugName T11 levetiracetam
+A28	DrugDose T11 1500
+A29	DoseUnit T11 mg
+A30	Frequency T11 2
+A31	CUIPhrase T11 levetiracetam
+A32	CUI T11 C0377265
+T13	Prescription 256 307	Lamotrigine-75MG-BD-(to-increase-as-detailed-below)
+A34	DrugName T13 lamotrigine
+A35	DrugDose T13 75
+A36	DoseUnit T13 mg
+A37	Frequency T13 2
+A38	CUIPhrase T13 lamotrigine
+A39	CUI T13 C0064636
+T19	SeizureFrequency 576 584	seizures
+A51	FrequencyChange T19 Frequent
+A52	CUIPhrase T19 seizures
+A53	CUI T19 C0036572
+T21	PatientHistory 576 584	seizures
+A55	Certainty T21 5
+A56	Negation T21 Affirmed
+A57	CUIPhrase T21 seizures
+A58	CUI T21 C0036572
+T23	PatientHistory 613 622	seizures-
+A60	Certainty T23 5
+A61	Negation T23 Affirmed
+A62	CUIPhrase T23 seizures
+A63	CUI T23 C0036572
+T25	PatientHistory 688 696	seizure-
+A65	Certainty T25 4
+A66	Negation T25 Affirmed
+A67	CUIPhrase T25 seizure
+A68	CUI T25 C0036572
+T27	Investigations 785 795	normal-MRI
+A70	MRI_Performed T27 Yes
+A71	MRI_Results T27 Normal
+A72	CUIPhrase T27 normal-mri
+A73	CUI T27 C0436481
+T29	Investigations 802 812	normal-eeg
+A75	EEG_Performed T29 Yes
+A76	EEG_Results T29 Normal
+A77	CUIPhrase T29 normal-eeg
+A78	CUI T29 C0560017
+T31	SeizureFrequency 882 891	seizures-
+A80	FrequencyChange T31 Frequent
+A81	CUIPhrase T31 seizures
+A82	CUI T31 C0036572
+T12	PatientHistory 882 889	seizure
+A14	Certainty T12 5
+A1510	Negation T12 Affirmed
+A1610	CUIPhrase T12 seizures
+A1710	CUI T12 C0036572

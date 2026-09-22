@@ -1,0 +1,90 @@
+T10	EpilepsyCause 123 142	Herpes-encephalitis
+A14	Certainty T10 5
+A15	Negation T10 Affirmed
+A16	CUIPhrase T10 herpes-encephalitis
+A17	CUI T10 C0276226
+T18	PatientHistory 123 142	Herpes-encephalitis
+A24	AgeUnit T18 Year
+A25	Age T18 20
+A26	Certainty T18 5
+A27	Negation T18 Affirmed
+A28	CUIPhrase T18 herpes-encephalitis
+A29	CUI T18 C0276226
+T1	PatientHistory 487 499	encephalitis
+A1	CUIPhrase T1 encephalitis
+A2	Negation T1 Affirmed
+A3	CUI T1 C0014038
+A4	Certainty T1 5
+T3	Diagnosis 335 373	Focal-to-bilateral-convulsive-seizures
+A9	Negation T3 Affirmed
+A10	Certainty T3 5
+A11	CUIPhrase T3 focal-to-bilateral-convulsive-seizures
+A12	DiagCategory T3 MultipleSeizures
+A13	CUI T3 C0877017
+T5	SeizureFrequency 335 372	Focal-to-bilateral-convulsive-seizure
+A1610	TimePeriod T5 Month
+A1710	NumberOfSeizures T5 1
+A1810	CUI T5 C0877017
+A19	CUIPhrase T5 focal-to-bilateral-convulsive-seizure
+A20	NumberOfTimePeriods T5 2
+T6	SeizureFrequency 573 581	seizure-
+A21	FrequencyChange T6 Same
+A22	CUIPhrase T6 seizure
+A23	CUI T6 C0036572
+T7	Investigations 419 422	MRI
+A2410	CUIPhrase T7 mri-abnormal
+A2510	MRI_Results T7 Abnormal
+A2610	MRI_Performed T7 Yes
+A2710	CUI T7 C1319851
+T8	Prescription 189 245	eslicarbazepine-800mg-od-(to-increase-as-detailed-below)
+A2810	CUI T8 C2725260
+A2910	Frequency T8 1
+A30	DrugDose T8 800
+A31	DrugName T8 eslicarbazepine
+A32	CUIPhrase T8 eslicarbazepine
+A33	DoseUnit T8 mg
+T11	Diagnosis 86 108	Temporal-lobe-epilepsy
+A43	CUI T11 C0014556
+A44	Certainty T11 5
+A45	CUIPhrase T11 temporal-lobe-epilepsy
+A46	DiagCategory T11 Epilepsy
+A47	Negation T11 Affirmed
+T9	PatientHistory 632 650	convulsive-seizure
+A102	Certainty T9 5
+A112	Negation T9 Affirmed
+A122	CUIPhrase T9 convulsive-seizure
+A132	CUI T9 C0751494
+T12	Diagnosis 817 825	epilepsy
+A48	CUIPhrase T12 epilepsy
+A49	Negation T12 Affirmed
+A50	Certainty T12 5
+A51	CUI T12 C0014544
+A52	DiagCategory T12 Epilepsy
+T13	SeizureFrequency 632 650	convulsive-seizure
+A53	NumberOfTimePeriods T13 2
+A54	CUIPhrase T13 convulsive-seizure
+A55	NumberOfSeizures T13 1
+A56	CUI T13 C0751494
+A57	TimePeriod T13 Month
+T16	EpilepsyCause 870 889	herpes-encephalitis
+A1910	Certainty T16 5
+A2010	Negation T16 Affirmed
+A2110	CUIPhrase T16 herpes-encephalitis
+A2210	CUI T16 C0276226
+T20	PatientHistory 870 889	herpes-encephalitis
+A3110	Certainty T20 5
+A3210	Negation T20 Affirmed
+A3310	CUIPhrase T20 herpes-encephalitis
+A34	CUI T20 C0276226
+T14	Diagnosis 898 907	epilepsy-
+A58	CUI T14 C0014544
+A59	DiagCategory T14 Epilepsy
+A60	Certainty T14 5
+A61	CUIPhrase T14 epilepsy
+A62	Negation T14 Affirmed
+T15	WhenDiagnosed 817 824	epileps
+A63	Certainty T15 5
+A64	CUI T15 C0014544
+A65	YearDate T15 2012
+A66	Negation T15 Affirmed
+A67	CUIPhrase T15 epilepsy

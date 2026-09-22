@@ -1,0 +1,41 @@
+T2	Diagnosis 91 111	focal-onset-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-onset-epilepsy
+A6	CUI T2 C0014547
+T4	PatientHistory 113 120	Anxiety
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 anxiety
+A11	CUI T4 C0003467
+T6	PatientHistory 122 139	Episodic-migraine
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 migraine
+A16	CUI T6 C0149931
+T8	Prescription 141 189	Current-medication-Brivaracetam-75mg-twice-a-day
+A18	DrugName T8 brivaracetam
+A19	DrugDose T8 75
+A20	DoseUnit T8 mg
+A21	Frequency T8 2
+A22	CUIPhrase T8 brivaracetam
+A23	CUI T8 C1699861
+T10	Diagnosis 452 466	focal-seizures
+A25	DiagCategory T10 MultipleSeizures
+A26	Certainty T10 5
+A27	Negation T10 Affirmed
+A28	CUIPhrase T10 focal-seizures
+A29	CUI T10 C0751495
+T12	SeizureFrequency 452 508	focal-seizures-now-happen-around-once-or-twice-per-month
+A31	LowerNumberOfSeizures T12 1
+A32	UpperNumberOfSeizures T12 2
+A33	TimePeriod T12 Month
+A34	NumberOfTimePeriods T12 1
+A35	CUIPhrase T12 focal-seizure
+A36	CUI T12 C0751495
+T14	PatientHistory 551 559	seizures
+A38	Certainty T14 5
+A39	Negation T14 Affirmed
+A40	CUIPhrase T14 seizures
+A41	CUI T14 C0036572

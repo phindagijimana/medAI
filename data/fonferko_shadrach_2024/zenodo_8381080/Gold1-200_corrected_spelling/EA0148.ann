@@ -1,0 +1,29 @@
+T1	Diagnosis 95 104	epilepsy-
+A1	Certainty T1 5
+A2	Negation T1 Affirmed
+A3	CUI T1 C0014544
+A4	CUIPhrase T1 epilepsy
+A5	DiagCategory T1 Epilepsy
+T2	PatientHistory 433 441	seizures
+A6	CUI T2 C0036572
+A7	Certainty T2 5
+A8	CUIPhrase T2 seizures
+A9	Negation T2 Affirmed
+T3	Diagnosis 1427 1435	epilepsy
+A10	Negation T3 Affirmed
+A11	CUI T3 C0014544
+A12	Certainty T3 5
+A13	CUIPhrase T3 epilepsy
+A14	DiagCategory T3 Epilepsy
+T4	PatientHistory 993 1006	head-injuries
+A15	Certainty T4 5
+A16	CUIPhrase T4 head-injuries
+A17	CUI T4 C0497301
+A18	Negation T4 Affirmed
+T5	PatientHistory 1050 1065	febrile-seizure
+A19	Age T5 6
+A20	Certainty T5 3
+A21	CUI T5 C0009952
+A22	Negation T5 Affirmed
+A23	AgeUnit T5 Month
+A24	CUIPhrase T5 febrile-seizure

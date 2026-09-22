@@ -1,0 +1,112 @@
+T2	PatientHistory 105 114	seizures-
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 seizures
+A5	CUI T2 C0036572
+T4	PatientHistory 168 179	craniotomy-
+A7	Certainty T4 5
+A8	Negation T4 Affirmed
+A9	CUIPhrase T4 craniotomy
+A10	CUI T4 C0010280
+T6	PatientHistory 187 212	frontal-lobe-brain-tumour
+A12	Certainty T6 5
+A13	Negation T6 Affirmed
+A14	CUIPhrase T6 brain-tumour
+A15	CUI T6 C0006118
+T8	PatientHistory 226 235	seizures-
+A17	Certainty T8 5
+A18	Negation T8 Affirmed
+A19	CUIPhrase T8 seizures
+A20	CUI T8 C0036572
+T12	Diagnosis 390 418	bilateral-convulsive-seizure
+A27	DiagCategory T12 SingleSeizure
+A28	Certainty T12 5
+A29	Negation T12 Affirmed
+A30	CUIPhrase T12 bilateral-convulsive-seizure
+A31	CUI T12 C0877017
+T14	PatientHistory 483 492	seizures-
+A33	Certainty T14 5
+A34	Negation T14 Affirmed
+A35	CUIPhrase T14 seizures
+A36	CUI T14 C0036572
+T16	SeizureFrequency 483 490	seizure
+A38	LowerNumberOfSeizures T16 2
+A39	UpperNumberOfSeizures T16 4
+A40	TimePeriod T16 Month
+A41	NumberOfTimePeriods T16 1
+A42	CUIPhrase T16 seizures
+A43	CUI T16 C0036572
+T18	SeizureFrequency 528 547	cluster-of-seizures
+A45	NumberOfSeizures T18 1
+A46	MonthDate T18 8
+A47	YearDate T18 2017
+A48	TimeSince_or_TimeOfEvent T18 During
+A49	CUIPhrase T18 cluster-of-seizures
+A50	CUI T18 C3203523
+T24	PatientHistory 528 546	cluster-of-seizure
+A67	Certainty T24 5
+A68	Negation T24 Affirmed
+A69	CUIPhrase T24 cluster-of-seizures
+A70	CUI T24 C3203523
+T20	PatientHistory 582 591	seizures-
+A52	Certainty T20 5
+A53	Negation T20 Affirmed
+A54	CUIPhrase T20 seizures
+A55	CUI T20 C0036572
+T22	SeizureFrequency 582 589	seizure
+A57	LowerNumberOfSeizures T22 6
+A58	UpperNumberOfSeizures T22 9
+A59	TimePeriod T22 Week
+A60	NumberOfTimePeriods T22 1
+A61	MonthDate T22 8
+A62	YearDate T22 2017
+A63	TimeSince_or_TimeOfEvent T22 During
+A64	CUIPhrase T22 seizures
+A65	CUI T22 C0036572
+T28	BirthHistory 624 637	born-normally
+A80	Certainty T28 5
+A81	Negation T28 Affirmed
+A82	CUIPhrase T28 born-normally
+A83	CUI T28 C3665337
+T26	PatientHistory 653 669	febrile-seizures
+A72	AgeUnit T26 Month
+A73	AgeLower T26 2
+A74	AgeUpper T26 34
+A75	Certainty T26 5
+A76	Negation T26 Affirmed
+A77	CUIPhrase T26 febrile-seizures
+A78	CUI T26 C0009952
+T30	Prescription 732 746	levetiracetam-
+A85	DrugName T30 Levetiracetam
+A86	DrugDose T30 750
+A87	DoseUnit T30 mg
+A88	Frequency T30 2
+A89	CUIPhrase T30 levetiracetam
+A90	CUI T30 C0377265
+T32	Prescription 776 788	lamotrigine-
+A92	DrugName T32 Lamotrigine
+A93	DrugDose T32 100
+A94	DoseUnit T32 mg
+A95	Frequency T32 2
+A96	CUIPhrase T32 lamotrigine
+A97	CUI T32 C0064636
+T34	Investigations 818 822	MRI-
+A99	MRI_Performed T34 Yes
+A100	MRI_Results T34 Abnormal
+A101	CUIPhrase T34 mri-abnormal
+A102	CUI T34 C1319851
+T10	PatientHistory 861 869	gliosis-
+A11	Certainty T10 5
+A125	Negation T10 Affirmed
+A135	CUIPhrase T10 gliosis
+A145	CUI T10 C0017639
+T11	PatientHistory 891 901	craniotomy
+A115	Certainty T11 5
+A126	Negation T11 Affirmed
+A136	CUIPhrase T11 craniotomy
+A147	CUI T11 C0010280
+T36	PatientHistory 990 999	seizures-
+A104	Certainty T36 5
+A105	Negation T36 Affirmed
+A106	CUIPhrase T36 seizures
+A107	CUI T36 C0036572

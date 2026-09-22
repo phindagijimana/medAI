@@ -1,0 +1,55 @@
+T10	Diagnosis 92 112	symptomatic-epilepsy
+A1	DiagCategory T10 Epilepsy
+A2	Certainty T10 5
+A3	Negation T10 Affirmed
+A4	CUIPhrase T10 symptomatic-epilepsy
+A5	CUI T10 C1406659
+T14	PatientHistory 127 148	s-neurocysticercosis.
+A5	Certainty T14 5
+A6	Negation T14 Affirmed
+A7	CUIPhrase T14 neurocysticercosis
+A8	CUI T14 C0338437
+T11	EpilepsyCause 129 148	neurocysticercosis.
+A9	Certainty T11 5
+A10	Negation T11 Affirmed
+A11	CUIPhrase T11 neurocysticercosis
+A12	CUI T11 C0338437
+T12	Investigations 342 344	CT
+A13	CT_Performed T12 Yes
+A14	CT_Results T12 Abnormal
+A15	CUIPhrase T12 abnormal-ct
+A16	CUI T12 C0436539
+T3	SeizureFrequency 248 256	seizures
+A17	UpperNumberOfSeizures T3 15
+A18	NumberOfTimePeriods T3 2
+A19	LowerNumberOfSeizures T3 10
+A20	TimePeriod T3 days
+A21	CUIPhrase T3 seizures
+A22	CUI T3 C0036572
+T4	SeizureFrequency 158 194	frequent-focal-dyscognitive-seizures
+A23	FrequencyChange T4 Frequent
+A24	CUIPhrase T4 dyscognitive-seizures
+A25	CUI T4 C0270834
+T15	PatientHistory 406 424	neurocysticercosis
+A26	Certainty T15 5
+A27	Negation T15 Affirmed
+A28	CUIPhrase T15 neurocysticercosis
+A29	CUI T15 C0338437
+T13	Investigations 435 438	MRI
+A30	MRI_Performed T13 Yes
+A31	MRI_Results T13 Normal
+A32	CUIPhrase T13 normal-mri
+A33	CUI T13 C0436481
+T5	Prescription 547 558	lamotrigine
+A34	CUI T5 C0064636
+A35	DoseUnit T5 mg
+A36	CUIPhrase T5 lamotrigine
+A37	Frequency T5 2
+A38	DrugName T5 Lamotrigine
+A39	DrugDose T5 150
+T6	Diagnosis 167 194	focal-dyscognitive-seizures
+A40	Certainty T6 5
+A41	CUIPhrase T6 dyscognitive-seizures
+A42	DiagCategory T6 MultipleSeizures
+A43	Negation T6 Affirmed
+A44	CUI T6 C0270834

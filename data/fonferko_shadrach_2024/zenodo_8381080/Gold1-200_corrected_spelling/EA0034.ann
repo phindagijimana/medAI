@@ -1,0 +1,47 @@
+T2	Diagnosis 11 43	focal-onset-epilepsy-(occipital)
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-onset-epilepsy
+A6	CUI T2 C0014547
+T4	Diagnosis 11 43	focal-onset-epilepsy-(occipital)
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 occipital-lobe-epilepsy
+A12	CUI T4 C0393691
+T6	Prescription 79 111	-levetiracetam-750mg-twice-a-day
+A14	DrugName T6 Levetiracetam
+A15	DrugDose T6 750
+A16	DoseUnit T6 mg
+A17	Frequency T6 2
+A18	CUIPhrase T6 levetiracetam
+A19	CUI T6 C0377265
+T8	Diagnosis 141 155	focal-seizures
+A21	DiagCategory T8 MultipleSeizures
+A22	Certainty T8 5
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 focal-seizures
+A25	CUI T8 C0751495
+T10	Diagnosis 174 211	focal-to-bilateral-convulsive-seizure
+A27	DiagCategory T10 SingleSeizure
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 focal-to-bilateral-convulsive-seizures
+A31	CUI T10 C0877017
+T14	Investigations 233 270	MRI-2019-right-occipital-lobe-infarct
+A38	MRI_Performed T14 Yes
+A39	MRI_Results T14 Abnormal
+A40	CUIPhrase T14 abnormal-mri
+A41	CUI T14 C1319851
+T3	PatientHistory 248 270	occipital-lobe-infarct
+A101	Certainty T3 5
+A111	Negation T3 Affirmed
+A121	CUIPhrase T3 occipital-lobe-infarct
+A131	CUI T3 C3809094
+T16	SeizureFrequency 377 440	not-had-any-further-seizures-since-increasing-the-levetiracetam
+A43	NumberOfSeizures T16 0
+A44	PointInTime T16 DrugChange
+A45	TimeSince_or_TimeOfEvent T16 Since
+A46	CUIPhrase T16 seizures
+A47	CUI T16 C0036572

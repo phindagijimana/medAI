@@ -1,0 +1,68 @@
+T2	Diagnosis 72 108	probable-juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	Prescription 109 145	Current-medication:-Clobazam-10mg-on
+A8	DrugName T4 clobazam
+A9	DrugDose T4 10
+A10	DoseUnit T4 mg
+A11	Frequency T4 1
+A12	CUIPhrase T4 clobazam
+A13	CUI T4 C0055891
+T6	Prescription 146 247	Sodium-Valproate-200-mg-twice-a-day-(to-be-increased-to-300-mg-BD-in-steps-of-100-mg-every-two-weeks)
+A15	DrugName T6 sodium-valproate
+A16	DrugDose T6 200
+A17	DoseUnit T6 mg
+A18	Frequency T6 2
+A19	CUIPhrase T6 sodium-valproate
+A20	CUI T6 C0037567
+T9	PatientHistory 309 318	seizures-
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 seizures
+A1310	CUI T9 C0036572
+T12	Diagnosis 348 380	generalised-seizures-once-a-week
+A36	DiagCategory T12 MultipleSeizures
+A37	Certainty T12 5
+A38	Negation T12 Affirmed
+A39	CUIPhrase T12 generalised-seizures
+A40	CUI T12 C0234533
+T14	SeizureFrequency 348 380	generalised-seizures-once-a-week
+A42	NumberOfSeizures T14 1
+A43	TimePeriod T14 Week
+A44	NumberOfTimePeriods T14 1
+A45	CUIPhrase T14 generalised-seizures
+A46	CUI T14 C0234533
+T21	SeizureFrequency 386 394	absences
+A60	NumberOfSeizures T21 2
+A61	TimePeriod T21 Day
+A62	NumberOfTimePeriods T21 1
+A63	CUIPhrase T21 absences
+A64	CUI T21 C0563606
+T11	Diagnosis 474 495	generalised-seizures-
+A1510	DiagCategory T11 MultipleSeizures
+A1610	Certainty T11 3
+A1710	Negation T11 Affirmed
+A1810	CUIPhrase T11 generalised-seizures
+A1910	CUI T11 C0234533
+T8	Prescription 526 567	She-is-currently-taking-clobazam-10-mg-od
+A22	DrugName T8 clobazam
+A23	DrugDose T8 10
+A24	DoseUnit T8 mg
+A25	Frequency T8 1
+A26	CUIPhrase T8 clobazam
+A27	CUI T8 C0055891
+T10	Prescription 572 598	sodium-valproate-200-mg-BD
+A29	DrugName T10 sodium-valproate
+A30	DrugDose T10 200
+A31	DoseUnit T10 mg
+A32	Frequency T10 2
+A33	CUIPhrase T10 sodium-valproate
+A34	CUI T10 C0037567
+T30	PatientHistory 631 639	seizures
+A79	Certainty T30 5
+A80	Negation T30 Affirmed
+A81	CUIPhrase T30 seizures
+A82	CUI T30 C0036572

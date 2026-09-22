@@ -1,0 +1,75 @@
+T11	EpilepsyCause 193 212	herpes-encephalitis
+A11	Certainty T11 5
+A12	Negation T11 Affirmed
+A13	CUIPhrase T11 herpes-encephalitis
+A14	CUI T11 C0276226
+T1	EpilepsyCause 974 986	encephalitis
+A1	Certainty T1 5
+A2	CUI T1 C0014038
+A3	Negation T1 Affirmed
+A4	CUIPhrase T1 encephalitis
+T2	Prescription 214 332	He-is-currently-taking-carbamazepine-(Tegretol-retard)-400mg-twice-a-day-as-well-as-sodium-valproate-400mg-twice-a-day
+A5	DrugName T2 carbamazepine
+A6	CUIPhrase T2 carbamazepine
+A7	DoseUnit T2 mg
+A8	Frequency T2 2
+A9	CUI T2 C0006949
+A10	DrugDose T2 400
+T3	Diagnosis 929 938	epilepsy-
+A112	Certainty T3 5
+A122	CUI T3 C0014544
+A132	Negation T3 Affirmed
+A142	DiagCategory T3 Epilepsy
+A15	CUIPhrase T3 epilepsy
+T4	PatientHistory 974 986	encephalitis
+A16	Negation T4 Affirmed
+A17	CUIPhrase T4 encephalitis
+A18	Certainty T4 5
+A19	CUI T4 C0014038
+T5	PatientHistory 376 384	anxiety-
+A20	Certainty T5 5
+A21	Negation T5 Affirmed
+A22	CUI T5 C0003467
+A23	CUIPhrase T5 anxiety
+T6	Diagnosis 679 717	focal-seizures-with-altered-awareness-
+A24	Certainty T6 5
+A25	Negation T6 Affirmed
+A26	CUIPhrase T6 focal-seizures-with-altered-awareness
+A27	CUI T6 C0270834
+A28	DiagCategory T6 MultipleSeizures
+T7	Diagnosis 503 511	epilepsy
+A29	CUI T7 C0014544
+A30	Certainty T7 5
+A31	CUIPhrase T7 epilepsy
+A32	Negation T7 Affirmed
+A33	DiagCategory T7 Epilepsy
+T8	Prescription 298 332	sodium-valproate-400mg-twice-a-day
+A34	DrugDose T8 400
+A35	DrugName T8 SodiumValproate
+A36	Frequency T8 2
+A37	DoseUnit T8 mg
+A38	CUI T8 C0037567
+A39	CUIPhrase T8 sodium-valproate
+T9	PatientHistory 193 212	herpes-encephalitis
+A40	CUI T9 C0014038
+A41	Negation T9 Affirmed
+A42	Certainty T9 5
+A43	CUIPhrase T9 encephalitis
+T10	SeizureFrequency 619 628	seizures-
+A44	PointInTime T10 Last_Year
+A45	TimeSince_or_TimeOfEvent T10 During
+A46	CUIPhrase T10 seizures
+A47	CUI T10 C0036572
+A48	NumberOfSeizures T10 5
+T13	Diagnosis 124 169	symptomatic-structural-temporal-lobe-epilepsy
+A49	Negation T13 Affirmed
+A50	DiagCategory T13 Epilepsy
+A51	CUI T13 C0472349
+A52	Certainty T13 5
+A53	CUIPhrase T13 symptomatic-structural-focal-epilepsy
+T12	Diagnosis 146 169	-temporal-lobe-epilepsy
+A54	DiagCategory T12 Epilepsy
+A55	CUI T12 C0014556
+A56	Negation T12 Affirmed
+A57	Certainty T12 5
+A58	CUIPhrase T12 temporal-lobe-epilepsy

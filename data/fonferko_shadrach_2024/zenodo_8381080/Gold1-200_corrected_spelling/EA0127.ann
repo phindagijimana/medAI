@@ -1,0 +1,52 @@
+T3	Diagnosis 20 44	Complex-partial-seizures
+A3	DiagCategory T3 MultipleSeizures
+A4	Certainty T3 5
+A5	Negation T3 Affirmed
+A6	CUIPhrase T3 complex-partial-seizures
+A7	CUI T3 C0149958
+T5	Diagnosis 49 93	-secondary-generalised-tonic-clonic-seizures
+A9	DiagCategory T5 MultipleSeizures
+A10	Certainty T5 5
+A11	CUIPhrase T5 secondary-generalised-tonic-clonic-seizures
+A12	CUI T5 C0877017
+T7	Investigations 114 118	-MRI
+A14	MRI_Performed T7 Yes
+A15	MRI_Results T7 Normal
+A16	CUIPhrase T7 normal-mri
+A17	CUI T7 C0436481
+T9	Investigations 155 159	-EEG
+A19	EEG_Performed T9 Yes
+A20	EEG_Results T9 Abnormal
+A21	CUIPhrase T9 eeg-abnormal
+A22	CUI T9 C0151611
+T11	Prescription 233 255	Sodium-valproate-400mg
+A24	DrugName T11 SodiumValproate
+A25	DrugDose T11 400
+A26	DoseUnit T11 mg
+A27	Frequency T11 2
+A28	CUIPhrase T11 sodium-valproate
+A29	CUI T11 C0037567
+T13	Prescription 292 309	Lamotrigine-100mg
+A31	DrugName T13 Lamotrigine
+A32	DrugDose T13 100
+A33	DoseUnit T13 mg
+A34	Frequency T13 2
+A35	CUIPhrase T13 lamotrigine
+A36	CUI T13 C0064636
+T15	SeizureFrequency 412 426	seizures-free.
+A38	NumberOfSeizures T15 0
+A39	PointInTime T15 LastClinic
+A40	CUIPhrase T15 seizure-free
+A41	CUI T15 C1299590
+T17	SeizureFrequency 436 443	seizure
+A43	NumberOfSeizures T17 0
+A44	MonthDate T17 2
+A45	YearDate T17 2005
+A46	TimeSince_or_TimeOfEvent T17 Since
+A47	CUIPhrase T17 seizure
+A48	CUI T17 C0036572
+T10	PatientHistory 436 443	seizure
+A102	Certainty T10 5
+A112	Negation T10 Affirmed
+A122	CUIPhrase T10 seizure
+A132	CUI T10 C0036572

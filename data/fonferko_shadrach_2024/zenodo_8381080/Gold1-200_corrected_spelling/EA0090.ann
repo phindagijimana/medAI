@@ -1,0 +1,41 @@
+T1	Prescription 204 217	Carbamazepine
+A1	DoseUnit T1 mg
+A2	Frequency T1 1
+A3	DrugDose T1 150
+A4	CUIPhrase T1 carbamazepine
+A5	DrugName T1 Carbamazepine
+A6	CUI T1 C0006949
+T2	Prescription 204 217	Carbamazepine
+A7	Frequency T2 1
+A8	CUI T2 C0006949
+A9	CUIPhrase T2 carbamazepine
+A10	DrugName T2 Carbamazepine
+A11	DrugDose T2 200
+A12	DoseUnit T2 mg
+T3	Diagnosis 146 160	Focal-seizures
+A13	DiagCategory T3 MultipleSeizures
+A14	Certainty T3 5
+A15	Negation T3 Affirmed
+A16	CUI T3 C0751495
+A17	CUIPhrase T3 focal-seizures
+T4	PatientHistory 591 600	migraines
+A18	CUI T4 C0149931
+A19	CUIPhrase T4 migraines
+A20	Negation T4 Affirmed
+A21	Certainty T4 5
+T5	Diagnosis 166 190	secondary-generalisation
+A22	Certainty T5 5
+A23	CUI T5 C0270838
+A24	Negation T5 Affirmed
+A25	CUIPhrase T5 secondary-generalisation
+A26	DiagCategory T5 MultipleSeizures
+T6	SeizureFrequency 358 389	generalised-tonic-clonic-seizur
+A27	TimeSince_or_TimeOfEvent T6 Since
+A28	NumberOfSeizures T6 1
+A29	PointInTime T6 Birthday
+T7	Diagnosis 358 390	generalised-tonic-clonic-seizure
+A30	CUIPhrase T7 generalised-tonic-clonic-seizure
+A31	CUI T7 C0494475
+A32	DiagCategory T7 SingleSeizure
+A33	Certainty T7 5
+A34	Negation T7 Affirmed

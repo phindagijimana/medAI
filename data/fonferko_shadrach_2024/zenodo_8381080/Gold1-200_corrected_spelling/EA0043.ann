@@ -1,0 +1,40 @@
+T2	PatientHistory 90 121	transient-loss-of-consciousness
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 transient-loss-of-consciousness
+A5	CUI T2 C4087400
+T4	Diagnosis 133 142	-Epilepsy
+A7	DiagCategory T4 Epilepsy
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 epilepsy
+A11	CUI T4 C0014544
+T6	PatientHistory 144 152	Diabetes
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 diabetes
+A16	CUI T6 C0011849
+T9	PatientHistory 741 750	diabetic-
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 diabetes
+A1310	CUI T9 C0011849
+T8	PatientHistory 1239 1254	febrile-seizure
+A18	AgeUnit T8 Month
+A19	Age T8 8
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 febrile-seizure
+A23	CUI T8 C0009952
+T10	Diagnosis 1584 1602	epileptic-seizures
+A25	DiagCategory T10 MultipleSeizures
+A26	Certainty T10 4
+A27	Negation T10 Affirmed
+A28	CUIPhrase T10 epileptic-seizures
+A29	CUI T10 C4317109
+T12	Diagnosis 1704 1747	epilepsy-with-tonic---clonic-seizures-alone.
+A31	DiagCategory T12 Epilepsy
+A32	Certainty T12 4
+A33	Negation T12 Affirmed
+A34	CUIPhrase T12 epilepsy-with-generalised-tonic-clonic-seizures-alone
+A35	CUI T12 C0393697

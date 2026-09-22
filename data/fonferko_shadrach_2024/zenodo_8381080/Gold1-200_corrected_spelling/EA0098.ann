@@ -1,0 +1,78 @@
+T15	PatientHistory 140 151	lobe-damage
+A102	Certainty T15 5
+A112	Negation T15 Affirmed
+A122	CUIPhrase T15 lobe-damage
+A132	CUI T15 C1456496
+T13	PatientHistory 351 358	seizure
+A13	Certainty T13 5
+A14	Negation T13 Affirmed
+A15	CUIPhrase T13 seizure
+A16	CUI T13 C0036572
+T10	SeizureFrequency 794 801	seizure
+A10	FrequencyChange T10 Increased
+A11	CUIPhrase T10 seizure
+A12	CUI T10 C0036572
+T1	Diagnosis 1151 1159	epilepsy
+A1	CUIPhrase T1 epilepsy
+A2	DiagCategory T1 Epilepsy
+A3	Negation T1 Affirmed
+A4	Certainty T1 5
+A5	CUI T1 C0014544
+T2	SeizureFrequency 281 311	Focal-onset-convulsive-seizure
+A6	NumberOfSeizures T2 0
+A7	YearDate T2 2019
+A8	CUI T2 C0877017
+A9	MonthDate T2 4
+A1010	CUIPhrase T2 focal-to-bilateral-convulsive-seizure
+T3	SeizureFrequency 630 636	seizur
+A1110	TimeSince_or_TimeOfEvent T3 During
+A1210	NumberOfSeizures T3 1
+A1310	MonthDate T3 9
+A1410	CUIPhrase T3 seizure
+A1510	CUI T3 C0036572
+T4	Diagnosis 281 311	Focal-onset-convulsive-seizure
+A1610	DiagCategory T4 MultipleSeizures
+A17	Certainty T4 5
+A18	CUIPhrase T4 focal-to-bilateral-convulsive-seizure
+A19	CUI T4 C0877017
+A20	Negation T4 Affirmed
+T6	PatientHistory 794 801	seizure
+A25	CUIPhrase T6 seizure
+A26	Certainty T6 5
+A27	CUI T6 C0036572
+A28	Negation T6 Affirmed
+T7	PatientHistory 630 637	seizure
+A29	CUIPhrase T7 seizure
+A30	CUI T7 C0036572
+A31	Negation T7 Affirmed
+A32	Certainty T7 4
+T8	Prescription 198 250	Lamotrigine-100mg-bd-(to-increase-as-detailed-below)
+A33	CUIPhrase T8 lamotrigine
+A34	CUI T8 C0064636
+A35	DrugDose T8 100
+A36	Frequency T8 2
+A37	DoseUnit T8 mg
+A38	DrugName T8 lamotrigine
+T9	SeizureFrequency 351 359	seizure-
+A39	YearDate T9 2019
+A40	CUIPhrase T9 seizure
+A41	NumberOfSeizures T9 0
+A42	TimeSince_or_TimeOfEvent T9 Since
+A43	CUI T9 C0036572
+A44	MonthDate T9 09
+T14	PatientHistory 154 161	Anxiety
+A45	Negation T14 Affirmed
+A46	CUIPhrase T14 anxiety
+A47	Certainty T14 5
+A48	CUI T14 C0003467
+T11	Diagnosis 96 116	Focal-onset-epilepsy
+A49	Certainty T11 5
+A50	Negation T11 Affirmed
+A51	DiagCategory T11 Epilepsy
+A52	CUIPhrase T11 focal-onset-epilepsy
+A53	CUI T11 C0014547
+T12	PatientHistory 949 956	anxiety
+A54	CUI T12 C0003467
+A55	Certainty T12 5
+A56	CUIPhrase T12 anxiety
+A57	Negation T12 Affirmed

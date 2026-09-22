@@ -1,0 +1,52 @@
+T9	PatientHistory 55 72	altered-awareness
+A93	Certainty T9 5
+A103	Negation T9 Affirmed
+A113	CUIPhrase T9 altered-awareness-and-consciousness
+A123	CUI T9 C0234428
+T2	Diagnosis 101 115	Focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	Certainty T2 5
+A6	Negation T2 Affirmed
+A7	CUIPhrase T2 focal-epilepsy
+A8	CUI T2 C0014547
+T12	BirthHistory 992 1021	no-problems-when-he-was-born-
+A16	Certainty T12 5
+A17	Negation T12 Affirmed
+A18	CUIPhrase T12 normal-birth
+A19	CUI T12 C3665337
+T4	PatientHistory 1042 1058	febrile-seizures
+A10	Certainty T4 1
+A11	Negation T4 Negated
+A12	CUIPhrase T4 febrile-seizures
+A13	CUI T4 C0009952
+T6	Investigations 1354 1357	MRI
+A15	MRI_Performed T6 Yes
+A1610	MRI_Results T6 Normal
+A1710	CUIPhrase T6 normal-mri
+A1810	CUI T6 C0436481
+T8	Diagnosis 1437 1457	focal-onset-epilepsy
+A20	DiagCategory T8 Epilepsy
+A21	Certainty T8 4
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 focal-onset-epilepsy
+A24	CUI T8 C0014547
+T10	Diagnosis 1484 1521	focal-seizures-with-altered-awareness
+A26	DiagCategory T10 MultipleSeizures
+A27	Certainty T10 5
+A28	Negation T10 Affirmed
+A29	CUIPhrase T10 focal-seizures-with-altered-awareness
+A30	CUI T10 C0270834
+T13	Diagnosis 1556 1594	focal-to-bilateral-convulsive-seizures
+A32	DiagCategory T13 MultipleSeizures
+A33	Certainty T13 5
+A34	Negation T13 Affirmed
+A35	CUIPhrase T13 focal-to-bilateral-convulsive-seizures
+A36	CUI T13 C0877017
+T11	Diagnosis 1645 1653	epilepsy
+A1010	DiagCategory T11 Epilepsy
+A1110	Certainty T11 5
+A1210	Negation T11 Affirmed
+A1310	CUIPhrase T11 epilepsy
+A14	CUI T11 C0014544

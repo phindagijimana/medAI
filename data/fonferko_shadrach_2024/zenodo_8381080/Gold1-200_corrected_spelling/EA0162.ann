@@ -1,0 +1,35 @@
+T8	Diagnosis 106 124	status-epilepticus
+A11	DiagCategory T8 Epilepsy
+A12	Certainty T8 5
+A13	Negation T8 Affirmed
+A14	CUIPhrase T8 status-epilepticus
+A15	CUI T8 C0038220
+T1	SeizureFrequency 220 229	seizures-
+A1	CUI T1 C0036572
+A2	NumberOfSeizures T1 0
+A3	CUIPhrase T1 seizures
+A4	PointInTime T1 LastClinic
+A5	TimeSince_or_TimeOfEvent T1 Since
+T3	PatientHistory 247 272	cluster-of-three-seizures
+A10	Negation T3 Affirmed
+A1110	Certainty T3 5
+A1210	CUIPhrase T3 cluster-of-seizures
+A1310	CUI T3 C3203523
+T4	PatientHistory 80 83	ASD
+A1410	Negation T4 Affirmed
+A1510	Certainty T4 5
+A16	CUIPhrase T4 asd
+A17	CUI T4 C1510586
+T5	Prescription 470 484	carbamazepine-
+A18	CUIPhrase T5 Carbamazepine
+A19	DrugName T5 Carbamazepine
+A20	Frequency T5 2
+A21	DoseUnit T5 mg
+A22	DrugDose T5 400
+A23	CUI T5 C0006949
+T6	Diagnosis 69 77	Epilepsy
+A24	Certainty T6 5
+A25	CUI T6 C0014544
+A26	CUIPhrase T6 epilepsy
+A27	Negation T6 Affirmed
+A28	DiagCategory T6 Epilepsy

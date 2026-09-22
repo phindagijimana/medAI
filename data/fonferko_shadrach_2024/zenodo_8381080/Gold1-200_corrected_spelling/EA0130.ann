@@ -1,0 +1,26 @@
+T1	SeizureFrequency 353 362	seizures-
+A1	PointInTime T1 LastClinic
+A2	TimeSince_or_TimeOfEvent T1 Since
+A3	NumberOfSeizures T1 0
+A4	CUI T1 C0036572
+A5	CUIPhrase T1 seizures
+T2	Prescription 132 166	Sodium-Valproate-300mg-twice-a-day
+A6	CUI T2 C0037567
+A7	DrugDose T2 300
+A8	CUIPhrase T2 sodium-valproate
+A9	Frequency T2 2
+A10	DoseUnit T2 mg
+A11	DrugName T2 sodium-valproate
+T3	Diagnosis 59 86	Juvenile-myoclonic-epilepsy
+A12	Certainty T3 5
+A13	CUI T3 C0270853
+A14	Negation T3 Affirmed
+A15	CUIPhrase T3 juvenile-myoclonic-epilepsy
+A16	DiagCategory T3 Epilepsy
+T4	Prescription 100 129	Lamotrigine-150mg-twice-a-day
+A17	Frequency T4 2
+A18	DrugName T4 lamotrigine
+A19	CUIPhrase T4 lamotrigine
+A20	DrugDose T4 150
+A21	DoseUnit T4 mg
+A22	CUI T4 C0064636

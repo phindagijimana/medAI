@@ -1,0 +1,16 @@
+T1	SeizureFrequency 288 296	seizures
+A1	TimeSince_or_TimeOfEvent T1 Since
+A2	CUI T1 C0036572
+A3	PointInTime T1 LastClinic
+A4	CUIPhrase T1 seizures
+A5	NumberOfSeizures T1 0
+T2	SeizureFrequency 145 159	focal-seziures
+A6	CUIPhrase T2 focal-seizures
+A7	CUI T2 C0751495
+A8	FrequencyChange T2 Infrequent
+T3	Diagnosis 145 159	focal-seziures
+A9	CUI T3 C0751495
+A10	CUIPhrase T3 focal-seizures
+A11	Certainty T3 5
+A12	DiagCategory T3 MultipleSeizures
+A13	Negation T3 Affirmed

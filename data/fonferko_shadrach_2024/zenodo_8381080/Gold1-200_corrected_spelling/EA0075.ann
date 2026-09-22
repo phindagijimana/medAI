@@ -1,0 +1,42 @@
+T1	Prescription 1656 1699	Continue-Sodium-Valproate-400mg-twice-daily
+A1	DrugDose T1 400
+A2	DoseUnit T1 mg
+A3	CUI T1 C0037567
+A4	Frequency T1 2
+A5	DrugName T1 sodium-valproate
+A6	CUIPhrase T1 sodium-valproate
+T2	Diagnosis 530 550	generalised-seizures
+A7	Certainty T2 5
+A8	Negation T2 Affirmed
+A9	CUI T2 C0234533
+A10	DiagCategory T2 MultipleSeizures
+A11	CUIPhrase T2 generalised-seizures
+T3	SeizureFrequency 766 797	she-has-had-no-further-seizures
+A12	PointInTime T3 DrugChange
+A13	NumberOfSeizures T3 0
+A14	CUI T3 C0036572
+A15	CUIPhrase T3 seizures
+A16	TimeSince_or_TimeOfEvent T3 Since
+T4	Investigations 905 908	EEG
+A17	CUI T4 C0560017
+A18	EEG_Results T4 Normal
+A19	CUIPhrase T4 normal-eeg
+A20	EEG_Performed T4 Yes
+T5	Diagnosis 456 464	Epilepsy
+A21	CUIPhrase T5 epilepsy
+A22	CUI T5 C0014544
+A23	Negation T5 Affirmed
+A24	DiagCategory T5 Epilepsy
+A25	Certainty T5 5
+T6	Investigations 891 894	MRI
+A26	CUIPhrase T6 mri-normal
+A27	MRI_Results T6 Normal
+A28	CUI T6 C0436481
+A29	MRI_Performed T6 Yes
+T7	WhenDiagnosed 456 464	Epilepsy
+A30	CUIPhrase T7 epilepsy
+A31	CUI T7 C0014544
+A32	Age T7 18
+A33	AgeUnit T7 Year
+A34	Negation T7 Affirmed
+A35	Certainty T7 5

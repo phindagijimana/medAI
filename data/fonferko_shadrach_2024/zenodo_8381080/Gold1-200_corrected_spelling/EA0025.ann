@@ -1,0 +1,66 @@
+T2	Diagnosis 45 78	generalised-tonic-clonic-seizures
+A2	DiagCategory T2 MultipleSeizures
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 generalised-tonic-clonic-seizures
+A6	CUI T2 C0494475
+T4	PatientHistory 84 99	myoclonic-jerks
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 myoclonic-jerks
+A11	CUI T4 C0027066
+T6	Diagnosis 110 113	JME
+A13	DiagCategory T6 Epilepsy
+A14	Certainty T6 3
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 jme
+A17	CUI T6 C0270853
+T8	Prescription 115 159	Anti-convulsant-medication:-epilim-500-mg-BD
+A19	DrugName T8 epilim
+A20	DrugDose T8 500
+A21	DoseUnit T8 mg
+A22	Frequency T8 2
+A23	CUIPhrase T8 epilim
+A24	CUI T8 C0591451
+T10	Prescription 160 190	Lamictal-100-mg-in-the-morning
+A26	DrugName T10 lamictal
+A27	DrugDose T10 100
+A28	DoseUnit T10 mg
+A29	Frequency T10 1
+A30	CUIPhrase T10 lamictal
+A31	CUI T10 C0678180
+T12	Prescription 160 169	Lamictal-
+A33	DrugName T12 lamictal
+A34	DrugDose T12 175
+A35	DoseUnit T12 mg
+A36	Frequency T12 1
+A37	CUIPhrase T12 lamictal
+A38	CUI T12 C0678180
+T14	Diagnosis 395 429	generalised-tonic-chronic-seizures
+A40	DiagCategory T14 MultipleSeizures
+A41	Certainty T14 5
+A42	Negation T14 Affirmed
+A43	CUIPhrase T14 generalised-tonic-clonic-seizures
+A44	CUI T14 C0494475
+T11	SeizureFrequency 395 428	generalised-tonic-chronic-seizure
+A12	LowerNumberOfSeizures T11 3
+A1310	UpperNumberOfSeizures T11 4
+A1410	TimePeriod T11 Week
+A1510	NumberOfTimePeriods T11 1
+A1710	TimeSince_or_TimeOfEvent T11 During
+A18	CUIPhrase T11 generalised-tonic-clonic-seizures
+A1910	CUI T11 C0494475
+T18	PatientHistory 486 501	myoclonic-jerks
+A53	Certainty T18 5
+A54	Negation T18 Affirmed
+A55	CUIPhrase T18 myoclonic-jerks
+A56	CUI T18 C0027066
+T20	SeizureFrequency 486 500	myoclonic-jerk
+A58	FrequencyChange T20 Frequent
+A59	CUIPhrase T20 myoclonic-jerks
+A60	CUI T20 C0027066
+T22	PatientHistory 555 578	drinks-too-much-alcohol
+A62	Certainty T22 4
+A63	Negation T22 Affirmed
+A64	CUIPhrase T22 alcohol-abuse
+A65	CUI T22 C0085762

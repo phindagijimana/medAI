@@ -1,0 +1,94 @@
+T2	PatientHistory 21 29	migraine
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 migraine
+A5	CUI T2 C0149931
+T4	Diagnosis 62 99	Symptomatic-structural-focal-epilepsy
+A7	DiagCategory T4 Epilepsy
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 symptomatic-structural-focal-epilepsy
+A11	CUI T4 C0472349
+T11	BirthHistory 110 126	perinatal-insult
+A111	Certainty T11 4
+A12	Negation T11 Affirmed
+A13	CUIPhrase T11 perinatal-insult
+A14	CUI T11 C0005604
+T13	EpilepsyCause 111 126	erinatal-insult
+A16	Certainty T13 4
+A17	Negation T13 Affirmed
+A18	CUIPhrase T13 perinatal-insult
+A19	CUI T13 C0005604
+T12	PatientHistory 205 215	migraines-
+A24	Certainty T12 5
+A25	Negation T12 Affirmed
+A26	CUIPhrase T12 migraines
+A27	CUI T12 C0149931
+T20	Prescription 432 444	lamotrigine-
+A29	DrugName T20 Lamotrigine
+A30	DrugDose T20 150
+A31	DoseUnit T20 mg
+A32	Frequency T20 2
+A33	CUIPhrase T20 lamotrigine
+A34	CUI T20 C0064636
+T15	SeizureFrequency 467 476	seizures-
+A36	NumberOfSeizures T15 0
+A37	AgeUnit T15 Year
+A38	AgeLower T15 13
+A39	AgeUpper T15 19
+A40	TimeSince_or_TimeOfEvent T15 Since
+A41	CUIPhrase T15 seizures
+A42	CUI T15 C0036572
+T19	PatientHistory 467 474	seizure
+A50	Certainty T19 5
+A51	Negation T19 Affirmed
+A52	CUIPhrase T19 seizure
+A53	CUI T19 C0036572
+T17	Diagnosis 538 576	focal-to-bilateral-convulsive-seizures
+A44	DiagCategory T17 MultipleSeizures
+A45	Certainty T17 5
+A46	Negation T17 Affirmed
+A47	CUIPhrase T17 focal-to-bilateral-convulsive-seizures
+A48	CUI T17 C0877017
+T23	BirthHistory 697 719	Special-care-baby-Unit
+A63	Certainty T23 5
+A64	Negation T23 Affirmed
+A65	CUIPhrase T23 special-care-baby-unit
+A66	CUI T23 C0583275
+T21	PatientHistory 731 747	febrile-seizures
+A55	AgeUnit T21 Year
+A56	AgeLower T21 3
+A57	AgeUpper T21 5
+A58	Certainty T21 5
+A59	Negation T21 Affirmed
+A60	CUIPhrase T21 febrile-seizures
+A61	CUI T21 C0009952
+T25	PatientHistory 802 818	viral-meningitis
+A68	AgeUnit T25 Year
+A69	AgeLower T25 17
+A70	AgeUpper T25 19
+A71	Certainty T25 5
+A72	Negation T25 Affirmed
+A73	CUIPhrase T25 meningitis
+A74	CUI T25 C0025289
+T27	Investigations 898 907	MRI-brain
+A76	MRI_Performed T27 Yes
+A77	MRI_Results T27 Abnormal
+A78	CUIPhrase T27 mri-abnormal
+A79	CUI T27 C1319851
+T16	BirthHistory 1036 1052	perinatal-insult
+A21	Certainty T16 4
+A22	Negation T16 Affirmed
+A23	CUIPhrase T16 perinatal-insult
+A2410	CUI T16 C0005604
+T29	PatientHistory 1083 1092	migraine-
+A81	Certainty T29 5
+A82	Negation T29 Affirmed
+A83	CUIPhrase T29 migraine
+A84	CUI T29 C0149931
+T31	Diagnosis 1323 1331	epilepsy
+A86	DiagCategory T31 Epilepsy
+A87	Certainty T31 5
+A88	Negation T31 Affirmed
+A89	CUIPhrase T31 epilepsy
+A90	CUI T31 C0014544

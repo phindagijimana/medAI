@@ -1,0 +1,43 @@
+T1	Diagnosis 16 40	refactory-focal-epilepsy
+A1	Certainty T1 5
+A2	DiagCategory T1 Epilepsy
+A3	CUIPhrase T1 drug-refractory-epilepsy
+A4	CUI T1 C1096063
+A5	Negation T1 Affirmed
+T2	Prescription 99 110	Lamotrigine
+A6	Frequency T2 2
+A7	DoseUnit T2 mg
+A8	CUIPhrase T2 lamotrigine
+A9	DrugName T2 Lamotrigine
+A10	DrugDose T2 200
+A11	CUI T2 C0064636
+T3	PatientHistory 43 61	Nocturnal-seizures-
+A12	CUIPhrase T3 nocturnal-seizures
+A13	CUI T3 C0748605
+A14	Negation T3 Affirmed
+A15	Certainty T3 5
+T4	PatientHistory 236 244	seizures
+A16	CUIPhrase T4 seizures
+A17	Negation T4 Affirmed
+A18	CUI T4 C0036572
+A19	Certainty T4 5
+T6	Diagnosis 26 40	focal-epilepsy
+A24	DiagCategory T6 Epilepsy
+A25	Negation T6 Affirmed
+A26	CUIPhrase T6 focal-epilepsy
+A27	CUI T6 C0014547
+A28	Certainty T6 5
+T7	Prescription 122 132	Perampanel
+A29	DrugName T7 Perampanel
+A30	CUI T7 C2698764
+A31	CUIPhrase T7 perampanel
+A32	Frequency T7 1
+A33	DoseUnit T7 mg
+A34	DrugDose T7 4
+T8	Prescription 75 87	Brivaracetam
+A35	DrugName T8 brivaracetam
+A36	Frequency T8 2
+A37	CUI T8 C1699861
+A38	CUIPhrase T8 brivaracetam
+A39	DrugDose T8 100
+A40	DoseUnit T8 mg

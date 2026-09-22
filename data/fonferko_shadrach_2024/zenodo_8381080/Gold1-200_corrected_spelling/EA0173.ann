@@ -1,0 +1,22 @@
+T1	PatientHistory 423 432	seizures-
+A1	CUIPhrase T1 seizures
+A2	Certainty T1 5
+A3	Negation T1 Affirmed
+A4	CUI T1 C0036572
+T2	SeizureFrequency 186 193	seizure
+A5	CUIPhrase T2 seizure
+A6	DayDate T2 15
+A7	MonthDate T2 4
+A8	NumberOfSeizures T2 0
+A9	CUI T2 C0036572
+T3	Diagnosis 57 65	Epilepsy
+A10	Negation T3 Affirmed
+A11	Certainty T3 5
+A12	CUIPhrase T3 epilepsy
+A13	DiagCategory T3 Epilepsy
+A14	CUI T3 C0014544
+T4	PatientHistory 186 193	seizure
+A15	CUIPhrase T4 seizure
+A16	Negation T4 Affirmed
+A17	Certainty T4 5
+A18	CUI T4 C0036572

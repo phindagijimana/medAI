@@ -1,0 +1,75 @@
+T3	Diagnosis 11 45	generalised-tonic-chronic-seizures
+A3	DiagCategory T3 MultipleSeizures
+A4	Certainty T3 5
+A5	Negation T3 Affirmed
+A6	CUIPhrase T3 generalised-tonic-clonic-seizures
+A7	CUI T3 C0494475
+T27	Onset 11 44	generalised-tonic-chronic-seizure
+A72	AgeUnit T27 Year
+A73	AgeLower T27 13
+A74	AgeUpper T27 19
+A75	Certainty T27 5
+A76	Negation T27 Affirmed
+A77	CUIPhrase T27 generalised-tonic-clonic-seizures
+A78	CUI T27 C0494475
+T29	PatientHistory 47 56	absences-
+A80	AgeUnit T29 Year
+A81	AgeLower T29 13
+A82	AgeUpper T29 19
+A83	Certainty T29 5
+A84	Negation T29 Affirmed
+A85	CUIPhrase T29 absences
+A86	CUI T29 C0563606
+T31	PatientHistory 60 75	myoclonic-jerks
+A88	AgeUnit T31 Year
+A89	AgeLower T31 13
+A90	AgeUpper T31 19
+A91	Certainty T31 5
+A92	Negation T31 Affirmed
+A93	CUIPhrase T31 myoclonic-jerks
+A94	CUI T31 C0027066
+T9	Diagnosis 97 100	JME
+A19	DiagCategory T9 Epilepsy
+A20	Certainty T9 3
+A21	Negation T9 Affirmed
+A22	CUIPhrase T9 jme
+A23	CUI T9 C0270853
+T11	Prescription 103 153	Medication:-lamotrigine-150-milligrams-twice-a-day
+A25	DrugName T11 lamotrigine
+A26	DrugDose T11 150
+A27	DoseUnit T11 mg
+A28	Frequency T11 2
+A29	CUIPhrase T11 lamotrigine
+A30	CUI T11 C0064636
+T13	Prescription 154 188	Keppra-1000-milligrams-twice-a-day
+A32	DrugName T13 keppra
+A33	DrugDose T13 1000
+A34	DoseUnit T13 mg
+A35	Frequency T13 2
+A36	CUIPhrase T13 keppra
+A37	CUI T13 C0876060
+T19	Onset 194 201	epileps
+A51	AgeUnit T19 Year
+A52	AgeLower T19 13
+A53	AgeUpper T19 19
+A54	Certainty T19 5
+A55	Negation T19 Affirmed
+A56	CUIPhrase T19 epilepsy
+A57	CUI T19 C0014544
+T15	Diagnosis 258 285	juvenile-myoclonic-epilepsy
+A39	DiagCategory T15 Epilepsy
+A40	Certainty T15 4
+A41	Negation T15 Affirmed
+A42	CUIPhrase T15 juvenile-myoclonic-epilepsy
+A43	CUI T15 C0270853
+T21	Investigations 308 312	EEG-
+A59	EEG_Performed T21 Yes
+A60	EEG_Results T21 Abnormal
+A61	CUIPhrase T21 eeg-abnormal
+A62	CUI T21 C0151611
+T23	Diagnosis 358 367	epilepsy-
+A64	DiagCategory T23 Epilepsy
+A65	Certainty T23 5
+A66	Negation T23 Affirmed
+A67	CUIPhrase T23 epilepsy
+A68	CUI T23 C0014544

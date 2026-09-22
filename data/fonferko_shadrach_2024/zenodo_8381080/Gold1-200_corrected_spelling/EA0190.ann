@@ -1,0 +1,110 @@
+T16	PatientHistory 62 83	right-hippocampectomy
+A19	YearDate T16 2018
+A20	Certainty T16 5
+A21	Negation T16 Affirmed
+A22	CUIPhrase T16 hippocampectomy
+A23	CUI T16 C2921031
+T11	PatientHistory 67 83	-hippocampectomy
+A11	YearDate T11 2018
+A12	Certainty T11 5
+A13	Negation T11 Affirmed
+A14	CUIPhrase T11 hippocampectomy
+A15	CUI T11 C2921031
+T2	PatientHistory 346 367	hippocampal-sclerosis
+A132	Certainty T2 5
+A142	Negation T2 Affirmed
+A152	CUIPhrase T2 hippocampal-sclerosis
+A16	CUI T2 C1504404
+T1	PatientHistory 387 396	seizures-
+A1	CUIPhrase T1 seizures
+A2	Certainty T1 5
+A3	Negation T1 Affirmed
+A4	CUI T1 C0036572
+T3	SeizureFrequency 175 212	focal-seizures-with-altered-awareness
+A9	Negation T3 Affirmed
+A10	TimeSince_or_TimeOfEvent T3 Since
+A112	CUI T3 C0270834
+A122	NumberOfSeizures T3 0
+A132	YearDate T3 2018
+A142	Certainty T3 5
+A152	CUIPhrase T3 focal-seizures-with-altered-awareness
+T4	Investigations 368 377	Video-EEG
+A162	CUI T4 C0151611
+A17	EEG_Performed T4 Yes
+A18	CUIPhrase T4 eeg-abnormal
+A192	EEG_Results T4 Abnormal
+A202	EEG_Type T4 VideoTelemetry
+T5	Diagnosis 175 212	focal-seizures-with-altered-awareness
+A212	Negation T5 Affirmed
+A222	CUI T5 C0270834
+A232	CUIPhrase T5 focal-seizures-with-altered-awareness
+A24	DiagCategory T5 MultipleSeizures
+A25	Certainty T5 5
+T6	SeizureFrequency 240 278	focal-to-bilateral-convulsive-seizures
+A26	YearDate T6 2018
+A27	NumberOfSeizures T6 0
+A28	CUIPhrase T6 focal to bilateral convulsive seizures
+A29	TimeSince_or_TimeOfEvent T6 Since
+A30	CUI T6 C0877017
+T7	PatientHistory 549 565	febrile-seizures
+A31	AgeUpper T7 5
+A32	CUI T7 C0009952
+A33	Negation T7 Affirmed
+A34	Certainty T7 5
+A35	AgeLower T7 3
+A36	AgeUnit T7 Year
+A37	CUIPhrase T7 febrile-seizures
+T8	BirthHistory 1061 1074	born-normally
+A38	CUI T8 C3665337
+A39	Negation T8 Affirmed
+A40	Certainty T8 5
+A41	CUIPhrase T8 born-normally
+A42	PrematureBirth T8 37+_TermBirth
+T9	Diagnosis 623 641	focal-onset-seizur
+A43	Negation T9 Affirmed
+A44	CUI T9 C0751495
+A45	Certainty T9 5
+A46	DiagCategory T9 MultipleSeizures
+A47	CUIPhrase T9 focal seizure
+T10	Prescription 91 144	Current-anti-seizure-medication:-lamotrigine-200mg-bd
+A48	Frequency T10 2
+A49	DoseUnit T10 mg
+A50	DrugDose T10 200
+A51	CUIPhrase T10 lamotrigine
+A52	DrugName T10 lamotrigine
+A53	CUI T10 C0064636
+T12	Onset 622 642	focal-onset-seizures
+A58	AgeUnit T12 Year
+A59	CUI T12 C0751495
+A60	CUIPhrase T12 focal-seizures
+A61	Age T12 6
+A62	Certainty T12 5
+A63	Negation T12 Affirmed
+T13	Investigations 331 335	MRI-
+A64	MRI_Results T13 Abnormal
+A65	CUIPhrase T13 MRI abnormal
+A66	CUI T13 C1319851
+A67	MRI_Performed T13 Yes
+T14	Diagnosis 240 278	focal-to-bilateral-convulsive-seizures
+A68	Negation T14 Affirmed
+A69	DiagCategory T14 MultipleSeizures
+A70	Certainty T14 5
+A71	CUIPhrase T14 focal-to-bilateral-convulsive-seizures
+A72	CUI T14 C0877017
+T15	SeizureFrequency 756 768	seizure-free
+A73	NumberOfSeizures T15 0
+A74	TimeSince_or_TimeOfEvent T15 Since
+A75	PointInTime T15 Surgery
+A76	CUIPhrase T15 seizure free
+A77	CUI T15 C1299590
+T17	PatientHistory 821 830	seizures-
+A78	Negation T17 Affirmed
+A79	CUI T17 C0036572
+A80	Certainty T17 5
+A81	CUIPhrase T17 seizures
+T18	Diagnosis 11 33	temporal-lobe-epilepsy
+A85	Negation T18 Affirmed
+A86	DiagCategory T18 Epilepsy
+A87	CUI T18 C0014556
+A88	CUIPhrase T18 temporal-lobe-epilepsy
+A89	Certainty T18 5

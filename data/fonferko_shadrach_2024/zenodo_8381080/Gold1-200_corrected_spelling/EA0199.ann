@@ -1,0 +1,36 @@
+T1	PatientHistory 252 261	seizures-
+A1	CUIPhrase T1 seizures
+A2	CUI T1 C0036572
+A3	Certainty T1 5
+A4	Negation T1 Affirmed
+T2	Prescription 72 86	phenobarbitone
+A5	CUIPhrase T2 phenobarbitone
+A6	CUI T2 C0031412
+A7	DrugName T2 Phenobarbital
+A8	DoseUnit T2 mg
+A9	Frequency T2 2
+A10	DrugDose T2 100
+T3	PatientHistory 164 172	seizures
+A11	Negation T3 Affirmed
+A12	Certainty T3 5
+A13	CUIPhrase T3 seizures
+A14	CUI T3 C0036572
+T4	SeizureFrequency 164 172	seizures
+A15	NumberOfTimePeriods T4 1
+A16	CUI T4 C0036572
+A17	NumberOfSeizures T4 2
+A18	TimePeriod T4 Month
+A19	CUIPhrase T4 seizures
+T5	Diagnosis 35 43	epilepsy
+A20	Certainty T5 5
+A21	Negation T5 Affirmed
+A22	DiagCategory T5 Epilepsy
+A23	CUIPhrase T5 epilepsy
+A24	CUI T5 C0014544
+T6	Prescription 116 121	EPlim
+A25	DrugName T6 SodiumValproate
+A26	CUIPhrase T6 epilim
+A27	DrugDose T6 300
+A28	DoseUnit T6 mg
+A29	CUI T6 C0591451
+A30	Frequency T6 2

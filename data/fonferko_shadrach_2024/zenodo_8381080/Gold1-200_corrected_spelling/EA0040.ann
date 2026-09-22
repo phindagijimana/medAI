@@ -1,0 +1,67 @@
+T2	Diagnosis 91 111	symptomatic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-epilepsy
+A6	CUI T2 C1406659
+T4	Diagnosis 117 141	complex-partial-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 complex-partial-seizures
+A12	CUI T4 C0149958
+T6	Diagnosis 146 175	secondly-generalised-seizures
+A14	DiagCategory T6 MultipleSeizures
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 secondary-generalised-seizures
+A18	CUI T6 C0270838
+T8	PatientHistory 192 223	left-frontal-cortical-dysplasia
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 cortical-dysplasia
+A23	CUI T8 C0431380
+T11	PatientHistory 252 260	anxiety-
+A122	Certainty T11 5
+A13	Negation T11 Affirmed
+A142	CUIPhrase T11 anxiety
+A152	CUI T11 C0003467
+T13	PatientHistory 264 274	depression
+A172	Certainty T13 5
+A182	Negation T13 Affirmed
+A19	CUIPhrase T13 depression
+A202	CUI T13 C0011570
+T12	Investigations 292 295	EEG
+A30	EEG_Performed T12 Yes
+A31	EEG_Results T12 Normal
+A32	CUIPhrase T12 normal-eeg
+A33	CUI T12 C0560017
+T16	Investigations 337 341	MRI-
+A232	MRI_Performed T16 Yes
+A24	MRI_Results T16 Abnormal
+A25	CUIPhrase T16 mri-abnormal
+A26	CUI T16 C1319851
+T17	PatientHistory 367 393	frontal-cortical-dysplasia
+A40	Certainty T17 5
+A41	Negation T17 Affirmed
+A42	CUIPhrase T17 cortical-dysplasia
+A43	CUI T17 C0431380
+T18	Prescription 395 437	Medication-levetiracetam-750mg-twice-a-day
+A45	DrugName T18 levetiracetam
+A46	DrugDose T18 750
+A47	DoseUnit T18 mg
+A48	Frequency T18 2
+A49	CUIPhrase T18 levetiracetam
+A50	CUI T18 C0377265
+T20	Prescription 438 467	Lamotrigine-50-mg-twice-a-day
+A52	DrugName T20 lamotrigine
+A53	DrugDose T20 50
+A54	DoseUnit T20 mg
+A55	Frequency T20 2
+A56	CUIPhrase T20 lamotrigine
+A57	CUI T20 C0064636
+T22	PatientHistory 842 850	seizures
+A59	Certainty T22 5
+A60	Negation T22 Affirmed
+A61	CUIPhrase T22 seizures
+A62	CUI T22 C0036572

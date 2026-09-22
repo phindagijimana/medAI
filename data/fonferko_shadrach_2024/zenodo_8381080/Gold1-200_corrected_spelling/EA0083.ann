@@ -1,0 +1,75 @@
+T1	Prescription 310 359	·-Brivaracetam-100mgs-bd-to-increase-to-100mgs-an
+A1	Frequency T1 2
+A2	DrugDose T1 100
+A3	DoseUnit T1 mg
+A4	DrugName T1 brivaracetam
+A5	CUI T1 C1699861
+A6	CUIPhrase T1 brivaracetam
+T2	Diagnosis 719 740	tonic-clonic-seizures
+A7	CUI T2 C0494475
+A8	CUIPhrase T2 tonic-clonic-seizures
+A9	Certainty T2 4
+A10	Negation T2 Affirmed
+A11	DiagCategory T2 MultipleSeizures
+T3	SeizureFrequency 719 740	tonic-clonic-seizures
+A12	CUIPhrase T3 tonic-clonic-seizures
+A13	NumberOfSeizures T3 1
+A14	TimePeriod T3 Week
+A15	NumberOfTimePeriods T3 1
+A16	CUI T3 C0494475
+T4	SeizureFrequency 673 681	seizures
+A17	CUIPhrase T4 seizures
+A18	CUI T4 C0036572
+A19	NumberOfSeizures T4 1
+A20	NumberOfTimePeriods T4 1
+A21	TimePeriod T4 Week
+T5	Prescription 287 309	·-Zonisamide-250mgs-bd
+A22	Frequency T5 2
+A23	CUI T5 C0078844
+A24	DoseUnit T5 mg
+A25	DrugDose T5 250
+A26	CUIPhrase T5 zonisamide
+A27	DrugName T5 zonisamide
+T6	Investigations 261 264	MRI
+A28	MRI_Performed T6 Yes
+A29	MRI_Results T6 Normal
+A30	CUIPhrase T6 mri-normal
+A31	CUI T6 C0436481
+T7	Diagnosis 150 175	Refractory-focal-epilepsy
+A32	Negation T7 Affirmed
+A33	Certainty T7 5
+A34	CUI T7 C1096063
+A35	DiagCategory T7 Epilepsy
+A36	CUIPhrase T7 refractory-epilepsies
+T8	PatientHistory 638 646	seizures
+A37	Negation T8 Affirmed
+A38	CUIPhrase T8 seizures
+A39	Certainty T8 5
+A40	CUI T8 C0036572
+T9	Investigations 241 244	EEG
+A41	EEG_Results T9 Abnormal
+A42	EEG_Performed T9 Yes
+A43	CUIPhrase T9 abnormal-eeg
+A44	CUI T9 C0151611
+T10	SeizureFrequency 638 645	seizure
+A45	FrequencyChange T10 Increased
+A46	CUIPhrase T10 seizure
+A47	CUI T10 C0036572
+T11	Diagnosis 181 190	Nocturnal
+A48	CUIPhrase T11 nocturnal-seizures
+A49	Certainty T11 5
+A50	Negation T11 Affirmed
+A51	CUI T11 C0748605
+A52	DiagCategory T11 MultipleSeizures
+T12	Diagnosis 162 175	ocal-epilepsy
+A53	DiagCategory T12 Epilepsy
+A54	Certainty T12 5
+A55	CUIPhrase T12 focal-epilepsy
+A56	CUI T12 C0014547
+A57	Negation T12 Affirmed
+T13	Diagnosis 181 224	Nocturnal-generalised-tonic-clonic-seizures
+A58	Negation T13 Affirmed
+A59	CUIPhrase T13 generalized-tonic-clonic-seizures
+A60	DiagCategory T13 MultipleSeizures
+A61	CUI T13 C0494475
+A62	Certainty T13 5

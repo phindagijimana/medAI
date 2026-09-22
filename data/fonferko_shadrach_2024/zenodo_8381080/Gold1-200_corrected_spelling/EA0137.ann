@@ -1,0 +1,117 @@
+T1	BirthHistory 128 145	-perinatal-trauma
+A10	Certainty T1 5
+A11	Negation T1 Affirmed
+A12	CUIPhrase T1 perinatal-injury
+A13	CUI T1 C0456798
+T11	EpilepsyCause 129 145	perinatal-trauma
+A1111	Certainty T11 5
+A1211	Negation T11 Affirmed
+A1311	CUIPhrase T11 perinatal-trauma
+A14	CUI T11 C0456798
+T2	Diagnosis 220 228	epilepsy
+A5	Negation T2 Affirmed
+A6	CUI T2 C0014544
+A7	CUIPhrase T2 epilepsy
+A8	Certainty T2 5
+A9	DiagCategory T2 Epilepsy
+T17	BirthHistory 295 328	hypoxia-during-a-difficult-birth.
+A23	Certainty T17 5
+A24	Negation T17 Affirmed
+A25	CUIPhrase T17 hypoxia-during-birth
+A26	CUI T17 C0559478
+T22	EpilepsyCause 295 328	hypoxia-during-a-difficult-birth.
+A16	Certainty T22 5
+A17	Negation T22 Affirmed
+A18	CUIPhrase T22 hypoxia-during-birth
+A19	CUI T22 C0559478
+T3	Diagnosis 361 391	secondary-generalised-seizures
+A1010	Certainty T3 5
+A1110	Negation T3 Affirmed
+A1210	DiagCategory T3 MultipleSeizures
+A1310	CUIPhrase T3 secondary-generalised-seizures
+A1410	CUI T3 C0270838
+T4	SeizureFrequency 406 412	seizur
+A15	TimePeriod T4 Month
+A162	CUI T4 C0036572
+A172	NumberOfSeizures T4 0
+A182	NumberOfTimePeriods T4 2
+A192	CUIPhrase T4 seizure
+T5	WhenDiagnosed 220 227	epileps
+A20	CUI T5 C0014544
+A21	Negation T5 Affirmed
+A22	Certainty T5 5
+A2310	AgeUnit T5 Year
+A2410	Age T5 4
+A2510	CUIPhrase T5 epilepsy
+T6	Investigations 927 931	MRI-
+A2610	MRI_Performed T6 Yes
+A27	CUI T6 C1319851
+A28	CUIPhrase T6 mri-abnormal
+A29	MRI_Results T6 Abnormal
+T7	Prescription 579 595	sodium-valproate
+A30	DoseUnit T7 g
+A31	DrugDose T7 1
+A32	CUIPhrase T7 sodium-valproate
+A33	CUI T7 C0037567
+A34	Frequency T7 2
+A35	DrugName T7 SodiumValproate
+T8	SeizureFrequency 361 390	secondary-generalised-seizure
+A36	CUIPhrase T8 secondary-generalised-seizures
+A37	NumberOfTimePeriods T8 1
+A38	CUI T8 C0270838
+A39	NumberOfSeizures T8 2
+A40	TimePeriod T8 Year
+T9	Prescription 695 706	lamotrigine
+A41	CUIPhrase T9 lamotrigine
+A42	DoseUnit T9 mg
+A43	DrugDose T9 50
+A44	CUI T9 C0064636
+A45	Frequency T9 2
+A46	DrugName T9 Lamotrigine
+T12	Diagnosis 265 274	epilepsy-
+A55	Negation T12 Affirmed
+A56	DiagCategory T12 Epilepsy
+A57	CUI T12 C0014544
+A58	CUIPhrase T12 epilepsy
+A59	Certainty T12 5
+T13	PatientHistory 406 414	seizure-
+A60	Certainty T13 5
+A61	CUI T13 C0036572
+A62	CUIPhrase T13 seizure
+A63	Negation T13 Affirmed
+T14	PatientHistory 946 954	gliosis-
+A64	CUIPhrase T14 gliosis
+A65	Negation T14 Affirmed
+A66	CUI T14 C0017639
+A67	Certainty T14 5
+T15	PatientHistory 898 906	anxiety-
+A68	CUI T15 C0003467
+A69	CUIPhrase T15 anxiety
+A70	Negation T15 Affirmed
+A71	Certainty T15 5
+T16	PatientHistory 785 794	seizures-
+A72	CUI T16 C0036572
+A73	Negation T16 Affirmed
+A74	Certainty T16 5
+A75	CUIPhrase T16 seizures
+T21	Diagnosis 85 115	Secondary-generalised-seizures
+A76	CUI T21 C0270838
+A77	CUIPhrase T21 secondary-generalised-seizures
+A78	Certainty T21 5
+A79	DiagCategory T21 MultipleSeizures
+A80	Negation T21 Affirmed
+T19	BirthHistory 1019 1035	perinatal-injury
+A1510	Certainty T19 5
+A1610	Negation T19 Affirmed
+A1710	CUIPhrase T19 perinatal-injury
+A1810	CUI T19 C0005604
+T18	Investigations 1043 1047	EEG-
+A81	EEG_Results T18 Abnormal
+A82	CUIPhrase T18 eeg-abnormal
+A83	CUI T18 C0151611
+A84	EEG_Performed T18 Yes
+T20	PatientHistory 910 920	depression
+A89	CUIPhrase T20 depression
+A90	CUI T20 C0011570
+A91	Certainty T20 5
+A92	Negation T20 Affirmed

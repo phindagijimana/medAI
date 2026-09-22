@@ -1,0 +1,38 @@
+T1	Diagnosis 219 252	generalised-tonic-clonic-seizures
+A1	CUI T1 C0494475
+A2	CUIPhrase T1 generalised-tonic-clonic-seizures
+A3	Negation T1 Affirmed
+A4	DiagCategory T1 MultipleSeizures
+A5	Certainty T1 5
+T2	Prescription 292 314	Carbamazepine-600mg-bd
+A6	CUI T2 C0006949
+A7	DoseUnit T2 mg
+A8	DrugName T2 carbamazepine
+A9	CUIPhrase T2 carbamazepine
+A10	DrugDose T2 600
+A11	Frequency T2 2
+T3	Diagnosis 193 213	intractable-epilepsy
+A12	DiagCategory T3 Epilepsy
+A13	CUIPhrase T3 intractable-epilepsy
+A14	Negation T3 Affirmed
+A15	Certainty T3 5
+A16	CUI T3 C1096063
+T4	Prescription 266 289	Levetiracetam-1250mg-bd
+A17	CUI T4 C0377265
+A18	DrugName T4 levetiracetam
+A19	Frequency T4 2
+A20	DrugDose T4 1250
+A21	DoseUnit T4 mg
+A22	CUIPhrase T4 levetiracetam
+T5	SeizureFrequency 350 382	generalised-tonic-clonic-seizure
+A23	NumberOfSeizures T5 1
+A24	TimePeriod T5 Month
+A25	CUIPhrase T5 generalised-tonic-clonic-seizure
+A26	CUI T5 C0494475
+A27	NumberOfTimePeriods T5 2
+T6	Diagnosis 350 382	generalised-tonic-clonic-seizure
+A28	Certainty T6 5
+A29	CUIPhrase T6 generalised-tonic-clonic-seizure
+A30	Negation T6 Affirmed
+A31	DiagCategory T6 MultipleSeizures
+A32	CUI T6 C0494475

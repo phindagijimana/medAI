@@ -1,0 +1,46 @@
+T2	Diagnosis 160 172	possible-TLE
+A5	CUI T2 C0014556
+A6	Certainty T2 3
+A7	CUIPhrase T2 temporal-lobe-epilepsy
+A8	DiagCategory T2 Epilepsy
+A9	Negation T2 Affirmed
+T3	Diagnosis 143 157	Focal-seizures
+A10	CUIPhrase T3 focal-seizures
+A11	DiagCategory T3 MultipleSeizures
+A12	CUI T3 C0751495
+A13	Negation T3 Affirmed
+A14	Certainty T3 5
+T10	PatientHistory 330 337	déjà-vu
+A112	TimePeriod T10 Month
+A122	NumberOfTimePeriods T10 10
+A132	Certainty T10 5
+A142	Negation T10 Affirmed
+A15	CUIPhrase T10 déjà-vu
+A16	CUI T10 C0011194
+T11	BirthHistory 549 564	birth-was-norma
+A162	Negation T11 Affirmed
+A163	CUIPhrase T11 normal-birth
+A164	CUI T11 C3665337
+T12	Investigations 773 776	EEG
+A165	EEG_Performed T12 Yes
+A166	EEG_Results T12 Abnormal
+A167	CUIPhrase T12 abnormal-eeg
+A168	CUI T12 C0151611
+T4	Diagnosis 1016 1039	temporal-lobe-epilepsy
+A153	CUI T4 C0014556
+A169	Negation T4 Affirmed
+A17	Certainty T4 4
+A18	CUIPhrase T4 temporal-lobe-epilepsy
+A19	DiagCategory T4 Epilepsy
+T6	Prescription 173 216	Medication:-Carbamazepine-200mg-twice-a-day
+A22	Frequency T6 2
+A23	CUI T6 C0006949
+A24	DrugName T6 carbamazepine
+A25	DrugDose T6 200
+A26	CUIPhrase T6 carbamazepine
+A27	DoseUnit T6 mg
+T7	PatientHistory 590 606	febrile-seizures
+A28	Negation T7 Negated
+A29	Certainty T7 1
+A30	CUI T7 C0009952
+A31	CUIPhrase T7 febrile-seizures

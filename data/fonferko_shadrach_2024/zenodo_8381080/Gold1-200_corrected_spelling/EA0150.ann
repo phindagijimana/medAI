@@ -1,0 +1,121 @@
+T1	Prescription 857 871	levetiracetam-
+A1	CUI T1 C0377265
+A2	DrugDose T1 1500
+A3	CUIPhrase T1 levetiracetam
+A4	Frequency T1 2
+A5	DrugName T1 Levetiracetam
+A6	DoseUnit T1 mg
+T2	Investigations 1367 1371	MRI-
+A7	CUI T2 C1319851
+A8	MRI_Performed T2 Yes
+A9	CUIPhrase T2 mri-abnormal
+A10	MRI_Results T2 Abnormal
+T3	PatientHistory 438 452	skull-fracture
+A11	Negation T3 Affirmed
+A12	Certainty T3 5
+A13	CUI T3 C0037304
+A14	CUIPhrase T3 skull-fracture
+T4	WhenDiagnosed 589 596	epileps
+A15	CUI T4 C0014544
+A16	Certainty T4 5
+A17	Negation T4 Affirmed
+A18	CUIPhrase T4 epilepsy
+A19	YearDate T4 2009
+T5	Diagnosis 122 153	symptomatic-structural-epilepsy
+A20	Negation T5 Affirmed
+A21	DiagCategory T5 Epilepsy
+A22	CUIPhrase T5 symptomatic-structural-focal-epilepsy
+A23	Certainty T5 5
+A24	CUI T5 C0472349
+T6	Diagnosis 615 639	complex-partial-seizures
+A25	CUIPhrase T6 complex-partial-seizures
+A26	DiagCategory T6 MultipleSeizures
+A27	Certainty T6 5
+A28	CUI T6 C0149958
+A29	Negation T6 Affirmed
+T7	PatientHistory 930 946	seizure-clusters
+A30	Negation T7 Affirmed
+A31	CUI T7 C3203523
+A32	CUIPhrase T7 seizure-cluster
+A33	Certainty T7 5
+T8	Diagnosis 589 598	epilepsy-
+A34	Negation T8 Affirmed
+A35	CUIPhrase T8 epilepsy
+A36	CUI T8 C0014544
+A37	DiagCategory T8 Epilepsy
+A38	Certainty T8 5
+T9	Investigations 1556 1560	EEG-
+A39	CUIPhrase T9 eeg-abnormal
+A40	CUI T9 C0151611
+A41	EEG_Performed T9 Yes
+A42	EEG_Results T9 Abnormal
+T10	PatientHistory 549 558	seizures-
+A43	Certainty T10 5
+A44	CUI T10 C0036572
+A45	CUIPhrase T10 seizures
+A46	YearDate T10 2008
+A47	Negation T10 Affirmed
+T11	Diagnosis 188 197	epilepsy-
+A48	CUIPhrase T11 epilepsy
+A49	Certainty T11 5
+A50	CUI T11 C0014544
+A51	Negation T11 Affirmed
+A52	DiagCategory T11 Epilepsy
+T12	Diagnosis 688 718	secondary-generalised-seizures
+A53	CUI T12 C0270838
+A54	DiagCategory T12 MultipleSeizures
+A55	Negation T12 Affirmed
+A56	Certainty T12 5
+A57	CUIPhrase T12 secondary-generalised-seizures
+T13	Prescription 917 925	clobazam
+A58	CUI T13 C0055891
+A59	Frequency T13 As_Required
+A60	CUIPhrase T13 clobazam
+A61	DrugName T13 Clobazam
+T14	PatientHistory 215 237	traumatic-brain-injury
+A62	CUIPhrase T14 traumatic brain injury
+A63	YearDate T14 2006
+A64	CUI T14 C0876926
+A65	Certainty T14 5
+A66	Negation T14 Affirmed
+T15	SeizureFrequency 803 833	secondary-generalised-seizures
+A67	UpperNumberOfSeizures T15 2
+A68	CUI T15 C0270838
+A69	CUIPhrase T15 secondary-generalised-seizures
+A70	NumberOfTimePeriods T15 1
+A71	LowerNumberOfSeizures T15 1
+A72	TimePeriod T15 Year
+T16	PatientHistory 1493 1505	brain-injury
+A73	CUIPhrase T16 brain-injury
+A74	Certainty T16 5
+A75	Negation T16 Affirmed
+A76	CUI T16 C0270611
+T17	EpilepsyCause 215 237	traumatic-brain-injury
+A77	Certainty T17 5
+A78	CUI T17 C0876926
+A79	Negation T17 Affirmed
+A80	CUIPhrase T17 traumatic brain injury
+T18	Prescription 892 904	lamotrigine-
+A81	CUIPhrase T18 lamotrigine
+A82	CUI T18 C0064636
+A83	DrugName T18 Lamotrigine
+A84	DoseUnit T18 mg
+A85	Frequency T18 2
+A86	DrugDose T18 200
+T20	PatientHistory 459 494	traumatic-sub-arachnoid-heamorrahge
+A92	Negation T20 Affirmed
+A93	CUIPhrase T20 subarachnoid-hemorrhage
+A94	Certainty T20 5
+A95	CUI T20 C0038525
+T21	Diagnosis 803 833	secondary-generalised-seizures
+A96	CUI T21 C0270838
+A97	Negation T21 Affirmed
+A98	DiagCategory T21 MultipleSeizures
+A99	Certainty T21 5
+A100	CUIPhrase T21 secondary generalised seizures
+T22	SeizureFrequency 724 748	complex-partial-seizures
+A101	CUIPhrase T22 complex-partial-seizures
+A102	CUI T22 C0149958
+A103	NumberOfTimePeriods T22 1
+A104	NumberOfSeizures T22 1
+A105	TimePeriod T22 Month

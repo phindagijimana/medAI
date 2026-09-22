@@ -1,0 +1,27 @@
+T2	Diagnosis 62 71	epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T8	Prescription 130 144	Levetiracetam-
+A22	DrugName T8 Levetiracetam
+A23	DrugDose T8 1500
+A24	DoseUnit T8 mg
+A25	Frequency T8 2
+A26	CUIPhrase T8 levetiracetam
+A27	CUI T8 C0377265
+T4	Prescription 156 176	Zonisamide-150-mg-BD
+A8	DrugName T4 zonisamide
+A9	DrugDose T4 150
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 zonisamide
+A13	CUI T4 C0078844
+T6	Prescription 178 199	Tegretol-600-mg-daily
+A15	DrugName T6 tegretol
+A16	DrugDose T6 600
+A17	DoseUnit T6 mg
+A18	Frequency T6 1
+A19	CUIPhrase T6 tegretol
+A20	CUI T6 C0700087

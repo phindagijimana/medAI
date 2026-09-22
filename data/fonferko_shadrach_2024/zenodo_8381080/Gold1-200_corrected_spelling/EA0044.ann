@@ -1,0 +1,55 @@
+T2	Diagnosis 85 138	Generalised-Epilepsy-with-tonic-clonic-seizures-alone
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy-with-generalised-tonic-clonic-seizures-alone
+A6	CUI T2 C0393697
+T4	PatientHistory 140 148	Diabetes
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 diabetes
+A11	CUI T4 C0011849
+T6	Prescription 150 190	Medication:-lamotrigine-75mg-twice-a-day
+A13	DrugName T6 lamotrigine
+A14	DrugDose T6 75
+A15	DoseUnit T6 mg
+A16	Frequency T6 2
+A17	CUIPhrase T6 lamotrigine
+A18	CUI T6 C0064636
+T8	Investigations 208 211	MRI
+A20	MRI_Performed T8 Yes
+A21	MRI_Results T8 Normal
+A22	CUIPhrase T8 normal-mri
+A23	CUI T8 C0436481
+T10	Investigations 226 229	EEG
+A25	EEG_Performed T10 Yes
+A26	EEG_Results T10 Abnormal
+A27	CUIPhrase T10 eeg-abnormal
+A28	CUI T10 C0151611
+T11	PatientHistory 268 284	photosensitivity
+A1510	Certainty T11 5
+A1610	Negation T11 Affirmed
+A1710	CUIPhrase T11 photosensitivity
+A1810	CUI T11 C3552821
+T12	SeizureFrequency 395 403	seizures
+A30	NumberOfSeizures T12 0
+A31	PointInTime T12 LastClinic
+A32	TimeSince_or_TimeOfEvent T12 Since
+A33	CUIPhrase T12 seizures
+A34	CUI T12 C0036572
+T14	SeizureFrequency 395 403	seizures
+A36	NumberOfSeizures T14 0
+A37	PointInTime T14 DrugChange
+A38	TimeSince_or_TimeOfEvent T14 Since
+A39	CUIPhrase T14 seizures
+A40	CUI T14 C0036572
+T9	Investigations 770 774	EEG-
+A1010	EEG_Performed T9 Yes
+A1110	EEG_Results T9 Abnormal
+A12	CUIPhrase T9 eeg-abnormal
+A1310	CUI T9 C0151611
+T16	PatientHistory 798 814	photosensitivity
+A42	Certainty T16 5
+A43	Negation T16 Affirmed
+A44	CUIPhrase T16 photosensitivity
+A45	CUI T16 C3552821

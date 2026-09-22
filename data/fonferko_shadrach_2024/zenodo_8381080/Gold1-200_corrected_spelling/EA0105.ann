@@ -1,0 +1,95 @@
+T3	Diagnosis 67 93	Focal-post-stroke-epilepsy
+A3	DiagCategory T3 Epilepsy
+A4	Certainty T3 5
+A5	Negation T3 Affirmed
+A6	CUIPhrase T3 focal-epilepsy
+A7	CUI T3 C0014547
+T2	Diagnosis 73 94	post-stroke-epilepsy-
+A102	DiagCategory T2 Epilepsy
+A112	Certainty T2 5
+A122	Negation T2 Affirmed
+A132	CUIPhrase T2 epilepsy-due-to-stroke
+A142	CUI T2 C4518323
+T5	Diagnosis 110 143	generalised-tonic-clonic-seizures
+A9	DiagCategory T5 MultipleSeizures
+A1010	Certainty T5 5
+A1110	Negation T5 Affirmed
+A1210	CUIPhrase T5 generalised-tonic-clonic-seizures
+A1310	CUI T5 C0494475
+T7	PatientHistory 172 180	infarct-
+A15	MonthDate T7 11
+A16	YearDate T7 2005
+A17	Certainty T7 5
+A18	Negation T7 Affirmed
+A19	CUIPhrase T7 infarct
+A20	CUI T7 C0751955
+T9	PatientHistory 202 210	diabetes
+A22	Certainty T9 5
+A23	Negation T9 Affirmed
+A24	CUIPhrase T9 diabetes
+A25	CUI T9 C0011847
+T10	PatientHistory 211 223	Hypertension
+A10	Certainty T10 5
+A11	Negation T10 Affirmed
+A12	CUIPhrase T10 hypertension
+A13	CUI T10 C0020538
+T11	PatientHistory 237 248	depression-
+A27	Certainty T11 5
+A28	Negation T11 Affirmed
+A29	CUIPhrase T11 depression
+A30	CUI T11 C0011570
+T13	Diagnosis 315 324	epilepsy-
+A32	DiagCategory T13 Epilepsy
+A33	Certainty T13 5
+A34	Negation T13 Affirmed
+A35	CUIPhrase T13 epilepsy
+A36	CUI T13 C0014544
+T12	PatientHistory 346 352	stroke
+A1610	Certainty T12 5
+A1710	Negation T12 Affirmed
+A1810	CUIPhrase T12 stroke
+A1910	CUI T12 C0038454
+T15	Prescription 390 406	sodium-valproate
+A38	DrugName T15 SodiumValproate
+A39	DrugDose T15 500
+A40	DoseUnit T15 mg
+A41	Frequency T15 1
+A42	CUIPhrase T15 sodium-valproate
+A43	CUI T15 C0037567
+T17	PatientHistory 433 441	seizures
+A45	Certainty T17 5
+A46	Negation T17 Affirmed
+A47	CUIPhrase T17 seizures
+A48	CUI T17 C0036572
+T19	SeizureFrequency 433 434	s
+A50	FrequencyChange T19 Infrequent
+A51	PointInTime T19 DrugChange
+A52	TimeSince_or_TimeOfEvent T19 Since
+A53	CUIPhrase T19 seizures
+A54	CUI T19 C0036572
+T21	SeizureFrequency 581 600	cluster-of-seizures
+A56	NumberOfSeizures T21 1
+A57	MonthDate T21 2
+A58	TimeSince_or_TimeOfEvent T21 During
+A59	CUIPhrase T21 cluster-of-seizures
+A60	CUI T21 C3203523
+T14	PatientHistory 581 600	cluster-of-seizures
+A1111	Certainty T14 5
+A1211	Negation T14 Affirmed
+A1311	CUIPhrase T14 cluster-of-seizures
+A1410	CUI T14 C3203523
+T23	PatientHistory 670 678	seizures
+A62	Certainty T23 5
+A63	Negation T23 Affirmed
+A64	CUIPhrase T23 seizures
+A65	CUI T23 C0036572
+T25	PatientHistory 891 899	diabetes
+A67	Certainty T25 5
+A68	Negation T25 Affirmed
+A69	CUIPhrase T25 diabetes
+A70	CUI T25 C0011847
+T27	PatientHistory 1046 1054	seizures
+A72	Certainty T27 5
+A73	Negation T27 Affirmed
+A74	CUIPhrase T27 seizures
+A75	CUI T27 C0036572

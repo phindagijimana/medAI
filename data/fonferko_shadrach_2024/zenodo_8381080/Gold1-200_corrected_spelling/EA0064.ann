@@ -1,0 +1,38 @@
+T2	Diagnosis 120 146	symptomatic-focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-focal-epilepsy
+A6	CUI T2 C0472349
+T4	BirthHistory 162 180	premature-delivery
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 premature-birth
+A11	CUI T4 C0151526
+T6	EpilepsyCause 162 180	premature-delivery
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 premature
+A16	CUI T6 C0151526
+T8	PatientHistory 405 413	seizures
+A18	Certainty T8 5
+A19	Negation T8 Affirmed
+A20	CUIPhrase T8 seizures
+A21	CUI T8 C0036572
+T10	SeizureFrequency 405 412	seizure
+A1010	FrequencyChange T10 Infrequent
+A1110	CUIPhrase T10 seizures
+A1210	CUI T10 C0036572
+T12	SeizureFrequency 405 411	seizur
+A1410	NumberOfSeizures T12 2
+A1510	TimePeriod T12 Year
+A1610	NumberOfTimePeriods T12 1
+A17	CUIPhrase T12 seizures
+A1810	CUI T12 C0036572
+T9	Prescription 514 527	carbamazapine
+A1011	DrugName T9 Carbamazepine
+A1111	DrugDose T9 400
+A1211	DoseUnit T9 mg
+A1311	Frequency T9 2
+A1411	CUIPhrase T9 carbamazepine
+A1511	CUI T9 C0006949

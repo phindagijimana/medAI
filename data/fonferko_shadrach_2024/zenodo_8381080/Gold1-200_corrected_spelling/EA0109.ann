@@ -1,0 +1,30 @@
+T2	Diagnosis 36 50	Focal-Seizures
+A2	DiagCategory T2 MultipleSeizures
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-seizures
+A6	CUI T2 C0751495
+T4	Diagnosis 61 74	temporal-lobe
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 4
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 temporal-lobe-seizure
+A12	CUI T4 C0014556
+T9	PatientHistory 320 327	déjà-vu
+A102	Certainty T9 3
+A112	Negation T9 Affirmed
+A122	CUIPhrase T9 déjà-vu
+A13	CUI T9 C0011194
+T6	PatientHistory 673 696	ischaemic-heart-disease
+A14	TimePeriod T6 Year
+A15	NumberOfTimePeriods T6 10
+A16	Certainty T6 5
+A17	Negation T6 Affirmed
+A18	CUIPhrase T6 ischaemic-heart-disease
+A19	CUI T6 C0151744
+T8	Diagnosis 1109 1131	temporal-lobe-seizures
+A21	DiagCategory T8 MultipleSeizures
+A22	Certainty T8 4
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 temporal-lobe-seizures
+A25	CUI T8 C0014556

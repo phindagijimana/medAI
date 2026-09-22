@@ -1,0 +1,71 @@
+T1	PatientHistory 186 219	episodes-of-loss-of-consciousness
+A1	CUI T1 C0041657
+A2	CUIPhrase T1 episodes-of-loss-of-consciousness
+A3	Negation T1 Affirmed
+A4	Certainty T1 5
+T2	PatientHistory 874 889	febrile-seizure
+A5	Negation T2 Affirmed
+A6	CUI T2 C0009952
+A7	CUIPhrase T2 febrile-seizure
+A8	Certainty T2 5
+A9	Age T2 2
+A10	AgeUnit T2 Year
+T3	PatientHistory 1205 1236	transient-loss-of-consciousness
+A11	CUI T3 C4087400
+A12	Negation T3 Affirmed
+A13	Certainty T3 4
+A14	CUIPhrase T3 Transient loss of consciousness
+T4	PatientHistory 965 976	depression-
+A15	Certainty T4 5
+A16	CUI T4 C0011570
+A17	Negation T4 Affirmed
+A18	CUIPhrase T4 depression
+T5	Diagnosis 1241 1259	epileptic-seizures
+A19	CUI T5 C4317109
+A20	Certainty T5 4
+A21	DiagCategory T5 MultipleSeizures
+A22	Negation T5 Affirmed
+A23	CUIPhrase T5 epileptic-seizures
+T6	PatientHistory 786 796	depression
+A24	Negation T6 Affirmed
+A25	CUIPhrase T6 depression
+A26	CUI T6 C0011570
+A27	Certainty T6 5
+T7	PatientHistory 641 652	depression-
+A28	CUI T7 C0011570
+A29	CUIPhrase T7 depression
+A30	Certainty T7 5
+A31	Negation T7 Affirmed
+T8	Diagnosis 85 93	epilepsy
+A32	CUIPhrase T8 epilepsy
+A33	CUI T8 C0014544
+A34	DiagCategory T8 Epilepsy
+A35	Negation T8 Affirmed
+A36	Certainty T8 5
+T9	Diagnosis 1302 1310	epilepsy
+A37	CUIPhrase T9 epilepsy
+A38	Certainty T9 4
+A39	Negation T9 Affirmed
+A40	DiagCategory T9 Epilepsy
+A41	CUI T9 C0014544
+T10	PatientHistory 42 73	transient-loss-of-consciousness
+A42	CUI T10 C4087400
+A43	Negation T10 Affirmed
+A44	Certainty T10 5
+A45	CUIPhrase T10 Transient loss of consciousness
+T11	Investigations 1132 1141	MRI-brain
+A46	CUIPhrase T11 mri-normal
+A47	MRI_Results T11 Normal
+A48	CUI T11 C0436481
+A49	MRI_Performed T11 Yes
+T12	Investigations 1120 1127	CT-head
+A50	CUIPhrase T12 ct-normal
+A51	CUI T12 C0744602
+A52	CT_Results T12 Normal
+A53	CT_Performed T12 Yes
+T13	BirthHistory 805 828	born-slightly-premature
+A54	Certainty T13 5
+A55	Negation T13 Affirmed
+A56	PrematureBirth T13 34to<37_LatePretermBirth
+A57	CUIPhrase T13 late-preterm-birth
+A58	CUI T13 C3829315

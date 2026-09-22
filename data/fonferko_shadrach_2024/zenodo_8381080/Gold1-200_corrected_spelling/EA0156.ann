@@ -1,0 +1,47 @@
+T1	SeizureFrequency 206 218	seizure-free
+A1	TimeSince_or_TimeOfEvent T1 Since
+A2	CUI T1 C1299590
+A3	CUIPhrase T1 seizure-free
+A4	NumberOfSeizures T1 0
+A5	MonthDate T1 7
+T2	Prescription 93 128	Medication:-Levetiracetam-1250mg-BD
+A6	CUIPhrase T2 levetiracetam
+A7	DoseUnit T2 mg
+A8	DrugDose T2 1250
+A9	Frequency T2 2
+A10	DrugName T2 levetiracetam
+A11	CUI T2 C0377265
+T3	Investigations 387 391	MRI-
+A12	CUI T3 C0436481
+A13	CUIPhrase T3 mri-normal
+A14	MRI_Performed T3 Yes
+A15	MRI_Results T3 Normal
+T4	Investigations 395 410	EEG-were-normal
+A16	CUIPhrase T4 eeg-normal
+A17	CUI T4 C0560017
+A18	EEG_Performed T4 Yes
+A19	EEG_Results T4 Normal
+T6	Prescription 130 148	Topiramate-75mg-BD
+A23	DrugDose T6 75
+A24	CUI T6 C0076829
+A25	CUIPhrase T6 topiramate
+A26	DoseUnit T6 mg
+A27	DrugName T6 topiramate
+A28	Frequency T6 2
+T7	Investigations 452 456	EEG-
+A29	CUI T7 C0151611
+A30	EEG_Results T7 Abnormal
+A31	EEG_Performed T7 Yes
+A32	CUIPhrase T7 abnormal EEG
+T8	Diagnosis 67 92	Juvenile-Absence-Epilepsy
+A33	DiagCategory T8 Epilepsy
+A34	CUIPhrase T8 juvenile-absence-epilepsy
+A35	Negation T8 Affirmed
+A36	CUI T8 C4317339
+A37	Certainty T8 5
+T12	Diagnosis 495 511	absence-seizures
+A132	DiagCategory T12 MultipleSeizures
+A142	Certainty T12 5
+A152	Negation T12 Affirmed
+A162	CUIPhrase T12 absence-seizures
+A172	CUI T12 C4316903

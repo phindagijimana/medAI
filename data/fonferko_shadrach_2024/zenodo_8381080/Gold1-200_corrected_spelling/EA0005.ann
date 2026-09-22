@@ -1,0 +1,83 @@
+T2	Diagnosis 21 49	genetic-generalised-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 genetic-generalised-epilepsy
+A6	CUI T2 C0270850
+T4	Diagnosis 50 104	epilepsy-with-generalised-tonic-chronic-seizures-alone
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A111	CUIPhrase T4 epilepsy-with-generalised-tonic-clonic-seizures-alone
+A121	CUI T4 C0393697
+T6	Prescription 107 162	Current-medication:-sodium-valproate-500-mg-twice-a-day
+A141	DrugName T6 sodium-valproate
+A151	DrugDose T6 500
+A16	DoseUnit T6 mg
+A17	Frequency T6 2
+A18	CUIPhrase T6 sodium-valproate
+A19	CUI T6 C0037567
+T8	Prescription 163 195	Carbamazepine-200-mg-twice-a-day
+A21	DrugName T8 carbamazepine
+A22	DrugDose T8 200
+A23	DoseUnit T8 mg
+A24	Frequency T8 2
+A25	CUIPhrase T8 carbamazepine
+A26	CUI T8 C0006949
+T10	Diagnosis 224 257	-Generalised-tonic-clonic-seizure
+A11	DiagCategory T10 SingleSeizure
+A12	Certainty T10 5
+A13	Negation T10 Affirmed
+A14	CUIPhrase T10 generalised-tonic-clonic-seizure
+A15	CUI T10 C0494475
+T12	SeizureFrequency 225 258	Generalised-tonic-clonic-seizure-
+A34	NumberOfSeizures T12 0
+A35	MonthDate T12 7
+A36	YearDate T12 2016
+A37	TimeSince_or_TimeOfEvent T12 Since
+A38	CUIPhrase T12 generalised-tonic-clonic-seizure
+A39	CUI T12 C0494475
+T14	Investigations 327 342	MRI-2012-normal
+A41	MRI_Performed T14 Yes
+A42	MRI_Results T14 Normal
+A43	CUIPhrase T14 mri-normal
+A44	CUI T14 C0436481
+T16	Investigations 344 348	EEG-
+A46	EEG_Performed T16 Yes
+A47	EEG_Results T16 Abnormal
+A48	CUIPhrase T16 eeg-abnormal
+A49	CUI T16 C0151611
+T18	PatientHistory 450 458	seizure-
+A51	Certainty T18 5
+A52	Negation T18 Affirmed
+A53	CUIPhrase T18 seizure
+A54	CUI T18 C0036572
+T20	PatientHistory 524 533	seizures-
+A56	YearDate T20 2010
+A57	Certainty T20 5
+A58	Negation T20 Affirmed
+A59	CUIPhrase T20 seizures
+A60	CUI T20 C0036572
+T22	SeizureFrequency 576 585	seizures-
+A62	NumberOfSeizures T22 2
+A63	TimePeriod T22 Year
+A64	NumberOfTimePeriods T22 1
+A65	CUIPhrase T22 seizures
+A66	CUI T22 C0036572
+T24	PatientHistory 576 585	seizures-
+A68	Certainty T24 5
+A69	Negation T24 Affirmed
+A70	CUIPhrase T24 seizures
+A71	CUI T24 C0036572
+T26	Diagnosis 884 918	generalised-tonic-chronic-seizures
+A73	DiagCategory T26 MultipleSeizures
+A74	Certainty T26 5
+A75	Negation T26 Affirmed
+A76	CUIPhrase T26 generalised-tonic-clonic-seizures
+A77	CUI T26 C0494475
+T28	Diagnosis 950 1002	epilepsy-with-generalised-tonic-clonic-seizure-alone
+A79	DiagCategory T28 Epilepsy
+A80	Certainty T28 4
+A81	Negation T28 Affirmed
+A82	CUIPhrase T28 epilepsy-with-generalised-tonic-clonic-seizure-alone
+A83	CUI T28 C0393697

@@ -1,0 +1,61 @@
+T1	Prescription 238 270	Phenytoin-120mg-bd-(10mg/kg/day)
+A1	CUI T1 C0031507
+A2	DrugDose T1 120
+A3	DrugName T1 phenytoin
+A4	CUIPhrase T1 phenytoin
+A5	DoseUnit T1 mg
+A6	Frequency T1 2
+T2	Prescription 195 205	Topiramate
+A7	CUI T2 C0076829
+A8	DrugDose T2 75
+A9	CUIPhrase T2 topiramate
+A10	Frequency T2 1
+A11	DoseUnit T2 mg
+A12	DrugName T2 Topiramate
+T3	Prescription 153 192	Sodium-Valproate-440mg-bd-(30mg/kg/day)
+A13	Frequency T3 2
+A14	CUIPhrase T3 sodium-valproate
+A15	CUI T3 C0037567
+A16	DrugName T3 sodium-valproate
+A17	DrugDose T3 440
+A18	DoseUnit T3 mg
+T4	Prescription 195 213	Topiramate-60mg-am
+A19	DrugDose T4 60
+A20	CUIPhrase T4 topiramate
+A21	DoseUnit T4 mg
+A22	Frequency T4 1
+A23	CUI T4 C0076829
+A24	DrugName T4 topiramate
+T9	SeizureFrequency 610 643	generalised-tonic-clonic-seizures
+A102	NumberOfSeizures T9 1
+A112	TimePeriod T9 Day
+A122	NumberOfTimePeriods T9 1
+A132	TimeSince_or_TimeOfEvent T9 During
+A142	CUIPhrase T9 generalised-tonic-clonic-seizures
+A152	CUI T9 C0494475
+T5	PatientHistory 680 688	absences
+A25	CUIPhrase T5 absences
+A26	CUI T5 C0563606
+A27	Negation T5 Affirmed
+A28	Certainty T5 5
+T6	Diagnosis 610 643	generalised-tonic-clonic-seizures
+A29	Certainty T6 5
+A30	CUIPhrase T6 generalised-tonic-clonic-seizures
+A31	CUI T6 C0494475
+A32	DiagCategory T6 MultipleSeizures
+A33	Negation T6 Affirmed
+T7	Diagnosis 109 117	epilepsy
+A34	CUI T7 C0014544
+A35	Negation T7 Affirmed
+A36	DiagCategory T7 Epilepsy
+A37	CUIPhrase T7 epilepsy
+A38	Certainty T7 5
+T8	PatientHistory 120 139	Learning-disability
+A39	Certainty T8 5
+A40	CUIPhrase T8 learning-disability
+A41	CUI T8 C0751265
+A42	Negation T8 Affirmed
+T14	SeizureFrequency 680 688	absences
+A43	FrequencyChange T14 Frequent
+A44	CUIPhrase T14 absences
+A45	CUI T14 C0563606

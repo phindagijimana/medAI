@@ -1,0 +1,63 @@
+T1	PatientHistory 293 307	Blank-episodes
+A1	Certainty T1 5
+A2	CUIPhrase T1 blank-episodes
+A3	CUI T1 C0563606
+A4	Negation T1 Affirmed
+T2	Onset 219 226	epileps
+A5	PointInTime T2 From_Birth
+A6	Negation T2 Affirmed
+A7	CUIPhrase T2 epilepsy
+A8	Certainty T2 5
+A9	CUI T2 C0014544
+T3	PatientHistory 846 857	depression-
+A10	Certainty T3 5
+A11	CUIPhrase T3 depression
+A12	Negation T3 Affirmed
+A13	CUI T3 C0011570
+T4	Investigations 1080 1085	EEGs-
+A14	EEG_Performed T4 Yes
+A15	EEG_Results T4 Normal
+A16	CUI T4 C0560017
+A17	CUIPhrase T4 eeg-normal
+T5	Investigations 1089 1093	MRIs
+A18	CUIPhrase T5 mri-normal
+A19	CUI T5 C0436481
+A20	MRI_Results T5 Normal
+A21	MRI_Performed T5 Yes
+T6	SeizureFrequency 442 459	Grand-mal-seizure
+A22	CUIPhrase T6 grand-mal
+A23	CUI T6 C0494475
+A24	TimePeriod T6 Month
+A25	NumberOfSeizures T6 2
+A26	NumberOfTimePeriods T6 1
+T7	Prescription 797 817	lamotrigine-175mg-bd
+A27	DrugDose T7 175
+A28	Frequency T7 2
+A29	CUIPhrase T7 lamotrigine
+A30	DoseUnit T7 mg
+A31	DrugName T7 lamotrigine
+A32	CUI T7 C0064636
+T8	Diagnosis 442 460	Grand-mal-seizures
+A33	Negation T8 Affirmed
+A34	DiagCategory T8 MultipleSeizures
+A35	CUIPhrase T8 grand-mal
+A36	CUI T8 C0494475
+A37	Certainty T8 5
+T9	PatientHistory 1161 1178	febriles-seizures
+A38	Certainty T9 1
+A39	CUI T9 C0009952
+A40	Negation T9 Negated
+A41	CUIPhrase T9 febrile-seizures
+T10	Prescription 756 792	Currently-she-takes-clobazam-20mg-bd
+A42	DrugName T10 clobazam
+A43	DrugDose T10 20
+A44	CUI T10 C0055891
+A45	DoseUnit T10 mg
+A46	Frequency T10 2
+A47	CUIPhrase T10 clobazam
+T11	Diagnosis 219 228	epilepsy-
+A48	CUIPhrase T11 epilepsy
+A49	DiagCategory T11 Epilepsy
+A50	Negation T11 Affirmed
+A51	CUI T11 C0014544
+A52	Certainty T11 5

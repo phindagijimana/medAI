@@ -1,0 +1,120 @@
+T21	PatientHistory 137 180	ischaemic-damage-left-inferior-frontal-lobe
+A13	Certainty T21 5
+A14	Negation T21 Affirmed
+A15	CUIPhrase T21 ischaemic-damage-left-inferior-frontal-lobe
+A16	CUI T21 C0007786
+T1	Investigations 1319 1323	EEG-
+A1	CUI T1 C0151611
+A2	EEG_Performed T1 Yes
+A3	EEG_Results T1 Abnormal
+A4	CUIPhrase T1 eeg-abnormal
+T2	WhenDiagnosed 1130 1137	epileps
+A5	Certainty T2 5
+A6	CUIPhrase T2 epilepsy
+A7	YearDate T2 2017
+A8	CUI T2 C0014544
+A9	Negation T2 Affirmed
+A10	MonthDate T2 5
+T3	Diagnosis 89 126	Symptomatic-structural-focal-epilepsy
+A11	DiagCategory T3 Epilepsy
+A12	CUI T3 C0472349
+A132	Certainty T3 5
+A142	Negation T3 Affirmed
+A152	CUIPhrase T3 symptomatic-structural-focal-epilepsy
+T4	PatientHistory 195 203	anxiety-
+A162	Negation T4 Affirmed
+A17	Certainty T4 5
+A18	CUI T4 C0003467
+A19	CUIPhrase T4 anxiety
+T5	Diagnosis 780 818	focal-to-bilateral-convulsive-seizures
+A20	Certainty T5 4
+A21	CUI T5 C0877017
+A22	Negation T5 Affirmed
+A23	CUIPhrase T5 focal-to-bilateral-convulsive-seizures
+A24	DiagCategory T5 MultipleSeizures
+T6	PatientHistory 352 360	seizure-
+A25	Certainty T6 5
+A26	CUIPhrase T6 seizure
+A27	Negation T6 Affirmed
+A28	CUI T6 C0036572
+T7	PatientHistory 207 217	depression
+A29	CUI T7 C0011570
+A30	CUIPhrase T7 depression
+A31	Certainty T7 5
+A32	Negation T7 Affirmed
+T8	PatientHistory 1444 1452	seizure-
+A33	CUI T8 C0036572
+A34	Certainty T8 5
+A35	CUIPhrase T8 seizure
+A36	Negation T8 Affirmed
+T9	Diagnosis 1130 1139	epilepsy-
+A37	Certainty T9 5
+A38	CUIPhrase T9 epilepsy
+A39	CUI T9 C0014544
+A40	DiagCategory T9 Epilepsy
+A41	Negation T9 Affirmed
+T10	Diagnosis 314 323	epilepsy-
+A42	CUIPhrase T10 epilepsy
+A43	DiagCategory T10 Epilepsy
+A44	Negation T10 Affirmed
+A45	CUI T10 C0014544
+A46	Certainty T10 5
+T11	SeizureFrequency 1060 1096	focal-to-bilateral-convulsive-seizur
+A47	YearDate T11 2017
+A48	NumberOfSeizures T11 1
+A49	TimeSince_or_TimeOfEvent T11 During
+A50	CUIPhrase T11 focal-to-bilateral-convulsive-seizure
+A51	MonthDate T11 5
+A52	CUI T11 C0877017
+T12	EpilepsyCause 1220 1236	ischaemic-damage
+A53	Negation T12 Affirmed
+A54	Certainty T12 4
+A55	CUI T12 C1456496
+A56	CUIPhrase T12 brain damage
+T13	SeizureFrequency 352 358	seizur
+A57	CUI T13 C0036572
+A58	CUIPhrase T13 seizure
+A59	TimeSince_or_TimeOfEvent T13 During
+A60	NumberOfSeizures T13 1
+A61	PointInTime T13 Last_Month
+T14	Prescription 1370 1421	He-is-currently-taking-lamotrigine-75mg-twice-a-day
+A62	CUIPhrase T14 lamotrigine
+A63	DoseUnit T14 mg
+A64	CUI T14 C0064636
+A65	Frequency T14 2
+A66	DrugDose T14 75
+A67	DrugName T14 lamotrigine
+T15	Diagnosis 1060 1097	focal-to-bilateral-convulsive-seizure
+A68	CUIPhrase T15 focal-to-bilateral-convulsive-seizure
+A69	Negation T15 Affirmed
+A70	Certainty T15 5
+A71	DiagCategory T15 SingleSeizure
+A72	CUI T15 C0877017
+T16	Investigations 1175 1179	MRI-
+A73	CUIPhrase T16 mri-abnormal
+A74	CUI T16 C1319851
+A75	MRI_Performed T16 Yes
+A76	MRI_Results T16 Abnormal
+T17	PatientHistory 1220 1236	ischaemic-damage
+A77	CUIPhrase T17 brain-ischaemia
+A78	Negation T17 Affirmed
+A79	Certainty T17 5
+A80	CUI T17 C0007786
+T18	SeizureFrequency 851 871	focal-motor-seizures
+A81	NumberOfSeizures T18 0
+A82	NumberOfTimePeriods T18 10
+A83	TimePeriod T18 Month
+A84	CUIPhrase T18 focal motor seizures
+A85	CUI T18 C0016399
+T19	Diagnosis 1306 1314	epilepsy
+A86	CUIPhrase T19 epilepsy
+A87	DiagCategory T19 Epilepsy
+A88	Certainty T19 5
+A89	Negation T19 Affirmed
+A90	CUI T19 C0014544
+T20	Diagnosis 851 871	focal-motor-seizures
+A91	Negation T20 Affirmed
+A92	DiagCategory T20 MultipleSeizures
+A93	CUIPhrase T20 focal-motor-seizures
+A94	Certainty T20 5
+A95	CUI T20 C0016399

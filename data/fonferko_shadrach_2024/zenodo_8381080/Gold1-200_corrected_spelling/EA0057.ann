@@ -1,0 +1,160 @@
+T2	PatientHistory 140 161	Dissociative-seizures
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 dissociative-convulsions
+A5	CUI T2 C0349245
+T7	PatientHistory 163 184	non-epileptic-attacks
+A10	Certainty T7 5
+A11	Negation T7 Affirmed
+A12	CUIPhrase T7 non-epileptic-attacks
+A13	CUI T7 C3495874
+T4	Diagnosis 191 222	Symptomatic-structural-epilepsy
+A7	DiagCategory T4 Epilepsy
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A1010	CUIPhrase T4 symptomatic-structural-focal-epilepsy
+A1110	CUI T4 C0472349
+T6	PatientHistory 245 260	cerebral-abcess
+A1310	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 cerebral-abscess
+A16	CUI T6 C1510428
+T8	EpilepsyCause 245 260	cerebral-abcess
+A18	Certainty T8 5
+A19	Negation T8 Affirmed
+A20	CUIPhrase T8 cerebral-abscess
+A21	CUI T8 C1510428
+T10	Prescription 274 297	Levetiracetam-1000mg-bd
+A23	DrugName T10 levetiracetam
+A24	DrugDose T10 1000
+A25	DoseUnit T10 mg
+A26	Frequency T10 2
+A27	CUIPhrase T10 levetiracetam
+A28	CUI T10 C0377265
+T3	Diagnosis 443 451	-epileps
+A1510	DiagCategory T3 Epilepsy
+A1610	Certainty T3 5
+A1710	Negation T3 Affirmed
+A1810	CUIPhrase T3 epilepsy
+A1910	CUI T3 C0014544
+T12	Onset 444 452	epilepsy
+A30	TimePeriod T12 Year
+A31	NumberOfTimePeriods T12 16
+A32	Certainty T12 5
+A33	Negation T12 Affirmed
+A34	CUIPhrase T12 epilepsy
+A35	CUI T12 C0014544
+T14	PatientHistory 497 510	brain-surgery
+A2110	Certainty T14 5
+A2210	Negation T14 Affirmed
+A2310	CUIPhrase T14 brain-surgery
+A2410	CUI T14 C0195775
+T5	PatientHistory 551 563	brain-abcess
+A37	Certainty T5 5
+A38	Negation T5 Affirmed
+A39	CUIPhrase T5 brain-abscess
+A40	CUI T5 C0006105
+T16	Diagnosis 581 601	focal-motor-seizures
+A42	DiagCategory T16 MultipleSeizures
+A43	Certainty T16 5
+A44	Negation T16 Affirmed
+A45	CUIPhrase T16 focal-motor-seizures
+A46	CUI T16 C0016399
+T18	SeizureFrequency 581 601	focal-motor-seizures
+A48	NumberOfSeizures T18 0
+A49	TimePeriod T18 Year
+A50	NumberOfTimePeriods T18 2
+A51	CUIPhrase T18 focal-motor-seizures
+A52	CUI T18 C0016399
+T20	Diagnosis 818 856	focal-to-bilateral-convulsive-seizures
+A54	DiagCategory T20 MultipleSeizures
+A55	Certainty T20 5
+A56	Negation T20 Affirmed
+A57	CUIPhrase T20 focal-to-bilateral-convulsive-seizures
+A58	CUI T20 C0877017
+T1	SeizureFrequency 818 856	focal-to-bilateral-convulsive-seizures
+A112	NumberOfSeizures T1 0
+A122	DayDate T1 25
+A132	MonthDate T1 12
+A142	YearDate T1 2009
+A152	TimeSince_or_TimeOfEvent T1 Since
+A162	CUIPhrase T1 focal-to-bilateral-convulsive-seizures
+A172	CUI T1 C0877017
+T9	PatientHistory 919 940	dissociative-seizures
+A1011	Certainty T9 5
+A1111	Negation T9 Affirmed
+A1211	CUIPhrase T9 dissociative-seizures
+A1310	CUI T9 C0349245
+T11	Diagnosis 999 1016	epilepsy-seizures
+A1512	DiagCategory T11 MultipleSeizures
+A1613	Certainty T11 5
+A1713	Negation T11 Affirmed
+A1813	CUIPhrase T11 epileptic-seizures
+A1913	CUI T11 C4317109
+T13	PatientHistory 1099 1120	dissociative-seizures
+A2111	Certainty T13 5
+A2211	Negation T13 Affirmed
+A2311	CUIPhrase T13 dissociative-seizures
+A2411	CUI T13 C0349245
+T15	BirthHistory 1154 1167	born-normally
+A2610	Certainty T15 5
+A2710	Negation T15 Affirmed
+A2810	CUIPhrase T15 born-normally
+A29	CUI T15 C3665337
+T17	PatientHistory 1184 1200	febrile-seizures
+A3110	Certainty T17 1
+A3210	Negation T17 Negated
+A3310	CUIPhrase T17 febrile-seizures
+A3410	CUI T17 C0009952
+T19	PatientHistory 1251 1264	brain-abscess
+A36	Certainty T19 5
+A3710	Negation T19 Affirmed
+A3810	CUIPhrase T19 brain-abscess
+A3910	CUI T19 C0006105
+T21	PatientHistory 1305 1320	brain-operation
+A41	Certainty T21 5
+A4210	Negation T21 Affirmed
+A4310	CUIPhrase T21 brain-tumour-operation
+A4410	CUI T21 C1096120
+T23	PatientHistory 1678 1689	hemiparesis
+A4610	Certainty T23 5
+A4710	Negation T23 Affirmed
+A4810	CUIPhrase T23 hemiparesis
+A4910	CUI T23 C0018989
+T25	Investigations 1748 1751	MRI
+A5110	MRI_Performed T25 Yes
+A5210	MRI_Results T25 Abnormal
+A5310	CUIPhrase T25 abnormal-mri
+A5410	CUI T25 C1319851
+T27	PatientHistory 1784 1791	gliosis
+A5610	Certainty T27 5
+A5710	Negation T27 Affirmed
+A5810	CUIPhrase T27 gliosis
+A5910	CUI T27 C0017639
+T29	Diagnosis 1883 1891	epilepsy
+A6110	DiagCategory T29 Epilepsy
+A6210	Certainty T29 5
+A6310	Negation T29 Affirmed
+A6410	CUIPhrase T29 epilepsy
+A6510	CUI T29 C0014544
+T24	EpilepsyCause 1911 1924	brain-surgery
+A1112	Certainty T24 5
+A1212	Negation T24 Affirmed
+A1312	CUIPhrase T24 brain-surgery
+A1414	CUI T24 C0195775
+T26	PatientHistory 1911 1924	brain-surgery
+A1612	Certainty T26 5
+A1712	Negation T26 Affirmed
+A1812	CUIPhrase T26 C0195775
+A1912	CUI T26 C0195775
+T30	Diagnosis 1956 1974	epileptic-seizures
+A1113	DiagCategory T30 MultipleSeizures
+A1213	Certainty T30 5
+A1313	Negation T30 Affirmed
+A1413	CUIPhrase T30 epileptic-seizures
+A154	CUI T30 C4317109
+T33	PatientHistory 2074 2095	dissociative-seizures
+A70	Certainty T33 5
+A71	Negation T33 Affirmed
+A72	CUIPhrase T33 dissociative-seizures
+A73	CUI T33 C0349245

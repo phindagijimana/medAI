@@ -1,0 +1,47 @@
+T2	Diagnosis 83 92	Epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	Diagnosis 112 145	generalised-tonic-clonic-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 generalised-tonic-clonic-seizures
+A12	CUI T4 C0494475
+T6	Prescription 160 231	Levetiracetam-250mgs-od-increasing-by-250mgs-every-2-weeks-to-500mgs-bd
+A14	DrugName T6 levetiracetam
+A15	DrugDose T6 250
+A16	DoseUnit T6 mg
+A17	Frequency T6 1
+A18	CUIPhrase T6 levetiracetam
+A19	CUI T6 C0377265
+T13	PatientHistory 332 339	seizure
+A1810	MonthDate T13 6
+A1910	YearDate T13 2016
+A20	Certainty T13 5
+A21	Negation T13 Affirmed
+A22	CUIPhrase T13 seizure
+A23	CUI T13 C0036572
+T11	PatientHistory 509 527	lost-consciousness
+A26	Certainty T11 5
+A27	Negation T11 Affirmed
+A28	CUIPhrase T11 loss-of-consciousness
+A29	CUI T11 C0041657
+T12	PatientHistory 868 887	febrile-convulsions
+A31	Certainty T12 1
+A32	Negation T12 Negated
+A33	CUIPhrase T12 febrile-convulsions
+A34	CUI T12 C0009952
+T14	Investigations 1067 1076	MRI-brain
+A36	MRI_Performed T14 Yes
+A37	MRI_Results T14 Normal
+A38	CUIPhrase T14 mri-normal
+A39	CUI T14 C0436481
+T10	Diagnosis 1169 1202	generalised-tonic-clonic-seizures
+A1110	DiagCategory T10 MultipleSeizures
+A1210	Certainty T10 5
+A1310	Negation T10 Affirmed
+A1410	CUIPhrase T10 generalised-tonic-clonic-seizures
+A1510	CUI T10 C0494475

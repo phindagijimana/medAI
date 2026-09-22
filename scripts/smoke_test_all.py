@@ -31,6 +31,8 @@ from schema import (
     SCHEMA_VERSION,
 )
 from services.baseline_rules import RulesMriBackend, run_b0_mri
+from services.baseline_rules_eeg import run_b0_eeg
+from services.baseline_rules_medication import run_b0_medication
 from services.evidence_verifier import verify_phenotype
 from services.extract import DecodingConfig, ExtractionResult, extract_module
 from services.prompt_registry import (
@@ -41,7 +43,9 @@ from services.prompt_registry import (
 )
 from services.router import MODULE_CLASSES, extract_phenotype
 from services.run_manifest import RunManifest
-from eval import aggregate_manifests, load_gold
+from eval import aggregate_manifests, load_gold, score_error_taxonomy, score_field
+from eval.error_taxonomy import ALL_CATEGORIES
+from schema import EegModule, MedicationModule
 
 
 # ---------------------------------------------------------------------------
@@ -51,7 +55,8 @@ from eval import aggregate_manifests, load_gold
 
 def test_prompts_render() -> None:
     ids = all_prompt_ids()
-    assert len(ids) == 18, f"expected 18 prompts, got {len(ids)}"
+    # 6 modules × 3 arms (v1) + 4 v2 templates (Fonferko-adapted medication + clinical_seizure)
+    assert len(ids) == 22, f"expected 22 prompts (18 v1 + 4 v2), got {len(ids)}"
     dummy_text = "MRI BRAIN 3T. FINDINGS: normal. IMPRESSION: unremarkable."
     for module_name, module_cls in MODULE_CLASSES.items():
         for arm in ALL_ARMS:
@@ -379,6 +384,87 @@ def test_evidence_verifier() -> None:
 # ---------------------------------------------------------------------------
 
 
+def test_b0_rules_eeg() -> None:
+    doc = DocumentMetadata(
+        doc_id="SYN-B0-EEG-01", doc_type=DocumentType.EEG_REPORT,
+        doc_date=date(2025, 6, 1), patient_id="SYN-P-B0-EEG",
+    )
+    text = (
+        "EEG STUDY: Video-EEG monitoring over 48 hours.\n"
+        "BACKGROUND: normal posterior dominant rhythm.\n"
+        "IEDS: Frequent left temporal sharp waves at 3 Hz.\n"
+        "SEIZURES: 2 electrographic seizures were captured with ictal onset "
+        "in the left temporal lobe."
+    )
+    m = EegModule.model_validate(run_b0_eeg(text, doc))
+    assert m.study_type.value.value == "video_eeg"
+    assert m.ied_present.value is True
+    assert m.seizures_captured.value is True
+    assert m.seizures_captured_count.value == 2
+    assert m.ictal_onset_lobe.value.value == "temporal"
+    assert m.ictal_onset_laterality.value.value == "left"
+    print(f"[4b] B0 EEG rules: video_eeg + {len(m.ied_findings)} IEDs + 2 seizures + L temporal onset — valid")
+
+
+def test_b0_rules_medication() -> None:
+    doc = DocumentMetadata(
+        doc_id="SYN-B0-MED-01", doc_type=DocumentType.PROGRESS_NOTE,
+        doc_date=date(2025, 6, 1), patient_id="SYN-P-B0-MED",
+    )
+    text = (
+        "Progress note: drug-resistant epilepsy. Currently on levetiracetam "
+        "1500mg BID. Previously tried carbamazepine. Failed lamotrigine. "
+        "Ketogenic diet ongoing. Underwent right temporal lobectomy in 2019."
+    )
+    m = MedicationModule.model_validate(run_b0_medication(text, doc))
+    assert m.drug_resistance_status.value.value == "drug_resistant"
+    assert any(e.value.generic_name == "levetiracetam" for e in m.current_asms)
+    assert any(e.value.generic_name == "carbamazepine" for e in m.prior_asms)
+    assert any(e.value.generic_name == "lamotrigine" for e in m.failed_asms)
+    assert any(s.value.surgery_type.value == "resection" for s in m.surgery_history)
+    assert any(t.value.therapy_type.value == "ketogenic_diet" for t in m.non_drug_therapies)
+    print("[4c] B0 medication rules: drug-resistant + 3 ASMs + surgery + diet — valid")
+
+
+def test_partial_list_scoring() -> None:
+    # 2 TP, 1 FP, 1 FN
+    gold = {"value": ["hippocampal_sclerosis", "gliosis", "encephalomalacia"]}
+    pred = {"value": ["hippocampal_sclerosis", "gliosis", "tumor"]}
+    m = score_field("findings", pred, gold, applicable=True)
+    assert m.tp == 2 and m.fp == 1 and m.fn == 1, f"got {m.tp}/{m.fp}/{m.fn}"
+    print(f"[6] partial-list scoring: TP=2 FP=1 FN=1 F1={m.f1:.2f} — correct")
+
+
+def test_error_taxonomy() -> None:
+    # A pred module with several kinds of errors vs gold
+    pred = {
+        "hippocampal_sclerosis": {"value": True, "certainty": "definite",
+                                  "evidence_text": "HS"},                  # OK
+        "lesion_lobe": {"value": "frontal", "certainty": "definite",
+                        "evidence_text": "frontal"},                        # wrong (mri_semantic)
+        "focal_cortical_dysplasia": {"value": None, "certainty": "not_documented",
+                                     "evidence_text": None},               # missed_fact
+    }
+    gold = {
+        "hippocampal_sclerosis": {"value": True, "certainty": "definite",
+                                  "evidence_text": "hippocampal sclerosis"},
+        "lesion_lobe": {"value": "temporal", "certainty": "definite",
+                        "evidence_text": "temporal"},
+        "focal_cortical_dysplasia": {"value": True, "certainty": "definite",
+                                     "evidence_text": "FCD IIa"},
+    }
+    rep = score_error_taxonomy(doc_id="X", module="mri",
+                               pred_module=pred, gold_module=gold,
+                               manifest_schema_failed=False,
+                               unsupported_field_paths=[])
+    cats = set(rep.counts.keys()) - {c for c in rep.counts if rep.counts[c] == 0}
+    assert "mri_semantic" in cats, f"expected mri_semantic in {cats}"
+    assert "missed_fact" in cats, f"expected missed_fact in {cats}"
+    # HS was OK (same value, evidence differs — should register evidence_mismatch)
+    assert "evidence_mismatch" in cats, f"expected evidence_mismatch in {cats}"
+    print(f"[7] error taxonomy: categories fired = {sorted(cats)}")
+
+
 def test_b0_rules_mri() -> None:
     doc = DocumentMetadata(
         doc_id="SYN-B0-MRI-01", doc_type=DocumentType.MRI_REPORT,
@@ -434,7 +520,11 @@ def main() -> int:
     test_router_full_phenotype()
     test_evidence_verifier()
     test_b0_rules_mri()
+    test_b0_rules_eeg()
+    test_b0_rules_medication()
     test_eval_aggregator()
+    test_partial_list_scoring()
+    test_error_taxonomy()
     print("\nALL COMPREHENSIVE SMOKE CHECKS PASSED")
     return 0
 

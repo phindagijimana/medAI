@@ -1,0 +1,73 @@
+T11	PatientHistory 723 744	sub-dural-haemorrhage
+A11	Certainty T11 5
+A12	Negation T11 Affirmed
+A13	CUIPhrase T11 subdural-haemorrhage
+A14	CUI T11 C0018946
+T1	PatientHistory 1017 1039	chronic-daily-headache
+A1	CUIPhrase T1 chronic-headache
+A2	Negation T1 Affirmed
+A3	CUI T1 C0151293
+A4	Certainty T1 5
+T2	EpilepsyCause 154 176	Traumatic-brain-injury
+A5	Negation T2 Affirmed
+A6	CUIPhrase T2 traumatic brain injury
+A7	Certainty T2 5
+A8	CUI T2 C0876926
+T3	Prescription 975 988	levetiraetam-
+A9	CUIPhrase T3 levetiracetam
+A10	DrugDose T3 1250
+A1110	CUI T3 C0377265
+A1210	DrugName T3 Levetiracetam
+A1310	Frequency T3 2
+A1410	DoseUnit T3 mg
+T4	Diagnosis 581 590	epilepsy-
+A15	CUIPhrase T4 epilepsy
+A16	CUI T4 C0014544
+A17	DiagCategory T4 Epilepsy
+A18	Certainty T4 5
+A19	Negation T4 Affirmed
+T5	PatientHistory 209 231	Chronic-daily-headache
+A20	CUI T5 C0151293
+A21	Negation T5 Affirmed
+A22	CUIPhrase T5 chronic-headache
+A23	Certainty T5 5
+T6	Diagnosis 925 949	complex-partial-seizures
+A24	CUI T6 C0149958
+A25	DiagCategory T6 MultipleSeizures
+A26	CUIPhrase T6 complex-partial-seizures
+A27	Negation T6 Affirmed
+A28	Certainty T6 4
+T7	Diagnosis 94 108	Focal-epilepsy
+A29	CUI T7 C0014547
+A30	CUIPhrase T7 focal-epilepsy
+A31	Certainty T7 5
+A32	DiagCategory T7 Epilepsy
+A33	Negation T7 Affirmed
+T8	PatientHistory 610 639	severe-traumatic-brain-injury
+A34	Certainty T8 5
+A35	CUI T8 C3508474
+A36	Negation T8 Affirmed
+A37	CUIPhrase T8 severe traumatic brain injury
+T9	Diagnosis 774 807	generalised-tonic-clonic-seizures
+A38	CUI T9 C0494475
+A39	Certainty T9 5
+A40	CUIPhrase T9 generalised-tonic-clonic-seizures
+A41	Negation T9 Affirmed
+A42	DiagCategory T9 MultipleSeizures
+T10	PatientHistory 154 175	Traumatic-brain-injur
+A43	CUI T10 C0876926
+A44	CUIPhrase T10 traumatic brain injury
+A45	Negation T10 Affirmed
+A46	Certainty T10 5
+T13	WhenDiagnosed 581 588	epileps
+A47	CUIPhrase T13 epilepsy
+A48	CUI T13 C0014544
+A49	Negation T13 Affirmed
+A50	Certainty T13 5
+A51	YearDate T13 2012
+T12	SeizureFrequency 774 806	generalised-tonic-clonic-seizure
+A52	CUI T12 C0494475
+A53	TimeSince_or_TimeOfEvent T12 During
+A54	NumberOfSeizures T12 15
+A55	CUIPhrase T12 generalised-tonic-clonic-seizure
+A56	PointInTime T12 Last_Year

@@ -1,0 +1,39 @@
+T1	Diagnosis 11 25	focal-epilepsy
+A1	CUIPhrase T1 focal-epilepsy
+A2	CUI T1 C0014547
+A3	Negation T1 Affirmed
+A4	Certainty T1 5
+A5	DiagCategory T1 Epilepsy
+T2	Prescription 81 91	Zonisamide
+A6	CUIPhrase T2 zonisamide
+A7	DrugDose T2 100
+A8	CUI T2 C0078844
+A9	DoseUnit T2 mg
+A10	Frequency T2 2
+A11	DrugName T2 Zonisamide
+T3	Prescription 28 80	Current-medication:-Levetiracetam-1500mg-twice-daily
+A12	CUI T3 C0377265
+A13	DrugDose T3 1500
+A14	DoseUnit T3 mg
+A15	Frequency T3 2
+A16	CUIPhrase T3 levetiracetam
+A17	DrugName T3 levetiracetam
+T4	Prescription 102 124	Carbamazepine-400mg-bd
+A18	DoseUnit T4 mg
+A19	CUIPhrase T4 carbamazepine
+A20	CUI T4 C0006949
+A21	DrugName T4 carbamazepine
+A22	DrugDose T4 400
+A23	Frequency T4 2
+T5	SeizureFrequency 290 298	seizures
+A24	CUI T5 C0036572
+A25	TimeSince_or_TimeOfEvent T5 Since
+A26	PointInTime T5 Surgery
+A27	CUIPhrase T5 seizures
+A28	NumberOfSeizures T5 0
+T6	SeizureFrequency 135 153	seizure-frequency:
+A29	CUI T6 C0036572
+A30	PointInTime T6 Surgery
+A31	CUIPhrase T6 seizure
+A32	TimeSince_or_TimeOfEvent T6 Since
+A33	NumberOfSeizures T6 0

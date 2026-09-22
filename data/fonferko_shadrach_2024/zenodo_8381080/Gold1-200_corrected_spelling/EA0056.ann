@@ -1,0 +1,115 @@
+T2	PatientHistory 139 173	Non-epileptic-psychogenic-seizures
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 non-epileptic-psychogenic-seizures
+A5	CUI T2 C1142430
+T4	Diagnosis 179 208	Localisation-related-epilepsy
+A7	DiagCategory T4 Epilepsy
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 localisation-related-epilepsy
+A11	CUI T4 C0014547
+T6	EpilepsyCause 231 246	cerebral-abcess
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 cerebral-abscess
+A16	CUI T6 C1510428
+T8	PatientHistory 231 246	cerebral-abcess
+A18	Certainty T8 5
+A19	Negation T8 Affirmed
+A20	CUIPhrase T8 cerebral-abscess
+A21	CUI T8 C1510428
+T10	Prescription 260 283	Levetiracetam-1000mg-bd
+A23	DrugName T10 levetiracetam
+A24	DrugDose T10 1000
+A25	DoseUnit T10 mg
+A26	Frequency T10 2
+A27	CUIPhrase T10 levetiracetam
+A28	CUI T10 C0377265
+T9	Prescription 286 298	Oxcarbazine-
+A1010	DrugName T9 Oxcarbazepine
+A1110	DrugDose T9 300
+A1210	DoseUnit T9 mg
+A1310	Frequency T9 2
+A1410	CUIPhrase T9 oxcarbazepine
+A1510	CUI T9 C0069751
+T13	Onset 373 381	epilepsy
+A40	TimePeriod T13 Year
+A41	NumberOfTimePeriods T13 10
+A42	Certainty T13 5
+A43	Negation T13 Affirmed
+A44	CUIPhrase T13 epilepsy
+A45	CUI T13 C0014544
+T12	Diagnosis 373 380	epileps
+A1810	DiagCategory T12 Epilepsy
+A1910	Certainty T12 5
+A2010	Negation T12 Affirmed
+A2110	CUIPhrase T12 epilepsy
+A22	CUI T12 C0014544
+T14	PatientHistory 433 446	brain-surgery
+A2410	Certainty T14 5
+A2510	Negation T14 Affirmed
+A2610	CUIPhrase T14 brain-surgery
+A2710	CUI T14 C0195775
+T16	Diagnosis 500 522	partial-motor-seizures
+A47	DiagCategory T16 MultipleSeizures
+A48	Certainty T16 5
+A49	Negation T16 Affirmed
+A50	CUIPhrase T16 partial-motor-seizures
+A51	CUI T16 C0016399
+T18	SeizureFrequency 500 522	partial-motor-seizures
+A53	NumberOfSeizures T18 1
+A54	TimePeriod T18 Month
+A55	NumberOfTimePeriods T18 1
+A56	CUIPhrase T18 partial-motor-seizures
+A57	CUI T18 C0016399
+T20	Diagnosis 620 650	secondary-generalised-seizures
+A59	DiagCategory T20 MultipleSeizures
+A60	Certainty T20 5
+A61	Negation T20 Affirmed
+A62	CUIPhrase T20 secondary-generalised-seizures
+A63	CUI T20 C0270838
+T22	SeizureFrequency 620 650	secondary-generalised-seizures
+A65	NumberOfSeizures T22 1
+A66	TimePeriod T22 Year
+A67	NumberOfTimePeriods T22 1
+A68	CUIPhrase T22 secondary-generalised-seizures
+A69	CUI T22 C0270838
+T17	SeizureFrequency 620 649	secondary-generalised-seizure
+A30	NumberOfSeizures T17 0
+A31	DayDate T17 25
+A32	MonthDate T17 12
+A33	YearDate T17 2009
+A34	TimeSince_or_TimeOfEvent T17 Since
+A35	CUIPhrase T17 secondary-generalized-seizures
+A36	CUI T17 C0270838
+T26	Investigations 975 978	EEG
+A76	EEG_Performed T26 Yes
+A77	EEG_Results T26 Normal
+A78	CUIPhrase T26 normal-eeg
+A79	CUI T26 C0560017
+T28	PatientHistory 1063 1097	non-epileptic-psychogenic-seizures
+A81	Certainty T28 5
+A82	Negation T28 Affirmed
+A83	CUIPhrase T28 non-epileptic-psychogenic-seizures
+A84	CUI T28 C1142430
+T30	PatientHistory 1107 1119	hypertension
+A86	Certainty T30 5
+A87	Negation T30 Affirmed
+A88	CUIPhrase T30 hypertension
+A89	CUI T30 C0020538
+T21	PatientHistory 1163 1171	anxiety-
+A39	Certainty T21 5
+A4010	Negation T21 Affirmed
+A4110	CUIPhrase T21 anxiety
+A4210	CUI T21 C0003467
+T222	PatientHistory 1175 1185	depression
+A4410	Certainty T222 5
+A4510	Negation T222 Affirmed
+A46	CUIPhrase T222 depression
+A47	CUI T222 C0011570
+T24	PatientHistory 1494 1515	non-epileptic-attacks
+A49	Certainty T24 5
+A5010	Negation T24 Affirmed
+A5110	CUIPhrase T24 non-epileptic-attacks
+A52	CUI T24 C3495874

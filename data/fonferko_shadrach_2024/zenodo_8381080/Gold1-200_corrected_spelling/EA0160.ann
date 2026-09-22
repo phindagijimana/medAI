@@ -1,0 +1,60 @@
+T1	PatientHistory 82 89	Anxiety
+A1	Negation T1 Affirmed
+A2	CUIPhrase T1 anxiety
+A3	CUI T1 C0003467
+A4	Certainty T1 5
+T2	PatientHistory 653 674	non-epileptic-attacks
+A5	Certainty T2 5
+A6	CUIPhrase T2 non-epileptic attacks
+A7	Negation T2 Affirmed
+A8	CUI T2 C3495874
+T3	Prescription 170 191	Pregabalin-75-mgms-bd
+A9	DrugName T3 pregabalin
+A10	DrugDose T3 75
+A11	CUI T3 C0657912
+A12	Frequency T3 2
+A13	DoseUnit T3 mg
+A14	CUIPhrase T3 pregabalin
+T4	PatientHistory 337 345	anxiety-
+A15	CUIPhrase T4 anxiety
+A16	Certainty T4 5
+A17	CUI T4 C0003467
+A18	Negation T4 Affirmed
+T5	Prescription 143 166	Lamotrigine-100-mgms-bd
+A19	DrugDose T5 100
+A20	CUI T5 C0064636
+A21	Frequency T5 2
+A22	DrugName T5 lamotrigine
+A23	CUIPhrase T5 lamotrigine
+A24	DoseUnit T5 mg
+T6	PatientHistory 436 444	anxiety-
+A25	Negation T6 Affirmed
+A26	CUI T6 C0003467
+A27	CUIPhrase T6 anxiety
+A28	Certainty T6 5
+T7	Diagnosis 56 78	Temporal-lobe-epilepsy
+A29	DiagCategory T7 Epilepsy
+A30	CUIPhrase T7 temporal-lobe-epilepsy
+A31	Negation T7 Affirmed
+A32	CUI T7 C0014556
+A33	Certainty T7 5
+T8	PatientHistory 468 476	absences
+A34	CUIPhrase T8 absences
+A35	Negation T8 Affirmed
+A36	Certainty T8 5
+A37	CUI T8 C0563606
+T9	PatientHistory 93 122	Non-epileptic-attack-disorder
+A38	Negation T9 Affirmed
+A39	CUI T9 C3495874
+A40	CUIPhrase T9 non-epileptic-attacks
+A41	Certainty T9 5
+T10	PatientHistory 800 807	anxiety
+A1010	Certainty T10 5
+A1110	Negation T10 Affirmed
+A1210	CUIPhrase T10 anxiety
+A1310	CUI T10 C0003467
+T12	PatientHistory 1024 1031	anxiety
+A1510	Certainty T12 5
+A1610	Negation T12 Affirmed
+A1710	CUIPhrase T12 anxiety
+A1810	CUI T12 C0003467

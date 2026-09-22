@@ -1,0 +1,67 @@
+T2	PatientHistory 104 135	transient-loss-of-consciousness
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 transient-loss-of-consciousness
+A5	CUI T2 C4087400
+T4	PatientHistory 148 164	probable-syncope
+A7	Certainty T4 4
+A8	Negation T4 Affirmed
+A9	CUIPhrase T4 syncope
+A10	CUI T4 C0039070
+T16	Diagnosis 176 184	epilepsy
+A42	DiagCategory T16 Epilepsy
+A43	Certainty T16 5
+A44	Negation T16 Affirmed
+A45	CUIPhrase T16 epilepsy
+A46	CUI T16 C0014544
+T6	Onset 264 294	epilepsy-since-the-age-of-four
+A12	AgeUnit T6 Year
+A13	Age T6 4
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 epilepsy
+A17	CUI T6 C0014544
+T9	Diagnosis 264 273	epilepsy-
+A1010	DiagCategory T9 Epilepsy
+A11	Certainty T9 5
+A1210	Negation T9 Affirmed
+A1310	CUIPhrase T9 epilepsy
+A1410	CUI T9 C0014544
+T11	Diagnosis 300 309	epilepsy-
+A1610	DiagCategory T11 Epilepsy
+A1710	Certainty T11 5
+A18	Negation T11 Affirmed
+A19	CUIPhrase T11 epilepsy
+A20	CUI T11 C0014544
+T8	SeizureFrequency 363 412	convulsive-seizure-approximately-every-five-years
+A1910	NumberOfSeizures T8 1
+A2010	TimePeriod T8 Year
+A21	NumberOfTimePeriods T8 5
+A22	CUIPhrase T8 convulsive-seizure
+A23	CUI T8 C0751494
+T13	PatientHistory 363 382	convulsive-seizure-
+A2210	Certainty T13 5
+A2310	Negation T13 Affirmed
+A24	CUIPhrase T13 convulsive-seizure
+A25	CUI T13 C0751494
+T15	PatientHistory 1027 1035	seizures
+A27	Certainty T15 5
+A28	Negation T15 Affirmed
+A29	CUIPhrase T15 seizures
+A30	CUI T15 C0036572
+T18	BirthHistory 1198 1215	born-prematurely-
+A33	Certainty T18 5
+A34	Negation T18 Affirmed
+A35	CUIPhrase T18 born-prematurely
+A36	CUI T18 C0151526
+T12	Diagnosis 1639 1647	epilepsy
+A31	DiagCategory T12 Epilepsy
+A32	Certainty T12 5
+A3310	Negation T12 Affirmed
+A3410	CUIPhrase T12 epilepsy
+A3510	CUI T12 C0014544
+T14	PatientHistory 1681 1691	-syncopal-
+A37	Certainty T14 5
+A38	Negation T14 Affirmed
+A39	CUIPhrase T14 syncope
+A40	CUI T14 C0039070

@@ -1,0 +1,60 @@
+T15	PatientHistory 92 126	non-epileptic-psychogenic-seizures
+A15	Certainty T15 5
+A16	Negation T15 Affirmed
+A17	CUIPhrase T15 non-epileptic-psychogenic-seizures
+A18	CUI T15 C1142430
+T4	PatientHistory 129 136	anxiety
+A7	Certainty T4 5
+A8	Negation T4 Affirmed
+A9	CUIPhrase T4 anxiety
+A10	CUI T4 C0003467
+T6	Prescription 150 155	Eplim
+A12	DrugName T6 SodiumValproate
+A13	DrugDose T6 200
+A14	DoseUnit T6 mg
+A1510	Frequency T6 2
+A1610	CUIPhrase T6 epilim
+A1710	CUI T6 C0591451
+T17	PatientHistory 255 290	-non-epileptic-psychogenic-seizures
+A20	Certainty T17 5
+A21	Negation T17 Affirmed
+A22	CUIPhrase T17 non-epileptic-psychogenic-seizures
+A23	CUI T17 C1142430
+T9	Investigations 313 316	EEG
+A1010	EEG_Performed T9 Yes
+A11	EEG_Results T9 Normal
+A1210	CUIPhrase T9 eeg-normal
+A1310	CUI T9 C0560017
+T10	Investigations 343 353	normal-MRI
+A24	MRI_Performed T10 Yes
+A25	MRI_Results T10 Normal
+A26	CUIPhrase T10 normal-mri
+A27	CUI T10 C0436481
+T12	PatientHistory 381 388	anxiety
+A29	Certainty T12 5
+A30	Negation T12 Affirmed
+A31	CUIPhrase T12 anxiety
+A32	CUI T12 C0003467
+T14	SeizureFrequency 405 417	seizure-free
+A34	NumberOfSeizures T14 0
+A35	TimePeriod T14 Year
+A36	NumberOfTimePeriods T14 5
+A37	CUIPhrase T14 seizure-free
+A38	CUI T14 C1299590
+T16	Prescription 555 571	sodium-valproate
+A40	DrugName T16 SodiumValproate
+A41	DrugDose T16 200
+A42	DoseUnit T16 mg
+A43	Frequency T16 2
+A44	CUIPhrase T16 sodium-valproate
+A45	CUI T16 C0037567
+T18	PatientHistory 837 844	anxiety
+A47	Certainty T18 5
+A48	Negation T18 Affirmed
+A49	CUIPhrase T18 anxiety
+A50	CUI T18 C0003467
+T20	PatientHistory 907 929	non-epileptic-seizures
+A52	Certainty T20 5
+A53	Negation T20 Affirmed
+A54	CUIPhrase T20 non-epileptic-seizures
+A55	CUI T20 C3495874

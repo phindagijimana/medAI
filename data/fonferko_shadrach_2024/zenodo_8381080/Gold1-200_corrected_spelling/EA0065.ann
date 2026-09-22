@@ -1,0 +1,118 @@
+T7	Diagnosis 135 166	Probable-temporal-lobe-epilepsy
+A16	DiagCategory T7 Epilepsy
+A17	Certainty T7 4
+A18	Negation T7 Affirmed
+A19	CUIPhrase T7 temporal-lobe-epilepsy
+A20	CUI T7 C0014556
+T4	Onset 291 299	epilepsy
+A8	AgeUnit T4 Year
+A9	Age T4 3
+A10	Certainty T4 5
+A11	Negation T4 Affirmed
+A12	CUIPhrase T4 epilepsy
+A13	CUI T4 C0014544
+T9	Diagnosis 291 299	epilepsy
+A22	DiagCategory T9 Epilepsy
+A23	Certainty T9 5
+A24	Negation T9 Affirmed
+A25	CUIPhrase T9 epilepsy
+A26	CUI T9 C0014544
+T11	PatientHistory 451 459	seizures
+A28	Certainty T11 5
+A29	Negation T11 Affirmed
+A30	CUIPhrase T11 seizures
+A31	CUI T11 C0036572
+T5	Diagnosis 491 515	complex-partial-seizures
+A33	DiagCategory T5 MultipleSeizures
+A34	Certainty T5 5
+A35	Negation T5 Affirmed
+A36	CUIPhrase T5 complex-partial-seizures
+A37	CUI T5 C0149958
+T15	SeizureFrequency 491 515	complex-partial-seizures
+A39	NumberOfSeizures T15 1
+A40	TimePeriod T15 Month
+A41	NumberOfTimePeriods T15 1
+A42	CUIPhrase T15 complex-partial-seizures
+A43	CUI T15 C0149958
+T17	Diagnosis 654 686	secondarily-generalised-seizures
+A45	DiagCategory T17 MultipleSeizures
+A46	Certainty T17 5
+A47	Negation T17 Affirmed
+A48	CUIPhrase T17 secondarily-generalised-seizures
+A49	CUI T17 C0270838
+T19	SeizureFrequency 654 686	secondarily-generalised-seizures
+A51	NumberOfSeizures T19 0
+A52	TimePeriod T19 Year
+A53	NumberOfTimePeriods T19 10
+A54	CUIPhrase T19 secondarily-generalised-seizures
+A55	CUI T19 C0270838
+T21	Prescription 771 852	She-is-currently-taking-levetiracetam-1250mg-bd-as-well-as-carbamazepine-400mg-bd
+A57	DrugName T21 levetiracetam
+A58	DrugDose T21 1250
+A59	DoseUnit T21 mg
+A60	Frequency T21 2
+A61	CUIPhrase T21 levetiracetam
+A62	CUI T21 C0377265
+T10	Prescription 830 843	carbamazepine
+A1110	DrugName T10 Carbamazepine
+A1210	DrugDose T10 400
+A1310	DoseUnit T10 mg
+A14	Frequency T10 2
+A1510	CUIPhrase T10 carbamazepine
+A1610	CUI T10 C0006949
+T25	Investigations 930 933	MRI
+A71	MRI_Performed T25 Yes
+A72	MRI_Results T25 Abnormal
+A73	CUIPhrase T25 abnormal-mri
+A74	CUI T25 C1319851
+T27	PatientHistory 963 984	hippocampal-sclerosis
+A76	Certainty T27 4
+A77	Negation T27 Affirmed
+A78	CUIPhrase T27 hippocampal-sclerosis
+A79	CUI T27 C1504404
+T29	Investigations 989 992	EEG
+A81	EEG_Performed T29 Yes
+A82	EEG_Results T29 Abnormal
+A83	CUIPhrase T29 abnormal-eeg
+A84	CUI T29 C0151611
+T12	BirthHistory 1068 1081	born-normally
+A1111	Certainty T12 5
+A1211	Negation T12 Affirmed
+A1311	CUIPhrase T12 born-normally
+A1411	CUI T12 C3665337
+T14	BirthHistory 1068 1089	born-normally-at-term
+A1611	PrematureBirth T14 37+_TermBirth
+A171	Certainty T14 5
+A1811	Negation T14 Affirmed
+A1911	CUIPhrase T14 at-term
+A2011	CUI T14 C0233324
+T33	PatientHistory 1104 1120	febrile-seizures
+A92	AgeUnit T33 Month
+A93	AgeLower T33 18
+A94	AgeUpper T33 28
+A95	Certainty T33 5
+A96	Negation T33 Affirmed
+A97	CUIPhrase T33 febrile-seizures
+A98	CUI T33 C0009952
+T35	Diagnosis 1648 1670	temporal-lobe-epilepsy
+A100	DiagCategory T35 Epilepsy
+A101	Certainty T35 5
+A102	Negation T35 Affirmed
+A103	CUIPhrase T35 temporal-lobe-epilepsy
+A104	CUI T35 C0014556
+T37	PatientHistory 1703 1724	hippocampal-sclerosis
+A106	Certainty T37 4
+A107	Negation T37 Affirmed
+A108	CUIPhrase T37 hippocampal-sclerosis
+A109	CUI T37 C1504404
+T39	EpilepsyCause 1703 1724	hippocampal-sclerosis
+A111	Certainty T39 4
+A112	Negation T39 Affirmed
+A113	CUIPhrase T39 hippocampal-sclerosis
+A114	CUI T39 C1504404
+T13	Diagnosis 1921 1929	epilepsy
+A1812	DiagCategory T13 Epilepsy
+A1912	Certainty T13 5
+A2012	Negation T13 Affirmed
+A2110	CUIPhrase T13 epilepsy
+A2210	CUI T13 C0014544

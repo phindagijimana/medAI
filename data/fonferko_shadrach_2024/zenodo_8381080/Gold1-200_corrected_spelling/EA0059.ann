@@ -1,0 +1,83 @@
+T2	Diagnosis 187 218	Symptomatic-structural-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-structural-focal-epilepsy
+A6	CUI T2 C0472349
+T4	PatientHistory 259 269	meningitis
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 meningitis
+A11	CUI T4 C0025289
+T6	EpilepsyCause 259 269	meningitis
+A13	Certainty T6 4
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 meningitis
+A16	CUI T6 C0025289
+T10	PatientHistory 273 294	learning-difficulties
+A1110	Certainty T10 5
+A1210	Negation T10 Affirmed
+A1310	CUIPhrase T10 learning-difficulties
+A1410	CUI T10 C0424939
+T8	Prescription 308 340	Brivaracetam--1000mg-twice-daily
+A18	DrugName T8 brivaracetam
+A19	DrugDose T8 1000
+A20	DoseUnit T8 mg
+A21	Frequency T8 2
+A22	CUIPhrase T8 brivaracetam
+A23	CUI T8 C1699861
+T13	Prescription 343 363	Lamotrigine-200mg-bd
+A25	DrugName T13 lamotrigine
+A26	DrugDose T13 200
+A27	DoseUnit T13 mg
+A28	Frequency T13 2
+A29	CUIPhrase T13 lamotrigine
+A30	CUI T13 C0064636
+T12	Diagnosis 393 431	focal-to-bilateral-convulsive-seizures
+A32	DiagCategory T12 MultipleSeizures
+A33	Certainty T12 5
+A34	Negation T12 Affirmed
+A35	CUIPhrase T12 focal-to-bilateral-convulsive-seizures
+A36	CUI T12 C0877017
+T14	SeizureFrequency 393 431	focal-to-bilateral-convulsive-seizures
+A38	NumberOfSeizures T14 0
+A39	YearDate T14 2015
+A40	TimeSince_or_TimeOfEvent T14 Since
+A41	CUIPhrase T14 focal-to-bilateral-convulsive-seizures
+A42	CUI T14 C0877017
+T16	Diagnosis 449 486	Focal-seizures-with-altered-awareness
+A44	DiagCategory T16 MultipleSeizures
+A45	Certainty T16 5
+A46	Negation T16 Affirmed
+A47	CUIPhrase T16 focal-seizures-with-altered-awareness
+A48	CUI T16 C0270834
+T18	SeizureFrequency 449 486	Focal-seizures-with-altered-awareness
+A50	NumberOfSeizures T18 0
+A51	YearDate T18 2017
+A52	TimeSince_or_TimeOfEvent T18 Since
+A53	CUIPhrase T18 focal-seizures-with-altered-awareness
+A54	CUI T18 C0270834
+T20	Investigations 521 524	MRI
+A56	MRI_Performed T20 Yes
+A57	MRI_Results T20 Abnormal
+A58	CUIPhrase T20 abnormal-mri
+A59	CUI T20 C1319851
+T17	PatientHistory 546 559	brain-atrophy
+A2610	Certainty T17 5
+A2710	Negation T17 Affirmed
+A2810	CUIPhrase T17 brain-atrophy
+A2910	CUI T17 C0235946
+T22	Investigations 596 599	EEG
+A61	EEG_Performed T22 Yes
+A62	EEG_Results T22 Abnormal
+A63	CUIPhrase T22 abnormal-eeg
+A64	CUI T22 C0151611
+T15	PatientHistory 907 916	-sseizure
+A2110	Certainty T15 5
+A2210	Negation T15 Affirmed
+A2310	CUIPhrase T15 seizure
+A2410	CUI T15 C0036572
+T9	SeizureFrequency 909 918	seizures-
+A1610	FrequencyChange T9 Infrequent
+A17	CUIPhrase T9 seizures
+A1810	CUI T9 C0036572

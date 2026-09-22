@@ -1,0 +1,11 @@
+T5	SeizureFrequency 96 104	seizures
+A11	NumberOfSeizures T5 0
+A12	CUIPhrase T5 seizures
+A13	CUI T5 C0036572
+T2	Prescription 153 167	levetiracetam-
+A2	DrugName T2 Levetiracetam
+A3	DrugDose T2 500
+A4	DoseUnit T2 mg
+A5	Frequency T2 2
+A6	CUIPhrase T2 levetiracetam
+A7	CUI T2 C0377265

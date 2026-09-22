@@ -1,0 +1,58 @@
+T1	Diagnosis 164 183	psy,-probable-focal
+A1	Negation T1 Affirmed
+A2	CUI T1 C0014547
+A3	DiagCategory T1 Epilepsy
+A4	Certainty T1 4
+A5	CUIPhrase T1 focal-epilepsy
+T2	PatientHistory 1592 1608	febrile-seizures
+A6	AgeUnit T2 Year
+A7	Negation T2 Affirmed
+A8	AgeUpper T2 3
+A9	AgeLower T2 1
+A10	Certainty T2 5
+A11	CUI T2 C0009952
+A12	CUIPhrase T2 febrile-seizures
+T3	Diagnosis 159 167	Epilepsy
+A13	CUI T3 C0014544
+A14	CUIPhrase T3 epilepsy
+A15	Negation T3 Affirmed
+A16	DiagCategory T3 Epilepsy
+A17	Certainty T3 5
+T4	Diagnosis 1881 1899	epileptic-seizures
+A18	Negation T4 Affirmed
+A19	CUI T4 C4317109
+A20	DiagCategory T4 MultipleSeizures
+A21	CUIPhrase T4 epileptic-seizures
+A22	Certainty T4 4
+T5	BirthHistory 1560 1576	birth-was-normal
+A23	CUIPhrase T5 birth-was-normal
+A24	Negation T5 Affirmed
+A25	CUI T5 C3665337
+A26	Certainty T5 5
+T6	Diagnosis 1991 1999	epilepsy
+A27	Certainty T6 5
+A28	DiagCategory T6 Epilepsy
+A29	Negation T6 Affirmed
+A30	CUIPhrase T6 epilepsy
+A31	CUI T6 C0014544
+T7	PatientHistory 105 136	transient-loss-of-consciousness
+A32	CUIPhrase T7 Transient loss of consciousness
+A33	CUI T7 C4087400
+A34	Certainty T7 5
+A35	Negation T7 Affirmed
+T8	PatientHistory 1975 1983	seizures
+A36	CUIPhrase T8 seizures
+A37	Certainty T8 5
+A38	Negation T8 Affirmed
+A39	CUI T8 C0036572
+T9	Investigations 1800 1807	CT-head
+A40	CUI T9 C0744602
+A41	CT_Performed T9 Yes
+A42	CT_Results T9 Normal
+A43	CUIPhrase T9 ct-normal
+T10	Diagnosis 2716 2725	epilepsy-
+A44	Certainty T10 5
+A45	CUIPhrase T10 epilepsy
+A46	Negation T10 Affirmed
+A47	CUI T10 C0014544
+A48	DiagCategory T10 Epilepsy

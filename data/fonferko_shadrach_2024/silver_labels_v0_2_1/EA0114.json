@@ -1,0 +1,216 @@
+{
+  "doc_id": "EA0114",
+  "doc_type": "progress_note",
+  "patient_id": "EA0114",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0114.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0114",
+      "doc_type": "progress_note",
+      "doc_date": "2019-01-01",
+      "patient_id": "EA0114",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": "focal",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal epilepsy",
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": 83,
+        "char_end": 97
+      },
+      "predominant_seizure_type": {
+        "value": "focal_impaired_awareness",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal impaired awareness seizures",
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": 428,
+        "char_end": 461
+      },
+      "other_seizure_types": [],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "semiology_text": {
+        "value": "seizures",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "seizures",
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": 776,
+        "char_end": 784
+      },
+      "age_at_onset_years": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "seizure_frequency": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "other_seizure_frequencies": [],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "levetiracetam",
+            "status": "current",
+            "dose_text": "750 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Levetiracetam 750mgs bd",
+          "source_doc_id": "EA0114",
+          "source_doc_type": "progress_note",
+          "source_date": "2019-01-01",
+          "char_start": 140,
+          "char_end": 163
+        },
+        {
+          "value": {
+            "generic_name": "carbamazepine",
+            "status": "current",
+            "dose_text": "400 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Carbamazepine Controlled Release 400mgs bd to reduce to 200mgs am",
+          "source_doc_id": "EA0114",
+          "source_doc_type": "progress_note",
+          "source_date": "2019-01-01",
+          "char_start": 166,
+          "char_end": 231
+        }
+      ],
+      "prior_asms": [],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0114",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

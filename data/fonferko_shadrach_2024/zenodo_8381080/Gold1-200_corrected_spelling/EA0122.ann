@@ -1,0 +1,97 @@
+T12	Diagnosis 286 319	generalised-tonic-clonic-seizures
+A12	DiagCategory T12 MultipleSeizures
+A13	Certainty T12 5
+A14	Negation T12 Affirmed
+A15	CUIPhrase T12 generalised-tonic-clonic-seizures
+A16	CUI T12 C0494475
+T1	Diagnosis 434 443	epilepsy-
+A1	Negation T1 Affirmed
+A2	CUI T1 C0014544
+A3	DiagCategory T1 Epilepsy
+A4	CUIPhrase T1 epilepsy
+A5	Certainty T1 5
+T2	SeizureFrequency 326 334	seizure-
+A6	CUI T2 C0036572
+A7	TimePeriod T2 Year
+A8	NumberOfTimePeriods T2 2
+A9	CUIPhrase T2 seizure
+A10	NumberOfSeizures T2 0
+T3	Diagnosis 59 67	Epilepsy
+A11	CUI T3 C0014544
+A1210	Certainty T3 5
+A1310	Negation T3 Affirmed
+A1410	CUIPhrase T3 epilepsy
+A1510	DiagCategory T3 Epilepsy
+T4	Prescription 180 205	Sodium-valproate-400mg-BD
+A1610	DoseUnit T4 mg
+A17	Frequency T4 2
+A18	DrugDose T4 400
+A19	CUI T4 C0037567
+A20	DrugName T4 sodium-valproate
+A21	CUIPhrase T4 sodium-valproate
+T8	Onset 434 443	epilepsy-
+A102	TimePeriod T8 Year
+A112	NumberOfTimePeriods T8 3
+A122	Certainty T8 5
+A132	Negation T8 Affirmed
+A142	CUIPhrase T8 epilepsy
+A152	CUI T8 C0014544
+T5	PatientHistory 774 783	seizures-
+A22	Negation T5 Affirmed
+A23	CUIPhrase T5 seizures
+A24	CUI T5 C0036572
+A25	Certainty T5 5
+T14	Diagnosis 788 810	bilateral-tonic-clonic
+A1810	DiagCategory T14 MultipleSeizures
+A1910	Certainty T14 4
+A2010	Negation T14 Affirmed
+A2110	CUIPhrase T14 generalised-tonic-clonic-seizure
+A2210	CUI T14 C0494475
+T6	Diagnosis 1257 1277	generalised-epilepsy
+A26	Negation T6 Affirmed
+A27	DiagCategory T6 Epilepsy
+A28	Certainty T6 5
+A29	CUI T6 C0014548
+A30	CUIPhrase T6 generalised-epilepsy
+T7	Diagnosis 59 89	Epilepsy,-probable-generalised
+A31	Negation T7 Affirmed
+A32	DiagCategory T7 Epilepsy
+A33	CUIPhrase T7 epilepsy,-generalized
+A34	CUI T7 C0014548
+A35	Certainty T7 4
+T9	PatientHistory 326 333	seizure
+A41	CUIPhrase T9 seizure
+A42	Negation T9 Affirmed
+A43	Certainty T9 5
+A44	CUI T9 C0036572
+T10	SeizureFrequency 479 488	seizures-
+A45	CUI T10 C0036572
+A46	FrequencyChange T10 Infrequent
+A47	CUIPhrase T10 seizures
+T11	PatientHistory 627 636	seizures-
+A48	CUIPhrase T11 seizures
+A49	Certainty T11 5
+A50	Negation T11 Affirmed
+A51	CUI T11 C0036572
+T15	SeizureFrequency 512 520	seizure-
+A52	NumberOfSeizures T15 0
+A53	NumberOfTimePeriods T15 2
+A54	CUIPhrase T15 seizure
+A55	TimePeriod T15 Year
+A56	CUI T15 C0036572
+T13	Investigations 825 828	MRI
+A57	CUIPhrase T13 normal-mri
+A58	MRI_Performed T13 Yes
+A59	MRI_Results T13 Normal
+A60	CUI T13 C0436481
+T18	Diagnosis 91 143	epilepsy-with-generalised-tonic-clinic-seizure-alone
+A61	Negation T18 Affirmed
+A62	Certainty T18 4
+A63	CUIPhrase T18 epilepsy-with-generalised-tonic-clonic-seizure-alone
+A64	DiagCategory T18 Epilepsy
+A65	CUI T18 C0393697
+T17	PatientHistory 512 518	seizur
+A76	Certainty T17 5
+A77	Negation T17 Affirmed
+A78	CUIPhrase T17 seizure
+A79	CUI T17 C0036572

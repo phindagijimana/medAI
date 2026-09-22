@@ -1,0 +1,67 @@
+T12	PatientHistory 1553 1573	loss-of-consciousnes
+A10	Certainty T12 5
+A11	Negation T12 Affirmed
+A12	CUIPhrase T12 loss-of-consciousness
+A13	CUI T12 C0041657
+T1	Diagnosis 1703 1731	genetic-generalised-epilepsy
+A1	CUIPhrase T1 genetic-generalised-epilepsy
+A2	CUI T1 C0270850
+A3	Negation T1 Affirmed
+A4	DiagCategory T1 Epilepsy
+A5	Certainty T1 5
+T2	BirthHistory 802 830	born-prematurely-at-32-weeks
+A6	Negation T2 Affirmed
+A7	CUIPhrase T2 born-prematurely
+A8	Certainty T2 5
+A9	PrematureBirth T2 32to<37_ModerateToLatePreterm
+A1010	CUI T2 C4054482
+T3	PatientHistory 23 54	transient-loss-of-consciousness
+A1110	CUIPhrase T3 Transient loss of consciousness
+A1210	CUI T3 C4087400
+A1310	Negation T3 Affirmed
+A1410	Certainty T3 5
+T4	Diagnosis 1580 1613	generalised-tonic-clonic-seizures
+A15	Negation T4 Affirmed
+A16	Certainty T4 4
+A17	CUIPhrase T4 generalised-tonic-clonic-seizures
+A18	DiagCategory T4 MultipleSeizures
+A19	CUI T4 C0494475
+T5	PatientHistory 863 879	febrile-seizures
+A20	Negation T5 Negated
+A21	CUI T5 C0009952
+A22	Certainty T5 1
+A23	CUIPhrase T5 febrile-seizures
+T6	Investigations 1416 1419	EEG
+A24	CUIPhrase T6 eeg-abnormal
+A25	EEG_Results T6 Abnormal
+A26	CUI T6 C0151611
+A27	EEG_Performed T6 Yes
+T7	Diagnosis 67 95	genetic-generalised-epilepsy
+A28	DiagCategory T7 Epilepsy
+A29	Certainty T7 5
+A30	Negation T7 Affirmed
+A31	CUI T7 C0270850
+A32	CUIPhrase T7 genetic-generalised-epilepsy
+T8	Investigations 1370 1373	MRI
+A33	CUI T8 C0436481
+A34	MRI_Performed T8 Yes
+A35	CUIPhrase T8 mri-normal
+A36	MRI_Results T8 Normal
+T9	Diagnosis 1686 1695	epilepsy,
+A37	DiagCategory T9 Epilepsy
+A38	Negation T9 Affirmed
+A39	CUIPhrase T9 epilepsy
+A40	Certainty T9 5
+A41	CUI T9 C0014544
+T10	Prescription 974 985	lamotrigine
+A42	CUIPhrase T10 lamotrigine
+A43	DrugDose T10 50
+A44	DrugName T10 Lamotrigine
+A45	Frequency T10 2
+A46	DoseUnit T10 mg
+A47	CUI T10 C0064636
+T11	Investigations 1648 1651	EEG
+A48	EEG_Results T11 Abnormal
+A49	CUIPhrase T11 eeg-abnormal
+A50	EEG_Performed T11 Yes
+A51	CUI T11 C0151611

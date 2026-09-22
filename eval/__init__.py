@@ -21,6 +21,13 @@ from .metrics import (
     score_module,
 )
 from .aggregator import aggregate_manifests, load_gold
+from .error_taxonomy import (
+    ALL_CATEGORIES,
+    ErrorRecord,
+    ErrorReport,
+    classify_field,
+    score_error_taxonomy,
+)
 
 __all__ = [
     "ArmSummary",
@@ -31,4 +38,9 @@ __all__ = [
     "load_gold",
     "score_field",
     "score_module",
+    "ALL_CATEGORIES",
+    "ErrorRecord",
+    "ErrorReport",
+    "classify_field",
+    "score_error_taxonomy",
 ]

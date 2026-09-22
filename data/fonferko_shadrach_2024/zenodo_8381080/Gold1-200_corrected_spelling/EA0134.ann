@@ -1,0 +1,145 @@
+T1	BirthHistory 267 280	born-normally
+A1	Certainty T1 5
+A2	Negation T1 Affirmed
+A3	CUIPhrase T1 born-normally
+A4	CUI T1 C3665337
+T22	PatientHistory 584 592	collapse
+A10	AgeUnit T22 Year
+A11	Age T22 32
+A12	Certainty T22 5
+A13	Negation T22 Affirmed
+A14	CUIPhrase T22 collapse
+A15	CUI T22 C0344329
+T2	WhenDiagnosed 1056 1063	epileps
+A5	Age T2 36
+A6	CUIPhrase T2 epilepsy
+A7	CUI T2 C0014544
+A8	AgeUnit T2 Year
+A9	Certainty T2 5
+A102	Negation T2 Affirmed
+T3	Diagnosis 1056 1065	epilepsy-
+A112	DiagCategory T3 Epilepsy
+A122	CUIPhrase T3 epilepsy
+A132	CUI T3 C0014544
+A142	Negation T3 Affirmed
+A152	Certainty T3 5
+T4	Prescription 1225 1239	levetiracetam-
+A16	CUIPhrase T4 levetiracetam
+A17	CUI T4 C0377265
+A18	DoseUnit T4 mg
+A19	DrugName T4 Levetiracetam
+A20	Frequency T4 2
+A21	DrugDose T4 750
+T5	PatientHistory 861 887	acute-symptomatic-seizures
+A22	Certainty T5 4
+A23	Negation T5 Affirmed
+A24	CUIPhrase T5 symptomatic seizures
+A25	CUI T5 C4023516
+T12	PatientHistory 1252 1259	seizure
+A172	Certainty T12 5
+A182	Negation T12 Affirmed
+A192	CUIPhrase T12 seizure
+A202	CUI T12 C0036572
+T10	PatientHistory 1252 1259	seizure
+A103	Certainty T10 5
+A113	Negation T10 Affirmed
+A123	CUIPhrase T10 seizure
+A133	CUI T10 C0036572
+T222	PatientHistory 2068 2075	gliosis
+A153	Certainty T222 5
+A162	Negation T222 Affirmed
+A173	CUIPhrase T222 gliosis
+A183	CUI T222 C0017639
+T6	Investigations 2106 2110	EEG-
+A26	EEG_Results T6 Abnormal
+A27	CUI T6 C0151611
+A28	CUIPhrase T6 eeg-abnormal
+A29	EEG_Performed T6 Yes
+T7	PatientHistory 767 791	subarachnoid-haemorrhage
+A30	Negation T7 Affirmed
+A31	CUI T7 C0038525
+A32	Certainty T7 5
+A33	CUIPhrase T7 subarachnoid haemorrhage
+T8	EpilepsyCause 2268 2292	sub-arachnoid-haemorrhag
+A34	CUIPhrase T8 subarachnoid-haemorrhage
+A35	Certainty T8 5
+A36	CUI T8 C0038525
+A37	Negation T8 Affirmed
+T9	PatientHistory 1596 1609	hypertension-
+A38	Certainty T9 5
+A39	Negation T9 Affirmed
+A40	CUI T9 C0020538
+A41	CUIPhrase T9 hypertension
+T23	PatientHistory 348 364	viral-meningitis
+A42	CUI T23 C0025289
+A43	CUIPhrase T23 meningitis
+A44	Age T23 18
+A45	Negation T23 Affirmed
+A46	Certainty T23 5
+A47	AgeUnit T23 Year
+T11	PatientHistory 2268 2293	sub-arachnoid-haemorrhage
+A48	Negation T11 Affirmed
+A49	CUI T11 C0038525
+A50	CUIPhrase T11 subarachnoid-haemorrhage
+A51	Certainty T11 5
+T24	Diagnosis 2209 2240	symptomatic-structural-epilepsy
+A52	Negation T24 Affirmed
+A53	DiagCategory T24 Epilepsy
+A54	Certainty T24 5
+A55	CUI T24 C0472349
+A56	CUIPhrase T24 symptomatic-structural-focal-epilepsy
+T13	PatientHistory 652 673	ruptured-ACA-aneurysm
+A57	CUI T13 C0242084
+A58	CUIPhrase T13 ruptured cerebral aneurysm
+A59	Negation T13 Affirmed
+A60	Certainty T13 5
+A61	AgeUnit T13 Year
+A62	Age T13 32
+T14	PatientHistory 617 642	sub-arachnoid-haemorrhage
+A63	CUI T14 C0038525
+A64	Age T14 32
+A65	Certainty T14 5
+A66	CUIPhrase T14 subarachnoid-haemorrhage
+A67	AgeUnit T14 Year
+A68	Negation T14 Affirmed
+T15	Investigations 1980 1983	CT-
+A69	CT_Performed T15 Yes
+A70	CUIPhrase T15 ct-abnormal
+A71	CT_Results T15 Abnormal
+A72	CUI T15 C0436539
+T16	PatientHistory 950 981	transient-loss-of-consciousness
+A73	Age T16 35
+A74	Certainty T16 5
+A75	CUI T16 C4087400
+A76	Negation T16 Affirmed
+A77	AgeUnit T16 Year
+A78	CUIPhrase T16 Transient loss of consciousness
+T17	SeizureFrequency 1252 1260	seizure-
+A79	NumberOfSeizures T17 0
+A80	CUI T17 C0036572
+A81	TimePeriod T17 Year
+A82	NumberOfTimePeriods T17 2
+A83	CUIPhrase T17 seizure
+T18	PatientHistory 294 309	febrile-seizure
+A84	CUI T18 C0009952
+A85	CUIPhrase T18 febrile-seizure
+A86	Age T18 3
+A87	Certainty T18 5
+A88	AgeUnit T18 Year
+A89	Negation T18 Affirmed
+T19	Diagnosis 199 208	epilepsy-
+A90	DiagCategory T19 Epilepsy
+A91	Certainty T19 5
+A92	Negation T19 Affirmed
+A93	CUI T19 C0014544
+A94	CUIPhrase T19 epilepsy
+T20	PatientHistory 740 748	seizure-
+A95	CUIPhrase T20 seizure
+A96	CUI T20 C0036572
+A97	Certainty T20 3
+A98	Negation T20 Affirmed
+T21	Diagnosis 1007 1028	tonic-clonic-seizures
+A99	Certainty T21 4
+A104	CUIPhrase T21 tonic-clonic-seizures
+A105	Negation T21 Affirmed
+A107	CUI T21 C0494475

@@ -1,0 +1,148 @@
+T112	PatientHistory 122 133	MCA-infarct
+A11	YearDate T112 2003
+A12	Certainty T112 5
+A13	Negation T112 Affirmed
+A14	CUIPhrase T112 mca-infarct
+A15	CUI T112 C0740392
+T14	PatientHistory 348 369	MCA-terrority-infarct
+A18	Certainty T14 5
+A19	Negation T14 Affirmed
+A20	CUIPhrase T14 mca-infarct
+A21	CUI T14 C0740392
+T1	Diagnosis 683 697	focal-seizures
+A1	CUIPhrase T1 focal-seizures
+A2	Negation T1 Affirmed
+A3	Certainty T1 5
+A4	CUI T1 C0751495
+A5	DiagCategory T1 MultipleSeizures
+T10	Diagnosis 763 778	-focal-seizures
+A10	DiagCategory T10 MultipleSeizures
+A112	Certainty T10 5
+A122	Negation T10 Affirmed
+A132	CUIPhrase T10 focal-seizures
+A142	CUI T10 C0751495
+T2	PatientHistory 1076 1084	migraine
+A6	CUIPhrase T2 migraine
+A7	Negation T2 Affirmed
+A8	Certainty T2 5
+A9	CUI T2 C0149931
+T11	PatientHistory 1314 1331	febrile-seizures-
+A113	AgeUnit T11 Month
+A123	Age T11 8
+A133	Certainty T11 5
+A143	Negation T11 Affirmed
+A152	CUIPhrase T11 febrile-seizures
+A162	CUI T11 C0009952
+T13	PatientHistory 1314 1330	febrile-seizures
+A17	AgeUnit T13 Month
+A182	Age T13 18
+A192	Certainty T13 5
+A202	Negation T13 Affirmed
+A212	CUIPhrase T13 febrile-seizures
+A22	CUI T13 C0009952
+T3	PatientHistory 1579 1586	stroke-
+A102	CUIPhrase T3 stroke
+A114	Certainty T3 5
+A124	Negation T3 Affirmed
+A134	CUI T3 C0038454
+T5	Diagnosis 1850 1864	focal-seizures
+A193	CUI T5 C0751495
+A203	Negation T5 Affirmed
+A213	CUIPhrase T5 focal-seizures
+A223	DiagCategory T5 MultipleSeizures
+A23	Certainty T5 5
+T7	SeizureFrequency 168 187	Focal-motor-seizure
+A28	CUI T7 C0016399
+A29	UpperNumberOfSeizures T7 3
+A30	LowerNumberOfSeizures T7 2
+A31	TimePeriod T7 Month
+A32	NumberOfTimePeriods T7 1
+A33	CUIPhrase T7 focal-motor-seizures
+T8	Diagnosis 223 261	Focal-to-bilateral-convulsive-seizures
+A34	Certainty T8 5
+A35	CUIPhrase T8 focal-to-bilateral-convulsive-seizures
+A36	DiagCategory T8 MultipleSeizures
+A37	Negation T8 Affirmed
+A38	CUI T8 C0877017
+T9	Diagnosis 1835 1844	epilepsy-
+A39	Negation T9 Affirmed
+A40	CUI T9 C0014544
+A41	CUIPhrase T9 epilepsy
+A42	DiagCategory T9 Epilepsy
+A43	Certainty T9 5
+T111	Diagnosis 554 563	epilepsy-
+A51	CUIPhrase T111 epilepsy
+A52	CUI T111 C0014544
+A53	Certainty T111 5
+A54	Negation T111 Affirmed
+A55	DiagCategory T111 Epilepsy
+T12	Prescription 408 433	Sodium-Valproate-500mg-bd
+A56	Frequency T12 2
+A57	DrugName T12 sodium-valproate
+A58	CUIPhrase T12 sodium-valproate
+A59	CUI T12 C0037567
+A60	DoseUnit T12 mg
+A61	DrugDose T12 500
+T24	WhenDiagnosed 554 562	epilepsy
+A62	Certainty T24 5
+A63	CUI T24 C0014544
+A64	YearDate T24 2015
+A65	Negation T24 Affirmed
+A66	CUIPhrase T24 epilepsy
+T144	Prescription 383 405	Carbamazepine-400mg-bd
+A67	Frequency T144 2
+A68	CUIPhrase T144 carbamazepine
+A69	DoseUnit T144 mg
+A70	DrugName T144 carbamazepine
+A71	DrugDose T144 400
+A72	CUI T144 C0006949
+T15	Diagnosis 611 628	epileptic-seizure
+A73	CUIPhrase T15 epileptic-seizure
+A74	CUI T15 C4317109
+A75	Certainty T15 5
+A76	DiagCategory T15 SingleSeizure
+A77	Negation T15 Affirmed
+T16	Diagnosis 168 188	Focal-motor-seizures
+A78	DiagCategory T16 MultipleSeizures
+A79	Certainty T16 5
+A80	CUI T16 C0016399
+A81	CUIPhrase T16 focal-motor-seizures
+A82	Negation T16 Affirmed
+T17	Investigations 296 303	CT-Head
+A83	CUI T17 C0436539
+A84	CT_Results T17 Abnormal
+A85	CUIPhrase T17 ct-abnormal
+A86	CT_Performed T17 Yes
+T18	BirthHistory 1230 1242	prematurely-
+A87	Negation T18 Affirmed
+A88	Certainty T18 5
+A89	PrematureBirth T18 32to<37_ModerateToLatePreterm
+A90	CUIPhrase T18 moderate-to-late-preterm-birth
+A91	CUI T18 C4054482
+T19	PatientHistory 1421 1444	significant-head-injury
+A92	Negation T19 Affirmed
+A93	CUI T19 C0497301
+A94	CUIPhrase T19 head-injury
+A95	Certainty T19 5
+T20	Diagnosis 82 113	Symptomatic-structural-epilepsy
+A96	CUI T20 C0472349
+A97	DiagCategory T20 Epilepsy
+A98	CUIPhrase T20 symptomatic-structural-focal-epilepsy
+A99	Certainty T20 5
+A100	Negation T20 Affirmed
+T21	SeizureFrequency 223 260	Focal-to-bilateral-convulsive-seizure
+A101	CUI T21 C0877017
+A102	CUIPhrase T21 focal-to-bilateral-convulsive-seizures
+A103	NumberOfSeizures T21 0
+A104	TimeSince_or_TimeOfEvent T21 Since
+A105	YearDate T21 2015
+T22	PatientHistory 313 321	gliosis-
+A106	Certainty T22 5
+A107	Negation T22 Affirmed
+A108	CUIPhrase T22 gliosis
+A109	CUI T22 C0017639
+T23	PatientHistory 999 1022	cerebrovascular-disease
+A110	Certainty T23 5
+A1111	Negation T23 Affirmed
+A1121	CUIPhrase T23 cerebrovascular disease
+A1131	CUI T23 C0007820

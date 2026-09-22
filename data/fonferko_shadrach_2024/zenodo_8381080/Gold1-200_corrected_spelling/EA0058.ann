@@ -1,0 +1,92 @@
+T2	Diagnosis 187 218	Symptomatic-structural-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-structural-focal-epilepsy
+A6	CUI T2 C0472349
+T4	EpilepsyCause 259 269	meningitis
+A8	Certainty T4 4
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 meningitis
+A11	CUI T4 C0025289
+T6	PatientHistory 259 269	meningitis
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 meningitis
+A16	CUI T6 C0025289
+T8	PatientHistory 273 294	learning-difficulties
+A18	Certainty T8 5
+A19	Negation T8 Affirmed
+A20	CUIPhrase T8 learning-difficulties
+A21	CUI T8 C0424939
+T10	Prescription 308 331	Levetiracetam-1000mg-bd
+A23	DrugName T10 levetiracetam
+A24	DrugDose T10 1000
+A25	DoseUnit T10 mg
+A26	Frequency T10 2
+A27	CUIPhrase T10 levetiracetam
+A28	CUI T10 C0377265
+T12	Prescription 334 354	Lamotrigine-200mg-bd
+A30	DrugName T12 lamotrigine
+A31	DrugDose T12 200
+A32	DoseUnit T12 mg
+A33	Frequency T12 2
+A34	CUIPhrase T12 lamotrigine
+A35	CUI T12 C0064636
+T14	Diagnosis 665 703	focal-to-bilateral-convulsive-seizures
+A37	DiagCategory T14 MultipleSeizures
+A38	Certainty T14 5
+A39	Negation T14 Affirmed
+A40	CUIPhrase T14 focal-to-bilateral-convulsive-seizures
+A41	CUI T14 C0877017
+T16	SeizureFrequency 665 703	focal-to-bilateral-convulsive-seizures
+A43	NumberOfSeizures T16 0
+A44	TimePeriod T16 Year
+A45	NumberOfTimePeriods T16 2
+A46	CUIPhrase T16 focal-to-bilateral-convulsive-seizures
+A47	CUI T16 C0877017
+T18	Diagnosis 748 785	focal-seizures-with-altered-awareness
+A49	DiagCategory T18 MultipleSeizures
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 focal-seizures-with-altered-awareness
+A53	CUI T18 C0270834
+T20	SeizureFrequency 748 785	focal-seizures-with-altered-awareness
+A55	NumberOfSeizures T20 1
+A56	TimePeriod T20 Month
+A57	NumberOfTimePeriods T20 1
+A58	CUIPhrase T20 focal-seizures-with-altered-awareness
+A59	CUI T20 C0270834
+T22	PatientHistory 958 968	meningitis
+A61	AgeUnit T22 Month
+A62	Age T22 7
+A63	Certainty T22 5
+A64	Negation T22 Affirmed
+A65	CUIPhrase T22 meningitis
+A66	CUI T22 C0025289
+T24	EpilepsyCause 958 968	meningitis
+A68	Certainty T24 4
+A69	Negation T24 Affirmed
+A70	CUIPhrase T24 meningitis
+A71	CUI T24 C0025289
+T26	Diagnosis 1019 1027	epilepsy
+A73	DiagCategory T26 Epilepsy
+A74	Certainty T26 5
+A75	Negation T26 Affirmed
+A76	CUIPhrase T26 epilepsy
+A77	CUI T26 C0014544
+T28	Investigations 1063 1066	MRI
+A79	MRI_Performed T28 Yes
+A80	MRI_Results T28 Abnormal
+A81	CUIPhrase T28 abnormal-mri
+A82	CUI T28 C1319851
+T9	PatientHistory 1104 1117	brain-atrophy
+A102	Certainty T9 5
+A112	Negation T9 Affirmed
+A12	CUIPhrase T9 brain-atrophy
+A132	CUI T9 C0235946
+T30	Investigations 1158 1161	EEG
+A84	EEG_Performed T30 Yes
+A85	EEG_Results T30 Abnormal
+A86	CUIPhrase T30 eeg-abnormal
+A87	CUI T30 C0151611

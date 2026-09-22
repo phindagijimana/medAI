@@ -1,0 +1,78 @@
+T1	PatientHistory 174 195	Dissociative-seizures
+A1	Negation T1 Affirmed
+A2	CUIPhrase T1 dissociative-seizures
+A3	Certainty T1 5
+A4	CUI T1 C0349245
+T2	Diagnosis 198 206	Epilepsy
+A5	CUI T2 C0014544
+A6	CUIPhrase T2 epilepsy
+A7	Certainty T2 5
+A8	DiagCategory T2 Epilepsy
+A9	Negation T2 Affirmed
+T3	Prescription 293 308	Clobazam-5mg-bd
+A10	Frequency T3 2
+A11	DrugName T3 clobazam
+A12	CUIPhrase T3 clobazam
+A13	DoseUnit T3 mg
+A14	DrugDose T3 5
+A15	CUI T3 C0055891
+T10	Diagnosis 596 604	grand-ma
+A1010	DiagCategory T10 MultipleSeizures
+A1110	Certainty T10 5
+A1210	Negation T10 Affirmed
+A1310	CUIPhrase T10 grand-mal
+A1410	CUI T10 C0494475
+T4	Investigations 1308 1312	EEG-
+A16	CUI T4 C0560017
+A17	CUIPhrase T4 EEG normal
+A18	EEG_Performed T4 Yes
+A19	EEG_Results T4 Normal
+T5	Investigations 1259 1263	MRI-
+A20	MRI_Results T5 Normal
+A21	CUI T5 C0436481
+A22	MRI_Performed T5 Yes
+A23	CUIPhrase T5 mri-normal
+T6	PatientHistory 209 219	Depression
+A24	CUI T6 C0011570
+A25	CUIPhrase T6 depression
+A26	Certainty T6 5
+A27	Negation T6 Affirmed
+T7	Prescription 267 282	Brivetiracetam-
+A28	DrugName T7 Perampanel
+A29	DoseUnit T7 mg
+A30	CUIPhrase T7 brivaracetam
+A31	CUI T7 C1699861
+A32	DrugDose T7 50
+A33	Frequency T7 2
+T8	Investigations 1267 1271	EEG-
+A34	EEG_Results T8 Normal
+A35	CUI T8 C0560017
+A36	CUIPhrase T8 eeg-normal
+A37	EEG_Performed T8 Yes
+T9	Prescription 241 263	Carbamazepine-600mg-bd
+A38	Frequency T9 2
+A39	DrugName T9 carbamazepine
+A40	DrugDose T9 600
+A41	CUI T9 C0006949
+A42	DoseUnit T9 mg
+A43	CUIPhrase T9 carbamazepine
+T13	PatientHistory 1332 1350	jerk-like-episodes
+A1311	Certainty T13 5
+A1411	Negation T13 Affirmed
+A152	CUIPhrase T13 jerking-episodes
+A162	CUI T13 C0231530
+T11	PatientHistory 1429 1450	dissociative-seizures
+A44	Negation T11 Affirmed
+A45	CUIPhrase T11 dissociative seizures
+A46	CUI T11 C0349245
+A47	Certainty T11 5
+T12	PatientHistory 1124 1134	depression
+A52	Certainty T12 5
+A53	CUI T12 C0011570
+A54	CUIPhrase T12 depression
+A55	Negation T12 Affirmed
+T15	PatientHistory 1505 1513	seizures
+A1810	Certainty T15 5
+A1910	Negation T15 Affirmed
+A2010	CUIPhrase T15 seizures
+A2110	CUI T15 C0036572

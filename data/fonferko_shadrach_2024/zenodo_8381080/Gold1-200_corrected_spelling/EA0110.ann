@@ -1,0 +1,65 @@
+T2	PatientHistory 248 256	seizures
+A222	TimePeriod T2 Month
+A322	NumberOfTimePeriods T2 6
+A422	Certainty T2 3
+A522	Negation T2 Affirmed
+A622	CUIPhrase T2 seizures
+A7	CUI T2 C0036572
+T4	SeizureFrequency 574 583	seizures-
+A9	LowerNumberOfSeizures T4 1
+A10	UpperNumberOfSeizures T4 2
+A11	TimePeriod T4 Month
+A12	NumberOfTimePeriods T4 1
+A13	CUIPhrase T4 seizures
+A14	CUI T4 C0036572
+T9	SeizureFrequency 636 643	cluster
+A1010	NumberOfSeizures T9 1
+A1110	PointInTime T9 Last_Month
+A1210	TimeSince_or_TimeOfEvent T9 During
+A1310	CUIPhrase T9 seizure-cluster
+A1410	CUI T9 C3203523
+T7	PatientHistory 978 994	febrile-seizures
+A1011	Certainty T7 1
+A1111	Negation T7 Negated
+A1211	CUIPhrase T7 febrile-seizures
+A1311	CUI T7 C0009952
+T8	Diagnosis 1512 1545	generalised-tonic-clonic-seizures
+A21	DiagCategory T8 MultipleSeizures
+A22	Certainty T8 4
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 generalised-tonic-clonic-seizures
+A25	CUI T8 C0494475
+T10	Diagnosis 1562 1573	focal-onset
+A27	DiagCategory T10 MultipleSeizures
+A28	Certainty T10 4
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 focal-seizures
+A31	CUI T10 C0751495
+T5	Diagnosis 1611 1635	complex-partial-seizures
+A33	DiagCategory T5 MultipleSeizures
+A34	Certainty T5 3
+A35	Negation T5 Affirmed
+A36	CUIPhrase T5 complex-partial-seizures
+A37	CUI T5 C0149958
+T14	Prescription 1660 1676	Sodium-Valproate
+A39	DrugName T14 SodiumValproate
+A40	DrugDose T14 400
+A41	DoseUnit T14 mg
+A42	Frequency T14 2
+A43	CUIPhrase T14 sodium-valproate
+A44	CUI T14 C0037567
+T12	PatientHistory 1691 1706	seizure-cluster
+A15	Certainty T12 5
+A16	Negation T12 Affirmed
+A17	CUIPhrase T12 seizure-cluster
+A18	CUI T12 C3203523
+T15	PatientHistory 2034 2043	seizures-
+A20	Certainty T15 5
+A2110	Negation T15 Affirmed
+A2210	CUIPhrase T15 seizures
+A2310	CUI T15 C0036572
+T16	PatientHistory 2289 2297	seizures
+A2510	Certainty T16 5
+A26	Negation T16 Affirmed
+A2710	CUIPhrase T16 seizures
+A2810	CUI T16 C0036572

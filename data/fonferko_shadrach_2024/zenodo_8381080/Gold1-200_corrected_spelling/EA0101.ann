@@ -1,0 +1,25 @@
+T2	Diagnosis 95 103	Epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	Prescription 117 129	Eplim-chrono
+A8	DrugName T4 SodiumValproate
+A9	DrugDose T4 400
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 epilim-chrono
+A13	CUI T4 C0591452
+T6	SeizureFrequency 141 153	Seizure-free
+A15	NumberOfSeizures T6 0
+A16	TimePeriod T6 Year
+A17	NumberOfTimePeriods T6 2
+A18	CUIPhrase T6 seizure-free
+A19	CUI T6 C1299590
+T8	Diagnosis 1112 1121	epilepsy-
+A21	DiagCategory T8 Epilepsy
+A22	Certainty T8 5
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 epilepsy
+A25	CUI T8 C0014544

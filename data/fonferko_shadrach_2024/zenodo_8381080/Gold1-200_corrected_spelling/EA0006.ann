@@ -1,0 +1,75 @@
+T2	Diagnosis 21 30	Epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	Diagnosis 55 66	generalised
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 3
+A101	Negation T4 Affirmed
+A111	CUIPhrase T4 generalised-epilepsy
+A121	CUI T4 C0014548
+T6	Prescription 69 135	Current-antiepileptic-medication:-levetiracetam-500-mg-twice-a-day
+A141	DrugName T6 levetiracetam
+A15	DrugDose T6 500
+A161	DoseUnit T6 mg
+A171	Frequency T6 2
+A181	CUIPhrase T6 levetiracetam
+A191	CUI T6 C0377265
+T8	Diagnosis 234 267	generalised-tonic-clonic-seizures
+A21	DiagCategory T8 MultipleSeizures
+A22	Certainty T8 5
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 generalised-tonic-clonic-seizures
+A25	CUI T8 C0494475
+T10	SeizureFrequency 234 272	generalised-tonic-clonic-seizures-2014
+A27	NumberOfSeizures T10 2
+A28	YearDate T10 2014
+A29	TimeSince_or_TimeOfEvent T10 During
+A30	CUIPhrase T10 generalised-tonic-clonic-seizures
+A31	CUI T10 C0494475
+T9	SeizureFrequency 274 295	absence-like-seizures
+A10	NumberOfSeizures T9 1
+A11	YearDate T9 2014
+A12	TimeSince_or_TimeOfEvent T9 During
+A13	CUIPhrase T9 absence-like-seizures
+A14	CUI T9 C0563606
+T11	PatientHistory 274 295	absence-like-seizures
+A1110	YearDate T11 2014
+A1210	Certainty T11 5
+A1310	Negation T11 Affirmed
+A1410	CUIPhrase T11 absence-like-seizures
+A1510	CUI T11 C0563606
+T12	Investigations 318 333	MRI-2015-normal
+A33	MRI_Performed T12 Yes
+A34	MRI_Results T12 Normal
+A35	CUIPhrase T12 mri-normal
+A36	CUI T12 C0436481
+T14	Investigations 335 350	EEG-2015-normal
+A38	EEG_Performed T14 Yes
+A39	EEG_Results T14 Normal
+A40	CUIPhrase T14 eeg-normal
+A41	CUI T14 C0560017
+T16	SeizureFrequency 498 541	2-generalised-tonic-clonic-seizures-in-2014
+A43	NumberOfSeizures T16 2
+A44	YearDate T16 2014
+A45	TimeSince_or_TimeOfEvent T16 During
+A46	CUIPhrase T16 generalised-tonic-clonic-seizures
+A47	CUI T16 C0494475
+T18	Diagnosis 500 533	generalised-tonic-clonic-seizures
+A49	DiagCategory T18 MultipleSeizures
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 generalised-tonic-clonic-seizures
+A53	CUI T18 C0494475
+T13	PatientHistory 643 666	“absence-like”-episodes
+A16	Certainty T13 5
+A17	Negation T13 Affirmed
+A18	CUIPhrase T13 absence
+A19	CUI T13 C0563606
+T20	PatientHistory 875 891	febrile-seizures
+A55	Certainty T20 5
+A56	Negation T20 Affirmed
+A57	CUIPhrase T20 febrile-seizures
+A58	CUI T20 C0009952

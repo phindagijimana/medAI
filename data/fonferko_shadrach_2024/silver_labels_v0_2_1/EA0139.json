@@ -1,0 +1,207 @@
+{
+  "doc_id": "EA0139",
+  "doc_type": "progress_note",
+  "patient_id": "EA0139",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0139.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0139",
+      "doc_type": "progress_note",
+      "doc_date": "2015-01-01",
+      "patient_id": "EA0139",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "predominant_seizure_type": {
+        "value": "generalized_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "generalised tonic clonic seizures",
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 153,
+        "char_end": 186
+      },
+      "other_seizure_types": [],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "semiology_text": {
+        "value": "head injury",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "head injury",
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 270,
+        "char_end": 281
+      },
+      "age_at_onset_years": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "seizure_frequency": {
+        "value": {
+          "raw_text": "generalised tonic clonic seizure",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "generalised tonic clonic seizure",
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 153,
+        "char_end": 185
+      },
+      "other_seizure_frequencies": [],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [],
+      "prior_asms": [
+        {
+          "value": {
+            "generic_name": "carbamazepine",
+            "status": "prior",
+            "dose_text": "400 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "historical",
+          "evidence_text": "At present he is taking Carbamazepine 400mg bd",
+          "source_doc_id": "EA0139",
+          "source_doc_type": "progress_note",
+          "source_date": "2015-01-01",
+          "char_start": 284,
+          "char_end": 330
+        }
+      ],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0139",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

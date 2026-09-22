@@ -1,0 +1,65 @@
+T2	Diagnosis 94 114	focal-onset-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-onset-epilepsy
+A6	CUI T2 C0014547
+T18	PatientHistory 116 123	Anxiety
+A54	Certainty T18 5
+A55	Negation T18 Affirmed
+A56	CUIPhrase T18 anxiety
+A57	CUI T18 C0003467
+T20	PatientHistory 125 142	Episodic-migraine
+A59	Certainty T20 5
+A60	Negation T20 Affirmed
+A61	CUIPhrase T20 migraine
+A62	CUI T20 C0149931
+T4	Prescription 144 224	Current-medication-levetiracetam-750mg-twice-a-day-(to-change-as-detailed-below)
+A8	DrugName T4 levetiracetam
+A9	DrugDose T4 750
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 levetiracetam
+A13	CUI T4 C0377265
+T6	Diagnosis 400 408	epilepsy
+A15	DiagCategory T6 Epilepsy
+A16	Certainty T6 5
+A17	Negation T6 Affirmed
+A18	CUIPhrase T6 epilepsy
+A19	CUI T6 C0014544
+T8	PatientHistory 1264 1303	ebrile-seizures-at-the-age-of-12-and-18
+A21	AgeUnit T8 Month
+A22	AgeLower T8 12
+A23	AgeUpper T8 18
+A24	Certainty T8 5
+A25	Negation T8 Affirmed
+A26	CUIPhrase T8 febrile-seizure
+A27	CUI T8 C0009952
+T11	BirthHistory 1319 1356	born-slightly-prematurely-at-34-weeks
+A29	PrematureBirth T11 34to<37_LatePretermBirth
+A30	Certainty T11 5
+A31	Negation T11 Affirmed
+A32	CUIPhrase T11 late-preterm-birth
+A33	CUI T11 C3829315
+T10	Investigations 1691 1702	Normal-MRI-
+A1110	MRI_Performed T10 Yes
+A1210	MRI_Results T10 Normal
+A1310	CUIPhrase T10 normal-mri
+A14	CUI T10 C0436481
+T13	Investigations 1724 1729	EEGs-
+A1710	EEG_Performed T13 Yes
+A1810	EEG_Results T13 Abnormal
+A1910	CUIPhrase T13 eeg-abnormal
+A20	CUI T13 C0151611
+T14	Diagnosis 1835 1853	epileptic-seizures
+A42	DiagCategory T14 MultipleSeizures
+A43	Certainty T14 4
+A44	Negation T14 Affirmed
+A45	CUIPhrase T14 epileptic-seizures
+A46	CUI T14 C4317109
+T16	Diagnosis 1941 1979	focal-to-bilateral-convulsive-seizures
+A48	DiagCategory T16 MultipleSeizures
+A49	Certainty T16 4
+A50	Negation T16 Affirmed
+A51	CUIPhrase T16 focal-to-bilateral-convulsive-seizures
+A52	CUI T16 C0877017

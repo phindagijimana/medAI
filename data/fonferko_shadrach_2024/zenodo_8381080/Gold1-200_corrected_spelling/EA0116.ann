@@ -1,0 +1,41 @@
+T5	Diagnosis 153 211	epilepsy-with-generalised-tonic-clonic-seizures-from-sleep
+A9	DiagCategory T5 Epilepsy
+A10	Certainty T5 5
+A11	Negation T5 Affirmed
+A12	CUIPhrase T5 epilepsy-with-generalised-tonic-clonic-seizures-on-awakening
+A13	CUI T5 C0393697
+T10	PatientHistory 214 229	Type-1-diabetes
+A1011	Certainty T10 5
+A1111	Negation T10 Affirmed
+A1211	CUIPhrase T10 type-1-diabetes
+A1311	CUI T10 C0011854
+T7	Prescription 255 286	Levetiracetam-250mgs-once-a-day
+A15	DrugName T7 levetiracetam
+A16	DrugDose T7 250
+A17	DoseUnit T7 mg
+A18	Frequency T7 1
+A19	CUIPhrase T7 levetiracetam
+A20	CUI T7 C0377265
+T14	PatientHistory 1104 1119	type-1-diabetes
+A172	Certainty T14 5
+A182	Negation T14 Affirmed
+A192	CUIPhrase T14 type-1-diabetes
+A202	CUI T14 C0011854
+T11	Diagnosis 1462 1495	generalised-tonic-clonic-seizures
+A27	DiagCategory T11 MultipleSeizures
+A28	Certainty T11 4
+A29	Negation T11 Affirmed
+A30	CUIPhrase T11 generalised-tonic-clonic-seizures
+A31	CUI T11 C0494475
+T13	Diagnosis 1550 1555	focal
+A1010	DiagCategory T13 MultipleSeizures
+A1110	Certainty T13 3
+A1210	Negation T13 Affirmed
+A1310	CUIPhrase T13 focal-seizures
+A14	CUI T13 C0751495
+T12	Diagnosis 1557 1575	frontal-lobe-onset
+A1610	DiagCategory T12 MultipleSeizures
+A1710	Certainty T12 3
+A1810	Negation T12 Affirmed
+A1910	CUIPhrase T12 frontal-lobe-onset-seizure
+A2010	CUI T12 C0085541

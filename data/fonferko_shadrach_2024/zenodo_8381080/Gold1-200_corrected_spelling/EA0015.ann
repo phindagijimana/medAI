@@ -1,0 +1,32 @@
+T9	PatientHistory 60 85	sub-arachnoid-haemorrhage
+A10	TimePeriod T9 Year
+A11	NumberOfTimePeriods T9 12
+A12	Certainty T9 5
+A13	Negation T9 Affirmed
+A14	CUIPhrase T9 subarachnoid-haemorrhage
+A15	CUI T9 C0038525
+T13	Diagnosis 146 155	epileptic
+A19	DiagCategory T13 MultipleSeizures
+A20	Certainty T13 5
+A21	Negation T13 Affirmed
+A22	CUIPhrase T13 epileptic-attack
+A23	CUI T13 C0014544
+T8	Prescription 227 269	Currently-she-is-taking-Tegretol-500-mg-BD
+A18	DrugName T8 tegretol
+A191	DrugDose T8 500
+A201	DoseUnit T8 mg
+A211	Frequency T8 2
+A221	CUIPhrase T8 tegretol
+A231	CUI T8 C0700087
+T10	Prescription 274 297	levetiracetam-250-mg-BD
+A25	DrugName T10 levetiracetam
+A26	DrugDose T10 250
+A27	DoseUnit T10 mg
+A28	Frequency T10 2
+A29	CUIPhrase T10 levetiracetam
+A30	CUI T10 C0377265
+T12	PatientHistory 330 341	depression-
+A32	Certainty T12 5
+A33	Negation T12 Affirmed
+A34	CUIPhrase T12 depression
+A35	CUI T12 C0011570

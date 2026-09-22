@@ -1,0 +1,54 @@
+T1	WhenDiagnosed 367 374	epileps
+A1	CUI T1 C0014544
+A2	Certainty T1 5
+A3	CUIPhrase T1 epilepsy
+A4	AgeUnit T1 Year
+A5	Negation T1 Affirmed
+A6	Age T1 22
+T2	Diagnosis 727 759	secondarily-generalised-seizures
+A7	Negation T2 Affirmed
+A8	CUIPhrase T2 secondarily-generalised-seizures
+A9	CUI T2 C0270838
+A10	Certainty T2 5
+A11	DiagCategory T2 MultipleSeizures
+T3	Diagnosis 590 627	focal-seizures-with-altered-awareness
+A12	DiagCategory T3 MultipleSeizures
+A13	Certainty T3 5
+A14	Negation T3 Affirmed
+A15	CUIPhrase T3 Focal seizures with altered awareness
+A16	CUI T3 C0270834
+T4	SeizureFrequency 1116 1124	seizure-
+A17	NumberOfSeizures T4 0
+A18	PointInTime T4 DrugChange
+A19	TimeSince_or_TimeOfEvent T4 Since
+A20	CUIPhrase T4 seizure
+A21	CUI T4 C0036572
+T5	Investigations 836 840	MRI-
+A22	CUI T5 C1319851
+A23	CUIPhrase T5 mri-abnormal
+A24	MRI_Performed T5 Yes
+A25	MRI_Results T5 Abnormal
+T6	PatientHistory 306 314	seizures
+A26	CUIPhrase T6 seizures
+A27	AgeUnit T6 Year
+A28	Certainty T6 5
+A29	CUI T6 C0036572
+A30	Age T6 19
+A31	Negation T6 Affirmed
+T7	Diagnosis 367 376	epilepsy-
+A32	DiagCategory T7 Epilepsy
+A33	Negation T7 Affirmed
+A34	CUIPhrase T7 epilepsy
+A35	CUI T7 C0014544
+A36	Certainty T7 5
+T8	SeizureFrequency 590 627	focal-seizures-with-altered-awareness
+A37	NumberOfTimePeriods T8 5
+A38	TimePeriod T8 Year
+A39	CUI T8 C0270834
+A40	CUIPhrase T8 focal-seizures-with-altered-awareness
+A41	NumberOfSeizures T8 0
+T9	PatientHistory 442 451	seizures-
+A42	Certainty T9 5
+A43	CUIPhrase T9 seizures
+A44	Negation T9 Affirmed
+A45	CUI T9 C0036572

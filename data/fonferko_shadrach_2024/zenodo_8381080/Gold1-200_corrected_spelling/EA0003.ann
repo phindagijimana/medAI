@@ -1,0 +1,78 @@
+T2	Diagnosis 30 50	generalised-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 generalised-epilepsy
+A6	CUI T2 C0014548
+T4	Prescription 52 123	Current-antiepileptic-medication:-sodium-valproate-600-mg-bd-(to-reduce
+A8	DrugName T4 sodium-valproate
+A9	DrugDose T4 600
+A10	DoseUnit T4 mg
+A111	Frequency T4 2
+A121	CUIPhrase T4 sodium-valproate
+A131	CUI T4 C0037567
+T6	Prescription 153 167	levetiracetam-
+A15	DrugName T6 Levetiracetam
+A16	DrugDose T6 1.25
+A17	DoseUnit T6 g
+A18	Frequency T6 2
+A19	CUIPhrase T6 levetiracetam
+A20	CUI T6 C0377265
+T8	SeizureFrequency 206 226	generalised-seizures
+A22	NumberOfSeizures T8 1
+A23	TimePeriod T8 Month
+A24	NumberOfTimePeriods T8 2
+A25	CUIPhrase T8 generalised-seizures
+A26	CUI T8 C0234533
+T10	Diagnosis 206 226	generalised-seizures
+A28	DiagCategory T10 MultipleSeizures
+A29	Certainty T10 5
+A30	Negation T10 Affirmed
+A31	CUIPhrase T10 generalised-seizures
+A32	CUI T10 C0234533
+T12	PatientHistory 264 273	myoclonus
+A34	Certainty T12 3
+A35	Negation T12 Affirmed
+A36	CUIPhrase T12 myoclonus
+A37	CUI T12 C0027066
+T14	SeizureFrequency 391 400	seizures-
+A39	NumberOfSeizures T14 1
+A40	TimePeriod T14 Month
+A41	NumberOfTimePeriods T14 2
+A42	CUIPhrase T14 seizures
+A43	CUI T14 C0036572
+T16	PatientHistory 391 400	seizures-
+A45	Certainty T16 5
+A46	Negation T16 Affirmed
+A47	CUIPhrase T16 seizures
+A48	CUI T16 C0036572
+T18	PatientHistory 457 465	seizures
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 seizures
+A53	CUI T18 C0036572
+T20	Diagnosis 860 869	epilepsy-
+A55	DiagCategory T20 Epilepsy
+A56	Certainty T20 5
+A57	Negation T20 Affirmed
+A58	CUIPhrase T20 epilepsy
+A59	CUI T20 C0014544
+T22	Onset 860 868	epilepsy
+A61	AgeUnit T22 Year
+A62	AgeLower T22 1
+A63	AgeUpper T22 6
+A64	Certainty T22 5
+A65	Negation T22 Affirmed
+A66	CUIPhrase T22 epilepsy
+A67	CUI T22 C0014544
+T24	SeizureFrequency 952 960	seizures
+A69	FrequencyChange T24 Increased
+A70	TimePeriod T24 Year
+A71	NumberOfTimePeriods T24 5
+A72	CUIPhrase T24 seizures
+A73	CUI T24 C0036572
+T9	PatientHistory 952 960	seizures
+A1010	Certainty T9 5
+A11	Negation T9 Affirmed
+A12	CUIPhrase T9 seizures
+A13	CUI T9 C0036572

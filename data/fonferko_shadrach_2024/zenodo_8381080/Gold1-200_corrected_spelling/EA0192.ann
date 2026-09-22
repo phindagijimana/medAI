@@ -1,0 +1,43 @@
+T1	Prescription 57 90	Carbamazepine-400mg-twice-per-day
+A1	CUIPhrase T1 carbamazepine
+A2	Frequency T1 2
+A3	DoseUnit T1 mg
+A4	DrugName T1 carbamazepine
+A5	DrugDose T1 400
+A6	CUI T1 C0006949
+T2	SeizureFrequency 420 428	seizures
+A7	CUIPhrase T2 seizures
+A8	FrequencyChange T2 Decreased
+A9	CUI T2 C0036572
+T3	PatientHistory 420 427	seizure
+A10	Negation T3 Affirmed
+A11	CUIPhrase T3 seizure
+A12	CUI T3 C0036572
+A13	Certainty T3 5
+T4	PatientHistory 145 152	seizure
+A14	Negation T4 Affirmed
+A15	Certainty T4 5
+A16	CUIPhrase T4 seizures
+A17	CUI T4 C0036572
+T5	Diagnosis 11 35	Complex-partial-seizures
+A18	CUI T5 C0149958
+A19	CUIPhrase T5 complex-partial-seizures
+A20	Certainty T5 5
+A21	Negation T5 Affirmed
+A22	DiagCategory T5 MultipleSeizures
+T6	Investigations 549 552	MRI
+A23	MRI_Performed T6 Yes
+A24	CUIPhrase T6 mri-normal
+A25	MRI_Results T6 Normal
+A26	CUI T6 C0436481
+T7	SeizureFrequency 145 153	seizure-
+A27	TimeSince_or_TimeOfEvent T7 Since
+A28	PointInTime T7 DrugChange
+A29	CUIPhrase T7 seizure
+A30	NumberOfSeizures T7 1
+A31	CUI T7 C0036572
+T8	Investigations 436 439	EEG
+A32	EEG_Performed T8 Yes
+A33	CUIPhrase T8 eeg-abnormal
+A34	EEG_Results T8 Abnormal
+A35	CUI T8 C0151611

@@ -1,0 +1,53 @@
+T1	Prescription 353 364	Lamotrigine
+A1	DoseUnit T1 mg
+A2	CUI T1 C0064636
+A3	DrugName T1 Lamotrigine
+A4	DrugDose T1 200
+A5	Frequency T1 2
+A6	CUIPhrase T1 lamotrigine
+T2	Prescription 233 249	Clobazam-20mg-BD
+A7	CUIPhrase T2 clobazam
+A8	Frequency T2 2
+A9	DrugDose T2 20
+A10	DoseUnit T2 mg
+A11	CUI T2 C0055891
+A12	DrugName T2 clobazam
+T3	Prescription 250 275	Buccal-Midazolam-10mg-PRN
+A13	DoseUnit T3 mg
+A14	CUI T3 C0026056
+A15	DrugName T3 midazolam
+A16	DrugDose T3 10
+A17	Frequency T3 As_Required
+A18	CUIPhrase T3 midazolam
+T4	Prescription 173 202	Lamotrigine-200mg-twice-daily
+A19	CUIPhrase T4 lamotrigine
+A20	Frequency T4 2
+A21	CUI T4 C0064636
+A22	DrugDose T4 200
+A23	DrugName T4 lamotrigine
+A24	DoseUnit T4 mg
+T5	Diagnosis 89 103	Focal-Epilepsy
+A25	CUIPhrase T5 focal-epilepsy
+A26	DiagCategory T5 Epilepsy
+A27	Certainty T5 5
+A28	Negation T5 Affirmed
+A29	CUI T5 C0014547
+T6	Prescription 203 232	Brivaracetam-75mg-twice-daily
+A30	DoseUnit T6 mg
+A31	CUI T6 C1699861
+A32	DrugDose T6 75
+A33	DrugName T6 brivaracetam
+A34	Frequency T6 2
+A35	CUIPhrase T6 brivaracetam
+T7	Diagnosis 125 158	Generalised-Tonic-Clonic-Seizures
+A36	DiagCategory T7 MultipleSeizures
+A37	Negation T7 Affirmed
+A38	CUIPhrase T7 generalised-tonic-clonic-seizures
+A39	Certainty T7 5
+A40	CUI T7 C0494475
+T8	Diagnosis 112 120	frontal-
+A41	DiagCategory T8 Epilepsy
+A42	CUI T8 C0085541
+A43	Certainty T8 4
+A44	CUIPhrase T8 frontal lobe epilepsy
+A45	Negation T8 Affirmed

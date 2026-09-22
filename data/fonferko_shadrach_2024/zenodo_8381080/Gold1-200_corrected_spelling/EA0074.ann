@@ -1,0 +1,21 @@
+T4	PatientHistory 883 891	collapse
+A10	Certainty T4 5
+A11	Negation T4 Affirmed
+A12	CUIPhrase T4 collapse
+A13	CUI T4 C0344329
+T1	BirthHistory 1506 1521	normal-delivery
+A1	Negation T1 Affirmed
+A2	Certainty T1 5
+A3	CUIPhrase T1 normal birth
+A4	CUI T1 C3665337
+T2	BirthHistory 1491 1500	full-term
+A5	CUI T2 C0233324
+A6	Certainty T2 5
+A7	Negation T2 Affirmed
+A8	CUIPhrase T2 term
+T3	Diagnosis 1710 1737	Juvenile-Myoclonic-Epilepsy
+A9	Certainty T3 5
+A1010	CUIPhrase T3 juvenile-myoclonic-epilepsy
+A1110	DiagCategory T3 Epilepsy
+A1210	CUI T3 C0270853
+A1310	Negation T3 Affirmed

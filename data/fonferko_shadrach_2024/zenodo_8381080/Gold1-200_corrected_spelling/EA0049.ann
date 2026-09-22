@@ -1,0 +1,171 @@
+T2	Diagnosis 74 101	juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	Diagnosis 131 165	generalised-tonic-clonic-seizures-
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 generalised-tonic-clonic-seizures
+A12	CUI T4 C0494475
+T6	SeizureFrequency 131 165	generalised-tonic-clonic-seizures-
+A14	LowerNumberOfSeizures T6 1
+A15	UpperNumberOfSeizures T6 2
+A16	TimePeriod T6 Month
+A17	NumberOfTimePeriods T6 1
+A18	CUIPhrase T6 generalised-tonic-clonic-seizures
+A19	CUI T6 C0494475
+T8	PatientHistory 184 199	Myoclonic-jerks
+A21	Certainty T8 5
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 myoclonic-jerks
+A24	CUI T8 C0027066
+T10	SeizureFrequency 184 199	Myoclonic-jerks
+A26	NumberOfSeizures T10 1
+A27	TimePeriod T10 Day
+A28	NumberOfTimePeriods T10 1
+A29	CUIPhrase T10 myoclonic-jerks
+A30	CUI T10 C0027066
+T9	PatientHistory 218 226	absences
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 absences
+A1310	CUI T9 C0563606
+T11	SeizureFrequency 218 225	absence
+A1510	FrequencyChange T11 Infrequent
+A1610	CUIPhrase T11 absence
+A1710	CUI T11 C0563606
+T12	Prescription 265 286	lamotrigine-250-mg-BD
+A32	DrugName T12 lamotrigine
+A33	DrugDose T12 250
+A34	DoseUnit T12 mg
+A35	Frequency T12 2
+A36	CUIPhrase T12 lamotrigine
+A37	CUI T12 C0064636
+T14	Prescription 287 313	Sodium-valproate-700-mg-BD
+A39	DrugName T14 sodium-valproate
+A40	DrugDose T14 700
+A41	DoseUnit T14 mg
+A42	Frequency T14 2
+A43	CUIPhrase T14 sodium-valproate
+A44	CUI T14 C0037567
+T16	Investigations 331 334	MRI
+A46	MRI_Performed T16 Yes
+A47	MRI_Results T16 Normal
+A48	CUIPhrase T16 normal-mri
+A49	CUI T16 C0436481
+T18	Investigations 347 350	EEG
+A51	EEG_Performed T18 Yes
+A52	EEG_Results T18 Abnormal
+A53	CUIPhrase T18 abnormal-eeg
+A54	CUI T18 C0151611
+T20	Diagnosis 480 488	epilepsy
+A56	DiagCategory T20 Epilepsy
+A57	Certainty T20 5
+A58	Negation T20 Affirmed
+A59	CUIPhrase T20 epilepsy
+A60	CUI T20 C0014544
+T13	Diagnosis 536 545	-epilepsy
+A1910	DiagCategory T13 Epilepsy
+A20	Certainty T13 5
+A2110	Negation T13 Affirmed
+A2210	CUIPhrase T13 epilepsy
+A2310	CUI T13 C0014544
+T22	Onset 537 571	epilepsy-started-at-the-each-of-12
+A62	AgeUnit T22 Year
+A63	Age T22 12
+A64	Certainty T22 5
+A65	Negation T22 Affirmed
+A66	CUIPhrase T22 epilepsy
+A67	CUI T22 C0014544
+T24	Diagnosis 672 690	myoclonic-seizures
+A69	DiagCategory T24 MultipleSeizures
+A70	Certainty T24 5
+A71	Negation T24 Affirmed
+A72	CUIPhrase T24 myoclonic-seizures
+A73	CUI T24 C4317123
+T26	Onset 709 742	generalised-tonic-chronic-seizure
+A75	AgeUnit T26 Year
+A76	Age T26 14
+A77	Certainty T26 5
+A78	Negation T26 Affirmed
+A79	CUIPhrase T26 generalised-tonic-clonic-seizure
+A80	CUI T26 C0494475
+T28	Diagnosis 709 742	generalised-tonic-chronic-seizure
+A82	DiagCategory T28 SingleSeizure
+A83	Certainty T28 5
+A84	Negation T28 Affirmed
+A85	CUIPhrase T28 generalised-tonic-clonic-seizure
+A86	CUI T28 C0494475
+T30	PatientHistory 780 795	myoclonic-jerks
+A88	Certainty T30 5
+A89	Negation T30 Affirmed
+A90	CUIPhrase T30 myoclonic-jerks
+A91	CUI T30 C0027066
+T15	SeizureFrequency 780 796	myoclonic-jerks-
+A25	FrequencyChange T15 Frequent
+A2610	CUIPhrase T15 myoclonic-jerks
+A2710	CUI T15 C0027066
+T32	Diagnosis 807 841	generalised-tonic-chronic-seizures
+A93	DiagCategory T32 MultipleSeizures
+A94	Certainty T32 5
+A95	Negation T32 Affirmed
+A96	CUIPhrase T32 generalised-tonic-clonic-seizures
+A97	CUI T32 C0494475
+T34	Diagnosis 856 889	generalised-tonic-clonic-seizures
+A99	DiagCategory T34 MultipleSeizures
+A100	Certainty T34 5
+A101	Negation T34 Affirmed
+A102	CUIPhrase T34 generalised-tonic-clonic-seizures
+A103	CUI T34 C0494475
+T17	SeizureFrequency 856 887	generalised-tonic-clonic-seizur
+A2910	FrequencyChange T17 Frequent
+A3010	CUIPhrase T17 generalised-tonic-clonic-seizures
+A31	CUI T17 C0494475
+T36	Diagnosis 972 1005	generalised-tonic-clonic-seizures
+A105	DiagCategory T36 MultipleSeizures
+A106	Certainty T36 5
+A107	Negation T36 Affirmed
+A108	CUIPhrase T36 generalised-tonic-clonic-seizures
+A109	CUI T36 C0494475
+T1	SeizureFrequency 972 1004	generalised-tonic-clonic-seizure
+A3410	LowerNumberOfSeizures T1 1
+A3510	UpperNumberOfSeizures T1 2
+A3610	TimePeriod T1 Month
+A3710	NumberOfTimePeriods T1 1
+A3810	CUIPhrase T1	generalised-tonic-clonic-seizures
+A3910	CUI T1 C0494475
+T40	PatientHistory 1087 1094	anxiety
+A117	Certainty T40 5
+A118	Negation T40 Affirmed
+A119	CUIPhrase T40 anxiety
+A120	CUI T40 C0003467
+T42	PatientHistory 1198 1218	clusters-of-seizures
+A122	Certainty T42 5
+A123	Negation T42 Affirmed
+A124	CUIPhrase T42 cluster-of-seizures
+A125	CUI T42 C3203523
+T44	Diagnosis 1343 1370	juvenile-myoclonic-epilepsy
+A127	DiagCategory T44 Epilepsy
+A128	Certainty T44 5
+A129	Negation T44 Affirmed
+A130	CUIPhrase T44 juvenile-myoclonic-epilepsy
+A131	CUI T44 C0270853
+T46	PatientHistory 1556 1563	anxiety
+A133	Certainty T46 5
+A134	Negation T46 Affirmed
+A135	CUIPhrase T46 anxiety
+A136	CUI T46 C0003467
+T242	PatientHistory 1686 1694	seizures
+A4710	Certainty T242 5
+A4810	Negation T242 Affirmed
+A4910	CUIPhrase T242 seizures
+A5010	CUI T242 C0036572
+T222	Diagnosis 1786 1795	epilepsy-
+A4110	DiagCategory T222 Epilepsy
+A4210	Certainty T222 5
+A4310	Negation T222 Affirmed
+A4410	CUIPhrase T222 epilepsy
+A4510	CUI T222 C0014544

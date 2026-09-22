@@ -1,0 +1,52 @@
+T10	PatientHistory 232 250	-altered-awareness
+A102	Certainty T10 5
+A112	Negation T10 Affirmed
+A122	CUIPhrase T10 altered-awareness-and-consciousness
+A132	CUI T10 C0234428
+T1	Investigations 1064 1067	MRI
+A1	MRI_Performed T1 Yes
+A2	CUIPhrase T1 mri-normal
+A3	CUI T1 C0436481
+A4	MRI_Results T1 Normal
+T2	Investigations 1087 1090	EEG
+A5	CUI T2 C0560017
+A6	EEG_Performed T2 Yes
+A7	CUIPhrase T2 eeg-normal
+A8	EEG_Results T2 Normal
+T3	BirthHistory 874 887	born-normally
+A9	Negation T3 Affirmed
+A10	Certainty T3 5
+A11	CUIPhrase T3 born-normally
+A12	CUI T3 C3665337
+T4	PatientHistory 282 303	dissociative-seizures
+A13	CUIPhrase T4 dissociative-seizures
+A14	Negation T4 Affirmed
+A15	Certainty T4 4
+A16	CUI T4 C0349245
+T5	PatientHistory 995 1003	migraine
+A17	Certainty T5 5
+A18	CUIPhrase T5 migraine
+A19	CUI T5 C0149931
+A20	Negation T5 Affirmed
+T6	PatientHistory 336 343	anxiety
+A21	Certainty T6 5
+A22	CUI T6 C0003467
+A23	CUIPhrase T6 anxiety
+A24	Negation T6 Affirmed
+T7	PatientHistory 1248 1269	dissociative-seizures
+A25	Negation T7 Affirmed
+A26	CUIPhrase T7 dissociative-seizures
+A27	CUI T7 C0349245
+A28	Certainty T7 4
+T8	PatientHistory 907 922	ebrile-seizures
+A29	Certainty T8 1
+A30	CUI T8 C0009952
+A31	Negation T8 Negated
+A32	CUIPhrase T8 febrile-seizures
+T9	PatientHistory 414 426	seizure-like
+A33	CUIPhrase T9 seizure-like-events
+A34	Certainty T9 5
+A35	Negation T9 Affirmed
+A36	NumberOfTimePeriods T9 1
+A37	CUI T9 C0748601
+A38	TimePeriod T9 Year

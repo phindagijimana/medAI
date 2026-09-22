@@ -1,0 +1,49 @@
+T1	PatientHistory 98 106	Migraine
+A1	CUI T1 C0149931
+A2	Certainty T1 5
+A3	Negation T1 Affirmed
+A4	CUIPhrase T1 migraine
+T2	SeizureFrequency 282 289	seizure
+A5	NumberOfTimePeriods T2 1
+A6	TimePeriod T2 Week
+A7	CUI T2 C0036572
+A8	LowerNumberOfSeizures T2 3
+A9	UpperNumberOfSeizures T2 4
+A10	CUIPhrase T2 seizures
+T3	Diagnosis 489 521	generalised-tonic-clonc-seizure.
+A11	DiagCategory T3 SingleSeizure
+A12	CUIPhrase T3 generalised-tonic-clonic-seizure
+A13	CUI T3 C0494475
+A14	Certainty T3 5
+A15	Negation T3 Affirmed
+T4	Diagnosis 1251 1265	focal-epilepsy
+A16	CUI T4 C0014547
+A17	CUIPhrase T4 focal-epilepsy
+A18	DiagCategory T4 Epilepsy
+A19	Negation T4 Affirmed
+A20	Certainty T4 5
+T5	Diagnosis 79 93	focal-epilepsy
+A21	Certainty T5 4
+A22	DiagCategory T5 Epilepsy
+A23	Negation T5 Affirmed
+A24	CUI T5 C0014547
+A25	CUIPhrase T5 focal-epilepsy
+T6	PatientHistory 282 291	seizures-
+A26	Certainty T6 5
+A27	Age T6 5
+A28	CUI T6 C0036572
+A29	Negation T6 Affirmed
+A30	AgeUnit T6 Year
+A31	CUIPhrase T6 seizures
+T7	Diagnosis 1284 1299	complex-partial
+A32	CUI T7 C0149958
+A33	CUIPhrase T7 complex-partial-seizure
+A34	DiagCategory T7 MultipleSeizures
+A35	Negation T7 Affirmed
+A36	Certainty T7 5
+T8	Diagnosis 1304 1334	secondary-generalised-seizures
+A37	CUIPhrase T8 secondary-generalised-seizures
+A38	Negation T8 Affirmed
+A39	DiagCategory T8 MultipleSeizures
+A40	Certainty T8 5
+A41	CUI T8 C0270838

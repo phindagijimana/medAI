@@ -1,0 +1,42 @@
+T2	Diagnosis 21 58	symptomatic-structural-focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-structural-focal-epilepsy
+A6	CUI T2 C0472349
+T11	PatientHistory 69 89	meningioma-resection
+A12	DayDate T11 3
+A131	MonthDate T11 1
+A141	YearDate T11 2005
+A151	Certainty T11 5
+A161	Negation T11 Affirmed
+A171	CUIPhrase T11 meningioma-surgery
+A18	CUI T11 C1096493
+T6	Diagnosis 136 173	focal-seizures-with-altered-awareness
+A13	DiagCategory T6 MultipleSeizures
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 focal-seizures-with-altered-awareness
+A17	CUI T6 C0270834
+T8	SeizureFrequency 136 172	focal-seizures-with-altered-awarenes
+A19	NumberOfSeizures T8 1
+A20	TimePeriod T8 Week
+A21	NumberOfTimePeriods T8 3
+A22	CUIPhrase T8 focal-seizures-with-altered-awareness
+A23	CUI T8 C0270834
+T10	Prescription 189 254	Current-anti-epileptic-medication:-lamotrigine-75mg-bd-(to-reduce
+A25	DrugName T10 lamotrigine
+A26	DrugDose T10 75
+A27	DoseUnit T10 mg
+A28	Frequency T10 2
+A29	CUIPhrase T10 lamotrigine
+A30	CUI T10 C0064636
+T14	PatientHistory 451 461	sseizures-
+A36	Certainty T14 5
+A37	Negation T14 Affirmed
+A38	CUIPhrase T14 seizures
+A39	CUI T14 C0036572
+T12	SeizureFrequency 452 474	seizures-have-returned
+A32	FrequencyChange T12 Increased
+A33	CUIPhrase T12 seizure
+A34	CUI T12 C0036572

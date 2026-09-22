@@ -1,0 +1,52 @@
+T5	PatientHistory 11 37	Insulin-dependent-diabetes
+A11	Certainty T5 5
+A12	Negation T5 Affirmed
+A13	CUIPhrase T5 insulin-dependent-diabetes
+A14	CUI T5 C0011854
+T1	SeizureFrequency 221 230	seizures-
+A1	CUIPhrase T1 seizures
+A2	TimePeriod T1 Year
+A3	UpperNumberOfSeizures T1 2
+A4	LowerNumberOfSeizures T1 1
+A5	CUI T1 C0036572
+A6	NumberOfTimePeriods T1 1
+T2	Prescription 62 74	Lamotrigine-
+A7	CUI T2 C0064636
+A8	DoseUnit T2 mg
+A9	DrugName T2 Lamotrigine
+A10	CUIPhrase T2 lamotrigine
+A112	DrugDose T2 100
+A122	Frequency T2 2
+T8	PatientHistory 221 229	seizures
+A102	Certainty T8 5
+A113	Negation T8 Affirmed
+A123	CUIPhrase T8 seizures
+A132	CUI T8 C0036572
+T10	PatientHistory 305 312	seizure
+A15	Certainty T10 5
+A16	Negation T10 Affirmed
+A17	CUIPhrase T10 seizures
+A18	CUI T10 C0036572
+T3	Investigations 893 897	MRI-
+A133	MRI_Performed T3 Yes
+A142	CUIPhrase T3 MRI normal
+A152	MRI_Results T3 Normal
+A162	CUI T3 C0436481
+T4	SeizureFrequency 305 314	seizures-
+A172	CUIPhrase T4 seizures
+A182	CUI T4 C0036572
+A19	NumberOfTimePeriods T4 1
+A20	LowerNumberOfSeizures T4 1
+A21	TimePeriod T4 Month
+A22	UpperNumberOfSeizures T4 2
+T6	Investigations 980 984	EEG-
+A27	EEG_Results T6 Abnormal
+A28	CUI T6 C0151611
+A29	CUIPhrase T6 EEG abnormal
+A30	EEG_Performed T6 Yes
+T7	Diagnosis 40 48	Epilepsy
+A31	Negation T7 Affirmed
+A32	CUIPhrase T7 epilepsy
+A33	Certainty T7 5
+A34	DiagCategory T7 Epilepsy
+A35	CUI T7 C0014544

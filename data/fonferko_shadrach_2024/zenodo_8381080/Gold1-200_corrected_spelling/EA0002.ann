@@ -1,0 +1,67 @@
+T2	Diagnosis 21 35	focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T4	Diagnosis 27 53	epilepsy-Probable-temporal
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 4
+A10	Negation T4 Affirmed
+A111	CUIPhrase T4 temporal-lobe-epilepsy
+A121	CUI T4 C0014556
+T8	Prescription 88 102	carbamazepine-
+A21	DrugName T8 Carbamazepine
+A22	DrugDose T8 400
+A23	DoseUnit T8 mg
+A24	Frequency T8 2
+A25	CUIPhrase T8 carbamazepine
+A26	CUI T8 C0006949
+T6	Prescription 121 141	Topiramate-100-mg-BD
+A140	DrugName T6 topiramate
+A15	DrugDose T6 100
+A16	DoseUnit T6 mg
+A17	Frequency T6 2
+A18	CUIPhrase T6 topiramate
+A19	CUI T6 C0076829
+T102	Diagnosis 250 264	focal-seizures
+A28	DiagCategory T102 MultipleSeizures
+A29	Certainty T102 5
+A30	Negation T102 Affirmed
+A31	CUIPhrase T102 focal-seizures
+A32	CUI T102 C0751495
+T12	SeizureFrequency 250 264	focal-seizures
+A34	LowerNumberOfSeizures T12 2
+A35	UpperNumberOfSeizures T12 3
+A36	MonthDate T12 3
+A37	TimeSince_or_TimeOfEvent T12 During
+A38	CUIPhrase T12 focal-seizures
+A39	CUI T12 C0751495
+T14	Diagnosis 345 375	secondary-generalised-seizures
+A41	DiagCategory T14 MultipleSeizures
+A42	Certainty T14 5
+A43	Negation T14 Affirmed
+A44	CUIPhrase T14 secondary-generalised-seizures
+A45	CUI T14 C0270838
+T16	SeizureFrequency 345 375	secondary-generalised-seizures
+A47	NumberOfSeizures T16 4
+A48	PointInTime T16 LastClinic
+A49	TimeSince_or_TimeOfEvent T16 Since
+A50	CUIPhrase T16 secondary-generalised-seizures
+A51	CUI T16 C0270838
+T18	Diagnosis 388 402	focal-seizures
+A53	DiagCategory T18 MultipleSeizures
+A54	Certainty T18 5
+A55	Negation T18 Affirmed
+A56	CUIPhrase T18 focal-seizures
+A57	CUI T18 C0751495
+T10	PatientHistory 611 630	convulsive-seizures
+A11	Certainty T10 5
+A12	Negation T10 Affirmed
+A13	CUIPhrase T10 convulsive-seizures
+A14	CUI T10 C0751494
+T22	Investigations 839 847	MRI-scan
+A65	MRI_Performed T22 Yes
+A66	MRI_Results T22 Abnormal
+A67	CUIPhrase T22 mri-abnormal
+A68	CUI T22 C1319851

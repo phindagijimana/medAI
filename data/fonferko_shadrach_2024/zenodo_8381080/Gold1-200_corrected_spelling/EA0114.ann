@@ -1,0 +1,42 @@
+T2	Diagnosis 83 97	Focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T4	Diagnosis 106 125	temporal-lobe-onset
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 3
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 temporal-lobe-onset-seizure
+A12	CUI T4 C0014556
+T6	Prescription 140 163	Levetiracetam-750mgs-bd
+A14	DrugName T6 levetiracetam
+A15	DrugDose T6 750
+A16	DoseUnit T6 mg
+A17	Frequency T6 2
+A18	CUIPhrase T6 levetiracetam
+A19	CUI T6 C0377265
+T8	Prescription 166 231	Carbamazepine-Controlled-Release-400mgs-bd-to-reduce-to-200mgs-am
+A21	DrugName T8 carbamazepine
+A22	DrugDose T8 400
+A23	DoseUnit T8 mg
+A24	Frequency T8 2
+A25	CUIPhrase T8 carbamazepine
+A26	CUI T8 C0006949
+T10	Diagnosis 428 461	focal-impaired-awareness-seizures
+A28	DiagCategory T10 MultipleSeizures
+A29	Certainty T10 5
+A30	Negation T10 Affirmed
+A31	CUIPhrase T10 focal-impaired-awareness-seizures
+A32	CUI T10 C0270834
+T12	Investigations 578 582	EEG-
+A34	EEG_Performed T12 Yes
+A35	EEG_Results T12 Abnormal
+A36	CUIPhrase T12 eeg-abnormal
+A37	CUI T12 C0151611
+T14	PatientHistory 776 784	seizures
+A39	Certainty T14 5
+A40	Negation T14 Affirmed
+A41	CUIPhrase T14 seizures
+A42	CUI T14 C0036572

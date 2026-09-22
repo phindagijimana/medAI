@@ -1,0 +1,64 @@
+T1	PatientHistory 115 124	absences-
+A1	Certainty T1 5
+A2	Negation T1 Affirmed
+A3	CUI T1 C0563606
+A4	CUIPhrase T1 absences
+T2	PatientHistory 128 143	myoclonic-jerks
+A5	Negation T2 Affirmed
+A6	CUIPhrase T2 myoclonic-jerks
+A7	CUI T2 C0027066
+A8	Certainty T2 5
+T3	Diagnosis 87 113	generalised-tonic-seizures
+A9	Certainty T3 5
+A10	CUI T3 C0270844
+A11	DiagCategory T3 MultipleSeizures
+A12	Negation T3 Affirmed
+A13	CUIPhrase T3 generalised-tonic-seizures
+T4	Prescription 194 241	Medication:-epilim-400-milligrammes-twice-a-day
+A14	CUIPhrase T4 epilim
+A15	DoseUnit T4 mg
+A16	DrugDose T4 400
+A17	CUI T4 C0591451
+A18	Frequency T4 2
+A19	DrugName T4 epilim
+T5	Diagnosis 391 400	epilepsy-
+A20	CUI T5 C0014544
+A21	DiagCategory T5 Epilepsy
+A22	Certainty T5 5
+A23	CUIPhrase T5 epilepsy
+A24	Negation T5 Affirmed
+T6	PatientHistory 334 342	seizures
+A25	Age T6 16
+A26	CUIPhrase T6 seizures
+A27	Negation T6 Affirmed
+A28	Certainty T6 5
+A29	AgeUnit T6 Year
+A30	CUI T6 C0036572
+T7	PatientHistory 682 697	febrile-seizure
+A31	CUI T7 C0009952
+A32	Negation T7 Affirmed
+A33	AgeUnit T7 Year
+A34	CUIPhrase T7 febrile-seizure
+A35	Age T7 4
+A36	Certainty T7 5
+T8	Diagnosis 67 71	JME-
+A37	Certainty T8 4
+A38	DiagCategory T8 Epilepsy
+A39	CUI T8 C0270853
+A40	Negation T8 Affirmed
+A41	CUIPhrase T8 jme
+T9	Diagnosis 864 891	juvenile-myoclonic-epilepsy
+A42	CUI T9 C0270853
+A43	CUIPhrase T9 juvenile-myoclonic-epilepsy
+A44	Negation T9 Affirmed
+A45	Certainty T9 5
+A46	DiagCategory T9 Epilepsy
+T10	PatientHistory 308 316	seizures
+A47	Negation T10 Affirmed
+A48	CUI T10 C0036572
+A49	Certainty T10 5
+A50	CUIPhrase T10 seizures
+T11	SeizureFrequency 296 316	iincreasing-seizures
+A51	CUIPhrase T11 seizure
+A52	CUI T11 C0036572
+A53	FrequencyChange T11 Increased

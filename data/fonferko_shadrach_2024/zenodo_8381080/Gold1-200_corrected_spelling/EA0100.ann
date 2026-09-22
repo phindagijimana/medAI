@@ -1,0 +1,47 @@
+T12	PatientHistory 93 124	Transient-loss-of-consciousness
+A12	Certainty T12 5
+A13	Negation T12 Affirmed
+A14	CUIPhrase T12 transient-loss-of-consciousness
+A15	CUI T12 C4087400
+T15	PatientHistory 144 151	seizure
+A39	Certainty T15 5
+A40	Negation T15 Affirmed
+A41	CUIPhrase T15 seizure
+A42	CUI T15 C0036572
+T14	PatientHistory 240 272	-transient-loss-of-consciousness
+A17	Certainty T14 5
+A18	Negation T14 Affirmed
+A19	CUIPhrase T14 transient-loss-of-consciousness
+A20	CUI T14 C4087400
+T9	BirthHistory 940 953	born-normally
+A9	Certainty T9 5
+A1010	Negation T9 Affirmed
+A1110	CUIPhrase T9 born-normally
+A1210	CUI T9 C3665337
+T10	PatientHistory 964 997	febrile-seizures-at-the-ages-of-3
+A23	AgeUnit T10 Year
+A24	Age T10 3
+A25	Certainty T10 5
+A26	Negation T10 Affirmed
+A27	CUIPhrase T10 febrile-seizures
+A28	CUI T10 C0009952
+T13	PatientHistory 1194 1202	diabetes
+A34	Certainty T13 5
+A35	Negation T13 Affirmed
+A36	CUIPhrase T13 diabetes
+A37	CUI T13 C0011847
+T19	Investigations 1471 1478	CT-head
+A49	CT_Performed T19 Yes
+A50	CT_Results T19 Normal
+A51	CUIPhrase T19 ct-normal
+A52	CUI T19 C0744602
+T17	PatientHistory 1527 1534	seizure
+A44	Certainty T17 5
+A45	Negation T17 Affirmed
+A46	CUIPhrase T17 seizure
+A47	CUI T17 C0036572
+T11	PatientHistory 1584 1592	seizure-
+A1410	Certainty T11 5
+A1510	Negation T11 Affirmed
+A1610	CUIPhrase T11 seizure
+A1710	CUI T11 C0036572

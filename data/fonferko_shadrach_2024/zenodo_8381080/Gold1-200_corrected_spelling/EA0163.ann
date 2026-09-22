@@ -1,0 +1,19 @@
+T1	SeizureFrequency 179 188	seizures-
+A1	NumberOfSeizures T1 0
+A2	NumberOfTimePeriods T1 3
+A3	TimePeriod T1 Week
+A4	CUIPhrase T1 seizures
+A5	CUI T1 C0036572
+T2	Prescription 74 105	Medication:-Lamotrigine-50mg-bd
+A6	DoseUnit T2 mg
+A7	DrugName T2 lamotrigine
+A8	DrugDose T2 50
+A9	Frequency T2 2
+A10	CUIPhrase T2 lamotrigine
+A11	CUI T2 C0064636
+T3	Diagnosis 51 73	Temporal-lobe-epilepsy
+A12	Certainty T3 5
+A13	DiagCategory T3 Epilepsy
+A14	Negation T3 Affirmed
+A15	CUIPhrase T3 temporal-lobe-epilepsy
+A16	CUI T3 C0014556

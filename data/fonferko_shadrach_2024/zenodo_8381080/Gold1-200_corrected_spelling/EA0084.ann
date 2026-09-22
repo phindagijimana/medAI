@@ -1,0 +1,24 @@
+T1	Prescription 193 216	·-Brivaracetam-50mgs-bd
+A1	CUIPhrase T1 brivaracetam
+A2	DrugName T1 brivaracetam
+A3	DrugDose T1 50
+A4	CUI T1 C1699861
+A5	Frequency T1 2
+A6	DoseUnit T1 mg
+T2	Diagnosis 165 179	Focal-epilepsy
+A7	CUI T2 C0014547
+A8	CUIPhrase T2 focal-epilepsy
+A9	Negation T2 Affirmed
+A10	DiagCategory T2 Epilepsy
+A11	Certainty T2 5
+T3	PatientHistory 959 967	seizures
+A12	CUI T3 C0036572
+A13	CUIPhrase T3 seizures
+A14	Certainty T3 5
+A15	Negation T3 Affirmed
+T4	SeizureFrequency 293 305	seizure-free
+A16	CUIPhrase T4 seizure-free
+A17	CUI T4 C1299590
+A18	TimeSince_or_TimeOfEvent T4 Since
+A19	NumberOfSeizures T4 0
+A20	PointInTime T4 DrugChange

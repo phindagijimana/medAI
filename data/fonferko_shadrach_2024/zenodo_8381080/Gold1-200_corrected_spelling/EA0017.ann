@@ -1,0 +1,35 @@
+T2	Diagnosis 45 59	focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T4	SeizureFrequency 80 92	seizure-free
+A8	NumberOfSeizures T4 0
+A9	TimePeriod T4 Month
+A10	NumberOfTimePeriods T4 7
+A11	CUIPhrase T4 seizure-free
+A12	CUI T4 C1299590
+T9	PatientHistory 166 174	seizures
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 seizures
+A1310	CUI T9 C0036572
+T6	Prescription 184 224	She-is-currently-taking-Keppra-750-mg-BD
+A14	DrugName T6 keppra
+A15	DrugDose T6 750
+A16	DoseUnit T6 mg
+A17	Frequency T6 2
+A18	CUIPhrase T6 keppra
+A19	CUI T6 C0876060
+T11	Prescription 229 255	folic-acid-5-mg-once-a-day
+A121	DrugName T11 folic-acid
+A13	DrugDose T11 5
+A141	DoseUnit T11 mg
+A151	Frequency T11 1
+A152	CUI T11 C0016410	
+T8	Investigations 260 263	MRI
+A21	MRI_Performed T8 Yes
+A22	MRI_Results T8 Abnormal
+A23	CUIPhrase T8 mri-abnormal
+A24	CUI T8 C1319851

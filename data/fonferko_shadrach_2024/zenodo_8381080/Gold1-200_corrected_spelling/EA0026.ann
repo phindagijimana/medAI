@@ -1,0 +1,53 @@
+T2	Diagnosis 71 104	generalised-tonic-clonic-seizures
+A2	DiagCategory T2 MultipleSeizures
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 generalised-tonic-clonic-seizures
+A6	CUI T2 C0494475
+T4	PatientHistory 110 125	myoclonic-jerks
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 myoclonic-jerks
+A11	CUI T4 C0027066
+T6	Diagnosis 136 139	JME
+A13	DiagCategory T6 Epilepsy
+A14	Certainty T6 3
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 jme
+A17	CUI T6 C0270853
+T8	Investigations 157 160	EEG
+A19	EEG_Performed T8 Yes
+A20	EEG_Results T8 Abnormal
+A21	EEG_Type T8 Standard
+A22	CUIPhrase T8 abnormal-eeg
+A23	CUI T8 C0151611
+T10	Investigations 207 210	MRI
+A25	MRI_Performed T10 Yes
+A26	MRI_Results T10 Normal
+A27	CUIPhrase T10 normal-mri
+A28	CUI T10 C0436481
+T17	Prescription 231 254	sodium-valproate-700-mg
+A133	DrugName T17 SodiumValproate
+A134	DrugDose T17 700
+A135	DoseUnit T17 mg
+A136	Frequency T17 1
+A137	CUIPhrase T17 sodium-valproate
+A138	CUI T17 C0037567
+T18	Prescription 280 290	topiramate
+A139	DrugName T18 Topiramate
+A140	DrugDose T18 100
+A141	DoseUnit T18 mg
+A142	Frequency T18 2
+A143	CUIPhrase T18 topiramate
+A144	CUI T18 C0076829
+T9	SeizureFrequency 357 365	seizures
+A40	NumberOfSeizures T9 15
+A41	TimePeriod T9 Month
+A42	NumberOfTimePeriods T9 4
+A43	CUIPhrase T9 seizures
+A44	CUI T9 C0036572
+T16	PatientHistory 357 365	seizures
+A102	Certainty T16 5
+A112	Negation T16 Affirmed
+A122	CUIPhrase T16 seizures
+A132	CUI T16 C0036572

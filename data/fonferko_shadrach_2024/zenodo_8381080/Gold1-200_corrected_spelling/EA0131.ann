@@ -1,0 +1,46 @@
+T1	Diagnosis 274 283	epilepsy-
+A1	Negation T1 Affirmed
+A2	CUIPhrase T1 epilepsy
+A3	DiagCategory T1 Epilepsy
+A4	CUI T1 C0014544
+A5	Certainty T1 5
+T2	Diagnosis 513 546	generalised-tonic-clonic-seizures
+A6	CUIPhrase T2 generalised-tonic-clonic-seizures
+A7	DiagCategory T2 MultipleSeizures
+A8	Certainty T2 5
+A9	CUI T2 C0494475
+A10	Negation T2 Affirmed
+T3	Prescription 358 374	sodium-valproate
+A11	CUI T3 C0037567
+A12	DrugName T3 SodiumValproate
+A13	Frequency T3 2
+A14	DoseUnit T3 mg
+A15	CUIPhrase T3 sodium-valproate
+A16	DrugDose T3 400
+T4	Investigations 180 197	EEG-abnormalities
+A17	CUIPhrase T4 eeg-abnormal
+A18	EEG_Performed T4 Yes
+A19	EEG_Results T4 Abnormal
+A20	CUI T4 C0151611
+T5	SeizureFrequency 439 446	eizures
+A21	CUI T5 C0036572
+A22	FrequencyChange T5 Increased
+A23	TimeSince_or_TimeOfEvent T5 Since
+A24	PointInTime T5 Last_Year
+A25	CUIPhrase T5 seizures
+T6	Diagnosis 137 165	primary-generalised-epilepsy
+A26	CUIPhrase T6 primary-generalised-epilepsy
+A27	Negation T6 Affirmed
+A28	CUI T6 C0270850
+A29	DiagCategory T6 Epilepsy
+A30	Certainty T6 5
+T7	PatientHistory 438 445	seizure
+A31	CUIPhrase T7 seizure
+A32	Negation T7 Affirmed
+A33	Certainty T7 5
+A34	CUI T7 C0036572
+T8	Investigations 208 212	MRI-
+A35	CUIPhrase T8 mri-normal
+A36	MRI_Results T8 Normal
+A37	CUI T8 C0436481
+A38	MRI_Performed T8 Yes

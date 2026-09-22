@@ -1,0 +1,102 @@
+T1	SeizureFrequency 632 653	tonic-clonic-seizures
+A1	NumberOfTimePeriods T1 2
+A2	CUIPhrase T1 tonic-clonic-seizures
+A3	CUI T1 C0494475
+A4	FrequencyChange T1 Frequent
+A5	TimePeriod T1 Year
+T2	Diagnosis 64 84	Generalised-epilepsy
+A6	CUI T2 C0014548
+A7	Negation T2 Affirmed
+A8	CUIPhrase T2 generalised-epilepsy
+A9	DiagCategory T2 Epilepsy
+A10	Certainty T2 5
+T3	Onset 375 390	absence-seizure
+A11	AgeUnit T3 Year
+A12	CUI T3 C4316903
+A13	CUIPhrase T3 absence-seizures
+A14	Negation T3 Affirmed
+A15	Age T3 8
+A16	Certainty T3 5
+T4	Diagnosis 375 391	absence-seizures
+A17	Negation T4 Affirmed
+A18	Certainty T4 5
+A19	CUIPhrase T4 absence-seizures
+A20	DiagCategory T4 MultipleSeizures
+A21	CUI T4 C4316903
+T5	Diagnosis 103 107	GTCS
+A22	Negation T5 Affirmed
+A23	CUIPhrase T5 generalised-tonic-clonic-seizures
+A24	DiagCategory T5 MultipleSeizures
+A25	Certainty T5 5
+A26	CUI T5 C0494475
+T6	PatientHistory 90 99	absences-
+A27	CUI T6 C0563606
+A28	CUIPhrase T6 absences
+A29	Negation T6 Affirmed
+A30	Certainty T6 5
+T7	SeizureFrequency 833 842	absences-
+A31	CUI T7 C0563606
+A32	NumberOfSeizures T7 1
+A33	NumberOfTimePeriods T7 1
+A34	TimePeriod T7 Week
+A35	CUIPhrase T7 absences
+T10	PatientHistory 833 841	absences
+A1010	Certainty T10 5
+A1110	Negation T10 Affirmed
+A1210	CUIPhrase T10 absences
+A1310	CUI T10 C0563606
+T8	Investigations 935 939	EEG-
+A36	CUIPhrase T8 eeg-abnormal
+A37	CUI T8 C0151611
+A38	EEG_Performed T8 Yes
+A39	EEG_Results T8 Abnormal
+T9	Investigations 1053 1063	normal-MRI
+A40	CUIPhrase T9 normal-mri
+A41	MRI_Results T9 Normal
+A42	MRI_Performed T9 Yes
+A43	CUI T9 C0436481
+T17	Onset 502 533	generalised-tonic-clonic-seizur
+A44	CUI T17 C0494475
+A45	Age T17 12
+A46	Certainty T17 5
+A47	CUIPhrase T17 generalised-tonic-clonic-seizure
+A48	Negation T17 Affirmed
+A49	AgeUnit T17 Year
+T11	Prescription 158 172	Levetiracetam-
+A50	DrugDose T11 250
+A51	CUIPhrase T11 levetiracetam
+A52	Frequency T11 2
+A53	DrugName T11 Levetiracetam
+A54	DoseUnit T11 mg
+A55	CUI T11 C0377265
+T12	SeizureFrequency 764 772	seizure-
+A56	TimeSince_or_TimeOfEvent T12 Since
+A57	PointInTime T12 DrugChange
+A58	FrequencyChange T12 Decreased
+A59	CUIPhrase T12 seizure
+A60	CUI T12 C0036572
+T13	Diagnosis 632 652	tonic-clonic-seizure
+A61	DiagCategory T13 MultipleSeizures
+A62	Certainty T13 5
+A63	CUIPhrase T13 tonic-clonic-seizures
+A64	Negation T13 Affirmed
+A65	CUI T13 C0494475
+T14	Diagnosis 502 534	generalised-tonic-clonic-seizure
+A66	Certainty T14 5
+A67	CUI T14 C0494475
+A68	Negation T14 Affirmed
+A69	CUIPhrase T14 generalised-tonic-clonic-seizure
+A70	DiagCategory T14 SingleSeizure
+T15	Prescription 120 131	Lamotrigine
+A71	CUI T15 C0064636
+A72	DrugName T15 Lamotrigine
+A73	CUIPhrase T15 lamotrigine
+A74	DoseUnit T15 mg
+A75	Frequency T15 1
+A76	DrugDose T15 100
+T16	SeizureFrequency 633 651	onic-clonic-seizur
+A77	NumberOfSeizures T16 1
+A78	TimePeriod T16 Month
+A79	NumberOfTimePeriods T16 2
+A80	CUIPhrase T16 tonic-clonic-seizure
+A81	CUI T16 C0494475

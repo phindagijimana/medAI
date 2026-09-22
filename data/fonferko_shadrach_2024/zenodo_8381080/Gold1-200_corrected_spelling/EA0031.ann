@@ -1,0 +1,62 @@
+T2	Diagnosis 42 69	Juvenile-Myoclonic-Epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T6	Prescription 83 89	Eplim-
+A15	DrugName T6 SodiumValproate
+A16	DrugDose T6 1.5
+A17	DoseUnit T6 g
+A18	Frequency T6 1
+A19	CUIPhrase T6 epilim
+A20	CUI T6 C0591451
+T8	Prescription 83 88	Eplim
+A22	DrugName T8 SodiumValproate
+A23	DrugDose T8 1
+A24	DoseUnit T8 g
+A25	Frequency T8 1
+A26	CUIPhrase T8 epilim
+A27	CUI T8 C0591451
+T4	Prescription 126 151	Clobazam-10-mg-once-a-day
+A8	DrugName T4 clobazam
+A9	DrugDose T4 10
+A10	DoseUnit T4 mg
+A11	Frequency T4 1
+A12	CUIPhrase T4 clobazam
+A13	CUI T4 C0055891
+T10	Investigations 169 179	MRI-normal
+A29	MRI_Performed T10 Yes
+A30	MRI_Results T10 Normal
+A31	CUIPhrase T10 mri-normal
+A32	CUI T10 C0436481
+T12	Investigations 180 184	EEG-
+A34	EEG_Performed T12 Yes
+A35	EEG_Results T12 Abnormal
+A36	CUIPhrase T12 eeg-abnormal
+A37	CUI T12 C0151611
+T9	PatientHistory 232 248	photosensitivity
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 photosensitivity
+A1310	CUI T9 C3552821
+T14	Diagnosis 261 269	epilepsy
+A39	DiagCategory T14 Epilepsy
+A40	Certainty T14 5
+A41	Negation T14 Affirmed
+A42	CUIPhrase T14 epilepsy
+A43	CUI T14 C0014544
+T16	PatientHistory 382 390	seizure-
+A45	Certainty T16 5
+A46	Negation T16 Affirmed
+A47	CUIPhrase T16 seizure
+A48	CUI T16 C0036572
+T18	PatientHistory 474 489	myoclonic-jerks
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 myoclonic-jerks
+A53	CUI T18 C0027066
+T11	SeizureFrequency 474 488	myoclonic-jerk
+A1510	FrequencyChange T11 Infrequent
+A1610	CUIPhrase T11 myoclonic-jerk
+A1710	CUI T11 C0027066

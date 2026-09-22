@@ -1,0 +1,40 @@
+T2	Diagnosis 171 180	epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T3	Prescription 193 224	Medication:-Lamotrigine-75mg-bd
+A24	DrugName T3 lamotrigine
+A25	DrugDose T3 75
+A26	DoseUnit T3 mg
+A27	Frequency T3 2
+A28	CUIPhrase T3 lamotrigine
+A29	CUI T3 C0064636
+T4	PatientHistory 314 322	seizures
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 seizures
+A11	CUI T4 C0036572
+T10	SeizureFrequency 314 322	seizures
+A1110	NumberOfSeizures T10 0
+A12	PointInTime T10 DrugChange
+A13	TimeSince_or_TimeOfEvent T10 Since
+A14	CUIPhrase T10 seizures
+A15	CUI T10 C0036572
+T8	SeizureFrequency 393 400	seizure
+A18	NumberOfSeizures T8 0
+A19	TimePeriod T8 Month
+A20	NumberOfTimePeriods T8 5
+A21	CUIPhrase T8 seizures
+A22	CUI T8 C0036572
+T9	PatientHistory 393 400	seizure
+A101	Certainty T9 5
+A111	Negation T9 Affirmed
+A121	CUIPhrase T9 seizure
+A131	CUI T9 C0036572
+T14	PatientHistory 581 588	seizure
+A1910	Certainty T14 5
+A2010	Negation T14 Affirmed
+A2110	CUIPhrase T14 seizures
+A2210	CUI T14 C0036572

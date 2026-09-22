@@ -1,0 +1,74 @@
+T1	Diagnosis 127 136	epilepsy-
+A1	DiagCategory T1 Epilepsy
+A2	Certainty T1 5
+A3	CUIPhrase T1 epilepsy
+A4	CUI T1 C0014544
+A5	Negation T1 Affirmed
+T2	PatientHistory 946 963	minor-head-injury
+A6	Certainty T2 5
+A7	Negation T2 Affirmed
+A8	CUI T2 C0497301
+A9	CUIPhrase T2 head-injury
+T3	WhenDiagnosed 127 134	epileps
+A10	Certainty T3 5
+A11	TimePeriod T3 Year
+A12	CUIPhrase T3 epilepsy
+A13	NumberOfTimePeriods T3 6
+A14	Negation T3 Affirmed
+A15	CUI T3 C0014544
+T4	PatientHistory 186 195	seizures-
+A16	Certainty T4 5
+A17	CUI T4 C0036572
+A18	CUIPhrase T4 seizures
+A19	Negation T4 Affirmed
+T5	Investigations 689 693	EEG-
+A20	CUIPhrase T5 eeg-normal
+A21	CUI T5 C0560017
+A22	EEG_Results T5 Normal
+A23	EEG_Performed T5 Yes
+T6	BirthHistory 818 834	birth-was-normal
+A24	Negation T6 Affirmed
+A25	CUIPhrase T6 birth-was-normal
+A26	Certainty T6 5
+A27	CUI T6 C3665337
+T7	PatientHistory 781 790	seizures-
+A28	CUIPhrase T7 seizures
+A29	CUI T7 C0036572
+A30	Negation T7 Affirmed
+A31	Certainty T7 5
+T8	PatientHistory 1322 1351	non-epileptic-attack-disorder
+A32	Certainty T8 3
+A33	Negation T8 Affirmed
+A34	CUI T8 C3495874
+A35	CUIPhrase T8 non-epileptic-seizure-disorder
+T9	PatientHistory 895 911	febrile-seizures
+A36	Certainty T9 1
+A37	CUIPhrase T9 febrile-seizures
+A38	Negation T9 Negated
+A39	CUI T9 C0009952
+T10	Investigations 639 647	CT-scan-
+A40	CT_Performed T10 Yes
+A41	CUIPhrase T10 ct-normal
+A42	CUI T10 C0744602
+A43	CT_Results T10 Normal
+T11	SeizureFrequency 781 789	seizures
+A44	NumberOfTimePeriods T11 1
+A45	CUI T11 C0036572
+A46	CUIPhrase T11 seizures
+A47	NumberOfSeizures T11 1
+A48	TimePeriod T11 Week
+T12	PatientHistory 1218 1227	seizures-
+A49	Certainty T12 5
+A50	Negation T12 Affirmed
+A51	CUIPhrase T12 seizures
+A52	CUI T12 C0036572
+T13	PatientHistory 1027 1038	depression-
+A53	Certainty T13 5
+A54	Negation T13 Affirmed
+A55	CUIPhrase T13 depression
+A56	CUI T13 C0011570
+T14	PatientHistory 1060 1085	consumed-too-much-alcohol
+A57	Certainty T14 5
+A58	Negation T14 Affirmed
+A59	CUIPhrase T14 alcohol abuse
+A60	CUI T14 C0085762

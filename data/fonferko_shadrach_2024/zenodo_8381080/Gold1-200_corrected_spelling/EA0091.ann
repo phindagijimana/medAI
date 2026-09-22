@@ -1,0 +1,13 @@
+T1	Diagnosis 149 163	focal-seizures
+A1	CUI T1 C0751495
+A2	Certainty T1 4
+A3	CUIPhrase T1 focal-seizures
+A4	Negation T1 Affirmed
+A5	DiagCategory T1 MultipleSeizures
+T2	Prescription 177 190	Carbamazepine
+A6	DrugName T2 Carbamazepine
+A7	Frequency T2 2
+A8	DoseUnit T2 mg
+A9	CUI T2 C0006949
+A10	CUIPhrase T2 carbamazepine
+A11	DrugDose T2 80

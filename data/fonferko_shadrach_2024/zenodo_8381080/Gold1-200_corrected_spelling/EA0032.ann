@@ -1,0 +1,40 @@
+T2	PatientHistory 86 95	seizures-
+A2	AgeUnit T2 Year
+A3	Age T2 13
+A4	Certainty T2 5
+A5	Negation T2 Affirmed
+A6	CUIPhrase T2 seizures
+A7	CUI T2 C0036572
+T4	PatientHistory 222 237	myoclonic-jerks
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 myoclonic-jerks
+A12	CUI T4 C0027066
+T6	Diagnosis 249 282	generalised-tonic-clonic-seizures
+A14	DiagCategory T6 MultipleSeizures
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 generalised-tonic-clonic-seizures
+A18	CUI T6 C0494475
+T8	Investigations 297 309	abnormal-EEG
+A20	EEG_Performed T8 Yes
+A21	EEG_Results T8 Abnormal
+A22	CUIPhrase T8 abnormal-eeg
+A23	CUI T8 C0151611
+T10	Prescription 374 390	sodium-valproate
+A25	DrugName T10 SodiumValproate
+A26	DrugDose T10 1
+A27	DoseUnit T10 g
+A28	Frequency T10 2
+A29	CUIPhrase T10 sodium-valproate
+A30	CUI T10 C0037567
+T12	Prescription 418 426	clobazam
+A32	DrugName T12 Clobazam
+A33	Frequency T12 As_Required
+A34	CUIPhrase T12 clobazam
+A35	CUI T12 C0055891
+T14	PatientHistory 576 584	seizures
+A37	Certainty T14 5
+A38	Negation T14 Affirmed
+A39	CUIPhrase T14 seizures
+A40	CUI T14 C0036572

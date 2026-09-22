@@ -1,0 +1,69 @@
+T2	Diagnosis 92 116	complex-partial-seizures
+A2	DiagCategory T2 MultipleSeizures
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 complex-partial-seizures
+A6	CUI T2 C0149958
+T4	Diagnosis 117 160	Secondary-generalised-tonic-clonic-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 secondary-generalised-tonic-clonic-seizures
+A12	CUI T4 C0877017
+T6	PatientHistory 161 201	Psychogenic-nonepileptic-attack-disorder
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 non-epileptic psychogenic seizures
+A17	CUI T6 C1142430
+T8	PatientHistory 202 210	Diabetes
+A19	Certainty T8 5
+A20	Negation T8 Affirmed
+A21	CUIPhrase T8 diabetes
+A22	CUI T8 C0011849
+T14	Prescription 248 261	Carbamazepine
+A38	DrugName T14 Carbamazepine
+A39	DrugDose T14 400
+A40	DoseUnit T14 mg
+A41	Frequency T14 1
+A42	CUIPhrase T14 carbamazepine
+A43	CUI T14 C0006949
+T16	Prescription 248 267	Carbamazepine-400mg
+A45	DrugName T16 Carbamazepine
+A46	DrugDose T16 400
+A47	DoseUnit T16 mg
+A48	Frequency T16 1
+A49	CUIPhrase T16 carbamazepine
+A50	CUI T16 C0006949
+T18	Prescription 248 280	Carbamazepine-400mg/400-mg/200mg
+A52	DrugName T18 Carbamazepine
+A53	DrugDose T18 200
+A54	DoseUnit T18 mg
+A55	Frequency T18 1
+A56	CUIPhrase T18 carbamazepine
+A57	CUI T18 C0006949
+T10	Prescription 281 309	Zonisamide-50-mg-twice-a-day
+A24	DrugName T10 zonisamide
+A25	DrugDose T10 50
+A26	DoseUnit T10 mg
+A27	Frequency T10 2
+A28	CUIPhrase T10 zonisamide
+A29	CUI T10 C0078844
+T12	Prescription 310 327	Clobazam-10-mg-BD
+A31	DrugName T12 clobazam
+A32	DrugDose T12 10
+A33	DoseUnit T12 mg
+A34	Frequency T12 2
+A35	CUIPhrase T12 clobazam
+A36	CUI T12 C0055891
+T20	Diagnosis 400 433	generalised-tonic-chronic-seizure
+A59	DiagCategory T20 SingleSeizure
+A60	Certainty T20 5
+A61	Negation T20 Affirmed
+A62	CUIPhrase T20 generalised-tonic-clonic-seizure
+A63	CUI T20 C0494475
+T9	SeizureFrequency 400 433	generalised-tonic-chronic-seizure
+A1010	NumberOfSeizures T9 1
+A1110	TimePeriod T9 Year
+A1210	NumberOfTimePeriods T9 1
+A1310	CUIPhrase T9 generalised-tonic-clonic-seizure
+A1410	CUI T9 C0494475

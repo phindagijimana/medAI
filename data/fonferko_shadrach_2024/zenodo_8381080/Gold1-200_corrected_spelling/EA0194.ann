@@ -1,0 +1,112 @@
+T1	BirthHistory 945 958	born-normally
+A1	Negation T1 Affirmed
+A2	Certainty T1 5
+A3	CUIPhrase T1 born-normally
+A4	PrematureBirth T1 37+_TermBirth
+A5	CUI T1 C3665337
+T2	SeizureFrequency 431 469	Focal-to-bilateral-convulsive-seizures
+A6	CUI T2 C0877017
+A7	CUIPhrase T2 focal to bilateral convulsive seizures
+A8	DayDate T2 23
+A9	NumberOfSeizures T2 0
+A10	YearDate T2 2019
+A11	TimeSince_or_TimeOfEvent T2 Since
+A12	MonthDate T2 5
+T3	Diagnosis 22 30	Epilepsy
+A13	CUIPhrase T3 epilepsy
+A14	DiagCategory T3 Epilepsy
+A15	CUI T3 C0014544
+A16	Certainty T3 5
+A17	Negation T3 Affirmed
+T4	SeizureFrequency 758 772	focal-seizures
+A18	FrequencyChange T4 Frequent
+A19	CUI T4 C0751495
+A20	CUIPhrase T4 focal seizures
+T5	Diagnosis 758 773	focal-seizures-
+A21	Certainty T5 5
+A22	CUI T5 C0751495
+A23	CUIPhrase T5 focal-seizures
+A24	Negation T5 Affirmed
+A25	DiagCategory T5 MultipleSeizures
+T6	PatientHistory 978 987	seizures-
+A26	Certainty T6 5
+A27	Age T6 5
+A28	CUIPhrase T6 seizures
+A29	CUI T6 C0036572
+A30	Negation T6 Affirmed
+A31	AgeUnit T6 Year
+T7	PatientHistory 99 123	autism-spectrum-disorder
+A32	Negation T7 Affirmed
+A33	CUI T7 C1510586
+A34	Certainty T7 5
+A35	CUIPhrase T7 autistic-spectrum-disorder
+T8	PatientHistory 87 94	Anxiety
+A36	Negation T8 Affirmed
+A37	CUIPhrase T8 anxiety
+A38	CUI T8 C0003467
+A39	Certainty T8 5
+T9	Diagnosis 342 369	Focal-dyscognitive-seizures
+A40	Certainty T9 5
+A41	Negation T9 Affirmed
+A42	DiagCategory T9 MultipleSeizures
+A43	CUI T9 C0270834
+A44	CUIPhrase T9 dyscognitive-seizures
+T10	Prescription 153 169	Sodium-valproate
+A45	CUI T10 C0037567
+A46	DrugDose T10 1000
+A47	Frequency T10 2
+A48	DrugName T10 SodiumValproate
+A49	CUIPhrase T10 sodium-valproate
+A50	DoseUnit T10 mg
+T11	Prescription 238 252	Briviteracetam
+A51	DrugDose T11 50
+A52	CUIPhrase T11 brivaracetam
+A53	DoseUnit T11 mg
+A54	CUI T11 C1699861
+A55	Frequency T11 2
+A56	DrugName T11 brivaracetam
+T12	PatientHistory 1402 1409	seizure
+A57	CUI T12 C0036572
+A58	Negation T12 Affirmed
+A59	CUIPhrase T12 seizure
+A60	Certainty T12 5
+T13	PatientHistory 1033 1049	febrile-seizures
+A61	Negation T13 Negated
+A62	CUI T13 C0009952
+A63	Certainty T13 1
+A64	CUIPhrase T13 febrile-seizures
+T14	Diagnosis 41 46	focal
+A65	CUIPhrase T14 focal epilepsy
+A66	DiagCategory T14 Epilepsy
+A67	Negation T14 Affirmed
+A68	CUI T14 C0014547
+A69	Certainty T14 4
+T15	SeizureFrequency 342 369	Focal-dyscognitive-seizures
+A70	TimePeriod T15 Week
+A71	CUIPhrase T15 Dyscognitive seizures
+A72	UpperNumberOfSeizures T15 3
+A73	LowerNumberOfSeizures T15 2
+A74	NumberOfTimePeriods T15 1
+A75	CUI T15 C0270834
+T16	SeizureFrequency 1402 1411	seizures-
+A76	CUIPhrase T16 seizures
+A77	FrequencyChange T16 Frequent
+A78	CUI T16 C0036572
+T17	PatientHistory 1232 1239	anxiety
+A79	Certainty T17 5
+A80	Negation T17 Affirmed
+A81	CUIPhrase T17 anxiety
+A82	CUI T17 C0003467
+T18	Diagnosis 431 469	Focal-to-bilateral-convulsive-seizures
+A83	DiagCategory T18 MultipleSeizures
+A84	Negation T18 Affirmed
+A85	Certainty T18 5
+A86	CUIPhrase T18 focal-to-bilateral-convulsive-seizures
+A87	CUI T18 C0877017
+T19	SeizureFrequency 431 469	Focal-to-bilateral-convulsive-seizures
+A88	TimePeriod T19 Year
+A89	CUI T19 C0877017
+A90	LowerNumberOfSeizures T19 1
+A91	CUIPhrase T19 focal to bilateral convulsive seizures
+A92	UpperNumberOfSeizures T19 2
+A93	NumberOfTimePeriods T19 1

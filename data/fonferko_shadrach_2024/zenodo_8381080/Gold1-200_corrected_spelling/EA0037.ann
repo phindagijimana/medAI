@@ -1,0 +1,61 @@
+T2	PatientHistory 91 122	non--epileptic-attacks-disorder
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 non-epileptic-attacks
+A5	CUI T2 C3495874
+T4	Diagnosis 123 137	Focal-seizures
+A7	DiagCategory T4 MultipleSeizures
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 focal-seizures
+A11	CUI T4 C0751495
+T6	Diagnosis 123 167	Focal-seizures-with-secondary-generalisation
+A13	DiagCategory T6 MultipleSeizures
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 secondary-generalised-seizures
+A17	CUI T6 C0270838
+T8	Prescription 169 210	Medication:-lamotrigine-125mg-twice-a-day
+A19	DrugName T8 lamotrigine
+A20	DrugDose T8 125
+A21	DoseUnit T8 mg
+A22	Frequency T8 2
+A351	CUIPhrase T8 lamotrigine-HSAddedCUI
+A361	CUI T8 C0064636
+T10	Prescription 213 240	Clobazam-10mg-once-at-night
+A24	DrugName T10 clobazam
+A25	DrugDose T10 10
+A26	DoseUnit T10 mg
+A27	Frequency T10 1
+A352	CUIPhrase T10 clobazam-HSAddedCUI
+A362	CUI T10 C0055891
+T11	Investigations 242 245	EEG
+A1110	EEG_Performed T11 Yes
+A12	EEG_Results T11 Normal
+A1310	CUIPhrase T11 eeg-normal
+A1410	CUI T11 C0560017
+T14	Investigations 323 376	MRI-(February-2011)-non-specific-white-matter-changes
+A33	MRI_Performed T14 Yes
+A34	MRI_Results T14 Abnormal
+A35	CUIPhrase T14 mri-abnormal
+A36	CUI T14 C1319851
+T16	PatientHistory 508 527	cluster-of-seizures
+A38	Certainty T16 5
+A39	Negation T16 Affirmed
+A40	CUIPhrase T16 cluster-of-seizures
+A41	CUI T16 C3203523
+T18	PatientHistory 770 787	she-get-a-seizure
+A43	Certainty T18 5
+A44	Negation T18 Affirmed
+A45	CUIPhrase T18 seizure
+A46	CUI T18 C0036572
+T12	PatientHistory 936 958	e-nonepileptic-attacks
+A1610	Certainty T12 4
+A1710	Negation T12 Affirmed
+A18	CUIPhrase T12 non-epileptic-attacks
+A1910	CUI T12 C3495874
+T20	PatientHistory 938 982	nonepileptic-attacks-(dissociative-seizures)
+A48	Certainty T20 4
+A49	Negation T20 Affirmed
+A50	CUIPhrase T20 dissociative-seizures
+A51	CUI T20 C0349245

@@ -1,0 +1,37 @@
+T2	Diagnosis 83 110	juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	Prescription 111 152	Medication:-Topiramate-100-mg-twice-a-day
+A8	DrugName T4 topiramate
+A9	DrugDose T4 100
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 topiramate
+A13	CUI T4 C0076829
+T6	Prescription 153 178	Epilim-400-mg-twice-a-day
+A15	DrugName T6 epilim
+A16	DrugDose T6 400
+A17	DoseUnit T6 mg
+A18	Frequency T6 2
+A19	CUIPhrase T6 epilim
+A20	CUI T6 C0591451
+T8	PatientHistory 409 414	jerks
+A22	Certainty T8 5
+A23	Negation T8 Affirmed
+A24	CUIPhrase T8 jerk
+A25	CUI T8 C0231530
+T10	Diagnosis 450 471	tonic-clonic-seizures
+A27	DiagCategory T10 MultipleSeizures
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 tonic-clonic-seizures
+A31	CUI T10 C0494475
+T12	SeizureFrequency 450 471	tonic-clonic-seizures
+A33	NumberOfSeizures T12 0
+A34	TimePeriod T12 Week
+A35	NumberOfTimePeriods T12 3
+A36	CUIPhrase T12 tonic-clonic-seizures
+A37	CUI T12 C0494475

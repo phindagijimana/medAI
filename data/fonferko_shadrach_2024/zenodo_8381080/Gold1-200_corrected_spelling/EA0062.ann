@@ -1,0 +1,21 @@
+T10	PatientHistory 697 706	seizures-
+A10	Certainty T10 3
+A11	Negation T10 Affirmed
+A12	CUIPhrase T10 seizures
+A13	CUI T10 C0036572
+T16	BirthHistory 786 799	born-normally
+A23	Certainty T16 5
+A24	Negation T16 Affirmed
+A25	CUIPhrase T16 born-normally
+A26	CUI T16 C3665337
+T6	Investigations 1002 1004	CT
+A1010	CT_Performed T6 Yes
+A1110	CT_Results T6 Unknown
+A1210	CUIPhrase T6 ct-unknown
+A1310	CUI T6 C3515741
+T13	Diagnosis 1181 1189	epilepsy
+A16	DiagCategory T13 Epilepsy
+A17	Certainty T13 4
+A18	Negation T13 Affirmed
+A19	CUIPhrase T13 epilepsy
+A20	CUI T13 C0014544

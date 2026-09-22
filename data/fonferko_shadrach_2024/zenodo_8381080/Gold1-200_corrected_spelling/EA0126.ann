@@ -1,0 +1,105 @@
+T1	Diagnosis 57 71	Focal-epilepsy
+A1	CUIPhrase T1 focal-epilepsy
+A2	Negation T1 Affirmed
+A3	DiagCategory T1 Epilepsy
+A4	Certainty T1 5
+A5	CUI T1 C0014547
+T15	EpilepsyCause 85 103	Tuberous-sclerosis
+A15	Certainty T15 5
+A16	Negation T15 Affirmed
+A17	CUIPhrase T15 Tuberous-sclerosis
+A18	CUI T15 C0041341
+T22	PatientHistory 356 374	tuberous-sclerosis
+A23	Certainty T22 5
+A24	Negation T22 Affirmed
+A25	CUIPhrase T22 tuberous-sclerosis
+A26	CUI T22 C0041341
+T31	PatientHistory 1453 1471	tuberous-sclerosis
+A35	Certainty T31 5
+A36	Negation T31 Affirmed
+A37	CUIPhrase T31 tuberous-sclerosis
+A38	CUI T31 C0041341
+T2	PatientHistory 1454 1472	tuberous-sclerosis
+A6	Negation T2 Affirmed
+A7	Certainty T2 5
+A8	CUI T2 C0041341
+A9	CUIPhrase T2 Tuberous-sclerosis
+T3	Investigations 494 502	MRI-scan
+A10	CUI T3 C1319851
+A11	MRI_Performed T3 Yes
+A12	CUIPhrase T3 mri-abnormal
+A13	MRI_Results T3 Abnormal
+T4	PatientHistory 633 641	seizures
+A14	CUIPhrase T4 C0036572
+A1510	Certainty T4 5
+A1610	CUI T4 C0036572
+A1710	Negation T4 Affirmed
+T5	Prescription 143 167	Eslicarbazepine-800mg-od
+A1810	CUIPhrase T5 eslicarbazepine
+A19	DrugDose T5 800
+A201	DrugName T5 eslicarbazepine
+A211	CUI T5 C2725260
+A221	Frequency T5 1
+A232	DoseUnit T5 mg
+T6	WhenDiagnosed 385 392	epileps
+A242	Age T6 6
+A252	CUI T6 C0014544
+A262	Certainty T6 5
+A27	AgeUnit T6 Year
+A28	Negation T6 Affirmed
+A29	CUIPhrase T6 epilepsy
+T7	Diagnosis 643 670	Focal-frontal-lobe-seizures
+A30	CUIPhrase T7 frontal-lobe-seizures
+A31	DiagCategory T7 MultipleSeizures
+A32	Certainty T7 5
+A33	Negation T7 Affirmed
+A34	CUI T7 C0085541
+T11	Diagnosis 385 394	epilepsy-
+A45	CUIPhrase T11 epilepsy
+A46	Negation T11 Affirmed
+A47	CUI T11 C0014544
+A48	DiagCategory T11 Epilepsy
+A49	Certainty T11 5
+T12	Diagnosis 643 648	Focal
+A50	CUI T12 C0751495
+A51	DiagCategory T12 MultipleSeizures
+A52	Certainty T12 5
+A53	CUIPhrase T12 focal-seizures
+A54	Negation T12 Affirmed
+T13	Prescription 105 142	Medication:-Sodium-valproate-500mg-bd
+A55	DrugName T13 sodium-valproate
+A56	CUIPhrase T13 sodium-valproate
+A57	CUI T13 C0037567
+A58	Frequency T13 2
+A59	DrugDose T13 500
+A60	DoseUnit T13 mg
+T14	Diagnosis 804 842	focal-to-bilateral-convulsive-seizures
+A61	Certainty T14 5
+A62	CUIPhrase T14 focal-to-bilateral-convulsive-seizures
+A63	DiagCategory T14 MultipleSeizures
+A64	CUI T14 C0877017
+A65	Negation T14 Affirmed
+T16	Diagnosis 1425 1434	epilepsy-
+A66	CUI T16 C0014544
+A67	Certainty T16 5
+A68	DiagCategory T16 Epilepsy
+A69	CUIPhrase T16 epilepsy
+A70	Negation T16 Affirmed
+T17	SeizureFrequency 643 669	Focal-frontal-lobe-seizure
+A75	TimePeriod T17 Month
+A76	CUIPhrase T17 frontal-lobe-seizure
+A77	UpperNumberOfSeizures T17 5
+A78	NumberOfTimePeriods T17 1
+A79	LowerNumberOfSeizures T17 4
+A80	CUI T17 C0085541
+T18	SeizureFrequency 804 841	focal-to-bilateral-convulsive-seizure
+A81	NumberOfSeizures T18 0
+A82	TimePeriod T18 Year
+A83	NumberOfTimePeriods T18 2
+A84	CUI T18 C0877017
+A85	CUIPhrase T18 focal-to-bilateral-convulsive-seizure
+T19	EpilepsyCause 1454 1472	tuberous-sclerosis
+A202	Certainty T19 5
+A212	Negation T19 Affirmed
+A222	CUIPhrase T19 Tuberous-sclerosis
+A232	CUI T19 C0041341

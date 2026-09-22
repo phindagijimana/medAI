@@ -1,0 +1,94 @@
+T1	PatientHistory 946 954	seizures
+A1	Negation T1 Affirmed
+A2	CUI T1 C0036572
+A3	Certainty T1 5
+A4	CUIPhrase T1 seizures
+T2	Prescription 397 410	Carbmazapine-
+A5	CUI T2 C0006949
+A6	CUIPhrase T2 carbamazepine
+A7	DrugDose T2 400
+A8	DoseUnit T2 mg
+A9	Frequency T2 2
+A10	DrugName T2 Carbamazepine
+T3	SeizureFrequency 312 341	Secondary-generalised-seizure
+A11	CUI T3 C0270838
+A12	TimePeriod T3 Year
+A13	UpperNumberOfSeizures T3 4
+A14	CUIPhrase T3 secondary-generalised-seizure
+A15	LowerNumberOfSeizures T3 3
+A16	NumberOfTimePeriods T3 1
+T4	Diagnosis 312 342	Secondary-generalised-seizures
+A17	Certainty T4 5
+A18	CUI T4 C0270838
+A19	CUIPhrase T4 secondary-generalised-seizures
+A20	Negation T4 Affirmed
+A21	DiagCategory T4 MultipleSeizures
+T5	Investigations 668 672	EEG-
+A22	EEG_Results T5 Abnormal
+A23	EEG_Performed T5 Yes
+A24	CUIPhrase T5 eeg-abnormal
+A25	CUI T5 C0151611
+T6	Prescription 451 460	Clobazam-
+A26	CUIPhrase T6 clobazam
+A27	CUI T6 C0055891
+A28	DrugName T6 Clobazam
+A29	Frequency T6 As_Required
+T7	WhenDiagnosed 793 800	epileps
+A30	Certainty T7 5
+A31	CUI T7 C0014544
+A32	Negation T7 Affirmed
+A33	AgeUnit T7 Year
+A34	CUIPhrase T7 epilepsy
+A35	Age T7 22
+T8	Investigations 561 565	MRI-
+A36	CUI T8 C1319851
+A37	MRI_Results T8 Abnormal
+A38	CUIPhrase T8 mri-abnormal
+A39	MRI_Performed T8 Yes
+T9	Diagnosis 793 801	epilepsy
+A40	CUI T9 C0014544
+A41	Negation T9 Affirmed
+A42	Certainty T9 5
+A43	CUIPhrase T9 epilepsy
+A44	DiagCategory T9 Epilepsy
+T10	Diagnosis 1001 1025	complex-partial-seizures
+A45	Negation T10 Affirmed
+A46	CUIPhrase T10 complex-partial-seizures
+A47	Certainty T10 5
+A48	CUI T10 C0149958
+A49	DiagCategory T10 MultipleSeizures
+T11	Diagnosis 235 259	Complex-partial-seizures
+A50	DiagCategory T11 MultipleSeizures
+A51	Certainty T11 5
+A52	Negation T11 Affirmed
+A53	CUI T11 C0149958
+A54	CUIPhrase T11 complex-partial-seizures
+T12	PatientHistory 601 619	cortical-dysplasia
+A55	Certainty T12 5
+A56	CUIPhrase T12 cortical dysplasia
+A57	Negation T12 Affirmed
+A58	CUI T12 C0431380
+T13	Diagnosis 90 121	Symptomatic-structural-epilepsy
+A59	CUIPhrase T13 symptomatic-structural-focal-epilepsy
+A60	CUI T13 C0472349
+A61	Certainty T13 5
+A62	Negation T13 Affirmed
+A63	DiagCategory T13 Epilepsy
+T14	Diagnosis 834 864	secondary-generalised-seizures
+A64	Negation T14 Affirmed
+A65	CUI T14 C0270838
+A66	Certainty T14 5
+A67	CUIPhrase T14 secondary-generalised-seizures
+A68	DiagCategory T14 MultipleSeizures
+T15	SeizureFrequency 234 258	-Complex-partial-seizure
+A69	LowerNumberOfSeizures T15 1
+A70	UpperNumberOfSeizures T15 2
+A71	CUI T15 C0149958
+A72	TimePeriod T15 Month
+A73	NumberOfTimePeriods T15 1
+A74	CUIPhrase T15 complex-partial-seizure
+T16	PatientHistory 160 178	cortical-dysplasia
+A75	Negation T16 Affirmed
+A76	Certainty T16 5
+A77	CUIPhrase T16 cortical-dysplasia
+A78	CUI T16 C0431380

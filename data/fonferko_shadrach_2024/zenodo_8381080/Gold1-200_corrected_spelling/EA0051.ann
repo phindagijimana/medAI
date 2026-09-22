@@ -1,0 +1,94 @@
+T2	Diagnosis 98 120	temporal-lobe-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 temporal-lobe-epilepsy
+A6	CUI T2 C0014556
+T10	Prescription 158 172	Eslicarbazine-
+A11	DrugName T10 EslicarbazepineAcetate
+A12	DrugDose T10 800
+A13	DoseUnit T10 mg
+A14	Frequency T10 1
+A15	CUIPhrase T10 eslicarbazepine
+A16	CUI T10 C2725260
+T4	Prescription 183 202	Zonisamide-100mg-bd
+A8	DrugName T4 zonisamide
+A9	DrugDose T4 100
+A1010	DoseUnit T4 mg
+A1110	Frequency T4 2
+A1210	CUIPhrase T4 zonisamide
+A1310	CUI T4 C0078844
+T8	PatientHistory 287 296	-seizures
+A22	AgeUnit T8 Year
+A23	Age T8 32
+A24	Certainty T8 5
+A25	Negation T8 Affirmed
+A26	CUIPhrase T8 seizures
+A27	CUI T8 C0036572
+T5	PatientHistory 378 386	seizures
+A29	Certainty T5 5
+A30	Negation T5 Affirmed
+A31	CUIPhrase T5 seizures
+A32	CUI T5 C0036572
+T14	PatientHistory 541 549	seizures
+A40	Certainty T14 5
+A41	Negation T14 Affirmed
+A42	CUIPhrase T14 seizures
+A43	CUI T14 C0036572
+T12	Diagnosis 623 648	complex-partial-seizures.
+A34	DiagCategory T12 MultipleSeizures
+A35	Certainty T12 4
+A36	Negation T12 Affirmed
+A37	CUIPhrase T12 complex-partial-seizures
+A38	CUI T12 C0149958
+T16	PatientHistory 682 690	seizures
+A45	Certainty T16 5
+A46	Negation T16 Affirmed
+A47	CUIPhrase T16 seizures
+A48	CUI T16 C0036572
+T13	SeizureFrequency 723 736	seizures-free
+A19	NumberOfSeizures T13 0
+A20	TimePeriod T13 Month
+A21	NumberOfTimePeriods T13 6
+A2210	CUIPhrase T13 seizure-free
+A2310	CUI T13 C1299590
+T20	PatientHistory 929 944	type-2-diabetes
+A57	Certainty T20 5
+A58	Negation T20 Affirmed
+A59	CUIPhrase T20 Non-Insulin-Dependent
+A60	CUI T20 C0011860
+T22	PatientHistory 949 961	hypertension
+A62	Certainty T22 5
+A63	Negation T22 Affirmed
+A64	CUIPhrase T22 hypertension
+A65	CUI T22 C0020538
+T24	BirthHistory 983 1006	normal-vaginal-delivery
+A67	Certainty T24 5
+A68	Negation T24 Affirmed
+A69	CUIPhrase T24 normal-birth
+A70	CUI T24 C3665337
+T26	BirthHistory 998 1014	delivery-at-term
+A72	PrematureBirth T26 37+_TermBirth
+A73	Certainty T26 5
+A74	Negation T26 Affirmed
+A75	CUIPhrase T26 term-birth
+A76	CUI T26 C0233324
+T28	PatientHistory 1090 1106	febrile-seizures
+A78	Certainty T28 1
+A79	Negation T28 Negated
+A80	CUIPhrase T28 febrile-seizures
+A81	CUI T28 C0009952
+T15	Diagnosis 1224 1233	epilepsy-
+A2510	DiagCategory T15 Epilepsy
+A2610	Certainty T15 5
+A2710	Negation T15 Affirmed
+T30	Investigations 1380 1383	MRI
+A83	MRI_Performed T30 Yes
+A84	MRI_Results T30 Normal
+A85	CUIPhrase T30 normal-mri
+A86	CUI T30 C0436481
+T32	Investigations 1416 1419	EEG
+A88	EEG_Performed T32 Yes
+A89	EEG_Results T32 Abnormal
+A90	CUIPhrase T32 abnormal-eeg
+A91	CUI T32 C0151611

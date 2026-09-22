@@ -1,0 +1,32 @@
+T1	PatientHistory 122 130	Migraine
+A1	Negation T1 Affirmed
+A2	CUIPhrase T1 migraine
+A3	CUI T1 C0149931
+A4	Certainty T1 5
+T2	Diagnosis 75 83	Epilepsy
+A5	CUIPhrase T2 epilepsy
+A6	Negation T2 Affirmed
+A7	CUI T2 C0014544
+A8	DiagCategory T2 Epilepsy
+A9	Certainty T2 5
+T3	Prescription 281 303	levetiracetam-750mg-bd
+A10	DrugName T3 levetiracetam
+A11	CUI T3 C0377265
+A12	DoseUnit T3 mg
+A13	Frequency T3 2
+A14	CUIPhrase T3 levetiracetam
+A15	DrugDose T3 750
+T4	Prescription 231 276	He-is-currently-taking-carbamazepine-400mg-bd
+A16	DrugDose T4 400
+A17	CUI T4 C0006949
+A18	DoseUnit T4 mg
+A19	CUIPhrase T4 carbamazepine
+A20	Frequency T4 2
+A21	DrugName T4 carbamazepine
+T6	SeizureFrequency 352 361	seizures-
+A26	TimePeriod T6 Day
+A27	CUIPhrase T6 seizures
+A28	NumberOfTimePeriods T6 1
+A29	UpperNumberOfSeizures T6 2
+A30	CUI T6 C0036572
+A31	LowerNumberOfSeizures T6 1

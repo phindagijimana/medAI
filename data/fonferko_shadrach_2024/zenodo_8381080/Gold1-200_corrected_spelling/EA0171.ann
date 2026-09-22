@@ -1,0 +1,52 @@
+T1	Investigations 282 292	EEG-normal
+A1	CUI T1 C0560017
+A2	EEG_Performed T1 Yes
+A3	EEG_Results T1 Normal
+A4	CUIPhrase T1 EEG normal
+T2	Diagnosis 926 950	focal-epileptic-seizures
+A5	Negation T2 Affirmed
+A6	Certainty T2 4
+A7	DiagCategory T2 MultipleSeizures
+A8	CUIPhrase T2 focal-seizures
+A9	CUI T2 C0751495
+T3	Diagnosis 157 187	Epilepsy,-probable-focal-onset
+A10	CUIPhrase T3 focal-onset-epilepsy
+A11	Certainty T3 4
+A12	CUI T3 C0014547
+A13	DiagCategory T3 Epilepsy
+T4	Prescription 190 255	Current-anti-seizure-medication:--------------Lamotrigine-50mg-bd
+A14	DoseUnit T4 mg
+A15	CUI T4 C0064636
+A16	CUIPhrase T4 lamotrigine
+A17	Frequency T4 2
+A18	DrugDose T4 50
+A19	DrugName T4 lamotrigine
+T5	PatientHistory 102 133	transient-loss-of-consciousness
+A20	Certainty T5 5
+A21	CUI T5 C4087400
+A22	Negation T5 Affirmed
+A23	CUIPhrase T5 Transient loss of consciousness
+T7	PatientHistory 502 533	transient-loss-of-consciousness
+A27	CUIPhrase T7 Transient loss of consciousness
+A28	CUI T7 C4087400
+A29	AgeUnit T7 Year
+A30	Certainty T7 5
+A31	Age T7 17
+A32	Negation T7 Affirmed
+T8	Investigations 274 277	MRI
+A33	MRI_Performed T8 Yes
+A34	CUI T8 C0436481
+A35	CUIPhrase T8 mri-normal
+A36	MRI_Results T8 Normal
+T9	Diagnosis 157 165	Epilepsy
+A37	Negation T9 Affirmed
+A38	CUI T9 null
+A39	DiagCategory T9 Epilepsy
+A40	Certainty T9 5
+A41	CUIPhrase T9 epilepsy
+T13	Diagnosis 1478 1486	epilepsy
+A1310	DiagCategory T13 Epilepsy
+A1410	Certainty T13 5
+A1510	Negation T13 Affirmed
+A1610	CUIPhrase T13 epilepsy
+A1710	CUI T13 C0014544

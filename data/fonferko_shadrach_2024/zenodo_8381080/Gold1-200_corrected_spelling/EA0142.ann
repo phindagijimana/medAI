@@ -1,0 +1,35 @@
+T6	PatientHistory 387 396	seizures.
+A10	Certainty T6 5
+A11	Negation T6 Affirmed
+A12	CUIPhrase T6 seizures
+A13	CUI T6 C0036572
+T1	Investigations 487 491	MRI-
+A1	CUI T1 C1319851
+A2	CUIPhrase T1 mri-abnormal
+A3	MRI_Results T1 Abnormal
+A4	MRI_Performed T1 Yes
+T2	SeizureFrequency 387 395	seizures
+A5	MonthDate T2 2
+A6	CUIPhrase T2 seizures
+A7	NumberOfSeizures T2 0
+A8	TimeSince_or_TimeOfEvent T2 Since
+A9	CUI T2 C0036572
+A102	DayDate T2 6
+T3	Investigations 611 615	EEG-
+A112	EEG_Results T3 Abnormal
+A122	CUI T3 C0151611
+A132	EEG_Performed T3 Yes
+A14	CUIPhrase T3 eeg-abnormal
+T4	Diagnosis 126 140	Focal-epilepsy
+A15	Certainty T4 5
+A16	DiagCategory T4 Epilepsy
+A17	CUIPhrase T4 focal-epilepsy
+A18	CUI T4 C0014547
+A19	Negation T4 Affirmed
+T5	Prescription 141 184	Current-medication:-------Lamictal-100mg-BD
+A20	DrugDose T5 100
+A21	CUIPhrase T5 lamictal
+A22	CUI T5 C0678180
+A23	DrugName T5 lamictal
+A24	Frequency T5 2
+A25	DoseUnit T5 mg

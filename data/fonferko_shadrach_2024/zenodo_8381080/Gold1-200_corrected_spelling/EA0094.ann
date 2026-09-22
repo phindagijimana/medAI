@@ -1,0 +1,39 @@
+T1	Diagnosis 162 186	Benign-Rolandic-Epilepsy
+A1	Negation T1 Affirmed
+A2	Certainty T1 3
+A3	CUI T1 C2363129
+A4	CUIPhrase T1 benigh rolandic epilepsy
+A5	DiagCategory T1 Epilepsy
+T2	Diagnosis 1085 1117	generalised-tonic-clonic-seizure
+A6	CUIPhrase T2 generalised-tonic-clonic-seizure
+A7	CUI T2 C0494475
+A8	Negation T2 Affirmed
+A9	Certainty T2 5
+A10	DiagCategory T2 MultipleSeizures
+T3	PatientHistory 141 159	Nocturnal-seizures
+A11	CUI T3 C0748605
+A12	Negation T3 Affirmed
+A13	Certainty T3 5
+A14	CUIPhrase T3 nocturnal-seizures
+T5	Investigations 1446 1449	EEG
+A17	EEG_Results T5 Normal
+A18	CUIPhrase T5 normal-eeg
+A19	EEG_Performed T5 Yes
+A20	CUI T5 C0560017
+T6	Diagnosis 397 430	generalised-tonic-clonic-seizures
+A21	DiagCategory T6 MultipleSeizures
+A22	Certainty T6 5
+A23	CUIPhrase T6 generalised-tonic-clonic-seizures
+A24	Negation T6 Affirmed
+A25	CUI T6 C0494475
+T7	Diagnosis 1504 1528	Benign-Rolandic-Epilepsy
+A26	Certainty T7 3
+A27	CUI T7 C2363129
+A28	DiagCategory T7 Epilepsy
+A29	CUIPhrase T7 benigh rolandic epilepsy
+A30	Negation T7 Affirmed
+T9	PatientHistory 1779 1787	seizures
+A111	Certainty T9 5
+A121	Negation T9 Affirmed
+A131	CUIPhrase T9 seizures
+A141	CUI T9 C0036572

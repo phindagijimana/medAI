@@ -1,0 +1,74 @@
+T1	Diagnosis 227 235	epilepsy
+A1	Certainty T1 5
+A2	CUI T1 C0014544
+A3	Negation T1 Affirmed
+A4	CUIPhrase T1 epilepsy
+A5	DiagCategory T1 Epilepsy
+T2	PatientHistory 933 940	anxiety
+A6	CUIPhrase T2 anxiety
+A7	CUI T2 C0003467
+A8	Certainty T2 5
+A9	Negation T2 Affirmed
+T3	SeizureFrequency 426 434	seizures
+A10	FrequencyChange T3 Increased
+A11	CUIPhrase T3 seizures
+A12	CUI T3 C0036572
+T4	Diagnosis 87 117	secondary-generalised-seizures
+A13	CUI T4 C0270838
+A14	CUIPhrase T4 secondary-generalised-seizures
+A15	Certainty T4 5
+A16	DiagCategory T4 MultipleSeizures
+A17	Negation T4 Affirmed
+T5	Onset 227 235	epilepsy
+A18	CUIPhrase T5 epilepsy
+A19	CUI T5 C0014544
+A20	Negation T5 Affirmed
+A21	Age T5 23
+A22	AgeUnit T5 Year
+A23	Certainty T5 5
+T6	PatientHistory 20 54	non-epileptic-psychogenic-seizures
+A24	Negation T6 Affirmed
+A25	Certainty T6 4
+A26	CUIPhrase T6 non-epileptic-psychogenic-seizures
+A27	CUI T6 C1142430
+T7	Diagnosis 57 81	Complex-partial-seizures
+A28	DiagCategory T7 MultipleSeizures
+A29	CUIPhrase T7 complex-partial-seizures
+A30	CUI T7 C0149958
+A31	Negation T7 Affirmed
+A32	Certainty T7 5
+T8	PatientHistory 287 304	minor-head-injury
+A33	CUI T8 C0497301
+A34	Negation T8 Affirmed
+A35	CUIPhrase T8 head injury
+A36	Certainty T8 5
+T9	SeizureFrequency 337 344	seizure
+A37	NumberOfTimePeriods T9 1
+A38	CUI T9 C0036572
+A39	TimePeriod T9 Week
+A40	CUIPhrase T9 seizure
+A41	NumberOfSeizures T9 3
+T10	PatientHistory 535 543	seizures
+A42	CUI T10 C0036572
+A43	Negation T10 Affirmed
+A44	CUIPhrase T10 seizures
+A45	Certainty T10 5
+T11	Onset 227 235	epilepsy
+A46	Negation T11 Affirmed
+A47	CUI T11 C0014544
+A48	TimePeriod T11 Year
+A49	NumberOfTimePeriods T11 15
+A50	CUIPhrase T11 epilepsy
+A51	Certainty T11 5
+T12	PatientHistory 337 344	seizure
+A52	CUI T12 C0036572
+A53	CUIPhrase T12 seizure
+A54	Certainty T12 5
+A55	Negation T12 Affirmed
+T13	Prescription 131 148	Sodium-valproate-
+A56	DoseUnit T13 mg
+A57	CUIPhrase T13 sodium-valproate
+A58	Frequency T13 2
+A59	DrugName T13 SodiumValproate
+A60	DrugDose T13 1000
+A61	CUI T13 C0037567

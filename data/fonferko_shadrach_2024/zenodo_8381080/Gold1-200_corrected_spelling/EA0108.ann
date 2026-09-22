@@ -1,0 +1,109 @@
+T3	Diagnosis 133 153	Symptomatic-epilepsy
+A3	DiagCategory T3 Epilepsy
+A4	Certainty T3 5
+A5	Negation T3 Affirmed
+A6	CUIPhrase T3 symptomatic-epilepsy
+A7	CUI T3 C1406659
+T5	Diagnosis 170 190	focal-motor-seizures
+A9	DiagCategory T5 MultipleSeizures
+A10	Certainty T5 5
+A11	Negation T5 Affirmed
+A12	CUIPhrase T5 focal-motor-seizures
+A13	CUI T5 C0016399
+T7	Diagnosis 196 239	secondary-generalised-tonic-clonic-seizures
+A15	DiagCategory T7 MultipleSeizures
+A16	Certainty T7 5
+A17	Negation T7 Affirmed
+A18	CUIPhrase T7 secondary-generalised-tonic-clonic-seizures
+A19	CUI T7 C0877017
+T9	PatientHistory 245 248	AVM
+A21	Certainty T9 5
+A22	Negation T9 Affirmed
+A23	CUIPhrase T9 avm
+A24	CUI T9 C0917804
+T1	Prescription 265 287	Levetiracetam-500mg-bd
+A26	DrugName T1 levetiracetam
+A27	DrugDose T1 500
+A28	DoseUnit T1 mg
+A29	Frequency T1 2
+A30	CUIPhrase T1 levetiracetam
+A31	CUI T1 C0377265
+T13	Prescription 293 315	Carbamazepine-300mg-bd
+A33	DrugName T13 carbamazepine
+A34	DrugDose T13 300
+A35	DoseUnit T13 mg
+A36	Frequency T13 2
+A37	CUIPhrase T13 carbamazepine
+A38	CUI T13 C0006949
+T11	PatientHistory 445 456	haemorrhage
+A112	YearDate T11 2006
+A122	Certainty T11 5
+A132	Negation T11 Affirmed
+A142	CUIPhrase T11 haemorrhage
+A152	CUI T11 C0019080
+T17	PatientHistory 473 499	arteriovenous-malformation
+A46	Certainty T17 5
+A47	Negation T17 Affirmed
+A48	CUIPhrase T17 arteriovenous-malformation
+A49	CUI T17 C0334533
+T19	PatientHistory 571 580	seizures-
+A51	PointInTime T19 Surgery
+A52	Certainty T19 5
+A53	Negation T19 Affirmed
+A54	CUIPhrase T19 seizures
+A55	CUI T19 C0036572
+T21	Diagnosis 631 639	epilepsy
+A57	DiagCategory T21 Epilepsy
+A58	Certainty T21 5
+A59	Negation T21 Affirmed
+A60	CUIPhrase T21 epilepsy
+A61	CUI T21 C0014544
+T23	SeizureFrequency 694 702	seizure-
+A63	NumberOfSeizures T23 1
+A64	MonthDate T23 12
+A65	TimeSince_or_TimeOfEvent T23 During
+A66	CUIPhrase T23 seizure
+A67	CUI T23 C0036572
+T10	PatientHistory 694 702	seizure-
+A1010	Certainty T10 5
+A1110	Negation T10 Affirmed
+A1210	CUIPhrase T10 seizure
+A1310	CUI T10 C0036572
+T25	SeizureFrequency 736 745	seizures-
+A69	LowerNumberOfSeizures T25 2
+A70	UpperNumberOfSeizures T25 3
+A71	TimePeriod T25 Month
+A72	NumberOfTimePeriods T25 1
+A73	CUIPhrase T25 seizures
+A74	CUI T25 C0036572
+T12	PatientHistory 736 745	seizures-
+A153	Certainty T12 5
+A1610	Negation T12 Affirmed
+A1710	CUIPhrase T12 seizures
+A1810	CUI T12 C0036572
+T27	Diagnosis 881 905	tonic-clonic-convulsion.
+A76	DiagCategory T27 SingleSeizure
+A77	Certainty T27 5
+A78	Negation T27 Affirmed
+A79	CUIPhrase T27 tonic-clonic-convulsion
+A80	CUI T27 C0494475
+T29	PatientHistory 1076 1083	seizure
+A82	Certainty T29 5
+A83	Negation T29 Affirmed
+A84	CUIPhrase T29 seizure
+A85	CUI T29 C0036572
+T31	Diagnosis 1215 1223	epilepsy
+A87	DiagCategory T31 Epilepsy
+A88	Certainty T31 5
+A89	Negation T31 Affirmed
+A90	CUIPhrase T31 epilepsy
+A91	CUI T31 C0014544
+T33	SeizureFrequency 1322 1330	seizures
+A93	FrequencyChange T33 Increased
+A94	CUIPhrase T33 seizures
+A95	CUI T33 C0036572
+T14	PatientHistory 1322 1330	seizures
+A2010	Certainty T14 5
+A2110	Negation T14 Affirmed
+A2210	CUIPhrase T14 seizures
+A2310	CUI T14 C0036572

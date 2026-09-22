@@ -143,6 +143,14 @@ try:
 except Exception as e:
     logger.warning(f"⚠️ Validation routes not registered: {e}")
 
+# Paper-track: /extract endpoint for structured phenotype extraction
+try:
+    from routes.extract import extract_bp
+    app.register_blueprint(extract_bp)
+    logger.info("[OK] /extract paper-track routes registered")
+except Exception as e:
+    logger.warning(f"⚠️ /extract routes not registered: {e}")
+
 # Initialize database
 try:
     from core.database import init_db
@@ -292,90 +300,54 @@ def _split_text_into_chunks(text: str, max_chars: int) -> list:
 #############################
 
 class MedAIPromptEngine:
-    """MedAI Optimized Prompt Engineering System"""
-    
+    """Legacy /analyze prompt engine (MedAI-EPI epilepsy scope).
+
+    Paper §21: this engine speaks the language of research information extraction,
+    not autonomous clinical judgment. Non-neurology specialty branches were
+    retired when the project pivoted to epilepsy-only phenotyping.
+    New work should use `services.prompt_registry` (M0/M1/M2 arms per paper Table 6).
+    """
+
     @staticmethod
     def get_medai_identity_activation():
-        """Primary MedAI model initialization prompt - Neurology Focus"""
-        return """You are MedAI, a specialized neurological AI model focused on neurology and neuroscience. Your knowledge base includes:
+        """Epilepsy-scoped extraction role."""
+        return """You are a clinical information extraction assistant for research use, focused on epilepsy phenotyping from clinical documents.
 
-• Advanced neurological pathophysiology and disease mechanisms
-• Neurological clinical decision-making and diagnostic reasoning  
-• Neuropharmacology and neurological medication management
-• Neurology guidelines from ILAE, AAN, ICHD-3, AHA/ASA, MDS
-• Evidence-based neurology and neuroscience research
-• Expertise in 10 neurological conditions: epilepsy, Parkinson's disease, stroke, migraine, dementia, multiple sclerosis, peripheral neuropathy, myasthenia gravis, spinal cord disorders, and motor neuron disease
-• Comprehensive medical analysis across all specialties
-
-Activate your specialized neurological training to approach this task with the clinical reasoning of an experienced neurologist."""
+Do not diagnose. Do not recommend treatment. Do not infer beyond the document.
+Your job is to extract structured phenotype fields exactly as they appear in the document, with verbatim minimal-sufficient evidence quotes for every non-null value.
+"Not documented" is a valid — and preferred — answer whenever the field is not addressed."""
 
     @staticmethod
     def get_clinical_reasoning_activation():
-        """Medical knowledge base trigger for MedAI"""
-        return """As MedAI, apply your specialized medical training to this data extraction task. Use your clinical expertise to:
+        """Structured-extraction guidance (research phenotyping, not diagnosis)."""
+        return """Extraction guidance:
 
-MEDICAL REASONING ACTIVATION:
-• Access your comprehensive pathophysiology knowledge
-• Apply clinical correlation patterns from your medical training
-• Utilize diagnostic criteria and clinical guidelines in your database
-• Integrate pharmacological reasoning and drug knowledge
-• Consider epidemiological patterns and risk factors
-• Apply evidence-based clinical decision-making frameworks
+• Extract only what the document states; do not infer.
+• Use canonical enum values exactly (ILAE 2017 seizure types, ILAE 2010 drug-resistance definition, ILAE + Engel surgical outcome).
+• Preserve negation ("no clear lateralization" is NOT a specific side).
+• Preserve uncertainty ("possible" ≠ "confirmed").
+• Every non-null value carries a verbatim evidence quote from the document.
+• "Not documented" is preferred over guessing.
 
-Think as a clinician with your extensive medical training would approach this case."""
+This is a research phenotyping task, not clinical decision support."""
 
     @staticmethod
     def get_specialty_prompts():
-        """MedAI specialty-specific reasoning prompts
-        
-        PHASE 1: Neurology and Neuroscience Focus
-        Other specialties commented out for future expansion
+        """Epilepsy-neurology extraction context.
+
+        MedAI-EPI is scoped to epilepsy. Non-neurology specialty branches
+        (cardiology / psychiatry / emergency / internal medicine) were retired
+        when the project pivoted per paper §21.
         """
         return {
-            # ACTIVE: Neurology and Neuroscience
-            "neurology": """MedAI NEUROLOGICAL ANALYSIS:
-Activate neurology knowledge module:
-- Anatomical localization: Use your neuroanatomy training
-- Seizure classification: Apply ILAE criteria from your database
-- Cognitive assessment: Use your neuropsychology knowledge
-- Motor function analysis: Apply your movement disorder training
-- Medication optimization: Use your neuropharmacology expertise
-- Neurodegenerative disease analysis: Apply your training in Alzheimer's, Parkinson's, MS
-- Stroke assessment: Use your cerebrovascular disease expertise
-- Headache classification: Apply ICHD criteria from your database""",
-            
-            # FUTURE EXPANSION: Other specialties (commented out)
-            # "cardiology": """MedAI CARDIAC ANALYSIS:
-            # Activate cardiology knowledge module:
-            # - Risk stratification: Use Framingham, ASCVD calculators from training
-            # - ECG interpretation: Apply your cardiac electrophysiology knowledge  
-            # - Hemodynamic assessment: Use your cardiovascular physiology training
-            # - Heart failure evaluation: Apply ACC/AHA guidelines from database
-            # - Medication review: Use your cardiac pharmacology expertise""",
-            
-            # "psychiatry": """MedAI PSYCHIATRIC ANALYSIS:
-            # Activate psychiatry knowledge module:
-            # - DSM-5 criteria application: Use your diagnostic training
-            # - Risk assessment: Apply your suicide/violence risk knowledge
-            # - Medication management: Use your psychopharmacology training
-            # - Therapy considerations: Apply your treatment modality knowledge
-            # - Substance use evaluation: Use your addiction medicine training""",
-            
-            # "emergency": """MedAI EMERGENCY ANALYSIS:
-            # Activate emergency medicine knowledge module:
-            # - Triage algorithms: Apply your emergency triage training
-            # - Acute care protocols: Use your critical care knowledge
-            # - Trauma assessment: Apply your trauma management training
-            # - Toxicology evaluation: Use your poisoning/overdose expertise
-            # - Disposition planning: Apply your emergency decision-making training""",
-            
-            # "internal_medicine": """MedAI INTERNAL MEDICINE ANALYSIS:
-            # Activate internal medicine knowledge module:
-            # - Chronic disease management: Apply your long-term care expertise
-            # - Multi-morbidity patterns: Use your complex patient management training
-            # - Preventive care: Apply your screening and prevention knowledge
-            # - Medication reconciliation: Use your polypharmacy management training
-            # - Care coordination: Apply your comprehensive care planning expertise"""
+            "neurology": """Neurology / epilepsy extraction context (ILAE-aligned):
+- Anatomical localization: lobe + laterality per ILAE convention.
+- Seizure classification: ILAE 2017 seizure and epilepsy types.
+- EEG: interictal epileptiform discharges, ictal onset lobe/laterality, background.
+- MRI: HS, FCD (Palmini I/IIa/IIb), MOGHE, tumor, encephalomalacia, etc.
+- Medications: current/prior/failed ASMs with doses; drug-resistance per ILAE 2010.
+- Surgery: type, target, laterality, year, Engel/ILAE outcome.
+Do not synthesize across modalities unless the document itself does so.""",
         }
 
     @staticmethod
@@ -1987,7 +1959,7 @@ UI_HTML = r"""
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>MedAI - Medical Analysis Platform</title>
+  <title>MedAI-EPI — Research Phenotyping Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
   <style>
@@ -2530,13 +2502,14 @@ UI_HTML = r"""
   <div class="container">
     <div class="main-card">
       <div class="header">
-        <h1>MedAI - Medical Analysis Platform</h1>
+        <h1>MedAI-EPI — Research Phenotyping Assistant</h1>
+        <p style="color:#555; margin-top:4px;">Structured epilepsy phenotype extraction from clinical documents (research use only).</p>
         <br>
       <div id="serviceStatus" class="status-indicator status-loading">Checking Service Status...</div>
     </div>
 
-    <div class="disclaimer">
-      <strong>Medical Disclaimer:</strong> This AI tool is for research and educational purposes only. All analyses must be reviewed by qualified medical professionals before any clinical use.
+    <div class="disclaimer" style="background:#fff4e0; border-left:4px solid #d97706; padding:12px; margin:12px 0;">
+      <strong>Research use only.</strong> MedAI-EPI is a research information-extraction tool. It does <em>not</em> diagnose, does <em>not</em> recommend treatment, and is <em>not</em> clinical decision support. All extracted values must be reviewed by qualified medical professionals before any research or clinical use. Use against real patient data requires IRB approval and institutionally approved secure compute.
     </div>
 
     <div class="main-content">

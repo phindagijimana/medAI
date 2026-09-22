@@ -1,0 +1,28 @@
+T12	PatientHistory 57 78	Dissociative-seizures
+A11	Certainty T12 5
+A12	Negation T12 Affirmed
+A13	CUIPhrase T12 dissociative-seizures
+A14	CUI T12 C0349245
+T4	PatientHistory 81 112	Post-traumatic-stress-disorders
+A5	Certainty T4 5
+A6	Negation T4 Affirmed
+A7	CUIPhrase T4 post-traumatic-stress-disorder
+A8	CUI T4 C0038436
+T6	Prescription 114 156	Medication:-lamotrigine-75mg-bd-(to-reduce
+A10	DrugName T6 lamotrigine
+A1110	DrugDose T6 75
+A1210	DoseUnit T6 mg
+A1310	Frequency T6 2
+A1410	CUIPhrase T6 lamotrigine
+A15	CUI T6 C0064636
+T9	SeizureFrequency 369 378	seizures-
+A18	NumberOfSeizures T9 0
+A19	PointInTime T9 LastClinic
+A20	TimeSince_or_TimeOfEvent T9 Since
+A21	CUIPhrase T9 seizures
+A22	CUI T9 C0036572
+T14	PatientHistory 559 579	dissociative-seizure
+A16	Certainty T14 4
+A17	Negation T14 Affirmed
+A1810	CUIPhrase T14 dissociative-seizure
+A1910	CUI T14 C0349245

@@ -1,0 +1,66 @@
+T20	PatientHistory 460 468	seizures
+A10	Certainty T20 5
+A11	Negation T20 Affirmed
+A12	CUIPhrase T20 seizures
+A13	CUI T20 C0036572
+T2	SeizureFrequency 365 373	seizures
+A7	CUI T2 C0036572
+A8	TimePeriod T2 Month
+A9	NumberOfTimePeriods T2 5
+A1010	NumberOfSeizures T2 2
+A1110	CUIPhrase T2 seizures
+T4	Diagnosis 11 25	Focal-epilepsy
+A17	DiagCategory T4 Epilepsy
+A18	Certainty T4 5
+A19	CUI T4 C0014547
+A20	CUIPhrase T4 focal-epilepsy
+A21	Negation T4 Affirmed
+T7	SeizureFrequency 322 330	seizures
+A32	PointInTime T7 DrugChange
+A33	CUIPhrase T7 seizures
+A34	TimeSince_or_TimeOfEvent T7 Since
+A35	FrequencyChange T7 Decreased
+A36	CUI T7 C0036572
+T8	PatientHistory 322 330	seizures
+A37	Certainty T8 5
+A38	CUIPhrase T8 seizures
+A39	Negation T8 Affirmed
+A40	CUI T8 C0036572
+T10	Diagnosis 31 74	secondary-generalised-tonic-clonic-seizures
+A45	CUIPhrase T10 secondary-generalised-tonic-clonic-seizures
+A46	DiagCategory T10 MultipleSeizures
+A47	CUI T10 C0877017
+A48	Negation T10 Affirmed
+A49	Certainty T10 5
+T13	Diagnosis 682 692	eplilepsy-
+A58	CUI T13 C0014544
+A59	CUIPhrase T13 epilepsy
+A60	DiagCategory T13 Epilepsy
+A61	Negation T13 Affirmed
+A62	Certainty T13 5
+T14	Prescription 151 160	Tegretaol
+A63	DrugDose T14 300
+A64	CUIPhrase T14 tegretol
+A65	Frequency T14 1
+A66	DrugName T14 Carbamazepine
+A67	DoseUnit T14 mg
+A68	CUI T14 C0700087
+T15	Prescription 151 160	Tegretaol
+A69	CUI T15 C0700087
+A70	DrugDose T15 200
+A71	Frequency T15 1
+A72	DrugName T15 Carbamazepine
+A73	CUIPhrase T15 tegretol
+A74	DoseUnit T15 mg
+T17	PatientHistory 365 373	seizures
+A80	Certainty T17 5
+A81	Negation T17 Affirmed
+A82	CUIPhrase T17 seizures
+A83	CUI T17 C0036572
+T18	Prescription 77 121	Medicaiton:-Levetiracetam-1000mg-twice-a-day
+A84	DrugName T18 levetiracetam
+A85	CUIPhrase T18 levetiracetam
+A86	Frequency T18 2
+A87	DrugDose T18 1000
+A88	CUI T18 C0377265
+A89	DoseUnit T18 mg

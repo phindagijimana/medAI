@@ -1,0 +1,126 @@
+T2	Diagnosis 12 34	Temporal-lobe-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 temporal-lobe-epilepsy
+A6	CUI T2 C0014556
+T4	Diagnosis 66 103	Focal-seizures-with-altered-awareness
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 focal-seizures-with-altered-awareness
+A12	CUI T4 C0270834
+T6	SeizureFrequency 67 102	ocal-seizures-with-altered-awarenes
+A14	NumberOfSeizures T6 1
+A15	TimePeriod T6 Week
+A16	NumberOfTimePeriods T6 2
+A17	CUIPhrase T6 focal-seizures-with-altered-awareness
+A18	CUI T6 C0270834
+T8	Diagnosis 134 172	Focal-to-bilateral-convulsive-seizures
+A20	DiagCategory T8 MultipleSeizures
+A21	Certainty T8 5
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 focal-to-bilateral-convulsive-seizures
+A24	CUI T8 C0877017
+T10	SeizureFrequency 134 171	Focal-to-bilateral-convulsive-seizure
+A26	NumberOfSeizures T10 0
+A27	MonthDate T10 12
+A28	YearDate T10 2017
+A29	TimeSince_or_TimeOfEvent T10 Since
+A30	CUIPhrase T10 focal-to-bilateral-convulsive-seizure
+A31	CUI T10 C0877017
+T14	Prescription 244 259	eslicarbazepine
+A172	DrugName T14 EslicarbazepineAcetate
+A182	DrugDose T14 800
+A19	DoseUnit T14 mg
+A202	Frequency T14 1
+A212	CUIPhrase T14 eslicarbazepine
+A222	CUI T14 C2725260
+T12	Prescription 279 307	Zonisamide-75-mg-twice-a-day
+A33	DrugName T12 zonisamide
+A34	DrugDose T12 75
+A35	DoseUnit T12 mg
+A36	Frequency T12 2
+A37	CUIPhrase T12 zonisamide
+A38	CUI T12 C0078844
+T9	Diagnosis 578 587	epilepsy-
+A101	DiagCategory T9 Epilepsy
+A111	Certainty T9 5
+A121	Negation T9 Affirmed
+A131	CUIPhrase T9 epilepsy
+A141	CUI T9 C0014544
+T11	PatientHistory 605 613	seizures
+A161	YearDate T11 2003
+A171	Certainty T11 5
+A181	Negation T11 Affirmed
+A192	CUIPhrase T11 seizures
+A203	CUI T11 C0036572
+T24	PatientHistory 605 612	seizure
+A343	AgeUnit T24 Year
+A353	Age T24 31
+A363	Certainty T24 5
+A373	Negation T24 Affirmed
+A383	CUIPhrase T24 seizures
+A39	CUI T24 C0036572
+T13	Diagnosis 670 708	focal-to-bilateral-convulsive-seizures
+A224	DiagCategory T13 MultipleSeizures
+A234	Certainty T13 5
+A244	Negation T13 Affirmed
+A25	CUIPhrase T13 focal-to-bilateral-convulsive-seizures
+A263	CUI T13 C0877017
+T5	SeizureFrequency 671 708	ocal-to-bilateral-convulsive-seizures
+A324	NumberOfSeizures T5 0
+A334	MonthDate T5 12
+A344	YearDate T5 2017
+A354	TimeSince_or_TimeOfEvent T5 Since
+A364	CUIPhrase T5 focal-to-bilateral-convulsive-seizures
+A374	CUI T5 C0877017
+T17	SeizureFrequency 672 708	cal-to-bilateral-convulsive-seizures
+A254	FrequencyChange T17 Infrequent
+A264	CUIPhrase T17 focal-to-bilateral-convulsive-seizures
+A274	CUI T17 C0877017
+T7	BirthHistory 818 831	born-normally
+A3910	Certainty T7 5
+A40	Negation T7 Affirmed
+A41	CUIPhrase T7 born-normally
+A42	CUI T7 C3665337
+T21	PatientHistory 854 870	febrile-seizures
+A44	AgeUnit T21 Month
+A45	AgeLower T21 12
+A46	AgeUpper T21 30
+A47	Certainty T21 5
+A48	Negation T21 Affirmed
+A49	CUIPhrase T21 febrile-seizures
+A50	CUI T21 C0009952
+T23	PatientHistory 971 989	severe-head-injury
+A52	YearDate T23 2017
+A53	Certainty T23 5
+A54	Negation T23 Affirmed
+A55	CUIPhrase T23 head-injury
+A56	CUI T23 C0497301
+T27	SeizureFrequency 1019 1036	convulsive-seizur
+A64	NumberOfSeizures T27 0
+A65	YearDate T27 2017
+A66	TimeSince_or_TimeOfEvent T27 Since
+A67	CUIPhrase T27 convulsive-seizure
+A68	CUI T27 C0751494
+T20	PatientHistory 1019 1035	convulsive-seizu
+A113	Certainty T20 5
+A123	Negation T20 Affirmed
+A133	CUIPhrase T20 convulsive-seizure
+A143	CUI T20 C0751494
+T29	Investigations 1090 1099	MRI-brain
+A70	MRI_Performed T29 Yes
+A71	MRI_Results T29 Abnormal
+A72	CUIPhrase T29 mri-abnormal
+A73	CUI T29 C1319851
+T19	PatientHistory 1134 1142	gliosis-
+A293	Certainty T19 5
+A303	Negation T19 Affirmed
+A313	CUIPhrase T19 gliosis
+A323	CUI T19 C0017639
+T31	Investigations 1183 1187	EEG-
+A75	EEG_Performed T31 Yes
+A76	EEG_Results T31 Abnormal
+A77	CUIPhrase T31 eeg-abnormal
+A78	CUI T31 C0151611

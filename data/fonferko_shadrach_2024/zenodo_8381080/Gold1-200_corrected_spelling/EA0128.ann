@@ -1,0 +1,114 @@
+T1	Diagnosis 101 134	generalised-tonic-clonic-seizures
+A1	Negation T1 Affirmed
+A2	Certainty T1 5
+A3	CUI T1 C0494475
+A4	DiagCategory T1 MultipleSeizures
+A5	CUIPhrase T1 generalised-tonic-clonic-seizures
+T10	SeizureFrequency 694 709	yoclonic-jerks.
+A9	FrequencyChange T10 Same
+A10	CUIPhrase T10 myoclonic-jerks
+A11	CUI T10 C0027066
+T19	BirthHistory 938 955	perinatal-hypoxia
+A1010	Certainty T19 4
+A1110	Negation T19 Affirmed
+A12	CUIPhrase T19 perinatal-hypoxia
+A13	CUI T19 C0559478
+T3	Onset 303 312	-eepileps
+A1210	CUI T3 C0014544
+A1310	AgeUnit T3 Year
+A14	CUIPhrase T3 epilepsy
+A15	Age T3 14
+T4	Diagnosis 144 147	JME
+A16	Certainty T4 4
+A17	CUIPhrase T4 jme
+A18	CUI T4 C0270853
+A19	Negation T4 Affirmed
+A20	DiagCategory T4 Epilepsy
+T13	PatientHistory 975 996	learning-disabilities
+A1610	Certainty T13 5
+A1710	Negation T13 Affirmed
+A1810	CUIPhrase T13 learning-disabilities
+A1910	CUI T13 C0751265
+T5	Diagnosis 1282 1309	juvenile-myoclonic-epilepsy
+A21	Certainty T5 4
+A22	Negation T5 Affirmed
+A23	CUI T5 C0270853
+A24	CUIPhrase T5 juvenile-myoclonic-epilepsy
+A25	DiagCategory T5 Epilepsy
+T6	PatientHistory 385 400	myoclonic-jerks
+A26	Age T6 14
+A27	Negation T6 Affirmed
+A28	CUI T6 C0027066
+A29	CUIPhrase T6 myoclonic-jerks
+A30	AgeUnit T6 Year
+A31	Certainty T6 5
+T7	PatientHistory 1087 1103	febrile-seizures
+A32	Certainty T7 1
+A33	CUIPhrase T7 febrile-seizures
+A34	CUI T7 C0009952
+A35	Negation T7 Negated
+T8	Diagnosis 1486 1494	epilepsy
+A36	DiagCategory T8 Epilepsy
+A37	CUI T8 C0014544
+A38	CUIPhrase T8 epilepsy
+A39	Negation T8 Affirmed
+A40	Certainty T8 5
+T9	PatientHistory 81 96	myoclonic-jerks
+A41	Certainty T9 5
+A42	CUI T9 C0027066
+A43	Negation T9 Affirmed
+A44	CUIPhrase T9 myoclonic-jerks
+T20	Diagnosis 347 380	generalised-tonic-clonic-seizures
+A45	Negation T20 Affirmed
+A46	DiagCategory T20 MultipleSeizures
+A47	CUIPhrase T20 generalised-tonic-clonic-seizures
+A48	CUI T20 C0494475
+A49	Certainty T20 5
+T11	Prescription 222 259	Medication:-epilim-800-mg-twice-a-day
+A50	CUI T11 C0591451
+A51	Frequency T11 2
+A52	DoseUnit T11 mg
+A53	DrugName T11 epilim
+A54	CUIPhrase T11 epilim
+A55	DrugDose T11 800
+T12	Diagnosis 71 79	epilepsy
+A56	CUI T12 C0014544
+A57	DiagCategory T12 Epilepsy
+A58	Certainty T12 5
+A59	CUIPhrase T12 epilepsy
+A60	Negation T12 Affirmed
+T21	Diagnosis 305 314	epilepsy-
+A61	CUIPhrase T21 epilepsy
+A62	DiagCategory T21 Epilepsy
+A63	Certainty T21 5
+A64	CUI T21 C0014544
+A65	Negation T21 Affirmed
+T14	SeizureFrequency 580 613	generalised-tonic-clonic-seizures
+A66	CUI T14 C0494475
+A67	TimePeriod T14 Year
+A68	NumberOfSeizures T14 0
+A69	NumberOfTimePeriods T14 7
+A70	CUIPhrase T14 generalized-tonic-clonic-seizures
+T15	PatientHistory 164 185	learning-disabilities
+A71	Negation T15 Affirmed
+A72	CUIPhrase T15 learning-disabilities
+A73	Certainty T15 5
+A74	CUI T15 C0751265
+T16	Onset 347 379	generalised-tonic-clonic-seizure
+A75	Negation T16 Affirmed
+A76	AgeUnit T16 Year
+A77	CUIPhrase T16 generalised-tonic-clonic-seizure
+A78	Age T16 14
+A79	CUI T16 C0494475
+A80	Certainty T16 5
+T17	PatientHistory 694 709	myoclonic-jerks
+A81	Certainty T17 5
+A82	Negation T17 Affirmed
+A83	CUIPhrase T17 myoclonic jerks
+A84	CUI T17 C0027066
+T18	Diagnosis 581 613	generalised-tonic-clonic-seizure
+A85	DiagCategory T18 MultipleSeizures
+A86	Certainty T18 5
+A87	Negation T18 Affirmed
+A88	CUIPhrase T18 generalised tonic clonic seizure
+A89	CUI T18 C0494475

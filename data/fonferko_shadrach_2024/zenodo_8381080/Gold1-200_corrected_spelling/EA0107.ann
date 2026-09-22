@@ -1,0 +1,61 @@
+T2	Diagnosis 192 220	primary-generalised-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 primary-generalised-epilepsy
+A6	CUI T2 C0270850
+T4	Prescription 258 271	Levetiracetam
+A8	DrugName T4 Levetiracetam
+A9	DrugDose T4 1
+A10	DoseUnit T4 g
+A11	Frequency T4 1
+A12	CUIPhrase T4 levetiracetam
+A13	CUI T4 C0377265
+T6	Prescription 258 272	Levetiracetam-
+A15	DrugName T6 Levetiracetam
+A16	DrugDose T6 750
+A17	DoseUnit T6 mg
+A18	Frequency T6 1
+A19	CUIPhrase T6 levetiracetam
+A20	CUI T6 C0377265
+T8	Prescription 312 324	Lamotrigine-
+A22	DrugName T8 Lamotrigine
+A23	DrugDose T8 75
+A24	DoseUnit T8 mg
+A25	Frequency T8 2
+A26	CUIPhrase T8 lamotrigine
+A27	CUI T8 C0064636
+T10	Diagnosis 373 406	generalised-tonic-clonic-seizures
+A29	DiagCategory T10 MultipleSeizures
+A30	Certainty T10 5
+A31	Negation T10 Affirmed
+A32	CUIPhrase T10 generalised-tonic-clonic-seizures
+A33	CUI T10 C0494475
+T12	SeizureFrequency 373 406	generalised-tonic-clonic-seizures
+A35	NumberOfSeizures T12 4
+A36	MonthDate T12 10
+A37	TimeSince_or_TimeOfEvent T12 Since
+A38	CUIPhrase T12 generalised-tonic-clonic-seizures
+A39	CUI T12 C0494475
+T14	Diagnosis 436 456	generalised-seizures
+A41	DiagCategory T14 MultipleSeizures
+A42	Certainty T14 5
+A43	Negation T14 Affirmed
+A44	CUIPhrase T14 generalised-seizures
+A45	CUI T14 C0234533
+T16	PatientHistory 769 776	seizure
+A47	Certainty T16 5
+A48	Negation T16 Affirmed
+A49	CUIPhrase T16 seizure
+A50	CUI T16 C0036572
+T18	Diagnosis 911 931	intractable-epilepsy
+A52	DiagCategory T18 Epilepsy
+A53	Certainty T18 5
+A54	Negation T18 Affirmed
+A55	CUIPhrase T18 intractable-epilepsy
+A56	CUI T18 C1096063
+T20	Investigations 937 944	CT-scan
+A58	CT_Performed T20 Yes
+A59	CT_Results T20 Normal
+A60	CUIPhrase T20 ct-normal
+A61	CUI T20 C0744602

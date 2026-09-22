@@ -1,0 +1,77 @@
+[
+  {
+    "record_id": "8381080",
+    "doi": "10.5281/zenodo.8381080",
+    "title": "Gold standard annotation of epilepsy clinic letters for the development of information extraction tools",
+    "license": "cc-by-4.0",
+    "record_url": "https://zenodo.org/records/8381080",
+    "publication_date": "2023-09-26",
+    "description": "Gold-standard letters + Markup .ann annotations",
+    "files": [
+      {
+        "key": "Gold1-200_corrected_spelling.zip",
+        "size": 345031,
+        "md5": "f7d432a49c00ff1e1af8dbcb79ac1255",
+        "raw_path": "data/fonferko_shadrach_2024/_downloads/zenodo_8381080__Gold1-200_corrected_spelling.zip",
+        "extracted_members": 401
+      }
+    ],
+    "extracted_into": "data/fonferko_shadrach_2024/zenodo_8381080"
+  },
+  {
+    "record_id": "8356494",
+    "doi": "10.5281/zenodo.8356494",
+    "title": "Gold standard annotations for 200 synthetic epilepsy clinic letters in JSON format",
+    "license": "unspecified",
+    "record_url": "https://zenodo.org/records/8356494",
+    "publication_date": "2024-01-11",
+    "description": "Gold JSON annotations",
+    "files": [
+      {
+        "key": "GoldStandardJSON.zip",
+        "size": 139507,
+        "md5": "6f2ab53c6ec5d61e57b780e19fc3c004",
+        "raw_path": "data/fonferko_shadrach_2024/_downloads/zenodo_8356494__GoldStandardJSON.zip",
+        "extracted_members": 200
+      }
+    ],
+    "extracted_into": "data/fonferko_shadrach_2024/zenodo_8356494"
+  },
+  {
+    "record_id": "8382589",
+    "doi": "10.5281/zenodo.8382589",
+    "title": "What and How of annotating with Markup",
+    "license": "cc-by-4.0",
+    "record_url": "https://zenodo.org/records/8382589",
+    "publication_date": "2023-09-27",
+    "description": "Annotation guidelines",
+    "files": [
+      {
+        "key": "ExECT V2 .1- What and How of annotating_v9.docx",
+        "size": 94155,
+        "md5": "cfe6ff763ee2211157216ae36e08c1ab",
+        "raw_path": "data/fonferko_shadrach_2024/_downloads/zenodo_8382589__ExECT V2 .1- What and How of annotating_v9.docx"
+      }
+    ],
+    "extracted_into": "data/fonferko_shadrach_2024/zenodo_8382589"
+  },
+  {
+    "record_id": "12520180",
+    "doi": "10.5281/zenodo.12520180",
+    "title": "200 Synthetic Epilepsy Clinic letters Markup annotation outputs as CSV files",
+    "license": "cc-by-4.0",
+    "record_url": "https://zenodo.org/records/12520180",
+    "publication_date": "2024-06-24",
+    "description": "Per-entity-type CSV outputs",
+    "files": [
+      {
+        "key": "MarkupOutput_200_SyntheticEpilepsyLetters.zip",
+        "size": 33855,
+        "md5": "057749a506592483d9b64511b28ec6fd",
+        "raw_path": "data/fonferko_shadrach_2024/_downloads/zenodo_12520180__MarkupOutput_200_SyntheticEpilepsyLetters.zip",
+        "extracted_members": 9
+      }
+    ],
+    "extracted_into": "data/fonferko_shadrach_2024/zenodo_12520180"
+  }
+]

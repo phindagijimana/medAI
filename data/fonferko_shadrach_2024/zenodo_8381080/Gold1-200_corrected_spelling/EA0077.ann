@@ -1,0 +1,20 @@
+T1	Prescription 401 418	Tegretol-400mg-bd
+A1	Frequency T1 2
+A2	DrugDose T1 400
+A3	DoseUnit T1 mg
+A4	DrugName T1 tegretol
+A5	CUIPhrase T1 tegretol
+A6	CUI T1 C0700087
+T2	SeizureFrequency 240 248	seizures
+A7	NumberOfTimePeriods T2 7
+A8	TimePeriod T2 Month
+A9	NumberOfSeizures T2 0
+A10	CUI T2 C0036572
+A11	CUIPhrase T2 seizures
+T3	Prescription 364 377	Levetiracetam
+A12	DrugDose T3 1250
+A13	DrugName T3 Levetiracetam
+A14	CUIPhrase T3 levetiracetam
+A15	CUI T3 C0377265
+A16	DoseUnit T3 mg
+A17	Frequency T3 2

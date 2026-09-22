@@ -1,0 +1,16 @@
+T2	PatientHistory 88 94	jerks-
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 jerks
+A5	CUI T2 C0231530
+T6	PatientHistory 493 499	jerks-
+A12	Certainty T6 5
+A13	Negation T6 Affirmed
+A14	CUIPhrase T6 jerks
+A15	CUI T6 C0231530
+T11	Diagnosis 675 683	epilepsy
+A24	DiagCategory T11 Epilepsy
+A25	Certainty T11 4
+A26	Negation T11 Affirmed
+A27	CUIPhrase T11 epilepsy
+A28	CUI T11 C0014544

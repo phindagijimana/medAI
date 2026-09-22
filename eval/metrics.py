@@ -219,16 +219,21 @@ def score_field(
 
     # Both present — compare
     if isinstance(gold_val, list) or isinstance(pred_val, list):
-        pv = _norm_list(pred_val if isinstance(pred_val, list) else [pred_val])
-        gv = _norm_list(gold_val if isinstance(gold_val, list) else [gold_val])
-        if pv == gv:
-            m.tp += 1
-        else:
-            # Set-difference could split into partial TP/FP/FN. For v0.1 harness
-            # we score list fields as all-or-nothing to keep the metric simple;
-            # partial-list scoring is a candidate v0.2 upgrade.
-            m.fp += 1
-            m.fn += 1
+        # Partial-list (multiset) scoring: per-item TP/FP/FN via multiset
+        # difference. TP = items in both, FP = items in pred but not gold,
+        # FN = items in gold but not pred. This treats findings/IEDs/ASMs
+        # as sets of tokens rather than all-or-nothing.
+        from collections import Counter
+        pv_items = pred_val if isinstance(pred_val, list) else [pred_val]
+        gv_items = gold_val if isinstance(gold_val, list) else [gold_val]
+        pv_counter = Counter(repr(_norm(x)) for x in pv_items)
+        gv_counter = Counter(repr(_norm(x)) for x in gv_items)
+        tp_bag = pv_counter & gv_counter
+        fp_bag = pv_counter - gv_counter
+        fn_bag = gv_counter - pv_counter
+        m.tp += sum(tp_bag.values())
+        m.fp += sum(fp_bag.values())
+        m.fn += sum(fn_bag.values())
         return m
 
     if _norm(pred_val) == _norm(gold_val):

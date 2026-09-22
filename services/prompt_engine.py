@@ -1,6 +1,13 @@
 """
-Med42 Prompt Engineering Module
-Specialized prompt engineering for medical AI analysis
+MedAI-EPI legacy prompt engine.
+
+Powers the legacy /analyze Flask endpoint (services/med42_model.Med42ModelService.analyze).
+NOT used by the paper track — paper-track prompts live in `services/prompt_registry.py`
+with per-module M0/M1/M2 templates, schema injection, and evidence grounding.
+
+Framing (paper §21): this module speaks the language of *research information extraction*,
+not autonomous clinical judgment. Non-neurology specialty branches have been retired
+because MedAI-EPI is scoped to epilepsy phenotyping only.
 """
 
 import os
@@ -9,80 +16,45 @@ from typing import Dict, List, Optional, Any
 
 
 class Med42PromptEngine:
-    """Med42-8B Optimized Prompt Engineering System"""
+    """Legacy prompt engine — kept for the /analyze endpoint. New work uses
+    `services.prompt_registry` per the paper's M0/M1/M2/M3 arm design."""
 
     @staticmethod
     def get_med42_identity_activation() -> str:
-        """Primary Med42 model initialization prompt"""
-        return """You are Med42-8B, a specialized medical AI model with comprehensive clinical training. Your medical knowledge base includes:
+        """Neurology-scoped extraction role."""
+        return """You are a clinical information extraction assistant for research use.
 
-• Advanced pathophysiology and disease mechanisms
-• Clinical decision-making frameworks and diagnostic reasoning
-• Pharmacological principles and drug interaction analysis
-• Medical guidelines from major clinical organizations
-• Evidence-based medicine and research methodologies
-• Multi-specialty clinical expertise across all medical domains
-
-Activate your specialized medical training to approach this task with the clinical reasoning of an experienced physician."""
+Do not diagnose. Do not recommend treatment. Do not infer beyond the document.
+Your job is to extract structured phenotype fields from the clinical document exactly as documented, with a verbatim minimal-sufficient quote as evidence for every non-null value. When a field is not addressed in the document, output "not documented" and leave the value empty."""
 
     @staticmethod
     def get_clinical_reasoning_activation() -> str:
-        """Medical knowledge base trigger for Med42"""
-        return """As Med42-8B, apply your specialized medical training to this data extraction task. Use your clinical expertise to:
+        """Structured-extraction guidance (research phenotyping, not diagnosis)."""
+        return """Extraction guidance:
 
-MEDICAL REASONING ACTIVATION:
-• Access your comprehensive pathophysiology knowledge
-• Apply clinical correlation patterns from your medical training
-• Utilize diagnostic criteria and clinical guidelines in your database
-• Integrate pharmacological reasoning and drug knowledge
-• Consider epidemiological patterns and risk factors
-• Apply evidence-based clinical decision-making frameworks
+• Identify the fields the schema asks for and extract only what the document states.
+• Use canonical enum values exactly as listed — do not invent values.
+• Preserve negation ("no clear lateralization" is NOT a specific side).
+• Preserve uncertainty ("possible" ≠ "confirmed").
+• Attach evidence: the verbatim minimal-sufficient text span supporting each value.
+• Prefer "not documented" over guessing.
 
-Think as a clinician with your extensive medical training would approach this case."""
+This is a research phenotyping task, not clinical decision support."""
 
     @staticmethod
     def get_specialty_prompts() -> Dict[str, str]:
-        """Med42 specialty-specific reasoning prompts"""
+        """Specialty prompts. MedAI-EPI is scoped to neurology (epilepsy); the
+        four non-neurology branches (cardiology/psychiatry/emergency/internal
+        medicine) were retired when the project pivoted per §21."""
         return {
-            "cardiology": """Med42-8B CARDIAC ANALYSIS:
-Activate cardiology knowledge module:
-- Risk stratification: Use Framingham, ASCVD calculators from training
-- ECG interpretation: Apply your cardiac electrophysiology knowledge
-- Hemodynamic assessment: Use your cardiovascular physiology training
-- Heart failure evaluation: Apply ACC/AHA guidelines from database
-- Medication review: Use your cardiac pharmacology expertise""",
-
-            "neurology": """Med42-8B NEUROLOGICAL ANALYSIS:
-Activate neurology knowledge module:
-- Anatomical localization: Use your neuroanatomy training
-- Seizure classification: Apply ILAE criteria from your database
-- Cognitive assessment: Use your neuropsychology knowledge
-- Motor function analysis: Apply your movement disorder training
-- Medication optimization: Use your neuropharmacology expertise""",
-
-            "psychiatry": """Med42-8B PSYCHIATRIC ANALYSIS:
-Activate psychiatry knowledge module:
-- DSM-5 criteria application: Use your diagnostic training
-- Risk assessment: Apply your suicide/violence risk knowledge
-- Medication management: Use your psychopharmacology training
-- Therapy considerations: Apply your treatment modality knowledge
-- Substance use evaluation: Use your addiction medicine training""",
-
-            "emergency": """Med42-8B EMERGENCY ANALYSIS:
-Activate emergency medicine knowledge module:
-- Triage algorithms: Apply your emergency triage training
-- Acute care protocols: Use your critical care knowledge
-- Trauma assessment: Apply your trauma management training
-- Toxicology evaluation: Use your poisoning/overdose expertise
-- Disposition planning: Apply your emergency decision-making training""",
-
-            "internal_medicine": """Med42-8B INTERNAL MEDICINE ANALYSIS:
-Activate internal medicine knowledge module:
-- Chronic disease management: Apply your long-term care expertise
-- Multi-morbidity patterns: Use your complex patient management training
-- Preventive care: Apply your screening and prevention knowledge
-- Medication reconciliation: Use your polypharmacy management training
-- Care coordination: Apply your comprehensive care planning expertise"""
+            "neurology": """Neurology extraction context (ILAE-aligned):
+- Anatomical localization: lobe + laterality per ILAE convention.
+- Seizure classification: ILAE 2017 seizure and epilepsy types.
+- EEG findings: interictal epileptiform discharges, ictal onset lobe/laterality, background.
+- MRI findings: HS, FCD (Palmini I/IIa/IIb), MOGHE, tumor, encephalomalacia, etc.
+- Medications: current/prior/failed ASMs with doses; drug-resistance status per ILAE 2010.
+- Surgical history: type, target, laterality, year, Engel/ILAE outcome.
+Do not synthesize across modalities unless the document itself does so.""",
         }
 
     def get_med42_system_prompts(self, analysis_type: str, is_tabular: bool = False, specialty: Optional[str] = None) -> str:

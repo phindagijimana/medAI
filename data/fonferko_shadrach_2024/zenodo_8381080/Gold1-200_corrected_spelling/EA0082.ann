@@ -1,0 +1,87 @@
+T1	Investigations 346 349	MRI
+A1	CUIPhrase T1 mri-normal
+A2	MRI_Results T1 Normal
+A3	MRI_Performed T1 Yes
+A4	CUI T1 C0436481
+T2	Investigations 382 385	EEG
+A5	EEG_Performed T2 Yes
+A6	EEG_Results T2 Abnormal
+A7	CUIPhrase T2 abnormal-eeg
+A8	CUI T2 C0151611
+T3	Prescription 310 328	Zonisamide-50mg-bd
+A9	CUIPhrase T3 zonisamide
+A10	Frequency T3 2
+A11	CUI T3 C0078844
+A12	DrugName T3 zonisamide
+A13	DoseUnit T3 mg
+A14	DrugDose T3 50
+T4	Prescription 291 307	Clobazam-10mg-od
+A15	DrugName T4 clobazam
+A16	CUI T4 C0055891
+A17	DoseUnit T4 mg
+A18	Frequency T4 1
+A19	CUIPhrase T4 clobazam
+A20	DrugDose T4 10
+T10	SeizureFrequency 512 520	absences
+A102	LowerNumberOfSeizures T10 2
+A112	UpperNumberOfSeizures T10 3
+A122	TimePeriod T10 Day
+A132	NumberOfTimePeriods T10 1
+A142	TimeSince_or_TimeOfEvent T10 During
+A152	CUIPhrase T10 absences
+A162	CUI T10 C0563606
+T11	SeizureFrequency 512 520	absences
+A113	FrequencyChange T11 Frequent
+A133	CUIPhrase T11 absences
+A143	CUI T11 C0563606
+T5	Diagnosis 586 619	generalised-tonic-clonic-seizure-
+A21	CUIPhrase T5 generalised-tonic-clonic-seizure
+A22	DiagCategory T5 MultipleSeizures
+A23	Negation T5 Affirmed
+A24	CUI T5 C0494475
+A25	Certainty T5 5
+T6	PatientHistory 228 249	Dissociative-seizures
+A26	Certainty T6 5
+A27	Negation T6 Affirmed
+A28	CUI T6 C0349245
+A29	CUIPhrase T6 dissociative-seizures
+T7	SeizureFrequency 586 617	generalised-tonic-clonic-seizur
+A30	TimePeriod T7 Year
+A31	TimeSince_or_TimeOfEvent T7 Since
+A32	CUIPhrase T7 generalised tonic clonic seizure
+A33	CUI T7 C0494475
+A34	NumberOfSeizures T7 0
+A35	NumberOfTimePeriods T7 2
+T9	Investigations 364 367	EEG
+A42	EEG_Performed T9 Yes
+A43	CUIPhrase T9 eeg-normal
+A44	EEG_Results T9 Normal
+A45	CUI T9 C0560017
+T15	Diagnosis 200 225	Juvenile-absence-epilepsy
+A46	Negation T15 Affirmed
+A47	Certainty T15 5
+A48	DiagCategory T15 Epilepsy
+A49	CUIPhrase T15 juvenile-absence-epilepsy
+A50	CUI T15 C4317339
+T16	Prescription 263 288	Sodium-valproate-500mg-bd
+A51	CUI T16 C0037567
+A52	DrugDose T16 500
+A53	CUIPhrase T16 sodium-valproate
+A54	Frequency T16 2
+A55	DrugName T16 sodium-valproate
+A56	DoseUnit T16 mg
+T12	PatientHistory 672 688	photosensitivity
+A57	Negation T12 Affirmed
+A58	CUIPhrase T12 photosensitivity
+A59	Certainty T12 5
+A60	CUI T12 C3552821
+T13	PatientHistory 512 520	absences
+A61	CUI T13 C0563606
+A62	CUIPhrase T13 absences
+A63	Negation T13 Affirmed
+A64	Certainty T13 5
+T14	PatientHistory 772 780	absences
+A65	Negation T14 Affirmed
+A66	CUIPhrase T14 absences
+A67	Certainty T14 5
+A68	CUI T14 C0563606

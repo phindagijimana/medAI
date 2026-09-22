@@ -1,0 +1,25 @@
+T5	PatientHistory 390 398	collapse
+A10	Certainty T5 5
+A11	Negation T5 Affirmed
+A12	C0151744 T5 collapse
+A13	CUI T5 C0344329
+T1	PatientHistory 449 472	ischaemic-heart-disease
+A1	CUI T1 C0151744
+A2	CUIPhrase T1 ischaemic heart disease
+A3	Negation T1 Affirmed
+A4	Certainty T1 5
+T2	PatientHistory 492 500	diabetes
+A5	CUI T2 C0011847
+A6	CUIPhrase T2 diabetes
+A7	Negation T2 Affirmed
+A8	Certainty T2 5
+T3	PatientHistory 474 486	hypertension
+A9	Certainty T3 5
+A1010	CUI T3 C0020538
+A1110	CUIPhrase T3 hypertension
+A1210	Negation T3 Affirmed
+T4	Investigations 1334 1336	CT
+A1310	CUIPhrase T4 normal-ct
+A14	CUI T4 C0744602
+A15	CT_Performed T4 Yes
+A16	CT_Results T4 Normal

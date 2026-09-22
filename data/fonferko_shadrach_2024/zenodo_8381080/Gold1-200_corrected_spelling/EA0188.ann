@@ -1,0 +1,116 @@
+T1	SeizureFrequency 814 843	secondary-generalised-seizure
+A1	NumberOfTimePeriods T1 1
+A2	NumberOfSeizures T1 1
+A3	CUIPhrase T1 secondary-generalised-seizure
+A4	TimePeriod T1 Month
+A5	CUI T1 C0270838
+T2	SeizureFrequency 620 627	seizure
+A6	CUIPhrase T2 seizure
+A7	NumberOfTimePeriods T2 1
+A8	NumberOfSeizures T2 1
+A9	CUI T2 C0036572
+A10	TimePeriod T2 Day
+T3	PatientHistory 624 627	eiz
+A11	CUIPhrase T3 seizure
+A12	CUI T3 C0036572
+A13	Certainty T3 5
+A14	Negation T3 Affirmed
+T4	Diagnosis 229 237	epilepsy
+A15	Negation T4 Affirmed
+A16	CUIPhrase T4 epilepsy
+A17	CUI T4 C0014544
+A18	DiagCategory T4 Epilepsy
+A19	Certainty T4 5
+T5	Prescription 103 117	Brivitiracetam
+A20	CUIPhrase T5 brivaracetam
+A21	DoseUnit T5 mg
+A22	CUI T5 C1699861
+A23	Frequency T5 2
+A24	DrugDose T5 50
+A25	DrugName T5 brivitiracetam
+T6	PatientHistory 984 997	hypertensions
+A26	Negation T6 Affirmed
+A27	CUIPhrase T6 hypertension
+A28	Certainty T6 5
+A29	CUI T6 C0020538
+T7	Investigations 56 59	MRI
+A30	CUI T7 C0436481
+A31	MRI_Performed T7 Yes
+A32	CUIPhrase T7 mri-normal
+A33	MRI_Results T7 Normal
+T8	PatientHistory 875 883	seizure-
+A34	CUI T8 C0036572
+A35	Negation T8 Affirmed
+A36	Certainty T8 5
+A37	CUIPhrase T8 seizure
+T9	Diagnosis 1296 1302	focal-
+A38	Negation T9 Affirmed
+A39	DiagCategory T9 Epilepsy
+A40	CUIPhrase T9 focal epilepsy
+A41	CUI T9 C0014547
+A42	Certainty T9 4
+T10	Diagnosis 1280 1295	drug-refractory
+A43	Negation T10 Affirmed
+A44	CUI T10 C1096063
+A45	DiagCategory T10 Epilepsy
+A46	CUIPhrase T10 drug refractory epilepsy
+A47	Certainty T10 4
+T11	PatientHistory 418 425	seizure
+A48	CUIPhrase T11 seizure
+A49	Certainty T11 5
+A50	CUI T11 C0036572
+A51	Age T11 11
+A52	AgeUnit T11 Year
+A53	Negation T11 Affirmed
+T12	Investigations 530 534	EEGs
+A54	CUI T12 C0151611
+A55	EEG_Results T12 Abnormal
+A56	EEG_Performed T12 Yes
+A57	CUIPhrase T12 eeg-abnormal
+T13	Diagnosis 1303 1327	occipital-lobe)-epilepsy
+A58	DiagCategory T13 Epilepsy
+A59	Negation T13 Affirmed
+A60	CUI T13 C0393691
+A61	Certainty T13 4
+A62	CUIPhrase T13 Occipital lobe epilepsy
+T14	Diagnosis 10 25	Focal-epilepsy,
+A63	CUI T14 C0014547
+A64	Negation T14 Affirmed
+A65	Certainty T14 5
+A66	DiagCategory T14 Epilepsy
+A67	CUIPhrase T14 focal-epilepsy
+T15	PatientHistory 651 660	seizures-
+A68	CUI T15 C0036572
+A69	Negation T15 Affirmed
+A70	CUIPhrase T15 seizures
+A71	Certainty T15 5
+T16	Diagnosis 26 55	probable-occipital-lobe-onset
+A72	Certainty T16 4
+A73	CUIPhrase T16 occipital-lobe-epilepsy
+A74	DiagCategory T16 Epilepsy
+A75	CUI T16 C0393691
+A76	Negation T16 Affirmed
+T17	BirthHistory 343 368	born-slightly-prematurely
+A77	CUI T17 C3829315
+A78	PrematureBirth T17 34to<37_LatePretermBirth
+A79	Certainty T17 5
+A80	Negation T17 Affirmed
+A81	CUIPhrase T17 born-prematurely
+T18	Investigations 489 492	MRI
+A82	MRI_Performed T18 Yes
+A83	CUIPhrase T18 mri-normal
+A84	MRI_Results T18 Normal
+A85	CUI T18 C0436481
+T19	Diagnosis 820 843	ondary-generalised-seiz
+A86	CUIPhrase T19 secondary generalised seizure
+A87	CUI T19 C0270838
+A88	Negation T19 Affirmed
+A89	DiagCategory T19 SingleSeizure
+A90	Certainty T19 5
+T20	Prescription 83 93	Zonismaide
+A91	CUI T20 C0078844
+A92	CUIPhrase T20 zonisamide
+A93	Frequency T20 2
+A94	DrugDose T20 100
+A95	DrugName T20 Zonisamide
+A96	DoseUnit T20 mg

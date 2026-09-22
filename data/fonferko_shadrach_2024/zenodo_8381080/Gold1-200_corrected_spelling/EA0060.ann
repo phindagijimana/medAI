@@ -1,0 +1,95 @@
+T2	Diagnosis 191 217	Symptomatic-focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-focal-epilepsy
+A6	CUI T2 C0472349
+T4	PatientHistory 223 231	Dementia
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 dementia
+A11	CUI T4 C0497327
+T6	Prescription 245 299	Levetiracetam-250mg-bd-(to-increase-as-detailed-below)
+A13	DrugName T6 levetiracetam
+A14	DrugDose T6 250
+A15	DoseUnit T6 mg
+A16	Frequency T6 2
+A17	CUIPhrase T6 levetiracetam
+A18	CUI T6 C0377265
+T11	Prescription 302 318	Buccal-midazolam
+A25	Frequency T11 As_Required
+A26	CUIPhrase T11 midazolam
+A27	CUI T11 C0026056
+T13	Diagnosis 436 473	focal-seizures-with-altered-awareness
+A29	DiagCategory T13 MultipleSeizures
+A30	Certainty T13 5
+A31	Negation T13 Affirmed
+A32	CUIPhrase T13 focal-seizures-with-altered-awareness
+A33	CUI T13 C0270834
+T15	Diagnosis 478 508	secondary-generalised-seizures
+A35	DiagCategory T15 MultipleSeizures
+A36	Certainty T15 5
+A37	Negation T15 Affirmed
+A38	CUIPhrase T15 secondary-generalised-seizures
+A39	CUI T15 C0270838
+T12	SeizureFrequency 500 511	seizures,-l
+A21	NumberOfSeizures T12 0
+A22	MonthDate T12 2
+A23	YearDate T12 2010
+A24	TimeSince_or_TimeOfEvent T12 Since
+A2510	CUIPhrase T12 seizures
+A2610	CUI T12 C0036572
+T8	Investigations 547 550	CT-
+A1110	CT_Performed T8 Yes
+A1210	CT_Results T8 Abnormal
+A1310	CUIPhrase T8 ct-abnormal
+A1410	CUI T8 C0436539
+T10	PatientHistory 583 596	brain-atrophy
+A1610	Certainty T10 5
+A1710	Negation T10 Affirmed
+A1810	CUIPhrase T10 brain-atrophy
+A19	CUI T10 C0235946
+T24	PatientHistory 681 700	convulsive-seizures
+A54	MonthDate T24 2
+A55	Certainty T24 5
+A56	Negation T24 Affirmed
+A57	CUIPhrase T24 convulsive-seizures
+A58	CUI T24 C0751494
+T21	PatientHistory 959 967	dementia
+A48	Certainty T21 5
+A49	Negation T21 Affirmed
+A50	CUIPhrase T21 dementia
+A51	CUI T21 C0497327
+T26	PatientHistory 1097 1114	“blank”-episodes-
+A60	Certainty T26 5
+A61	Negation T26 Affirmed
+A62	CUIPhrase T26 blank-episodes
+A63	CUI T26 C0563606
+T28	Diagnosis 1260 1268	epilepsy
+A65	DiagCategory T28 Epilepsy
+A66	Certainty T28 5
+A67	Negation T28 Affirmed
+A68	CUIPhrase T28 epilepsy
+A69	CUI T28 C0014544
+T30	EpilepsyCause 1312 1320	dementia
+A71	Certainty T30 4
+A72	Negation T30 Affirmed
+A73	CUIPhrase T30 dementia
+A74	CUI T30 C0497327
+T14	PatientHistory 1312 1320	dementia
+A1111	Certainty T14 5
+A1211	Negation T14 Affirmed
+A1311	CUIPhrase T14 dementia
+A1411	CUI T14 C0497327
+T32	Diagnosis 1371 1408	focal-seizures-with-altered-awareness
+A76	DiagCategory T32 MultipleSeizures
+A77	Certainty T32 4
+A78	Negation T32 Affirmed
+A79	CUIPhrase T32 focal-seizures-with-altered-awareness
+A80	CUI T32 C0270834
+T16	Diagnosis 1578 1587	epilepsy-
+A34	DiagCategory T16 Epilepsy
+A3510	Certainty T16 5
+A3610	Negation T16 Affirmed
+A3710	CUIPhrase T16 epilepsy
+A3810	CUI T16 C0014544

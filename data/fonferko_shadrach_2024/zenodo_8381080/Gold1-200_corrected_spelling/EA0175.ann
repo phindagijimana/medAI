@@ -1,0 +1,59 @@
+T1	Prescription 207 230	Levetiracetam-1750mg-bd
+A1	DoseUnit T1 mg
+A2	CUI T1 C0377265
+A3	DrugName T1 levetiracetam
+A4	CUIPhrase T1 levetiracetam
+A5	Frequency T1 2
+A6	DrugDose T1 1750
+T2	PatientHistory 391 399	seizures
+A7	Certainty T2 5
+A8	CUIPhrase T2 seizures
+A9	CUI T2 C0036572
+A10	Negation T2 Affirmed
+T3	SeizureFrequency 391 399	seizures
+A11	CUI T3 C0036572
+A12	UpperNumberOfTimePeriods T3 2
+A13	TimePeriod T3 Week
+A14	NumberOfSeizures T3 1
+A15	CUIPhrase T3 seizures
+A16	LowerNumberOfTimePeriods T3 1
+T4	Investigations 138 141	EEG
+A17	EEG_Results T4 Abnormal
+A18	CUI T4 C0151611
+A19	CUIPhrase T4 eeg-abnormal
+A20	EEG_Performed T4 Yes
+T5	Diagnosis 82 129	Generalised-tonic-clonic-seizures-whilst-asleey
+A21	Negation T5 Affirmed
+A22	DiagCategory T5 MultipleSeizures
+A23	Certainty T5 5
+A24	CUIPhrase T5 generalised-tonic-clonic-seizures
+A25	CUI T5 C0494475
+T6	Investigations 157 161	MRI-
+A26	CUI T6 C0436481
+A27	MRI_Performed T6 Yes
+A28	MRI_Results T6 Normal
+A29	CUIPhrase T6 MRI normal
+T7	Diagnosis 65 79	focal-epilepsy
+A30	CUIPhrase T7 focal-epilepsy
+A31	CUI T7 C0014547
+A32	Negation T7 Affirmed
+A33	DiagCategory T7 Epilepsy
+A34	Certainty T7 5
+T8	PatientHistory 895 902	anxiety
+A35	CUIPhrase T8 anxiety
+A36	Certainty T8 5
+A37	Negation T8 Affirmed
+A38	CUI T8 C0003467
+T9	Prescription 181 191	Perampanel
+A39	DrugDose T9 8
+A40	Frequency T9 1
+A41	DrugName T9 Perampanel
+A42	CUI T9 C2698764
+A43	DoseUnit T9 mg
+A44	CUIPhrase T9 perampanel
+T10	Diagnosis 50 79	Drug-refactory-focal-epilepsy
+A45	CUI T10 C1096063
+A46	DiagCategory T10 Epilepsy
+A47	CUIPhrase T10 drug-refractory-epilepsies
+A48	Certainty T10 5
+A49	Negation T10 Affirmed

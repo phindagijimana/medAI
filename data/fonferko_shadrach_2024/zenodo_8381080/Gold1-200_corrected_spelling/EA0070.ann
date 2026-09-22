@@ -1,0 +1,90 @@
+T1	PatientHistory 1243 1251	seizures
+A1	CUI T1 C0036572
+A2	Negation T1 Affirmed
+A3	CUIPhrase T1 seizures
+A4	Certainty T1 5
+T2	Diagnosis 161 169	Epilepsy
+A5	CUI T2 C0014544
+A6	Certainty T2 5
+A7	Negation T2 Affirmed
+A8	DiagCategory T2 Epilepsy
+A9	CUIPhrase T2 epilepsy
+T3	Diagnosis 213 242	Bilateral-convulsive-seizures
+A10	DiagCategory T3 MultipleSeizures
+A11	Certainty T3 5
+A12	CUIPhrase T3 bilateral-convulsive-seizures
+A13	CUI T3 C0877017
+A14	Negation T3 Affirmed
+T8	SeizureFrequency 1353 1361	seizures
+A112	FrequencyChange T8 Infrequent
+A122	CUIPhrase T8 seizures
+A132	CUI T8 C0036572
+T11	SeizureFrequency 1353 1361	seizures
+A15	LowerNumberOfSeizures T11 1
+A16	UpperNumberOfSeizures T11 2
+A17	TimePeriod T11 Year
+A18	NumberOfTimePeriods T11 1
+A19	TimeSince_or_TimeOfEvent T11 During
+A20	CUIPhrase T11 seizures
+A21	CUI T11 C0036572
+T4	PatientHistory 1421 1431	depression
+A152	Certainty T4 5
+A162	CUI T4 C0011570
+A172	CUIPhrase T4 depression
+A182	Negation T4 Affirmed
+T5	PatientHistory 1353 1361	seizures
+A192	CUIPhrase T5 seizures
+A202	Negation T5 Affirmed
+A212	CUI T5 C0036572
+A22	Certainty T5 5
+T6	Diagnosis 1177 1206	convulsive-epileptic-seizures
+A23	DiagCategory T6 MultipleSeizures
+A24	Certainty T6 5
+A25	CUIPhrase T6 epileptic convulsions
+A26	CUI T6 C0014544
+A27	Negation T6 Affirmed
+T9	PatientHistory 672 679	seizure
+A41	CUIPhrase T9 seizures
+A42	Negation T9 Affirmed
+A43	Age T9 22
+A44	Certainty T9 5
+A45	AgeUnit T9 Year
+A46	CUI T9 C0036572
+T10	Investigations 439 442	MRI
+A47	MRI_Performed T10 Yes
+A48	MRI_Results T10 Abnormal
+A49	CUI T10 C1319851
+A50	CUIPhrase T10 abnormal-mri
+T7	Prescription 305 365	Lamotrigine-75mg-twice-a-day-(to-increase-as-detailed-below)
+A51	Frequency T7 2
+A52	DoseUnit T7 mg
+A53	CUIPhrase T7 lamotrigine
+A54	DrugName T7 lamotrigine
+A55	DrugDose T7 75
+A56	CUI T7 C0064636
+T12	Investigations 499 502	EEG
+A57	CUIPhrase T12 eeg-unknown
+A58	CUI T12 C0013819
+A59	EEG_Performed T12 Yes
+A60	EEG_Results T12 Unknown
+T13	SeizureFrequency 213 242	Bilateral-convulsive-seizures
+A61	NumberOfSeizures T13 0
+A62	TimePeriod T13 Week
+A63	CUI T13 C0877017
+A64	CUIPhrase T13 bilateral-convulsive-seizures
+A65	NumberOfTimePeriods T13 2
+T15	PatientHistory 1666 1682	febrile-seizures
+A113	AgeUnit T15 Year
+A123	AgeLower T15 3
+A133	AgeUpper T15 4
+A143	Certainty T15 5
+A153	Negation T15 Affirmed
+A163	CUIPhrase T15 febrile-seizures
+A173	CUI T15 C0009952
+T14	PatientHistory 1721 1732	head-injury
+A66	Negation T14 Affirmed
+A67	CUI T14 C0497301
+A68	AgeUnit T14 Year
+A69	CUIPhrase T14 head-injury
+A70	Certainty T14 5
+A71	Age T14 8

@@ -1,0 +1,21 @@
+T1	PatientHistory 340 348	seizure-
+A1	CUI T1 C0036572
+A2	Certainty T1 5
+A3	CUIPhrase T1 seizure
+A4	Negation T1 Affirmed
+T2	Diagnosis 145 159	Focal-epilepsy
+A5	Certainty T2 5
+A6	Negation T2 Affirmed
+A7	CUI T2 C0014547
+A8	CUIPhrase T2 focal-epilepsy
+A9	DiagCategory T2 Epilepsy
+T3	Investigations 1083 1086	MRI
+A10	CUIPhrase T3 normal-mri
+A11	CUI T3 C0436481
+A12	MRI_Results T3 Normal
+A13	MRI_Performed T3 Yes
+T4	PatientHistory 1176 1183	seizure
+A14	Certainty T4 5
+A15	Negation T4 Affirmed
+A16	CUIPhrase T4 seizure
+A17	CUI T4 C0036572

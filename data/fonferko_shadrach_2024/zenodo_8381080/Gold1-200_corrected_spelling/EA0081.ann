@@ -1,0 +1,86 @@
+T15	PatientHistory 876 893	altered-awareness
+A102	Certainty T15 5
+A112	Negation T15 Affirmed
+A122	CUIPhrase T15 altered-awareness-and-consciousness
+A132	CUI T15 C0234428
+T1	PatientHistory 1550 1593	episodes-of-transient-loss-of-consciousness
+A1	Negation T1 Affirmed
+A2	Certainty T1 5
+A3	CUI T1 C4087400
+A4	CUIPhrase T1 Transient loss of consciousness
+T2	BirthHistory 1292 1304	3-week-early
+A5	Certainty T2 5
+A6	CUI T2 C3829315
+A7	Negation T2 Affirmed
+A8	PrematureBirth T2 34to<37_LatePretermBirth
+A9	CUIPhrase T2 late-preterm-birth
+T3	Diagnosis 1599 1647	focal-to-bilateral-convulsive-epileptic-seizures
+A10	Negation T3 Affirmed
+A11	CUIPhrase T3 focal-to-bilateral-convulsive-seizures
+A12	CUI T3 C0877017
+A13	Certainty T3 4
+A14	DiagCategory T3 MultipleSeizures
+T4	Diagnosis 272 292	focal-onset-epilepsy
+A15	CUI T4 C0014547
+A16	DiagCategory T4 Epilepsy
+A17	CUIPhrase T4 focal-onset-epilepsy
+A18	Negation T4 Affirmed
+A19	Certainty T4 4
+T5	Diagnosis 3103 3115	his-epilepsy
+A20	Certainty T5 5
+A21	DiagCategory T5 Epilepsy
+A22	Negation T5 Affirmed
+A23	CUI T5 C0014544
+A24	CUIPhrase T5 epilepsy
+T6	PatientHistory 386 429	episodes-of-transient-loss-of-consciousness
+A25	CUIPhrase T6 Transient loss of consciousness
+A26	Certainty T6 5
+A27	CUI T6 C4087400
+A28	Negation T6 Affirmed
+T7	Investigations 1212 1219	CT-head
+A29	CT_Results T7 Normal
+A30	CT_Performed T7 Yes
+A31	CUIPhrase T7 normal-ct
+A32	CUI T7 C0744602
+T8	PatientHistory 1057 1069	hypertension
+A33	CUIPhrase T8 hypertension
+A34	Negation T8 Affirmed
+A35	CUI T8 C0020538
+A36	Certainty T8 5
+T9	PatientHistory 1179 1200	myocardial-infarction
+A37	CUI T9 C0027051
+A38	CUIPhrase T9 myocardial-infarction
+A39	YearDate T9 2010
+A40	Certainty T9 5
+A41	Negation T9 Affirmed
+T10	Diagnosis 981 1018	focal-seizures-with-altered-awareness
+A42	Negation T10 Affirmed
+A43	DiagCategory T10 MultipleSeizures
+A44	CUIPhrase T10 focal-seizures-with-altered-awareness
+A45	CUI T10 C0270834
+A46	Certainty T10 4
+T11	Diagnosis 1692 1730	focal-seizures-with-altered-awareness-
+A47	Negation T11 Affirmed
+A48	CUIPhrase T11 focal-seizures-with-altered-awareness
+A49	DiagCategory T11 MultipleSeizures
+A50	Certainty T11 5
+A51	CUI T11 C0270834
+T12	PatientHistory 219 250	transient-loss-of-consciousness
+A52	Certainty T12 5
+A53	CUIPhrase T12 Transient loss of consciousness
+A54	Negation T12 Affirmed
+A55	CUI T12 C4087400
+T13	Diagnosis 1666 1674	epilepsy
+A56	Negation T13 Affirmed
+A57	CUIPhrase T13 epilepsy
+A58	DiagCategory T13 Epilepsy
+A59	CUI T13 C0014544
+A60	Certainty T13 5
+T14	PatientHistory 1395 1412	febriles-seizures
+A61	Negation T14 Affirmed
+A62	AgeLower T14 9
+A63	AgeUnit T14 Month
+A64	Certainty T14 5
+A65	CUI T14 C0009952
+A66	CUIPhrase T14 febrile-seizures
+A67	AgeUpper T14 36

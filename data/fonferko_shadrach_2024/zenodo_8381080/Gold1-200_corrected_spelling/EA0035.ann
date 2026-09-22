@@ -1,0 +1,59 @@
+T2	Diagnosis 11 19	epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	Diagnosis 11 41	epilepsy,-probably-generalised
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 4
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 generalised-epilepsy
+A12	CUI T4 C0014548
+T6	Diagnosis 42 95	Epilepsy-with-generalised-tonic-clonic-seizures-alone
+A14	DiagCategory T6 Epilepsy
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 epilepsy-with-generalised-tonic-clonic-seizures-alone
+A18	CUI T6 C0393697
+T11	Prescription 97 166	Current-antiepileptic-medication:-sodium-valproate-(epilim)-400-mg-BD
+A1610	DrugName T11 sodium-valproate
+A1710	DrugDose T11 400
+A1810	DoseUnit T11 mg
+A19	Frequency T11 2
+A20	CUIPhrase T11 sodium-valproate
+A21	CUI T11 C0037567
+T10	Diagnosis 196 229	generalised-tonic-clonic-seizures
+A27	DiagCategory T10 MultipleSeizures
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 generalised-tonic-clonic-seizures
+A31	CUI T10 C0494475
+T12	SeizureFrequency 196 259	generalised-tonic-clonic-seizures,-last-seizure-four-years-ago.
+A33	NumberOfSeizures T12 0
+A34	TimePeriod T12 Year
+A35	NumberOfTimePeriods T12 4
+A36	CUIPhrase T12 generalised-tonic-clonic-seizures
+A37	CUI T12 C0494475
+T9	PatientHistory 236 243	seizure
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 seizure
+A1310	CUI T9 C0036572
+T14	Diagnosis 346 378	she’s-got-long-standing-epilepsy
+A39	DiagCategory T14 Epilepsy
+A40	Certainty T14 5
+A41	Negation T14 Affirmed
+A42	CUIPhrase T14 epilepsy
+A43	CUI T14 C0014544
+T16	Investigations 521 524	MRI
+A45	MRI_Performed T16 Yes
+A46	MRI_Results T16 Normal
+A47	CUIPhrase T16 normal-mri
+A48	CUI T16 C0436481
+T18	Diagnosis 789 801	her-epilepsy
+A50	DiagCategory T18 Epilepsy
+A51	Certainty T18 5
+A52	Negation T18 Affirmed
+A53	CUIPhrase T18 epilepsy
+A54	CUI T18 C0014544

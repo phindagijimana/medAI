@@ -1,0 +1,84 @@
+T2	Diagnosis 75 102	juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	Diagnosis 132 165	generalised-tonic-clonic-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 generalised-tonic-clonic-seizures
+A12	CUI T4 C0494475
+T6	SeizureFrequency 132 165	generalised-tonic-clonic-seizures
+A14	NumberOfSeizures T6 1
+A15	PointInTime T6 LastClinic
+A16	TimeSince_or_TimeOfEvent T6 Since
+A17	CUIPhrase T6 generalised-tonic-clonic-seizures
+A18	CUI T6 C0494475
+T8	PatientHistory 196 211	Myoclonic-jerks
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 myoclonic-jerks
+A23	CUI T8 C0027066
+T10	SeizureFrequency 196 211	Myoclonic-jerks
+A1110	NumberOfSeizures T10 1
+A1210	TimePeriod T10 Week
+A1310	NumberOfTimePeriods T10 1
+A1410	CUIPhrase T10 myoclonic-jerks
+A1510	CUI T10 C0027066
+T11	PatientHistory 230 238	absences
+A25	Certainty T11 5
+A26	Negation T11 Affirmed
+A27	CUIPhrase T11 absences
+A28	CUI T11 C0563606
+T12	SeizureFrequency 230 238	absences
+A1710	FrequencyChange T12 Infrequent
+A1810	CUIPhrase T12 absences
+A1910	CUI T12 C0563606
+T13	Prescription 277 298	lamotrigine-100-mg-BD
+A30	DrugName T13 lamotrigine
+A31	DrugDose T13 100
+A32	DoseUnit T13 mg
+A33	Frequency T13 2
+A34	CUIPhrase T13 lamotrigine
+A35	CUI T13 C0064636
+T14	Prescription 299 325	Sodium-valproate-700-mg-BD
+A37	DrugName T14 sodium-valproate
+A38	DrugDose T14 700
+A39	DoseUnit T14 mg
+A40	Frequency T14 2
+A41	CUIPhrase T14 sodium-valproate
+A42	CUI T14 C0037567
+T16	Investigations 343 347	MRI-
+A44	MRI_Performed T16 Yes
+A45	MRI_Results T16 Normal
+A46	CUIPhrase T16 normal-mri
+A47	CUI T16 C0436481
+T18	Investigations 359 362	EEG
+A49	EEG_Performed T18 Yes
+A50	EEG_Results T18 Abnormal
+A51	CUIPhrase T18 abnormal-eeg
+A52	CUI T18 C0151611
+T20	PatientHistory 482 491	-seizures
+A54	Certainty T20 5
+A55	Negation T20 Affirmed
+A56	CUIPhrase T20 seizures
+A57	CUI T20 C0036572
+T22	SeizureFrequency 482 491	-seizures
+A59	FrequencyChange T22 Decreased
+A60	PointInTime T22 DrugChange
+A61	TimeSince_or_TimeOfEvent T22 Since
+A62	CUIPhrase T22 seizures
+A63	CUI T22 C0036572
+T24	PatientHistory 605 612	anxiety
+A65	Certainty T24 5
+A66	Negation T24 Affirmed
+A67	CUIPhrase T24 anxiety
+A68	CUI T24 C0003467
+T26	Diagnosis 641 649	epilepsy
+A70	DiagCategory T26 Epilepsy
+A71	Certainty T26 5
+A72	Negation T26 Affirmed
+A73	CUIPhrase T26 epilepsy
+A74	CUI T26 C0014544

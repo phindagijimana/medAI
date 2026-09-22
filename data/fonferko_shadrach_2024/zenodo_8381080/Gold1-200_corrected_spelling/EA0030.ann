@@ -1,0 +1,35 @@
+T2	Diagnosis 20 23	JME
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 4
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 jme
+A6	CUI T2 C0270853
+T4	Investigations 41 44	EEG
+A8	EEG_Performed T4 Yes
+A9	EEG_Results T4 Abnormal
+A10	CUIPhrase T4 eeg-abnormal
+A11	CUI T4 C0151611
+T6	Investigations 107 111	MRI-
+A13	MRI_Performed T6 Yes
+A14	MRI_Results T6 Abnormal
+A15	CUIPhrase T6 mri-abnormal
+A16	CUI T6 C1319851
+T9	PatientHistory 122 140	cerebellar-atrophy
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A12	CUIPhrase T9 cerebellar-atrophy
+A1310	CUI T9 C0740279
+T8	Prescription 142 192	Medication:-lamotrigine-250-milligrams-twice-a-day
+A18	DrugName T8 lamotrigine
+A19	DrugDose T8 250
+A20	DoseUnit T8 mg
+A21	Frequency T8 2
+A22	CUIPhrase T8 lamotrigine
+A23	CUI T8 C0064636
+T10	Prescription 193 227	Keppra-1000-milligrams-twice-a-day
+A25	DrugName T10 keppra
+A26	DrugDose T10 1000
+A27	DoseUnit T10 mg
+A28	Frequency T10 2
+A29	CUIPhrase T10 keppra
+A30	CUI T10 C0876060

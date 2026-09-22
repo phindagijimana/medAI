@@ -1,0 +1,18 @@
+T1	Diagnosis 124 151	Juvenile-Myoclonic-Epilepsy
+A1	CUIPhrase T1 juvenile-myoclonic-epilepsy
+A2	Negation T1 Affirmed
+A3	CUI T1 C0270853
+A4	Certainty T1 5
+A5	DiagCategory T1 Epilepsy
+T2	PatientHistory 466 472	jerks-
+A6	Negation T2 Affirmed
+A7	CUI T2 C0231530
+A8	Certainty T2 5
+A9	CUIPhrase T2 jerks
+T3	Prescription 165 236	Lamotrigine-125mg-twice-daily-(please-increase-with-immediate-effect-in
+A10	DrugName T3 lamotrigine
+A11	CUIPhrase T3 lamotrigine
+A12	CUI T3 C0064636
+A13	DrugDose T3 125
+A14	DoseUnit T3 mg
+A15	Frequency T3 2

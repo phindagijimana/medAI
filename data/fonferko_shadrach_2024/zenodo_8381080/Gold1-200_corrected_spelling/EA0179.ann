@@ -1,0 +1,85 @@
+T1	PatientHistory 1009 1030	learning-disabilities
+A1	Negation T1 Affirmed
+A2	CUI T1 C0751265
+A3	CUIPhrase T1 learning-disabilities
+A4	Certainty T1 5
+T2	PatientHistory 893 926	episodes-of-loss-of-consciousness
+A5	CUIPhrase T2 episodes of loss of consciousness
+A6	Certainty T2 5
+A7	Negation T2 Affirmed
+A8	CUI T2 C0041657
+T3	PatientHistory 159 185	mild-learning-disabilities
+A9	Negation T3 Affirmed
+A10	CUI T3 C0751265
+A11	CUIPhrase T3 learning-disabilities
+A12	Certainty T3 5
+T4	PatientHistory 383 416	episodes-of-loss-of-consciousness
+A13	Negation T4 Affirmed
+A14	CUIPhrase T4 episodes of loss of consciousness
+A15	Certainty T4 5
+A16	CUI T4 C0041657
+T5	Diagnosis 63 89	?-complex-partial-seizures
+A17	Negation T5 Affirmed
+A18	Certainty T5 3
+A19	CUI T5 C0149958
+A20	DiagCategory T5 MultipleSeizures
+A21	CUIPhrase T5 complex-partial-seizures
+T6	Investigations 717 721	EEG-
+A22	CUI T6 C0013819
+A23	EEG_Results T6 Unknown
+A24	CUIPhrase T6 EEG unknown
+A25	EEG_Performed T6 Yes
+T7	PatientHistory 1054 1062	seizures
+A26	Certainty T7 5
+A27	Negation T7 Affirmed
+A28	CUIPhrase T7 seizures
+A29	CUI T7 C0036572
+T8	Investigations 595 598	MRI
+A30	CUI T8 C0436481
+A31	MRI_Performed T8 Yes
+A32	MRI_Results T8 Normal
+A33	CUIPhrase T8 mri-normal
+T9	Diagnosis 1070 1078	epilepsy
+A34	CUIPhrase T9 epilepsy
+A35	CUI T9 C0014544
+A36	Negation T9 Affirmed
+A37	Certainty T9 3
+A38	DiagCategory T9 Epilepsy
+T10	Prescription 1137 1153	sodium-valproate
+A39	CUIPhrase T10 sodium-valproate
+A40	DoseUnit T10 mg
+A41	DrugDose T10 300
+A42	Frequency T10 2
+A43	CUI T10 C0037567
+A44	DrugName T10 SodiumValproate
+T11	PatientHistory 54 62	?syncope
+A45	Negation T11 Affirmed
+A46	Certainty T11 3
+A47	CUI T11 C0039070
+A48	CUIPhrase T11 syncope
+T12	PatientHistory 980 987	syncope
+A49	CUIPhrase T12 syncope
+A50	CUI T12 C0039070
+A51	Certainty T12 4
+A52	Negation T12 Affirmed
+T13	PatientHistory 205 213	seizures
+A53	CUI T13 C0036572
+A54	Certainty T13 5
+A55	AgeUpper T13 12
+A56	CUIPhrase T13 seizures
+A57	Negation T13 Affirmed
+A58	TimePeriod T13 Year
+A59	AgeLower T13 2
+T14	PatientHistory 19 53	-Episodes-of-loss-of-consciousness
+A60	CUI T14 C0041657
+A61	CUIPhrase T14 episodes-of-loss-of-consciousness
+A62	Certainty T14 5
+A63	Negation T14 Affirmed
+T15	PatientHistory 277 296	febrile-convulsions
+A64	Certainty T15 5
+A65	CUI T15 C0009952
+A66	Negation T15 Affirmed
+A67	AgeUnit T15 Year
+A68	Age T15 3
+A69	CUIPhrase T15 febrile-convulsions
+

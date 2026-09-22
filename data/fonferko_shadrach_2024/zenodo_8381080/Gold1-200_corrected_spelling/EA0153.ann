@@ -1,0 +1,46 @@
+T1	PatientHistory 1105 1121	febrile-seizures
+A1	Certainty T1 1
+A2	Negation T1 Negated
+A3	CUI T1 C0009952
+A4	CUIPhrase T1 febrile-seizures
+T2	Diagnosis 96 109	temporal-lobe
+A5	CUIPhrase T2 temporal-lobe-epilepsy
+A6	Certainty T2 3
+A7	Negation T2 Affirmed
+A8	DiagCategory T2 Epilepsy
+A9	CUI T2 C0014556
+T3	BirthHistory 1040 1056	born-prematurely
+A10	CUI T3 C3829315
+A11	Certainty T3 5
+A12	Negation T3 Affirmed
+A13	CUIPhrase T3 late-preterm-birth
+A14	PrematureBirth T3 34to<37_LatePretermBirth
+T4	Diagnosis 75 89	Focal-epilepsy
+A15	CUIPhrase T4 focal-epilepsy
+A16	CUI T4 C0014547
+A17	DiagCategory T4 Epilepsy
+A18	Certainty T4 5
+A19	Negation T4 Affirmed
+T5	Diagnosis 1365 1402	focal-seizures-with-altered-awareness
+A20	Negation T5 Affirmed
+A21	CUIPhrase T5 focal-seizures-with-altered-awareness
+A22	DiagCategory T5 MultipleSeizures
+A23	CUI T5 C0270834
+A24	Certainty T5 4
+T6	Diagnosis 1435 1443	epilepsy
+A25	CUI T6 C0014544
+A26	CUIPhrase T6 epilepsy
+A27	Certainty T6 5
+A28	Negation T6 Affirmed
+A29	DiagCategory T6 Epilepsy
+T7	PatientHistory 843 852	migraine-
+A30	Negation T7 Affirmed
+A31	CUI T7 C0149931
+A32	Certainty T7 5
+A33	CUIPhrase T7 migraine
+T8	Diagnosis 1476 1484	epilepsy
+A34	Negation T8 Affirmed
+A35	Certainty T8 5
+A36	DiagCategory T8 Epilepsy
+A37	CUI T8 C0014544
+A38	CUIPhrase T8 epilepsy

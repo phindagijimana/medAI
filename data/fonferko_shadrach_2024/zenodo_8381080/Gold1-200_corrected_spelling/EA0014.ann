@@ -1,0 +1,31 @@
+T2	Diagnosis 65 85	intractable-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 intractable-epilepsy
+A6	CUI T2 C1096063
+T4	Prescription 103 130	She-is-on-Keppra-1000-mg-BD
+A8	DrugName T4 keppra
+A9	DrugDose T4 1000
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 keppra
+A13	CUI T4 C0876060
+T6	Prescription 132 142	zobisamide
+A15	DrugName T6 Zonisamide
+A16	DrugDose T6 125
+A17	DoseUnit T6 mg
+A18	Frequency T6 2
+A19	CUIPhrase T6 zonisamide
+A20	CUI T6 C0078844
+T8	Diagnosis 200 224	complex-partial-seizures
+A22	DiagCategory T8 MultipleSeizures
+A23	Certainty T8 5
+A24	Negation T8 Affirmed
+A25	CUIPhrase T8 complex-partial-seizures
+A26	CUI T8 C0149958
+T10	PatientHistory 304 327	chronic-daily-headaches
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 chronic-headaches
+A31	CUI T10 C0151293

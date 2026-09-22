@@ -1,0 +1,44 @@
+T3	PatientHistory 21 32	head-injury
+A3	Certainty T3 5
+A4	Negation T3 Affirmed
+A5	CUIPhrase T3 head-injury
+A6	CUI T3 C0497301
+T5	PatientHistory 36 57	Dissociative-seizures
+A8	Certainty T5 5
+A9	Negation T5 Affirmed
+A10	CUIPhrase T5 dissociative-seizures
+A11	CUI T5 C0349245
+T7	Diagnosis 61 75	Focal-epilepsy
+A13	DiagCategory T7 Epilepsy
+A14	Certainty T7 5
+A15	Negation T7 Affirmed
+A16	CUIPhrase T7 focal-epilepsy
+A17	CUI T7 C0014547
+T8	Diagnosis 177 191	focal-seizures
+A1010	DiagCategory T8 MultipleSeizures
+A1110	Certainty T8 4
+A12	Negation T8 Affirmed
+A1310	CUIPhrase T8 focal-seizures
+A1410	CUI T8 C0751495
+T10	SeizureFrequency 177 191	focal-seizures
+A1113	NumberOfSeizures T10 0
+A1213	PointInTime T10 DrugChange
+A1313	CUIPhrase T10 focal-seizures
+A1431	CUI T10 C0751495
+T11	Prescription 236 248	lamotrigine-
+A1610	DrugName T11 Lamotrigine
+A1710	DrugDose T11 200
+A18	DoseUnit T11 mg
+A19	Frequency T11 2
+A20	CUIPhrase T11 lamotrigine
+A21	CUI T11 C0064636
+T14	Investigations 488 556	EEG-she-had-some-of-these-episodes-and-there-was-no-epileptiform-EEG
+A1111	EEG_Performed T14 Yes
+A1211	EEG_Results T14 Normal
+A1311	CUIPhrase T14 eeg-normal
+A1411	CUI T14 C0560017
+T9	SeizureFrequency 693 701	seizures
+A1011	FrequencyChange T9 Infrequent
+A1112	PointInTime T9 DrugChange
+A1212	CUIPhrase T9 seizures
+A1312	CUI T9 C0036572

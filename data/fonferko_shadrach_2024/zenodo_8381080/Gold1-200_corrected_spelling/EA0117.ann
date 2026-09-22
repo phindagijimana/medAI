@@ -1,0 +1,63 @@
+T2	Diagnosis 117 131	focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T12	PatientHistory 136 157	dissociative-seizures
+A13	Certainty T12 5
+A14	Negation T12 Affirmed
+A15	CUIPhrase T12 dissociative-seizures
+A16	CUI T12 C0349245
+T6	Prescription 173 183	Lacosmaide
+A11	DrugName T6 Lacosamide
+A12	DrugDose T6 100
+A1310	DoseUnit T6 mg
+A1410	Frequency T6 2
+A1510	CUIPhrase T6 lacosamide
+A1610	CUI T6 C0893761
+T8	Prescription 196 207	Perampanel-
+A18	DrugName T8 Perampanel
+A19	DrugDose T8 8
+A20	DoseUnit T8 mg
+A21	Frequency T8 1
+A22	CUIPhrase T8 perampanel
+A23	CUI T8 C2698764
+T10	PatientHistory 293 301	seizures
+A25	Certainty T10 5
+A26	Negation T10 Affirmed
+A27	CUIPhrase T10 seizures
+A28	CUI T10 C0036572
+T13	SeizureFrequency 293 301	seizures
+A30	NumberOfSeizures T13 1
+A31	TimePeriod T13 Week
+A32	NumberOfTimePeriods T13 1
+A33	CUIPhrase T13 seizures
+A34	CUI T13 C0036572
+T22	Diagnosis 371 404	focal-impaired-awareness-seizures
+A35	DiagCategory T22 MultipleSeizures
+A36	Certainty T22 5
+A37	Negation T22 Affirmed
+A38	CUIPhrase T22 focal-impaired-awareness-seizures
+A39	CUI T22 C0270834
+T19	PatientHistory 409 430	dissociative-seizures
+A29	Certainty T19 4
+A3010	Negation T19 Affirmed
+A3110	CUIPhrase T19 dissociative-seizures
+A3210	CUI T19 C0349245
+T18	Diagnosis 897 930	focal-impaired-awareness-seizures
+A45	DiagCategory T18 MultipleSeizures
+A46	Certainty T18 4
+A47	Negation T18 Affirmed
+A48	CUIPhrase T18 focal-impaired-awareness-seizures
+A49	CUI T18 C0270834
+T16	PatientHistory 935 956	dissociative-seizures
+A2310	Certainty T16 4
+A24	Negation T16 Affirmed
+A2510	CUIPhrase T16 dissociative-seizures
+A2610	CUI T16 C0349245
+T24	Investigations 985 989	EEG-
+A41	EEG_Performed T24 Yes
+A42	EEG_Results T24 Abnormal
+A43	CUIPhrase T24 eeg-abnormal
+A44	CUI T24 C0151611

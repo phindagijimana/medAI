@@ -1,0 +1,68 @@
+T4	Diagnosis 138 163	Refractory-focal-epilepsy
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 refractory-epilepsies
+A12	CUI T4 C1096063
+T2	Diagnosis 149 163	focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T6	Diagnosis 179 212	generalised-tonic-clonic-seizures
+A14	DiagCategory T6 MultipleSeizures
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 generalised-tonic-clonic-seizures
+A18	CUI T6 C0494475
+T8	Investigations 229 246	EEG-abnormalities
+A20	EEG_Performed T8 Yes
+A21	EEG_Results T8 Abnormal
+A22	CUIPhrase T8 eeg-abnormal
+A23	CUI T8 C0151611
+T10	Investigations 249 261	MRI-negative
+A25	MRI_Performed T10 Yes
+A26	MRI_Results T10 Normal
+A27	CUIPhrase T10 mri-normal
+A28	CUI T10 C0436481
+T12	Prescription 277 297	Zonisamide-200mgs-bd
+A30	DrugName T12 zonisamide
+A31	DrugDose T12 200
+A32	DoseUnit T12 mg
+A33	Frequency T12 2
+A34	CUIPhrase T12 zonisamide
+A35	CUI T12 C0078844
+T14	Prescription 300 347	Brivaracetam-100mgs-bd-to-increase-to-100mgs-am
+A37	DrugName T14 brivaracetam
+A38	DrugDose T14 100
+A39	DoseUnit T14 mg
+A40	Frequency T14 2
+A41	CUIPhrase T14 brivaracetam
+A42	CUI T14 C1699861
+T16	SeizureFrequency 626 634	seizures
+A44	FrequencyChange T16 Increased
+A45	CUIPhrase T16 seizures
+A46	CUI T16 C0036572
+T22	PatientHistory 626 634	seizures
+A60	Certainty T22 5
+A61	Negation T22 Affirmed
+A62	CUIPhrase T22 seizures
+A63	CUI T22 C0036572
+T18	SeizureFrequency 661 670	seizures-
+A48	NumberOfSeizures T18 1
+A49	TimePeriod T18 Week
+A50	NumberOfTimePeriods T18 1
+A51	CUIPhrase T18 seizures
+A52	CUI T18 C0036572
+T24	PatientHistory 661 669	seizures
+A65	Certainty T24 5
+A66	Negation T24 Affirmed
+A67	CUIPhrase T24 seizures
+A68	CUI T24 C0036572
+T20	Diagnosis 707 728	tonic-clonic-seizures
+A54	DiagCategory T20 MultipleSeizures
+A55	Certainty T20 4
+A56	Negation T20 Affirmed
+A57	CUIPhrase T20 tonic-clonic-seizures
+A58	CUI T20 C0494475

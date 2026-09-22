@@ -1,0 +1,36 @@
+T1	PatientHistory 157 160	ASD
+A1	CUIPhrase T1 asd
+A2	Negation T1 Affirmed
+A3	Certainty T1 5
+A4	CUI T1 C1510586
+T2	Prescription 163 211	Medication:-Levetiracetam-500mg-bd-(36mg/kg/day)
+A5	DrugName T2 levetiracetam
+A6	DoseUnit T2 mg
+A7	CUI T2 C0377265
+A8	DrugDose T2 500
+A9	CUIPhrase T2 levetiracetam
+A10	Frequency T2 2
+T3	PatientHistory 750 769	cluster-of-seizures
+A11	Negation T3 Affirmed
+A12	CUIPhrase T3 cluster-of-seizures
+A13	Certainty T3 5
+A14	CUI T3 C3203523
+T4	Diagnosis 138 154	Genetic-epilepsy
+A15	DiagCategory T4 Epilepsy
+A16	CUI T4 C0014544
+A17	Certainty T4 5
+A18	CUIPhrase T4 epilepsy
+A19	Negation T4 Affirmed
+T5	Diagnosis 448 472	complex-partial-seizures
+A20	Negation T5 Affirmed
+A21	CUI T5 C0149958
+A22	Certainty T5 5
+A23	DiagCategory T5 MultipleSeizures
+A24	CUIPhrase T5 complex-partial-seizures
+T6	Prescription 212 297	Lamotrigine-50mg-bd-increasing-by-5mg-each-dose-every-2-weeks-to-75mg-bd-(7mg/kg/day)
+A25	CUI T6 C0064636
+A26	DrugDose T6 50
+A27	Frequency T6 2
+A28	CUIPhrase T6 lamotrigine
+A29	DrugName T6 lamotrigine
+A30	DoseUnit T6 mg

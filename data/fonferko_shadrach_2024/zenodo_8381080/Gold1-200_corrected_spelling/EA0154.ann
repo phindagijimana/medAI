@@ -1,0 +1,47 @@
+T1	PatientHistory 264 273	seizures-
+A1	PointInTime T1 Last_Year
+A2	Certainty T1 5
+A3	CUI T1 C0036572
+A4	CUIPhrase T1 seizures
+A5	Negation T1 Affirmed
+T2	Investigations 645 649	MRI-
+A6	MRI_Performed T2 Yes
+A7	CUI T2 C0436481
+A8	CUIPhrase T2 mri-normal
+A9	MRI_Results T2 Normal
+T3	Diagnosis 250 258	epilepsy
+A10	DiagCategory T3 Epilepsy
+A11	CUIPhrase T3 epilepsy
+A12	CUI T3 C0014544
+A13	Certainty T3 5
+A14	Negation T3 Affirmed
+T4	Prescription 58 148	Medication:-Currently-Lamotrigine-75mg-bd-to-increase-over-the-following-weeks-to-125mg-bd
+A15	DrugDose T4 75
+A16	DrugName T4 lamotrigine
+A17	CUI T4 C0064636
+A18	CUIPhrase T4 lamotrigine
+A19	DoseUnit T4 mg
+A20	Frequency T4 2
+T5	PatientHistory 1108 1116	seizures
+A21	CUIPhrase T5 seizures
+A22	CUI T5 C0036572
+A23	Certainty T5 5
+A24	Negation T5 Affirmed
+T7	Diagnosis 34 56	Epilepsy---focal-onset
+A29	Negation T7 Affirmed
+A30	CUI T7 C0014547
+A31	CUIPhrase T7 focal-onset-epilepsy
+A32	Certainty T7 5
+A33	DiagCategory T7 Epilepsy
+T8	SeizureFrequency 908 916	seizure-
+A34	TimePeriod T8 Week
+A35	CUI T8 C0036572
+A36	NumberOfSeizures T8 1
+A37	NumberOfTimePeriods T8 4
+A38	CUIPhrase T8 seizure
+T9	Diagnosis 2022 2030	epilepsy
+A1010	DiagCategory T9 Epilepsy
+A1110	Certainty T9 5
+A1210	Negation T9 Affirmed
+A1310	CUIPhrase T9 epilepsy
+A1410	CUI T9 C0014544

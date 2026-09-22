@@ -1,0 +1,42 @@
+T1	Diagnosis 1103 1121	epileptic-seizures
+A1	Negation T1 Affirmed
+A2	Certainty T1 4
+A3	DiagCategory T1 SingleSeizure
+A4	CUI T1 C4317109
+A5	CUIPhrase T1 epileptic seizure
+T2	PatientHistory 20 51	transient-loss-of-consciousness
+A6	CUIPhrase T2 Transient loss of consciousness
+A7	Negation T2 Affirmed
+A8	CUI T2 C4087400
+A9	Certainty T2 5
+T3	BirthHistory 752 765	born-normally
+A10	CUI T3 C3665337
+A11	PrematureBirth T3 37+_TermBirth
+A12	Negation T3 Affirmed
+A13	CUIPhrase T3 born-normally
+A14	Certainty T3 5
+T4	Investigations 980 982	CT
+A15	CUI T4 C0744602
+A16	CT_Results T4 Normal
+A17	CT_Performed T4 Yes
+A18	CUIPhrase T4 ct-normal
+T5	PatientHistory 72 79	seizure
+A19	Negation T5 Affirmed
+A20	CUI T5 C0036572
+A21	CUIPhrase T5 seizure
+A22	Certainty T5 5
+T6	PatientHistory 97 102	jerks
+A23	Negation T6 Affirmed
+A24	CUIPhrase T6 jerks
+A25	CUI T6 C0231530
+A26	Certainty T6 5
+T7	PatientHistory 778 793	febrile-seizure
+A27	Certainty T7 5
+A28	CUI T7 C0009952
+A29	Negation T7 Affirmed
+A30	CUIPhrase T7 febrile-seizure
+T8	PatientHistory 1592 1599	seizure
+A102	Certainty T8 5
+A112	Negation T8 Affirmed
+A122	CUIPhrase T8 seizure
+A132	CUI T8 C0036572

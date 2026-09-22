@@ -1,0 +1,59 @@
+T2	Diagnosis 41 54	focal-seizure
+A2	DiagCategory T2 SingleSeizure
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-seizure
+A6	CUI T2 C0751495
+T4	PatientHistory 55 59	CVA-
+A8	YearDate T4 2017
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 cva
+A12	CUI T4 C0038454
+T6	PatientHistory 70 82	hemiparesis-
+A14	YearDate T6 2017
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 hemiparesis
+A18	CUI T6 C0018989
+T8	PatientHistory 557 563	stroke
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 stroke
+A23	CUI T8 C0038454
+T10	PatientHistory 764 775	hemiparesis
+A25	Certainty T10 5
+A26	Negation T10 Affirmed
+A27	CUIPhrase T10 hemiparesis
+A28	CUI T10 C0018989
+T14	Investigations 814 821	CT-scan
+A35	CT_Performed T14 Yes
+A36	CT_Results T14 Abnormal
+A37	CUIPhrase T14 ct-abnormal
+A38	CUI T14 C0436539
+T12	PatientHistory 858 865	infarct
+A30	Certainty T12 5
+A31	Negation T12 Affirmed
+A32	CUIPhrase T12 infarct
+A33	CUI T12 C0751955
+T16	Diagnosis 920 933	focal-seizure
+A40	DiagCategory T16 SingleSeizure
+A41	Certainty T16 5
+A42	Negation T16 Affirmed
+A43	CUIPhrase T16 focal-seizure
+A44	CUI T16 C0751495
+T18	EpilepsyCause 955 961	stroke
+A46	Certainty T18 5
+A47	Negation T18 Affirmed
+A48	CUIPhrase T18 strokes
+A49	CUI T18 C0038454
+T20	PatientHistory 955 960	strok
+A51	Certainty T20 5
+A52	Negation T20 Affirmed
+A53	CUIPhrase T20 stroke
+A54	CUI T20 C0038454
+T22	PatientHistory 1160 1168	seizure-
+A56	Certainty T22 5
+A57	Negation T22 Affirmed
+A58	CUIPhrase T22 seizure
+A59	CUI T22 C0036572

@@ -1,0 +1,53 @@
+T1	SeizureFrequency 287 295	seizure-
+A1	CUI T1 C0036572
+A2	CUIPhrase T1 seizure
+A3	NumberOfTimePeriods T1 3
+A4	TimePeriod T1 Week
+A5	NumberOfSeizures T1 0
+T2	Prescription 802 858	She-is-taking-Lamotrigine-150-mg-bd-with-no-side-effects
+A6	Frequency T2 2
+A7	CUI T2 C0064636
+A8	DrugName T2 lamotrigine
+A9	CUIPhrase T2 lamotrigine
+A10	DoseUnit T2 mg
+A11	DrugDose T2 150
+T3	Prescription 155 187	Medication:-Lamotrigine-150mg-bd
+A12	Frequency T3 2
+A13	CUI T3 C0064636
+A14	DrugDose T3 150
+A15	DoseUnit T3 mg
+A16	DrugName T3 lamotrigine
+A17	CUIPhrase T3 lamotrigine
+T4	Investigations 643 647	EEG-
+A18	CUI T4 C0151611
+A19	CUIPhrase T4 EEG abnormal
+A20	EEG_Results T4 Abnormal
+A21	EEG_Performed T4 Yes
+T5	Diagnosis 150 153	TLE
+A22	CUIPhrase T5 temporal lobe epilepsy
+A23	CUI T5 C0014556
+A24	DiagCategory T5 Epilepsy
+A25	Certainty T5 3
+A26	Negation T5 Affirmed
+T6	Investigations 1308 1312	EEG-
+A27	CUI T6 C0560017
+A28	EEG_Results T6 Normal
+A29	CUIPhrase T6 EEG normal
+A30	EEG_Performed T6 Yes
+A31	EEG_Type T6 SleepDeprived
+T8	PatientHistory 350 359	seizures-
+A34	Negation T8 Affirmed
+A35	Certainty T8 5
+A36	CUIPhrase T8 seizures
+A37	CUI T8 C0036572
+T9	PatientHistory 287 293	seizur
+A38	CUI T9 C0036572
+A39	Negation T9 Affirmed
+A40	Certainty T9 5
+A41	CUIPhrase T9 seizure
+T10	Diagnosis 122 146	Complex-Partial-Seizures
+A42	CUI T10 C0149958
+A43	Negation T10 Affirmed
+A44	CUIPhrase T10 complex-partial-seizures
+A45	Certainty T10 4
+A46	DiagCategory T10 MultipleSeizures

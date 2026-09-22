@@ -1,0 +1,66 @@
+T1	Diagnosis 292 335	nocturnal-generalised-tonic-clonic-seizures
+A1	DiagCategory T1 MultipleSeizures
+A2	CUI T1 C0494475
+A3	CUIPhrase T1 generalised-tonic-clonic-seizures
+A4	Certainty T1 5
+A5	Negation T1 Affirmed
+T2	SeizureFrequency 621 651	generlised-tonic-clonic-seizur
+A6	CUIPhrase T2 generalised tonic clonic seizure
+A7	TimePeriod T2 Year
+A8	CUI T2 C0494475
+A9	NumberOfTimePeriods T2 2
+A10	NumberOfSeizures T2 1
+T4	Investigations 419 423	EEGs
+A15	EEG_Results T4 Abnormal
+A16	CUI T4 C0151611
+A17	EEG_Performed T4 Yes
+A18	CUIPhrase T4 eeg-abnormal
+T5	Diagnosis 621 652	generlised-tonic-clonic-seizure
+A19	Negation T5 Affirmed
+A20	DiagCategory T5 MultipleSeizures
+A21	CUI T5 C0494475
+A22	CUIPhrase T5 generalised-tonic-clonic-seizure
+A23	Certainty T5 5
+T6	Diagnosis 397 417	symptomatic-epilepsy
+A24	Certainty T6 5
+A25	DiagCategory T6 Epilepsy
+A26	CUIPhrase T6 symptomatic-epilepsy
+A27	Negation T6 Affirmed
+A28	CUI T6 C1406659
+T7	Prescription 730 785	he-is-currently-taking-levetiracetam-1250mg-twice-a-day
+A29	DoseUnit T7 mg
+A30	DrugName T7 levetiracetam
+A31	CUIPhrase T7 levetiracetam
+A32	Frequency T7 2
+A33	DrugDose T7 1250
+A34	CUI T7 C0377265
+T8	Diagnosis 245 253	epilepsy
+A35	Certainty T8 5
+A36	CUI T8 C0014544
+A37	CUIPhrase T8 epilepsy
+A38	Negation T8 Affirmed
+A39	DiagCategory T8 Epilepsy
+T9	Prescription 790 821	carbamazepine-400mg-twice-a-day
+A40	DrugName T9 carbamazepine
+A41	DrugDose T9 400
+A42	CUI T9 C0006949
+A43	CUIPhrase T9 carbamazepine
+A44	Frequency T9 2
+A45	DoseUnit T9 mg
+T10	Onset 245 253	epilepsy
+A46	Age T10 3
+A47	CUI T10 C0014544
+A48	Negation T10 Affirmed
+A49	Certainty T10 5
+A50	CUIPhrase T10 epilepsy
+A51	AgeUnit T10 Year
+T11	Diagnosis 551 560	epilepsy-
+A52	Certainty T11 5
+A53	Negation T11 Affirmed
+A54	DiagCategory T11 Epilepsy
+T12	Diagnosis 292 302	nocturnal-
+A55	Certainty T12 5
+A56	CUIPhrase T12 nocturnal-seizures
+A57	DiagCategory T12 MultipleSeizures
+A58	CUI T12 C0748605
+A59	Negation T12 Affirmed

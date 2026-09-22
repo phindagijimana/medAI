@@ -1,0 +1,260 @@
+{
+  "doc_id": "EA0144",
+  "doc_type": "progress_note",
+  "patient_id": "EA0144",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0144.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0144",
+      "doc_type": "progress_note",
+      "doc_date": "2014-01-01",
+      "patient_id": "EA0144",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": "focal",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Symptomatic structural epilepsy",
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01",
+        "char_start": 89,
+        "char_end": 120
+      },
+      "predominant_seizure_type": {
+        "value": "focal_to_bilateral_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Secondary generalised seizures",
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01",
+        "char_start": 300,
+        "char_end": 330
+      },
+      "other_seizure_types": [
+        {
+          "value": "focal_unknown_awareness",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "focal seizures",
+          "source_doc_id": "EA0144",
+          "source_doc_type": "progress_note",
+          "source_date": "2014-01-01",
+          "char_start": 857,
+          "char_end": 871
+        }
+      ],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "semiology_text": {
+        "value": "meningioma",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "meningioma",
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01",
+        "char_start": 143,
+        "char_end": 154
+      },
+      "age_at_onset_years": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "seizure_frequency": {
+        "value": {
+          "raw_text": "(secondary generalised seizures",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "(secondary generalised seizures",
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01",
+        "char_start": 1074,
+        "char_end": 1105
+      },
+      "other_seizure_frequencies": [
+        {
+          "value": {
+            "raw_text": "Complex partial seizure",
+            "period": "month",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Complex partial seizure",
+          "source_doc_id": "EA0144",
+          "source_doc_type": "progress_note",
+          "source_date": "2014-01-01",
+          "char_start": 252,
+          "char_end": 275
+        },
+        {
+          "value": {
+            "raw_text": "Secondary generalised seizure",
+            "period": "unspecified",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Secondary generalised seizure",
+          "source_doc_id": "EA0144",
+          "source_doc_type": "progress_note",
+          "source_date": "2014-01-01",
+          "char_start": 300,
+          "char_end": 329
+        }
+      ],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "levetiracetam",
+            "status": "current",
+            "dose_text": "1500 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Levetiracetam",
+          "source_doc_id": "EA0144",
+          "source_doc_type": "progress_note",
+          "source_date": "2014-01-01",
+          "char_start": 378,
+          "char_end": 392
+        }
+      ],
+      "prior_asms": [],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0144",
+        "source_doc_type": "progress_note",
+        "source_date": "2014-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

@@ -1,0 +1,20 @@
+T2	Diagnosis 94 116	temporal-lobe-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 temporal-lobe-epilepsy
+A6	CUI T2 C0014556
+T4	Prescription 154 214	Carbamazepine-400mg-bd-(to-change-to-eslicarbazine-as-below)
+A8	DrugName T4 carbamazepine
+A9	DrugDose T4 400
+A10	DoseUnit T4 mg
+A11	Frequency T4 2
+A12	CUIPhrase T4 carbamazepine
+A13	CUI T4 C0006949
+T6	Prescription 217 236	Zonisamide-100mg-bd
+A15	DrugName T6 zonisamide
+A16	DrugDose T6 100
+A17	DoseUnit T6 mg
+A18	Frequency T6 2
+A19	CUIPhrase T6 zonisamide
+A20	CUI T6 C0078844

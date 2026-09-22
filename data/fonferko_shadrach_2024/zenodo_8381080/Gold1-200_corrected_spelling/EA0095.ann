@@ -1,0 +1,20 @@
+T1	Diagnosis 111 136	Juvenile-absence-epilepsy
+A1	CUI T1 C4317339
+A2	DiagCategory T1 Epilepsy
+A3	CUIPhrase T1 juvenile-absence-epilepsy
+A4	Certainty T1 5
+A5	Negation T1 Affirmed
+T2	Prescription 164 180	Sodium-Valproate
+A6	CUIPhrase T2 sodium-valproate
+A7	DoseUnit T2 mg
+A8	DrugDose T2 300
+A9	CUI T2 C0037567
+A10	Frequency T2 1
+A11	DrugName T2 SodiumValproate
+T3	Prescription 150 189	(As-reported)-Sodium-Valproate-500mg-am
+A12	DrugDose T3 500
+A13	CUI T3 C0037567
+A14	Frequency T3 1
+A15	CUIPhrase T3 sodium-valproate
+A16	DoseUnit T3 mg
+A17	DrugName T3 sodium-valproate

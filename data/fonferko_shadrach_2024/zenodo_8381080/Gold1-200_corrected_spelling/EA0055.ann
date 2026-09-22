@@ -1,0 +1,122 @@
+T2	PatientHistory 139 147	Headache
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 chronic-headache
+A5	CUI T2 C0151293
+T4	PatientHistory 163 180	Episodic-migraine
+A7	Certainty T4 5
+A8	Negation T4 Affirmed
+A9	CUIPhrase T4 migraine
+A10	CUI T4 C0149931
+T6	Diagnosis 186 223	Symptomatic-structural-focal-epilepsy
+A12	DiagCategory T6 Epilepsy
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 symptomatic-structural-focal-epilepsy
+A16	CUI T6 C0472349
+T8	BirthHistory 225 241	perinatal-insult
+A18	Certainty T8 5
+A19	Negation T8 Affirmed
+A20	CUIPhrase T8 perinatal-insult
+A21	CUI T8 C0005604
+T10	EpilepsyCause 225 241	perinatal-insult
+A11	Certainty T10 5
+A1210	Negation T10 Affirmed
+A1310	CUIPhrase T10 perinatal-insult
+A1410	CUI T10 C0005604
+T11	PatientHistory 314 322	headache
+A23	Certainty T11 5
+A24	Negation T11 Affirmed
+A25	CUIPhrase T11 chronic-headache
+A26	CUI T11 C0151293
+T12	PatientHistory 341 349	headache
+A28	Certainty T12 5
+A29	Negation T12 Affirmed
+A30	CUIPhrase T12 chronic-headache
+A31	CUI T12 C0151293
+T14	Diagnosis 527 545	epileptic-seizures
+A33	DiagCategory T14 MultipleSeizures
+A34	Certainty T14 5
+A35	Negation T14 Affirmed
+A36	CUIPhrase T14 epileptic-seizures
+A37	CUI T14 C4317109
+T16	Onset 527 545	epileptic-seizures
+A39	AgeUnit T16 Year
+A40	Age T16 10
+A41	Certainty T16 5
+A42	Negation T16 Affirmed
+A43	CUIPhrase T16 epileptic-seizures
+A44	CUI T16 C4317109
+T18	PatientHistory 645 652	seizure
+A46	Certainty T18 5
+A47	Negation T18 Affirmed
+A48	CUIPhrase T18 seizure
+A49	CUI T18 C0036572
+T20	SeizureFrequency 645 652	seizure
+A51	NumberOfSeizures T20 0
+A52	TimePeriod T20 Year
+A53	NumberOfTimePeriods T20 10
+A54	CUIPhrase T20 seizures
+A55	CUI T20 C0036572
+T13	Prescription 671 745	She-currently-takes-150mg-lamotrigine-twice-a-day-without-any-side-effects
+A1610	DrugName T13 lamotrigine
+A1710	DrugDose T13 150
+A1810	DoseUnit T13 mg
+A1910	Frequency T13 2
+A2010	CUIPhrase T13 lamotrigine
+A2110	CUI T13 C0064636
+T22	BirthHistory 957 981	born-6-weeks-prematurely
+A57	PrematureBirth T22 34to<37_LatePreterm
+A58	Certainty T22 5
+A59	Negation T22 Affirmed
+A60	CUIPhrase T22 late_preterm_birth
+A61	CUI T22 C3829315
+T24	PatientHistory 1195 1205	meningitis
+A63	AgeUnit T24 Year
+A64	Age T24 16
+A65	Certainty T24 5
+A66	Negation T24 Affirmed
+A67	CUIPhrase T24 meningitis
+A68	CUI T24 C0025289
+T26	Investigations 1321 1324	MRI
+A70	MRI_Performed T26 Yes
+A71	MRI_Results T26 Abnormal
+A72	CUIPhrase T26 abnormal-mri
+A73	CUI T26 C1319851
+T9	BirthHistory 1371 1388	perinatal-hypoxia
+A1011	Certainty T9 5
+A1111	Negation T9 Affirmed
+A1211	CUIPhrase T9 perinatal-hypoxia
+A1311	CUI T9 C0559478
+T28	Investigations 1416 1419	EEG
+A75	EEG_Performed T28 Yes
+A76	EEG_Results T28 Abnormal
+A77	CUIPhrase T28 eeg-abnormal
+A78	CUI T28 C0151611
+T32	Diagnosis 1506 1514	epilepsy
+A85	DiagCategory T32 Epilepsy
+A86	Certainty T32 5
+A87	Negation T32 Affirmed
+A88	CUIPhrase T32 epilepsy
+A89	CUI T32 C0014544
+T30	BirthHistory 1535 1554	hypoxic-birth-injury
+A80	Certainty T30 5
+A81	Negation T30 Affirmed
+A82	CUIPhrase T30 birth-hypoxia
+A83	CUI T30 C0559478
+T34	EpilepsyCause 1535 1554	hypoxic-birth-injury
+A91	Certainty T34 4
+A92	Negation T34 Affirmed
+A93	CUIPhrase T34 birth-hypoxia
+A94	CUI T34 C0559478
+T17	SeizureFrequency 1612 1624	seizure-free
+A2910	NumberOfSeizures T17 0
+A3010	TimePeriod T17 Year
+A3110	NumberOfTimePeriods T17 10
+A32	CUIPhrase T17 seizure-free
+A3310	CUI T17 C1299590
+T15	PatientHistory 1704 1712	migraine
+A2310	Certainty T15 5
+A2410	Negation T15 Affirmed
+A2510	CUIPhrase T15 migraine
+A2610	CUI T15 C0149931

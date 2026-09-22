@@ -1,0 +1,49 @@
+T2	Diagnosis 53 61	epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	PatientHistory 91 102	head-injury
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 head-injury
+A11	CUI T4 C0497301
+T6	Prescription 151 197	Currently-he-is-taking-carbamazepine-300-mg-BD
+A13	DrugName T6 carbamazepine
+A14	DrugDose T6 300
+A15	DoseUnit T6 mg
+A16	Frequency T6 2
+A17	CUIPhrase T6 carbamazepine
+A18	CUI T6 C0006949
+T8	Prescription 199 234	He-also-takes-gabapentin-300-mg-tds
+A20	DrugName T8 gabapentin
+A21	DrugDose T8 300
+A22	DoseUnit T8 mg
+A23	Frequency T8 3
+A24	CUIPhrase T8 gabapentin
+A25	CUI T8 C0060926
+T10	Diagnosis 275 307	generalised-tonic-tonic-seizures
+A27	DiagCategory T10 MultipleSeizures
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 generalised-tonic-clonic-seizures
+A31	CUI T10 C0494475
+T12	SeizureFrequency 275 306	generalised-tonic-tonic-seizure
+A33	NumberOfSeizures T12 3
+A34	PointInTime T12 LastClinic
+A35	TimeSince_or_TimeOfEvent T12 Since
+A36	CUIPhrase T12 generalised-tonic-clonic-seizure
+A37	CUI T12 C0494475
+T11	Diagnosis 324 338	typical-absenc
+A1110	DiagCategory T11 MultipleSeizures
+A12	Certainty T11 5
+A1310	Negation T11 Affirmed
+A1410	CUIPhrase T11 typical-absences
+A1510	CUI T11 C4316903
+T13	SeizureFrequency 324 337	typical-absen
+A1111	FrequencyChange T13 Same
+A1211	PointInTime T13 LastClinic
+A1311	TimeSince_or_TimeOfEvent T13 Since
+A1411	CUIPhrase T13 typical-absences
+A1511	CUI T13 C4316903

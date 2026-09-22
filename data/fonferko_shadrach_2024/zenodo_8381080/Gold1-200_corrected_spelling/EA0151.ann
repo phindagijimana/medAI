@@ -1,0 +1,45 @@
+T8	SeizureFrequency 504 525	cluster-of-5-seizures
+A10	NumberOfSeizures T8 5
+A11	PointInTime T8 Last_Month
+A12	TimeSince_or_TimeOfEvent T8 During
+A13	CUIPhrase T8 seizures
+A14	CUI T8 C0036572
+T1	PatientHistory 578 587	seizures-
+A1	CUI T1 C0036572
+A2	CUIPhrase T1 seizures
+A3	Certainty T1 5
+A4	Negation T1 Affirmed
+T2	Diagnosis 1039 1047	epilepsy
+A5	Negation T2 Affirmed
+A6	CUI T2 C0014544
+A7	DiagCategory T2 Epilepsy
+A8	CUIPhrase T2 epilepsy
+A9	Certainty T2 5
+T3	Diagnosis 79 99	Focal-onset-epilepsy
+A1010	CUI T3 C0014547
+A1110	Negation T3 Affirmed
+A1210	Certainty T3 5
+A1310	DiagCategory T3 Epilepsy
+A1410	CUIPhrase T3 focal-onset-epilepsy
+T4	PatientHistory 727 735	seizures
+A15	CUI T4 C0036572
+A16	Certainty T4 5
+A17	CUIPhrase T4 seizures
+A18	Negation T4 Affirmed
+T5	PatientHistory 504 525	cluster-of-5-seizures
+A19	CUIPhrase T5 cluster of seizures
+A20	Negation T5 Affirmed
+A21	CUI T5 C3203523
+A22	Certainty T5 5
+T6	Prescription 146 178	Medication:-Lamotrigine-125mg-bd
+A23	DoseUnit T6 mg
+A24	CUI T6 C0064636
+A25	Frequency T6 2
+A26	DrugName T6 lamotrigine
+A27	CUIPhrase T6 lamotrigine
+A28	DrugDose T6 125
+T7	PatientHistory 372 380	seizures
+A29	CUI T7 C0036572
+A30	Negation T7 Affirmed
+A31	Certainty T7 5
+A32	CUIPhrase T7 seizures

@@ -1,0 +1,37 @@
+T1	SeizureFrequency 270 279	seizures-
+A1	CUI T1 C0036572
+A2	LowerNumberOfSeizures T1 3
+A3	TimePeriod T1 Week
+A4	NumberOfTimePeriods T1 1
+A5	UpperNumberOfSeizures T1 5
+A6	CUIPhrase T1 seizures
+T2	Prescription 32 73	Medication:-------Levetiracetam-1250mg-bd
+A7	Frequency T2 2
+A8	DrugName T2 levetiracetam
+A9	DrugDose T2 1250
+A10	CUI T2 C0377265
+A11	CUIPhrase T2 levetiracetam
+A12	DoseUnit T2 mg
+T3	SeizureFrequency 232 239	seizure
+A13	CUIPhrase T3 seizure
+A14	FrequencyChange T3 Same
+A15	PointInTime T3 DrugChange
+A16	CUI T3 C0036572
+T4	Diagnosis 11 29	Refactory-epilepsy
+A17	Certainty T4 5
+A18	CUIPhrase T4 drug-refractory-epilepsy
+A19	Negation T4 Affirmed
+A20	CUI T4 C1096063
+A21	DiagCategory T4 Epilepsy
+T5	Prescription 103 123	Lamotrigine-100mg-bd
+A22	DrugName T5 lamotrigine
+A23	Frequency T5 2
+A24	CUIPhrase T5 lamotrigine
+A25	CUI T5 C0064636
+A26	DrugDose T5 100
+A27	DoseUnit T5 mg
+T6	PatientHistory 270 278	seizures
+A28	CUIPhrase T6 seizures
+A29	Negation T6 Affirmed
+A30	Certainty T6 5
+A31	CUI T6 C0036572

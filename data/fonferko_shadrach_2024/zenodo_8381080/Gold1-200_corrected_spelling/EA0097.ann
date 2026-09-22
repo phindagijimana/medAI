@@ -1,0 +1,28 @@
+T6	PatientHistory 117 148	transient-loss-of-consciousness
+A10	Certainty T6 5
+A11	Negation T6 Affirmed
+A12	CUIPhrase T6 transient-loss-of-consciousness
+A13	CUI T6 C4087400
+T1	Diagnosis 170 190	focal-onset-epilepsy
+A1	CUIPhrase T1 focal-onset-epilepsy
+A2	DiagCategory T1 Epilepsy
+A3	Certainty T1 4
+A4	CUI T1 C0014547
+A5	Negation T1 Affirmed
+T2	PatientHistory 347 368	loss-of-consciousness
+A6	CUIPhrase T2 loss-of-consciousness
+A7	CUI T2 C0041657
+A8	Certainty T2 5
+A9	Negation T2 Affirmed
+T4	Diagnosis 825 843	epileptic-seizures
+A14	Negation T4 Affirmed
+A15	CUIPhrase T4 epileptic-seizures
+A16	CUI T4 C4317109
+A17	DiagCategory T4 MultipleSeizures
+A18	Certainty T4 4
+T5	Diagnosis 896 904	epilepsy
+A19	Certainty T5 4
+A20	CUIPhrase T5 epilepsy
+A21	CUI T5 C0014544
+A22	DiagCategory T5 Epilepsy
+A23	Negation T5 Affirmed

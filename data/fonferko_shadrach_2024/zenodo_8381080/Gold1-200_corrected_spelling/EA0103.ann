@@ -1,0 +1,52 @@
+T2	Diagnosis 130 139	epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	PatientHistory 159 169	cavernoma-
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 cavernoma
+A11	CUI T4 C0018920
+T9	EpilepsyCause 159 194	cavernoma-in-the-right-temporal-lob
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A12	CUIPhrase T9 cavernoma
+A13	CUI T9 C0018920
+T6	Diagnosis 235 252	-partial-seizures
+A1310	DiagCategory T6 MultipleSeizures
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 partial-seizures
+A17	CUI T6 C0751495
+T10	Prescription 327 335	Lamictal
+A23	DrugName T10 Lamotrigine
+A24	DrugDose T10 150
+A25	DoseUnit T10 mg
+A26	Frequency T10 2
+A27	CUIPhrase T10 lamictal
+A28	CUI T10 C0678180
+T12	Prescription 349 362	levitiracetam
+A30	DrugName T12 Levetiracetam
+A31	DrugDose T12 1250
+A32	DoseUnit T12 mg
+A33	Frequency T12 2
+A34	CUIPhrase T12 levetiracetam
+A35	CUI T12 C0377265
+T16	SeizureFrequency 426 445	helped-her-seizures
+A42	FrequencyChange T16 Same
+A43	PointInTime T16 DrugChange
+A44	TimeSince_or_TimeOfEvent T16 Since
+A45	CUIPhrase T16 seizures
+A46	CUI T16 C0036572
+T14	PatientHistory 437 446	seizures-
+A37	Certainty T14 5
+A38	Negation T14 Affirmed
+A39	CUIPhrase T14 seizures
+A40	CUI T14 C0036572
+T19	PatientHistory 533 543	depression
+A49	Certainty T19 5
+A50	Negation T19 Affirmed
+A51	CUIPhrase T19 depression
+A52	CUI T19 C0011570

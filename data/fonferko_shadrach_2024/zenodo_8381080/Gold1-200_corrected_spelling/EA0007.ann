@@ -1,0 +1,100 @@
+T2	Diagnosis 21 30	epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	PatientHistory 47 55	Diabetes
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 diabetes-
+A11	CUI T4 C0011849
+T6	PatientHistory 57 71	hypothyroidism
+A13	Certainty T6 5
+A14	Negation T6 Affirmed
+A15	CUIPhrase T6 hypothyroidism
+A16	CUI T6 C0020676
+T8	Prescription 107 121	levetiracetam-
+A18	DrugName T8 Levetiracetam
+A19	DrugDose T8 750
+A20	DoseUnit T8 mg
+A21	Frequency T8 1
+A22	CUIPhrase T8 levetiracetam
+A23	CUI T8 C0377265
+T10	Prescription 107 121	levetiracetam-
+A25	DrugName T10 Levetiracetam
+A26	DrugDose T10 500
+A27	DoseUnit T10 mg
+A28	Frequency T10 1
+A29	CUIPhrase T10 levetiracetam
+A30	CUI T10 C0377265
+T12	Prescription 151 161	Phenytoin-
+A32	DrugName T12 Phenytoin
+A33	DrugDose T12 75
+A34	DoseUnit T12 mg
+A35	Frequency T12 3
+A36	CUIPhrase T12 phenytoin
+A37	CUI T12 C0031507
+T14	PatientHistory 288 297	seizures-
+A39	Certainty T14 5
+A40	Negation T14 Affirmed
+A41	CUIPhrase T14 seizures
+A42	CUI T14 C0036572
+T16	SeizureFrequency 288 298	seizures-e
+A44	NumberOfSeizures T16 1
+A45	TimePeriod T16 Week
+A46	LowerNumberOfTimePeriods T16 3
+A47	UpperNumberOfTimePeriods T16 4
+A48	CUIPhrase T16 seizures
+A49	CUI T16 C0036572
+T18	Diagnosis 326 337	focal-onset
+A51	DiagCategory T18 MultipleSeizures
+A52	Certainty T18 3
+A53	Negation T18 Affirmed
+A54	CUIPhrase T18 focal-onset-epilepsy
+A55	CUI T18 C0014547
+T20	Investigations 363 378	MRI-2011-Normal
+A57	MRI_Performed T20 Yes
+A58	MRI_Results T20 Normal
+A59	CUIPhrase T20 mri-normal
+A60	CUI T20 C0436481
+T22	PatientHistory 468 477	seizures-
+A62	AgeUnit T22 Year
+A63	Age T22 13
+A64	Certainty T22 5
+A65	Negation T22 Affirmed
+A66	CUIPhrase T22 seizures
+A67	CUI T22 C0036572
+T24	Diagnosis 513 522	epilepsy-
+A69	DiagCategory T24 Epilepsy
+A70	Certainty T24 5
+A71	Negation T24 Affirmed
+A72	CUIPhrase T24 epilepsy
+A73	CUI T24 C0014544
+T26	SeizureFrequency 558 567	seizures-
+A75	NumberOfSeizures T26 1
+A76	TimePeriod T26 Week
+A77	LowerNumberOfTimePeriods T26 3
+A78	UpperNumberOfTimePeriods T26 4
+A79	CUIPhrase T26 seizures
+A80	CUI T26 C0036572
+T28	PatientHistory 558 566	seizures
+A82	Certainty T28 5
+A83	Negation T28 Affirmed
+A84	CUIPhrase T28 seizures
+A85	CUI T28 C0036572
+T30	PatientHistory 591 600	diabetes-
+A87	Certainty T30 5
+A88	Negation T30 Affirmed
+A89	CUIPhrase T30 diabetes
+A90	CUI T30 C0011849
+T32	PatientHistory 674 683	seizures-
+A92	Certainty T32 5
+A93	Negation T32 Affirmed
+A94	CUIPhrase T32 seizures
+A95	CUI T32 C0036572
+T34	PatientHistory 772 781	seizures-
+A97	Certainty T34 5
+A98	Negation T34 Affirmed
+A99	CUIPhrase T34 seizures
+A100	CUI T34 C0036572

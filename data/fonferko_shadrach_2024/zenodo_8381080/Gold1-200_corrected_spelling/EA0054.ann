@@ -1,0 +1,90 @@
+T2	Diagnosis 134 178	symptomatic-structural-frontal-lobe-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-structural-focal-epilepsy
+A6	CUI T2 C0472349
+T4	Diagnosis 157 178	frontal-lobe-epilepsy
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 frontal-lobe-epilepsy
+A12	CUI T4 C0085541
+T6	PatientHistory 205 223	cortical-dysplasia
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 cortical-dysplasia
+A17	CUI T6 C0431380
+T8	Diagnosis 252 289	focal-seizures-with-altered-awareness
+A19	DiagCategory T8 MultipleSeizures
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 focal-seizures-with-altered-awareness
+A23	CUI T8 C0270834
+T10	SeizureFrequency 252 289	focal-seizures-with-altered-awareness
+A25	NumberOfSeizures T10 1
+A26	TimePeriod T10 Week
+A27	NumberOfTimePeriods T10 1
+A28	CUIPhrase T10 focal-seizures-with-altered-awareness
+A29	CUI T10 C0270834
+T12	Diagnosis 330 369	Focal-to-bilateral-convulsive-seizures-
+A31	DiagCategory T12 MultipleSeizures
+A32	Certainty T12 5
+A33	Negation T12 Affirmed
+A34	CUIPhrase T12 focal-to-bilateral-convulsive-seizures
+A35	CUI T12 C0877017
+T11	SeizureFrequency 330 367	Focal-to-bilateral-convulsive-seizure
+A1110	NumberOfSeizures T11 1
+A1210	MonthDate T11 8
+A13	YearDate T11 2014
+A1410	TimeSince_or_TimeOfEvent T11 During
+A1510	CUIPhrase T11 focal-to-bilateral-convulsive-seizures
+A1610	CUI T11 C0877017
+T13	SeizureFrequency 330 366	Focal-to-bilateral-convulsive-seizur
+A18	NumberOfSeizures T13 1
+A1910	MonthDate T13 9
+A2010	YearDate T13 2015
+A2110	TimeSince_or_TimeOfEvent T13 During
+A2210	CUIPhrase T13 focal-to-bilateral-convulsive-seizures
+A2310	CUI T12 C0877017
+T16	Prescription 400 440	Current-medication:-Lamotrigine-150mg-bd
+A43	DrugName T16 lamotrigine
+A44	DrugDose T16 150
+A45	DoseUnit T16 mg
+A46	Frequency T16 2
+A47	CUIPhrase T16 lamotrigine
+A48	CUI T16 C0064636
+T18	Diagnosis 752 789	focal-seizures-with-altered-awareness
+A50	DiagCategory T18 MultipleSeizures
+A51	Certainty T18 5
+A52	Negation T18 Affirmed
+A53	CUIPhrase T18 focal-seizures-with-altered-awareness
+A54	CUI T18 C0270834
+T20	SeizureFrequency 752 789	focal-seizures-with-altered-awareness
+A56	NumberOfSeizures T20 1
+A57	TimePeriod T20 Week
+A58	NumberOfTimePeriods T20 1
+A59	CUIPhrase T20 focal-seizures-with-altered-awareness
+A60	CUI T20 C0270834
+T22	Diagnosis 900 937	focal-to-bilateral-convulsive-seizure
+A62	DiagCategory T22 MultipleSeizures
+A63	Certainty T22 5
+A64	Negation T22 Affirmed
+A65	CUIPhrase T22 focal-to-bilateral-convulsive-seizure
+A66	CUI T22 C0877017
+T24	SeizureFrequency 900 937	focal-to-bilateral-convulsive-seizure
+A68	NumberOfSeizures T24 0
+A69	TimePeriod T24 Year
+A70	NumberOfTimePeriods T24 3
+A71	CUIPhrase T24 focal-to-bilateral-convulsive-seizure
+A72	CUI T24 C0877017
+T26	Investigations 1224 1227	MRI
+A74	MRI_Performed T26 Yes
+A75	MRI_Results T26 Abnormal
+A76	CUIPhrase T26 abnormal-mri
+A77	CUI T26 C1319851
+T15	PatientHistory 1418 1436	cortical-dysplasia
+A2610	Certainty T15 4
+A2710	Negation T15 Affirmed
+A2810	CUIPhrase T15 cortical-dysplasia
+A2910	CUI T15 C0431380

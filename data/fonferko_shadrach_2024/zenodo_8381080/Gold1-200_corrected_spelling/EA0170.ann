@@ -1,0 +1,51 @@
+T1	SeizureFrequency 396 420	complex-partial-seizures
+A1	FrequencyChange T1 Infrequent
+A2	CUI T1 C0149958
+A3	CUIPhrase T1 complex partial seizures
+T3	Diagnosis 116 153	Symptomatic-structural-focal-epilepsy
+A8	DiagCategory T3 Epilepsy
+A9	CUIPhrase T3 symptomatic-structural-focal-epilepsy
+A10	Negation T3 Affirmed
+A11	Certainty T3 5
+A12	CUI T3 C0472349
+T4	SeizureFrequency 396 420	complex-partial-seizures
+A13	CUIPhrase T4 complex-partial-seizures
+A14	UpperNumberOfSeizures T4 2
+A15	TimePeriod T4 Month
+A16	CUI T4 C0149958
+A17	NumberOfTimePeriods T4 1
+A18	LowerNumberOfSeizures T4 1
+T5	EpilepsyCause 71 113	right-hemisphere-intracerebral-haemorhhage
+A19	Certainty T5 5
+A20	Negation T5 Affirmed
+A21	CUIPhrase T5 intracerebral-haemorrhage
+A22	CUI T5 C2937358
+T6	PatientHistory 184 206	cerebrovascular-events
+A23	Negation T6 Affirmed
+A24	CUI T6 C0038454
+A25	Certainty T6 5
+A26	CUIPhrase T6 cerebral-vascular-events
+T7	Diagnosis 320 328	epilepsy
+A27	DiagCategory T7 Epilepsy
+A28	Negation T7 Affirmed
+A29	CUIPhrase T7 epilepsy
+A30	CUI T7 C0014544
+A31	Certainty T7 5
+T8	Prescription 238 269	Carbamazepine-400mg-twice-a-day
+A32	DoseUnit T8 mg
+A33	DrugDose T8 400
+A34	DrugName T8 carbamazepine
+A35	CUI T8 C0006949
+A36	Frequency T8 2
+A37	CUIPhrase T8 carbamazepine
+T9	PatientHistory 71 113	right-hemisphere-intracerebral-haemorhhage
+A38	CUIPhrase T9 intracerebral-hemorrhages
+A39	Negation T9 Affirmed
+A40	Certainty T9 5
+A41	CUI T9 C2937358
+T10	Diagnosis 396 420	complex-partial-seizures
+A42	Negation T10 Affirmed
+A43	Certainty T10 5
+A44	CUIPhrase T10 complex-partial-seizures
+A45	DiagCategory T10 MultipleSeizures
+A46	CUI T10 C0149958

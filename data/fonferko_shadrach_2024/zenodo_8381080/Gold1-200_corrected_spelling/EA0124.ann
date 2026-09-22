@@ -1,0 +1,119 @@
+T10	PatientHistory 114 121	measles
+A10	Certainty T10 5
+A11	Negation T10 Affirmed
+A12	CUIPhrase T10 measles
+A13	CUI T10 C0025007
+T12	PatientHistory 570 577	measles
+A15	Certainty T12 5
+A16	Negation T12 Affirmed
+A17	CUIPhrase T12 measles
+A18	CUI T12 C0025007
+T1	PatientHistory 909 917	absence-
+A1	CUI T1 C0563606
+A2	CUIPhrase T1 absence
+A3	Negation T1 Affirmed
+A4	Certainty T1 5
+T2	SeizureFrequency 909 915	absenc
+A5	NumberOfTimePeriods T2 1
+A6	CUIPhrase T2 absence
+A7	TimePeriod T2 Week
+A8	CUI T2 C0563606
+A9	NumberOfSeizures T2 1
+T3	SeizureFrequency 821 853	generalised-tonic-clonic-seizure
+A102	NumberOfSeizures T3 0
+A112	CUIPhrase T3 generalised-tonic-clonic-seizure
+A122	NumberOfTimePeriods T3 3
+A132	CUI T3 C0494475
+A142	TimePeriod T3 Year
+T14	PatientHistory 1341 1348	atrophy
+A20	Certainty T14 5
+A21	Negation T14 Affirmed
+A22	CUIPhrase T14 brain-atrophy
+A23	CUI T14 C0235946
+T4	PatientHistory 1563 1572	seizures-
+A152	Certainty T4 5
+A162	Negation T4 Affirmed
+A172	CUIPhrase T4 seizures
+A182	CUI T4 C0036572
+T5	Diagnosis 733 742	epilepsy-
+A19	Negation T5 Affirmed
+A202	CUIPhrase T5 epilepsy
+A212	DiagCategory T5 Epilepsy
+A222	Certainty T5 5
+A232	CUI T5 C0014544
+T6	Prescription 124 197	Medication:-sodium-valproate-500-milligrammes-mane-700-milligrammes-nocte
+A24	DoseUnit T6 mg
+A25	CUI T6 C0037567
+A26	DrugDose T6 500
+A27	DrugName T6 sodium-valproate
+A28	Frequency T6 1
+A29	CUIPhrase T6 sodium-valproate
+T7	Prescription 199 217	Zonisamide-50mg-bd
+A30	CUIPhrase T7 zonisamide
+A31	Frequency T7 2
+A32	CUI T7 C0078844
+A33	DrugDose T7 50
+A34	DoseUnit T7 mg
+A35	DrugName T7 zonisamide
+T8	Diagnosis 821 854	generalised-tonic-clonic-seizures
+A36	Certainty T8 5
+A37	CUIPhrase T8 generalized-tonic-clonic-seizures
+A38	Negation T8 Affirmed
+A39	CUI T8 C0494475
+A40	DiagCategory T8 MultipleSeizures
+T9	PatientHistory 593 614	learning-difficulties
+A41	Negation T9 Affirmed
+A42	Certainty T9 5
+A43	CUIPhrase T9 learning-difficulties
+A44	CUI T9 C0424939
+T19	Investigations 1295 1304	MRI-brain
+A45	CUI T19 C1319851
+A46	MRI_Performed T19 Yes
+A47	CUIPhrase T19 mri-abnormal
+A48	MRI_Results T19 Abnormal
+T11	Diagnosis 490 499	epilepsy-
+A49	Negation T11 Affirmed
+A50	CUIPhrase T11 epilepsy
+A51	CUI T11 C0014544
+A52	DiagCategory T11 Epilepsy
+A53	Certainty T11 5
+T20	Prescription 136 152	sodium-valproate
+A54	DrugDose T20 700
+A55	Frequency T20 1
+A56	CUIPhrase T20 sodium-valproate
+A57	DoseUnit T20 mg
+A58	DrugName T20 SodiumValproate
+A59	CUI T20 C0037567
+T13	PatientHistory 72 93	Learning-difficulties
+A60	CUIPhrase T13 learning-difficulties
+A61	Negation T13 Affirmed
+A62	CUI T13 C0424939
+A63	Certainty T13 5
+T21	Diagnosis 58 66	epilepsy
+A64	Negation T21 Affirmed
+A65	CUI T21 C0014544
+A66	CUIPhrase T21 epilepsy
+A67	DiagCategory T21 Epilepsy
+A68	Certainty T21 5
+T15	WhenDiagnosed 490 497	epileps
+A69	Age T15 6
+A70	Negation T15 Affirmed
+A71	AgeUnit T15 Year
+A72	CUIPhrase T15 epilepsy
+A73	Certainty T15 5
+A74	CUI T15 C0014544
+T16	PatientHistory 650 657	measles
+A75	Certainty T16 5
+A76	Negation T16 Affirmed
+A81	CUI T16 C0025007
+A82	CUIPhrase T16 Measles
+T17	PatientHistory 776 784	-measles
+A77	Certainty T17 5
+A78	Negation T17 Affirmed
+A83	CUI T17 C0025007
+A84	CUIPhrase T17 Measles
+T18	EpilepsyCause 778 783	easle
+A79	Certainty T18 5
+A80	Negation T18 Affirmed
+A85	CUI T18 C0025007
+A86	CUIPhrase T18 Measles

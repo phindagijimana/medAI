@@ -1,0 +1,40 @@
+T1	SeizureFrequency 214 221	seizure
+A1	CUIPhrase T1 seizure
+A2	FrequencyChange T1 Same
+A3	CUI T1 C0036572
+T2	Prescription 409 421	Eplim-Chrono
+A4	DrugDose T2 1000
+A5	DoseUnit T2 mg
+A6	DrugName T2 SodiumValproate
+A7	CUI T2 C0591452
+A8	CUIPhrase T2 epilim-chrono
+A9	Frequency T2 2
+T3	SeizureFrequency 266 289	generalised-convulsions
+A10	NumberOfSeizures T3 0
+A11	TimePeriod T3 Year
+A12	NumberOfTimePeriods T3 3
+A13	CUI T3 C0234533
+A14	CUIPhrase T3 generalised-convulsions
+T4	SeizureFrequency 497 516	generalised-seizure
+A15	CUI T4 C0234533
+A16	TimePeriod T4 Year
+A17	CUIPhrase T4 generalised-seizure
+A18	NumberOfTimePeriods T4 5
+A19	NumberOfSeizures T4 0
+T5	Diagnosis 90 110	Generalised-epilepsy
+A20	CUI T5 C0014548
+A21	Negation T5 Affirmed
+A22	Certainty T5 5
+A23	DiagCategory T5 Epilepsy
+A24	CUIPhrase T5 generalised-epilepsy
+T6	PatientHistory 214 223	seizures-
+A25	CUI T6 C0036572
+A26	CUIPhrase T6 seizures
+A27	Certainty T6 5
+A28	Negation T6 Affirmed
+T7	Diagnosis 497 517	generalised-seizures
+A29	Certainty T7 5
+A30	CUIPhrase T7 generalised-seizures
+A31	CUI T7 C0234533
+A32	DiagCategory T7 MultipleSeizures
+A33	Negation T7 Affirmed

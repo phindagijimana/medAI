@@ -1,0 +1,92 @@
+T1	Diagnosis 520 540	generalised-seizures
+A1	DiagCategory T1 MultipleSeizures
+A2	CUIPhrase T1 generalised-seizures
+A3	Certainty T1 5
+A4	Negation T1 Affirmed
+A5	CUI T1 C0234533
+T2	Diagnosis 592 629	focal-seizures-with-altered-awareness
+A6	CUIPhrase T2 focal-seizures-with-altered-awareness
+A7	Negation T2 Affirmed
+A8	CUI T2 C0270834
+A9	DiagCategory T2 MultipleSeizures
+A10	Certainty T2 5
+T3	Diagnosis 76 107	Symptomatic-structural-epilepsy
+A11	CUIPhrase T3 symptomatic-structural-focal-epilepsy
+A12	Negation T3 Affirmed
+A13	CUI T3 C0472349
+A14	DiagCategory T3 Epilepsy
+A15	Certainty T3 5
+T4	Prescription 323 332	midazolam
+A16	Frequency T4 As_Required
+A17	CUIPhrase T4 Midazolam
+A18	DrugName T4 Midazolam
+A19	CUI T4 C0026056
+T5	SeizureFrequency 592 628	focal-seizures-with-altered-awarenes
+A20	NumberOfSeizures T5 2
+A21	NumberOfTimePeriods T5 1
+A22	TimePeriod T5 Week
+A23	CUI T5 C0270834
+A24	CUIPhrase T5 focal-seizures-with-altered-awareness
+T6	PatientHistory 125 143	Tuberous-sclerosis
+A25	CUIPhrase T6 tuberous sclerosis
+A26	Negation T6 Affirmed
+A27	CUI T6 C0041341
+A28	Certainty T6 5
+T7	EpilepsyCause 125 143	Tuberous-sclerosis
+A29	CUIPhrase T7 tuberous sclerosis
+A30	Negation T7 Affirmed
+A31	CUI T7 C0041341
+A32	Certainty T7 5
+T8	PatientHistory 152 171	learning-difficulty
+A33	CUI T8 C0424939
+A34	CUIPhrase T8 learning-difficulty
+A35	Negation T8 Affirmed
+A36	Certainty T8 5
+T9	Prescription 192 218	Sodium-valproate-1000mg-bd
+A37	DoseUnit T9 mg
+A38	DrugDose T9 1000
+A39	CUIPhrase T9 sodium-valproate
+A40	CUI T9 C0037567
+A41	Frequency T9 2
+A42	DrugName T9 sodium-valproate
+T10	SeizureFrequency 520 539	generalised-seizure
+A43	UpperNumberOfSeizures T10 4
+A44	TimePeriod T10 Month
+A45	LowerNumberOfSeizures T10 3
+A46	CUI T10 C0234533
+A47	NumberOfTimePeriods T10 1
+A48	CUIPhrase T10 generalised-seizure
+T11	Prescription 284 312	Clobazam-10mg-bd-as-required
+A49	CUI T11 C0055891
+A50	DoseUnit T11 mg
+A51	Frequency T11 As_Required
+A52	DrugDose T11 10
+A53	DrugName T11 clobazam
+A54	CUIPhrase T11 clobazam
+T12	Prescription 246 257	Perampanel-
+A55	DrugDose T12 8
+A56	CUI T12 C2698764
+A57	CUIPhrase T12 perampanel
+A58	DrugName T12 Perampanel
+A59	DoseUnit T12 mg
+A60	Frequency T12 1
+T13	Diagnosis 741 761	focal-motor-seizures
+A61	Negation T13 Affirmed
+A62	DiagCategory T13 MultipleSeizures
+A63	CUIPhrase T13 focal-motor-seizures
+A64	CUI T13 C0016399
+A65	Certainty T13 5
+T14	PatientHistory 429 438	seizures-
+A66	Certainty T14 5
+A67	AgeUnit T14 Year
+A68	Age T14 2
+A69	CUI T14 C0036572
+A70	Negation T14 Affirmed
+A71	CUIPhrase T14 seizures
+T15	Prescription 222 242	Lamotrigine-100mg-bd
+A72	CUI T15 C0064636
+A73	DrugDose T15 100
+A74	CUIPhrase T15 lamotrigine
+A75	DrugName T15 lamotrigine
+A76	DoseUnit T15 mg
+A77	Frequency T15 2

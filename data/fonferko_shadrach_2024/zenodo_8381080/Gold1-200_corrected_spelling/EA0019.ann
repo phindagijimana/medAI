@@ -1,0 +1,49 @@
+T2	Diagnosis 43 71	primary-generalised-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 primary-generalised-epilepsy
+A6	CUI T2 C0270850
+T4	Prescription 96 133	He-is-on-Epilim-300-mg-in-the-morning
+A8	DrugName T4 epilim
+A9	DrugDose T4 300
+A10	DoseUnit T4 mg
+A11	Frequency T4 1
+A12	CUIPhrase T4 epilim
+A13	CUI T4 C0591451
+T8	Prescription 105 112	Epilim-
+A22	DrugName T8 Epilim
+A23	DrugDose T8 600
+A24	DoseUnit T8 mg
+A25	Frequency T8 1
+A26	CUIPhrase T8 epilim
+A27	CUI T8 C0591451
+T6	Prescription 164 186	carbamazepine-300mg-bd
+A15	DrugName T6 carbamazepine
+A16	DrugDose T6 300
+A17	DoseUnit T6 mg
+A18	Frequency T6 2
+A19	CUIPhrase T6 carbamazepine
+A20	CUI T6 C0006949
+T11	Diagnosis 274 306	generalised-tonic-clonic-seizure
+A121	DiagCategory T11 SingleSeizure
+A131	Certainty T11 5
+A14	Negation T11 Affirmed
+A1510	CUIPhrase T11 generalised-tonic-clonic-seizure
+A1610	CUI T11 C0494475
+T13	SeizureFrequency 274 305	generalised-tonic-clonic-seizur
+A1810	NumberOfSeizures T13 1
+A1910	PointInTime T13 Last_Week
+A2010	TimeSince_or_TimeOfEvent T13 During
+A21	CUIPhrase T13 generalised-tonic-clonic-seizure
+A221	CUI T13 C0494475
+T14	PatientHistory 322 330	seizure-
+A41	Certainty T14 5
+A42	Negation T14 Affirmed
+A43	CUIPhrase T14 seizure
+A44	CUI T14 C0036572
+T9	PatientHistory 454 462	-seizure
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A1210	CUIPhrase T9 seizure
+A1310	CUI T9 C0036572

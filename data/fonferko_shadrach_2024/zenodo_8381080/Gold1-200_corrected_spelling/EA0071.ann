@@ -1,0 +1,24 @@
+T1	PatientHistory 288 295	seizure
+A1	Negation T1 Affirmed
+A2	CUIPhrase T1 seizures
+A3	CUI T1 C0036572
+A4	Certainty T1 5
+T6	SeizureFrequency 288 295	seizure
+A11	NumberOfSeizures T6 1
+A12	TimePeriod T6 Week
+A13	NumberOfTimePeriods T6 1
+A14	TimeSince_or_TimeOfEvent T6 Since
+A15	CUIPhrase T6 seizure
+A16	CUI T6 C0036572
+T4	PatientHistory 316 323	seizure
+A10	Certainty T4 5
+A112	Negation T4 Affirmed
+A122	CUIPhrase T4 seizure
+A132	CUI T4 C0036572
+T2	Prescription 589 634	Helena-is-taking-lamotrigine-75mg-twice-a-day
+A5	DrugDose T2 75
+A6	CUI T2 C0064636
+A7	Frequency T2 2
+A8	DrugName T2 lamotrigine
+A9	CUIPhrase T2 lamotrigine
+A102	DoseUnit T2 mg

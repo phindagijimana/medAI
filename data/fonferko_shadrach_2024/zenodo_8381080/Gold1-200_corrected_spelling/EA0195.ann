@@ -1,0 +1,50 @@
+T1	PatientHistory 87 112	right-temporal-meningioma
+A1	YearDate T1 2013
+A2	CUIPhrase T1 meningioma
+A3	CUI T1 C0349604
+A4	Certainty T1 5
+A5	Negation T1 Affirmed
+T2	PatientHistory 284 292	seizure-
+A6	Certainty T2 5
+A7	CUIPhrase T2 seizure
+A8	Negation T2 Affirmed
+A9	CUI T2 C0036572
+T3	Diagnosis 48 81	generalised-tonic-clonic-seizures
+A10	CUI T3 C0494475
+A11	Negation T3 Affirmed
+A12	Certainty T3 5
+A13	CUIPhrase T3 generalised tonic clonic seizures
+A14	DiagCategory T3 MultipleSeizures
+T4	Diagnosis 22 42	Symptomatic-epilepsy
+A15	CUI T4 C1406659
+A16	Certainty T4 5
+A17	Negation T4 Affirmed
+A18	CUIPhrase T4 symptomatic epilepsy
+A19	DiagCategory T4 Epilepsy
+T6	SeizureFrequency 204 232	seizure-free-for-three-years
+A24	CUI T6 C1299590
+A25	NumberOfTimePeriods T6 3
+A26	TimePeriod T6 Year
+A27	CUIPhrase T6 seizure-freedom
+A28	NumberOfSeizures T6 0
+T7	Prescription 134 143	Tegretol-
+A29	DrugDose T7 600
+A30	DrugName T7 Carbamazepine
+A31	DoseUnit T7 mg
+A32	CUIPhrase T7 tegretol
+A33	Frequency T7 1
+A34	CUI T7 C0700087
+T8	Prescription 134 163	Tegretol-400mg-in-the-morning
+A35	DrugDose T8 400
+A36	CUIPhrase T8 tegretol
+A37	Frequency T8 1
+A38	CUI T8 C0700087
+A39	DrugName T8 carbamazapine
+A40	DoseUnit T8 mg
+T9	SeizureFrequency 284 292	seizure-
+A41	MonthDate T9 11
+A42	NumberOfSeizures T9 1
+A43	CUIPhrase T9 seizure
+A44	CUI T9 C0036572
+A45	DayDate T9 2
+A46	TimeSince_or_TimeOfEvent T9 During

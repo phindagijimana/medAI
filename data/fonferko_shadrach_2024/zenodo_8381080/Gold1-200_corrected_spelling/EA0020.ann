@@ -1,0 +1,27 @@
+T2	Diagnosis 36 45	epilepsy-
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T7	SeizureFrequency 117 150	generalised-tonic-clonic-seizures
+A15	NumberOfSeizures T7 0
+A16	MonthDate T7 8
+A17	YearDate T7 2016
+A18	TimeSince_or_TimeOfEvent T7 Since
+A19	CUIPhrase T7 generalised-tonic-clonic-seizures
+A20	CUI T7 C0494475
+T9	SeizureFrequency 189 197	absences
+A22	NumberOfSeizures T9 0
+A23	MonthDate T9 11
+A24	YearDate T9 2016
+A25	TimeSince_or_TimeOfEvent T9 Since
+A26	CUIPhrase T9 absences
+A27	CUI T9 C0563606
+T11	Prescription 220 255	She-takes-Keppra-500-mg-twice-a-day
+A29	DrugName T11 keppra
+A30	DrugDose T11 500
+A31	DoseUnit T11 mg
+A32	Frequency T11 2
+A33	CUIPhrase T11 keppra
+A34	CUI T11 C0876060

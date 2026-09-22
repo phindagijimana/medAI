@@ -1,0 +1,127 @@
+T2	Diagnosis 91 122	Symptomatic-structural-focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 symptomatic-structural-focal-epilepsy
+A6	CUI T2 C0472349
+T4	PatientHistory 180 207	traumatic-brain-injury-2005
+A8	YearDate T4 2005
+A9	Certainty T4 5
+A1010	Negation T4 Affirmed
+A1110	CUIPhrase T4 traumatic-brain-injury
+A1210	CUI T4 C0876926
+T36	EpilepsyCause 180 207	traumatic-brain-injury-2005
+A103	Certainty T36 5
+A104	Negation T36 Affirmed
+A105	CUIPhrase T36 traumatic-brain-injury
+A106	CUI T36 C0876926
+T6	Diagnosis 270 308	Focal-to-bilateral-convulsive-seizures
+A1410	DiagCategory T6 MultipleSeizures
+A15	Certainty T6 5
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 focal-to-bilateral-convulsive-seizures
+A18	CUI T6 C0877017
+T8	SeizureFrequency 270 308	Focal-to-bilateral-convulsive-seizures
+A20	NumberOfSeizures T8 0
+A21	MonthDate T8 10
+A22	YearDate T8 2019
+A23	TimeSince_or_TimeOfEvent T8 Since
+A24	CUIPhrase T8 focal-to-bilateral-convulsive-seizures
+A25	CUI T8 C0877017
+T9	Prescription 403 425	Levetiracetam-750mg-bd
+A27	DrugName T9 levetiracetam
+A28	DrugDose T9 750
+A29	DoseUnit T9 mg
+A30	Frequency T9 2
+A31	CUIPhrase T9 levetiracetam
+A32	CUI T9 C0377265
+T12	Prescription 458 505	Phenytoin-100mg-od-(reducing-as-detailed-below)
+A34	DrugName T12 phenytoin
+A35	DrugDose T12 100
+A36	DoseUnit T12 mg
+A37	Frequency T12 1
+A38	CUIPhrase T12 phenytoin
+A39	CUI T12 C0031507
+T10	Investigations 564 567	MRI
+A41	MRI_Performed T10 Yes
+A42	MRI_Results T10 Abnormal
+A43	CUIPhrase T10 abnormal-mri
+A44	CUI T10 C1319851
+T11	PatientHistory 592 599	gliosis
+A46	Certainty T11 5
+A47	Negation T11 Affirmed
+A48	CUIPhrase T11 gliosis
+A49	CUI T11 C0017639
+T18	PatientHistory 736 756	brain-injury-in-2005
+A51	YearDate T18 2005
+A52	Certainty T18 5
+A53	Negation T18 Affirmed
+A54	CUIPhrase T18 brain-injury
+A55	CUI T18 C0270611
+T20	PatientHistory 1076 1092	unusual-episodes
+A57	Certainty T20 5
+A58	Negation T20 Affirmed
+A59	CUIPhrase T20 unusual-episodes
+A60	CUI T20 C0424531
+T13	Investigations 1693 1697	MRI-
+A1710	MRI_Performed T13 Yes
+A1810	MRI_Results T13 Abnormal
+A1910	CUIPhrase T13 mri-abnormal
+A2010	CUI T13 C1319851
+T24	PatientHistory 1995 2011	febrile-seizures
+A67	AgeUnit T24 Month
+A68	AgeLower T24 14
+A69	AgeUpper T24 18
+A70	Certainty T24 5
+A71	Negation T24 Affirmed
+A72	CUIPhrase T24 febrile-seizures
+A73	CUI T24 C0009952
+T26	PatientHistory 2063 2075	encephalitis
+A75	AgeUnit T26 Year
+A76	Age T26 18
+A77	Certainty T26 5
+A78	Negation T26 Affirmed
+A79	CUIPhrase T26 viral-encephalitis
+A80	CUI T26 C0243010
+T28	Investigations 2167 2170	MRI
+A82	MRI_Performed T28 Yes
+A83	MRI_Results T28 Abnormal
+A84	CUIPhrase T28 abnormal-mri
+A85	CUI T28 C1319851
+T30	PatientHistory 2195 2202	gliosis
+A87	Certainty T30 5
+A88	Negation T30 Affirmed
+A89	CUIPhrase T30 gliosis
+A90	CUI T30 C0017639
+T14	PatientHistory 2220 2233	brain-injury-
+A2210	Certainty T14 5
+A2310	Negation T14 Affirmed
+A2410	CUIPhrase T14 brain-injury
+A2510	CUI T14 C0270611
+T32	Investigations 2240 2243	EEG
+A92	EEG_Performed T32 Yes
+A93	EEG_Results T32 Abnormal
+A94	CUIPhrase T32 abnormal-eeg
+A95	CUI T32 C0151611
+T34	Diagnosis 2319 2333	focal-epilepsy
+A97	DiagCategory T34 Epilepsy
+A98	Certainty T34 5
+A99	Negation T34 Affirmed
+A100	CUIPhrase T34 focal-epilepsy
+A101	CUI T34 C0014547
+T38	PatientHistory 2351 2373	traumatic-brain-injury
+A108	Certainty T38 5
+A109	Negation T38 Affirmed
+A110	CUIPhrase T38 traumatic-brain-injury
+A111	CUI T38 C0876926
+T40	EpilepsyCause 2351 2373	traumatic-brain-injury
+A113	Certainty T40 5
+A114	Negation T40 Affirmed
+A115	CUIPhrase T40 traumatic-brain-injury
+A116	CUI T40 C0876926
+T16	Diagnosis 2416 2425	epilepsy-
+A2710	DiagCategory T16 Epilepsy
+A2810	Certainty T16 5
+A2910	Negation T16 Affirmed
+A3010	CUIPhrase T16 epilepsy
+A3110	CUI T16 C0014544

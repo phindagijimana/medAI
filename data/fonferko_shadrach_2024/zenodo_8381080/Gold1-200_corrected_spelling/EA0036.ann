@@ -1,0 +1,55 @@
+T2	Diagnosis 24 33	-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T4	Diagnosis 35 68	generalised-tonic-clonic-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 generalised-tonic-clonic-seizures
+A12	CUI T4 C0494475
+T6	Prescription 81 132	-Epilim-200mg-in-the-morning,-400-mg-in-the-evening
+A14	DrugName T6 SodiumValproate
+A15	DrugDose T6 200
+A16	DoseUnit T6 mg
+A17	Frequency T6 1
+A18	CUIPhrase T6 epilim
+A19	CUI T6 C0591451
+T8	Prescription 82 132	Epilim-200mg-in-the-morning,-400-mg-in-the-evening
+A21	DrugName T8 SodiumValproate
+A22	DrugDose T8 400
+A23	DoseUnit T8 mg
+A24	Frequency T8 1
+A25	CUIPhrase T8 epilim
+A26	CUI T8 C0591451
+T10	WhenDiagnosed 192 235	diagnosed-with-epilepsy-around-10-years-ago
+A28	TimePeriod T10 Year
+A29	NumberOfTimePeriods T10 10
+A30	Certainty T10 5
+A31	Negation T10 Affirmed
+A32	CUIPhrase T10 epilepsy
+A33	CUI T10 C0014544
+T12	Diagnosis 207 215	epilepsy
+A35	DiagCategory T12 Epilepsy
+A36	Certainty T12 5
+A37	Negation T12 Affirmed
+A38	CUIPhrase T12 epilepsy
+A39	CUI T12 C0014544
+T14	Diagnosis 246 279	generalised-tonic-clonic-seizures
+A41	DiagCategory T14 MultipleSeizures
+A42	Certainty T14 5
+A43	Negation T14 Affirmed
+A44	CUIPhrase T14 generalised-tonic-clonic-seizures
+A45	CUI T14 C0494475
+T16	BirthHistory 369 393	Birth-history-was-normal
+A47	Certainty T16 5
+A48	Negation T16 Affirmed
+A49	CUIPhrase T16 birth-was-normal
+A50	CUI T16 C3665337
+T18	PatientHistory 431 461	no-history-of-febrile-seizures
+A52	Certainty T18 1
+A53	Negation T18 Negated
+A54	CUIPhrase T18 febrile-seizures
+A55	CUI T18 C0009952

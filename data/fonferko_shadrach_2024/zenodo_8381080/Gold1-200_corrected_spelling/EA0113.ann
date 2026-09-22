@@ -1,0 +1,46 @@
+T2	Diagnosis 121 148	Juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	PatientHistory 477 485	seizure-
+A8	AgeUnit T4 Year
+A9	Age T4 11
+A10	Certainty T4 5
+A11	Negation T4 Affirmed
+A12	CUIPhrase T4 seizure
+A13	CUI T4 C0036572
+T6	SeizureFrequency 566 573	seizure
+A15	NumberOfSeizures T6 1
+A16	TimePeriod T6 Year
+A17	NumberOfTimePeriods T6 1
+A18	CUIPhrase T6 seizure
+A19	CUI T6 C0036572
+T8	SeizureFrequency 566 573	seizure
+A21	NumberOfSeizures T8 3
+A22	YearDate T8 2018
+A23	TimeSince_or_TimeOfEvent T8 During
+A24	CUIPhrase T8 seizures
+A25	CUI T8 C0036572
+T16	PatientHistory 566 574	seizure-
+A43	Certainty T16 5
+A44	Negation T16 Affirmed
+A45	CUIPhrase T16 seizure
+A46	CUI T16 C0036572
+T10	PatientHistory 922 937	myoclonic-jerks
+A27	Certainty T10 4
+A28	Negation T10 Affirmed
+A29	CUIPhrase T10 myoclonic-jerks
+A30	CUI T10 C0027066
+T12	PatientHistory 1144 1163	febrile-convulsions
+A32	Certainty T12 1
+A33	Negation T12 Negated
+A34	CUIPhrase T12 febrile-convulsions
+A35	CUI T12 C0009952
+T14	Diagnosis 1330 1357	Juvenile-Myoclonic-Epilepsy
+A37	DiagCategory T14 Epilepsy
+A38	Certainty T14 4
+A39	Negation T14 Affirmed
+A40	CUIPhrase T14 juvenile-myoclonic-epilepsy
+A41	CUI T14 C0270853

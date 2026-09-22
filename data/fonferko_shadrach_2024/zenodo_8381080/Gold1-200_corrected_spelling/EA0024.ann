@@ -1,0 +1,25 @@
+T12	PatientHistory 34 43	blackouts
+A16	Certainty T12 5
+A17	Negation T12 Affirmed
+A18	CUIPhrase T12 blackout
+A19	CUI T12 C0234428
+T2	PatientHistory 76 83	Anxiety
+A2	Certainty T2 5
+A3	Negation T2 Affirmed
+A4	CUIPhrase T2 anxiety
+A5	CUI T2 C0003467
+T4	PatientHistory 123 130	alcohol
+A7	Certainty T4 5
+A8	Negation T4 Affirmed
+A9	CUIPhrase T4 alcohol-abuse
+A10	CUI T4 C0085762
+T6	PatientHistory 725 741	febrile-seizures
+A12	Certainty T6 1
+A13	Negation T6 Negated
+A14	CUIPhrase T6 febrile-seizures
+A15	CUI T6 C0009952
+T8	PatientHistory 1099 1120	loss-of-consciousness
+A171	Certainty T8 5
+A181	Negation T8 Affirmed
+A191	CUIPhrase T8 loss-of-consciousness
+A201	CUI T8 C0041657

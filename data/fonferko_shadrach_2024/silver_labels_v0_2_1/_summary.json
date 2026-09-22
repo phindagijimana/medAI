@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "n_letters": 200,
+  "n_ok": 200,
+  "n_failed": 0,
+  "field_populated": {
+    "clinical_seizure.epilepsy_type": 94,
+    "clinical_seizure.predominant_seizure_type": 123,
+    "clinical_seizure.seizure_frequency": 142,
+    "clinical_seizure.age_at_onset_years": 15,
+    "clinical_seizure.etiology_category": 28,
+    "clinical_seizure.semiology_text": 165,
+    "medication.current_asms.nonempty": 143,
+    "medication.prior_asms.nonempty": 29,
+    "medication.failed_asms.nonempty": 4
+  },
+  "medication_status_counter": {
+    "current": 244,
+    "prior": 45,
+    "discontinued_adverse_effect": 2,
+    "failed": 3
+  },
+  "etiology_category_counter": {
+    "structural": 15,
+    "unknown": 6,
+    "infectious": 5,
+    "immune": 2
+  },
+  "warnings_sample": [],
+  "target_schema_version": "v0.2.1"
+}

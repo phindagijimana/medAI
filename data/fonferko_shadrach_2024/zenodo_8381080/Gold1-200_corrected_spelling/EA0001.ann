@@ -1,0 +1,64 @@
+T1	Diagnosis 21 73	symptomatic,-structural-right-temporal-lobe-epilepsy
+A12	DiagCategory T1 Epilepsy
+A13	Certainty T1 5
+A14	Negation T1 Affirmed
+A15	CUIPhrase T1 symptomatic-structural-focal-epilepsy
+A16	CUI T1 C0472349
+T4	Diagnosis 51 73	temporal-lobe-epilepsy
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 temporal-lobe-epilepsy
+A122	CUI T4 C0014556
+T6	PatientHistory 74 98	Subarachnoid-haemorrhage
+A142	YearDate T6 2017
+A152	Certainty T6 5
+A162	Negation T6 Affirmed
+A17	CUIPhrase T6 subarachnoid-haemorrhage
+A18	CUI T6 C0038525
+T8	Prescription 152 181	lamotrigine-75-mg-twice-a-day
+A20	DrugName T8 lamotrigine
+A21	DrugDose T8 75
+A22	DoseUnit T8 mg
+A23	Frequency T8 2
+A24	CUIPhrase T8 lamotrigine
+A25	CUI T8 C0064636
+T10	Diagnosis 239 276	focal-seizures-with-loss-of-awareness
+A27	DiagCategory T10 MultipleSeizures
+A28	Certainty T10 5
+A29	Negation T10 Affirmed
+A30	CUIPhrase T10 focal-seizures-with-loss-of-awareness
+A31	CUI T10 C0270834
+T12	SeizureFrequency 239 276	focal-seizures-with-loss-of-awareness
+A33	LowerNumberOfSeizures T12 2
+A34	UpperNumberOfSeizures T12 3
+A35	TimePeriod T12 Month
+A36	NumberOfTimePeriods T12 1
+A37	CUIPhrase T12 focal-seizures-with-loss-of-awareness
+A38	CUI T12 C0270834
+T14	Investigations 341 348	CT-head
+A40	CT_Performed T14 Yes
+A41	CT_Results T14 Abnormal
+A42	CUIPhrase T14 ct-abnormal
+A43	CUI T14 C0436539
+T22	PatientHistory 493 501	absences
+A61	Certainty T22 5
+A62	Negation T22 Affirmed
+A63	CUIPhrase T22 absences
+A64	CUI T22 C0563606
+T16	Diagnosis 513 527	focal-seizures
+A45	DiagCategory T16 MultipleSeizures
+A46	Certainty T16 5
+A47	Negation T16 Affirmed
+A48	CUIPhrase T16 focal-seizures
+A49	CUI T16 C0751495
+T18	PatientHistory 731 739	seizure-
+A51	Certainty T18 5
+A52	Negation T18 Affirmed
+A53	CUIPhrase T18 seizure
+A54	CUI T18 C0036572
+T20	PatientHistory 779 787	seizures
+A56	Certainty T20 5
+A57	Negation T20 Affirmed
+A58	CUIPhrase T20 seizures
+A59	CUI T20 C0036572

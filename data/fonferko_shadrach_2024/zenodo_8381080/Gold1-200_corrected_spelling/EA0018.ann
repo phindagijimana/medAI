@@ -1,0 +1,38 @@
+T2	Diagnosis 48 56	epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 epilepsy
+A6	CUI T2 C0014544
+T6	Diagnosis 353 366	temporal-lobe
+A14	DiagCategory T6 MultipleSeizures
+A15	Certainty T6 4
+A16	Negation T6 Affirmed
+A17	CUIPhrase T6 temporal-lobe-seizure
+A18	CUI T6 C0014556
+T4	Diagnosis 373 387	focal-seizures
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 4
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 focal-seizures
+A12	CUI T4 C0751495
+T8	Diagnosis 511 534	occipital-lobe-seizures
+A20	DiagCategory T8 MultipleSeizures
+A21	Certainty T8 4
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 occipital-lobe-seizures
+A24	CUI T8 C0393691
+T10	Prescription 537 596	Currently-she-is-taking-sodium-valproate-500-mg-twice-a-day
+A26	DrugName T10 sodium-valproate
+A27	DrugDose T10 500
+A28	DoseUnit T10 mg
+A29	Frequency T10 2
+A30	CUIPhrase T10 sodium-valproate
+A31	CUI T10 C0037567
+T12	Prescription 601 634	levetiracetam-1000-mg-twice-today
+A33	DrugName T12 levetiracetam
+A34	DrugDose T12 1000
+A35	DoseUnit T12 mg
+A36	Frequency T12 2
+A37	CUIPhrase T12 levetiracetam
+A38	CUI T12 C0377265

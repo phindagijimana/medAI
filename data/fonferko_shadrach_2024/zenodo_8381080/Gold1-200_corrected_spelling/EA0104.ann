@@ -1,0 +1,58 @@
+T2	Diagnosis 97 120	Simple-partial-seizures
+A2	DiagCategory T2 MultipleSeizures
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 simple-partial-seizures
+A6	CUI T2 C0234974
+T4	Diagnosis 137 161	secondary-generalisation
+A8	DiagCategory T4 MultipleSeizures
+A9	Certainty T4 5
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 secondary-generalisation
+A12	CUI T4 C0270838
+T8	Investigations 162 166	MRI-
+A19	MRI_Performed T8 Yes
+A20	MRI_Results T8 Abnormal
+A21	CUIPhrase T8 mri-abnormal
+A22	CUI T8 C1319851
+T6	PatientHistory 186 195	cavernoma
+A14	Certainty T6 5
+A15	Negation T6 Affirmed
+A16	CUIPhrase T6 cavernoma
+A17	CUI T6 C0018920
+T18	PatientHistory 218 228	Depression
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 depression
+A53	CUI T18 C0011570
+T10	Prescription 248 260	Lamotrigine-
+A24	DrugName T10 Lamotrigine
+A25	DrugDose T10 150
+A26	DoseUnit T10 mg
+A27	Frequency T10 2
+A28	CUIPhrase T10 lamotrigine
+A29	CUI T10 C0064636
+T12	PatientHistory 442 451	seizures-
+A31	AgeUnit T12 Year
+A32	Age T12 15
+A33	Certainty T12 5
+A34	Negation T12 Affirmed
+A35	CUIPhrase T12 seizures
+A36	CUI T12 C0036572
+T14	Prescription 883 895	lamotrigine-
+A38	DrugName T14 Lamotrigine
+A39	DrugDose T14 150
+A40	DoseUnit T14 mg
+A41	Frequency T14 2
+A42	CUIPhrase T14 lamotrigine
+A43	CUI T14 C0064636
+T9	PatientHistory 996 1005	seizures-
+A100	Certainty T9 5
+A110	Negation T9 Affirmed
+A120	CUIPhrase T9 seizures
+A130	CUI T9 C0036572
+T16	PatientHistory 1052 1063	depression-
+A45	Certainty T16 5
+A46	Negation T16 Affirmed
+A47	CUIPhrase T16 depression
+A48	CUI T16 C0011570

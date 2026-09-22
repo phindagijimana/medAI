@@ -1,0 +1,93 @@
+T2	Diagnosis 164 178	focal-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-epilepsy
+A6	CUI T2 C0014547
+T4	Diagnosis 164 197	focal-epilepsy,-probable-parietal
+A8	DiagCategory T4 Epilepsy
+A9	Certainty T4 4
+A10	Negation T4 Affirmed
+A11	CUIPhrase T4 parietal-lobe-epilepsy
+A12	CUI T4 C0393690
+T6	Diagnosis 233 270	-focal-seizures-with-altered-awarenes
+A1110	DiagCategory T6 MultipleSeizures
+A1210	Certainty T6 5
+A13	Negation T6 Affirmed
+A14	CUIPhrase T6 focal-seizures-with-altered-awareness
+A15	CUI T6 C0270834
+T8	SeizureFrequency 234 271	focal-seizures-with-altered-awareness
+A20	NumberOfSeizures T8 0
+A21	TimePeriod T8 Year
+A22	NumberOfTimePeriods T8 3
+A23	CUIPhrase T8 focal-seizures-with-altered-awareness
+A24	CUI T8 C0270834
+T10	Diagnosis 320 347	focal-to-bilateral-seizures
+A26	DiagCategory T10 MultipleSeizures
+A27	Certainty T10 5
+A28	Negation T10 Affirmed
+A29	CUIPhrase T10 focal-to-bilateral-convulsive-seizures
+A30	CUI T10 C0877017
+T12	SeizureFrequency 320 346	focal-to-bilateral-seizure
+A32	NumberOfSeizures T12 0
+A33	TimePeriod T12 Year
+A34	NumberOfTimePeriods T12 10
+A35	CUIPhrase T12 focal-to-bilateral-convulsive-seizure
+A36	CUI T12 C0877017
+T14	Prescription 429 449	lamtorigine-250mg-bd
+A38	DrugName T14 Lamotrigine
+A39	DrugDose T14 250
+A40	DoseUnit T14 mg
+A41	Frequency T14 2
+A42	CUIPhrase T14 lamotrigine
+A43	CUI T14 C0064636
+T16	Investigations 546 549	MRI
+A45	MRI_Performed T16 Yes
+A46	MRI_Results T16 Abnormal
+A47	CUIPhrase T16 abnormal-mri
+A48	CUI T16 C1319851
+T18	PatientHistory 572 590	cortical-dysplasia
+A50	Certainty T18 5
+A51	Negation T18 Affirmed
+A52	CUIPhrase T18 cortical-dysplasia
+A53	CUI T18 C0431380
+T20	Diagnosis 820 828	epilepsy
+A55	DiagCategory T20 Epilepsy
+A56	Certainty T20 5
+A57	Negation T20 Affirmed
+A58	CUIPhrase T20 epilepsy
+A59	CUI T20 C0014544
+T22	Onset 820 828	epilepsy
+A61	AgeUnit T22 Year
+A62	Age T22 10
+A63	Certainty T22 5
+A64	Negation T22 Affirmed
+A65	CUIPhrase T22 epilepsy
+A66	CUI T22 C0014544
+T24	PatientHistory 872 887	febrile-seizure
+A68	AgeUnit T24 Year
+A69	Age T24 3
+A70	Certainty T24 5
+A71	Negation T24 Affirmed
+A72	CUIPhrase T24 febrile-seizure
+A73	CUI T24 C0009952
+T26	PatientHistory 925 933	migraine
+A75	Certainty T26 5
+A76	Negation T26 Affirmed
+A77	CUIPhrase T26 migraine
+A78	CUI T26 C0149931
+T28	PatientHistory 1054 1062	seizures
+A80	Certainty T28 5
+A81	Negation T28 Affirmed
+A82	CUIPhrase T28 seizures
+A83	CUI T28 C0036572
+T30	PatientHistory 1206 1214	seizures
+A85	Certainty T30 5
+A86	Negation T30 Affirmed
+A87	CUIPhrase T30 seizures
+A88	CUI T30 C0036572
+T13	Investigations 1527 1531	MRI-
+A2310	MRI_Performed T13 Yes
+A2410	MRI_Results T13 Abnormal
+A2510	CUIPhrase T13 mri-abnormal
+A2610	CUI T13 C1319851

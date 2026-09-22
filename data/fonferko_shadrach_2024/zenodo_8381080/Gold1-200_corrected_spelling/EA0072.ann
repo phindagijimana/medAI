@@ -1,0 +1,59 @@
+T1	Diagnosis 543 563	focal-motor-seizure-
+A1	CUIPhrase T1 focal-motor-seizure
+A2	CUI T1 C0016399
+A3	DiagCategory T1 SingleSeizure
+A4	Negation T1 Affirmed
+A5	Certainty T1 5
+T2	PatientHistory 266 274	Dementia
+A6	Negation T2 Affirmed
+A7	CUIPhrase T2 dementia
+A8	CUI T2 C0497327
+A9	Certainty T2 5
+T3	PatientHistory 277 307	Moderate-learning-difficulties
+A10	Certainty T3 5
+A11	Negation T3 Affirmed
+A12	CUIPhrase T3 learning-difficulties
+A13	CUI T3 C0424939
+T4	Diagnosis 403 433	secondary-generalised-seizures
+A14	CUIPhrase T4 secondary-generalised-seizures
+A15	Negation T4 Affirmed
+A16	CUI T4 C0270838
+A17	Certainty T4 5
+A18	DiagCategory T4 MultipleSeizures
+T5	Diagnosis 224 250	Symptomatic-focal-epilepsy
+A19	CUIPhrase T5 symptomatic-focal-epilepsy
+A20	CUI T5 C0472349
+A21	DiagCategory T5 Epilepsy
+A22	Certainty T5 5
+A23	Negation T5 Affirmed
+T6	SeizureFrequency 543 562	focal-motor-seizure
+A24	CUI T6 C0016399
+A25	TimeSince_or_TimeOfEvent T6 Since
+A26	CUIPhrase T6 focal-motor-seizure
+A27	NumberOfSeizures T6 1
+A28	PointInTime T6 LastClinic
+T7	Diagnosis 378 398	Focal-motor-seizures
+A29	Negation T7 Affirmed
+A30	Certainty T7 5
+A31	CUI T7 C0016399
+A32	DiagCategory T7 MultipleSeizures
+A33	CUIPhrase T7 focal-motor-seizures
+T8	Prescription 320 342	Levetiracetam-500mg-bd
+A34	CUIPhrase T8 levetiracetam
+A35	DrugName T8 levetiracetam
+A36	CUI T8 C0377265
+A37	DrugDose T8 500
+A38	DoseUnit T8 mg
+A39	Frequency T8 2
+T9	Prescription 345 355	Lamotrigne
+A40	Frequency T9 2
+A41	CUI T9 C0064636
+A42	DrugName T9 Lamotrigine
+A43	DrugDose T9 50
+A44	DoseUnit T9 mg
+A45	CUIPhrase T9 lamotrigine
+T10	PatientHistory 253 263	Trisomy-21
+A46	CUI T10 C3537167
+A47	Certainty T10 5
+A48	CUIPhrase T10 Trisomy 21
+A49	Negation T10 Affirmed

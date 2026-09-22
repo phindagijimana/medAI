@@ -1,0 +1,72 @@
+T2	Diagnosis 183 209	Focal-symptomatic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 focal-symptomatic-epilepsy
+A6	CUI T2 C0472349
+T4	PatientHistory 226 250	cerebrovascular-dissease
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 cerebrovascular-disease
+A11	CUI T4 C0007820
+T8	EpilepsyCause 226 250	cerebrovascular-dissease
+A20	Certainty T8 5
+A21	Negation T8 Affirmed
+A22	CUIPhrase T8 cerebrovascular-disease
+A23	CUI T8 C0007820
+T6	Prescription 252 283	Medication:-Lamotrigine-75mg-bd
+A13	DrugName T6 lamotrigine
+A14	DrugDose T6 75
+A15	DoseUnit T6 mg
+A16	Frequency T6 2
+A17	CUIPhrase T6 lamotrigine
+A18	CUI T6 C0064636
+T10	Investigations 301 305	MRI-
+A1110	MRI_Performed T10 Yes
+A12	MRI_Results T10 Abnormal
+A1310	CUIPhrase T10 mri-abnormal
+A1410	CUI T10 C1319851
+T11	PatientHistory 367 375	seizures
+A30	MonthDate T11 2
+A31	Certainty T11 5
+A32	Negation T11 Affirmed
+A33	CUIPhrase T11 seizures
+A34	CUI T11 C0036572
+T12	SeizureFrequency 367 374	seizure
+A1610	NumberOfSeizures T12 4
+A1710	MonthDate T12 2
+A1810	TimeSince_or_TimeOfEvent T12 During
+A19	CUIPhrase T12 seizure
+A2010	CUI T12 C0036572
+T13	Diagnosis 486 506	tonic-clonic-seizure
+A36	DiagCategory T13 SingleSeizure
+A37	Certainty T13 5
+A38	Negation T13 Affirmed
+A39	CUIPhrase T13 tonic-clonic-seizure
+A40	CUI T13 C0494475
+T14	SeizureFrequency 665 673	seizures
+A2210	NumberOfSeizures T14 0
+A2310	PointInTime T14 DrugChange
+A24	TimeSince_or_TimeOfEvent T14 Since
+A25	CUIPhrase T14 seizures
+A26	CUI T14 C0036572
+T16	PatientHistory 701 703	MI
+A42	Certainty T16 5
+A43	Negation T16 Affirmed
+A44	CUIPhrase T16 mi
+A45	CUI T16 C0027051
+T18	BirthHistory 831 848	-birth-was-normal
+A47	Certainty T18 5
+A48	Negation T18 Affirmed
+A49	CUIPhrase T18 birth-was-normal
+A50	CUI T18 C3665337
+T20	PatientHistory 931 947	febrile-seizures
+A52	Certainty T20 1
+A53	Negation T20 Negated
+A54	CUIPhrase T20 febrile-seizures
+A55	CUI T20 C0009952
+T9	PatientHistory 1056 1064	seizures
+A102	Certainty T9 5
+A112	Negation T9 Affirmed
+A122	CUIPhrase T9 seizures
+A132	CUI T9 C0036572

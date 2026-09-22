@@ -1,0 +1,90 @@
+T1	Diagnosis 73 104	symptomatic-structural-epilepsy
+A11	DiagCategory T1 Epilepsy
+A12	Certainty T1 5
+A13	Negation T1 Affirmed
+A14	CUIPhrase T1 symptomatic-structural-focal-epilepsy
+A15	CUI T1 C0472349
+T4	PatientHistory 175 186	meningioma-
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 meningioma
+A112	CUI T4 C0349604
+T13	EpilepsyCause 175 186	meningioma-
+A18	Certainty T13 5
+A19	Negation T13 Affirmed
+A20	CUIPhrase T13 cranial-meningioma
+A21	CUI T13 C0349604
+T6	PatientHistory 187 196	resected-
+A132	DayDate T6 1
+A142	MonthDate T6 3
+A152	YearDate T6 2015
+A16	Certainty T6 5
+A17	Negation T6 Affirmed
+A182	CUIPhrase T6 meningioma-surgery
+A192	CUI T6 C1096493
+T8	PatientHistory 250 257	anxiety
+A212	Certainty T8 5
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 anxiety
+A24	CUI T8 C0003467
+T10	Prescription 276 315	Current-medication-Lamotrigine-150mg-bd
+A26	DrugName T10 lamotrigine
+A27	DrugDose T10 150
+A28	DoseUnit T10 mg
+A29	Frequency T10 2
+A30	CUIPhrase T10 lamotrigine
+A31	CUI T10 C0064636
+T12	Diagnosis 376 396	focal-motor-seizures
+A33	DiagCategory T12 MultipleSeizures
+A34	Certainty T12 5
+A35	Negation T12 Affirmed
+A36	CUIPhrase T12 focal-motor-seizures
+A37	CUI T12 C0016399
+T14	SeizureFrequency 376 396	focal-motor-seizures
+A39	NumberOfSeizures T14 1
+A40	TimePeriod T14 Week
+A41	NumberOfTimePeriods T14 2
+A42	CUIPhrase T14 focal-motor-seizures
+A43	CUI T14 C0016399
+T16	SeizureFrequency 464 502	Focal-to-bilateral-convulsive-seizures
+A45	NumberOfSeizures T16 0
+A46	TimePeriod T16 Year
+A47	NumberOfTimePeriods T16 2
+A48	CUIPhrase T16 focal-to-bilateral-convulsive-seizures
+A49	CUI T16 C0877017
+T11	Diagnosis 464 502	Focal-to-bilateral-convulsive-seizures
+A113	DiagCategory T11 MultipleSeizures
+A123	Certainty T11 5
+A133	Negation T11 Affirmed
+A143	CUIPhrase T11 focal-to-bilateral-convulsive-seizures
+A153	CUI T11 C0877017
+T18	Investigations 544 548	MRI-
+A51	MRI_Performed T18 Yes
+A52	MRI_Results T18 Abnormal
+A53	CUIPhrase T18 mri-abnormal
+A54	CUI T18 C1319851
+T20	PatientHistory 594 605	meningioma-
+A56	Certainty T20 5
+A57	Negation T20 Affirmed
+A58	CUIPhrase T20 meningioma
+A59	CUI T20 C0349604
+T17	PatientHistory 615 623	surgery-
+A172	Certainty T17 5
+A183	Negation T17 Affirmed
+A193	CUIPhrase T17 meningioma-surgery
+A202	CUI T17 C1096493
+T22	SeizureFrequency 999 1016	frequent-seizures
+A61	FrequencyChange T22 Frequent
+A62	CUIPhrase T22 seizures
+A63	CUI T22 C0036572
+T19	PatientHistory 1007 1016	-seizures
+A222	Certainty T19 5
+A232	Negation T19 Affirmed
+A242	CUIPhrase T19 seizures
+A25	CUI T19 C0036572
+T24	Diagnosis 1283 1291	epilepsy
+A65	DiagCategory T24 Epilepsy
+A66	Certainty T24 5
+A67	Negation T24 Affirmed
+A68	CUIPhrase T24 epilepsy
+A69	CUI T24 C0014544

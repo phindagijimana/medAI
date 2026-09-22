@@ -1,0 +1,238 @@
+{
+  "doc_id": "EA0117",
+  "doc_type": "progress_note",
+  "patient_id": "EA0117",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0117.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0117",
+      "doc_type": "progress_note",
+      "doc_date": "1991-01-01",
+      "patient_id": "EA0117",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": "focal",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal epilepsy",
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01",
+        "char_start": 117,
+        "char_end": 131
+      },
+      "predominant_seizure_type": {
+        "value": "focal_impaired_awareness",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal impaired awareness seizures",
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01",
+        "char_start": 371,
+        "char_end": 404
+      },
+      "other_seizure_types": [
+        {
+          "value": "focal_impaired_awareness",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "focal impaired awareness seizures",
+          "source_doc_id": "EA0117",
+          "source_doc_type": "progress_note",
+          "source_date": "1991-01-01",
+          "char_start": 897,
+          "char_end": 930
+        }
+      ],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "semiology_text": {
+        "value": "dissociative seizures",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "dissociative seizures",
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01",
+        "char_start": 136,
+        "char_end": 157
+      },
+      "age_at_onset_years": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "seizure_frequency": {
+        "value": {
+          "raw_text": "seizures",
+          "period": "week",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "seizures",
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01",
+        "char_start": 293,
+        "char_end": 301
+      },
+      "other_seizure_frequencies": [],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "lacosamide",
+            "status": "current",
+            "dose_text": "100 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Lacosamide",
+          "source_doc_id": "EA0117",
+          "source_doc_type": "progress_note",
+          "source_date": "1991-01-01",
+          "char_start": 173,
+          "char_end": 183
+        },
+        {
+          "value": {
+            "generic_name": "perampanel",
+            "status": "current",
+            "dose_text": "8 mg \u00d7 1/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Perampanel",
+          "source_doc_id": "EA0117",
+          "source_doc_type": "progress_note",
+          "source_date": "1991-01-01",
+          "char_start": 196,
+          "char_end": 207
+        }
+      ],
+      "prior_asms": [],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0117",
+        "source_doc_type": "progress_note",
+        "source_date": "1991-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

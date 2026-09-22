@@ -1,0 +1,63 @@
+T2	Diagnosis 93 120	juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	BirthHistory 581 594	born-normally
+A8	Certainty T4 5
+A9	Negation T4 Affirmed
+A10	CUIPhrase T4 born-normally
+A11	CUI T4 C3665337
+T6	PatientHistory 613 629	febrile-seizures
+A13	Certainty T6 1
+A14	Negation T6 Negated
+A15	CUIPhrase T6 febrile-seizures
+A16	CUI T6 C0009952
+T9	PatientHistory 828 839	depression-
+A1010	Certainty T9 5
+A1110	Negation T9 Affirmed
+A12	CUIPhrase T9 depression
+A1310	CUI T9 C0011570
+T7	Investigations 1087 1091	EEG-
+A1610	EEG_Performed T7 Yes
+A17	EEG_Results T7 Abnormal
+A18	CUIPhrase T7 eeg-abnormal
+A19	CUI T7 C0151611
+T10	PatientHistory 1151 1167	photosensitivity
+A21	Certainty T10 5
+A22	Negation T10 Affirmed
+A23	CUIPhrase T10 photosensitivity
+A24	CUI T10 C3552821
+T12	Investigations 1172 1175	MRI
+A26	MRI_Performed T12 Yes
+A27	MRI_Results T12 Normal
+A28	CUIPhrase T12 normal-mri
+A29	CUI T12 C0436481
+T11	PatientHistory 1224 1238	arachnoid-cyst
+A102	Certainty T11 5
+A1112	Negation T11 Affirmed
+A1212	CUIPhrase T11 arachnoid-cyst
+A1312	CUI T11 C0078981
+T13	PatientHistory 1269 1274	jerks
+A151	Certainty T13 5
+A161	Negation T13 Affirmed
+A171	CUIPhrase T13 jerks
+A181	CUI T13 C0231530
+T14	Diagnosis 1279 1297	myoclonic-seizures
+A31	DiagCategory T14 MultipleSeizures
+A32	Certainty T14 4
+A33	Negation T14 Affirmed
+A34	CUIPhrase T14 myoclonic-seizures
+A35	CUI T14 C4317123
+T16	Investigations 1336 1339	EEG
+A37	EEG_Performed T16 Yes
+A38	EEG_Results T16 Abnormal
+A39	CUIPhrase T16 abnormal-eeg
+A40	CUI T16 C0151611
+T18	Diagnosis 1363 1390	Juvenile-Myoclonic-Epilepsy
+A42	DiagCategory T18 Epilepsy
+A43	Certainty T18 5
+A44	Negation T18 Affirmed
+A45	CUIPhrase T18 juvenile-myoclonic-epilepsy
+A46	CUI T18 C0270853

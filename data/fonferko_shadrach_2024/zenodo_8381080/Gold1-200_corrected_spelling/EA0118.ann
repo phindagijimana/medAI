@@ -1,0 +1,17 @@
+T4	Diagnosis 108 141	generalised-tonic-clonic-seizures
+A4	DiagCategory T4 MultipleSeizures
+A5	Certainty T4 5
+A6	Negation T4 Affirmed
+A7	CUIPhrase T4 generalised-tonic-clonic-seizures
+A8	CUI T4 C0494475
+T6	PatientHistory 334 355	loss-of-consciousness
+A10	Certainty T6 5
+A11	Negation T6 Affirmed
+A12	CUIPhrase T6 loss-of-consciousness
+A13	CUI T6 C0041657
+T8	Diagnosis 1112 1144	generalised-tonic-clonic-seizure
+A15	DiagCategory T8 SingleSeizure
+A16	Certainty T8 4
+A17	Negation T8 Affirmed
+A18	CUIPhrase T8 generalised-tonic-clonic-seizure
+A19	CUI T8 C0494475

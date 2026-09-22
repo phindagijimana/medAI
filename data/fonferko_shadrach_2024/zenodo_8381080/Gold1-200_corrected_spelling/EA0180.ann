@@ -1,0 +1,70 @@
+T1	Prescription 166 182	Sodium-valproate
+A1	DrugDose T1 400
+A2	DoseUnit T1 mg
+A3	Frequency T1 2
+A4	DrugName T1 SodiumValproate
+A5	CUI T1 C0037567
+A6	CUIPhrase T1 sodium-valproate
+T2	SeizureFrequency 238 250	seizrue-free
+A7	CUI T2 C1299590
+A8	CUIPhrase T2 seizure free
+A9	FrequencyChange T2 Same
+A10	NumberOfSeizures T2 0
+T3	PatientHistory 126 136	depression
+A11	CUI T3 C0011570
+A12	CUIPhrase T3 depression
+A13	Certainty T3 5
+A14	Negation T3 Affirmed
+T4	SeizureFrequency 279 286	seizure
+A15	TimeSince_or_TimeOfEvent T4 Since
+A16	CUIPhrase T4 seizure
+A17	YearDate T4 2015
+A18	CUI T4 C0036572
+A19	NumberOfSeizures T4 0
+A20	MonthDate T4 11
+T5	SeizureFrequency 547 560	seizures-free
+A21	NumberOfSeizures T5 0
+A22	CUIPhrase T5 seizure free
+A23	CUI T5 C1299590
+T6	Diagnosis 20 47	Juvenile-Myoclonic-Epilepsy
+A24	Certainty T6 4
+A25	CUI T6 C0270853
+A26	Negation T6 Affirmed
+A27	CUIPhrase T6 juvenile-myoclonic-epilepsy
+A28	DiagCategory T6 Epilepsy
+T7	PatientHistory 434 441	anxiety
+A29	Negation T7 Affirmed
+A30	CUI T7 C0003467
+A31	Certainty T7 5
+A32	CUIPhrase T7 anxiety
+T8	PatientHistory 55 63	absences
+A33	CUIPhrase T8 absences
+A34	CUI T8 C0563606
+A35	Certainty T8 5
+A36	Negation T8 Affirmed
+T9	PatientHistory 446 456	depression
+A37	Certainty T9 5
+A38	CUIPhrase T9 depression
+A39	Negation T9 Affirmed
+A40	CUI T9 C0011570
+T10	PatientHistory 65 74	myoclonus
+A41	CUI T10 C0027066
+A42	Certainty T10 5
+A43	Negation T10 Affirmed
+A44	CUIPhrase T10 myoclonus
+T11	Diagnosis 79 112	generalised-tonic-clonic-seizures
+A45	Certainty T11 5
+A46	DiagCategory T11 MultipleSeizures
+A47	CUI T11 C0494475
+A48	CUIPhrase T11 generalised-tonic-clonic-seizures
+A49	Negation T11 Affirmed
+T12	PatientHistory 114 121	Anxiety
+A50	Certainty T12 5
+A51	CUI T12 C0003467
+A52	CUIPhrase T12 anxiety
+A53	Negation T12 Affirmed
+T13	PatientHistory 280 286	seizur
+A54	Negation T13 Affirmed
+A55	Certainty T13 5
+A56	CUIPhrase T13 seizure
+A57	CUI T13 C0036572

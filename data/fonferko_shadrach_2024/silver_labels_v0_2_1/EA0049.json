@@ -1,0 +1,367 @@
+{
+  "doc_id": "EA0049",
+  "doc_type": "progress_note",
+  "patient_id": "EA0049",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0049.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:56+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0049",
+      "doc_type": "progress_note",
+      "doc_date": "2018-01-01",
+      "patient_id": "EA0049",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "predominant_seizure_type": {
+        "value": "generalized_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "generalised tonic clonic seizures",
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 131,
+        "char_end": 165
+      },
+      "other_seizure_types": [
+        {
+          "value": "generalized_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic chronic seizure",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 709,
+          "char_end": 742
+        },
+        {
+          "value": "generalized_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic chronic seizures.",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 807,
+          "char_end": 841
+        },
+        {
+          "value": "generalized_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic clonic seizures",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 856,
+          "char_end": 889
+        },
+        {
+          "value": "generalized_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic clonic seizures",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 972,
+          "char_end": 1005
+        }
+      ],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "semiology_text": {
+        "value": "Myoclonic jerks",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Myoclonic jerks",
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 184,
+        "char_end": 199
+      },
+      "age_at_onset_years": {
+        "value": 12.0,
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "epilepsy started at the age of 12.",
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 537,
+        "char_end": 571
+      },
+      "seizure_frequency": {
+        "value": {
+          "raw_text": "generalised tonic clonic seizures",
+          "period": "month",
+          "count_min": 1.0,
+          "count_max": 2.0,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "generalised tonic clonic seizures",
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 131,
+        "char_end": 165
+      },
+      "other_seizure_frequencies": [
+        {
+          "value": {
+            "raw_text": "Myoclonic jerks",
+            "period": "day",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Myoclonic jerks",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 184,
+          "char_end": 199
+        },
+        {
+          "value": {
+            "raw_text": "absence",
+            "period": "unspecified",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "absence",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 218,
+          "char_end": 225
+        },
+        {
+          "value": {
+            "raw_text": "yoclonic jerks b",
+            "period": "unspecified",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "yoclonic jerks b",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 780,
+          "char_end": 796
+        },
+        {
+          "value": {
+            "raw_text": "eneralised tonic clonic seizure",
+            "period": "unspecified",
+            "count_min": null,
+            "count_max": null,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic clonic seizure",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 856,
+          "char_end": 887
+        },
+        {
+          "value": {
+            "raw_text": "eneralised tonic clonic seizures",
+            "period": "month",
+            "count_min": 1.0,
+            "count_max": 2.0,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "eneralised tonic clonic seizures",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 972,
+          "char_end": 1004
+        }
+      ],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "lamotrigine",
+            "status": "current",
+            "dose_text": "250 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "lamotrigine 250 mg BD",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 265,
+          "char_end": 286
+        },
+        {
+          "value": {
+            "generic_name": "sodium valproate",
+            "status": "current",
+            "dose_text": "700 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Sodium valproate 700 mg BD",
+          "source_doc_id": "EA0049",
+          "source_doc_type": "progress_note",
+          "source_date": "2018-01-01",
+          "char_start": 287,
+          "char_end": 313
+        }
+      ],
+      "prior_asms": [],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0049",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

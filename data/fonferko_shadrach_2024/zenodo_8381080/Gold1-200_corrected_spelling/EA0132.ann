@@ -1,0 +1,72 @@
+T1	Investigations 442 457	EEG-is-abnormal
+A1	CUI T1 C0151611
+A2	CUIPhrase T1 eeg-abnormal
+A3	EEG_Results T1 Abnormal
+A4	EEG_Performed T1 Yes
+T2	Investigations 211 215	MRI-
+A5	CUI T2 C0436481
+A6	MRI_Performed T2 Yes
+A7	CUIPhrase T2 mri-normal
+A8	MRI_Results T2 Normal
+T10	PatientHistory 592 610	altered-awareness-
+A10	Certainty T10 5
+A11	Negation T10 Affirmed
+A12	CUIPhrase T10 altered-awareness-and-consciousness
+A13	CUI T10 C0234428
+T12	PatientHistory 767 799	episode-of-loss-of-consciousness
+A102	Certainty T12 5
+A112	Negation T12 Affirmed
+A122	CUIPhrase T12 loss-of-consciousness
+A132	CUI T12 C0041657
+T3	Diagnosis 834 871	focal-to-bilateral-convulsive-seizure
+A9	CUI T3 C0877017
+A103	Negation T3 Affirmed
+A113	CUIPhrase T3 focal-to-bilateral-convulsive-seizure
+A123	Certainty T3 4
+A133	DiagCategory T3 SingleSeizure
+T4	Diagnosis 923 937	focal-seizures
+A14	CUI T4 C0751495
+A15	DiagCategory T4 MultipleSeizures
+A16	CUIPhrase T4 focal-seizures
+A17	Certainty T4 4
+A18	Negation T4 Affirmed
+T5	Diagnosis 969 978	epilepsy-
+A19	DiagCategory T5 Epilepsy
+A20	CUI T5 C0014544
+A21	Certainty T5 4
+A22	CUIPhrase T5 epilepsy
+A23	Negation T5 Affirmed
+T6	Diagnosis 137 174	Focal-seizures-with-altered-awareness
+A24	Certainty T6 5
+A25	CUIPhrase T6 focal-seizures-with-altered-awareness
+A26	DiagCategory T6 MultipleSeizures
+A27	Negation T6 Affirmed
+A28	CUI T6 C0270834
+T7	Investigations 235 239	EEG-
+A29	EEG_Results T7 Abnormal
+A30	CUI T7 C0151611
+A31	CUIPhrase T7 eeg-abnormal
+A32	EEG_Performed T7 Yes
+T8	Diagnosis 93 107	focal-epilepsy
+A33	CUIPhrase T8 focal-epilepsy
+A34	Negation T8 Affirmed
+A35	CUI T8 C0014547
+A36	DiagCategory T8 Epilepsy
+A37	Certainty T8 4
+T9	SeizureFrequency 137 173	Focal-seizures-with-altered-awarenes
+A38	TimePeriod T9 Month
+A39	NumberOfTimePeriods T9 1
+A40	CUIPhrase T9 focal-seizures-with-altered-awareness
+A41	CUI T9 C0270834
+A42	NumberOfSeizures T9 3
+T13	Investigations 986 990	EEG-
+A43	EEG_Performed T13 Yes
+A44	EEG_Results T13 Abnormal
+A45	CUIPhrase T13 EEG abnormal
+A46	CUI T13 C0151611
+T11	Diagnosis 1054 1063	epilepsy-
+A47	DiagCategory T11 Epilepsy
+A48	Certainty T11 5
+A49	Negation T11 Affirmed
+A50	CUIPhrase T11 epilepsy
+A51	CUI T11 C0014544

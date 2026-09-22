@@ -628,6 +628,246 @@ INTEGRATED_M0_V1, INTEGRATED_M1_V1, INTEGRATED_M2_V1 = _make_arm_triple(
 )
 
 
+# ---------------------------------------------------------------------------
+# v2 few-shots adapted from Fonferko-Shadrach 2024 (CC-BY 4.0). Real
+# clinician-authored clinic-letter prose replaces the synthetic v1
+# examples for the modules where Fonferko is a natural match (medication,
+# clinical_seizure). MRI/EEG stay on v1 synthetic since Fonferko has no
+# radiology/neurophysiology reports.
+#
+# Attribution: Fonferko-Shadrach B et al. 2024, J Biomed Semantics 15:17.
+# DOI: 10.1186/s13326-024-00316-z. Source letter: EA0150 (synthetic).
+# ---------------------------------------------------------------------------
+
+# Excerpted synthetic clinic-letter prose (Fonferko-Shadrach EA0150), lightly
+# trimmed to fit prompt budgets. All content is synthetic; no PHI.
+_FONFERKO_EA0150_EXCERPT = (
+    "I reviewed this 59 year old man with symptomatic structural epilepsy in "
+    "clinic today. The cause of his epilepsy was a significant traumatic brain "
+    "injury in 2006. He started having seizures in 2008 and was diagnosed with "
+    "epilepsy in 2009. He gets complex partial seizures (deja-vu and orofacial "
+    "automatisms) as well as secondary generalised seizures. The complex partial "
+    "seizures are now happening once a month, and he has around 1-2 secondary "
+    "generalised seizures per year. He is taking levetiracetam 1500mg bd as well "
+    "as lamotrigine 200mg bd and clobazam for seizure clusters (he takes this "
+    "infrequently)."
+)
+
+
+_MEDICATION_EX_V2_FONFERKO = FewShotExample(
+    example_id="medication.fewshot.fonferko-EA0150.v1",
+    document_excerpt=_FONFERKO_EA0150_EXCERPT,
+    expected_json={
+        "current_asms": [
+            {
+                "value": {"generic_name": "levetiracetam", "status": "current",
+                          "dose_text": "1500mg bd", "reason_discontinued": None,
+                          "rxnorm_cui": None},
+                "certainty": "definite", "temporal_status": "current",
+                "evidence_text": "levetiracetam 1500mg bd",
+                "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+                "source_date": "2016-11-25",
+            },
+            {
+                "value": {"generic_name": "lamotrigine", "status": "current",
+                          "dose_text": "200mg bd", "reason_discontinued": None,
+                          "rxnorm_cui": None},
+                "certainty": "definite", "temporal_status": "current",
+                "evidence_text": "lamotrigine 200mg bd",
+                "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+                "source_date": "2016-11-25",
+            },
+            {
+                "value": {"generic_name": "clobazam", "status": "current",
+                          "dose_text": None,
+                          "reason_discontinued": None, "rxnorm_cui": None},
+                "certainty": "definite", "temporal_status": "current",
+                "evidence_text": "clobazam for seizure clusters",
+                "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+                "source_date": "2016-11-25",
+            },
+        ],
+        "prior_asms": [],
+        "failed_asms": [],
+        "adverse_effects_text": {
+            "value": None, "certainty": "not_documented",
+            "temporal_status": "unspecified", "evidence_text": None,
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "drug_resistance_status": {
+            "value": None, "certainty": "not_documented",
+            "temporal_status": "unspecified", "evidence_text": None,
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "surgery_history": [],
+        "non_drug_therapies": [],
+    },
+)
+
+
+_CLIN_SEIZURE_EX_V2_FONFERKO = FewShotExample(
+    example_id="clinical_seizure.fewshot.fonferko-EA0150.v1",
+    document_excerpt=_FONFERKO_EA0150_EXCERPT,
+    expected_json={
+        "epilepsy_type": {
+            "value": "focal", "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "symptomatic structural epilepsy",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "predominant_seizure_type": {
+            "value": "focal_impaired_awareness", "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "complex partial seizures (deja-vu and orofacial automatisms)",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "other_seizure_types": [
+            {
+                "value": "focal_to_bilateral_tonic_clonic",
+                "certainty": "definite", "temporal_status": "current",
+                "evidence_text": "secondary generalised seizures",
+                "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+                "source_date": "2016-11-25",
+            },
+        ],
+        "awareness": {
+            "value": "impaired", "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "complex partial seizures",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "semiology_text": {
+            "value": "deja-vu and orofacial automatisms",
+            "certainty": "definite", "temporal_status": "current",
+            "evidence_text": "deja-vu and orofacial automatisms",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "age_at_onset_years": {
+            "value": None, "certainty": "not_documented",
+            "temporal_status": "unspecified", "evidence_text": None,
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "seizure_frequency": {
+            "value": {"raw_text": "once a month", "period": "month",
+                      "count_min": 1.0, "count_max": 1.0, "seizure_free": False,
+                      "duration_text": None,
+                      "applies_to_type": "focal_impaired_awareness"},
+            "certainty": "definite", "temporal_status": "current",
+            "evidence_text": "complex partial seizures are now happening once a month",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "other_seizure_frequencies": [
+            {
+                "value": {"raw_text": "1-2 per year", "period": "year",
+                          "count_min": 1.0, "count_max": 2.0, "seizure_free": False,
+                          "duration_text": None,
+                          "applies_to_type": "focal_to_bilateral_tonic_clonic"},
+                "certainty": "definite", "temporal_status": "current",
+                "evidence_text": "1-2 secondary generalised seizures per year",
+                "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+                "source_date": "2016-11-25",
+            },
+        ],
+        "status_epilepticus_history": {
+            "value": None, "certainty": "not_documented",
+            "temporal_status": "unspecified", "evidence_text": None,
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "etiology_category": {
+            "value": "structural", "certainty": "definite",
+            "temporal_status": "historical",
+            "evidence_text": "significant traumatic brain injury in 2006",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "etiology_details_text": {
+            "value": "traumatic brain injury 2006",
+            "certainty": "definite", "temporal_status": "historical",
+            "evidence_text": "significant traumatic brain injury in 2006",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "etiology_specifics": {
+            "value": None, "certainty": "not_documented",
+            "temporal_status": "unspecified", "evidence_text": None,
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "focal_motor_onset": {
+            "value": "automatisms", "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "orofacial automatisms",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+        "focal_nonmotor_onset": {
+            "value": "cognitive", "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "deja-vu",
+            "source_doc_id": "FSH-EA0150", "source_doc_type": "progress_note",
+            "source_date": "2016-11-25",
+        },
+    },
+)
+
+
+# v2 arm templates for Medication + ClinicalSeizure — same task text and
+# directives as v1 but with real clinician-authored few-shot demonstration.
+_MEDICATION_V2_RATIONALE = (
+    "M1/M2 few-shot adapted from Fonferko-Shadrach 2024 (CC-BY 4.0), letter "
+    "EA0150. Real clinician-authored clinic-letter prose replaces the synthetic "
+    "v1 example. Provenance recorded in the FewShotExample.example_id."
+)
+
+
+MEDICATION_M1_V2 = PromptTemplate(
+    prompt_id="medication.M1.v2",
+    doc_type=DocumentType.PROGRESS_NOTE, module_name="medication",
+    arm=ARM_M1, version="v2",
+    system_prompt=_ROLE_PREAMBLE, task_instruction=_TASK_MEDICATION,
+    output_directives=_OUTPUT_DIRECTIVES_M0M1,
+    few_shot=(_MEDICATION_EX_V2_FONFERKO,),
+    rationale=_MEDICATION_V2_RATIONALE,
+)
+MEDICATION_M2_V2 = PromptTemplate(
+    prompt_id="medication.M2.v2",
+    doc_type=DocumentType.PROGRESS_NOTE, module_name="medication",
+    arm=ARM_M2, version="v2",
+    system_prompt=_ROLE_PREAMBLE, task_instruction=_TASK_MEDICATION,
+    output_directives=_OUTPUT_DIRECTIVES_M2,
+    few_shot=(_MEDICATION_EX_V2_FONFERKO,),
+    rationale=_MEDICATION_V2_RATIONALE,
+)
+
+CLIN_SEIZURE_M1_V2 = PromptTemplate(
+    prompt_id="clinical_seizure.M1.v2",
+    doc_type=DocumentType.PROGRESS_NOTE, module_name="clinical_seizure",
+    arm=ARM_M1, version="v2",
+    system_prompt=_ROLE_PREAMBLE, task_instruction=_TASK_CLINICAL_SEIZURE,
+    output_directives=_OUTPUT_DIRECTIVES_M0M1,
+    few_shot=(_CLIN_SEIZURE_EX_V2_FONFERKO,),
+    rationale=_MEDICATION_V2_RATIONALE,
+)
+CLIN_SEIZURE_M2_V2 = PromptTemplate(
+    prompt_id="clinical_seizure.M2.v2",
+    doc_type=DocumentType.PROGRESS_NOTE, module_name="clinical_seizure",
+    arm=ARM_M2, version="v2",
+    system_prompt=_ROLE_PREAMBLE, task_instruction=_TASK_CLINICAL_SEIZURE,
+    output_directives=_OUTPUT_DIRECTIVES_M2,
+    few_shot=(_CLIN_SEIZURE_EX_V2_FONFERKO,),
+    rationale=_MEDICATION_V2_RATIONALE,
+)
+
+
 _ALL_TEMPLATES = (
     MRI_M0_V1, MRI_M1_V1, MRI_M2_V1,
     EEG_M0_V1, EEG_M1_V1, EEG_M2_V1,
@@ -635,6 +875,9 @@ _ALL_TEMPLATES = (
     MEDICATION_M0_V1, MEDICATION_M1_V1, MEDICATION_M2_V1,
     CLIN_LOC_M0_V1, CLIN_LOC_M1_V1, CLIN_LOC_M2_V1,
     INTEGRATED_M0_V1, INTEGRATED_M1_V1, INTEGRATED_M2_V1,
+    # v2 additions (real-provenance few-shot from Fonferko-Shadrach 2024)
+    MEDICATION_M1_V2, MEDICATION_M2_V2,
+    CLIN_SEIZURE_M1_V2, CLIN_SEIZURE_M2_V2,
 )
 
 

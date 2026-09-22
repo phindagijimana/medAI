@@ -1,0 +1,57 @@
+T15	PatientHistory 139 150	lobe-damage
+A102	Certainty T15 5
+A112	Negation T15 Affirmed
+A122	CUIPhrase T15 lobe-damage
+A132	CUI T15 C1456496
+T1	PatientHistory 153 160	Anxiety
+A1	CUI T1 C0003467
+A2	CUIPhrase T1 anxiety
+A3	Certainty T1 5
+A4	Negation T1 Affirmed
+T2	Diagnosis 622 630	epilepsy
+A10	DiagCategory T2 Epilepsy
+A11	Certainty T2 5
+A12	Negation T2 Affirmed
+A13	CUIPhrase T2 epilepsy
+A14	CUI T2 C0014544
+T3	Prescription 197 264	Levetiracetam-750mg-bd-(To-change-to-lamotrigine-as-detailed-below)
+A9	DoseUnit T3 mg
+A103	CUIPhrase T3 levetiracetam
+A113	DrugDose T3 750
+A123	Frequency T3 2
+A133	CUI T3 C0377265
+A143	DrugName T3 levetiracetam
+T4	SeizureFrequency 447 455	seizures
+A15	NumberOfSeizures T4 0
+A16	CUI T4 C0036572
+A17	CUIPhrase T4 seizures
+A18	PointInTime T4 LastClinic
+T5	Diagnosis 295 325	Focal-onset-convulsive-seizure
+A19	CUIPhrase T5 focal-to-bilateral-convulsive-seizure
+A20	Negation T5 Affirmed
+A21	Certainty T5 5
+A22	CUI T5 C0877017
+A23	DiagCategory T5 MultipleSeizures
+T7	SeizureFrequency 295 325	Focal-onset-convulsive-seizure
+A28	YearDate T7 2019
+A29	NumberOfSeizures T7 0
+A30	MonthDate T7 4
+A31	CUI T7 C0877017
+A32	CUIPhrase T7 focal-to-bilateral-convulsive-seizure
+T8	Diagnosis 746 754	epilepsy
+A33	Negation T8 Affirmed
+A34	Certainty T8 4
+A35	CUIPhrase T8 epilepsy
+A36	DiagCategory T8 Epilepsy
+A37	CUI T8 C0014544
+T9	Diagnosis 95 115	Focal-onset-epilepsy
+A38	CUI T9 C0014547
+A39	CUIPhrase T9 focal-onset-epilepsy
+A40	Negation T9 Affirmed
+A41	Certainty T9 5
+A42	DiagCategory T9 Epilepsy
+T10	Investigations 780 783	MRI
+A43	MRI_Results T10 Abnormal
+A44	MRI_Performed T10 Yes
+A45	CUI T10 C1319851
+A46	CUIPhrase T10 abnormal-mri

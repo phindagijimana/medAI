@@ -1,0 +1,35 @@
+T1	Diagnosis 690 708	epileptic-seizures
+A1	CUIPhrase T1 epileptic-seizures
+A2	Certainty T1 5
+A3	CUI T1 C4317109
+A4	DiagCategory T1 MultipleSeizures
+A5	Negation T1 Affirmed
+T2	Prescription 104 117	Levetiracetam
+A6	DrugDose T2 1500
+A7	DoseUnit T2 mg
+A8	CUIPhrase T2 levetiracetam
+A9	Frequency T2 2
+A10	CUI T2 C0377265
+A11	DrugName T2 Levetiracetam
+T3	Diagnosis 50 59	Epilepsy-
+A12	Negation T3 Affirmed
+A13	CUI T3 C0014544
+A14	Certainty T3 5
+A15	DiagCategory T3 Epilepsy
+A16	CUIPhrase T3 epilepsy
+T4	PatientHistory 349 357	seizures
+A17	CUIPhrase T4 seizures
+A18	CUI T4 C0036572
+A19	Negation T4 Affirmed
+A20	Certainty T4 5
+T5	SeizureFrequency 349 357	seizures
+A21	CUI T5 C0036572
+A22	FrequencyChange T5 Increased
+A23	CUIPhrase T5 seizures
+T6	Prescription 84 94	Zonisamide
+A24	DrugName T6 Zonisamide
+A25	DrugDose T6 100
+A26	CUIPhrase T6 zonisamide
+A27	DoseUnit T6 mg
+A28	CUI T6 C0078844
+A29	Frequency T6 2

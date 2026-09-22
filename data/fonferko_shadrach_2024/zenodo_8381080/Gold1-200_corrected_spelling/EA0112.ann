@@ -1,0 +1,24 @@
+T4	Diagnosis 126 140	Focal-epilepsy
+A9	DiagCategory T4 Epilepsy
+A10	Certainty T4 5
+A11	Negation T4 Affirmed
+A12	CUIPhrase T4 focal-epilepsy
+A13	CUI T4 C0014547
+T2	Prescription 156 178	Brivaracetam-75-mgs-bd
+A2	DrugName T2 brivaracetam
+A3	DrugDose T2 75
+A4	DoseUnit T2 mg
+A5	Frequency T2 2
+A6	CUIPhrase T2 brivaracetam
+A7	CUI T2 C1699861
+T6	SeizureFrequency 255 267	seizure-free
+A15	NumberOfSeizures T6 0
+A16	PointInTime T6 DrugChange
+A17	TimeSince_or_TimeOfEvent T6 Since
+A18	CUIPhrase T6 seizure-free
+A19	CUI T6 C1299590
+T8	PatientHistory 921 930	seizures-
+A21	Certainty T8 5
+A22	Negation T8 Affirmed
+A23	CUIPhrase T8 seizures
+A24	CUI T8 C0036572

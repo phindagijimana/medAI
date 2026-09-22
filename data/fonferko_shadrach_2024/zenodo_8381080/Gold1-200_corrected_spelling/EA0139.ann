@@ -1,0 +1,25 @@
+T1	Prescription 284 330	At-present-he-is-taking-Carbamazepine-400mg-bd
+A1	Frequency T1 2
+A2	DoseUnit T1 mg
+A3	DrugName T1 carbamazepine
+A4	CUIPhrase T1 carbamazepine
+A5	CUI T1 C0006949
+A6	DrugDose T1 400
+T2	PatientHistory 270 281	head-injury
+A7	Negation T2 Affirmed
+A8	CUI T2 C0497301
+A9	CUIPhrase T2 head injury
+A10	Certainty T2 5
+A11	MonthDate T2 9
+T3	Diagnosis 153 186	generalised-tonic-clonic-seizures
+A12	Certainty T3 5
+A13	CUI T3 C0494475
+A14	Negation T3 Affirmed
+A15	DiagCategory T3 MultipleSeizures
+A16	CUIPhrase T3 generalised-tonic-clonic-seizures
+T4	SeizureFrequency 153 185	generalised-tonic-clonic-seizure
+A17	NumberOfSeizures T4 2
+A18	CUI T4 C0494475
+A19	TimeSince_or_TimeOfEvent T4 Since
+A20	CUIPhrase T4 generalised tonic clonic seizure
+A21	PointInTime T4 LastClinic

@@ -1,0 +1,26 @@
+T1	Prescription 171 205	Medication:-Carbamazepine-100mg-am
+A1	CUIPhrase T1 carbamazepine
+A2	DrugName T1 carbamazepine
+A3	DrugDose T1 100
+A4	CUI T1 C0006949
+A5	DoseUnit T1 mg
+A6	Frequency T1 1
+T2	Prescription 183 196	Carbamazepine
+A7	CUI T2 C0006949
+A8	DrugName T2 Carbamazepine
+A9	CUIPhrase T2 carbamazepine
+A10	Frequency T2 1
+A11	DrugDose T2 200
+A12	DoseUnit T2 mg
+T3	Diagnosis 147 168	Frontal-lobe-epilepsy
+A13	CUIPhrase T3 frontal-lobe-epilepsy
+A14	Certainty T3 5
+A15	Negation T3 Affirmed
+A16	DiagCategory T3 Epilepsy
+A17	CUI T3 C0085541
+T10	SeizureFrequency 311 324	-seizure-free
+A132	NumberOfSeizures T10 0
+A142	MonthDate T10 12
+A152	TimeSince_or_TimeOfEvent T10 Since
+A162	CUIPhrase T10 seizure-free
+A172	CUI T10 C1299590

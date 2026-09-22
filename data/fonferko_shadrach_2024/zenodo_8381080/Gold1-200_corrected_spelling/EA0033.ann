@@ -1,0 +1,80 @@
+T2	Diagnosis 11 38	juvenile-myoclonic-epilepsy
+A2	DiagCategory T2 Epilepsy
+A3	Certainty T2 5
+A4	Negation T2 Affirmed
+A5	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A6	CUI T2 C0270853
+T4	Prescription 72 88	sodium-valproate
+A8	DrugName T4 SodiumValproate
+A9	DrugDose T4 1
+A10	DoseUnit T4 g
+A11	Frequency T4 2
+A12	CUIPhrase T4 sodium-valproate
+A13	CUI T4 C0037567
+T6	Prescription 105 114	Clobazam-
+A15	DrugName T6 Clobazam
+A16	DrugDose T6 10
+A17	DoseUnit T6 mg
+A18	Frequency T6 As_Required
+A19	CUIPhrase T6 clobazam
+A20	CUI T6 C0055891
+T8	Investigations 148 159	MRI–-normal
+A22	MRI_Performed T8 Yes
+A23	MRI_Results T8 Normal
+A24	CUIPhrase T8 mri-normal
+A25	CUI T8 C0436481
+T5	Investigations 160 163	EEG
+A27	EEG_Performed T5 Yes
+A28	EEG_Results T5 Abnormal
+A29	CUIPhrase T5 eeg-abnormal
+A30	CUI T5 C0151611
+T10	PatientHistory 212 228	photosensitivity
+A1110	Certainty T10 5
+A1210	Negation T10 Affirmed
+A1310	CUIPhrase T10 photosensitivity
+A14	CUI T10 C3552821
+T12	Diagnosis 323 332	epilepsy-
+A32	DiagCategory T12 Epilepsy
+A33	Certainty T12 5
+A34	Negation T12 Affirmed
+A35	CUIPhrase T12 epilepsy
+A36	CUI T12 C0014544
+T14	Onset 323 330	epileps
+A38	AgeUnit T14 Year
+A39	Age T14 14
+A40	Certainty T14 5
+A41	Negation T14 Affirmed
+A42	CUIPhrase T14 epilepsy
+A43	CUI T14 C0014544
+T16	Diagnosis 384 411	juvenile-myoclonic-epilepsy
+A45	DiagCategory T16 Epilepsy
+A46	Certainty T16 5
+A47	Negation T16 Affirmed
+A48	CUIPhrase T16 juvenile-myoclonic-epilepsy
+A49	CUI T16 C0270853
+T18	Diagnosis 428 461	generalised-tonic-clonic-seizures
+A51	DiagCategory T18 MultipleSeizures
+A52	Certainty T18 5
+A53	Negation T18 Affirmed
+A54	CUIPhrase T18 generalised-tonic-clonic-seizures
+A55	CUI T18 C0494475
+T20	PatientHistory 463 471	absences
+A57	Certainty T20 5
+A58	Negation T20 Affirmed
+A59	CUIPhrase T20 absences
+A60	CUI T20 C0563606
+T22	PatientHistory 476 491	myoclonic-jerks
+A62	Certainty T22 5
+A63	Negation T22 Affirmed
+A64	CUIPhrase T22 myoclonic-jerks
+A65	CUI T22 C0027066
+T24	PatientHistory 622 630	anxiety-
+A67	Certainty T24 5
+A68	Negation T24 Affirmed
+A69	CUIPhrase T24 anxiety
+A70	CUI T24 C0003467
+T26	PatientHistory 816 831	myoclonic-jerks
+A102	Certainty T26 5
+A112	Negation T26 Affirmed
+A122	CUIPhrase T26 myoclonic-jerks
+A132	CUI T26 C0027066

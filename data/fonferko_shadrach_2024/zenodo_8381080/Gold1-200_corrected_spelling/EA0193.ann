@@ -1,0 +1,37 @@
+T1	Prescription 82 92	Topiramate
+A1	DoseUnit T1 mg
+A2	CUIPhrase T1 topiramate
+A3	CUI T1 C0076829
+A4	DrugDose T1 150
+A5	Frequency T1 2
+A6	DrugName T1 top
+T2	SeizureFrequency 429 458	Bilateral-convulsive-seizures
+A7	DayDate T2 3
+A8	MonthDate T2 6
+A9	NumberOfSeizures T2 0
+A10	TimeSince_or_TimeOfEvent T2 Since
+A11	YearDate T2 2007
+T3	Prescription 192 203	Lamotrigine
+A12	DoseUnit T3 mg
+A13	CUIPhrase T3 lamotrigine
+A14	CUI T3 C0064636
+A15	DrugDose T3 25
+A16	DrugName T3 Lamotrigine
+A17	Frequency T3 1
+T4	Diagnosis 24 32	epilepsy
+A18	Certainty T4 5
+A19	DiagCategory T4 Epilepsy
+A20	CUIPhrase T4 epilepsy
+A21	CUI T4 C0014544
+A22	Negation T4 Affirmed
+T5	Investigations 659 662	MRI
+A23	MRI_Performed T5 Yes
+A24	MRI_Results T5 Normal
+A25	CUIPhrase T5 mri-normal
+A26	CUI T5 C0436481
+T6	Diagnosis 429 458	Bilateral-convulsive-seizures
+A27	CUIPhrase T6 bilateral-convulsive-seizures
+A28	Negation T6 Affirmed
+A29	Certainty T6 5
+A30	CUI T6 C0877017
+A31	DiagCategory T6 MultipleSeizures

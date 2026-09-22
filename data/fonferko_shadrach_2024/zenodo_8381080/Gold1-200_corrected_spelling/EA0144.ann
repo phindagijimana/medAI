@@ -1,0 +1,124 @@
+T1	Diagnosis 89 120	Symptomatic-structural-epilepsy
+A1	DiagCategory T1 Epilepsy
+A2	CUI T1 C0472349
+A3	CUIPhrase T1 symptomatic-structural-focal-epilepsy
+A4	Certainty T1 5
+A5	Negation T1 Affirmed
+T12	SeizureFrequency 1074 1105	(secondary-generalised-seizures
+A12	DiagCategory T12 MultipleSeizures
+A13	Certainty T12 4
+A14	Negation T12 Affirmed
+A15	NumberOfSeizures T12 0
+A16	PointInTime T12 Surgery
+A17	TimeSince_or_TimeOfEvent T12 Since
+A18	CUIPhrase T12 secondary-generalised-seizures
+A19	CUI T12 C0270838
+T2	PatientHistory 1192 1199	anxiety
+A6	CUI T2 C0003467
+A7	CUIPhrase T2 anxiety
+A8	Negation T2 Affirmed
+A9	Certainty T2 5
+T3	Diagnosis 702 711	epilepsy-
+A10	DiagCategory T3 Epilepsy
+A11	CUIPhrase T3 epilepsy
+A1210	Certainty T3 5
+A1310	CUI T3 C0014544
+A1410	Negation T3 Affirmed
+T4	PatientHistory 143 154	meningioma-
+A1510	Certainty T4 5
+A1610	CUI T4 C0349604
+A1710	Negation T4 Affirmed
+A1810	CUIPhrase T4 meningioma
+T5	Prescription 378 392	Levetiracetam-
+A1910	DoseUnit T5 mg
+A20	Frequency T5 2
+A21	CUI T5 C0377265
+A22	CUIPhrase T5 levetiracetam
+A23	DrugName T5 Levetiracetam
+A24	DrugDose T5 1500
+T6	SeizureFrequency 252 275	Complex-partial-seizure
+A25	TimePeriod T6 Month
+A26	CUI T6 C0149958
+A27	CUIPhrase T6 complex-partial-seizure
+A28	NumberOfTimePeriods T6 1
+A29	NumberOfSeizures T6 3
+T7	PatientHistory 1479 1495	febrile-seizures
+A30	Certainty T7 5
+A31	Age T7 8
+A32	CUI T7 C0009952
+A33	AgeUnit T7 Month
+A34	CUIPhrase T7 febrile-seizures
+A35	Negation T7 Affirmed
+T8	PatientHistory 1673 1682	seizures-
+A36	CUI T8 C0036572
+A37	CUIPhrase T8 seizures
+A38	Negation T8 Affirmed
+A39	Certainty T8 5
+T9	Diagnosis 252 275	Complex-partial-seizure
+A40	CUIPhrase T9 complex partial seizures
+A41	DiagCategory T9 MultipleSeizures
+A42	Certainty T9 5
+A43	CUI T9 C0149958
+A44	Negation T9 Affirmed
+T10	WhenDiagnosed 702 709	epileps
+A45	Certainty T10 5
+A46	CUIPhrase T10 epilepsy
+A47	YearDate T10 2012
+A48	Negation T10 Affirmed
+A49	CUI T10 C0014544
+T11	PatientHistory 769 780	meningioma-
+A50	CUIPhrase T11 meningioma
+A51	CUI T11 C0349604
+A52	Negation T11 Affirmed
+A53	Certainty T11 5
+T21	Investigations 1532 1536	MRI-
+A54	CUI T21 C1319851
+A55	CUIPhrase T21 mri-abnormal
+A56	MRI_Performed T21 Yes
+A57	MRI_Results T21 Abnormal
+T13	Diagnosis 300 330	Secondary-generalised-seizures
+A58	CUIPhrase T13 secondary-generalised-seizures
+A59	DiagCategory T13 MultipleSeizures
+A60	CUI T13 C0270838
+A61	Certainty T13 5
+A62	Negation T13 Affirmed
+T14	PatientHistory 663 671	seizure-
+A63	Certainty T14 5
+A64	CUI T14 C0036572
+A65	YearDate T14 2012
+A66	Negation T14 Affirmed
+A67	CUIPhrase T14 seizure
+T15	PatientHistory 541 551	meningioma
+A68	CUIPhrase T15 meningioma
+A69	Negation T15 Affirmed
+A70	Certainty T15 5
+A71	CUI T15 C0349604
+T16	PatientHistory 1177 1188	depression-
+A72	CUIPhrase T16 depression
+A73	Negation T16 Affirmed
+A74	CUI T16 C0011570
+A75	Certainty T16 5
+T17	Investigations 481 485	MRI-
+A76	MRI_Performed T17 Yes
+A77	CUI T17 C1319851
+A78	MRI_Results T17 Abnormal
+A79	CUIPhrase T17 mri-abnormal
+T18	Diagnosis 857 871	focal-seizures
+A80	Negation T18 Affirmed
+A81	Certainty T18 5
+A82	CUIPhrase T18 focal-seizures
+A83	DiagCategory T18 MultipleSeizures
+A84	CUI T18 C0751495
+T19	Diagnosis 206 228	Partial-motor-seizures
+A85	CUI T19 C0016399
+A86	DiagCategory T19 MultipleSeizures
+A87	CUIPhrase T19 partial-motor-seizures
+A88	Certainty T19 5
+A89	Negation T19 Affirmed
+T20	SeizureFrequency 300 329	Secondary-generalised-seizure
+A90	MonthDate T20 10
+A91	CUI T20 C0270838
+A92	NumberOfSeizures T20 0
+A93	CUIPhrase T20 secondary-generalised-seizure
+A94	TimeSince_or_TimeOfEvent T20 Since
+A95	YearDate T20 2012

@@ -1,0 +1,44 @@
+# MedAI-EPI reproducible evaluation container (paper §20, Table 9).
+#
+# Small, deterministic image that runs the paper's eval harness against a
+# directory of run manifests + optional gold labels. Does NOT include the
+# Med42 model itself — that requires GPU + weights + HF token, out of scope
+# for a portable eval image. This image reproduces the *scoring* half of the
+# paper (metrics, evidence verification, error taxonomy, aggregation).
+#
+# Usage:
+#   docker build -f Dockerfile.eval -t medai-epi-eval:v0.2.1 .
+#   docker run --rm \
+#     -v $(pwd)/data/run_manifests:/data/run_manifests:ro \
+#     -v $(pwd)/data/gold:/data/gold:ro \
+#     -v $(pwd)/out:/out \
+#     medai-epi-eval:v0.2.1 \
+#     python -m eval.aggregator_cli --manifests /data/run_manifests --gold /data/gold --out /out
+
+FROM python:3.11-slim
+
+# Non-root for reproducibility
+RUN useradd --create-home --shell /bin/bash medai
+WORKDIR /app
+
+# Only the eval-track deps (no torch/transformers/Med42 weights)
+COPY --chown=medai:medai requirements.eval.txt /app/requirements.eval.txt
+RUN pip install --no-cache-dir -r /app/requirements.eval.txt
+
+# Paper-track code only. App runtime (Flask + Med42 service) is NOT included.
+COPY --chown=medai:medai schema /app/schema
+COPY --chown=medai:medai services /app/services
+COPY --chown=medai:medai eval /app/eval
+COPY --chown=medai:medai scripts /app/scripts
+COPY --chown=medai:medai docs/SCHEMA_V0_2.md /app/docs/SCHEMA_V0_2.md
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+USER medai
+
+# Default entrypoint: aggregate manifests and print an ArmSummary per arm.
+# Override by passing a specific command, e.g.:
+#   docker run ... medai-epi-eval:v0.2.1 python scripts/smoke_test_all.py
+ENTRYPOINT ["python"]
+CMD ["-m", "eval.aggregator_cli", "--help"]

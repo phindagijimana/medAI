@@ -1,0 +1,71 @@
+T1	Prescription 199 213	Levetiracetam-
+A1	CUI T1 C0377265
+A2	CUIPhrase T1 levetiracetam
+A3	Frequency T1 2
+A4	DrugName T1 Levetiracetam
+A5	DrugDose T1 1750
+A6	DoseUnit T1 mg
+T14	SeizureFrequency 416 435	cluster-of-seizures
+A21	NumberOfSeizures T14 1
+A22	TimePeriod T14 Month
+A23	NumberOfTimePeriods T14 6
+A24	TimeSince_or_TimeOfEvent T14 During
+A25	CUIPhrase T14 cluster-of-seizures
+A26	CUI T14 C3203523
+T10	Diagnosis 735 744	epileptic
+A10	DiagCategory T10 MultipleSeizures
+A11	Certainty T10 3
+A12	Negation T10 Affirmed
+A13	CUIPhrase T10 epileptic-seizures
+A14	CUI T10 C4317109
+T12	PatientHistory 748 786	dissociative-(non-epileptic)-seizures-
+A16	Certainty T12 3
+A17	Negation T12 Affirmed
+A18	CUIPhrase T12 dissociative-seizures
+A19	CUI T12 C0349245
+T2	Diagnosis 829 847	epileptic-seizures
+A7	Negation T2 Affirmed
+A8	CUI T2 C4317109
+A9	Certainty T2 4
+A1010	DiagCategory T2 MultipleSeizures
+A1110	CUIPhrase T2 epileptic-seizures
+T3	Prescription 171 195	Eslicarbazepine-800mg-od
+A1210	DoseUnit T3 mg
+A1310	DrugName T3 eslicarbazepine
+A1410	CUI T3 C2725260
+A1510	Frequency T3 1
+A1610	DrugDose T3 800
+A1710	CUIPhrase T3 eslicarbazepine
+T4	PatientHistory 139 149	Depression
+A1810	CUI T4 C0011570
+A1910	CUIPhrase T4 depression
+A20	Certainty T4 5
+A212	Negation T4 Affirmed
+T5	Prescription 226 242	Clobazam-10mg-od
+A222	DoseUnit T5 mg
+A232	CUIPhrase T5 clobazam
+A242	DrugDose T5 10
+A252	DrugName T5 clobazam
+A262	Frequency T5 1
+A272	CUI T5 C0055891
+T6	PatientHistory 81 103	Dissociative-​seizures
+A28	Certainty T6 5
+A29	CUI T6 C0349245
+A30	CUIPhrase T6 dissociative-seizures
+A31	Negation T6 Affirmed
+T7	Diagnosis 105 125	Focal-onset-epilepsy
+A32	CUIPhrase T7 focal-onset-epilepsy
+A33	DiagCategory T7 Epilepsy
+A34	Negation T7 Affirmed
+A35	CUI T7 C0014547
+A36	Certainty T7 5
+T8	PatientHistory 128 136	Migraine
+A37	CUI T8 C0149931
+A38	Certainty T8 5
+A39	CUIPhrase T8 migraine
+A40	Negation T8 Affirmed
+T9	PatientHistory 416 435	cluster-of-seizures
+A41	Certainty T9 5
+A42	CUI T9 C3203523
+A43	Negation T9 Affirmed
+A44	CUIPhrase T9 cluster-of-seizures

@@ -1,0 +1,96 @@
+T1	Diagnosis 279 288	epilepsy-
+A1	Certainty T1 5
+A2	CUIPhrase T1 epilepsy
+A3	Negation T1 Affirmed
+A4	DiagCategory T1 Epilepsy
+A5	CUI T1 C0014544
+T2	SeizureFrequency 1443 1487	infrequent-generalised-tonic-clonic-seizures
+A6	CUIPhrase T2 generalized-tonic-clonic-seizures
+A7	CUI T2 C0494475
+A8	FrequencyChange T2 Infrequent
+T3	Diagnosis 85 118	generalised-tonic-clonic-seizures
+A9	CUIPhrase T3 generalised-tonic-clonic-seizures
+A10	CUI T3 C0494475
+A11	Certainty T3 5
+A12	DiagCategory T3 MultipleSeizures
+A13	Negation T3 Affirmed
+T4	PatientHistory 653 669	febrile-seizures
+A14	CUIPhrase T4 febrile-seizures
+A15	CUI T4 C0009952
+A16	Certainty T4 1
+A17	Negation T4 Negated
+T5	PatientHistory 431 440	seizures-
+A18	Negation T5 Affirmed
+A19	CUIPhrase T5 seizures
+A20	CUI T5 C0036572
+A21	Certainty T5 5
+T6	BirthHistory 580 596	birth-was-normal
+A22	CUIPhrase T6 birth-was-normal
+A23	Certainty T6 5
+A24	Negation T6 Affirmed
+A25	CUI T6 C3665337
+T7	Diagnosis 71 80	epilepsy-
+A26	CUIPhrase T7 epilepsy
+A27	Negation T7 Affirmed
+A28	DiagCategory T7 Epilepsy
+A29	CUI T7 C0014544
+A30	Certainty T7 5
+T8	Investigations 841 848	CT-scan
+A31	CUI T8 C0744602
+A32	CT_Performed T8 Yes
+A33	CT_Results T8 Normal
+A34	CUIPhrase T8 normal-ct
+T9	Prescription 121 171	Medication:-epilim-200-milligrammes-in-the-morning
+A35	CUIPhrase T9 epilim
+A36	DrugName T9 epilim
+A37	CUI T9 C0591451
+A38	Frequency T9 1
+A39	DrugDose T9 200
+A40	DoseUnit T9 mg
+T10	WhenDiagnosed 279 286	epileps
+A41	NumberOfTimePeriods T10 16
+A42	Certainty T10 5
+A43	TimePeriod T10 Year
+A44	CUIPhrase T10 epilepsy
+A45	Negation T10 Affirmed
+A46	CUI T10 C0014544
+T11	Diagnosis 1454 1487	generalised-tonic-clonic-seizures
+A47	CUI T11 C0494475
+A48	Certainty T11 5
+A49	DiagCategory T11 MultipleSeizures
+A50	Negation T11 Affirmed
+A51	CUIPhrase T11 generalised-tonic-clonic-seizures
+T12	Investigations 871 875	eeg-
+A52	EEG_Results T12 Abnormal
+A53	EEG_Performed T12 Yes
+A54	CUI T12 C0151611
+A55	CUIPhrase T12 eeg-abnormal
+T13	SeizureFrequency 1034 1042	seizure-
+A56	NumberOfSeizures T13 1
+A57	CUIPhrase T13 seizure
+A58	TimePeriod T13 Year
+A59	UpperNumberOfTimePeriods T13 3
+A60	CUI T13 C0036572
+A61	LowerNumberOfTimePeriods T13 2
+T14	SeizureFrequency 974 1003	seizure-frequency-has-reduced
+A62	CUI T14 C0036572
+A63	FrequencyChange T14 Decreased
+A64	CUIPhrase T14 seizure
+T15	Diagnosis 354 387	generalised-tonic-clonic-seizures
+A65	DiagCategory T15 MultipleSeizures
+A66	Certainty T15 5
+A67	Negation T15 Affirmed
+A68	CUIPhrase T15 generalised tonic clonic seizures
+A69	CUI T15 C0494475
+T16	Prescription 133 140	epilim-
+A70	DrugName T16 SodiumValproate
+A71	DrugDose T16 400
+A72	DoseUnit T16 mg
+A73	Frequency T16 1
+A74	CUIPhrase T16 Epilim
+A75	CUI T16 C0591451
+T17	PatientHistory 1034 1040	-seizu
+A76	Certainty T17 5
+A77	Negation T17 Affirmed
+A78	CUIPhrase T17 seizure
+A79	CUI T17 C0036572

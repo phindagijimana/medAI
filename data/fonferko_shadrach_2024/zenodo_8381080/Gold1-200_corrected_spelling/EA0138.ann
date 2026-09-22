@@ -1,0 +1,104 @@
+T1	Investigations 594 598	MRI-
+A1	MRI_Performed T1 Yes
+A2	CUIPhrase T1 mri-abnormal
+A3	MRI_Results T1 Abnormal
+A4	CUI T1 C1319851
+T10	PatientHistory 616 629	brain-atrophy
+A10	Certainty T10 5
+A11	Negation T10 Affirmed
+A12	CUIPhrase T10 brain-atrophy
+A13	CUI T10 C0235946
+T12	PatientHistory 646 653	gliosis
+A15	Certainty T12 5
+A16	Negation T12 Affirmed
+A17	CUIPhrase T12 gliosis
+A18	CUI T12 C0017639
+T2	EpilepsyCause 860 869	meningiti
+A5	CUIPhrase T2 meningitis
+A6	CUI T2 C0025289
+A7	Certainty T2 4
+A8	Negation T2 Affirmed
+T3	Diagnosis 114 136	temporal-lobe-epilepsy
+A9	CUI T3 C0014556
+A102	DiagCategory T3 Epilepsy
+A112	Certainty T3 5
+A122	CUIPhrase T3 temporal-lobe-epilepsy
+A132	Negation T3 Affirmed
+T4	Prescription 251 280	Lamotrigine-200mg-twice-a-day
+A142	DrugName T4 lamotrigine
+A152	CUI T4 C0064636
+A162	Frequency T4 2
+A172	DoseUnit T4 mg
+A182	DrugDose T4 200
+A19	CUIPhrase T4 lamotrigine
+T5	Diagnosis 1000 1008	epilepsy
+A20	Certainty T5 5
+A21	DiagCategory T5 Epilepsy
+A22	CUIPhrase T5 epilepsy
+A23	CUI T5 C0014544
+A24	Negation T5 Affirmed
+T6	PatientHistory 860 871	meningitis-
+A25	Negation T6 Affirmed
+A26	Certainty T6 5
+A27	Age T6 6
+A28	AgeUnit T6 Month
+A29	CUI T6 C0025289
+A30	CUIPhrase T6 meningitis
+T7	PatientHistory 187 189	MI
+A31	CUI T7 C0027051
+A32	YearDate T7 2011
+A33	CUIPhrase T7 myocardial infarct
+A34	Negation T7 Affirmed
+A35	Certainty T7 5
+T8	PatientHistory 1032 1048	febrile-seizures
+A36	Certainty T8 5
+A37	CUI T8 C0009952
+A38	CUIPhrase T8 febrile-seizures
+A39	Negation T8 Affirmed
+T9	Diagnosis 418 454	Focal-seizures-with-altered-awarenss
+A40	CUI T9 C0270834
+A41	CUIPhrase T9 focal-seizures-with-altered-awareness
+A42	Certainty T9 5
+A43	Negation T9 Affirmed
+A44	DiagCategory T9 MultipleSeizures
+T14	Investigations 562 566	EEG-
+A45	CUI T14 C0151611
+A46	EEG_Performed T14 Yes
+A47	EEG_Results T14 Abnormal
+A48	CUIPhrase T14 eeg-abnormal
+T11	Diagnosis 479 517	Focal-to-bilateral-convulsive-seizures
+A49	CUIPhrase T11 focal-to-bilateral-convulsive-seizures
+A50	DiagCategory T11 MultipleSeizures
+A51	Negation T11 Affirmed
+A52	CUI T11 C0877017
+A53	Certainty T11 5
+T18	Prescription 284 312	Zonisamide-100mg-twice-a-day
+A54	CUIPhrase T18 zonisamide
+A55	DoseUnit T18 mg
+A56	CUI T18 C0078844
+A57	Frequency T18 2
+A58	DrugDose T18 100
+A59	DrugName T18 zonisamide
+T13	SeizureFrequency 479 516	Focal-to-bilateral-convulsive-seizure
+A60	YearDate T13 2013
+A61	TimeSince_or_TimeOfEvent T13 Since
+A62	CUIPhrase T13 focal-to-bilateral-convulsive-seizures
+A63	NumberOfSeizures T13 0
+A64	CUI T13 C0877017
+T15	Diagnosis 91 136	Symptomatic-structural-temporal-lobe-epilepsy
+A70	CUI T15 C0472349
+A71	CUIPhrase T15 symptomatic-focal-epilepsy
+A72	DiagCategory T15 epilepsy
+A73	Certainty T15 5
+A74	Negation T15 Affirmed
+T16	PatientHistory 150 160	meningitis
+A75	Negation T16 Affirmed
+A76	Certainty T16 5
+A77	CUIPhrase T16 meningitis
+A78	CUI T16 C0025289
+T17	SeizureFrequency 418 453	Focal-seizures-with-altered-awarens
+A79	NumberOfTimePeriods T17 1
+A80	TimePeriod T17 Month
+A81	CUI T17 C0270834
+A82	NumberOfSeizures T17 2
+A83	CUIPhrase T17 focal-seizures-with-altered-awareness

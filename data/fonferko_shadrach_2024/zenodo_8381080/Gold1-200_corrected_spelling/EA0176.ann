@@ -1,0 +1,38 @@
+T1	PatientHistory 129 139	Depression
+A1	Negation T1 Affirmed
+A2	CUI T1 C0011570
+A3	CUIPhrase T1 depression
+A4	Certainty T1 5
+T2	Investigations 670 673	MRI
+A5	CUI T2 C0436481
+A6	MRI_Performed T2 Yes
+A7	MRI_Results T2 Normal
+A8	CUIPhrase T2 mri-normal
+T3	Investigations 724 727	EEG
+A9	CUI T3 C0151611
+A10	EEG_Performed T3 Yes
+A11	CUIPhrase T3 eeg-abnormal
+A12	EEG_Results T3 Abnormal
+T4	SeizureFrequency 256 269	-seizure-free
+A13	CUI T4 C1299590
+A14	CUIPhrase T4 seizure free
+A15	NumberOfSeizures T4 0
+A16	FrequencyChange T4 Same
+T5	PatientHistory 119 127	Diabetes
+A17	Certainty T5 5
+A18	CUI T5 C0011847
+A19	CUIPhrase T5 diabetes
+A20	Negation T5 Affirmed
+T6	Prescription 174 187	levetiracetam
+A21	DrugDose T6 500
+A22	DoseUnit T6 mg
+A23	DrugName T6 Levetiracetam
+A24	Frequency T6 2
+A25	CUI T6 C0377265
+A26	CUIPhrase T6 levetiracetam
+T7	Diagnosis 110 118	Epilepsy
+A27	Negation T7 Affirmed
+A28	CUI T7 C0014544
+A29	CUIPhrase T7 epilepsy
+A30	DiagCategory T7 Epilepsy
+A31	Certainty T7 5

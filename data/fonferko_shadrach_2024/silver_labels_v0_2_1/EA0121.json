@@ -1,0 +1,310 @@
+{
+  "doc_id": "EA0121",
+  "doc_type": "progress_note",
+  "patient_id": "EA0121",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0121.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0121",
+      "doc_type": "progress_note",
+      "doc_date": "2000-01-01",
+      "patient_id": "EA0121",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": "focal",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal epilepsy",
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01",
+        "char_start": 79,
+        "char_end": 93
+      },
+      "predominant_seizure_type": {
+        "value": "focal_impaired_awareness",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal seizures with altered awareness",
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01",
+        "char_start": 750,
+        "char_end": 787
+      },
+      "other_seizure_types": [
+        {
+          "value": "unknown_onset_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "focal to bilateral convulsive seizures",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 886,
+          "char_end": 924
+        }
+      ],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "semiology_text": {
+        "value": "Severe learning difficulties",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Severe learning difficulties",
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01",
+        "char_start": 99,
+        "char_end": 127
+      },
+      "age_at_onset_years": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "seizure_frequency": {
+        "value": {
+          "raw_text": "frequent seizures",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "frequent seizures",
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01",
+        "char_start": 482,
+        "char_end": 499
+      },
+      "other_seizure_frequencies": [
+        {
+          "value": {
+            "raw_text": "focal to bilateral convulsive seizure",
+            "period": "month",
+            "count_min": 0.0,
+            "count_max": 3.0,
+            "seizure_free": false,
+            "duration_text": null,
+            "applies_to_type": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "focal to bilateral convulsive seizure",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 886,
+          "char_end": 923
+        }
+      ],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "levetiracetam",
+            "status": "current",
+            "dose_text": "1500 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Levetiracetam 1500mg bd",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 163,
+          "char_end": 186
+        }
+      ],
+      "prior_asms": [
+        {
+          "value": {
+            "generic_name": "phenytoin",
+            "status": "prior",
+            "dose_text": "350 mg \u00d7 1/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "historical",
+          "evidence_text": "Phenytoin 350mg od",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 191,
+          "char_end": 209
+        },
+        {
+          "value": {
+            "generic_name": "zonisamide",
+            "status": "prior",
+            "dose_text": "200 mg \u00d7 2/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "historical",
+          "evidence_text": "Zonisamide 200mg bd",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 214,
+          "char_end": 233
+        },
+        {
+          "value": {
+            "generic_name": "perampanel",
+            "status": "prior",
+            "dose_text": "8 mg \u00d7 1/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "historical",
+          "evidence_text": "Perampanel",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 238,
+          "char_end": 249
+        },
+        {
+          "value": {
+            "generic_name": "midazolam",
+            "status": "prior",
+            "dose_text": "\u00d7 As_Required/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "historical",
+          "evidence_text": "Midazolam",
+          "source_doc_id": "EA0121",
+          "source_doc_type": "progress_note",
+          "source_date": "2000-01-01",
+          "char_start": 260,
+          "char_end": 270
+        }
+      ],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0121",
+        "source_doc_type": "progress_note",
+        "source_date": "2000-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

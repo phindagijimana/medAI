@@ -1,0 +1,19 @@
+T20	SeizureFrequency 173 198	Infrequent-focal-seizures
+A28	FrequencyChange T20 Infrequent
+A29	CUIPhrase T20 focal-seizures
+A30	CUI T20 C0751495
+T16	Diagnosis 184 198	focal-seizures
+A17	DiagCategory T16 MultipleSeizures
+A18	Certainty T16 5
+A19	Negation T16 Affirmed
+A20	CUIPhrase T16 focal-seizures
+A21	CUI T16 C0751495
+T18	PatientHistory 201 214	Hydrocephalus
+A23	Certainty T18 5
+A24	Negation T18 Affirmed
+A25	CUIPhrase T18 hydrocephalus
+A26	CUI T18 C0020255
+T22	SeizureFrequency 340 356	further-seizures
+A32	NumberOfSeizures T22 0
+A33	CUIPhrase T22 seizures
+A34	CUI T22 C0036572

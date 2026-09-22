@@ -1,0 +1,73 @@
+T1	Prescription 224 240	Sodium-Valproate
+A1	DrugName T1 SodiumValproate
+A2	Frequency T1 1
+A3	DrugDose T1 800
+A4	CUI T1 C0037567
+A5	DoseUnit T1 mg
+A6	CUIPhrase T1 sodium-valproate
+T2	Onset 286 294	epilepsy
+A7	AgeUnit T2 Year
+A8	Negation T2 Affirmed
+A9	Certainty T2 5
+A10	CUIPhrase T2 epilepsy
+A11	Age T2 4
+A12	CUI T2 C0014544
+T10	Diagnosis 336 370	-generalised-tonic-clonic-seizures
+A1010	DiagCategory T10 MultipleSeizures
+A1110	Certainty T10 5
+A1210	Negation T10 Affirmed
+A13	CUIPhrase T10 generalised-tonic-clonic-seizures
+A14	CUI T10 C0494475
+T3	PatientHistory 875 892	-febrile-seizures
+A1310	CUI T3 C0009952
+A1410	CUIPhrase T3 febrile-seizures
+A15	Negation T3 Negated
+A16	Certainty T3 1
+T4	Diagnosis 286 294	epilepsy
+A17	Negation T4 Affirmed
+A18	CUIPhrase T4 generalised-tonic-clonic-seizures
+A19	CUI T4 C0494475
+A20	DiagCategory T4 MultipleSeizures
+A21	Certainty T4 5
+T6	Investigations 815 818	MRI
+A26	CUI T6 C0436481
+A27	MRI_Results T6 Normal
+A28	CUIPhrase T6 mri-normal
+A29	MRI_Performed T6 Yes
+T8	Investigations 731 734	EEG
+A34	CUIPhrase T8 eeg-abnormal
+A35	CUI T8 C0151611
+A36	EEG_Results T8 Abnormal
+A37	EEG_Performed T8 Yes
+T9	Prescription 212 261	Medication:-Sodium-Valproate-700mg-in-the-morning
+A38	Frequency T9 1
+A39	DrugDose T9 700
+A40	CUI T9 C0037567
+A41	DrugName T9 sodium-valproate
+A42	CUIPhrase T9 sodium-valproate
+A43	DoseUnit T9 mg
+T11	Diagnosis 168 211	secondary-generalised-tonic-clonic-seizures
+A44	DiagCategory T11 MultipleSeizures
+A45	CUIPhrase T11 secondary-generalised-tonic-clonic-seizures
+A46	CUI T11 C0877017
+A47	Certainty T11 5
+A48	Negation T11 Affirmed
+T12	PatientHistory 464 472	seizures
+A53	NumberOfTimePeriods T12 2
+A54	CUIPhrase T12 seizures
+A55	Certainty T12 5
+A56	Negation T12 Affirmed
+A57	TimePeriod T12 Year
+A58	CUI T12 C0036572
+T13	Diagnosis 138 162	Complex-partial-seizures
+A59	CUIPhrase T13 complex-partial-seizures
+A60	CUI T13 C0149958
+A61	DiagCategory T13 MultipleSeizures
+A62	Negation T13 Affirmed
+A63	Certainty T13 5
+T14	BirthHistory 839 851	normal-birth
+A64	Certainty T14 5
+A65	CUIPhrase T14 normal-birth
+A66	Negation T14 Affirmed
+A67	PrematureBirth T14 37+_TermBirth
+A68	CUI T14 C3665337

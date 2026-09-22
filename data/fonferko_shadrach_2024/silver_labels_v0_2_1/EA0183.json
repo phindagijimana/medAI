@@ -1,0 +1,228 @@
+{
+  "doc_id": "EA0183",
+  "doc_type": "progress_note",
+  "patient_id": "EA0183",
+  "source_text_path": "data/fonferko_shadrach_2024/zenodo_8381080/Gold1-200_corrected_spelling/EA0183.txt",
+  "provenance": {
+    "source_paper": "Fonferko-Shadrach B et al. (2024). Annotation of epilepsy clinic letters for natural language processing. J Biomed Semantics 15:17.",
+    "source_doi": "10.1186/s13326-024-00316-z",
+    "source_pmcid": "PMC11402197",
+    "source_license": "CC-BY-4.0",
+    "zenodo_records": [
+      "8381080",
+      "8356494",
+      "8382589",
+      "12520180"
+    ],
+    "generator_script": "scripts/silver_label_fonferko.py",
+    "target_schema_version": "v0.2.1",
+    "label_quality": "silver",
+    "notes": "Deterministic conversion; imperfect by construction. Not to be used as adjudicated gold."
+  },
+  "generated_at": "2026-09-22T04:00:57+00:00",
+  "phenotype": {
+    "schema_version": "v0.2.1",
+    "document": {
+      "doc_id": "EA0183",
+      "doc_type": "progress_note",
+      "doc_date": "2013-01-01",
+      "patient_id": "EA0183",
+      "icd10cm_codes": [],
+      "snomed_ct_codes": []
+    },
+    "clinical_seizure": {
+      "epilepsy_type": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "predominant_seizure_type": {
+        "value": "generalized_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "generalised tonic clonic seizure",
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01",
+        "char_start": 337,
+        "char_end": 370
+      },
+      "other_seizure_types": [
+        {
+          "value": "unknown_onset_tonic_clonic",
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "secondary generalised tonic clonic seizure",
+          "source_doc_id": "EA0183",
+          "source_doc_type": "progress_note",
+          "source_date": "2013-01-01",
+          "char_start": 168,
+          "char_end": 211
+        }
+      ],
+      "awareness": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "semiology_text": {
+        "value": "seizures",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "seizures",
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01",
+        "char_start": 464,
+        "char_end": 473
+      },
+      "age_at_onset_years": {
+        "value": 4.0,
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "epileps",
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01",
+        "char_start": 286,
+        "char_end": 294
+      },
+      "seizure_frequency": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "other_seizure_frequencies": [],
+      "status_epilepticus_history": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "etiology_category": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "etiology_details_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "etiology_specifics": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "focal_motor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "focal_nonmotor_onset": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      }
+    },
+    "medication": {
+      "current_asms": [
+        {
+          "value": {
+            "generic_name": "sodiumvalproate",
+            "status": "current",
+            "dose_text": "800 mg \u00d7 1/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Sodium Valproate",
+          "source_doc_id": "EA0183",
+          "source_doc_type": "progress_note",
+          "source_date": "2013-01-01",
+          "char_start": 224,
+          "char_end": 241
+        },
+        {
+          "value": {
+            "generic_name": "sodiumvalproate",
+            "status": "current",
+            "dose_text": "700 mg \u00d7 1/day",
+            "reason_discontinued": null,
+            "rxnorm_cui": null
+          },
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "Sodium Valproat",
+          "source_doc_id": "EA0183",
+          "source_doc_type": "progress_note",
+          "source_date": "2013-01-01",
+          "char_start": 224,
+          "char_end": 240
+        }
+      ],
+      "prior_asms": [],
+      "failed_asms": [],
+      "adverse_effects_text": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "drug_resistance_status": {
+        "value": null,
+        "certainty": "not_documented",
+        "temporal_status": "unspecified",
+        "evidence_text": null,
+        "source_doc_id": "EA0183",
+        "source_doc_type": "progress_note",
+        "source_date": "2013-01-01"
+      },
+      "surgery_history": [],
+      "non_drug_therapies": []
+    },
+    "clinical_localization": null,
+    "eeg": null,
+    "mri": null,
+    "integrated": null
+  }
+}

@@ -1,0 +1,24 @@
+T2	Prescription 35 79	Medication:-carbamazepine-400mgs-twice-a-day
+A5	Frequency T2 2
+A6	CUIPhrase T2 carbamazepine
+A7	DrugDose T2 400
+A8	CUI T2 C0006949
+A9	DoseUnit T2 mg
+A10	DrugName T2 carbamazepine
+T6	SeizureFrequency 181 193	seizure-free
+A11	NumberOfSeizures T6 0
+A12	PointInTime T6 LastClinic
+A13	TimeSince_or_TimeOfEvent T6 Since
+A14	CUIPhrase T6 seizure-free
+A15	CUI T6 C1299590
+T3	PatientHistory 261 269	seizurs-
+A112	CUI T3 C0036572
+A122	Negation T3 Affirmed
+A132	CUIPhrase T3 seizures
+A142	Certainty T3 5
+T4	Diagnosis 11 19	epilepsy
+A152	Negation T4 Affirmed
+A16	CUIPhrase T4 epilepsy
+A17	Certainty T4 5
+A18	DiagCategory T4 Epilepsy
+A19	CUI T4 C0014544

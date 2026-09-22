@@ -1,0 +1,60 @@
+T1	Prescription 256 275	Lamotrigine-50mg-am
+A1	CUI T1 C0064636
+A2	Frequency T1 1
+A3	DoseUnit T1 mg
+A4	DrugDose T1 50
+A5	CUIPhrase T1 lamotrigine
+A6	DrugName T1 lamotrigine
+T2	Diagnosis 175 202	Juvenile-Myoclonic-Epilepsy
+A7	Certainty T2 5
+A8	CUI T2 C0270853
+A9	DiagCategory T2 Epilepsy
+A10	CUIPhrase T2 juvenile-myoclonic-epilepsy
+A11	Negation T2 Affirmed
+T3	SeizureFrequency 665 698	generalised-tonic-clinic-seizures
+A12	TimePeriod T3 Week
+A13	NumberOfTimePeriods T3 3
+A14	CUI T3 C0494475
+A15	NumberOfSeizures T3 4
+A16	CUIPhrase T3 generalized-tonic-clonic-seizures
+T4	SeizureFrequency 483 498	myoclonic-jerks
+A17	CUI T4 C0027066
+A18	NumberOfTimePeriods T4 1
+A19	TimePeriod T4 Week
+A20	NumberOfSeizures T4 1
+A21	CUIPhrase T4 myoclonic-jerks
+T5	Prescription 216 253	Levetiracetam-1500mg-bd-(50mg/kg/day)
+A22	CUI T5 C0377265
+A23	DrugDose T5 1500
+A24	Frequency T5 2
+A25	CUIPhrase T5 levetiracetam
+A26	DrugName T5 levetiracetam
+A27	DoseUnit T5 mg
+T6	Prescription 256 268	Lamotrigine-
+A28	CUI T6 C0064636
+A29	DoseUnit T6 mg
+A30	DrugDose T6 75
+A31	DrugName T6 Lamotrigine
+A32	Frequency T6 1
+A33	CUIPhrase T6 lamotrigine
+T7	PatientHistory 483 498	myoclonic-jerks
+A34	Negation T7 Affirmed
+A35	CUI T7 C0027066
+A36	CUIPhrase T7 myoclonic-jerks
+A37	Certainty T7 5
+T8	Diagnosis 665 698	generalised-tonic-clinic-seizures
+A38	DiagCategory T8 MultipleSeizures
+A39	CUI T8 C0494475
+A40	Certainty T8 5
+A41	Negation T8 Affirmed
+A42	CUIPhrase T8 generalised-tonic-clonic-seizures
+T9	SeizureFrequency 665 698	generalised-tonic-clinic-seizures
+A43	FrequencyChange T9 Increased
+A44	CUIPhrase T9 generalised tonic clonic seizures
+A45	CUI T9 C0494475
+T10	Diagnosis 994 1026	generalised-tonic-clonic-seizure
+A1010	DiagCategory T10 SingleSeizure
+A1110	Certainty T10 5
+A1210	Negation T10 Affirmed
+A1310	CUIPhrase T10 generalised-tonic-clonic-seizure
+A1410	CUI T10 C0494475
