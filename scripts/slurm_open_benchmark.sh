@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=medai-epi-open
-#SBATCH --partition=general
+#SBATCH --partition=interactive
 #SBATCH --gres=gpu:l40s.24g:1
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
