@@ -78,10 +78,14 @@ class Med42ModelService:
             if not self.tokenizer.pad_token:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
 
-            # Load model with optimized settings
+            # Load model with optimized settings.
+            # dtype: bf16 on CUDA (Med42-8B fits ~16 GB in bf16, needed for L40S 24 GB
+            # slices); fp32 on CPU for numerical stability.
+            model_dtype = torch.bfloat16 if (torch.cuda.is_available()) else torch.float32
+            logger.info(f"Model dtype: {model_dtype}")
             model_kwargs = {
                 "trust_remote_code": True,
-                "torch_dtype": torch.float32,  # Use float32 for CPU compatibility
+                "torch_dtype": model_dtype,
                 "cache_dir": self.config.model_cache_dir,
                 "low_cpu_mem_usage": True
             }

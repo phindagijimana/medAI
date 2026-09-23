@@ -35,23 +35,26 @@ module load cuda   2>/dev/null || module load cuda/12.2  2>/dev/null || echo "cu
 
 # Environment
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
-export APP_HOME="${SLURM_SUBMIT_DIR:-$(pwd)}"
 
-# .env for HF_TOKEN (Med42 weights are gated) — same pattern as slurm_job.sh
-if [ -f "$APP_HOME/.env" ]; then
-    echo "Sourcing $APP_HOME/.env"
-    set -a; . "$APP_HOME/.env"; set +a
+# NOTE: source .env BEFORE setting APP_HOME — .env contains APP_HOME= (empty
+# placeholder) which will overwrite the export otherwise.
+_SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$(pwd)}"
+if [ -f "$_SUBMIT_DIR/.env" ]; then
+    echo "Sourcing $_SUBMIT_DIR/.env"
+    set -a; . "$_SUBMIT_DIR/.env"; set +a
 fi
-if [ -z "${HF_TOKEN:-}" ]; then
-    echo "WARNING: HF_TOKEN not set — Med42 download may fail" >&2
-fi
+export APP_HOME="$_SUBMIT_DIR"
 
-# Activate venv if present
-if [ -f "$APP_HOME/venv/bin/activate" ]; then
-    echo "Activating venv"
-    # shellcheck disable=SC1091
-    . "$APP_HOME/venv/bin/activate"
+# Use venv Python explicitly — plain `python` was resolving to system 3.9 +
+# user .local site-packages which have a mismatched pydantic-stack.
+PY="$APP_HOME/venv/bin/python"
+if [ ! -x "$PY" ]; then
+    echo "ERROR: venv Python not executable at $PY" >&2
+    exit 1
 fi
+echo "Using Python at: $PY"
+$PY --version
+export PYTHONNOUSERSITE=1
 
 # nvidia-smi for the log
 if command -v nvidia-smi >/dev/null 2>&1; then
@@ -64,11 +67,11 @@ cd "$APP_HOME"
 # Default: synthetic MRI report first (baseline sanity), then one PMC excerpt
 echo ""
 echo "--- Run 1: synthetic MRI report ---"
-python scripts/run_m2_mri_real.py
+$PY scripts/run_m2_mri_real.py
 
 echo ""
 echo "--- Run 2: PMC6872800 (MTLE + right HS) MRI excerpt ---"
-python scripts/run_m2_mri_real.py --pmc PMC6872800
+$PY scripts/run_m2_mri_real.py --pmc PMC6872800
 
 echo ""
 echo "Finished: $(date)"

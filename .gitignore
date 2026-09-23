@@ -98,3 +98,6 @@ data/run_manifests/
 
 # Raw downloads of external corpora — extracted content is committed instead
 data/fonferko_shadrach_2024/_downloads/
+
+# Med42 model weights (~16 GB, cached by HuggingFace on first load)
+model_cache/
