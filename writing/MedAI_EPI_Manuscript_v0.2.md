@@ -194,6 +194,37 @@ The single-document MRI sanity run reported earlier (SLURM job 89473; Supplement
 
 Two conclusions land with statistical support. First, M1 few-shot prompting is the only Med42-8B configuration that produces meaningful medication extraction from Fonferko-Shadrach clinic letters (content-validity 15.0 %, 95 % CI 10.0–20.0 %; ASM multiset F1 = 0.25, 95 % CI 0.17–0.31); its CI on ASM F1 does not overlap M0's (0.07–0.19), giving a real between-arm distinction rather than a chance ordering. Second, M2's schema-echo failure is statistically robust — content-validity CI [0.0 %, 2.5 %] separates cleanly from both M0 and M1 — confirming that at 8 B model size and a 1024-token generation budget, prompt-level schema injection is not just suboptimal but *actively harmful* to content yield. Comparing across paradigms, the rules baseline (B0) remains the strongest medication extractor across the board (ASM multiset F1 = 0.57 unbounded — no LLM arm's CI reaches this value), reinforcing that transparent regex-based extraction is not an antique substitute for LLM extraction on constrained-vocabulary fields but a competitive alternative worth retaining.
 
+**Table 4c. Paired McNemar's tests on medication content-validity across LLM arms (continuity-corrected, two-tailed).** Same 200 documents, each doc scored per-arm; discordant pairs analysed.
+
+| Arm A | Arm B | Both valid | A-only | B-only | Neither | χ² | p |
+|---|---|---:|---:|---:|---:|---:|---:|
+| M0 | M1 | 5 | 16 | 25 | 154 | 1.56 | 0.212 |
+| M0 | M2 | 0 | 21 | 0 | 179 | 19.05 | 1.27 × 10⁻⁵ |
+| M1 | M2 | 0 | 30 | 0 | 170 | 28.03 | 1.19 × 10⁻⁷ |
+
+The paired McNemar analyses quantify what the marginal CIs suggested. M2 is significantly worse than both M0 (χ² = 19.05, p = 1.3 × 10⁻⁵) and M1 (χ² = 28.03, p = 1.2 × 10⁻⁷) on content-validity, in each case losing content on every discordant pair where the alternative arm succeeded. M1's marginal advantage over M0 (15.0 % vs. 10.5 %) does not reach statistical significance under the paired test at α = 0.05 (χ² = 1.56, p = 0.21), reflecting the small absolute count of successes and modest discordance; the CI-based ordering is retained but should be interpreted as directional evidence rather than definitive superiority. For clinical_seizure module comparisons all three paired tests are trivially null because every arm produced zero content-valid extractions.
+
+**Table 4d. Error taxonomy (paper Table 8, twelve categories) — total counts across 200-document Fonferko-Shadrach sweep, baseline max_new_tokens = 1024.** A single document may register multiple error categories.
+
+| Category | M0/clinical_seizure | M0/medication | M1/clinical_seizure | M1/medication | M2/clinical_seizure | M2/medication |
+|---|---:|---:|---:|---:|---:|---:|
+| missed_fact | 791 | 270 | 791 | 247 | 791 | 294 |
+| wrong_label | 0 | 52 | 0 | 95 | 0 | 4 |
+| negation | 0 | 0 | 0 | 0 | 0 | 0 |
+| uncertainty | 0 | 0 | 0 | 0 | 0 | 0 |
+| temporal | 0 | 0 | 0 | 0 | 0 | 0 |
+| medication_status | 0 | 0 | 0 | 0 | 0 | 0 |
+| eeg_semantic | 0 | 0 | 0 | 0 | 0 | 0 |
+| mri_semantic | 0 | 0 | 0 | 0 | 0 | 0 |
+| conflict | 0 | 0 | 0 | 0 | 0 | 0 |
+| unsupported_inference | 0 | 0 | 0 | 0 | 0 | 0 |
+| evidence_mismatch | 0 | 0 | 0 | 0 | 0 | 0 |
+| schema | 200 | 200 | 200 | 190 | 200 | 200 |
+
+The error taxonomy is dominated by `missed_fact` (silver populated a value where Med42 emitted `not_documented`) and `schema` (raw parse failed for the whole module). Category-level errors that require both prediction and gold to be present but disagree in specific semantic axes (negation, uncertainty, temporal, medication_status, and modality-specific semantic errors) never fire, because Med42 produces so few extracted values that fine-grained disagreement is not the failure mode — omission is. `wrong_label` on medication (52, 95, 4 for M0/M1/M2) is the informative sub-signal: M1 attempts more medication labels and thus makes more label-mismatch errors than M0, and M2 attempts almost none (schema echo consumes the budget).
+
+**Preliminary sensitivity analysis (SLURM job 103501, `max_new_tokens = 4096`, in progress at time of writing).** A rerun of the full 200-letter sweep with the generation budget raised from 1,024 to 4,096 tokens is currently executing on a separate GPU slice, with manifests written to `data/run_manifests_maxtok4096/`. At the time of writing (n = 12 documents per arm × module, partial results only), the medication-module raw-validity rate for M1 rose from 5.0 % at 1,024 tokens to 41.7 % at 4,096 tokens on the first 12 documents; M2 remained at 0.0 % raw validity on the same subset. If this signal holds through the full 200-document sensitivity sweep, the schema-echo pathology is bounded by generation budget rather than by model scale — a resolvable engineering constraint rather than a fundamental limit on 8-billion-parameter clinical LLMs. The full sensitivity result and any accompanying statistical comparison against the baseline run will be reported in the next revision.
+
 ### Downstream utility demonstration
 
 To evaluate what the extracted phenotypes enable beyond validity metrics, we operationalized an ILAE 2010 drug-resistance identifier over the extracted medication timelines: a letter was flagged as a drug-resistance candidate if the extracted phenotype either directly stated `drug_resistant` status or reported ≥ 2 failed or prior anti-seizure medications. We compared each arm's candidate list against silver-derived candidate flags on the same 200 letters (silver flagged 16 letters as candidates). Table 5 reports per-arm sensitivity and positive predictive value against silver as a plausibility check on the downstream analytic pipeline the framework enables.

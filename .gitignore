@@ -98,6 +98,7 @@ logs/vecta_*.err
 
 # Extraction pipeline runtime output — commit specific locked-run manifests intentionally
 data/run_manifests/
+data/run_manifests_maxtok4096/
 
 # Raw downloads of external corpora — extracted content is committed instead
 data/fonferko_shadrach_2024/_downloads/
