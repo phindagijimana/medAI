@@ -212,9 +212,30 @@ def extract_module(
         manifest = mb.finish()
         return ExtractionResult(manifest=manifest, module=parsed_raw)
 
-    # Raw parse failed. Try repair.
+    # Raw parse failed. Try tier-1 repair (deterministic JSON extraction).
     mb.record_raw(response, n_tokens=n_tokens, raw_valid=False, parse_error=err)
     repaired, method, attempts, err2 = _repair(module_cls, response)
+
+    # Tier-2 repair: smart wrap+normalize when Med42 emits bare values instead
+    # of Evidence-wrapped structure. See services/smart_repair.py for details.
+    if repaired is None:
+        try:
+            from services.smart_repair import try_smart_repair
+            smart_module, _parsed, smart_err = try_smart_repair(
+                response, module_cls, source_doc_meta,
+            )
+        except Exception as smart_e:
+            smart_module, smart_err = None, f"smart_repair_exception: {smart_e}"
+        if smart_module is not None:
+            repaired = smart_module
+            method = "smart_repair_wrap_and_normalize"
+            attempts += 1
+            err2 = None
+        else:
+            # Preserve original tier-1 error unless smart-repair emitted a
+            # more informative one.
+            err2 = err2 or smart_err
+
     mb.record_repair(
         method=method,
         attempts=attempts,

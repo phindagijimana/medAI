@@ -1,0 +1,324 @@
+{
+  "per_arm": {
+    "clinical_seizure/M2/v1": {
+      "n": 215,
+      "raw_valid": 14,
+      "smart_valid": 200,
+      "smart_valid_with_content": 0,
+      "raw_tokens_sum": 204800,
+      "raw_tokens_count": 200,
+      "error_kinds": {
+        "1 validation error for ClinicalSeizureModule": 14,
+        "2 validation errors for ClinicalSeizureModule": 1
+      }
+    },
+    "mri/M2/v1": {
+      "n": 23,
+      "raw_valid": 17,
+      "smart_valid": 19,
+      "smart_valid_with_content": 19,
+      "raw_tokens_sum": 2928,
+      "raw_tokens_count": 4,
+      "error_kinds": {
+        "no_json_found": 3,
+        "1 validation error for MriModule": 1
+      }
+    },
+    "medication/M2/v1": {
+      "n": 215,
+      "raw_valid": 15,
+      "smart_valid": 215,
+      "smart_valid_with_content": 15,
+      "raw_tokens_sum": 204800,
+      "raw_tokens_count": 200,
+      "error_kinds": {}
+    },
+    "mri/M0/v1": {
+      "n": 6,
+      "raw_valid": 2,
+      "smart_valid": 4,
+      "smart_valid_with_content": 4,
+      "raw_tokens_sum": 1334,
+      "raw_tokens_count": 4,
+      "error_kinds": {
+        "4 validation errors for MriModule": 1,
+        "1 validation error for MriModule": 1
+      }
+    },
+    "eeg/M2/v1": {
+      "n": 15,
+      "raw_valid": 15,
+      "smart_valid": 15,
+      "smart_valid_with_content": 15,
+      "raw_tokens_sum": 0,
+      "raw_tokens_count": 0,
+      "error_kinds": {}
+    },
+    "mri/M1/v1": {
+      "n": 5,
+      "raw_valid": 2,
+      "smart_valid": 4,
+      "smart_valid_with_content": 4,
+      "raw_tokens_sum": 1985,
+      "raw_tokens_count": 3,
+      "error_kinds": {
+        "1 validation error for MriModule": 1
+      }
+    },
+    "medication/M0/v1": {
+      "n": 200,
+      "raw_valid": 0,
+      "smart_valid": 34,
+      "smart_valid_with_content": 21,
+      "raw_tokens_sum": 41030,
+      "raw_tokens_count": 200,
+      "error_kinds": {
+        "8 validation errors for MedicationModule": 4,
+        "2 validation errors for MedicationModule": 59,
+        "1 validation error for MedicationModule": 41,
+        "5 validation errors for MedicationModule": 8,
+        "3 validation errors for MedicationModule": 23,
+        "4 validation errors for MedicationModule": 18,
+        "10 validation errors for MedicationModule": 3,
+        "6 validation errors for MedicationModule": 5,
+        "9 validation errors for MedicationModule": 2,
+        "12 validation errors for MedicationModule": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 18 column 2": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 46 column 3": 1
+      }
+    },
+    "medication/M1/v1": {
+      "n": 200,
+      "raw_valid": 10,
+      "smart_valid": 48,
+      "smart_valid_with_content": 30,
+      "raw_tokens_sum": 109102,
+      "raw_tokens_count": 200,
+      "error_kinds": {
+        "1 validation error for MedicationModule": 26,
+        "7 validation errors for MedicationModule": 7,
+        "3 validation errors for MedicationModule": 27,
+        "5 validation errors for MedicationModule": 16,
+        "2 validation errors for MedicationModule": 19,
+        "no_json_found": 8,
+        "8 validation errors for MedicationModule": 3,
+        "4 validation errors for MedicationModule": 21,
+        "15 validation errors for MedicationModule": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 19 column 1": 1,
+        "6 validation errors for MedicationModule": 13,
+        "11 validation errors for MedicationModule": 1,
+        "12 validation errors for MedicationModule": 2,
+        "9 validation errors for MedicationModule": 4,
+        "19 validation errors for MedicationModule": 1,
+        "10 validation errors for MedicationModule": 2
+      }
+    },
+    "clinical_seizure/M0/v1": {
+      "n": 200,
+      "raw_valid": 0,
+      "smart_valid": 1,
+      "smart_valid_with_content": 0,
+      "raw_tokens_sum": 43107,
+      "raw_tokens_count": 200,
+      "error_kinds": {
+        "7 validation errors for ClinicalSeizureModule": 20,
+        "3 validation errors for ClinicalSeizureModule": 17,
+        "4 validation errors for ClinicalSeizureModule": 19,
+        "json_parse_failed: Expecting ',' delimiter: line 48 column 2": 1,
+        "8 validation errors for ClinicalSeizureModule": 33,
+        "6 validation errors for ClinicalSeizureModule": 11,
+        "9 validation errors for ClinicalSeizureModule": 21,
+        "10 validation errors for ClinicalSeizureModule": 18,
+        "json_parse_failed: Expecting ',' delimiter: line 12 column 1": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 14 column 1": 1,
+        "5 validation errors for ClinicalSeizureModule": 15,
+        "11 validation errors for ClinicalSeizureModule": 10,
+        "1 validation error for ClinicalSeizureModule": 10,
+        "12 validation errors for ClinicalSeizureModule": 5,
+        "json_parse_failed: Expecting ',' delimiter: line 7 column 22": 1,
+        "2 validation errors for ClinicalSeizureModule": 8,
+        "13 validation errors for ClinicalSeizureModule": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 10 column 1": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 8 column 17": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 7 column 20": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 7 column 15": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 27 column 1": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 9 column 15": 1,
+        "json_parse_failed: Expecting ',' delimiter: line 35 column 2": 1
+      }
+    },
+    "clinical_seizure/M1/v1": {
+      "n": 200,
+      "raw_valid": 0,
+      "smart_valid": 3,
+      "smart_valid_with_content": 0,
+      "raw_tokens_sum": 202373,
+      "raw_tokens_count": 200,
+      "error_kinds": {
+        "13 validation errors for ClinicalSeizureModule": 2,
+        "no_json_found": 189,
+        "14 validation errors for ClinicalSeizureModule": 2,
+        "2 validation errors for ClinicalSeizureModule": 2,
+        "3 validation errors for ClinicalSeizureModule": 1,
+        "4 validation errors for ClinicalSeizureModule": 1
+      }
+    }
+  },
+  "sample_repairs": [
+    {
+      "doc_id": "SYN-MRI-0001",
+      "prompt_id": "mri.M0.v1",
+      "raw_first_200": "Here is the extracted MRI phenotype for this report:\n\n{\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"right hippocampal",
+      "wrapped_field_sample": {
+        "overall_normal": {
+          "value": false,
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "right hippocampal sclerosis",
+          "source_doc_id": "SYN-MRI-0001",
+          "source_doc_type": "mri_report",
+          "source_date": "2025-06-14",
+          "char_start": null,
+          "char_end": null
+        },
+        "findings": [
+          {
+            "value": "hippocampal_sclerosis",
+            "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "right hippocampal sclerosis",
+            "source_doc_id": "SYN-MRI-0001",
+            "source_doc_type": "mri_report",
+            "source_date": "2025-06-14",
+            "char_start": null,
+            "char_end": null
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "SYN-MRI-0001",
+      "prompt_id": "mri.M2.v1",
+      "raw_first_200": "```json\n{\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"right hippocampal sclerosis\",\n    \"source_doc_id\": \"SYN-MRI-000",
+      "wrapped_field_sample": {
+        "overall_normal": {
+          "value": false,
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "right hippocampal sclerosis",
+          "source_doc_id": "SYN-MRI-0001",
+          "source_doc_type": "mri_report",
+          "source_date": "2025-06-14",
+          "char_start": null,
+          "char_end": null
+        },
+        "findings": [
+          {
+            "value": "hippocampal_sclerosis",
+            "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "right hippocampal sclerosis",
+            "source_doc_id": "SYN-MRI-0001",
+            "source_doc_type": "mri_report",
+            "source_date": "2025-06-14",
+            "char_start": null,
+            "char_end": null
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "SYN-MRI-0001",
+      "prompt_id": "mri.M0.v1",
+      "raw_first_200": "```json\n{\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"right hippocampal sclerosis\",\n    \"source_doc_id\": \"SYN-MRI-000",
+      "wrapped_field_sample": {
+        "overall_normal": {
+          "value": false,
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "right hippocampal sclerosis",
+          "source_doc_id": "SYN-MRI-0001",
+          "source_doc_type": "mri_report",
+          "source_date": "2025-06-14",
+          "char_start": null,
+          "char_end": null
+        },
+        "findings": [
+          {
+            "value": "hippocampal_sclerosis",
+            "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "right hippocampal sclerosis",
+            "source_doc_id": "SYN-MRI-0001",
+            "source_doc_type": "mri_report",
+            "source_date": "2025-06-14",
+            "char_start": null,
+            "char_end": null
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "SYN-MRI-0001",
+      "prompt_id": "mri.M2.v1",
+      "raw_first_200": "Here is the extracted MRI phenotype for this report:\n\n{\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"right hippocampal",
+      "wrapped_field_sample": {
+        "overall_normal": {
+          "value": false,
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "right hippocampal sclerosis",
+          "source_doc_id": "SYN-MRI-0001",
+          "source_doc_type": "mri_report",
+          "source_date": "2025-06-14",
+          "char_start": null,
+          "char_end": null
+        },
+        "findings": [
+          {
+            "value": "hippocampal_sclerosis",
+            "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "right hippocampal sclerosis",
+            "source_doc_id": "SYN-MRI-0001",
+            "source_doc_type": "mri_report",
+            "source_date": "2025-06-14",
+            "char_start": null,
+            "char_end": null
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "SYN-MRI-0001",
+      "prompt_id": "mri.M1.v1",
+      "raw_first_200": "Here is the extracted MRI phenotype for this report:\n\n{\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"right hippocampal",
+      "wrapped_field_sample": {
+        "overall_normal": {
+          "value": false,
+          "certainty": "definite",
+          "temporal_status": "current",
+          "evidence_text": "right hippocampal sclerosis",
+          "source_doc_id": "SYN-MRI-0001",
+          "source_doc_type": "mri_report",
+          "source_date": "2025-06-14",
+          "char_start": null,
+          "char_end": null
+        },
+        "findings": [
+          {
+            "value": "hippocampal_sclerosis",
+            "certainty": "definite",
+            "temporal_status": "current",
+            "evidence_text": "right hippocampal sclerosis",
+            "source_doc_id": "SYN-MRI-0001",
+            "source_doc_type": "mri_report",
+            "source_date": "2025-06-14",
+            "char_start": null,
+            "char_end": null
+          }
+        ]
+      }
+    }
+  ]
+}
