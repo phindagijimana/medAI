@@ -103,3 +103,6 @@ data/fonferko_shadrach_2024/_downloads/
 
 # Med42 model weights (~16 GB, cached by HuggingFace on first load)
 model_cache/
+
+# B1 / BERT training checkpoints (regenerable from silver labels)
+checkpoints/

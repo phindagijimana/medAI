@@ -21,6 +21,60 @@ A validated text-phenotype layer supporting downstream epilepsy research:
 - **App runtime** (existing Flask + SLURM stack): interactive extraction UI + `/extract` REST endpoint for programmatic use.
 - **Paper track** (new): schema `schema/`, versioned prompts and extraction pipeline `services/`, evaluation harness `eval/`, silver-labeled corpus at `data/fonferko_shadrach_2024/`. See `docs/SCHEMA_V0_2.md` for the ontology and `paper_doc/` for the full study protocol.
 
+## Getting started for researchers (~3 minutes)
+
+If you have a single note you want to phenotype right now:
+
+1. **Start the service.** Local (uses the small dev server, fine for one user):
+   ```bash
+   ./medai start -f
+   ```
+   or on HPC:
+   ```bash
+   sbatch slurm_job.sh
+   ```
+
+2. **Open the research UI in a browser** at `http://localhost:8085/extract/ui` (or replace localhost with the HPC node hostname).
+
+3. **Acknowledge the research-use disclaimer** on first visit.
+
+4. **Wait for Med42 to load.** The status badge in the top-right shows `Loading Med42…` for ~30–60 s on the first request, then flips to `Backend ready`.
+
+5. **Paste a clinical document** into the left panel. The doc type auto-detects on click-out (MRI report / EEG report / progress note / EMU discharge / etc.). Override the suggestion if it's wrong.
+
+6. **Pick an extraction arm**:
+   - `M0` — zero-shot (fastest, lowest raw validity)
+   - `M1` — few-shot with one Fonferko-Shadrach-adapted example
+   - `M2` — few-shot + JSON schema injected into the prompt (highest final validity, ~30 s per module) — **recommended**
+
+7. **Click "Extract phenotype"**. A per-module extraction runs; results appear in the bottom panel.
+
+8. **Review the phenotype**. Every field carries a certainty pill (`definite`, `probable`, `possible`, `negated`, `unknown`, or `not_documented`). Click any field with evidence → the source view scrolls to and highlights the source quote.
+
+9. **Download the results**:
+   - `Download JSON` — full phenotype record, Pydantic-schema-conforming
+   - `Download CSV` — one row per document, one column per `<module>.<field>.<value|certainty|evidence>` — imports directly into R / Excel / MATLAB.
+
+10. **Iterate.** Clear the form and paste the next note. Nothing is stored server-side beyond the audit trail (`data/run_manifests/<date>/*.json`) unless you also configure the validation database.
+
+**Programmatic API** (curl / Python / REDCap integration):
+```bash
+curl -X POST http://localhost:8085/extract \
+  -H "Content-Type: application/json" \
+  -d '{"source_text": "MRI BRAIN 3T. FINDINGS: right hippocampal sclerosis...", "doc_type": "mri_report", "arm": "M2"}'
+```
+Endpoints:
+- `POST /extract` — single document
+- `POST /extract/batch` — up to N documents in one call (synchronous)
+- `POST /extract/detect_doc_type` — deterministic keyword-based doc-type suggestion
+- `GET /extract/health` — Med42 load status + supported doc types
+- `GET /extract/registry` — list of all 22 versioned prompt templates
+- `GET /extract/registry/<prompt_id>` — one prompt in full for auditing
+
+**Governance reminder.** MedAI-EPI is a **research phenotyping assistant**, not a diagnostic tool. Every extracted value must be reviewed by qualified clinicians. Real patient data requires IRB approval and institutionally-approved secure compute.
+
+---
+
 ## Quick Start
 
 ### Local

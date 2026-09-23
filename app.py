@@ -151,6 +151,14 @@ try:
 except Exception as e:
     logger.warning(f"⚠️ /extract routes not registered: {e}")
 
+# Paper-track: /extract/ui single-page research UI
+try:
+    from routes.extract_ui import extract_ui_bp
+    app.register_blueprint(extract_ui_bp)
+    logger.info("[OK] /extract/ui research UI registered")
+except Exception as e:
+    logger.warning(f"⚠️ /extract/ui not registered: {e}")
+
 # Initialize database
 try:
     from core.database import init_db
@@ -2558,6 +2566,7 @@ UI_HTML = r"""
       </div>
       <ul class="nav-links">
         <li><a href="/" class="nav-link active">Main App</a></li>
+        <li><a href="/extract/ui" class="nav-link">Extract (research)</a></li>
         <li><a href="/validate" class="nav-link">Validator</a></li>
         <li><a href="/learning" class="nav-link">Learning Dashboard</a></li>
       </ul>

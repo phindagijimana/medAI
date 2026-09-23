@@ -1,0 +1,672 @@
+"""MedAI-EPI single-page research UI (paper §21 framing).
+
+`GET /extract/ui` renders a self-contained HTML page (no external assets,
+no JS frameworks) that talks to the existing /extract/* API endpoints:
+
+  1. Research-use acknowledgment modal on first visit per browser
+  2. Left panel: paste source text; doc-type autodetected on blur via
+     POST /extract/detect_doc_type; user can confirm or override
+  3. Arm selector (M0 / M1 / M2)
+  4. Extract button → POST /extract → renders phenotype tree with
+     click-to-highlight-evidence in the source panel
+  5. Health poll every 3 s until backend is ready (~30-60 s Med42 load)
+  6. Download CSV (client-side flatten) and Download JSON buttons
+
+The whole page is ~450 lines of HTML + CSS + vanilla JS. Deliberately
+frameworkless so it works everywhere and reviewers can audit the client-side
+logic in one file.
+
+Framing (paper §21): all copy says "research phenotyping / structured
+extraction", never "diagnostic support" or "clinical decision".
+"""
+
+from __future__ import annotations
+
+from flask import Blueprint, Response, render_template_string
+
+
+extract_ui_bp = Blueprint("extract_ui", __name__, url_prefix="/extract")
+
+
+_UI_HTML = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MedAI-EPI — Research Phenotyping Assistant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f7fb;
+    --panel: #ffffff;
+    --ink: #1a2432;
+    --muted: #667085;
+    --accent: #004977;
+    --accent-hover: #003354;
+    --border: #e2e8f0;
+    --highlight: #fef3c7;
+    --highlight-active: #fbbf24;
+    --danger: #b42318;
+    --warn: #b54708;
+    --ok: #067647;
+    --certainty-def: #067647;
+    --certainty-prob: #b54708;
+    --certainty-poss: #7f56d9;
+    --certainty-neg: #b42318;
+    --certainty-unk: #667085;
+    --certainty-nd: #94a3b8;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  header.nav {
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  header.nav h1 { font-size: 18px; font-weight: 600; }
+  header.nav .subtitle { font-size: 12px; opacity: 0.85; }
+  header.nav a { color: #fff; text-decoration: none; margin-left: 18px; font-size: 13px; }
+  header.nav a:hover { text-decoration: underline; }
+
+  .disclaimer {
+    background: #fff4e0;
+    border-left: 4px solid #d97706;
+    padding: 10px 24px;
+    font-size: 13px;
+    color: #422006;
+  }
+
+  .container { max-width: 1440px; margin: 0 auto; padding: 20px 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+  }
+  .panel h2 { font-size: 14px; font-weight: 600; color: var(--muted);
+               text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .panel .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .form-row { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .form-row label { font-size: 13px; color: var(--muted); }
+  select, input, textarea, button {
+    font-family: inherit; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 10px; background: #fff;
+  }
+  textarea {
+    width: 100%;
+    min-height: 400px;
+    font-family: ui-monospace, SFMono-Regular, "Menlo", monospace;
+    font-size: 12.5px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  button {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+    cursor: pointer; font-weight: 500; padding: 8px 16px;
+  }
+  button:hover { background: var(--accent-hover); }
+  button:disabled { background: #cbd5e0; border-color: #cbd5e0; cursor: not-allowed; }
+  button.secondary { background: #fff; color: var(--accent); border-color: var(--border); }
+  button.secondary:hover { background: #f5f7fb; }
+
+  #status-badge {
+    display: inline-block; padding: 4px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 500;
+  }
+  .status-loading { background: #fef3c7; color: #b54708; }
+  .status-ready   { background: #d1fae5; color: #067647; }
+  .status-error   { background: #fee4e2; color: #b42318; }
+
+  .source-view {
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 6px;
+    padding: 12px; font-family: ui-monospace, SFMono-Regular, "Menlo", monospace;
+    font-size: 12.5px; line-height: 1.6; max-height: 500px; overflow-y: auto;
+    white-space: pre-wrap; word-wrap: break-word;
+  }
+  .source-view mark {
+    background: var(--highlight); border-radius: 2px; padding: 0 1px;
+  }
+  .source-view mark.active {
+    background: var(--highlight-active); outline: 2px solid #d97706;
+  }
+
+  .phenotype-tree { font-size: 13px; }
+  .phenotype-module { margin-bottom: 14px; border-left: 3px solid var(--border); padding-left: 10px; }
+  .phenotype-module h3 { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+  .phenotype-field {
+    padding: 4px 0; display: grid; grid-template-columns: 200px 1fr auto; gap: 10px;
+    cursor: pointer; border-bottom: 1px dashed #f1f5f9; align-items: center;
+  }
+  .phenotype-field:hover { background: #f8fafc; }
+  .phenotype-field.active { background: #fef9c3; }
+  .field-name { color: var(--muted); font-family: ui-monospace, monospace; font-size: 12px; }
+  .field-value { font-weight: 500; }
+  .field-cert {
+    font-size: 10px; padding: 2px 6px; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600;
+  }
+  .cert-definite       { background: #d1fae5; color: var(--certainty-def); }
+  .cert-probable       { background: #fef3c7; color: var(--certainty-prob); }
+  .cert-possible       { background: #ede9fe; color: var(--certainty-poss); }
+  .cert-negated        { background: #fee4e2; color: var(--certainty-neg); }
+  .cert-unknown        { background: #f1f5f9; color: var(--certainty-unk); }
+  .cert-not_documented { background: transparent; color: var(--certainty-nd); font-style: italic; }
+
+  .phenotype-list-item { margin-left: 12px; margin-bottom: 4px; }
+  .phenotype-empty { color: var(--muted); font-style: italic; padding: 4px 0; }
+
+  .summary-row {
+    display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 0; margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-item { font-size: 12px; }
+  .summary-item strong { color: var(--ink); }
+  .summary-item.ok       { color: var(--ok); }
+  .summary-item.warn     { color: var(--warn); }
+  .summary-item.danger   { color: var(--danger); }
+
+  #detect-suggestion {
+    font-size: 12px; color: var(--muted); margin-left: 8px;
+  }
+  #detect-suggestion strong { color: var(--accent); }
+
+  /* Disclaimer modal (first visit) */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.65);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+  }
+  .modal {
+    background: #fff; border-radius: 10px; padding: 28px 32px;
+    max-width: 560px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .modal h2 { color: var(--accent); margin-bottom: 12px; font-size: 20px; }
+  .modal p { margin-bottom: 12px; color: var(--ink); }
+  .modal ul { margin: 8px 0 12px 20px; }
+  .modal .ack { display: flex; align-items: center; gap: 8px; margin: 16px 0; font-size: 13px; }
+  .modal .actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div>
+    <h1>MedAI-EPI — Research Phenotyping Assistant</h1>
+    <div class="subtitle">Structured epilepsy phenotype extraction from clinical documents · research use only</div>
+  </div>
+  <div>
+    <a href="/">Legacy /analyze</a>
+    <a href="/validate">Validator</a>
+    <a href="/extract/health" target="_blank">Health</a>
+    <span id="status-badge" class="status-loading">Loading backend…</span>
+  </div>
+</header>
+
+<div class="disclaimer">
+  <strong>Research use only.</strong> MedAI-EPI is a research information-extraction tool. It does <em>not</em> diagnose, does <em>not</em> recommend treatment, and is <em>not</em> clinical decision support. All extracted values must be reviewed by qualified clinicians. Use on real patient data requires IRB approval and institutionally-approved secure compute.
+</div>
+
+<div id="modal" class="modal-backdrop hidden">
+  <div class="modal">
+    <h2>Research use acknowledgment</h2>
+    <p>MedAI-EPI extracts structured phenotype fields from clinical text for <strong>research purposes only</strong>. Before you proceed:</p>
+    <ul>
+      <li>Outputs are <strong>not</strong> diagnostic or treatment recommendations.</li>
+      <li>Every extracted value must be reviewed by a qualified clinician.</li>
+      <li>Use on real patient text requires IRB approval and institutionally-approved secure compute.</li>
+      <li>The Med42-8B model runs locally in this deployment; no text leaves this server.</li>
+    </ul>
+    <div class="ack">
+      <input type="checkbox" id="ack-checkbox" />
+      <label for="ack-checkbox">I understand and agree.</label>
+    </div>
+    <div class="actions">
+      <button id="ack-continue" disabled>Continue</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="grid">
+
+    <div class="panel">
+      <h2>Source document</h2>
+      <textarea id="source-text" placeholder="Paste a clinical document (MRI report, EEG report, progress note, EMU discharge summary, etc.). The doc type will be auto-detected. Nothing is sent anywhere until you click Extract."></textarea>
+      <div class="form-row" style="margin-top:12px;">
+        <label>Doc type</label>
+        <select id="doc-type">
+          <option value="">— select —</option>
+        </select>
+        <span id="detect-suggestion"></span>
+      </div>
+      <div class="form-row">
+        <label>Prompting arm</label>
+        <label><input type="radio" name="arm" value="M0" /> M0 (zero-shot)</label>
+        <label><input type="radio" name="arm" value="M1" /> M1 (few-shot)</label>
+        <label><input type="radio" name="arm" value="M2" checked /> M2 (few-shot + schema)</label>
+      </div>
+      <div class="form-row">
+        <button id="btn-extract">Extract phenotype</button>
+        <button id="btn-clear" class="secondary">Clear</button>
+        <span id="progress" style="font-size:12px; color:var(--muted);"></span>
+      </div>
+      <p class="hint">M0 is fastest but rarely produces valid JSON without repair. M2 (with schema injected in the prompt) is slower but reaches ~95% final validity.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Source view (with highlighted evidence)</h2>
+      <div id="source-view" class="source-view">Paste text on the left, then click Extract.</div>
+      <p class="hint">After extraction, click a field on the right → the source is scrolled and the evidence quote is highlighted.</p>
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:20px;">
+    <h2>Extracted phenotype</h2>
+    <div id="summary" class="summary-row hidden"></div>
+    <div id="phenotype" class="phenotype-tree">
+      <div class="phenotype-empty">No extraction yet.</div>
+    </div>
+    <div class="form-row" style="margin-top:16px;">
+      <button id="btn-download-json" class="secondary" disabled>Download JSON</button>
+      <button id="btn-download-csv" class="secondary" disabled>Download CSV</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = {
+    docTypes: [],
+    lastPhenotype: null,
+    lastSource: null,
+  };
+
+  // ---- Disclaimer modal ----
+  const ACK_KEY = "medai-epi-ack-v1";
+  if (!localStorage.getItem(ACK_KEY)) {
+    $("modal").classList.remove("hidden");
+  }
+  $("ack-checkbox").addEventListener("change", (e) => {
+    $("ack-continue").disabled = !e.target.checked;
+  });
+  $("ack-continue").addEventListener("click", () => {
+    localStorage.setItem(ACK_KEY, new Date().toISOString());
+    $("modal").classList.add("hidden");
+  });
+
+  // ---- Health polling ----
+  async function pollHealth() {
+    try {
+      const r = await fetch("/extract/health");
+      const d = await r.json();
+      state.docTypes = d.doc_types_supported || [];
+      populateDocTypes();
+      const badge = $("status-badge");
+      const status = d.med42_load_status || "unknown";
+      if (status === "ready") {
+        badge.className = "status-ready";
+        badge.textContent = "Backend ready";
+        $("btn-extract").disabled = false;
+      } else if (status.startsWith("load_failed") || status.startsWith("exception")) {
+        badge.className = "status-error";
+        badge.textContent = "Backend error";
+        $("btn-extract").disabled = true;
+      } else {
+        badge.className = "status-loading";
+        badge.textContent = `Loading Med42… (${status})`;
+        $("btn-extract").disabled = true;
+        setTimeout(pollHealth, 3000);
+      }
+    } catch (e) {
+      const badge = $("status-badge");
+      badge.className = "status-error";
+      badge.textContent = "Backend unreachable";
+      setTimeout(pollHealth, 5000);
+    }
+  }
+  function populateDocTypes() {
+    const sel = $("doc-type");
+    if (sel.options.length > 1) return;   // already populated
+    for (const dt of state.docTypes) {
+      const opt = document.createElement("option");
+      opt.value = dt;
+      opt.textContent = dt;
+      sel.appendChild(opt);
+    }
+  }
+  pollHealth();
+
+  // Trigger backend load by hitting /extract/health once — it doesn't
+  // itself trigger, but /extract does. We could also add a POST here.
+
+  // ---- Doc-type autodetect on textarea blur ----
+  $("source-text").addEventListener("blur", async () => {
+    const text = $("source-text").value.trim();
+    if (text.length < 50) {
+      $("detect-suggestion").textContent = "";
+      return;
+    }
+    try {
+      const r = await fetch("/extract/detect_doc_type", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({source_text: text}),
+      });
+      const d = await r.json();
+      if (d.doc_type) {
+        $("doc-type").value = d.doc_type;
+        $("detect-suggestion").innerHTML =
+          `auto-detected: <strong>${d.doc_type}</strong> (${d.confidence}, ${d.reasons.length} signals)`;
+      } else {
+        $("detect-suggestion").innerHTML =
+          `<em>no doc type auto-detected — please select manually</em>`;
+      }
+    } catch (e) {
+      $("detect-suggestion").textContent = "";
+    }
+  });
+
+  // ---- Extract action ----
+  $("btn-extract").addEventListener("click", async () => {
+    const text = $("source-text").value.trim();
+    const doc_type = $("doc-type").value;
+    const arm = document.querySelector('input[name="arm"]:checked').value;
+    if (!text) return alert("Paste a document first.");
+    if (!doc_type) return alert("Select or auto-detect a doc type.");
+
+    const t0 = performance.now();
+    $("btn-extract").disabled = true;
+    $("progress").textContent = "Extracting… this typically takes 10–30 seconds per module.";
+    $("phenotype").innerHTML = '<div class="phenotype-empty">Running…</div>';
+    $("summary").classList.add("hidden");
+
+    try {
+      const r = await fetch("/extract", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({source_text: text, doc_type, arm}),
+      });
+      const d = await r.json();
+      const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+      $("progress").textContent = `Done in ${elapsed}s.`;
+      if (!r.ok) {
+        $("phenotype").innerHTML =
+          `<div class="phenotype-empty" style="color:var(--danger);">Error: ${d.error || r.statusText}</div>`;
+      } else {
+        state.lastPhenotype = d.phenotype;
+        state.lastSource = text;
+        renderPhenotype(d);
+        $("btn-download-json").disabled = false;
+        $("btn-download-csv").disabled = false;
+      }
+    } catch (e) {
+      $("phenotype").innerHTML =
+        `<div class="phenotype-empty" style="color:var(--danger);">Network error: ${e.message}</div>`;
+    } finally {
+      $("btn-extract").disabled = false;
+    }
+  });
+
+  $("btn-clear").addEventListener("click", () => {
+    $("source-text").value = "";
+    $("phenotype").innerHTML = '<div class="phenotype-empty">No extraction yet.</div>';
+    $("source-view").textContent = "Paste text on the left, then click Extract.";
+    $("summary").classList.add("hidden");
+    $("detect-suggestion").textContent = "";
+    state.lastPhenotype = null;
+    state.lastSource = null;
+    $("btn-download-json").disabled = true;
+    $("btn-download-csv").disabled = true;
+  });
+
+  // ---- Phenotype rendering ----
+  function renderPhenotype(response) {
+    const p = response.phenotype;
+    const summary = response.summary || {};
+    const manifests = response.manifests || [];
+
+    // Summary strip
+    const rawValidTot = manifests.filter(m => m.raw_valid).length;
+    const finalValidTot = manifests.filter(m => m.final_valid).length;
+    $("summary").innerHTML = `
+      <div class="summary-item"><strong>Arm:</strong> ${response.arm}</div>
+      <div class="summary-item"><strong>Doc type:</strong> ${response.doc_type}</div>
+      <div class="summary-item"><strong>Schema:</strong> ${response.schema_version}</div>
+      <div class="summary-item ${rawValidTot === manifests.length ? 'ok' : 'warn'}"><strong>Raw valid:</strong> ${rawValidTot}/${manifests.length} modules</div>
+      <div class="summary-item ${finalValidTot === manifests.length ? 'ok' : 'danger'}"><strong>Final valid:</strong> ${finalValidTot}/${manifests.length} modules</div>
+      <div class="summary-item"><strong>Time:</strong> ${response.processing_time_s?.toFixed(1) || '?'}s</div>
+    `;
+    $("summary").classList.remove("hidden");
+
+    // Render source with all evidence spans pre-highlighted
+    renderSourceWithHighlights(state.lastSource, p);
+
+    // Render phenotype tree
+    const tree = $("phenotype");
+    tree.innerHTML = "";
+    const modules = ["clinical_seizure", "medication", "clinical_localization",
+                     "eeg", "mri", "integrated"];
+    let anyRendered = false;
+    for (const mod of modules) {
+      if (!p[mod]) continue;
+      anyRendered = true;
+      const div = document.createElement("div");
+      div.className = "phenotype-module";
+      div.innerHTML = `<h3>${mod}</h3>`;
+      renderModuleFields(div, p[mod], mod);
+      tree.appendChild(div);
+    }
+    if (!anyRendered) {
+      tree.innerHTML = '<div class="phenotype-empty">No modules populated. The doc type may not have any applicable modules.</div>';
+    }
+  }
+
+  function renderModuleFields(container, module, modName) {
+    for (const [fname, val] of Object.entries(module)) {
+      if (Array.isArray(val)) {
+        const wrap = document.createElement("div");
+        wrap.innerHTML = `<div class="field-name" style="margin-top:4px;">${fname} <span style="color:var(--muted); font-size:11px;">(list, ${val.length})</span></div>`;
+        for (let i = 0; i < val.length; i++) {
+          const li = document.createElement("div");
+          li.className = "phenotype-list-item";
+          renderEvidence(li, val[i], `${modName}.${fname}[${i}]`);
+          wrap.appendChild(li);
+        }
+        container.appendChild(wrap);
+      } else if (val && typeof val === "object" && "value" in val) {
+        const row = document.createElement("div");
+        row.className = "phenotype-field";
+        renderEvidence(row, val, `${modName}.${fname}`);
+        row.querySelector(".field-name-slot").textContent = fname;
+        container.appendChild(row);
+      }
+    }
+  }
+
+  function renderEvidence(row, ev, path) {
+    const value = ev.value;
+    const cert = ev.certainty || "not_documented";
+    let displayValue = value;
+    if (value === null || value === undefined) displayValue = "—";
+    else if (typeof value === "object") displayValue = JSON.stringify(value);
+    else if (typeof value === "boolean") displayValue = value ? "yes" : "no";
+    row.innerHTML = `
+      <div class="field-name field-name-slot">${path.split(".").pop()}</div>
+      <div class="field-value">${escapeHtml(String(displayValue))}</div>
+      <div class="field-cert cert-${cert}">${cert.replace('_', ' ')}</div>
+    `;
+    if (ev.evidence_text && ev.char_start !== null && ev.char_start !== undefined) {
+      row.dataset.evStart = ev.char_start;
+      row.dataset.evEnd = ev.char_end;
+      row.dataset.evText = ev.evidence_text;
+      row.addEventListener("click", () => activateEvidence(row));
+    }
+  }
+
+  function renderSourceWithHighlights(text, phenotype) {
+    const spans = collectSpans(phenotype);
+    // Merge overlapping spans, sort by start
+    spans.sort((a, b) => a.start - b.start);
+    const view = $("source-view");
+    view.innerHTML = "";
+    let cursor = 0;
+    for (const span of spans) {
+      if (span.start < cursor) continue;   // skip overlapping
+      if (span.start > cursor) {
+        view.appendChild(document.createTextNode(text.slice(cursor, span.start)));
+      }
+      const mark = document.createElement("mark");
+      mark.textContent = text.slice(span.start, span.end);
+      mark.dataset.start = span.start;
+      view.appendChild(mark);
+      cursor = span.end;
+    }
+    if (cursor < text.length) {
+      view.appendChild(document.createTextNode(text.slice(cursor)));
+    }
+    if (spans.length === 0) {
+      view.textContent = text;
+    }
+  }
+
+  function collectSpans(phenotype) {
+    const out = [];
+    const walk = (obj) => {
+      if (!obj || typeof obj !== "object") return;
+      if (Array.isArray(obj)) { obj.forEach(walk); return; }
+      if ("char_start" in obj && "char_end" in obj &&
+          obj.char_start !== null && obj.char_end !== null &&
+          obj.evidence_text) {
+        out.push({start: obj.char_start, end: obj.char_end});
+      }
+      for (const v of Object.values(obj)) walk(v);
+    };
+    walk(phenotype);
+    return out;
+  }
+
+  function activateEvidence(row) {
+    document.querySelectorAll(".phenotype-field.active").forEach(e => e.classList.remove("active"));
+    document.querySelectorAll("#source-view mark.active").forEach(e => e.classList.remove("active"));
+    row.classList.add("active");
+    const start = row.dataset.evStart;
+    const marks = document.querySelectorAll(`#source-view mark[data-start="${start}"]`);
+    if (marks.length) {
+      marks[0].classList.add("active");
+      marks[0].scrollIntoView({behavior: "smooth", block: "center"});
+    }
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[c]);
+  }
+
+  // ---- Downloads ----
+  $("btn-download-json").addEventListener("click", () => {
+    if (!state.lastPhenotype) return;
+    const blob = new Blob([JSON.stringify(state.lastPhenotype, null, 2)],
+                          {type: "application/json"});
+    downloadBlob(blob, `phenotype_${state.lastPhenotype.document.doc_id || 'doc'}.json`);
+  });
+
+  $("btn-download-csv").addEventListener("click", () => {
+    if (!state.lastPhenotype) return;
+    const csv = phenotypeToCsv(state.lastPhenotype);
+    const blob = new Blob([csv], {type: "text/csv"});
+    downloadBlob(blob, `phenotype_${state.lastPhenotype.document.doc_id || 'doc'}.csv`);
+  });
+
+  function downloadBlob(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 100);
+  }
+
+  function phenotypeToCsv(p) {
+    // Flatten: one row per document; one column per <module>.<field>.<sub>.
+    const rows = [];
+    const headers = ["doc_id", "doc_type", "doc_date", "patient_id", "schema_version"];
+    const data = {
+      "doc_id": p.document.doc_id,
+      "doc_type": p.document.doc_type,
+      "doc_date": p.document.doc_date,
+      "patient_id": p.document.patient_id,
+      "schema_version": p.schema_version,
+    };
+    const modules = ["clinical_seizure", "medication", "clinical_localization",
+                     "eeg", "mri", "integrated"];
+    for (const mod of modules) {
+      if (!p[mod]) continue;
+      for (const [f, v] of Object.entries(p[mod])) {
+        if (Array.isArray(v)) {
+          const names = v.map(item => {
+            const val = item.value;
+            if (val && typeof val === "object" && "generic_name" in val) return val.generic_name;
+            if (val && typeof val === "object") return JSON.stringify(val);
+            return val;
+          }).filter(x => x !== null && x !== undefined);
+          headers.push(`${mod}.${f}.values`);
+          data[`${mod}.${f}.values`] = names.join(";");
+          headers.push(`${mod}.${f}.count`);
+          data[`${mod}.${f}.count`] = v.length;
+        } else if (v && typeof v === "object" && "value" in v) {
+          headers.push(`${mod}.${f}.value`);
+          data[`${mod}.${f}.value`] = v.value === null ? "" :
+                                       typeof v.value === "object" ? JSON.stringify(v.value) :
+                                       String(v.value);
+          headers.push(`${mod}.${f}.certainty`);
+          data[`${mod}.${f}.certainty`] = v.certainty || "";
+          headers.push(`${mod}.${f}.evidence`);
+          data[`${mod}.${f}.evidence`] = v.evidence_text || "";
+        }
+      }
+    }
+    rows.push(headers);
+    rows.push(headers.map(h => data[h] ?? ""));
+    return rows.map(r => r.map(csvEscape).join(",")).join("\n");
+  }
+  function csvEscape(v) {
+    v = String(v ?? "");
+    if (/[",\n]/.test(v)) return '"' + v.replace(/"/g, '""') + '"';
+    return v;
+  }
+
+})();
+</script>
+
+</body>
+</html>
+"""
+
+
+@extract_ui_bp.route("/ui", methods=["GET"])
+def extract_ui() -> Response:
+    """Single-page research UI for /extract."""
+    resp = Response(render_template_string(_UI_HTML), mimetype="text/html")
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
