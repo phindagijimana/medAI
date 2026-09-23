@@ -65,6 +65,8 @@ data/rag_cache/
 !docs/PROTOCOL_*.md
 !docs/REVIEWER_*.md
 !paper_doc/*.md
+!writing/*.md
+!docs/APP_*.md
 
 # Environment
 .env

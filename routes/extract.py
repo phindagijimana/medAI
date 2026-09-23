@@ -153,7 +153,7 @@ def extract() -> Any:
 @extract_bp.route("/health", methods=["GET"])
 def extract_health() -> Any:
     try:
-        from schema import SCHEMA_VERSION
+        from schema import SCHEMA_VERSION, DocumentType
         from services.prompt_registry import all_prompt_ids
     except ImportError as e:
         return jsonify({"ok": False, "error": str(e)}), 503
@@ -163,6 +163,118 @@ def extract_health() -> Any:
         "ok": True,
         "schema_version": SCHEMA_VERSION,
         "prompts_registered": all_prompt_ids(),
+        "doc_types_supported": [d.value for d in DocumentType],
         "med42_backend_attached": backend is not None,
         "backend_model": getattr(backend, "model_name", None) if backend else None,
     })
+
+
+# ---------------------------------------------------------------------------
+# Doc-type auto-detection (UX §1.1 in docs/APP_UX_IMPROVEMENTS.md)
+# ---------------------------------------------------------------------------
+
+# Keyword signatures per doc type — ranked by specificity. First strong hit wins.
+_DOC_TYPE_SIGNATURES: list[tuple[str, tuple[str, ...], str]] = [
+    ("mri_report", (
+        "MRI BRAIN", "MRI OF THE BRAIN", "T1 WEIGHTED", "FLAIR",
+        "TECHNIQUE:", "IMPRESSION:", "hippocampal sclerosis",
+        "focal cortical dysplasia", "MRI-negative",
+    ), "radiology-report boilerplate + brain-imaging findings"),
+    ("eeg_report", (
+        "EEG STUDY", "video-EEG", "video EEG", "EMU MONITORING",
+        "posterior dominant rhythm", "epileptiform discharges",
+        "ictal onset", "electrographic seizures",
+    ), "EEG-report boilerplate + neurophysiology terms"),
+    ("presurgical_evaluation", (
+        "PRESURGICAL", "PRE-SURGICAL EVALUATION", "epilepsy monitoring unit summary",
+        "epilepsy surgery conference", "recommended for surgery",
+        "concordant for", "discordant for",
+    ), "presurgical / EMU / surgery-conference vocabulary"),
+    ("emu_discharge", (
+        "EMU DISCHARGE", "DISCHARGE SUMMARY", "admitted to the EMU",
+        "seizures were captured",
+    ), "EMU discharge language"),
+    ("procedure_seeg", (
+        "SEEG", "stereo-EEG", "stereo EEG", "depth electrodes",
+        "subdural grid",
+    ), "stereo-EEG procedure documentation"),
+    ("procedure_resection", (
+        "temporal lobectomy", "anterior temporal lobectomy",
+        "amygdalohippocampectomy", "resection", "corticectomy",
+    ), "resection procedure documentation"),
+    ("procedure_neurostim", (
+        "vagus nerve stimulation", "VNS", "responsive neurostimulation",
+        "RNS", "deep brain stimulation", "DBS",
+    ), "neurostimulation procedure documentation"),
+    ("initial_consult", (
+        "initial epilepsy consult", "initial consultation",
+        "seen in initial consultation",
+    ), "initial-consult heading"),
+    ("progress_note", (
+        "Dear Dr", "Dear doctor", "I reviewed", "follow-up",
+        "clinic note", "review of systems",
+    ), "clinic-letter or progress-note salutation"),
+]
+
+
+def _detect_doc_type(text: str) -> dict[str, Any]:
+    """Deterministic keyword-based doc-type classifier.
+
+    Not authoritative — the caller must confirm. Returns:
+      {
+        "doc_type": <best guess string or None>,
+        "confidence": "low" | "medium" | "high",
+        "reasons": [ ...matching phrases... ],
+        "alternatives": [ ...other doc_types that matched at all... ]
+      }
+    """
+    if not text or not isinstance(text, str):
+        return {"doc_type": None, "confidence": "low", "reasons": [],
+                "alternatives": [], "detail": "empty text"}
+
+    lower = text.lower()
+    scored: list[tuple[str, list[str], str]] = []
+    for dt, patterns, why in _DOC_TYPE_SIGNATURES:
+        hits = [p for p in patterns if p.lower() in lower]
+        if hits:
+            scored.append((dt, hits, why))
+
+    if not scored:
+        return {
+            "doc_type": None, "confidence": "low", "reasons": [],
+            "alternatives": [], "detail": "no signature matched",
+        }
+
+    # Sort by hit count then by rank in the signature list (earlier = more specific)
+    scored.sort(key=lambda t: (-len(t[1]),
+                                [d for d, *_ in _DOC_TYPE_SIGNATURES].index(t[0])))
+    top = scored[0]
+    hit_count = len(top[1])
+    if hit_count >= 3:
+        conf = "high"
+    elif hit_count == 2:
+        conf = "medium"
+    else:
+        conf = "low"
+
+    return {
+        "doc_type": top[0],
+        "confidence": conf,
+        "reasons": top[1],
+        "reason_rationale": top[2],
+        "alternatives": [s[0] for s in scored[1:5]],
+    }
+
+
+@extract_bp.route("/detect_doc_type", methods=["POST"])
+def detect_doc_type() -> Any:
+    """Suggest a `doc_type` for a pasted document. Not authoritative — the
+    caller confirms before calling `/extract`. Deterministic; no LLM needed."""
+    payload = request.get_json(silent=True) or {}
+    text = payload.get("source_text") or payload.get("text")
+    if not text:
+        return _bad("`source_text` (non-empty string) is required")
+    result = _detect_doc_type(text)
+    resp = jsonify(result)
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
