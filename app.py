@@ -159,6 +159,71 @@ try:
 except Exception as e:
     logger.warning(f"⚠️ Database initialization failed: {e}")
 
+
+# --- Med42Backend attachment for /extract paper-track endpoint ---
+# Loads Med42 in a background daemon thread so Flask starts serving immediately;
+# /extract returns 503 with a clear message until the load completes. The
+# existing app was already loading Med42 in a background thread for /analyze;
+# this piggy-backs on that service (Med42ModelService) and wraps it in
+# services.med42_backend.Med42Backend for deterministic decoding on eval calls.
+app.med42_backend = None
+app.med42_backend_status = "not_started"
+
+
+def _attach_med42_backend_background():
+    """Load Med42 (once) and attach a Med42Backend adapter to `app`.
+
+    Runs in a daemon thread. Idempotent — subsequent /extract calls see the
+    fully-loaded backend once this completes. Failures are logged and
+    reflected in app.med42_backend_status.
+    """
+    try:
+        app.med42_backend_status = "loading"
+        from core.config import Med42Config
+        from services.med42_model import Med42ModelService
+        from services.med42_backend import Med42Backend
+
+        cfg = Med42Config()
+        logger.info("[extract] loading Med42 for /extract endpoint (background)")
+        svc = Med42ModelService(cfg)
+        if not svc.load_model():
+            app.med42_backend_status = f"load_failed: {svc.load_error}"
+            logger.error("[extract] Med42 load failed: %s", svc.load_error)
+            return
+        app.med42_backend = Med42Backend(svc)
+        app.med42_backend_status = "ready"
+        logger.info("[extract] Med42Backend attached; /extract is ready")
+    except Exception as e:
+        app.med42_backend_status = f"exception: {type(e).__name__}: {e}"
+        logger.exception("[extract] Med42Backend attachment raised")
+
+
+# Only start the background load when the app is running as a service, not
+# when it's imported by scripts or tests. Env var MEDAI_LOAD_MED42=0 disables.
+if os.environ.get("MEDAI_LOAD_MED42", "1") == "1" and __name__ != "__main__":
+    # We defer to a lazy trigger: attach on first request to /extract/*, so
+    # unit tests and CLI imports never load the model. See routes/extract.py
+    # where request handlers call `ensure_med42_loaded()`.
+    pass
+
+
+def ensure_med42_loaded():
+    """Kick off Med42 load if it hasn't started. Idempotent; returns the
+    current status so callers can decide whether to 503 or proceed."""
+    import threading
+    if app.med42_backend_status == "not_started":
+        app.med42_backend_status = "starting"
+        threading.Thread(
+            target=_attach_med42_backend_background,
+            name="med42-loader",
+            daemon=True,
+        ).start()
+    return app.med42_backend_status
+
+
+# Expose the loader on the app so blueprints can call it
+app.ensure_med42_loaded = ensure_med42_loaded
+
 ALLOWED_EXT = {"txt", "pdf", "docx", "xlsx", "csv", "json"}
 
 # Short labels for tabular "Task" column (what analysis was performed)

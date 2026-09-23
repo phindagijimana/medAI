@@ -100,13 +100,18 @@ def extract() -> Any:
         patient_id=patient_id, icd10cm_codes=icd, snomed_ct_codes=snomed,
     )
 
-    # Backend selection — Med42 if loaded on the app, else 503
+    # Backend selection — trigger lazy Med42 load if not yet started
+    ensure = getattr(current_app, "ensure_med42_loaded", None)
+    if callable(ensure):
+        status = ensure()
+    else:
+        status = "not_available"
     backend = getattr(current_app, "med42_backend", None)
     if backend is None:
         return _bad(
-            "Med42 backend not attached to the Flask app. See the deployment "
-            "guide for setting `app.med42_backend = Med42Backend(...)` after "
-            "the model finishes loading.", 503,
+            f"Med42 backend not yet ready (status={status!r}). The model loads "
+            "on first request to /extract/*; retry in 30–60 s.",
+            503,
         )
 
     decoding = DecodingConfig(
@@ -159,12 +164,14 @@ def extract_health() -> Any:
         return jsonify({"ok": False, "error": str(e)}), 503
 
     backend = getattr(current_app, "med42_backend", None)
+    load_status = getattr(current_app, "med42_backend_status", "unknown")
     return jsonify({
         "ok": True,
         "schema_version": SCHEMA_VERSION,
         "prompts_registered": all_prompt_ids(),
         "doc_types_supported": [d.value for d in DocumentType],
         "med42_backend_attached": backend is not None,
+        "med42_load_status": load_status,   # not_started / starting / loading / ready / load_failed:…
         "backend_model": getattr(backend, "model_name", None) if backend else None,
     })
 
@@ -264,6 +271,185 @@ def _detect_doc_type(text: str) -> dict[str, Any]:
         "reason_rationale": top[2],
         "alternatives": [s[0] for s in scored[1:5]],
     }
+
+
+# ---------------------------------------------------------------------------
+# /extract/batch — many docs in one call (synchronous)
+# ---------------------------------------------------------------------------
+
+
+@extract_bp.route("/batch", methods=["POST"])
+def extract_batch() -> Any:
+    """Batch extraction. Body:
+        {
+          "documents": [
+            {"doc_id": "...", "source_text": "...", "doc_type": "...",
+             "patient_id": "...", "doc_date": "..."},   # per-doc metadata
+            ...
+          ],
+          "arm": "M0" | "M1" | "M2",
+          "max_new_tokens": 1024,          # optional
+          "seed": 0,                        # optional
+          "prompt_version": "v1"            # optional
+        }
+
+    Returns a list of phenotype records + per-doc summary. Runs serially
+    on a single Med42 load. Suitable for tens of documents; for hundreds,
+    submit an SLURM sweep instead.
+    """
+    try:
+        from schema import DocumentMetadata, DocumentType, SCHEMA_VERSION
+        from services.extract import DecodingConfig
+        from services.router import extract_phenotype
+    except ImportError as e:
+        return _bad(f"paper-track modules unavailable: {e}", 503)
+
+    payload = request.get_json(silent=True) or {}
+    documents = payload.get("documents") or []
+    arm = payload.get("arm", "M2")
+    if not isinstance(documents, list) or not documents:
+        return _bad("`documents` must be a non-empty list")
+    if arm not in ("M0", "M1", "M2"):
+        return _bad("`arm` must be one of 'M0', 'M1', 'M2'")
+
+    ensure = getattr(current_app, "ensure_med42_loaded", None)
+    status = ensure() if callable(ensure) else "not_available"
+    backend = getattr(current_app, "med42_backend", None)
+    if backend is None:
+        return _bad(
+            f"Med42 backend not yet ready (status={status!r}). Retry after model loads.",
+            503,
+        )
+
+    decoding = DecodingConfig(
+        do_sample=False, temperature=None, top_p=None,
+        max_new_tokens=int(payload.get("max_new_tokens", 1024)),
+        seed=int(payload.get("seed", 0)),
+    )
+    prompt_version = payload.get("prompt_version", "v1")
+
+    results = []
+    t_all_start = datetime.utcnow()
+    for i, item in enumerate(documents):
+        src = item.get("source_text")
+        dt_str = item.get("doc_type")
+        if not src or not dt_str:
+            results.append({"index": i, "error": "missing source_text or doc_type"})
+            continue
+        try:
+            doc_type = DocumentType(dt_str)
+        except ValueError:
+            results.append({"index": i, "error": f"invalid doc_type {dt_str!r}"})
+            continue
+
+        doc_id = item.get("doc_id") or f"batch-{i:04d}-{uuid.uuid4().hex[:6]}"
+        patient_id = item.get("patient_id") or doc_id
+        dd = item.get("doc_date")
+        try:
+            doc_date = date.fromisoformat(dd) if dd else date.today()
+        except ValueError:
+            results.append({"index": i, "error": f"invalid doc_date {dd!r}"})
+            continue
+
+        doc = DocumentMetadata(
+            doc_id=doc_id, doc_type=doc_type, doc_date=doc_date,
+            patient_id=patient_id,
+            icd10cm_codes=item.get("icd10cm_codes") or [],
+            snomed_ct_codes=item.get("snomed_ct_codes") or [],
+        )
+
+        t0 = datetime.utcnow()
+        try:
+            result = extract_phenotype(
+                doc=doc, source_text=src, model_backend=backend,
+                arm=arm, schema_version=SCHEMA_VERSION,
+                decoding=decoding, write_manifests=True,
+            )
+            elapsed = (datetime.utcnow() - t0).total_seconds()
+            results.append({
+                "index": i, "doc_id": doc_id, "arm": arm,
+                "processing_time_s": round(elapsed, 2),
+                "summary": result.summary(),
+                "phenotype": result.phenotype.model_dump(mode="json"),
+            })
+        except Exception as e:
+            elapsed = (datetime.utcnow() - t0).total_seconds()
+            results.append({
+                "index": i, "doc_id": doc_id, "arm": arm,
+                "processing_time_s": round(elapsed, 2),
+                "error": f"{type(e).__name__}: {e}",
+            })
+
+    total_elapsed = (datetime.utcnow() - t_all_start).total_seconds()
+    resp = jsonify({
+        "n_documents": len(documents),
+        "arm": arm,
+        "prompt_version": prompt_version,
+        "schema_version": SCHEMA_VERSION,
+        "total_time_s": round(total_elapsed, 2),
+        "results": results,
+    })
+    return _no_cache(resp)
+
+
+# ---------------------------------------------------------------------------
+# /extract/registry — browse the prompt registry
+# ---------------------------------------------------------------------------
+
+
+@extract_bp.route("/registry", methods=["GET"])
+def registry_index() -> Any:
+    """List all registered prompt templates with metadata."""
+    try:
+        from services.prompt_registry import _REGISTRY
+    except ImportError as e:
+        return _bad(f"prompt registry unavailable: {e}", 503)
+
+    entries = []
+    for pid, p in sorted(_REGISTRY.items()):
+        entries.append({
+            "prompt_id": p.prompt_id,
+            "doc_type": p.doc_type.value,
+            "module_name": p.module_name,
+            "arm": p.arm,
+            "version": p.version,
+            "n_few_shot": len(p.few_shot),
+            "few_shot_ids": [ex.example_id for ex in p.few_shot],
+            "rationale": p.rationale[:200],
+        })
+    return jsonify({"n_prompts": len(entries), "prompts": entries})
+
+
+@extract_bp.route("/registry/<prompt_id>", methods=["GET"])
+def registry_show(prompt_id: str) -> Any:
+    """Return one prompt template in full (task instruction, few-shot content).
+    Intended for auditors / reviewers who want to see the exact prompt without cloning the repo."""
+    try:
+        from services.prompt_registry import get as get_prompt
+    except ImportError as e:
+        return _bad(f"prompt registry unavailable: {e}", 503)
+    try:
+        p = get_prompt(prompt_id)
+    except KeyError:
+        return _bad(f"unknown prompt_id {prompt_id!r}", 404)
+    return jsonify({
+        "prompt_id": p.prompt_id,
+        "doc_type": p.doc_type.value,
+        "module_name": p.module_name,
+        "arm": p.arm,
+        "version": p.version,
+        "system_prompt": p.system_prompt,
+        "task_instruction": p.task_instruction,
+        "output_directives": p.output_directives,
+        "rationale": p.rationale,
+        "few_shot": [
+            {"example_id": ex.example_id,
+             "document_excerpt": ex.document_excerpt,
+             "expected_json_keys": list(ex.expected_json.keys())
+                                    if isinstance(ex.expected_json, dict) else None}
+            for ex in p.few_shot
+        ],
+    })
 
 
 @extract_bp.route("/detect_doc_type", methods=["POST"])

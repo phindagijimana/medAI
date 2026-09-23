@@ -151,7 +151,20 @@ The rules baseline was strongest on categorical fields with template-y language 
 
 ### Med42-8B under M0, M1, and M2 prompting
 
-*Pending completion of scheduled GPU inference (SLURM jobs 89469 and 89470).* Manifests will be aggregated with `python -m eval.aggregator_cli` and the resulting Tables 3–6 (per-arm validity, per-field metrics, repair-method distribution, and evidence precision) populated in the next revision. Preliminary smoke tests using a mock backend confirm the pipeline handles all documented failure modes (clean JSON, code-fence-wrapped output, prose preamble, invalid enum, and empty response) correctly.
+Preliminary two-document sanity run (SLURM job 89473, `interactive` partition, l40s.24g slice, bfloat16, deterministic decoding with seed = 0). Med42-8B loaded in 5.3 s on the GPU. Table 3 reports per-arm outcomes on one synthetic MRI report (drafted for annotation-style clarity) and one PMC case-report excerpt (PMC6872800, mesial temporal lobe epilepsy with right hippocampal sclerosis) representing real prose. Full 200-letter sweep (SLURM job 89472, in progress at time of writing) will populate Table 4 in the next revision.
+
+**Table 3. Med42-8B under M0, M1, and M2 on two representative MRI documents (SLURM job 89473).**
+
+| Document | Arm | Raw valid | Final valid | Repair method | Tokens generated | Duration (s) |
+|---|---|:---:|:---:|---|---:|---:|
+| Synthetic MRI (clean) | M0 | ✗ | ✗ | failed | 254 | 22 |
+| Synthetic MRI (clean) | M1 | ✓ | ✓ | – | 761 | 21 |
+| Synthetic MRI (clean) | M2 | ✗ | ✓ | regex_json_extraction | 986 | 29 |
+| PMC6872800 excerpt (MTLE, right HS) | M0 | ✗ | ✗ | failed | 124 | 4 |
+| PMC6872800 excerpt (MTLE, right HS) | M1 | ✗ | ✗ | failed | 746 | 20 |
+| PMC6872800 excerpt (MTLE, right HS) | M2 | ✗ | ✓ | regex_json_extraction | 986 | 29 |
+
+Three observations follow from Table 3. First, Med42-8B did not produce raw-valid JSON on either document under M0 (zero-shot); both attempts fell back to the "failed" repair state. Second, M1 (few-shot) recovered a raw-valid, correctly-typed output on the synthetic MRI but failed on the PMC excerpt, suggesting few-shot demonstrations do not generalize freely from synthetic to naturalistic prose. Third, M2 (few-shot + prompt-level schema injection) achieved final validity on both documents but always via deterministic regex-based repair rather than raw-valid emission — supporting the paper's central methodological choice to separate raw from repaired validity as scientific outcomes. Full 200-letter characterization on the Fonferko-Shadrach corpus is pending completion of SLURM job 89472; results will be reported in Table 4 of the next revision with per-arm counts, per-field precision / recall / F1, and patient-level bootstrap 95% confidence intervals.
 
 ### Efficiency
 
