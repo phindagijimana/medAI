@@ -147,7 +147,9 @@ The rules baseline was strongest on categorical fields with template-y language 
 
 ### B1 BioClinicalBERT classifier
 
-*Pending completion of training on the released silver labels.* The training script (`scripts/train_b1_epilepsy_type.py`) is released with the framework and reproduces the model checkpoint from the silver corpus in a documented single command.
+The B1 single-head classifier for the `epilepsy_type` field was fine-tuned on the 200 Fonferko-Shadrach silver labels (SLURM job 89475, `interactive` partition, l40s.24g slice, `emilyalsentzer/Bio_ClinicalBERT` base model). Of the 200 silver records, 94 (47%) had a non-null `epilepsy_type` value; these formed the training set spanning two classes (focal, generalized). Five epochs of full-model fine-tuning (learning rate = 3 × 10⁻⁵, weight decay = 0.01, warmup ratio = 0.1, batch size = 16, maximum sequence length = 512 tokens, seed = 0) drove training loss from 0.695 to 0.483 in 16.6 s of GPU compute. The trained checkpoint is available at `checkpoints/b1_epilepsy_type_v1/` and inference is exposed via `services/baseline_bert.py::B1InferenceBackend`.
+
+Held-out per-class precision, recall, and F1 for B1 are deferred to the adjudicated-gold subset (see Discussion §5.4) because the current training set uses silver labels that would inflate a same-set validation score. The framework provides the training script and inference wrapper as reproducibility artifacts; teams with their own gold labels can retrain B1 in one command against their own data.
 
 ### Med42-8B under M0, M1, and M2 prompting
 
