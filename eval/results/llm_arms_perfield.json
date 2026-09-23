@@ -1,0 +1,365 @@
+{
+  "M0/clinical_seizure": {
+    "age_at_onset_years": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 15,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "epilepsy_type": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 94,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "etiology_category": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 28,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "focal_motor_onset": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "predominant_seizure_type": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 123,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "seizure_frequency": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 142,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    }
+  },
+  "M0/medication": {
+    "adverse_effects_text": {
+      "n": 200,
+      "tp": 0,
+      "fp": 6,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "drug_resistance_status": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "asm_names_multiset": {
+      "n": 200,
+      "tp": 22,
+      "fp": 24,
+      "fn": 272,
+      "precision": 0.4782608695652174,
+      "recall": 0.07482993197278912,
+      "f1": 0.12941176470588237,
+      "f1_ci": {
+        "lo": 0.0658682634730539,
+        "hi": 0.1907356948228883
+      }
+    }
+  },
+  "M1/clinical_seizure": {
+    "age_at_onset_years": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 15,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "epilepsy_type": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 94,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "etiology_category": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 28,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "focal_motor_onset": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "predominant_seizure_type": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 123,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "seizure_frequency": {
+      "n": 200,
+      "tp": 0,
+      "fp": 0,
+      "fn": 142,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    }
+  },
+  "M1/medication": {
+    "adverse_effects_text": {
+      "n": 200,
+      "tp": 0,
+      "fp": 10,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "drug_resistance_status": {
+      "n": 200,
+      "tp": 0,
+      "fp": 5,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "asm_names_multiset": {
+      "n": 200,
+      "tp": 46,
+      "fp": 33,
+      "fn": 248,
+      "precision": 0.5822784810126582,
+      "recall": 0.1564625850340136,
+      "f1": 0.24664879356568364,
+      "f1_ci": {
+        "lo": 0.1676300578034682,
+        "hi": 0.3147208121827411
+      }
+    }
+  },
+  "M2/clinical_seizure": {
+    "age_at_onset_years": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 15,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "epilepsy_type": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 94,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "etiology_category": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 28,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "focal_motor_onset": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "predominant_seizure_type": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 123,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "seizure_frequency": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 142,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    }
+  },
+  "M2/medication": {
+    "adverse_effects_text": {
+      "n": 202,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "drug_resistance_status": {
+      "n": 202,
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    },
+    "asm_names_multiset": {
+      "n": 202,
+      "tp": 0,
+      "fp": 2,
+      "fn": 294,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "f1_ci": {
+        "lo": 0.0,
+        "hi": 0.0
+      }
+    }
+  }
+}
