@@ -37,7 +37,13 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MANIFEST_ROOT = REPO_ROOT / "data" / "run_manifests"
+# MANIFEST_ROOT can be overridden by the MEDAI_MANIFEST_DIR env var so a
+# sensitivity-analysis SLURM run (e.g. max_new_tokens=4096) can write to a
+# separate directory without colliding with the baseline manifests.
+MANIFEST_ROOT = Path(os.environ.get(
+    "MEDAI_MANIFEST_DIR",
+    str(REPO_ROOT / "data" / "run_manifests"),
+))
 
 
 def _git_sha_short() -> str:

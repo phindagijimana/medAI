@@ -1,0 +1,44 @@
+{
+  "n_letters": 200,
+  "silver_seizure_free_candidates": 9,
+  "per_arm": [
+    {
+      "arm": "M0",
+      "n_extractions": 200,
+      "n_arm_candidates": 0,
+      "silver_candidates": 9,
+      "overlap": 0,
+      "arm_added_vs_silver": 0,
+      "arm_missed_vs_silver": 9,
+      "sensitivity_vs_silver": 0.0,
+      "ppv_vs_silver": 0.0
+    },
+    {
+      "arm": "M1",
+      "n_extractions": 200,
+      "n_arm_candidates": 0,
+      "silver_candidates": 9,
+      "overlap": 0,
+      "arm_added_vs_silver": 0,
+      "arm_missed_vs_silver": 9,
+      "sensitivity_vs_silver": 0.0,
+      "ppv_vs_silver": 0.0
+    },
+    {
+      "arm": "M2",
+      "n_extractions": 202,
+      "n_arm_candidates": 0,
+      "silver_candidates": 9,
+      "overlap": 0,
+      "arm_added_vs_silver": 0,
+      "arm_missed_vs_silver": 9,
+      "sensitivity_vs_silver": 0.0,
+      "ppv_vs_silver": 0.0
+    }
+  ],
+  "time_per_letter_s": {
+    "manual_estimate": 240,
+    "extraction_measured": 12,
+    "savings_ratio": 20.0
+  }
+}
