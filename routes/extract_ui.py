@@ -213,8 +213,7 @@ _UI_HTML = r"""<!DOCTYPE html>
     <div class="subtitle">Structured epilepsy phenotype extraction from clinical documents · research use only</div>
   </div>
   <div>
-    <a href="/">Legacy /analyze</a>
-    <a href="/validate">Validator</a>
+    <a href="/extract/registry" target="_blank">Prompt registry</a>
     <a href="/extract/health" target="_blank">Health</a>
     <span id="status-badge" class="status-loading">Loading backend…</span>
   </div>
@@ -288,7 +287,30 @@ _UI_HTML = r"""<!DOCTYPE html>
     <div class="form-row" style="margin-top:16px;">
       <button id="btn-download-json" class="secondary" disabled>Download JSON</button>
       <button id="btn-download-csv" class="secondary" disabled>Download CSV</button>
+      <label style="font-size:12px;color:var(--muted);"><input type="checkbox" id="csv-include-nd" /> include not_documented</label>
+      <label style="font-size:12px;color:var(--muted);"><input type="checkbox" id="csv-include-chat" checked /> include chat Q&amp;A rows</label>
     </div>
+    <p class="hint" style="margin-top:6px;">
+      CSV is long-format (one row per extracted field) with a
+      <code>confidence</code> column and an <code>evidence_text</code>
+      column next to each value — the standard tidy-data shape for
+      downstream analysis in pandas / R / SQL.
+    </p>
+  </div>
+
+  <div class="panel" style="margin-top:20px;">
+    <h2>Chat — ask a freeform question about this note</h2>
+    <p class="hint" style="margin-bottom:8px;">
+      Ask anything the structured extraction did not cover
+      (e.g. "was surgery mentioned?", "what was the reason for LTG discontinuation?").
+      The model must ground its answer in a verbatim quote from the note.
+      Answers can be appended to the CSV download.
+    </p>
+    <div class="form-row">
+      <input id="chat-q" type="text" placeholder="Type your question and press Enter…" style="flex:1; min-width:280px;" disabled />
+      <button id="btn-chat-send" disabled>Ask</button>
+    </div>
+    <div id="chat-history" style="margin-top:12px;"></div>
   </div>
 
 </div>
@@ -300,6 +322,8 @@ _UI_HTML = r"""<!DOCTYPE html>
     docTypes: [],
     lastPhenotype: null,
     lastSource: null,
+    lastResponse: null,
+    chatRows: [],   // {question, answer, evidence_text, confidence, csv_row}
   };
 
   // ---- Disclaimer modal ----
@@ -415,10 +439,15 @@ _UI_HTML = r"""<!DOCTYPE html>
           `<div class="phenotype-empty" style="color:var(--danger);">Error: ${d.error || r.statusText}</div>`;
       } else {
         state.lastPhenotype = d.phenotype;
+        state.lastResponse = d;
         state.lastSource = text;
+        state.chatRows = [];
+        $("chat-history").innerHTML = "";
         renderPhenotype(d);
         $("btn-download-json").disabled = false;
         $("btn-download-csv").disabled = false;
+        $("chat-q").disabled = false;
+        $("btn-chat-send").disabled = false;
       }
     } catch (e) {
       $("phenotype").innerHTML =
@@ -435,9 +464,76 @@ _UI_HTML = r"""<!DOCTYPE html>
     $("summary").classList.add("hidden");
     $("detect-suggestion").textContent = "";
     state.lastPhenotype = null;
+    state.lastResponse = null;
     state.lastSource = null;
+    state.chatRows = [];
+    $("chat-history").innerHTML = "";
+    $("chat-q").value = "";
+    $("chat-q").disabled = true;
+    $("btn-chat-send").disabled = true;
     $("btn-download-json").disabled = true;
     $("btn-download-csv").disabled = true;
+  });
+
+  // ---- Chat action ----
+  async function sendChat() {
+    const q = $("chat-q").value.trim();
+    if (!q || !state.lastSource) return;
+    const t0 = performance.now();
+    $("btn-chat-send").disabled = true;
+    const entry = document.createElement("div");
+    entry.style.cssText = "border-left: 3px solid var(--accent); padding: 8px 12px; margin-bottom: 8px; background: #f8fafc;";
+    entry.innerHTML =
+      `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Q:</div>` +
+      `<div style="font-weight:500;margin-bottom:6px;">${escapeHtml(q)}</div>` +
+      `<div style="font-size:12px;color:var(--muted);">Asking…</div>`;
+    $("chat-history").prepend(entry);
+    try {
+      const r = await fetch("/extract/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          question: q,
+          source_text: state.lastSource,
+          doc_id: state.lastPhenotype?.document?.doc_id,
+          patient_id: state.lastPhenotype?.document?.patient_id,
+          doc_date: state.lastPhenotype?.document?.doc_date,
+          doc_type: state.lastPhenotype?.document?.doc_type,
+        }),
+      });
+      const d = await r.json();
+      const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+      if (!r.ok) {
+        entry.querySelector("div:last-child").innerHTML =
+          `<span style="color:var(--danger);">Error: ${d.error || r.statusText}</span>`;
+      } else {
+        state.chatRows.push({
+          question: q, answer: d.answer,
+          evidence_text: d.evidence_text, confidence: d.confidence,
+          csv_row: d.csv_row,
+        });
+        const cert = d.confidence || "unknown";
+        entry.innerHTML =
+          `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Q &nbsp;(${elapsed}s):</div>` +
+          `<div style="font-weight:500;margin-bottom:6px;">${escapeHtml(q)}</div>` +
+          `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">A:</div>` +
+          `<div style="margin-bottom:6px;">${escapeHtml(d.answer || "—")} ` +
+          `<span class="field-cert cert-${cert}" style="margin-left:6px;">${cert}</span></div>` +
+          (d.evidence_text ? `<div style="font-size:12px;color:var(--muted);">Evidence:</div>` +
+            `<div style="font-style:italic;color:#334155;">"${escapeHtml(d.evidence_text)}"</div>` : ``);
+      }
+    } catch (e) {
+      entry.querySelector("div:last-child").innerHTML =
+        `<span style="color:var(--danger);">Network error: ${e.message}</span>`;
+    } finally {
+      $("btn-chat-send").disabled = false;
+      $("chat-q").value = "";
+      $("chat-q").focus();
+    }
+  }
+  $("btn-chat-send").addEventListener("click", sendChat);
+  $("chat-q").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
   });
 
   // ---- Phenotype rendering ----
@@ -594,7 +690,11 @@ _UI_HTML = r"""<!DOCTYPE html>
 
   $("btn-download-csv").addEventListener("click", () => {
     if (!state.lastPhenotype) return;
-    const csv = phenotypeToCsv(state.lastPhenotype);
+    const includeNd = $("csv-include-nd").checked;
+    const includeChat = $("csv-include-chat").checked;
+    const rows = phenotypeToLongRows(state.lastPhenotype, includeNd);
+    if (includeChat) rows.push(...state.chatRows.map(c => c.csv_row));
+    const csv = rowsToCsv(LONG_COLS, rows);
     const blob = new Blob([csv], {type: "text/csv"});
     downloadBlob(blob, `phenotype_${state.lastPhenotype.document.doc_id || 'doc'}.csv`);
   });
@@ -607,49 +707,79 @@ _UI_HTML = r"""<!DOCTYPE html>
     setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 100);
   }
 
-  function phenotypeToCsv(p) {
-    // Flatten: one row per document; one column per <module>.<field>.<sub>.
-    const rows = [];
-    const headers = ["doc_id", "doc_type", "doc_date", "patient_id", "schema_version"];
-    const data = {
-      "doc_id": p.document.doc_id,
-      "doc_type": p.document.doc_type,
-      "doc_date": p.document.doc_date,
-      "patient_id": p.document.patient_id,
-      "schema_version": p.schema_version,
+  const LONG_COLS = [
+    "doc_id", "patient_id", "doc_type", "doc_date", "visit_date",
+    "module", "field",
+    "value", "evidence_text", "confidence", "temporal_status",
+    "char_start", "char_end", "source_doc_id", "chunk_index", "note",
+  ];
+  const MODULES = ["clinical_seizure", "medication", "clinical_localization",
+                    "eeg", "mri", "integrated"];
+
+  function renderVal(v) {
+    if (v === null || v === undefined) return "";
+    if (typeof v === "boolean") return v ? "true" : "false";
+    if (typeof v === "object") {
+      return Object.entries(v).filter(([, val]) => val !== null && val !== undefined)
+        .map(([k, val]) => `${k}=${typeof val === "boolean" ? (val ? "true" : "false") : val}`)
+        .join("; ");
+    }
+    return String(v);
+  }
+
+  function evRow(docCols, mod, field, ev) {
+    return {
+      ...docCols, module: mod, field: field,
+      value: renderVal(ev.value),
+      evidence_text: ev.evidence_text || "",
+      confidence: ev.certainty || "not_documented",
+      temporal_status: ev.temporal_status || "unspecified",
+      char_start: ev.char_start ?? "",
+      char_end: ev.char_end ?? "",
+      source_doc_id: ev.source_doc_id || "",
+      chunk_index: "", note: "",
     };
-    const modules = ["clinical_seizure", "medication", "clinical_localization",
-                     "eeg", "mri", "integrated"];
-    for (const mod of modules) {
-      if (!p[mod]) continue;
-      for (const [f, v] of Object.entries(p[mod])) {
+  }
+
+  function phenotypeToLongRows(p, includeNd) {
+    const docCols = {
+      doc_id: p.document.doc_id, patient_id: p.document.patient_id,
+      doc_type: p.document.doc_type, doc_date: p.document.doc_date,
+      visit_date: "",
+    };
+    const rows = [];
+    for (const mod of MODULES) {
+      const m = p[mod]; if (!m) continue;
+      for (const [f, v] of Object.entries(m)) {
         if (Array.isArray(v)) {
-          const names = v.map(item => {
-            const val = item.value;
-            if (val && typeof val === "object" && "generic_name" in val) return val.generic_name;
-            if (val && typeof val === "object") return JSON.stringify(val);
-            return val;
-          }).filter(x => x !== null && x !== undefined);
-          headers.push(`${mod}.${f}.values`);
-          data[`${mod}.${f}.values`] = names.join(";");
-          headers.push(`${mod}.${f}.count`);
-          data[`${mod}.${f}.count`] = v.length;
+          if (v.length === 0) {
+            rows.push({...docCols, module: mod, field: f, value: "", evidence_text: "",
+                       confidence: "not_documented", temporal_status: "unspecified",
+                       char_start: "", char_end: "",
+                       source_doc_id: docCols.doc_id, chunk_index: "", note: "(empty list)"});
+            continue;
+          }
+          v.forEach((item, i) => {
+            if (item && typeof item === "object" && "value" in item) {
+              rows.push(evRow(docCols, mod, `${f}[${i}]`, item));
+            }
+          });
         } else if (v && typeof v === "object" && "value" in v) {
-          headers.push(`${mod}.${f}.value`);
-          data[`${mod}.${f}.value`] = v.value === null ? "" :
-                                       typeof v.value === "object" ? JSON.stringify(v.value) :
-                                       String(v.value);
-          headers.push(`${mod}.${f}.certainty`);
-          data[`${mod}.${f}.certainty`] = v.certainty || "";
-          headers.push(`${mod}.${f}.evidence`);
-          data[`${mod}.${f}.evidence`] = v.evidence_text || "";
+          rows.push(evRow(docCols, mod, f, v));
         }
       }
     }
-    rows.push(headers);
-    rows.push(headers.map(h => data[h] ?? ""));
-    return rows.map(r => r.map(csvEscape).join(",")).join("\n");
+    return includeNd ? rows : rows.filter(r => r.confidence !== "not_documented");
   }
+
+  function rowsToCsv(headers, rows) {
+    const lines = [headers.map(csvEscape).join(",")];
+    for (const r of rows) {
+      lines.push(headers.map(h => csvEscape(r[h] ?? "")).join(","));
+    }
+    return lines.join("\n") + "\n";
+  }
+
   function csvEscape(v) {
     v = String(v ?? "");
     if (/[",\n]/.test(v)) return '"' + v.replace(/"/g, '""') + '"';

@@ -255,6 +255,64 @@ def extract_module(
 # ---------------------------------------------------------------------------
 
 
+# ---------------------------------------------------------------------------
+# Long-document + longitudinal (Excel-per-visit) orchestration.
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class LongExtractionResult:
+    module: BaseModel | None
+    manifests: list[RunManifest]
+    merge_report: "MergeReport | None"    # populated iff any chunk validated
+
+
+def extract_module_long(
+    *,
+    module_cls: Type[BaseModel],
+    prompt: PromptTemplate,
+    chunks: "list[Chunk]",
+    source_doc_meta: DocumentMetadata,
+    model_backend: ModelBackend,
+    decoding: DecodingConfig | None = None,
+    schema_version: str,
+    inject_schema: bool | None = None,
+) -> LongExtractionResult:
+    """Run `extract_module` per chunk, then merge into one module instance.
+
+    `chunks` comes from services.chunker.chunk_text() or chunk_rows(); the
+    merger uses each chunk's visit_date / char_offset / section_hint for
+    latest-wins semantics and offset adjustment.
+    """
+    from .chunker import Chunk as _Chunk  # noqa: F401
+    from .merge import merge_modules
+
+    per_chunk_outputs: list[tuple] = []
+    manifests: list[RunManifest] = []
+
+    for chunk in chunks:
+        result = extract_module(
+            module_cls=module_cls,
+            prompt=prompt,
+            source_text=chunk.text,
+            source_doc_meta=source_doc_meta,
+            model_backend=model_backend,
+            decoding=decoding,
+            schema_version=schema_version,
+            inject_schema=inject_schema,
+        )
+        manifests.append(result.manifest)
+        per_chunk_outputs.append((chunk, result.module))
+
+    merged, report = merge_modules(
+        module_cls, per_chunk_outputs,
+        fallback_source_doc_id=source_doc_meta.doc_id,
+        fallback_source_doc_type=source_doc_meta.doc_type,
+        fallback_source_date=source_doc_meta.doc_date,
+    )
+    return LongExtractionResult(module=merged, manifests=manifests, merge_report=report)
+
+
 def evidence_boilerplate(doc: DocumentMetadata) -> dict[str, Any]:
     return {
         "source_doc_id": doc.doc_id,

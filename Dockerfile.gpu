@@ -1,0 +1,53 @@
+# MedAI-EPI — GPU-capable extraction service (Med42-8B in bfloat16).
+#
+# Target: a machine with an NVIDIA GPU (24 GB VRAM is sufficient — the paper
+# ran on an L40S 24GB slice). Med42-8B loads in bfloat16 at ~16 GB.
+#
+# Build:
+#   docker build -f Dockerfile.gpu -t medai-epi:gpu .
+# Run (with a mounted HF cache to avoid re-downloading weights):
+#   docker run --gpus all -p 8085:8085 \
+#       -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+#       -e HF_TOKEN=$HF_TOKEN \
+#       -e MEDAI_REQUIRE_GPU=1 \
+#       medai-epi:gpu
+
+FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+
+ENV PYTHONUNBUFFERED=1 \
+    APP_HOME=/app \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3.11 python3.11-venv python3-pip \
+        build-essential git ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -sf /usr/bin/python3.11 /usr/local/bin/python \
+    && ln -sf /usr/bin/python3.11 /usr/local/bin/python3
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+# Install PyTorch with CUDA 12.4 wheels first — the requirements.txt above lists
+# torch without a CUDA index, so we pin here.
+RUN pip install --upgrade pip \
+    && pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cu124 \
+    && pip install -r requirements.txt
+
+COPY . .
+
+RUN mkdir -p /app/logs /app/uploads /app/data/run_manifests
+
+ENV SERVICE_HOST=0.0.0.0 \
+    SERVICE_PORT=8085 \
+    MEDAI_REQUIRE_GPU=1 \
+    MEDAI_MAX_NEW_TOKENS=1024
+
+EXPOSE 8085
+
+# Med42-8B loads in a background daemon thread on first /extract/* request; the
+# extract endpoint returns 503 with a clear message until the load completes.
+CMD ["gunicorn", "-c", "gunicorn_config.py", "app:app"]

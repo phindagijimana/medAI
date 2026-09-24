@@ -2,172 +2,291 @@
 
 **Research phenotyping assistant for epilepsy clinical documentation.**
 
-MedAI-EPI extracts structured, evidence-grounded epilepsy phenotype variables from heterogeneous clinical documents (MRI reports, EEG reports, progress notes, EMU/presurgical/conference/procedure documentation) for research use.
+MedAI-EPI extracts structured, evidence-grounded epilepsy phenotype variables
+from clinical documents (progress notes, MRI reports, EEG reports, EMU/
+presurgical documentation) for research use. Every extracted value carries a
+verbatim source quote and a `certainty` label; outputs land as tidy-format CSV
+ready for pandas / R / SQL analysis.
 
-> **⚠️ Research use only.** MedAI-EPI is a research information-extraction tool. It does **not** diagnose, does **not** recommend treatment, and is **not** a clinical decision-support system. All extracted values must be reviewed by qualified medical professionals before any research or clinical use. See paper §21 of the study protocol for governance detail.
+> **Research use only.** MedAI-EPI is a research information-extraction tool.
+> It does **not** diagnose, does **not** recommend treatment, and is **not**
+> clinical decision support. All extracted values must be reviewed by qualified
+> clinicians. Deployment against real patient data requires IRB approval and
+> institutionally-approved secure compute. See the manuscript §Positioning for
+> the specialty-at-a-time framing and §Ethics for scope of intended use.
 
-## What this project is
+## Table of contents
 
-A validated text-phenotype layer supporting downstream epilepsy research:
-- Structured extraction of ILAE 2017 seizure/epilepsy types, medication timelines, drug-resistance status, imaging findings, and cross-modality synthesis
-- Every extracted value carries evidence provenance (source document, date, minimal-sufficient quote, character offsets)
-- Modular ontology per document family (MRI-report fields only apply to MRI reports, etc.)
-- Runs on locally deployable open-source medical LLMs (currently Llama3-Med42-8B)
-
-**What this project is NOT**: a diagnostic AI, a clinical decision-support tool, an autonomous "expert" system. See paper §21.
-
-## Two parallel tracks
-
-- **App runtime** (existing Flask + SLURM stack): interactive extraction UI + `/extract` REST endpoint for programmatic use.
-- **Paper track** (new): schema `schema/`, versioned prompts and extraction pipeline `services/`, evaluation harness `eval/`, silver-labeled corpus at `data/fonferko_shadrach_2024/`. See `docs/SCHEMA_V0_2.md` for the ontology and `paper_doc/` for the full study protocol.
-
-## Getting started for researchers (~3 minutes)
-
-If you have a single note you want to phenotype right now:
-
-1. **Start the service.** Local (uses the small dev server, fine for one user):
-   ```bash
-   ./medai start -f
-   ```
-   or on HPC:
-   ```bash
-   sbatch slurm_job.sh
-   ```
-
-2. **Open the research UI in a browser** at `http://localhost:8085/extract/ui` (or replace localhost with the HPC node hostname).
-
-3. **Acknowledge the research-use disclaimer** on first visit.
-
-4. **Wait for Med42 to load.** The status badge in the top-right shows `Loading Med42…` for ~30–60 s on the first request, then flips to `Backend ready`.
-
-5. **Paste a clinical document** into the left panel. The doc type auto-detects on click-out (MRI report / EEG report / progress note / EMU discharge / etc.). Override the suggestion if it's wrong.
-
-6. **Pick an extraction arm**:
-   - `M0` — zero-shot (fastest, lowest raw validity)
-   - `M1` — few-shot with one Fonferko-Shadrach-adapted example
-   - `M2` — few-shot + JSON schema injected into the prompt (highest final validity, ~30 s per module) — **recommended**
-
-7. **Click "Extract phenotype"**. A per-module extraction runs; results appear in the bottom panel.
-
-8. **Review the phenotype**. Every field carries a certainty pill (`definite`, `probable`, `possible`, `negated`, `unknown`, or `not_documented`). Click any field with evidence → the source view scrolls to and highlights the source quote.
-
-9. **Download the results**:
-   - `Download JSON` — full phenotype record, Pydantic-schema-conforming
-   - `Download CSV` — one row per document, one column per `<module>.<field>.<value|certainty|evidence>` — imports directly into R / Excel / MATLAB.
-
-10. **Iterate.** Clear the form and paste the next note. Nothing is stored server-side beyond the audit trail (`data/run_manifests/<date>/*.json`) unless you also configure the validation database.
-
-**Programmatic API** (curl / Python / REDCap integration):
-```bash
-curl -X POST http://localhost:8085/extract \
-  -H "Content-Type: application/json" \
-  -d '{"source_text": "MRI BRAIN 3T. FINDINGS: right hippocampal sclerosis...", "doc_type": "mri_report", "arm": "M2"}'
-```
-Endpoints:
-- `POST /extract` — single document
-- `POST /extract/batch` — up to N documents in one call (synchronous)
-- `POST /extract/detect_doc_type` — deterministic keyword-based doc-type suggestion
-- `GET /extract/health` — Med42 load status + supported doc types
-- `GET /extract/registry` — list of all 22 versioned prompt templates
-- `GET /extract/registry/<prompt_id>` — one prompt in full for auditing
-
-**Governance reminder.** MedAI-EPI is a **research phenotyping assistant**, not a diagnostic tool. Every extracted value must be reviewed by qualified clinicians. Real patient data requires IRB approval and institutionally-approved secure compute.
+1. [What you get](#what-you-get)
+2. [Quick start (5 min)](#quick-start-5-min)
+3. [Using the app in the browser](#using-the-app-in-the-browser)
+4. [API reference](#api-reference)
+5. [Long notes and multi-visit Excel input](#long-notes-and-multi-visit-excel-input)
+6. [Reproducing the paper's tables](#reproducing-the-papers-tables)
+7. [Requirements](#requirements)
+8. [Repository layout](#repository-layout)
+9. [Citing this work](#citing-this-work)
 
 ---
 
-## Quick Start
+## What you get
 
-### Local
+- **Structured extraction** into a versioned Pydantic ontology (`schema/`)
+  covering six modules: `ClinicalSeizure`, `Medication`, `ClinicalLocalization`,
+  `Eeg`, `Mri`, `IntegratedPhenotype`. Aligned with ILAE 2017 seizure and
+  epilepsy classifications and ILAE 2010 drug-resistance definition.
+- **Evidence-grounded output**: every field carries a `value`, `certainty`
+  (definite / probable / possible / negated / unknown / not_documented),
+  verbatim `evidence_text`, character offsets, and source-document provenance.
+- **Three prompting arms** for Med42-8B (M0 zero-shot / M1 few-shot / M2
+  few-shot with schema injected) plus rules (B0) and BioClinicalBERT (B1)
+  baselines. All 22 versioned prompts live in `services/prompt_registry.py`.
+- **Two-tier repair chain**: strip-code-fence + regex JSON extraction, then
+  `smart_repair` wraps bare values in default Evidence metadata and normalizes
+  60+ enum synonyms — raising structural validity from ~5 % raw to ~95 %.
+- **Long-format CSV output**: one row per extracted field with `value`,
+  `evidence_text`, `confidence`, `temporal_status`, `char_start`/`char_end`,
+  and provenance columns. Standard tidy-data shape for downstream analysis.
+- **Freeform chat**: `/extract/chat` accepts any user question about a note and
+  returns a grounded answer with a verbatim quote, appendable to the same CSV.
+- **Long-document and per-visit handling**: `services/chunker.py` chunks by
+  clinical section / paragraph or by Excel-style visit rows;
+  `services/merge.py` unions list fields, keeps latest-visit-wins scalars,
+  and flags conflicts across chunks.
+- **Reproducibility container**: `Dockerfile.eval` reproduces every table in
+  the manuscript from released run manifests without a GPU. `eval/aggregator_cli.py`
+  is the entry point.
+
+---
+
+## Quick start (5 min)
+
+### Option A — Docker (recommended for a fresh machine)
+
 ```bash
-git clone https://github.com/phindagijimana/medai.git
-cd medai
-./medai start
-```
-Access at `http://localhost:8085`.
+git clone https://github.com/phindagijimana/vecta.git
+cd vecta
 
-### HPC (SLURM)
+# CPU-only image (fine for smoke tests, offline components, and remote-GPU dev):
+docker build -t medai-epi:cpu .
+docker run -p 8085:8085 medai-epi:cpu
+
+# GPU image (needed to run Med42-8B locally on an NVIDIA GPU with ≥16 GB VRAM):
+docker build -f Dockerfile.gpu -t medai-epi:gpu .
+docker run --gpus all -p 8085:8085 \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    -e HF_TOKEN=$HF_TOKEN \
+    medai-epi:gpu
+```
+
+Open `http://localhost:8085` → auto-redirects to the research UI at `/extract/ui`.
+
+### Option B — Local Python venv
+
+```bash
+git clone https://github.com/phindagijimana/vecta.git
+cd vecta
+cp .env.example .env    # then edit APP_HOME and (optionally) SECRET_KEY
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python app.py           # or: ./medai start -f
+```
+
+### Option C — HPC (SLURM)
+
 ```bash
 ./medai-hpc install
-./medai-hpc run gpu    # 'run cpu' for CPU-only
+./medai-hpc run gpu
 ./medai-hpc status
 ```
 
-### Paper-track eval sweep
+### Verify the install (offline, no GPU needed)
+
 ```bash
-sbatch scripts/slurm_m2_mri.sh                   # first Med42 M0/M1/M2 signal
-python3 scripts/smoke_test_all.py                # end-to-end pipeline verification
-python3 scripts/fetch_fonferko_shadrach.py       # open annotated corpus
-python3 scripts/silver_label_fonferko.py         # convert to silver labels
-python3 scripts/analyze_fonferko_schema.py       # schema-mapping report
+python scripts/smoke_e2e_http.py
 ```
 
-## CLI Commands
+Should print 26 `✓` checks in green. Uses a scripted mock backend, so it
+verifies the HTTP surface end-to-end without loading Med42.
 
-### Local (`./medai`)
+---
+
+## Using the app in the browser
+
+1. Open `http://localhost:8085/extract/ui`.
+2. Acknowledge the research-use disclaimer.
+3. Wait for the status badge to turn `Backend ready` (~30–60 s on first request
+   while Med42-8B downloads and loads).
+4. Paste a clinical note into the left panel. Doc type auto-detects on blur;
+   override the suggestion if needed.
+5. Pick a prompting arm:
+   - `M0` — zero-shot (fastest, lowest raw validity)
+   - `M1` — few-shot with one Fonferko-Shadrach-adapted example
+   - `M2` — few-shot + JSON schema injected in the prompt (highest final
+     validity but hits the schema-echo pathology on 8B models; see paper
+     §Results and §Limitations)
+6. Click **Extract phenotype**. Per-module extractions run in sequence; results
+   appear in the phenotype tree with certainty pills. Click any field with
+   evidence — the source view scrolls to and highlights the exact quote.
+7. **Ask follow-up questions** in the Chat panel below the phenotype tree —
+   e.g. "was surgery mentioned?", "what was the reason for LTG discontinuation?"
+   Answers come with a verbatim quote and a confidence label.
+8. **Download CSV** — tidy long format, one row per field, with `evidence_text`
+   and `confidence` columns next to each value. Optional toggles let you
+   include `not_documented` rows and chat Q&A rows in the same file.
+
+---
+
+## API reference
+
+All endpoints under `/extract/*`. Every response is `Cache-Control: no-store`.
+
+| Endpoint                              | Method | Purpose |
+|---------------------------------------|--------|---------|
+| `/extract`                            | POST   | Single-document structured extraction; returns full JSON phenotype + per-module manifests |
+| `/extract/batch`                      | POST   | Multi-document, synchronous |
+| `/extract/csv`                        | POST   | Text OR CSV input → long-format CSV output. Auto-chunks docs > 8000 chars; `?chunk=1` to force |
+| `/extract/chat`                       | POST   | One user question about one note → grounded answer + CSV row for `module=user_query` |
+| `/extract/ui`                         | GET    | Single-page browser UI |
+| `/extract/health`                     | GET    | Backend load status + registered prompts + supported doc types |
+| `/extract/registry`                   | GET    | Inventory of all 22 versioned prompts |
+| `/extract/registry/<prompt_id>`       | GET    | One prompt in full for auditing |
+| `/extract/detect_doc_type`            | POST   | Deterministic keyword-based doc-type suggestion |
+
+**Single-doc example**:
+
 ```bash
-./medai install        # pip install -r requirements.txt
-./medai start          # Gunicorn in background (production-style)
-./medai start -f       # Flask dev server in foreground
-./medai start -p 8090  # Port (also SERVICE_PORT)
-./medai status         # Check status
-./medai logs           # View logs
-./medai stop           # Stop service
-./medai restart
+curl -X POST http://localhost:8085/extract \
+  -H "Content-Type: application/json" \
+  -d '{
+    "source_text": "Dear Dr, on lamotrigine 75mg BID. Focal epilepsy.",
+    "doc_type": "progress_note",
+    "arm": "M2"
+  }'
 ```
 
-Use `MEDAI_PIP_USER=0` when using a venv so `pip install` does not pass `--user`.
+**CSV batch example** (rows-of-notes → tidy CSV):
 
-### HPC (medai-hpc)
 ```bash
-./medai-hpc install             # Setup
-./medai-hpc run gpu             # Submit GPU job
-./medai-hpc run cpu             # Submit CPU job
-./medai-hpc status              # Check status
-./medai-hpc logs                # View logs
+curl -X POST http://localhost:8085/extract/csv \
+  -H "Content-Type: text/csv" \
+  --data-binary @notes.csv \
+  -o phenotypes.csv
 ```
+
+Input CSV columns: `text` (required; `note`, `source_text`, `clinical_note`,
+`content` also accepted), plus optional `doc_id`, `patient_id`, `doc_date`,
+`visit_date`, `doc_type`, `arm`.
+
+**Chat example**:
+
+```bash
+curl -X POST http://localhost:8085/extract/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "source_text": "Dear Dr, seizure-free for 6 months on LTG.",
+    "question": "Is the patient seizure-free?"
+  }'
+```
+
+---
+
+## Long notes and multi-visit Excel input
+
+The extractor accepts documents longer than the model's context by chunking
+on clinical section headers (HPI / Assessment / EEG / MRI / …) with paragraph-
+level overlap, running one call per module per chunk, and merging with
+Evidence-aware union rules.
+
+**Free-text long note** — auto-chunks anything over 8000 chars:
+```bash
+curl -X POST http://localhost:8085/extract/csv -H "Content-Type: application/json" \
+  -d '{"source_text": "<a very long clinic letter…>", "doc_type": "progress_note"}'
+```
+
+**Excel-per-visit longitudinal input** — one row = one visit. `visit_date` is
+used as the temporal-ordering key; list fields (like `current_asms`) collapse
+across visits keeping the latest visit's dose text; conflict on scalar fields
+is surfaced in a `MergeReport`.
+
+Programmatic API in `services/chunker.py` (`chunk_text`, `chunk_rows`) and
+`services/merge.py` (`merge_modules`, `MergeReport`). Smoke tests:
+```bash
+python scripts/smoke_chunk_merge.py    # 3 scenarios: free-text, longitudinal, conflict
+```
+
+---
+
+## Reproducing the paper's tables
+
+Every reported table is regenerated from released run manifests without a GPU.
+
+```bash
+docker build -f Dockerfile.eval -t medai-epi:eval .
+docker run --rm -v $PWD:/work medai-epi:eval \
+    python -m eval.aggregator_cli --manifests /work/data/run_manifests --gold /work/data/fonferko_shadrach_2024
+```
+
+Manuscript tables and the scripts that generate them:
+
+| Table | Script |
+|---|---|
+| 4a — content-validity per (arm, module) | `scripts/score_llm_arms.py` |
+| 4b — per-field P/R/F1 vs silver (95% CI) | `scripts/score_llm_arms.py` |
+| **4b-gold — per-field P/R/F1 vs F-S native gold** | **`scripts/score_llm_arms_vs_fs_gold.py`** |
+| 4c — paired McNemar's across arms | `scripts/mcnemar_arm_comparisons.py` |
+| 4d — 12-category error taxonomy | `scripts/error_taxonomy_scan.py` |
+| 5 — downstream utility (drug resistance) | `scripts/utility_demo_drug_resistance.py` |
+| 6 — downstream utility (seizure freedom) | `scripts/utility_demo_seizure_freedom.py` |
+
+Scope of gold-based scoring is documented in `docs/FONFERKO_GOLD_SCOPE.md`.
+
+---
 
 ## Requirements
 
-**Minimum**:
-- Python 3.8+
-- 2GB RAM
-- Flask, pandas, numpy (auto-installed)
+**Minimum (offline components, HTTP surface, smoke tests, scoring)**:
+- Python 3.9+
+- ~500 MB disk for repo + deps
+- No GPU required
 
-**For AI Model**:
-- PyTorch 2.1+
-- 16GB+ GPU VRAM (GPU mode) or CPU fallback
-- CUDA 11.7+ (GPU mode)
+**To run Med42-8B locally**:
+- NVIDIA GPU with ≥ 16 GB VRAM (paper ran on an L40S 24 GB slice)
+- CUDA 12.x drivers
+- PyTorch 2.4+ with CUDA wheels (`pip install torch --index-url https://download.pytorch.org/whl/cu124`)
+- Hugging Face token to download Med42-8B weights (~16 GB, one-time)
 
-## Documentation
+---
 
-- `docs/SCHEMA_V0_2.md` — the phenotype ontology (v0.2.1), reviewer-facing
-- `docs/SCHEMA_V0_1_STRESS_TEST.md` — schema gap analysis against real case narratives
-- `docs/FONFERKO_SHADRACH_MAPPING.md` — external corpus mapping
-- `docs/DEPLOYMENT.md` — deployment guide (HPC + local)
-- `docs/SELF_HOSTING.md` — Gunicorn / env vars / Docker
-- `paper_doc/MedAI_Paper1_Heterogeneous_Clinical_Documents_Full_Blueprint.docx` — full study protocol
-- `paper_doc/MedAI_Paper1_Literature_Review_Reference_Guide.docx` — related-work map
+## Repository layout
 
-## Tech Stack
+```
+schema/            v0.2.1 Pydantic ontology (6 modules + Evidence[T] wrapper)
+services/          extraction pipeline, prompt registry, chunker, merger, tabular
+  extract.py       three-tier repair pipeline
+  prompt_registry.py 22 versioned prompts (M0/M1/M2 × 6 modules × versions)
+  smart_repair.py  Evidence-wrapping + enum normalization repair
+  chunker.py       section-aware and Excel-per-visit chunking
+  merge.py         Evidence-aware merger with conflict reporting
+  tabular.py       phenotype → long-format CSV rows
+  router.py        applicability-driven multi-module extractor
+routes/            Flask endpoints
+  extract.py       /extract, /extract/batch, /extract/csv, /extract/chat, …
+  extract_ui.py    /extract/ui (single-page research UI)
+data/              silver labels, run manifests, corpora (fetched via scripts/)
+scripts/           run scripts, scorers, utility demos, smoke tests
+eval/              scoring library + aggregator CLI
+docs/              schema, protocol, TRIPOD checklist, F-S mapping and gold scope
+writing/           manuscript sources
+```
 
-- Backend: Flask, Python 3, Gunicorn
-- Schema: Pydantic v2
-- Database: SQLite (annotation database); PostgreSQL planned for multi-user annotation
-- ML: PyTorch 2.5+, Transformers 4.44+ (loads m42-health/Llama3-Med42-8B)
-- Optional: sentence-transformers for retrieval
+---
 
-## Governance and intended use
+## Citing this work
 
-- All extractions are research-grade phenotype records, not clinical inferences.
-- Every value has provenance (document ID + date + verbatim evidence quote).
-- "Not documented" / "unknown" are first-class values and are preferred over guessing.
-- Deployment against real patient data requires IRB approval, appropriate DUA, and institutionally approved secure compute for PHI.
-- MedAI-EPI must not be used for autonomous diagnosis or treatment recommendations.
+*[BibTeX to be inserted at submission.]*
 
-## License
+License: MIT for code; fetched corpora keep their own licenses (Fonferko-
+Shadrach is CC-BY 4.0, see `data/fonferko_shadrach_2024/manifest.json`).
 
-MIT (code). Fetched external corpora carry their own licenses; see per-artifact `manifest.json`.
-
-## Support
-
-GitHub Issues: https://github.com/phindagijimana/medai/issues
+Support: GitHub Issues on the release repository.
