@@ -1,0 +1,83 @@
+[
+  {
+    "question": "Q1 age-at-onset median [IQR]",
+    "source": "Gold (F-S)",
+    "n_reported": 15,
+    "n_total": 200,
+    "median": 8.0,
+    "q1": 3.0,
+    "q3": 13.0,
+    "median_ci_lo": 4.0,
+    "median_ci_hi": 13.0
+  },
+  {
+    "question": "Q1 age-at-onset median [IQR]",
+    "source": "MedAI-EPI M1",
+    "n_reported": 0,
+    "n_total": 200,
+    "median": null,
+    "q1": null,
+    "q3": null,
+    "median_ci_lo": null,
+    "median_ci_hi": null
+  },
+  {
+    "question": "Q1 age-at-onset median [IQR]",
+    "source": "Silver",
+    "n_reported": 15,
+    "n_total": 200,
+    "median": 8.0,
+    "q1": 3.5,
+    "q3": 14.0,
+    "median_ci_lo": 4.0,
+    "median_ci_hi": 14.0
+  },
+  {
+    "question": "Q2 fraction \u22652 concurrent ASMs",
+    "source": "Gold (F-S)",
+    "rate": 0.44,
+    "rate_ci_lo": 0.375,
+    "rate_ci_hi": 0.51,
+    "n": 200
+  },
+  {
+    "question": "Q2 fraction \u22652 concurrent ASMs",
+    "source": "MedAI-EPI M1",
+    "rate": 0.105,
+    "rate_ci_lo": 0.065,
+    "rate_ci_hi": 0.15,
+    "n": 200
+  },
+  {
+    "question": "Q2 fraction \u22652 concurrent ASMs",
+    "source": "Silver",
+    "rate": 0.35,
+    "rate_ci_lo": 0.29,
+    "rate_ci_hi": 0.42,
+    "n": 200
+  },
+  {
+    "question": "Q3 fraction with temporal-lobe involvement",
+    "source": "Gold (F-S)",
+    "rate": 0.095,
+    "rate_ci_lo": 0.055,
+    "rate_ci_hi": 0.135,
+    "n": 200
+  },
+  {
+    "question": "Q3 fraction with temporal-lobe involvement",
+    "source": "MedAI-EPI M1",
+    "rate": 0.0,
+    "rate_ci_lo": 0.0,
+    "rate_ci_hi": 0.0,
+    "n": 200
+  },
+  {
+    "question": "Q3 fraction with temporal-lobe involvement",
+    "source": "Silver",
+    "rate": 0.075,
+    "rate_ci_lo": 0.04,
+    "rate_ci_hi": 0.115,
+    "n": 200
+  }
+]

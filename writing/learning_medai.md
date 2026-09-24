@@ -19,6 +19,7 @@
 13. Programming concepts as applied
 14. Session-specific decisions and their rationale
 15. What is NOT done and why
+16. LLMs, generative AI, prompt engineering, and fine-tuning — beginner to mastery (Med42-8B as running example)
 
 ---
 
@@ -586,6 +587,452 @@ The Shape A paper's contribution is the framework, not the numbers. Even if Med4
 - **Institutional cohort (Shape B)** — blocked on IRB.
 
 Each of these is a *known unknown*, called out in Discussion §5 and Limitations §6 of the manuscript. Reviewers who ask "why don't you have more data?" can be pointed at these gates and the outreach log at `docs/CORPUS_OUTREACH.md`.
+
+---
+
+## 16. LLMs, generative AI, prompt engineering, and fine-tuning — beginner to mastery (Med42-8B as running example)
+
+This chapter is the standalone curriculum I wish I had before starting MedAI-EPI. It goes from "what is a language model" to "when do you fine-tune vs. prompt vs. retrieve," using the actual model in this project (Llama3-Med42-8B, ref^14^) as the running example. You can skip earlier subsections if you already know the material.
+
+Sections build on each other:
+
+- 16.1 What a language model actually is
+- 16.2 Transformers, attention, and why "8B" means something
+- 16.3 Pretraining → SFT → instruction-tuning: what Med42-8B is
+- 16.4 Med42-8B specifically: architecture, training data, license, hardware
+- 16.5 Loading and running the model (Hugging Face `transformers`)
+- 16.6 Decoding — the knobs that actually matter
+- 16.7 The context window and why long clinical notes break
+- 16.8 Prompt engineering — the taxonomy (zero-shot / few-shot / CoT / …)
+- 16.9 Prompt engineering — what actually helps and what doesn't
+- 16.10 Schema-constrained output — three paradigms
+- 16.11 The schema-echo pathology
+- 16.12 Evidence grounding as a first-class LLM output
+- 16.13 Fine-tuning taxonomy — full FT, PEFT/LoRA, QLoRA, DoRA
+- 16.14 LoRA in detail (with rank / alpha / target-modules intuition)
+- 16.15 When NOT to fine-tune
+- 16.16 Retrieval-augmented generation (RAG)
+- 16.17 Evaluating clinical LLMs rigorously
+- 16.18 Ethics and safety for medical LLMs
+- 16.19 What mastery looks like
+- 16.20 Reading list
+
+### 16.1 What a language model actually is
+
+A language model is a function that takes a sequence of tokens and returns a probability distribution over the next token. That's it. Everything else — chatbots, code generators, clinical extractors — is that function applied autoregressively and wrapped in tooling.
+
+Formally, for a sequence of tokens `x_1, x_2, …, x_n`, the model computes:
+
+```
+P(x_{n+1} | x_1, …, x_n)
+```
+
+To generate text, you sample or greedily pick `x_{n+1}`, append it to the sequence, and call the model again. Repeat until you hit a stop token or a length limit.
+
+**Tokens are not characters and are not words.** They are subword units. In Llama3's tokenizer, "epilepsy" is one token; "lamotrigine" is two tokens; a rare drug like "rufinamide" might be three or four. This matters because:
+- The model's context window is measured in tokens, not characters.
+- Cost (API) and latency scale with tokens.
+- Rare medical vocabulary uses more tokens than common English.
+
+In our project, `services/med42_backend.py` logs `input_tokens=3200` before every call — that's the tokenizer's count, and we cap it at 3200 to leave room for the model's own generation up to `max_new_tokens=1024` inside Med42's 8192-token context.
+
+### 16.2 Transformers, attention, and why "8B" means something
+
+A transformer is the architecture underneath essentially every modern LLM (GPT, Claude, Llama, Med42, DeepSeek, Mistral, …). Its core operation is **attention**: for every position in the sequence, compute a weighted combination of all other positions, where the weights are learned. This lets the model relate distant tokens ("the patient" at position 12 to "she" at position 187).
+
+A transformer is stacked layers. Each layer has:
+1. A self-attention block (learned Q, K, V projections plus a heads mechanism)
+2. A feed-forward block (two-layer MLP with a nonlinearity)
+3. Normalization (usually RMSNorm in modern models like Llama3) and residual connections
+
+**"8B" means ≈ 8 billion learned parameters.** For Llama3-8B: 32 transformer layers, hidden dimension 4096, 32 attention heads (grouped-query attention with 8 KV heads), MLP intermediate size 14336. Multiply and add: ~8 × 10⁹ float weights.
+
+At **bfloat16** (2 bytes per parameter), 8B ≈ 16 GB of VRAM just for weights. Plus activations, KV cache, etc. That's why Med42-8B fits on a 24 GB L40S but not on a 16 GB T4. Larger models (70B, 405B) are 140 GB and 810 GB respectively — beyond single-GPU budgets, hence multi-GPU sharding or quantization.
+
+**Grouped-query attention (GQA)** — Llama3 uses this. Instead of one KV head per attention head, KV heads are shared across groups. This trades some quality for large memory savings during autoregressive decoding, which is why 8B models feel snappy on modest hardware.
+
+### 16.3 Pretraining → SFT → instruction-tuning: what Med42-8B is
+
+Modern LLMs go through three training phases:
+
+1. **Pretraining**. Trained on trillions of tokens from web text, books, code, papers, etc. Objective: predict the next token. Result: a "base model" that continues text but doesn't follow instructions well. Llama3-8B's pretraining corpus is 15 T tokens. This is *the* compute cost — pretraining an 8B model is millions of GPU-hours.
+
+2. **Supervised fine-tuning (SFT)**. The base model is further trained on curated (instruction, response) pairs. Objective: same next-token prediction, but the loss is only applied to the response tokens. This teaches the model to obey instructions. Corpus size: 10K–100K high-quality examples.
+
+3. **Preference alignment (RLHF, DPO, KTO, ORPO, ...)**. Human raters compare two model outputs; the model is trained to prefer the "better" one. This makes it safer / more helpful / more concise. Not always used, especially for research-focused models.
+
+**Med42-8B** is Llama3-8B → SFT on a curated clinical-domain dataset (approx. 200K medical instruction–response pairs curated by the M42 Health team, per ref^14^). It is a *clinically instruction-tuned* Llama3. It still uses Llama3's tokenizer, Llama3's context window, and Llama3's architecture. What differs is the weights: attention and MLP parameters have been nudged toward clinical language patterns.
+
+**Practical implication**: Med42-8B is better than base Llama3 at recognising clinical terminology and following instructions phrased in clinical language. It is NOT better at reasoning, arithmetic, coding, or general-domain tasks. When you ask it to emit JSON, it obeys because Llama3 was SFT'd on JSON — Med42 inherits that but does not amplify it.
+
+### 16.4 Med42-8B specifically
+
+- **HuggingFace ID**: `m42-health/Llama3-Med42-8B`
+- **License**: Meta Llama 3 Community License + M42 addendum (research use permitted with attribution; commercial use gated by Meta's terms)
+- **Base**: Llama3-8B-Instruct
+- **Weights**: 16 GB in bfloat16 (fp16 also works; fp32 is 32 GB and requires >24 GB VRAM)
+- **Context window**: 8192 tokens (Llama3 native; recent Llama3.1 goes to 128K but that's not what Med42 was trained on)
+- **Tokenizer**: Llama3 SentencePiece with vocabulary ≈ 128K
+- **Generation**: standard `transformers.AutoModelForCausalLM.generate()` — no special API
+
+**In this project**: `services/med42_model.py` loads it in bfloat16 on CUDA; `services/med42_backend.py` wraps it in a `ModelBackend` protocol (defined at `services/extract.py:45`) that yields deterministic outputs (temperature=None, do_sample=False, seed=0) suitable for reproducible research runs. Every generate call logs `input_tokens`, `max_new`, `do_sample`, and `seed`.
+
+**Why Med42-8B for this project** — three reasons:
+1. Openly licensed (Shape A commitment: nothing in the pipeline requires a proprietary API)
+2. Small enough to run on a single-GPU 24 GB slice (institutional research groups can deploy without a supercomputer)
+3. Instruction-tuned on clinical text (better prior than base Llama3 for clinical vocabulary)
+
+### 16.5 Loading and running the model
+
+The complete "hello world" is short:
+
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+
+tok = AutoTokenizer.from_pretrained("m42-health/Llama3-Med42-8B")
+model = AutoModelForCausalLM.from_pretrained(
+    "m42-health/Llama3-Med42-8B",
+    torch_dtype=torch.bfloat16,      # not float32 — you'll OOM on 24GB
+    device_map="cuda",               # or "auto" for multi-GPU
+)
+
+prompt = "The patient has focal epilepsy. List anti-seizure medications:"
+inputs = tok(prompt, return_tensors="pt").to("cuda")
+outputs = model.generate(
+    **inputs,
+    max_new_tokens=256,
+    do_sample=False,                 # greedy — reproducible
+    temperature=None, top_p=None,    # ignored when do_sample=False
+)
+print(tok.decode(outputs[0][inputs.input_ids.shape[1]:],
+                 skip_special_tokens=True))
+```
+
+Common mistakes I hit early:
+- **Loading in `float32`** — needs 32 GB. Symptom: `CUDA out of memory: Tried to allocate ... GiB. GPU 0 has ... GiB free`. Fix at `services/med42_model.py`.
+- **Forgetting `device_map`** — model sits on CPU, `.generate()` runs at 0.5 tok/sec.
+- **User site-packages shadowing venv Python** — HPC gotcha; fix in `slurm_open_benchmark.sh` with `export PYTHONNOUSERSITE=1`.
+- **HF weights not cached** — first launch downloads ~16 GB; on SLURM's default filesystem this can time out. Fix: pre-fetch once with `huggingface-cli download m42-health/Llama3-Med42-8B --local-dir model_cache/`.
+
+### 16.6 Decoding — the knobs that actually matter
+
+Once the model exists, generation is controlled by five parameters that determine EVERY published LLM number you'll ever read:
+
+| Parameter | What it does | Research setting |
+|---|---|---|
+| `do_sample` | Enable stochastic sampling | **False** for reproducibility |
+| `temperature` | Sharpen (< 1) or flatten (> 1) the next-token distribution | Ignored when `do_sample=False` |
+| `top_p` | Restrict sampling to smallest set of tokens whose probability sums to `p` | Ignored when `do_sample=False` |
+| `top_k` | Restrict sampling to top-`k` tokens | Ignored when `do_sample=False` |
+| `max_new_tokens` | Cap on generated tokens | **Chosen deliberately** — trade off content vs. cost |
+| `seed` | Random seed (only affects sampling) | **0** for reproducibility |
+
+**The rule for research code**: `do_sample=False` (greedy decoding). Every call is deterministic; running the same prompt twice returns the same output. This is not the default in most tutorials — most examples show `do_sample=True, temperature=0.7` because they optimize for "feels natural" instead of reproducibility.
+
+**In this project**: `services/med42_backend.py` and `services/run_manifest.py::DecodingConfig` enforce this. Every manifest carries `do_sample=False, temperature=None, top_p=None, seed=0`, and reviewers can re-run the exact call.
+
+**`max_new_tokens` is the parameter you get wrong first**. Too small: the model runs out of budget mid-JSON. Too large: latency blows up. Our paper reports on 1024 (baseline) and 4096 (sensitivity) — the schema-echo pathology at M2 is largely a `max_new_tokens=1024` phenomenon; at 4096 it partially resolves (§Table 4a-4096 sensitivity, forthcoming).
+
+### 16.7 The context window and why long clinical notes break
+
+The context window is the maximum number of tokens the model can process at once, input + output combined. Llama3 (and Med42-8B) has 8192. If your prompt is 3000 tokens and `max_new_tokens=1024`, you use 4024 tokens — safe. If your prompt is 7500 tokens, only 692 tokens are left for generation — often not enough for a full Evidence-wrapped JSON.
+
+**Chunking**. When a single note exceeds the context window, split it. The naive approach — chop every N tokens — is wrong because you split mid-sentence, mid-value-object, mid-clinician-quote. The smart approach: split on natural boundaries.
+
+In this project, `services/chunker.py` does section-aware then paragraph-aware chunking with overlap. `chunk_text(text, max_chars=8000, overlap_chars=400)` returns a list of `Chunk` objects with `char_offset`, `section_hint`, and metadata. Downstream, `services/extract.py:extract_module_long()` runs the same per-module prompt on every chunk and `services/merge.py::merge_modules()` unions the results with Evidence-aware conflict rules.
+
+**Why "8000 chars ≈ 2000 tokens" is a reasonable rule of thumb**: English prose is ~4 chars/token in Llama3's tokenizer. Clinical text with medical jargon is more like ~3.5 chars/token because rare words split into more subwords. If you need exact counts, tokenize.
+
+**Context is not free.** Attention is quadratic in sequence length. A 4× longer prompt is 16× more compute (in the attention layers). The `max_new_tokens=4096` sensitivity sweep took ~9 h 40 min for 1200 inferences; the 1024 baseline took ~6 h 40 min. Budget for it.
+
+### 16.8 Prompt engineering — the taxonomy
+
+Prompting techniques, in rough order of complexity and cost:
+
+| Technique | Description | When it helps | Overhead |
+|---|---|---|---|
+| **Zero-shot** | Just describe the task | Simple tasks, capable models | Free |
+| **Few-shot** | Include example (input, output) pairs | Format-heavy tasks, teaching schema | ~1–5 examples worth of tokens |
+| **Chain-of-thought (CoT)** | "Think step by step" | Multi-step reasoning, arithmetic | Doubles output length |
+| **Self-consistency** | Sample multiple outputs, vote | Reasoning tasks, robust answers | N× cost |
+| **Tree-of-thoughts** | Explore multiple reasoning branches | Complex planning | Very high cost |
+| **ReAct** | Interleave Thought and Action steps with tool use | Tool-using agents | Depends on tools |
+| **Schema injection (M2 in this paper)** | Embed the full output schema in the prompt | Structured output | Big prompt, sometimes helps, sometimes hurts (see 16.11) |
+
+**In this project**: M0 = zero-shot; M1 = few-shot with one Fonferko-Shadrach-adapted example; M2 = few-shot + full Pydantic-derived JSON schema injected into the prompt. All three defined in `services/prompt_registry.py`, 22 versioned prompts total (6 modules × 3 arms + 4 v2 rewrites).
+
+Chain-of-thought, self-consistency, tree-of-thoughts, ReAct — **none of these are used** in the current paper. Reason: for phenotype extraction, we care about *what the model got right*, not *how it reasoned*. CoT would help on multi-step numerical reasoning (e.g. "compute drug-resistance status from a list of failed ASMs plus their trial durations") but the paper doesn't currently ask multi-step questions.
+
+### 16.9 Prompt engineering — what actually helps and what doesn't
+
+Empirical rules I've extracted from this project and the broader literature:
+
+**Things that reliably help**:
+1. **Format anchoring**. Show the model exactly what you want, ideally with a syntactically valid example. M1 in our registry does this; it beats M0 (which just describes the schema).
+2. **Specific over general**. "Extract the generic name of every anti-seizure medication mentioned" > "Extract medications."
+3. **Named fields**. Prompt with the same field names the schema uses (`current_asms`, `drug_resistance_status`) so the model can pattern-match rather than guess mappings.
+4. **Explicit `not_documented` handling**. If the note doesn't mention something, the model should say so — but only if you tell it that's allowed. Otherwise it hallucinates.
+5. **Role priming (system prompt)**. "You are a research phenotyping assistant for epilepsy clinical documentation." primes the model into the right register.
+
+**Things that hurt or don't help (contrary to popular advice)**:
+1. **"Be concise" instructions**. The model often ignores them and sometimes truncates important content. Rely on `max_new_tokens` instead.
+2. **Threats or emotional framing** ("your job depends on it"). Cargo-culting; effect on modern instruction-tuned models is near-zero and unreliable across model versions.
+3. **Excessive schema injection (M2 phenomenon)**. Injecting a 12 KB JSON schema hurts an 8 B model — it eats the token budget and the model echoes back the schema instead of extracting content (see 16.11).
+4. **Chain-of-thought where it's not needed**. For a lookup-style extraction, CoT wastes tokens and can *hurt* content-validity because the model spends its budget "thinking" instead of producing structured output.
+
+**Iteration loop**:
+1. Write a first prompt; run on 5 documents.
+2. Look at raw outputs (not aggregate metrics). Find one failure mode. Fix.
+3. Repeat until you plateau, then run on 20 documents.
+4. Measure content-validity, F1, evidence precision.
+5. Compare arms on the *same* documents (paired McNemar, not marginal comparison).
+
+### 16.10 Schema-constrained output — three paradigms
+
+Three ways to make an LLM emit valid structured output, with their tradeoffs:
+
+**A. Prompt-level (what M2 does)**: put the schema in the prompt as a JSON Schema or Pydantic definition. Model is *asked* to comply.
+- ✅ Model-agnostic; works on any LLM you can prompt.
+- ✅ Cheap to implement (just concatenate schema string).
+- ❌ Not enforced — the model can and does emit invalid JSON.
+- ❌ Costs tokens: schema in every request.
+- ❌ Big schemas can trigger schema-echo pathology (§16.11).
+
+**B. Token-level constrained decoding** (`outlines`, `instructor`, `guidance`, `LM Studio`, Ollama structured output): during generation, the decoding loop *masks* impossible tokens so the output is guaranteed valid.
+- ✅ 100% valid output by construction.
+- ✅ Faster inference (no invalid tokens to sample).
+- ❌ Requires access to the model's logits (not available on most API-only models like GPT-4o via public API without special settings; Claude has structured output; OpenAI has structured output).
+- ❌ Can make the model "give up" — if the valid-token mask is too restrictive, the model emits `not_documented` when a valid answer existed. This is the *silent failure* that would trivialize our paper's methodology (§Discussion).
+
+**C. Post-hoc repair** (what our two-tier repair chain does in `services/extract.py` and `services/smart_repair.py`): let the model emit whatever, then deterministic code fixes recoverable errors.
+- ✅ Preserves the raw-vs-repaired-validity distinction (the paper's central methodology decision).
+- ✅ Doesn't touch decoding — reproducibility preserved.
+- ✅ You can measure the model's *unaided* structural competence.
+- ❌ Repair rules take effort to build (enum normalization, Evidence-wrapping, brace-balance JSON extraction).
+- ❌ Can't fix everything — some outputs are unrepairable.
+
+Our paper uses **A + C**: schema in the prompt for M2 (to measure whether it helps or hurts at 8 B scale) and deterministic repair afterwards (to separate structural from content-level failures). We deliberately do NOT use B, so that the raw validity numbers mean something.
+
+### 16.11 The schema-echo pathology (this paper's central negative result)
+
+We hit a specific failure mode with M2 at `max_new_tokens=1024` that is worth understanding as a general LLM caveat:
+
+**Symptom**: at M2 (few-shot + schema-injected), content-validity was 0.0–7.0 % across modules — worse than M0 (zero-shot) and M1 (few-shot). Bootstrap 95 % CI: [0.0 %, 2.5 %] on drug-resistance content — cleanly separated from M0 [6.5 %, 14.5 %].
+
+**Diagnosis**: the injected schema is ~12 KB (a few thousand tokens). Combined with the few-shot example and the source document, the *input* is ~7 K tokens, leaving ~1 K for output. The 8 B model, given no clear directive to produce content, spent its output budget *echoing back the schema itself* — reproducing field names, enum definitions, and JSON structure but never populating values.
+
+**Why it happens**: instruction-tuned LLMs are trained to be helpful. When asked to "produce JSON conforming to this schema," a small model that hasn't strongly internalized "produce EXTRACTED CONTENT that conforms" defaults to the safest interpretation: echo the structure. This is the LLM equivalent of a student copying the exam questions onto the answer sheet.
+
+**How we characterized it**: paired McNemar's tests across arms (Table 4c). M2 vs M0: χ² = 19.05, p = 1.3 × 10⁻⁵. M2 vs M1: χ² = 28.03, p = 1.2 × 10⁻⁷. This isn't chance — it's a real, reproducible, statistically significant regression.
+
+**How to fix it**:
+1. Larger `max_new_tokens` (this is what the SLURM 103501 sensitivity sweep tests at 4096).
+2. Bigger model (Med42-70B if released, or a frontier model — but that violates the open-framework thesis).
+3. Token-level constrained decoding (§16.10 B) — but that hides the pathology, doesn't cure it.
+4. Fine-tuning on structured extraction (§16.13) — expensive but principled.
+
+**Broader lesson**: prompt engineering has model-scale-dependent behaviors. What works on GPT-4o may fail on Med42-8B. Always characterize on the model you'll actually deploy.
+
+### 16.12 Evidence grounding as a first-class LLM output
+
+Most LLM tutorials teach "make it output JSON" but stop there. For clinical or research use, that's not enough — you need to know *where in the source* every extracted value came from.
+
+**Evidence grounding** means every extracted value carries a verbatim source quote (and, optionally, character offsets). In our schema, `Evidence[T]` (defined at `schema/evidence.py`) wraps every field:
+
+```python
+class Evidence(BaseModel, Generic[T]):
+    value: T | None
+    certainty: Certainty
+    temporal_status: TemporalStatus
+    evidence_text: str | None
+    source_doc_id: str
+    source_doc_type: DocumentType
+    source_date: date
+    char_start: int | None
+    char_end: int | None
+```
+
+The Pydantic validator enforces the invariants:
+- If `value` is present, `evidence_text` must be non-empty.
+- If `value` is `None`, `certainty` must be `NOT_DOCUMENTED` or `UNKNOWN` or `NEGATED`.
+- Character offsets must both be set or both be `None`.
+
+**Why this matters for evaluation**: two separate metrics fall out — *field F1* (did the model extract the right value?) and *evidence precision* (did the quote actually support the value?). A model with high field F1 but low evidence precision is hallucinating the source. This is caught by `services/evidence_verifier.py`, which does whitespace-normalized substring match between the emitted quote and the source note.
+
+**Why this is a first-class LLM design question**: instructing the model to emit `evidence_text` alongside `value` doubles the output tokens but gives you audit-grade output. Every clinical LLM should do this if the output will inform any research or clinical decision.
+
+### 16.13 Fine-tuning taxonomy
+
+When prompting isn't enough, fine-tuning is the next escalation. There are several paradigms, in rough order of compute cost:
+
+| Technique | What it does | Params trained | VRAM | Typical use |
+|---|---|---|---|---|
+| **Full fine-tuning** | Retrain all weights | 100 % (8 B for Med42-8B) | 80+ GB | Big compute budget; large task-specific corpus |
+| **LoRA** | Learn low-rank additive matrices per layer | ~ 0.1–1 % | 16 GB (bf16) | Modest budget; most research |
+| **QLoRA** | LoRA over a 4-bit-quantized base model | ~ 0.1–1 % | 8 GB | Consumer GPU; tightest budget |
+| **DoRA** | LoRA + directional decomposition | Similar to LoRA | 16 GB | LoRA replacement, slightly better in some benchmarks |
+| **Adapter tuning** | Small MLPs inserted between layers | ~ 1 % | 16 GB | Older PEFT technique |
+| **Prompt tuning / prefix tuning** | Learn a soft-prompt prefix | ~ 0.01 % | 8 GB | When labels are scarce |
+
+**Full fine-tuning** is what most people mean when they say "fine-tuning," but it's rare in practice for large models because:
+- 8 B model in bfloat16 = 16 GB weights + 16 GB gradients + 16 GB optimizer state (Adam) + activations = 64 GB minimum, usually 80+ GB.
+- Catastrophic forgetting risk — the model forgets general capabilities while learning your narrow task.
+- Requires 10K+ high-quality task examples.
+
+**PEFT (parameter-efficient fine-tuning)** — a family of techniques that train a small fraction of parameters. LoRA is the dominant one.
+
+### 16.14 LoRA in detail
+
+LoRA (Low-Rank Adaptation, Hu et al. 2021) is the fine-tuning technique you'll use 90 % of the time for research on modern LLMs. The math:
+
+Instead of updating a big weight matrix `W ∈ ℝ^{d × d}` directly, LoRA adds a low-rank decomposition:
+
+```
+W_new = W_frozen + (B × A)  where  B ∈ ℝ^{d × r},  A ∈ ℝ^{r × d},  r ≪ d
+```
+
+`W_frozen` is not updated. Only `A` and `B` are trained. For `d = 4096` and `r = 16`, you train `2 × 4096 × 16 = 131,072` parameters instead of `4096 × 4096 = 16,777,216`. That's a **128× reduction**.
+
+**The parameters that matter**:
+- **`r` (rank)**: 4–32 typical. Higher rank = more expressive but more params + more overfitting risk. Start at 8 or 16.
+- **`alpha` (scaling factor)**: LoRA scales the update by `alpha / r`. Common practice: `alpha = 2 × r`. Governs how much the LoRA update "weighs" against the frozen base.
+- **`target_modules`**: which layers get LoRA adapters. For decoder-only LLMs, standard choice is `["q_proj", "k_proj", "v_proj", "o_proj"]` (all four attention projections). Add `["gate_proj", "up_proj", "down_proj"]` for MLP LoRAs (more expressive, more params).
+- **`dropout`**: 0.05–0.1 typical.
+- **Learning rate**: 1e-4 to 3e-4 typical for LoRA (higher than full-FT because you're training fewer params).
+
+**In this project (not yet run)**: `docs/PROTOCOL_SHAPE_A.md` sketches a follow-up experiment where Med42-8B is LoRA-tuned on the F-S silver labels for ClinicalSeizure extraction. Rationale: at M1 our ClinicalSeizure F1 is 0.00 (Table 4b-gold). Fine-tuning is the natural escalation, but §Discussion §Limitations #4 defers it pending adjudicated gold at sufficient scale — the F-S silver labels alone are too noisy to LoRA-train productively.
+
+**Minimal LoRA code**:
+
+```python
+from peft import LoraConfig, get_peft_model
+from transformers import AutoModelForCausalLM
+import torch
+
+base = AutoModelForCausalLM.from_pretrained("m42-health/Llama3-Med42-8B",
+                                             torch_dtype=torch.bfloat16,
+                                             device_map="cuda")
+config = LoraConfig(
+    r=16, lora_alpha=32,
+    target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+    lora_dropout=0.05, bias="none",
+    task_type="CAUSAL_LM",
+)
+model = get_peft_model(base, config)
+model.print_trainable_parameters()   # e.g. "trainable: 4.2M / total: 8B (0.05%)"
+```
+
+Then train with `transformers.Trainer` or `trl.SFTTrainer` on your (prompt, target) pairs.
+
+### 16.15 When NOT to fine-tune
+
+Fine-tuning is not a first move. The order of escalation is usually:
+
+1. **Prompt engineering first**. Cheap, no data required, one hour of iteration often beats a week of fine-tuning.
+2. **Few-shot examples**. Free, mechanical, quantifiable.
+3. **Retrieval-augmented generation (§16.16)**. Adds new knowledge without retraining.
+4. **PEFT / LoRA**. Only when the above plateau and you have a real labeled dataset (>1K examples ideally).
+5. **Full fine-tuning**. Rarely; big data + big compute + willingness to accept catastrophic forgetting.
+
+**Signals you SHOULD fine-tune**:
+- Prompt engineering has plateaued (M2 vs M1 curves cross).
+- You have a specific output format (JSON schema) the model can't reliably produce.
+- You have >1K adjudicated (input, output) pairs.
+- Your task doesn't require general capability (fine-tuned models get worse at things they weren't fine-tuned on).
+
+**Signals you should NOT fine-tune**:
+- < 200 labeled examples.
+- Task is a lookup or an aggregation ("count the seizures mentioned"), not a language-understanding one.
+- Task needs to update dynamically (new drug added → RAG, not retrain).
+- You haven't tried few-shot yet.
+
+For MedAI-EPI: we deliberately deferred fine-tuning (§Discussion #4) because our labeled corpus is 200 silver documents — well below the threshold, and the silver labels themselves have known transformation errors that fine-tuning would only memorize.
+
+### 16.16 Retrieval-augmented generation (RAG)
+
+RAG adds external knowledge to an LLM at inference time by retrieving relevant documents and stuffing them into the prompt. Pattern:
+
+1. Embed every knowledge-base document into a vector store (FAISS, Chroma, Qdrant, pgvector).
+2. At query time, embed the query, find the top-k nearest documents.
+3. Prepend those documents to the prompt: "Given these facts: [retrieved]. Answer: [query]"
+
+**When RAG beats fine-tuning**:
+- Knowledge changes frequently (new drug approved, guideline updated).
+- You need to cite sources (medical, legal, research).
+- Your task is knowledge-retrieval, not skill-acquisition.
+
+**When RAG doesn't help**:
+- Task is structural (produce this schema) — RAG has nothing to add.
+- Latency-sensitive — retrieval + embedding round-trip adds hundreds of ms.
+- Small knowledge base fits in the prompt anyway.
+
+**For MedAI-EPI**: the codebase has legacy `services/*rag*.py` files from the pre-pivot general medical platform. These are unused in the current paper — the F-S clinic-letter extraction task is structural, not knowledge-retrieval. A future Shape B or C paper could integrate RAG for guideline-anchored extraction (e.g., "does this treatment plan comply with the current ILAE 2010 drug-resistance definition?").
+
+### 16.17 Evaluating clinical LLMs rigorously
+
+Common failure modes in LLM evaluation:
+
+1. **Reporting only one metric**. F1 alone lies. Report P, R, F1, plus content-validity, plus evidence precision, plus per-field breakdowns.
+2. **Marginal-comparison instead of paired**. When comparing arms on the same documents, use paired tests (McNemar, sign test), not marginal-CI overlap. `scripts/mcnemar_arm_comparisons.py`.
+3. **No bootstrap CI**. Point estimates on n=200 without CIs are noise. Patient-level bootstrap, 1000 resamples, seed=0.
+4. **Silver labels as gold**. Silver-labeling has its own error rate — compare to native gold when possible (`scripts/score_llm_arms_vs_fs_gold.py`).
+5. **No error taxonomy**. Aggregate F1 hides *why* the model failed. `scripts/error_taxonomy_scan.py` classifies errors into 12 categories (missed_fact, wrong_label, negation, uncertainty, temporal, medication_status, eeg_semantic, mri_semantic, conflict, unsupported_inference, evidence_mismatch, schema).
+6. **No downstream utility check**. Field F1 is not utility. `scripts/cohort_demo.py` shows how field-level F1 propagates to cohort-level inference — this is the honest utility story.
+
+**TRIPOD-LLM checklist** (`docs/TRIPOD_LLM_CHECKLIST.md`): our completed reporting checklist for the manuscript. Analogous to CONSORT for clinical trials — enforces disclosure of prompt versions, decoding config, seed, corpus provenance, license, and per-field metric definitions.
+
+### 16.18 Ethics and safety for medical LLMs
+
+Non-negotiable rules for clinical NLP research:
+
+1. **No PHI in prompts to external APIs**. Any GPT-4o/Claude API call means the text left your infrastructure. For real patient data this is an IRB-blocking issue. Med42-8B runs locally = no leakage. Frame the paper's contribution around this.
+
+2. **Deterministic decoding for reproducibility**. Every research call: `do_sample=False, seed=0`. Reviewers should be able to re-run.
+
+3. **Evidence grounding for auditability**. Every extracted value has a verbatim source quote — if a clinician disagrees with the extraction, they can look at the quote and adjudicate. No unauditable claims.
+
+4. **"Research use only" framing**. MedAI-EPI is not a medical device (not FDA-cleared, not CE-marked). Manuscript §Ethics states this explicitly. The disclaimer appears in three places: the app UI first-visit modal, the README, and the manuscript.
+
+5. **Failure-mode taxonomy included in publication**. Not hiding negative results (schema-echo pathology, ClinicalSeizure refractoriness). Negative results are the paper's contribution as much as positive ones.
+
+6. **License compliance**. Med42's Meta Llama 3 Community License permits research use with attribution. Weights: cached from HuggingFace, not redistributed. Data: Fonferko-Shadrach CC-BY 4.0 with attribution.
+
+7. **No autonomous clinical decisions**. Every extracted value is *research-grade phenotype data*, not a diagnosis. The tool assists a clinician; it does not replace one.
+
+### 16.19 What mastery looks like
+
+You're at "beginner": you can load Med42-8B, run `generate()`, and interpret its output.
+You're at "intermediate": you can design a prompt, measure content-validity vs. structural-validity, and iterate.
+You're at "advanced": you can characterize a model's failure modes (schema-echo, hallucination, negation confusion) and choose the right escalation (bigger context, few-shot, LoRA, RAG).
+
+You're at "mastery" when:
+1. You can read the Methods of an LLM clinical extraction paper and *reproduce the numbers* without asking the authors. (Prompt registry, deterministic decoding, versioned schema, per-inference manifest.)
+2. You can tell when a model's poor performance is a *model* problem (needs fine-tuning), a *prompt* problem (needs different phrasing), a *schema* problem (task is over-specified), or a *data* problem (labels are wrong).
+3. You know the tradeoffs of the three schema-constrained-output paradigms (§16.10) well enough to pick one for a new task in 5 minutes.
+4. You've read at least one paper each on: attention mechanisms (Vaswani 2017), instruction tuning (InstructGPT, Ouyang 2022), LoRA (Hu 2021), RAG (Lewis 2020), TRIPOD-LLM (Gallifant 2024).
+5. You can decide "should I run this on Med42-8B or on GPT-4o?" without a shrug — you know that Med42 gives you determinism + local weights + no PHI leakage but costs you raw capability, and you know when each side of the tradeoff wins.
+6. You can say "the model isn't the bottleneck" and mean it — sometimes the schema is wrong, the corpus is unreliable, or the evaluation is measuring the wrong thing.
+
+### 16.20 Reading list
+
+Ordered from foundational to specialty. One-line summaries; read the papers.
+
+1. Vaswani et al. 2017. "Attention Is All You Need." NeurIPS. — the transformer paper. Read once, revisit forever.
+2. Radford et al. 2018/2019. GPT-1 / GPT-2 papers. — pretraining paradigm.
+3. Ouyang et al. 2022. "Training language models to follow instructions with human feedback." — InstructGPT / RLHF for instruction tuning.
+4. Hu et al. 2021. "LoRA: Low-Rank Adaptation of Large Language Models." ICLR. — the fine-tuning technique you'll use most.
+5. Dettmers et al. 2023. "QLoRA: Efficient Finetuning of Quantized LLMs." — the consumer-GPU version of LoRA.
+6. Lewis et al. 2020. "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." — the RAG paper.
+7. Christophe et al. 2024. "Med42-v2: A Suite of Clinical LLMs." arXiv 2408.06142. — the model in this project.
+8. Alsentzer et al. 2019. "Publicly Available Clinical BERT Embeddings." — the B1 baseline.
+9. Fonferko-Shadrach et al. 2019, 2024. ExECT and Annotation-of-epilepsy-clinic-letters papers. — the epilepsy NLP lineage.
+10. Li et al. 2021. "Are synthetic clinical notes useful for real NLP tasks?" JAMIA. — the synthetic-corpus methodology precedent.
+11. Gallifant et al. 2024. "TRIPOD-LLM Reporting Guidelines." — the clinical-LLM reporting standard we conform to.
+12. Kwan and Brodie 2000. "Early identification of refractory epilepsy." NEJM. — the drug-resistance operationalization our downstream utility demo uses.
+13. Fisher et al. 2017. ILAE seizure classification. — the ontology's canonical reference.
+
+Skip: everything on "prompt engineering hacks" that promises Nx improvements without citing empirical evidence on your specific model. Those are almost always cargo-cult techniques that fail to reproduce.
 
 ---
 

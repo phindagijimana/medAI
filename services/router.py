@@ -130,3 +130,81 @@ def extract_phenotype(
         doc=doc,
         arm=arm,
     )
+
+
+def extract_phenotype_streaming(
+    *,
+    doc: DocumentMetadata,
+    source_text: str,
+    model_backend: ModelBackend,
+    arm: str,
+    schema_version: str,
+    decoding: DecodingConfig | None = None,
+    version: str = "v1",
+    write_manifests: bool = True,
+):
+    """Generator variant of `extract_phenotype`: yields per-module results as
+    they finish, then a final `PhenotypeExtractionResult`.
+
+    Yields dicts of shape:
+        {"event": "module_start", "module": "<name>", "n_total": N, "n_done": k}
+        {"event": "module_done",  "module": "<name>", "result": {…}, "n_done": k}
+        {"event": "final", "phenotype": {…}, "summary": {…}}
+    """
+    applicable = sorted(modules_for(doc.doc_type))
+    per_module: dict[str, ExtractionResult] = {}
+    phenotype_kwargs: dict = {"document": doc}
+    total = len(applicable)
+
+    for i, module_name in enumerate(applicable):
+        module_cls = MODULE_CLASSES.get(module_name)
+        if module_cls is None:
+            continue
+        try:
+            prompt = resolve(module_name, arm, version)
+        except KeyError:
+            continue
+
+        yield {"event": "module_start", "module": module_name,
+               "n_total": total, "n_done": i}
+
+        result = extract_module(
+            module_cls=module_cls,
+            prompt=prompt,
+            source_text=source_text,
+            source_doc_meta=doc,
+            model_backend=model_backend,
+            decoding=decoding,
+            schema_version=schema_version,
+        )
+        if write_manifests:
+            result.manifest.write()
+        per_module[module_name] = result
+        if result.module is not None:
+            phenotype_kwargs[module_name] = result.module
+
+        yield {
+            "event": "module_done",
+            "module": module_name,
+            "n_total": total,
+            "n_done": i + 1,
+            "final_valid": result.manifest.final_valid,
+            "raw_valid": result.manifest.raw_valid,
+            "repair_method": result.manifest.repair_method,
+            "duration_s": result.manifest.duration_s,
+            "module_json": result.module.model_dump(mode="json") if result.module else None,
+        }
+
+    phenotype = EpilepsyPhenotype(**phenotype_kwargs)
+    summary = {m: {"raw_valid": r.manifest.raw_valid,
+                    "final_valid": r.manifest.final_valid,
+                    "repair_method": r.manifest.repair_method,
+                    "duration_s": r.manifest.duration_s,
+                    "tokens": r.manifest.raw_response_tokens}
+                for m, r in per_module.items()}
+    yield {
+        "event": "final",
+        "phenotype": phenotype.model_dump(mode="json"),
+        "summary": summary,
+        "arm": arm,
+    }

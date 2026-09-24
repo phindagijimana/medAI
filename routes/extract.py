@@ -576,6 +576,157 @@ def _extract_long(*, source_text, doc_id, patient_id, doc_date_iso,
     return (phen, {"n_chunks": n_chunks_total, "per_module_ok": per_module_ok})
 
 
+@extract_bp.route("/stream", methods=["POST"])
+def extract_stream() -> Any:
+    """Streaming variant of POST /extract — same request shape, but the
+    response body is newline-delimited JSON (NDJSON): one line per module
+    as it completes, plus a final line with the assembled phenotype.
+
+    Each line is a self-contained JSON object with an `event` field
+    ("module_start" | "module_done" | "final"). The UI uses this to render
+    per-module progress instead of blocking on the full 6-module extraction.
+    """
+    try:
+        from schema import DocumentMetadata, DocumentType, SCHEMA_VERSION
+        from services.extract import DecodingConfig
+        from services.router import extract_phenotype_streaming
+    except ImportError as e:
+        return _bad(f"paper-track modules unavailable: {e}", 503)
+
+    payload = request.get_json(silent=True) or {}
+    src = payload.get("source_text")
+    doc_type_str = payload.get("doc_type")
+    arm = payload.get("arm", "M2")
+
+    if not src or not isinstance(src, str):
+        return _bad("`source_text` (non-empty string) is required")
+    if not doc_type_str:
+        return _bad("`doc_type` is required")
+    if arm not in ("M0", "M1", "M2"):
+        return _bad("`arm` must be one of 'M0', 'M1', 'M2'")
+    try:
+        doc_type = DocumentType(doc_type_str)
+    except ValueError:
+        allowed = [d.value for d in DocumentType]
+        return _bad(f"invalid doc_type {doc_type_str!r}. Allowed: {allowed}")
+
+    doc_id = payload.get("doc_id") or f"api-{uuid.uuid4().hex[:12]}"
+    patient_id = payload.get("patient_id") or doc_id
+    try:
+        d_date = date.fromisoformat(payload["doc_date"]) if payload.get("doc_date") else date.today()
+    except ValueError:
+        return _bad(f"invalid doc_date")
+
+    icd = payload.get("icd10cm_codes") or []
+    snomed = payload.get("snomed_ct_codes") or []
+    doc = DocumentMetadata(
+        doc_id=doc_id, doc_type=doc_type, doc_date=d_date,
+        patient_id=patient_id, icd10cm_codes=icd, snomed_ct_codes=snomed,
+    )
+
+    ensure = getattr(current_app, "ensure_med42_loaded", None)
+    if callable(ensure):
+        status = ensure()
+    else:
+        status = "not_available"
+    backend = getattr(current_app, "med42_backend", None)
+    if backend is None:
+        return _bad(f"Med42 backend not yet ready (status={status!r}); retry in 30–60 s.", 503)
+
+    decoding = DecodingConfig(
+        do_sample=False, temperature=None, top_p=None,
+        max_new_tokens=int(payload.get("max_new_tokens", 1024)),
+        seed=int(payload.get("seed", 0)),
+    )
+
+    def stream():
+        import json as _j
+        try:
+            for evt in extract_phenotype_streaming(
+                doc=doc, source_text=src, model_backend=backend,
+                arm=arm, schema_version=SCHEMA_VERSION,
+                decoding=decoding, write_manifests=True,
+            ):
+                yield _j.dumps(evt) + "\n"
+        except Exception as e:
+            logger.exception("stream extraction failed")
+            yield _j.dumps({"event": "error", "error": f"{type(e).__name__}: {e}"}) + "\n"
+
+    return Response(stream(), mimetype="application/x-ndjson",
+                    headers={"Cache-Control": "no-store",
+                              "X-Accel-Buffering": "no"})
+
+
+@extract_bp.route("/long", methods=["POST"])
+def extract_long() -> Any:
+    """Chunk-and-merge extraction for a single long document.
+
+    Same request/response shape as POST /extract, but chunks the source_text
+    by clinical section + paragraph, runs each applicable module on every
+    chunk via extract_module_long, and merges with services.merge.merge_modules.
+    Use when the source text is longer than the model's context (~8000 chars)
+    or when the /extract/ui "auto-chunk" checkbox is enabled.
+    """
+    try:
+        from schema import DocumentType, SCHEMA_VERSION
+    except ImportError as e:
+        return _bad(f"paper-track modules unavailable: {e}", 503)
+
+    payload = request.get_json(silent=True) or {}
+    src = payload.get("source_text")
+    doc_type_str = payload.get("doc_type")
+    arm = payload.get("arm", "M2")
+
+    if not src or not isinstance(src, str):
+        return _bad("`source_text` (non-empty string) is required")
+    if not doc_type_str:
+        return _bad("`doc_type` is required")
+    if arm not in ("M0", "M1", "M2"):
+        return _bad("`arm` must be one of 'M0', 'M1', 'M2'")
+
+    doc_id = payload.get("doc_id") or f"api-{uuid.uuid4().hex[:12]}"
+    patient_id = payload.get("patient_id") or doc_id
+    doc_date_str = payload.get("doc_date") or ""
+
+    ensure = getattr(current_app, "ensure_med42_loaded", None)
+    if callable(ensure):
+        status = ensure()
+    else:
+        status = "not_available"
+    backend = getattr(current_app, "med42_backend", None)
+    if backend is None:
+        return _bad(
+            f"Med42 backend not yet ready (status={status!r}). Retry in 30–60 s.",
+            503,
+        )
+
+    max_new_tokens = int(payload.get("max_new_tokens", 1024))
+    seed = int(payload.get("seed", 0))
+
+    t0 = datetime.utcnow()
+    result = _extract_long(
+        source_text=src, doc_id=doc_id, patient_id=patient_id,
+        doc_date_iso=doc_date_str, doc_type_str=doc_type_str, arm=arm,
+        visit_date_iso=None,
+        backend=backend, max_new_tokens=max_new_tokens, seed=seed,
+    )
+    if isinstance(result, str):
+        return _bad(f"extract_long failure: {result}", 500)
+    phen, meta = result
+
+    return _no_cache(jsonify({
+        "phenotype": phen.model_dump(mode="json"),
+        "chunking": {
+            "n_chunks": meta.get("n_chunks", 0),
+            "per_module_ok": meta.get("per_module_ok", {}),
+        },
+        "schema_version": SCHEMA_VERSION,
+        "arm": arm,
+        "doc_type": doc_type_str,
+        "processing_time_s": (datetime.utcnow() - t0).total_seconds(),
+    }))
+
+
 @extract_bp.route("/csv", methods=["POST"])
 def extract_csv() -> Any:
     """Structured phenotype extraction with CSV output (long format).

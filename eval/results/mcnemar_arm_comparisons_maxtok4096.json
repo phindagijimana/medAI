@@ -1,0 +1,68 @@
+[
+  {
+    "module": "clinical_seizure",
+    "arm_a": "M0",
+    "arm_b": "M1",
+    "both": 0,
+    "a_only": 0,
+    "b_only": 0,
+    "neither": 200,
+    "chi2": 0.0,
+    "p": 1.0
+  },
+  {
+    "module": "clinical_seizure",
+    "arm_a": "M0",
+    "arm_b": "M2",
+    "both": 0,
+    "a_only": 0,
+    "b_only": 0,
+    "neither": 200,
+    "chi2": 0.0,
+    "p": 1.0
+  },
+  {
+    "module": "clinical_seizure",
+    "arm_a": "M1",
+    "arm_b": "M2",
+    "both": 0,
+    "a_only": 0,
+    "b_only": 0,
+    "neither": 200,
+    "chi2": 0.0,
+    "p": 1.0
+  },
+  {
+    "module": "medication",
+    "arm_a": "M0",
+    "arm_b": "M1",
+    "both": 5,
+    "a_only": 16,
+    "b_only": 27,
+    "neither": 152,
+    "chi2": 2.3255813953488373,
+    "p": 0.12726266362043936
+  },
+  {
+    "module": "medication",
+    "arm_a": "M0",
+    "arm_b": "M2",
+    "both": 0,
+    "a_only": 21,
+    "b_only": 0,
+    "neither": 179,
+    "chi2": 19.047619047619047,
+    "p": 1.2749674921042065e-05
+  },
+  {
+    "module": "medication",
+    "arm_a": "M1",
+    "arm_b": "M2",
+    "both": 0,
+    "a_only": 32,
+    "b_only": 0,
+    "neither": 168,
+    "chi2": 30.03125,
+    "p": 4.251394403187447e-08
+  }
+]

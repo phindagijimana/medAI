@@ -263,11 +263,15 @@ _UI_HTML = r"""<!DOCTYPE html>
         <label><input type="radio" name="arm" value="M2" checked /> M2 (few-shot + schema)</label>
       </div>
       <div class="form-row">
+        <label><input type="checkbox" id="chunk-mode" /> auto-chunk long notes (&gt; 8000 chars)</label>
+        <span id="chars-indicator" style="font-size:12px;color:var(--muted);"></span>
+      </div>
+      <div class="form-row">
         <button id="btn-extract">Extract phenotype</button>
         <button id="btn-clear" class="secondary">Clear</button>
         <span id="progress" style="font-size:12px; color:var(--muted);"></span>
       </div>
-      <p class="hint">M0 is fastest but rarely produces valid JSON without repair. M2 (with schema injected in the prompt) is slower but reaches ~95% final validity.</p>
+      <p class="hint">M0 is fastest but rarely produces valid JSON without repair. M2 (with schema injected in the prompt) is slower but reaches ~95% final validity. Enable <em>auto-chunk</em> for notes that exceed the model's context — chunks are extracted independently and merged with Evidence-aware rules.</p>
     </div>
 
     <div class="panel">
@@ -309,6 +313,7 @@ _UI_HTML = r"""<!DOCTYPE html>
     <div class="form-row">
       <input id="chat-q" type="text" placeholder="Type your question and press Enter…" style="flex:1; min-width:280px;" disabled />
       <button id="btn-chat-send" disabled>Ask</button>
+      <button id="btn-chat-clear" class="secondary" disabled>Clear history</button>
     </div>
     <div id="chat-history" style="margin-top:12px;"></div>
   </div>
@@ -325,6 +330,45 @@ _UI_HTML = r"""<!DOCTYPE html>
     lastResponse: null,
     chatRows: [],   // {question, answer, evidence_text, confidence, csv_row}
   };
+
+  // ---- Chat history persistence (localStorage) ----
+  const CHAT_KEY_PREFIX = "medai-epi-chat-v1:";
+  function chatKey(docId) { return CHAT_KEY_PREFIX + (docId || "__unspecified__"); }
+  function saveChatHistory() {
+    const doc_id = state.lastPhenotype?.document?.doc_id;
+    if (!doc_id) return;
+    try {
+      localStorage.setItem(chatKey(doc_id), JSON.stringify(state.chatRows));
+    } catch (e) { /* localStorage may be full or disabled — silent */ }
+  }
+  function loadChatHistory() {
+    const doc_id = state.lastPhenotype?.document?.doc_id;
+    if (!doc_id) return [];
+    try {
+      const raw = localStorage.getItem(chatKey(doc_id));
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+  function renderChatHistoryFromState() {
+    const wrap = $("chat-history");
+    wrap.innerHTML = "";
+    for (const c of [...state.chatRows].reverse()) {
+      const entry = document.createElement("div");
+      entry.style.cssText = "border-left: 3px solid var(--accent); padding: 8px 12px; margin-bottom: 8px; background: #f8fafc;";
+      const cert = c.confidence || "unknown";
+      entry.innerHTML =
+        `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Q:</div>` +
+        `<div style="font-weight:500;margin-bottom:6px;">${escapeHtml(c.question)}</div>` +
+        `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">A:</div>` +
+        `<div style="margin-bottom:6px;">${escapeHtml(c.answer || "—")} ` +
+        `<span class="field-cert cert-${cert}" style="margin-left:6px;">${cert}</span></div>` +
+        (c.evidence_text
+          ? `<div style="font-size:12px;color:var(--muted);">Evidence:</div>` +
+            `<div style="font-style:italic;color:#334155;">"${escapeHtml(c.evidence_text)}"</div>`
+          : ``);
+      wrap.appendChild(entry);
+    }
+  }
 
   // ---- Disclaimer modal ----
   const ACK_KEY = "medai-epi-ack-v1";
@@ -384,6 +428,80 @@ _UI_HTML = r"""<!DOCTYPE html>
   // Trigger backend load by hitting /extract/health once — it doesn't
   // itself trigger, but /extract does. We could also add a POST here.
 
+  // ---- NDJSON streaming client for /extract/stream ----
+  async function streamedExtract(endpoint, body) {
+    const r = await fetch(endpoint, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      throw new Error(err.error || r.statusText);
+    }
+    const reader = r.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "";
+    let final = null;
+    const perModuleStatus = {};
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let idx;
+      while ((idx = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, idx).trim();
+        buf = buf.slice(idx + 1);
+        if (!line) continue;
+        let evt;
+        try { evt = JSON.parse(line); } catch (_) { continue; }
+        if (evt.event === "module_start") {
+          perModuleStatus[evt.module] = `starting (${evt.n_done + 1}/${evt.n_total})`;
+        } else if (evt.event === "module_done") {
+          perModuleStatus[evt.module] =
+            (evt.final_valid ? "✓" : "✗") +
+            (evt.repair_method && evt.repair_method !== "none" ? ` [${evt.repair_method}]` : ``) +
+            `  ${evt.duration_s?.toFixed(1)}s`;
+        } else if (evt.event === "final") {
+          final = {
+            phenotype: evt.phenotype,
+            summary: evt.summary,
+            arm: evt.arm,
+            doc_type: evt.phenotype?.document?.doc_type,
+            schema_version: evt.phenotype?.schema_version,
+            manifests: Object.entries(evt.summary || {}).map(([mname, m]) => ({
+              module: mname, ...m,
+            })),
+          };
+        } else if (evt.event === "error") {
+          throw new Error(evt.error);
+        }
+        // Live progress paint
+        const lines = Object.entries(perModuleStatus).map(
+          ([m, s]) => `${m}: ${s}`
+        );
+        $("progress").textContent = lines.join("  ·  ");
+      }
+    }
+    if (!final) throw new Error("stream ended without a final event");
+    return final;
+  }
+
+  // ---- Live character counter + auto-chunk suggestion ----
+  function updateCharCount() {
+    const n = $("source-text").value.length;
+    const CHUNK_THRESHOLD = 8000;
+    const el = $("chars-indicator");
+    el.textContent = `${n.toLocaleString()} chars`;
+    if (n > CHUNK_THRESHOLD) {
+      el.textContent += `  — exceeds ${CHUNK_THRESHOLD} chars, auto-chunk recommended`;
+      el.style.color = "var(--warn)";
+    } else if (n > 0) {
+      el.style.color = "var(--muted)";
+    }
+  }
+  $("source-text").addEventListener("input", updateCharCount);
+
   // ---- Doc-type autodetect on textarea blur ----
   $("source-text").addEventListener("blur", async () => {
     const text = $("source-text").value.trim();
@@ -425,29 +543,45 @@ _UI_HTML = r"""<!DOCTYPE html>
     $("phenotype").innerHTML = '<div class="phenotype-empty">Running…</div>';
     $("summary").classList.add("hidden");
 
+    const useChunk = $("chunk-mode").checked;
+    // Chunk mode → /extract/long (JSON). Non-chunk mode → /extract/stream
+    // (NDJSON, per-module progress).
+    const useStream = !useChunk;
+    const endpoint = useChunk ? "/extract/long" : "/extract/stream";
     try {
-      const r = await fetch("/extract", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({source_text: text, doc_type, arm}),
-      });
-      const d = await r.json();
+      let d;
+      if (useStream) {
+        d = await streamedExtract(endpoint, {source_text: text, doc_type, arm});
+      } else {
+        const r = await fetch(endpoint, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({source_text: text, doc_type, arm}),
+        });
+        if (!r.ok) {
+          const errBody = await r.json().catch(() => ({}));
+          throw new Error(errBody.error || r.statusText);
+        }
+        d = await r.json();
+      }
       const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
       $("progress").textContent = `Done in ${elapsed}s.`;
-      if (!r.ok) {
+      if (!d || !d.phenotype) {
         $("phenotype").innerHTML =
-          `<div class="phenotype-empty" style="color:var(--danger);">Error: ${d.error || r.statusText}</div>`;
+          `<div class="phenotype-empty" style="color:var(--danger);">Error: no phenotype in response</div>`;
       } else {
         state.lastPhenotype = d.phenotype;
         state.lastResponse = d;
         state.lastSource = text;
-        state.chatRows = [];
-        $("chat-history").innerHTML = "";
+        // Restore any persisted chat history for this doc_id
+        state.chatRows = loadChatHistory();
+        renderChatHistoryFromState();
         renderPhenotype(d);
         $("btn-download-json").disabled = false;
         $("btn-download-csv").disabled = false;
         $("chat-q").disabled = false;
         $("btn-chat-send").disabled = false;
+        $("btn-chat-clear").disabled = state.chatRows.length === 0;
       }
     } catch (e) {
       $("phenotype").innerHTML =
@@ -473,6 +607,7 @@ _UI_HTML = r"""<!DOCTYPE html>
     $("btn-chat-send").disabled = true;
     $("btn-download-json").disabled = true;
     $("btn-download-csv").disabled = true;
+    $("chars-indicator").textContent = "";
   });
 
   // ---- Chat action ----
@@ -512,6 +647,8 @@ _UI_HTML = r"""<!DOCTYPE html>
           evidence_text: d.evidence_text, confidence: d.confidence,
           csv_row: d.csv_row,
         });
+        saveChatHistory();
+        $("btn-chat-clear").disabled = false;
         const cert = d.confidence || "unknown";
         entry.innerHTML =
           `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Q &nbsp;(${elapsed}s):</div>` +
@@ -534,6 +671,15 @@ _UI_HTML = r"""<!DOCTYPE html>
   $("btn-chat-send").addEventListener("click", sendChat);
   $("chat-q").addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
+  });
+  $("btn-chat-clear").addEventListener("click", () => {
+    const doc_id = state.lastPhenotype?.document?.doc_id;
+    if (doc_id) {
+      try { localStorage.removeItem(chatKey(doc_id)); } catch (_) {}
+    }
+    state.chatRows = [];
+    $("chat-history").innerHTML = "";
+    $("btn-chat-clear").disabled = true;
   });
 
   // ---- Phenotype rendering ----

@@ -68,6 +68,7 @@ data/rag_cache/
 !eval/results/*.md
 !writing/*.md
 !docs/APP_*.md
+!docs/FUTURE_*.md
 
 # Environment
 .env
