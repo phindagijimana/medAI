@@ -1,0 +1,12 @@
+gate,status,basis
+G01,PASS,Med42 removed from primary generation registry.
+G02,PASS,Three GPT generator IDs verified against official OpenAI API documentation on 2026-09-25.
+G03,PASS,Same GPT-5.6 family selected to reduce family-level confounding.
+G04,PASS,Reasoning effort held at medium across GPT generators; official docs list medium as default.
+G05,PASS,No rendering tools enabled; independent request per document.
+G06,PASS,Only clinic-letter and limited EEG document families included.
+G07,PASS,"Clinical values restricted to upstream frozen semantics; no new seizure subtype, EEG feature, syndrome, DRE, MRI, or RxNorm mapping introduced."
+G08,PASS,"Synthetic frequency quantities explicitly classified as experimental fixtures, not prevalence claims."
+G09,PASS,C1-C3 prompts and semantic plans frozen before outputs.
+G10,PENDING EXECUTION,API response model identifier/request metadata and output hashes can only be recorded when actual requests are executed.
+G11,BLOCK CLAIMS,"No generator performance, clinical realism, utility, privacy, or superiority claim is authorized before execution and adjudication."

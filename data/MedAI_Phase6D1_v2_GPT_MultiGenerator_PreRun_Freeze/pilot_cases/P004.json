@@ -1,0 +1,14 @@
+{
+  "patient_id": "P004",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "unknown_epilepsy_type",
+  "events": [
+    {
+      "id": "E006",
+      "field": "EP_TYPE",
+      "value": "Unknown",
+      "source": "ILAE 2017"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE \u2014 NOT PREVALENCE"
+}

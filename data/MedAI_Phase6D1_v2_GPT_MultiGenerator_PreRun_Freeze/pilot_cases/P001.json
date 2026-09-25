@@ -1,0 +1,24 @@
+{
+  "patient_id": "P001",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_epilepsy",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "Focal",
+      "source": "ILAE 2017"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 2,
+        "unit": "month"
+      },
+      "source": "ExECTv2/SZFreqExtract-compatible representation",
+      "fixture_note": "Experimental quantity; not prevalence."
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE \u2014 NOT PREVALENCE"
+}

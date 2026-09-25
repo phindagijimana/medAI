@@ -1,0 +1,26 @@
+{
+  "patient_id": "P001",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "Focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 2,
+        "unit": "month"
+      }
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL"
+}

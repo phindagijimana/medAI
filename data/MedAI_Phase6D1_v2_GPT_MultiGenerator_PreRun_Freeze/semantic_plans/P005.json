@@ -1,0 +1,19 @@
+{
+  "patient_id": "P005",
+  "document_family": "eeg_report",
+  "allowed_source_event_ids": [
+    "E007"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E007",
+      "field": "EEG_RESULT",
+      "value": "Normal"
+    }
+  ],
+  "prohibited_assertions": [
+    "Do not infer an epilepsy diagnosis or seizure classification from EEG result alone."
+  ],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL"
+}

@@ -1,0 +1,58 @@
+{
+  "registry_version": "2.0",
+  "design_rationale": "Use three officially documented GPT-5.6 tiers from the same model family to test generator robustness while reducing model-family confounding.",
+  "reasoning_effort_policy": "medium for all three models; official docs identify medium as default. Held constant across the primary comparison.",
+  "tool_policy": "No web search, file search, code interpreter, or external tools during document rendering.",
+  "conversation_policy": "Each render is an independent API request; no cross-case conversational state.",
+  "output_policy": "Raw first output retained; no selective regeneration.",
+  "generators": [
+    {
+      "generator_id": "GPT56-LUNA",
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-luna",
+      "role": "cost-sensitive/high-volume GPT generator",
+      "reasoning_effort": "medium",
+      "context_window": 1050000,
+      "max_output_tokens": 128000,
+      "knowledge_cutoff": "2026-02-16",
+      "api_endpoint": "Responses API",
+      "source": "OpenAI official model documentation",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+    },
+    {
+      "generator_id": "GPT56-TERRA",
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-terra",
+      "role": "balanced intelligence/cost GPT generator",
+      "reasoning_effort": "medium",
+      "context_window": 1050000,
+      "max_output_tokens": 128000,
+      "knowledge_cutoff": "2026-02-16",
+      "api_endpoint": "Responses API",
+      "source": "OpenAI official model documentation",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+    },
+    {
+      "generator_id": "GPT56-SOL",
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-sol",
+      "role": "flagship GPT-5.6 generator",
+      "reasoning_effort": "medium",
+      "context_window": 1050000,
+      "max_output_tokens": 128000,
+      "knowledge_cutoff": "2026-02-16",
+      "api_endpoint": "Responses API",
+      "source": "OpenAI official model documentation",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+    }
+  ],
+  "excluded_from_primary_generation": [
+    "Med42-8B"
+  ],
+  "non_llm_control": {
+    "id": "C0",
+    "type": "deterministic template renderer",
+    "note": "Control, not a GPT generator."
+  },
+  "snapshot_policy": "If a dated/immutable snapshot is exposed to the executing account, record and use it. Otherwise record the exact model ID, API response model identifier, timestamp, request ID where available, and all request parameters. Do not invent a snapshot."
+}

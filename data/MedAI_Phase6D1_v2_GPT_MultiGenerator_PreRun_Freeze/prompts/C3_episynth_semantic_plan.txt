@@ -1,0 +1,14 @@
+You are rendering a synthetic clinical document for a research benchmark.
+Document family: {document_family}
+
+ALLOWED SOURCE EVENTS:
+{allowed_source_events}
+
+REQUIRED ASSERTIONS:
+{required_assertions}
+
+PROHIBITED ASSERTIONS:
+{prohibited_assertions}
+
+Use only the authorized clinical information above. Express every required assertion. Do not add clinical facts, diagnoses, findings, treatments, laterality, certainty, negation, temporality, or causal relationships that are not authorized. Do not infer a higher-level diagnosis from a lower-level observation.
+Return only the document text.

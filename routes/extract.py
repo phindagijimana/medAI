@@ -51,6 +51,54 @@ def _no_cache(resp: Response) -> Response:
     return resp
 
 
+# ---------------------------------------------------------------------------
+# Multi-model backend selector
+# ---------------------------------------------------------------------------
+
+_SUPPORTED_MODELS = {"med42", "openai", "deepseek"}
+
+
+def _resolve_backend(model_name: str | None):
+    """Return a `ModelBackend`-conformant object for `model_name`.
+
+    - "med42" (default)  → the app-attached Med42Backend (needs GPU + weights)
+    - "openai:<id>"      → OpenAIBackend, e.g. "openai:gpt-5.6-sol"
+    - "deepseek"         → DeepSeekBackend (lazy-loaded on first request)
+
+    Returns (backend, error_message). error_message is None on success.
+    """
+    if not model_name or model_name.lower() in ("med42", "med42-8b"):
+        ensure = getattr(current_app, "ensure_med42_loaded", None)
+        if callable(ensure):
+            ensure()
+        backend = getattr(current_app, "med42_backend", None)
+        if backend is None:
+            status = getattr(current_app, "med42_backend_status", "unknown")
+            return None, f"Med42 backend not yet ready (status={status!r}); retry in 30–60 s."
+        return backend, None
+
+    if model_name.lower().startswith("openai"):
+        model_id = "gpt-5.6-sol"
+        if ":" in model_name:
+            _, model_id = model_name.split(":", 1)
+        try:
+            from services.openai_backend import OpenAIBackend
+            return OpenAIBackend(model_name=model_id), None
+        except Exception as e:
+            return None, f"OpenAIBackend init failed: {type(e).__name__}: {e}"
+
+    if model_name.lower().startswith("deepseek"):
+        try:
+            from services.deepseek_backend import DeepSeekBackend
+            b = DeepSeekBackend()
+            b.load()   # eager-load so we fail fast if weights aren't cached
+            return b, None
+        except Exception as e:
+            return None, f"DeepSeekBackend init failed: {type(e).__name__}: {e}"
+
+    return None, f"unsupported model {model_name!r}. Choose from: {sorted(_SUPPORTED_MODELS)}"
+
+
 @extract_bp.route("", methods=["POST"])
 def extract() -> Any:
     # Lazy imports so this module can load even if paper-track deps or the
@@ -100,19 +148,11 @@ def extract() -> Any:
         patient_id=patient_id, icd10cm_codes=icd, snomed_ct_codes=snomed,
     )
 
-    # Backend selection — trigger lazy Med42 load if not yet started
-    ensure = getattr(current_app, "ensure_med42_loaded", None)
-    if callable(ensure):
-        status = ensure()
-    else:
-        status = "not_available"
-    backend = getattr(current_app, "med42_backend", None)
-    if backend is None:
-        return _bad(
-            f"Med42 backend not yet ready (status={status!r}). The model loads "
-            "on first request to /extract/*; retry in 30–60 s.",
-            503,
-        )
+    # Backend selection — Med42 (default) / OpenAI / DeepSeek
+    model_name = payload.get("model") or request.args.get("model") or "med42"
+    backend, err = _resolve_backend(model_name)
+    if err is not None:
+        return _bad(err, 503 if "not yet ready" in err else 400)
 
     decoding = DecodingConfig(
         do_sample=False, temperature=None, top_p=None,
@@ -130,6 +170,33 @@ def extract() -> Any:
     except Exception as e:
         logger.exception("extract_phenotype failed")
         return _bad(f"extraction failure: {type(e).__name__}: {e}", 500)
+
+    # Optional verifier pass — a *different* model reviews each Evidence.
+    verifier_verdicts = None
+    verify_flag = (
+        payload.get("verify") in (True, 1, "1", "true", "yes")
+        or request.args.get("verify") in ("1", "true", "yes")
+    )
+    verifier_model = payload.get("verifier_model") or request.args.get("verifier_model")
+    if verify_flag and verifier_model:
+        try:
+            from services.llm_verifier import verify_phenotype
+            verifier_backend, vb_err = _resolve_backend(verifier_model)
+            if vb_err is None and verifier_backend is not backend:
+                verifier_verdicts = [
+                    v.as_dict() for v in verify_phenotype(
+                        verifier_backend=verifier_backend,
+                        source_text=src,
+                        phenotype=result.phenotype.model_dump(mode="json"),
+                        decoding=DecodingConfig(
+                            do_sample=False, temperature=None, top_p=None,
+                            max_new_tokens=256, seed=0,
+                        ),
+                    )
+                ]
+        except Exception as e:
+            logger.exception("verifier pass failed")
+            verifier_verdicts = [{"error": f"{type(e).__name__}: {e}"}]
 
     resp_json = {
         "phenotype": result.phenotype.model_dump(mode="json"),
@@ -150,8 +217,14 @@ def extract() -> Any:
         "schema_version": SCHEMA_VERSION,
         "arm": arm,
         "doc_type": doc_type.value,
+        "model": model_name,
         "processing_time_s": (datetime.utcnow() - t0).total_seconds(),
     }
+    if verifier_verdicts is not None:
+        resp_json["verifier"] = {
+            "model": verifier_model,
+            "verdicts": verifier_verdicts,
+        }
     return _no_cache(jsonify(resp_json))
 
 

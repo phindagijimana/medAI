@@ -141,6 +141,11 @@ def cmd_extract(args):
         payload["doc_id"] = args.doc_id
     if args.patient_id:
         payload["patient_id"] = args.patient_id
+    if getattr(args, "model", None):
+        payload["model"] = args.model
+    if getattr(args, "verify", False) and getattr(args, "verifier_model", None):
+        payload["verify"] = True
+        payload["verifier_model"] = args.verifier_model
     status, body, _ = _http("POST", f"{args.server}/extract", body=payload)
     _die_on_error(status, body)
     print(json.dumps(json.loads(body), indent=2))
@@ -283,6 +288,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--doc-type", required=True,
                      help="e.g. progress_note / mri_report / eeg_report")
     sp.add_argument("--arm", default="M2", choices=["M0", "M1", "M2"])
+    sp.add_argument("--model", default=None,
+                     help="med42 (default) / deepseek / openai[:model_id]")
+    sp.add_argument("--verify", action="store_true",
+                     help="run a verifier pass with --verifier-model")
+    sp.add_argument("--verifier-model", default=None,
+                     help="e.g. openai:gpt-5.6-terra or deepseek")
     sp.add_argument("--doc-id", default=None)
     sp.add_argument("--patient-id", default=None)
     sp.set_defaults(func=cmd_extract)

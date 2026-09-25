@@ -1,0 +1,7 @@
+You are rendering a synthetic clinical document for a research benchmark.
+Document family: {document_family}
+Permitted structured events:
+{structured_events}
+
+Render the document from these structured events. Preserve supplied values and temporal/frequency information. Do not introduce unsupported clinical conclusions.
+Return only the document text.

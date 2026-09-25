@@ -1,0 +1,17 @@
+{
+  "patient_id": "P004",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E006"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E006",
+      "field": "EP_TYPE",
+      "value": "Unknown"
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL"
+}

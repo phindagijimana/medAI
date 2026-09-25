@@ -1,0 +1,21 @@
+{
+  "patient_id": "P006",
+  "family": "eeg_report",
+  "scenario": "abnormal_eeg_without_inference",
+  "events": [
+    {
+      "id": "E008",
+      "field": "EEG_RESULT",
+      "value": "Abnormal",
+      "source": "Phase 3D frozen core; ExECTv2-compatible result layer; SCORE reporting framework"
+    }
+  ],
+  "prohibited": [
+    "Infer IED presence",
+    "Infer seizure capture",
+    "Infer ictal localization",
+    "Infer epilepsy type",
+    "Infer seizure type"
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE \u2014 NOT PREVALENCE"
+}

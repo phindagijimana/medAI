@@ -1,0 +1,17 @@
+{
+  "patient_id": "P003",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E005"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E005",
+      "field": "EP_TYPE",
+      "value": "Combined generalized and focal"
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL"
+}

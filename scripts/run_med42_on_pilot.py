@@ -36,9 +36,7 @@ from services.med42_model import Med42ModelService
 from services.router import extract_phenotype
 
 RUN_DIR = REPO / "data" / "episynth_pilot" / "run_001"
-FREEZE_DIR = Path(
-    "/tmp/phase6d1v2/MedAI_Phase6D1_v2_GPT_MultiGenerator_PreRun_Freeze"
-)
+FREEZE_DIR = REPO / "data" / "MedAI_Phase6D1_v2_GPT_MultiGenerator_PreRun_Freeze"
 
 
 class _Config:

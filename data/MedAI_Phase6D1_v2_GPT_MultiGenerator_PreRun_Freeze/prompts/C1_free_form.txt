@@ -1,0 +1,7 @@
+You are rendering a synthetic clinical document for a research benchmark.
+Document family: {document_family}
+Synthetic case information:
+{case_information}
+
+Write one plausible document of the requested family using the supplied case information. Do not state that the patient is real. Do not deliberately add facts that conflict with the supplied information.
+Return only the document text.

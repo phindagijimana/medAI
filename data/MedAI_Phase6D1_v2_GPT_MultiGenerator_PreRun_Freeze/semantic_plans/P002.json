@@ -1,0 +1,26 @@
+{
+  "patient_id": "P002",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E003",
+    "E004"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E003",
+      "field": "EP_TYPE",
+      "value": "Generalized"
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 1,
+        "unit": "week"
+      }
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL"
+}

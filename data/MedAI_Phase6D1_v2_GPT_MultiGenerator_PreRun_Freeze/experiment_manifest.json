@@ -1,0 +1,22 @@
+{
+  "phase": "6D.1 v2",
+  "status": "PASS \u2014 GPT MULTI-GENERATOR PRE-RUN FREEZE; NO RESULTS",
+  "date": "2026-09-25",
+  "primary_generators": [
+    "gpt-5.6-luna",
+    "gpt-5.6-terra",
+    "gpt-5.6-sol"
+  ],
+  "conditions": [
+    "C0 deterministic control",
+    "C1 free-form",
+    "C2 structured events",
+    "C3 EpiSynth semantic plan"
+  ],
+  "pilot_case_count": 6,
+  "planned_gpt_renders": 54,
+  "planned_non_llm_controls": 6,
+  "total_planned_documents": 60,
+  "primary_question": "Does explicit EpiSynth semantic planning improve truth preservation across multiple GPT-5.6 generator tiers relative to less constrained generation conditions?",
+  "results_exist": false
+}

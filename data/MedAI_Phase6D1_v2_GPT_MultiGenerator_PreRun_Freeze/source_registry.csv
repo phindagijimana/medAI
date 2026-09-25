@@ -1,0 +1,9 @@
+source_id,source,class,locator,use
+OPENAI-MODELS,OpenAI API model catalog,Official API documentation,https://developers.openai.com/api/docs/models,Verifies current model IDs/capability family.
+OPENAI-SOL,GPT-5.6 Sol model page,Official API documentation,https://developers.openai.com/api/docs/models/gpt-5.6-sol,Verifies gpt-5.6-sol and model characteristics.
+OPENAI-TERRA,GPT-5.6 Terra model page,Official API documentation,https://developers.openai.com/api/docs/models/gpt-5.6-terra,Verifies gpt-5.6-terra and model characteristics.
+OPENAI-LUNA,GPT-5.6 Luna model page,Official API documentation,https://developers.openai.com/api/docs/models/gpt-5.6-luna,Verifies gpt-5.6-luna and model characteristics.
+ILAE17,"Scheffer et al., ILAE classification of the epilepsies",Authoritative clinical classification,DOI:10.1111/epi.13709,Epilepsy-type values.
+EXECT24,Fonferko-Shadrach et al. 2024,Published epilepsy NLP annotation method,DOI:10.1186/s13326-024-00316-z,Clinic-letter precedent and seizure-frequency representation.
+SCORE17,Beniczky et al. 2017 SCORE,Published EEG reporting standard,DOI:10.1016/j.clinph.2017.07.418,EEG reporting framework.
+MEDAI-UPSTREAM,"MedAI Phases 3D/4.1, 4, 5, 6A-6D",Internal source-audited specifications,internal,"Frozen application profile, evidence rules, pilot protocol."

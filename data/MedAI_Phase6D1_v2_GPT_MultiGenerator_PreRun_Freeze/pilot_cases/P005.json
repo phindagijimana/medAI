@@ -1,0 +1,14 @@
+{
+  "patient_id": "P005",
+  "family": "eeg_report",
+  "scenario": "normal_eeg",
+  "events": [
+    {
+      "id": "E007",
+      "field": "EEG_RESULT",
+      "value": "Normal",
+      "source": "Phase 3D frozen core; ExECTv2-compatible result layer; SCORE reporting framework"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE \u2014 NOT PREVALENCE"
+}
