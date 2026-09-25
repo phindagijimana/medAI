@@ -10,13 +10,16 @@
 #SBATCH --output=logs/medai_lora_%j.out
 #SBATCH --error=logs/medai_lora_%j.err
 #
-# Submit:  sbatch scripts/slurm_finetune_med42.sh
+# Submit:  sbatch [--export=ALL,BASE_MODEL=deepseek,CORPUS=both] \
+#              scripts/slurm_finetune_med42.sh
 #
-# LoRA fine-tune Med42-8B on the MedAI-EPI pilot (prompt, target_phenotype)
-# pairs. Adapter weights land in checkpoints/med42_lora_epi/.
+# LoRA fine-tune Med42-8B (or DeepSeek-R1-Distill-Llama-8B) on MedAI-EPI
+# (prompt, target_phenotype) pairs. Adapter lands in
+# checkpoints/{model_slug}_lora_epi/.
 #
-# Note: at n=60 pairs this is a scaffold/pilot run; a real Shape D
-# fine-tune needs the scaled synthetic corpus (docs/FUTURE_WORK.md Shape C).
+# Env knobs (both optional, both default shown):
+#   BASE_MODEL=med42            # or deepseek, or any HF id
+#   CORPUS=pilot                # or synth-v1, or both
 
 set -euo pipefail
 
@@ -48,10 +51,11 @@ if command -v nvidia-smi >/dev/null 2>&1; then
 fi
 
 cd "$APP_HOME"
+BASE_MODEL="${BASE_MODEL:-med42}"
+CORPUS="${CORPUS:-pilot}"
 echo ""
-echo "--- Running LoRA fine-tune ---"
-$PY scripts/finetune_med42_lora.py
+echo "--- Running LoRA fine-tune (base=$BASE_MODEL corpus=$CORPUS) ---"
+$PY scripts/finetune_lora_epi.py --base-model "$BASE_MODEL" --corpus "$CORPUS"
 
 echo ""
 echo "Finished: $(date)"
-echo "Adapter: checkpoints/med42_lora_epi/"
