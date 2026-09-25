@@ -1,0 +1,16 @@
+{
+  "phase": "6D.3-G2",
+  "created_at": "2026-09-25T10:01:29.410688+00:00",
+  "pilot_run_dir": "data/episynth_pilot/run_001",
+  "freeze_dir_used": "/tmp/phase6d1v2/MedAI_Phase6D1_v2_GPT_MultiGenerator_PreRun_Freeze",
+  "documents_processed": 60,
+  "total_g2_records": 141,
+  "notes": [
+    "P01: expected_assertion_id and event links pre-populated from G1.",
+    "P02: candidate_status='candidate' on every span; NO machine-only promotion.",
+    "P03: no G3 records are written by this script.",
+    "P04: rendered meaning is captured; discrepancies with G0/G1 are flagged for human review.",
+    "P05: fields outside the small MEDAI-PROPOSED surface-form table are not projected.",
+    "This artifact is a machine-projection candidate set. Two independent human annotators must review, then adjudicate to produce G3."
+  ]
+}

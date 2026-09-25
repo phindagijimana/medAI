@@ -1,0 +1,107 @@
+{
+  "id": "resp_00fc9ff57c62fea8016ab63ae5dc4887d2a96975a252a7038b",
+  "created_at": 1790327525.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_00fc9ff57c62fea8016ab63ae6ba0c87d29ae6f29457e9c75e",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjrtkG7HDNB9lsDnADCfhsZm9J5Urd-AgJS3GsuKkqM5_lH49XvNe7sKyBX5UyVLwwnMqRKRmzbVhZ38BWJpk-GsC02y517BnC1ZT4IWNxu2W9Y4yRdJjku2akxIyO5h11cf5ZtBSDG_zP8-mwFev0XK4_6hSPBluWpBelc4t92_XKpfnYLehUIyI1lzA2SBGJX45kpGYNSoBJ7CQsbEpV0QwvyGTNgTBo39w9QdUmiJQWm9ynsn7sa6RorYkJpW42qzbYxJxGtvQzpOu8VG429LJVtTW7Hr1toObPMS-fTn9syEE-fISoB1xxR72b2VAHq4YJe-jAhjQlT0UFj5-cde1fZQPfbcrd7kkeiHPXY1_e10Ut1XuK6ogFRYCPmGIpBy-5V4eq1x8ubmvUGDyBd-19hVlzOqiu9K_ueit5aFiYPMdLhMDYnhSz1fhxvpUdr1qTqsgjSIn5N4lBZgRAiLudyUDwL7zBoJmuKgiwXf9PWR5VqpwmoIUTU6A7L5T2FgP4Foa0wZTlYuAZRVStnxyGJnTL6DFi2bTjfqmkg9noUV6WJ7OUi-VvW2UPI5PrXmttk7ThYCPK4u98OdIO71dAgDgELdu5DIfWUCa3tBv1IhLq8P-le5wyavoCwJ1LYYioFWDHTHOaJLKe8hYMhtb0cisf78SmrFrazCKgQxWAsN-DW7ooFmesUkpnHzyaFHzsC0A7r6bn9612NULrqvZvpcf2atYO9qJ83yfVYsbLZvtLZD4SsF94YsNYs84LFLxo_CcjZJVD8BlRuMtUtr2Q9w08L9uC8FgChRZgJwjPzUsvgV37P7enSp5L6jh9NwQvrgrrGhcfAVmEEIMHLIrS4Kv2phOI_S4IUmZtjj1N22HK2AKlVQ0pqIivSGIRTEzK1H-y__4rl-gB6Pbm-6z5tHd_05aAXG9m_HAbXTJqHAQ9_eBmUf3zUp4HyqedHlwHtEfo7Ssd40vg3y7P91VXQMwc_SuWAPlFSS6LKJGOCrspBqFvqdSjVjxRepp2lMuVXsNSqToGY4uXWmHh4zv99jtWtkVchOzsl0lLkkZeT1S0lgkz474396-rlyjcLi9VM_rSJReJnUnCtOK5vsDFssHhbjTwUazJX1D7z72O3Q0lbwcHKAjlaThJU5PRNeTIF3TJQEYwhO4H1aiOiqMAQRlp6G8z3obPwaidnb8LsXnOtaXcpCYd7pDOsinFQZfRUxb-LDo0GZHTwD1aJGF_a--MGeQ2vcJnAfHX1HfrYCluz5rbBHCbY8d4SGAOrvIaEggYmZTZDm0hUbrt_HlooyKBxa7aTHmWVx1Tt1PCCGBB3aJ07Xwc44ijRwpWQ8Y6QTwd2NdIRH-s3-Dkj4lCNzlBNI3kG6OpBC5EAlcvGPmnYF9EuHA_Zo5h8KqWjq3pBpguDqtB_AzuFgokNcwcCQWBkkV6wk2RTFlSwueVqx9KqWC6NJ5m1NFu4TLzUGoYiMvU3BojRFpvHTlxTsF4PvSNFvA5f3HswC_jYdgaIRLsEMEMZeIaPxWGpsLHlZlG09-JGyobSF_HD4PZ6Ux-FPQ2vB9Tp9ffOKVnXUDcSgmwh6sldfeglbthxya4Bcpv6U6TNfIePwoxTcN0-hyjN5387cHCwiFt5Puy_gHcM=",
+      "status": null
+    },
+    {
+      "id": "msg_00fc9ff57c62fea8016ab63ae8137c87d2b3f3738b1071378c",
+      "content": [
+        {
+          "annotations": [],
+          "text": "EEG REPORT\n\nPatient ID: E008  \nStudy Type: Routine EEG  \nClinical Indication: Evaluation for possible seizures.\n\nTechnical Description:  \nA routine digital EEG was recorded using the international 10-20 electrode placement system with additional ECG monitoring. Recording included awake and drowsy states. Hyperventilation and intermittent photic stimulation were performed.\n\nFindings:  \nThe posterior dominant rhythm was poorly sustained at 8 Hz and reactive to eye opening. Intermittent polymorphic delta-theta slowing was present over the left temporal region, maximal at T3/T5, with occasional spread to the left frontotemporal electrodes. No definite epileptiform discharges were identified. No electrographic seizures were recorded.\n\nHyperventilation did not produce additional abnormalities. Photic stimulation did not elicit a photoparoxysmal response.\n\nImpression:  \nAbnormal EEG due to intermittent left temporal focal slowing, suggesting focal cerebral dysfunction in this region. No epileptiform discharges or electrographic seizures were captured during this recording.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327533.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 124,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 281,
+    "output_tokens_details": {
+      "reasoning_tokens": 68
+    },
+    "total_tokens": 405
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

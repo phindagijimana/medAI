@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-luna",
+  "input": "You are rendering a synthetic clinical document for a research benchmark.\nDocument family: epilepsy_clinic_letter\n\nALLOWED SOURCE EVENTS:\n[\n  {\n    \"id\": \"E003\",\n    \"field\": \"EP_TYPE\",\n    \"value\": \"Generalized\",\n    \"source\": \"ILAE 2017\"\n  },\n  {\n    \"id\": \"E004\",\n    \"field\": \"SZ_FREQ\",\n    \"value\": {\n      \"quantity\": 1,\n      \"unit\": \"week\"\n    },\n    \"source\": \"ExECTv2/SZFreqExtract-compatible representation\",\n    \"fixture_note\": \"Experimental quantity; not prevalence.\"\n  }\n]\n\nREQUIRED ASSERTIONS:\n[\n  {\n    \"event_id\": \"E003\",\n    \"field\": \"EP_TYPE\",\n    \"value\": \"Generalized\"\n  },\n  {\n    \"event_id\": \"E004\",\n    \"field\": \"SZ_FREQ\",\n    \"value\": {\n      \"quantity\": 1,\n      \"unit\": \"week\"\n    }\n  }\n]\n\nPROHIBITED ASSERTIONS:\n[]\n\nUse only the authorized clinical information above. Express every required assertion. Do not add clinical facts, diagnoses, findings, treatments, laterality, certainty, negation, temporality, or causal relationships that are not authorized. Do not infer a higher-level diagnosis from a lower-level observation.\nReturn only the document text.",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

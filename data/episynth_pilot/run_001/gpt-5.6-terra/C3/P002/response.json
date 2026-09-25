@@ -1,0 +1,107 @@
+{
+  "id": "resp_020cdcbaf2742b93016ab63a8391a087d2b173397f542bbdce",
+  "created_at": 1790327427.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_020cdcbaf2742b93016ab63a8460d087d2861fc034b960b893",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqFhD3AclNlSPF_53JLFuhPC691MdxcmPL00-UtFg9QVumHtzz4YWuiLLk4WTO4rol5T5lPEX55M0ZsMtNMLLyuf-WLHsKIpkE0Hx3qg4oUiWHys9nBmsiOVhYbxRoopTyGTvveebbI6RWse1xN0wscrR0uejLKWX9q_aASU3a64fsR62K2m_9C9qjxyAYvLokIKmuLuRXZXCui2Tad_KTdbFN12GZYU4mRsQmna9Oi0UUGIqb-U3oicGWWXxQZ-O3f8UMi3u_xufOSfF0jwL9qlIhWY7Q2PKvIgLmZNeQeIj-HtIErNDuPzfxtwLetw5zMYKZtVqpR6UkcmYetoEWTRpUlaEz5tADRb2fTWNar_GuZ3PJno5PVINuxEP1A-QqBMwCKIHGBEStKTEFxPJrY--Sko-E9Od91MYorv601rO4mdV_F89T5HTYS0v4PD3T1a4_Nc81kJQjDJK2YwN8sA6K361NU4OCx5kyBKDw7NuFlz26OqC0JC16VP7stpDD1CTmKUH6YnMDwpO1IBqSDl5Vd-10plIWyMNNaE92v2wWiKjmw3XReSxiclrxQIW6lbYiboLoLMChykfe9RwI4JpCqi2JxXX_Wl2E0hucbnqSuKXLUlFOirqxOZ99k57ui1TBUZqQfm43nJm6CTcFK9xVByNignwS7jrNzyGfmSgNrddCbmhjmE7Ig85Jy5gIcTIPCXo2lLqyYTNKLhElEO7g8zVoXlFTT9uAVcV25GMI78guAkqwR5EE-VAN-prxuiACELpyWqlwy0cQ0qOHetpZGaj5nmM321ynzZ0L8Wkq3SP066UW6mw_IGDe_xGPFzt6Ea6zO6FyAFG9rOsqfrv-CWpyk3bxNl0v0eqxyDCNRTkcGCRiLV0WdXLYJTnt3CdVgMxbsy9CUb2H2IYSSL2T0L0V5ynGoupV6XptdOn4EN2VtWNzoV89JQRpOJ3JdI6zAaJbUJUJf5leqHldkjwuijVNgz6rGHK82DXz0HeDJ-eWPUNLBV-sNICfohqSg18dD1xhku4z5v3SkMH9RJ9aSsE2QjfFGnACt_AJDRo8n1O9QdyDQwXKtd2h3SwSMWjKkIwdM2uYOeT0L6s7YKZwEG0jdCTL9ahvgKGzIKIUkVmJMkGtJVHOCwy1cwttkaT4OQ5AZJ-n6wjMuKTxWAryAj8mYPQfYJurQADF_thNk8iWfw47WNKBg52_q9fjk7WSDU1gD8p7fDPlgyMHy32jpH_63ZQhcN0uu3VsrGeC0KncAe9R_b3DKVRUxPJ6TtlFRuR56CE_UJsQfMkUpmAIRmmup3Mczrqxzplq6DmPh_hd7tQhs1-CdrstgM48GKXHwULurkOZTb9GyZDB9medlELyuacPkIxUqowQ9E8w22FT7J9w4No_Qsha-qMr92Ht1M-mxM0yiSHBiFKB5voiHgDacAQzqYlUyvpG6_69EuR5HMt4MEfWI6Oo7kkHqcyaZ0wBEf4rtM7-1AiwpthwWfv0U4FxHe3CfLegU8wM=",
+      "status": null
+    },
+    {
+      "id": "msg_020cdcbaf2742b93016ab63a85026487d2bb53c2647f09f3db",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy type: Generalized\n\nSeizure frequency: 1 per week",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327429.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 289,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 75,
+    "output_tokens_details": {
+      "reasoning_tokens": 52
+    },
+    "total_tokens": 364
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

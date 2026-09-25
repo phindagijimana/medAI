@@ -1,0 +1,107 @@
+{
+  "id": "resp_00441e24212b6f08016ab63aca5d1487d28c01ef780eeb4b88",
+  "created_at": 1790327498.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_00441e24212b6f08016ab63acae36087d2a5aad1b92fbcfca7",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjrLmp3wRfn2JuxOu6DJNAbQ__2reKvol6GT5TUhDmtXlmcOEHTFR_i0nAZAh9v_RDrkQvGhT1AMVTE2JPQidWLhdIkI1NaUelipbXCU3_sM6kYszveKDV6MESzjzmRA14Ab_yUkU8ckqK4veJ369Z8mrqYy1pFj1ALaTuVXIXv2Aw_r_83LU5qYQFP9kFfPZ_YG-yRQ46cVAHNjqzFayysDM1pv_5WbFpCoRigHZhy1dNu6iPzuaw1sWFDTICnG_oKXrKSfaqzgK9TzVF0XKYyPvfmRphSJtQvMk7UTr9_7C9vK-gFGTkQNaEp0H54-4vBGxuMB0BxTIFp4gVfBlzjCjOQ_tQu0qq0yD2hsrFsztZTB-QL24NyO9nOPXI6F5GGy6L7479gslH28dlp_XiZZtbR95TBo0MmQj2a4SkJdOTOKfiyChm__UkgDtmlXpV4xK4_BTlrvRusaqeBdTShaQIo08BwJ0J4Dpl-QqcTxKRFvl90UuYnGTD_b_3iEGkieFptUv4lLkRNbx-VStB35ANKXkbel1IFtWMtCm-utIWpVrlwBYDxIdMCJGdW0CLCjgybXC6XFrKYWvYBgxFhlummWbwxVSC6s6_0NxrIfCtErsjzN8_ASPGKLAyMZilV5Dz4ezFtkhjjFyJv_by8aJUcbOIikSxai5v7fi0b5eOesLalhjZq2G8ASuVs9WEJyteO7f0AAYFWmJYeKWA_aYhVk_GIFGAz08xmKBFOW5qyWSRK7PQLshLApltsRq3fUjv6wTmNzBlqEYpCAC_o2i_Oi3pt0G4lI_BlDnnbv6xC8vxRdb6NtXgVVaPM2V-S6War49_hf9_ZAI6Ko1V9ubU1iJjBVrbRYX0DT9HG_bIaKVGCeyfvj6SMK0o74iyAmYt3RpM_UZH8wck9Nayhpt94oojsSfHYl2rEBg2z4IMhEVpABERw1O9_8QBV8F5G3I5HOGpZNrLRqe_AxHRuZy8jFMP5aiUlPlwuDJV6jssr7oHo7FvI9mvW-MgiV9pj7Y3UZHhhCJGuHBwMDF8ezTMFxVIQ6dvRVkFZ29G9zCu16CyPr0afSWP-UdM72gDLyISTLalDzUW7jbPTAumHzv7K6AoU6C4xWJL0vHD6TbVPoM4x_N1ciekLvXACmue9OgRRVrcl5omCuIB_-NNwElhCxdOk39KBgyKT2rsFrhX43g9z1crUv3KZqdNxcfoVQf4VP15SVLxM4eBNbtlUhD6LC8RbqTT96LHPfLWP4ACSyjLSUyIWheAKv1OsIUP8fUneqB52LNlunHASU6yKC8PvohSueE5W7KtaRQdHC6vWGFmORTrqDF6xX80vYpjWBZs-qizvEAFHRpQoZoQR7ZTIi8AmZ3Id0jy9v1bWqz4ilChHuyD6K7-tiBqZuvOBN5V_24VxlNCybTURB-TCbXg==",
+      "status": null
+    },
+    {
+      "id": "msg_00441e24212b6f08016ab63acb5f1c87d2a83f66ddfffd8a53",
+      "content": [
+        {
+          "annotations": [],
+          "text": "EEG REPORT\n\nEEG Result: Normal.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327499.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 113,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 56,
+    "output_tokens_details": {
+      "reasoning_tokens": 40
+    },
+    "total_tokens": 169
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

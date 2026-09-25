@@ -1,0 +1,107 @@
+{
+  "id": "resp_0c0f763c4509a289016ab63a6a0f4887d2894a9d74ca5a55b1",
+  "created_at": 1790327402.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0c0f763c4509a289016ab63a6a8c7087d2b4ec3816b5355de3",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjpsXYg36O0Ux55GWVacaJdBsrVSfpE4U9gleai_r3zyQwDMiY-pKZf-WXD9kUVvVuVjXPItMRe7Q6c4dHmAG7z882CY2kBMD8BQHZ5biBV5PCcqoSFsa1frkzHHheFwhK4DPLZy7nsfqzcZCRIIpxMd-T4H6uTkqeswVVqRgIL06Pc4aR_VO0V99Vwtez4C4PeWAj19fLJkzWTH3kKmOjRrO2JSwcD-LfDT1eUtyRMN9U6JTc-3NYGRC2ByajGxwOEJTvmcgB4W8Pe3r-3cHyfEQffMmzM9fh411ZK0ytc8ADG42mMOraqfQVIhchZJQrBk8wHHxdnBB9XQHo5eGXNthIaf58X62OQ5mWdww3-oQc55qUM5hLz5EMdc0Qen0MKnVvX5qcPT-TKEdUvvg2tMkI3vmKgoOlydfV--tAdvm5pcbfX_Q2xXunTffyKBmZbo2jRSVpd7dDWElSNndj6g-BASOfFqPq5WkJQNUX8QR_CHzxFBzafH6EUaCI4MLouXvg0VqaOVECrrHt6RWvPSE7IAaLg5DYnSDM5q3v9Mjq1GycoDPcvbTk3RVyaUAJ37v0jNjPpFM_oJgoPpOoe8mEl3HemB_kOw9t5gIrXv-LJpxnC_khlw2yRYgFXhn3NX3gj01GmNkpbjwhK3W6wcd7kUa0ypK_aSk9vf-XIccOtfQeqwdkKWUelLwus-oa_7_weu-LIN4UQfq2tM_EpU9PM_MBSxdmGRxaN6QeHsOgONOF3qnnbBuS5BGvTyLAGPfXlJfPSZ4hTpLB_OvWRpWwHGMxn6cNGdAhX1NI4gucDLre6sN1JV_EMCkjQmFdZbEhSy7ZAcNi3QUXLm6H4mgEOGzVLM7brDTrA_xz0ByW9CGr82D1bBI8X_ONxvn957csBEt_LYej639K66D6V19FxRpFZsH40Ei7zt-LImZeHS53WXzonXGEoTsGbJXyMpWbCgp-ysLtocdXX_jUuV4EekM0au1xARl6O04j_66RNU1NkTBHvGHUcw0234hXCvGDShSaXBXlo34kQZayxghoxuVmlmP25Aqbi6J9OB9vKdTx5QWq-zKw8xpq5zuoPfG505Rf33vCvALkqebFq0bf82SdFbxmFG7nW2mG9j5fNg9QMTKr5W-PjQ083B5-DGzeODNHPCLbNGKzpfLAUWBeHnqq5zJCszvpg4S7BwkJNDDVIIt3f2u4o67MVzSFRFKO1IBaUb9JgqmsTlbjzDz6Mx3SVJ3E5Hrm5v8y-DWEsCyvktQANl4kiZNRBP3pM3ncqx4HugkexXos25rB1jwzgG6U0u0f-BUhZ3HJEsQ8wFJc_LHcU0Ea1sCwfedFVhkpxdxK6F_mU19BapQdmvWeRMb2-MDdjd45RNsd8w-D_tnqJbPxn_ynZbaukUdxEKMnbKYbrimStyv3cFG91ig-iZLy5O9ko2F1LMrQg4ayJ8rSDX685bGH_k513VCj1W",
+      "status": null
+    },
+    {
+      "id": "msg_0c0f763c4509a289016ab63a6b92fc87d2bd04d6da1d45e2f0",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nEpilepsy type: Focal  \nSeizure frequency: 2 per month",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327404.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 289,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 89,
+    "output_tokens_details": {
+      "reasoning_tokens": 60
+    },
+    "total_tokens": 378
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_06f9fbdf6e011de2016ab63ac7377887d2b300484080bd4b82",
+  "created_at": 1790327495.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_06f9fbdf6e011de2016ab63ac7aba887d2b94a1bfd801f661c",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjrKdpVPp7FcfIeAkMmYx3u8TUHXnxu9jT1zwVsResuPqHu6uSRCP3msASiIRLpXKF_8sahW6m7CMV6zGsDy6Qwhw_iwUDxQML0uOnA99Vh0AHjteWxrIQbLt1MR9glxn98sEu-F0IVV0KwYSCxfy4EaoC0a4lM9NUBUbZNQ5bwRjoiVZbnM2dxQGGUvmFqjT4m992JOwmeMsUuEuqaIgsso-B0r5UFaKgzdzqaoW351gVQTM3tM93IKahtWHMhzeDMw5IWSM1WaGGJ-dJO8CcU3hG8CLIS5RO6D90QvGp2TCk9om0Psfo_Seig4H7z_jiRju3rNJEyTU9WJOUgP_DhAZWkSP8uoMBKmxRMTpW4F_6WT7vrNxekWLV7NvIZN4-qINPCsdJZ9_kfkwSIg0VeKnTFyBzpgVJFBaFiqEiWdv1MQjONDCYPRfNjtyO5H9eq9hgAkYaTloxrFhpvCXGtAt8NoYc4izWgAgC6xB11F7NiBwjr8vnZypxdCoi9SEC9Ku8k0SAdYTVXfSg2nSW8qZ1t3sqq_xtQGNrYBdGGWP-If5CGGcK5CUTFDf2XSdFJvqk7LiNneBoEiJyejRDGCxF32kd1O0qP9sCyJyxWNlltykErT91Dt7TR9ProNPgXCK1ZogtR0oQ2qXQ7ErJ9udwJlYynRssc-FdkrW3jfNEe3lN0I0UcR__slKE3BLKdedVJnuzAQ3LV2CF9cAz-tb-mZ-5k1eutwHtlJbkAOJiFVIuzr7TmJ1Xnq8bVa6-JaHX059DfenGRZJHig_8ZPhYsVG-nJGbMLzqc2ps7JQVdcx9txKm_s69aoVB_LaktlfgS0O-F2ANG9yrHUfIDORtGRTn0PXQhy3i5jeaDoIgjH33WkoISiiiloVpBm2nAWrMJF-8hFXCSoy_Ap_h4Yi-NwXyEjPfB4dr-kARqOnIFY5VIu1L6aiIqI-3Vy-h0s_h2W-zqiFxeCyPaC2OKNlZZBBxd0DYPMlm-9InlZ0Ye4ggWB38IjIuPWiOWNkVgkgIYP4gYLFPe_fRbgcY6ibnHy_gYaO-SfBhqcqB-sWE6F9kljhHsB3uLWIcWKfHuw5zCWwN3UwMtRLHIVDmZvz78w429s800-J5CZyxvAosSl7_7RhEXkGd7fGTURmih0JwLrFU4CSUO7SXKzpjLBrXkcfZd-jzKJqNmbNrrltew5LiiCj5DBgVVnIEYAEx8uKdOq-xjguP7dXG96QU6vYLirl_WTciKnW997N-PHzZ25Eh3TrMDsIWMxD0GU_6pMiIJWTrRBXB_cqq1M0qKAKseNhmDbdaqpK7JhNGmBTz3h-NsKRzqL109_2EqeJRAzOOsKKvvO89YTzTCaBROJ2-YFKsQVI1GAL3uOszyZBS39b9vUkuUKrFCpAIpI5CWDH98Hb4R2THIoOpcwzWV9Jeoa1HKCwyp3JMfHpaku-_3kBJEh7pwSrrdHmzxOc63-vIMMPedXx8ozrmrCeN4VsW25om-gQPPDbHEw1PIsXvx9ZtfAS8pqmooLsWUSgP3pfqUm9snR7RG8lDH5VzONHf7Ry0dvI6nsci1OA2ukNvDT4F2iinhhDVLbavVCdNucZI9k45CWf0xl9xc7ixaINCeCcZMCgFUSJPFfhvpajNAyfa8SbJcBPaxVTs1jtqDt77Sm1x9H4JeTQatvidlbPflQapPtdU17Nff_fjeBBPVCviMIg-MSrRshRWY3NSZb7WdxleYVUInaHct8VHdly5eaJpYb7-XDZ5xhmUW7O3E=",
+      "status": null
+    },
+    {
+      "id": "msg_06f9fbdf6e011de2016ab63ac8a20487d2b5c60338c01042aa",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**EEG REPORT**\n\n**Study:** Routine electroencephalogram  \n**Technical Summary:** Standard scalp EEG recording obtained with appropriate electrode placement.  \n\n**Findings:**  \nThe record demonstrates a well-formed, symmetric posterior dominant rhythm appropriate for the state of wakefulness, with normal reactivity. Expected changes with drowsiness are present. No focal slowing, epileptiform discharges, or electrographic seizures are identified.\n\n**Impression:**  \n**Normal EEG.** No epileptiform abnormalities or seizures recorded.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327498.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 123,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 198,
+    "output_tokens_details": {
+      "reasoning_tokens": 88
+    },
+    "total_tokens": 321
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_0d18a861f3208688016ab63a9c8cb087d2935f9d3247b69f5c",
+  "created_at": 1790327452.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0d18a861f3208688016ab63a9d397087d2beca3aa6f61651d3",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqedU8AZDPpoKSJi2JkV8F3DT_CSTGYN1qD35ulxV8GPq6IcvpPXZjjbs_wAexiY11AIe0cDvV0jNeTx8LVm00DJd0B34T5bRzlQCPIx0ff8ozPjbJfyOxjBzV72HUckXk051BRDYcQqR59Gg39tKzX3F4OBCgy4Nv0PNYDKB1CLX-McY84JwCy9yQ4dco8qRrJBUiNyzXSsHwqcn9DRO-wMTYlqIf-CjHhcwZq8wcx6YQjVPCs_JgcJLKfzBIgzLQSWRzhHV5QFVssCvd31QHjcErV3aUH6Tf-FP34y6XEzcqLtRvZw-591RbkpL-6ck2l7TQlMD-Gzkcl879ZQ2320sqx71px7GVhgAQjcelTZFaUo81ilaJoz2KXLPKi-H6rggMk_Ti-dLfcuyV091opW6Cl7KPJu2whNhnT0WDVvrZroSkUv_gqY9cb8lhtBOzWOfbo8hFYgZCfkLx_L6VpyaFLPlzsOWHbZPKymXuJvuQdD-MlqxpGDTURCFsZg9Qk50zPmd7E5YiDRUWEbV7wHUH1mizCRFOWT_30QpFwNYlj_21qHl5ooWwrnb6_LzqCK9wBzDS2f48sHubmDNf800gYngVoNMUqsO_nISTKxzm4elwWRUfdkXyKLfRLs2H5codsIPN6xffoomRXPY5NLp3lS_4YlPlfrdvYrwf5smsgn1gRQsd4rbNWqKD8Odb7IHL1GfTI0c9TOK_BYh71iblxfX8HT5JiX_z_BLmhgKxuXAU13IYVAAuepcZJAeu0WQOkZ5F3rl6wlqRehO59y4Wo0nj4vf2OtV5y_lc0Zbvoa7dvPB64YC2dGjG8hd_yJ2QXkU6wXNqlvkOe5m__MBVkHTjIy-wCPhFfT_5FUKXs5C83s4DGctXmWbAiAEyvYDjODbfmT_tJOvRV08ZriOl0RpjGS_j8IPLyAQqJpx2TxZ6bYU66bWx7XMn3EfZ8580vYjMIodeVYniYXFL8yZhBSBde0rb5pZVCVsTeqOHvatPy-_UMyEojzjMrR90tzSoscryTHXrrbaL0mnxRgoUTHzYCLBNbunImG0oL9AKVP-pyWZOfTWCW_PSBSudnDqvi0IjgTCOfSTF1hvhVRil7AtUkgjVa-SjEJ7rmBZ2HL6YuNLNvW8hRLqb4ue0ZbSYxTdWy2TFTjGbNleyNwlVt23i-UxqbJQHOjYGegx-covUltXE8n7Iefk2Z3uKjUcgC-c_vcPdsuVcVZJRiKwJlolGOC_6Ckbis2pL-lSB5NOy2cpOp7_7FPQ8e2T3gLA5CL7AiCMtsT99nL7qyQ59Jk7xPUFhFI7ABNuwdUnS1uKVpFmi0aXoR71ax_WY5138jW_MpC3agxiagmUulz2L8WuMMYhHc_vF99XkUrZCuB6Dw49twNZBBamGSkBoSkld_oDFsnFIpX_brU8TSQTypAE0eFrmmsJ18RMkomTqkuMJCKpFyZ0Q56RBok0ABxGrrzdGkzR5bOKlxp-w0hg==",
+      "status": null
+    },
+    {
+      "id": "msg_0d18a861f3208688016ab63a9e38b487d29f621bd8c39dc3e9",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nEpilepsy type: Combined generalized and focal epilepsy, classified according to ILAE 2017.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327454.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 104,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 85,
+    "output_tokens_details": {
+      "reasoning_tokens": 52
+    },
+    "total_tokens": 189
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

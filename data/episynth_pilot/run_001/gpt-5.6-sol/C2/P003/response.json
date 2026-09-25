@@ -1,0 +1,107 @@
+{
+  "id": "resp_08aaaefeaf6b83c2016ab63aa7431487d29d89207c489960f0",
+  "created_at": 1790327463.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_08aaaefeaf6b83c2016ab63aa7d95c87d2a54a8b5ecef9a0ec",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqpNnR5sAHYzD2PX7wNMAtT5HefUd3FK98cOGWASBz8qhjoFDFerCetoVUg_XGS_wEUf3iGlV2H9PhRmrrNmnaGSifQLfMp2eeVRYe-8qiOdUSyYBDwsTC8BQ7-4q1CWqXGnzqhc-NnXnqZ7dStFLrBZ1u32a-odtwLTAt0xuaglfwbVN3_KvGQCWRr-4HG59m2CmvH7dcEIJe6b-NK36SBRNXMgNxOArRNVpvzWyFgTSlavZXkV_39Zga0RvyBDd4juy8sHDaFJj7ykRdX6a8UZHvYG5qibKmoNYGAquLK7Wcx2M1tvspuoClGJVSlXHgvk1PQAmpkZaZStsHLxt0uYvWb6LvV1taxpcQcB4vkqNV3Vnoly_X74xBDRoNAcVTW5aAv_t8qEojDqXeYiUJ-rvH6_jpnge53re7w72w3SX2dG1E7wn5ThliHqdIphqA1PMluCZZp3zdZVe6Zgx4q6hpBr-fBp92CgXjwiL_jHjuNefVI5JDiJ-gU90lDztSqMf_DCPJ7W0pj8_C_izUQ-m_VGCLnIPMm_5Bjc689alH7O_YB35-lbw7b9fqjglkUoODnoLaA7380XUXNVPN-hfWyaHfz8vx0i3rQTOqrexhZr6ixbpi4HuBlIC3DtAc0H-UVzxBCtRPUZBtIP3LAJ7gReNfAgCb-xbnhG-xCvjqHp1GDt5gfvxE7mOe8KrreP7agfrnWdpB8OLE1WGpPf9XhB4aXqWQNLfFu4Akbx9e4LRmOhPF3xZiwXmUSRNS9X9UVW7PmKrP7ebYLMwyVvVJqxvCvYapnp5I30238Pwu3c7_gV6mmAeXJBxBqcS7W0sFUSMSDtyZgs8sKWPki0LZ_Gf3Lz-5SYOEnWfEsI9PpjZSLgNl7dUqt1vzksAXQboOsoE97KiTLoqs3lFSg-eeEKVSTpMQN-TSWNVoynK6Zw1al_H6tuNz8FWA7KqGYgiHBeRYvn7W1aLhq6pHa0EkGhVl2YUlbSYo9xnnOTi5gMEpXVf-vE6EoWnxibCs-X7I0IaEiHLHyhvslMXkTU4kK8Wpf6Z6tI4VLwTOexoj9wm0IoHcd1de4wEMp0iWJ070Zd8TSekO_ayduQFzVLDVOyw18zUsWxWwDuz54ddAIkGP6V-ZW3cG5VqlF06istsjdazKm6EttgJ6pDKmKCelV1Erzku3M8scW-qjVZVC4JYIG8Tb_vnLPDFzceWKGmi1T6Es2VLpH3zMmi5qHQ8R0Vp6T27LN2cXpjTosVfallYxZ_MP0pZaQtBkGIHfAUQLRZsXpuKtqOjf9ZNrhEegeC3zWOXEYxLQdUmN37DFiHL6QUIl4Z9VwyczGUATLKgoTAmCTFgL0iT6eUNgHs7pJ64rSYi8aTZ15VhlfWcJk6ng_R5hEu9ZuRdQ2QpdZvSOhI4UlX6BaRalqeEr_Xhi7Wj7HnMD95TGChVh-mhHATTnGnGsrU4BIJ4cEakbGyvfj7WBDkvQwxFjDuj0Vdg==",
+      "status": null
+    },
+    {
+      "id": "msg_08aaaefeaf6b83c2016ab63aa8a6f487d297932b8b7b9a6f23",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**Epilepsy classification:** Combined generalized and focal epilepsy, according to the ILAE 2017 classification.\n\nYours sincerely,\n\nEpilepsy Clinic",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327465.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 104,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 96,
+    "output_tokens_details": {
+      "reasoning_tokens": 55
+    },
+    "total_tokens": 200
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

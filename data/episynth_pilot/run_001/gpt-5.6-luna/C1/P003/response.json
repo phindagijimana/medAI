@@ -1,0 +1,107 @@
+{
+  "id": "resp_001dbebc66780507016ab63a8e4df087d28f074a32a890e46a",
+  "created_at": 1790327438.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_001dbebc66780507016ab63a8ec44487d2adb587f7361499d5",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqRj_keKS0mzK4DVySRosBYnzf0Pwl6qvjFBbiA9Dh6v9hKtf0q2Y_J44XE1voGL_iHEDRdfLIucU-jgK47C12bub4aNNG4G_LVvC5_ldEl5ersF5EfgbJnfJ-f5Vv5iXp4z0h2KbYbXoVPTtNpksKsS_CoW_YgOL50naKJR2jYXVzvPv13H1z73n9GJ0R-2Kd-2Nh6NREKMuJgxe_CFBPifh_SyzkSqPLgP-GdR_tGsdrZ1a-KTC1KEW55ouhCqqSpD5YBsJ0TwoCE4_4MmLgxSUmAUYw9QiVTLLqdnlzvA1jm5m28tas7AT5sDYc3oUgMfHnOKy2sMwF918OTtB_mLGiTkNCUrRj2JILXO5GGKMawoVAPP9Wvs7c2Y4b3g16R2VT8t1zMWTFVWKj6F-SCCPeY-CzwP6lubQCIxh8giOJhSkH5x_BXHfGlk0c8Aj2nN5-tX-nJMudRUxMHmEi_QzpzRW7hUFKGk1HILD8hC7LxKZpVWctyxR1bZU2lFDVhjV3Epg8MBbBA_yie6VCnwDhmEGc4MS2MqbMbXI-d6_lGheQqqA-_wYgijVHgBZ3LjaSa9PEm4CP0dE3jnT8jGZu7tnMYNh9BDfQwlk8ILUDmO_M36tWI4znFTXsFarpo5EAYCkMVa0YEHkVrLoQAkO6WN4pwv2Gnxn0yA1U2AYFgZYXYlFpATTDdF2vcsjiu9mkukLD0gOPTjlecn60uWCvhgOTBK_j2rYhlIYi0jMbQ9Xl7vj3sBbh39HpwYywsW-iFIwKiSeAAmUmdAUhgugxtJVxKhwqQQmkoY2bFbjRo3sxbrRMnniN2gOyDd_BW-JWA1uhdbAKf_MVtG-EZEj8hgoa-ifD6epXIaq5pfFURFcz7yDTrXj7ydkkU2_nX_Cf2QOue2WVy3R9e-AS0TUyRWxZuPDkFm0ynhbBTUNt72jPvoyu7gL2C9YWCwI8wewtqnU9iLnEsRP2R2LpYyYo-Vi7Mgzl2vneBLIQv6J0AsgY6BWmaMbRX8NLiuDgQdPYTjD9FJTrMM8u0Nf7uEKDunbRaX55c5l7fqup98PK0Nkg2Y6eEvpK_TSYtA-TPgT5fDr7NW60Vnc05Gec2kimQktEdCz4FgSxZClUwtIaYqksi1I3yVnN7-dOqnOdC3VBVHYCGS4gWtfvVz2F02guWrX6ZFn0YMtllegjQY3JZWTm95E2RtrEr2RoDERuti5dfBzZzf1xlvXWHJ76YnWAoWC_w_GBC3DrMau2NrE2zY89h8nIy-0qgglDEDzVPRxq7LLd3siLpx7yn_9wAsS-pFrTdKTx8i7VaUegw09OJ-C_uD6wzI-PYK412fKA8B5XZ4tnts-4kjOQlEh9fUbC7g3fE_SwwMboL9b2i2tsz2l6xztVMygjUKJf57yhvirujWIStNORbNqcjeQiNFWRM1Lq0_PtKZ7bvSSnoau-qwqlYJLsJAHTtBs9ecKmOzFC18JAQdJeeZhu7EUqt-G0NQo7Bb8a1XcyvHIw4l1aKsjvGF679yCR0zVrUui6vMmWfSFjQrvrcUzItLBYHmncUpqb_iubOJvefY5buucayZoi56pxKLGy3L5c77qrV",
+      "status": null
+    },
+    {
+      "id": "msg_001dbebc66780507016ab63a8fbb4087d2b9bdca3ca41c1327",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Epilepsy Clinic Letter**\n\n**Re:** Epilepsy classification\n\nDear Colleague,\n\nThe patient was reviewed in the Epilepsy Clinic for diagnostic classification of their seizure disorder. Based on the available clinical information and the 2017 International League Against Epilepsy (ILAE) classification, the epilepsy type is:\n\n**Combined generalized and focal epilepsy**\n\nThis classification indicates that the patient has seizure types or electroclinical features arising from both generalized and focal epileptic mechanisms. Ongoing management should take this combined seizure profile into account.\n\nYours sincerely,  \n**Epilepsy Clinic**",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327441.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 114,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 184,
+    "output_tokens_details": {
+      "reasoning_tokens": 60
+    },
+    "total_tokens": 298
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_0617725b6d893268016ab63ad5f77c87d285e42d3030e83382",
+  "created_at": 1790327510.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0617725b6d893268016ab63ad7399887d2997559e9195d7cb2",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjrb-YFVGeNNCSZs0AfhoJEQXsjpCnarkHx8yimqfOw35mCSBvKRAxjy65YaHxMqiOmnNFwmljFgn1Q_TJPxaLI3m0GyBxqrmUt08lnSP0bjCRxdW5e3oKd3h3THC4vUB-4WFn_vuURcgUYaO6Chv5TQt-KqJ3i86EJ3TOoFeJCeRAyUOUeVdYcxPBo3uTy94n4fVhI7RTV7M-fJKqVvMu5xwc6fZToK1YX_wjcWctgb6DK83394zqWCrjZnpE84Ho13p55f7j1AlOjZG_JL-50ARgXG_G0nj1XVddUWC2_dUhhZkdm4TP3iYKquv1ykKVxC9_eErQJ4jEHMhBsAL7rux0v0qaX7RH4qzo2J6HPs0-hIPeDmC0zltq7T1G1zn_vB7HxwpVEZHUgcOXWLr3f8uEOoqj8nehR7u2LnPiZC-vV_M65Vk_dbkgQXizdNB7DlHCECxm3QIIPBXebiwUk35u-pRobPPO8c5OCA_CshZJHOAh49o05bZD7idx8-iaq3RS00MISEBZqrrddEp_SutiRaQoh7jiCM3JrVumZzfcWp-QZD9bEERcpiqdH7edn6lbox1LslBzhc_QqJ7YqJgRL8r3x4D-L9dP_L38SOiQjDdx25KugMNHnT0W8PAFwlppq41wL5MuzFgvOCRduVquPwOZUyC3tUjHVVIXISeIYzTOcMpRj4wfM1QwolNd_uW46qTb_mpoxU5O3tNIH32YuenuIMIHI0gD1x-9DuYINCdVvmZk-sAQiKTFqXqQXXq9Q-LF2tnxnq9OFZ_vI9mYvPLI-k0Hk_yuQe3iKviZyD93jyIIUHu__1voZxLzmzlwQzbk87gr8NQOl2mkiRlTY5hn9S8e3NcL-zslbw55LPpMF6ZkVTNGUa9xLcrxkmxwL_UmcfpM97XLgzuxnnlFcNynthRWhZakJkMUwFe0YkvLUmULlIEB7Mk0sJEUua7thhMWMeI94sQh0XlDq8I7uRx6-kyDOXfLQllWZcJ_ovNi3mSTFQ6R_ymrlGE1nQA8I5_Rpbg6DaiS1yu9G9mKwYGGmwl7EmIFdr_fqRP-aJTKaPh4fmSXOs9Nn6YNY6AlUWJwgop2NwvhEA5mPauW3KHAtUFFi_eR78xXcJL_IElLUFDTOESxp3wPG3E95iR89qy_GZDx4uUoA5CkIu_nd1mUKtaQBuz1kh8TLjSEEh-MRKcuXcI5xUxDJVaiXEFzVAXPuOq97gV-BTT2DlYzgQTugjAC5LlDXVeaYRE1GPrf6Ufw4sKId9We3TM0sXVyHiDBUU_R52OymmCBeTzjJvlQvgVl4R8UCmYM69Zwlcwe_1TTzZfH-N-HnKSF1k7kzt0beNdRJ5-AoTaPWBAbz-74qWHI1CKCs8jwOGhOVRqlgFqU1-19gs1Lomc4mex5pSDoMSb2bsxTjevXudMA==",
+      "status": null
+    },
+    {
+      "id": "msg_0617725b6d893268016ab63ad7ea4087d2b880c352c2ebe2dc",
+      "content": [
+        {
+          "annotations": [],
+          "text": "ELECTROENCEPHALOGRAM REPORT\n\nIndication: Clinical evaluation for possible seizure activity.\n\nTechnique: Routine scalp EEG was performed using the international 10–20 electrode placement system. The recording included awake and drowsy states. Photic stimulation and hyperventilation were performed.\n\nFindings: The awake background demonstrates a symmetric, well-organized posterior dominant rhythm with appropriate reactivity to eye opening and closure. Drowsiness is associated with expected attenuation of the posterior rhythm and diffuse slowing. No focal slowing, epileptiform discharges, or electrographic seizures are identified. Photic stimulation and hyperventilation produce no abnormal activation.\n\nImpression: Normal routine awake and drowsy EEG. No epileptiform abnormalities or seizures are recorded.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327515.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 123,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 192,
+    "output_tokens_details": {
+      "reasoning_tokens": 35
+    },
+    "total_tokens": 315
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_0158d513bbc64ffc016ab63a715ac487d297146592a5025da6",
+  "created_at": 1790327409.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0158d513bbc64ffc016ab63a71f51087d2979cefcab57e9846",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjpzCUrLMTMt6LoGgLNVDyij6BUa6Wdtvii8jdKucZfG-6I9GYAjuX0oZ1YL-yDzguISaYjWE2nGThPI3HoKm78G_cqC7AThmq8ctZoBubm3kTEFAURxy667DhFz4AGOIIEV8HIvRulsyGBEp5doCwL5nx7MlvvDg2lkXMSfncgnSNNqQFsO4bwNqI5xm2PJ8Q3QE04zkS_oEz0c4dPRnyNpw4yPu2yLe_b1Xmsnl0SQocRnFz3RqeufNGRWACLnjifRjN89Ud0TUj-MGGSpPZtdNcm49vwH_9fpHp-Gr4GdWVDoY5bY2Zbul--M5o12r1bmPEhmSEQlzU-EpJ3ho77H3GPgIqRgEXohJlAGPeaVQTpfj7fHvXT3IAyf2LzOX4_tN55lh3WetPa5at3T1zauSy_R9HlR2RunRiGQpCwMfhwc1vwdv_IdyL_c3H9Acb00Vm4DyVsD4hmKO7puJXSHegEpzyp0CvIaIzMQNFPgWYSxO5E4UzfzWjSOOkH4N_4pVWU3PpEuC7GXkeNjgdMRRDZto-wxN5crJhVlV6Z6Y7S-yo9VvBNoCCDjr-Th3r0huRKwnLtC4Rm32MYQMYUqXJueCFscD8WsgLgHb3XIpq9FDU_5Ih9smA0qUn57weGJpOZfcDbVxEPEqKsUxH1PH_wQSr4MFTqK0aPJWAf9TxpZNxckId7LstKNf0R5AHT94J9k8WQD8z9u42XALItn5YSYzw6E7OllSrx8VJBVOyi4DWuPxpOH-CTcb011XFgkZmJhLLSaOtBRk0GznR5UAt7bBz9Z468X-ZbZlVWnr75ynLOohIRhQKYRSfOYPVf0avvtQI5dik2ZZ9zjsF-_To1eW4uZadT_2gRH83lgLedxNrUNsniOyuUMXRgCLv98v7kWjwI00p95AIJOpljtbVem4V6qSGrVcEK3-4qLhUXJlZBN2dDXwQfbUuqOEGax1s3eoSaXNOUaAH2QqnUGGON2k5d3G6yiF2UUT5V0FGGGVhbgRe3_Cjn066J5RsDevkVuBjQmGLK0iBf_RkhlvLFlZmQR_g1zjU1tnULjdvNWNzBZ6dxs1Imd7MYrjMYi6nSDP19q5kJHk1Yc_rsrjqfMQPUw8fAm5YAfMVXneLgJXONPEYJyh-Bvpis5dW9xdVUaXnTMnianwxAUCTaRp_1zyyf4ZX5ouvPrkorOJ_7gCnTxywUqj9DYGWCbcEQ-gZ7Euy4nYAuLMQ_GHX3qwsjnxh1TNA15weYVBjCuslNBvrrzwQ2F5S78wIAuo-66Z4KHyi1Qg4ClthnFxtBDq2lLX-mJnMcaiBaGwvT8nhvH5gV6p4ucfaHEWP3iJ22j6LicEiHitjv-6V_Z4s891YstnCKK4uzyzXrEmJdcsxqOOzhOEBzSWIQFj4fElt-cSeaF1ILoQjxd4-CrG58eeiRzaN7iDUH1ZQzC38D6zic=",
+      "status": null
+    },
+    {
+      "id": "msg_0158d513bbc64ffc016ab63a72ab4c87d299c78ed243ce3667",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nThis patient has focal epilepsy, classified according to ILAE 2017 criteria. The reported seizure frequency is approximately 2 per month.\n\nYours sincerely,\n\nEpilepsy Clinic",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327411.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 171,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 86,
+    "output_tokens_details": {
+      "reasoning_tokens": 40
+    },
+    "total_tokens": 257
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

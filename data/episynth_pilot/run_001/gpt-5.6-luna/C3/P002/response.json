@@ -1,0 +1,107 @@
+{
+  "id": "resp_0b3737cbba8647b1016ab63a7b43b487d2adc6591758df6577",
+  "created_at": 1790327419.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0b3737cbba8647b1016ab63a7bc0c087d292eaf2bd2c5d9f48",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjp8mbP3TyTr-96bLeufnKYiTj-flto4cAM35dYam8WquOeV8ryzRGI__wF6CpLqFHsL6m5BUlQhCNre5ivHCGZ4Ru2Zomow47NmHj7CcCNO5RF_tKScrmNkYYq6LaE_hD6lHDVKxiZCA_8gATRfs35cJssrI4s1UTPKZPm0hOsRGSB54NP-rPyQ7IEdnW5UezRZkC0Qw0DniZiL_ZFGlqJxo2VXjE4ELJoZYyzjYwXtSkRLH3R9r_SconMtL7VJ7txVpdjh4qZIf9B10cmaEEUXm6c-3A-5tBc_jDxFS8MwHDCEuj-u0Li4FRDvsUVJFx1gL8zAFjBsZe6f6NanSC2DZc7YFZe8AtX7yRy-r9ekhm2bOfKBGp7W8VKU5HFAyv08RPi3u5PI8Z6faozqbozXRbHYZMk0ItP1ekkEm9304jbhPDyQqnibwJ6nqQ3Ah5Omxee0t1fA69dJnXllymn_AUT4rR24bfhMlCG4TooHp8Eh0r32yPfZ4Ru5hFkq6H2tqBzO5io1oVEnKB_gLPBJYPCbAZNr44T_sQvIJmciRVlVZ0ie1I5joawCyEazBJkhKwR8tCZR_xZOnDsmw7WcB-pXuTkSVFIYPMlK0oA_E2WsmZahKAmUHDnGAmOJp_NjAto2Uu0GRIEfdqhtpsL_NOhjw1DC5DPYD_Wf3Egf-kw3lT_9c1GTEwCAVB0kgYFPYpj6J2csXiEl6PjFNxySAGMEzm5v6Y7WR6zYWYDG1pLT3P0olQ5auVMaMeqzqeHzNgbXTYqU8W7JgSK-0AYhOBFlMI2P2bwNx5bjGh-2IAcjwdIbuccR2LMzeJygnuesZCdyaku8C8Rf9drL5nr-PSpgbgjlPADpb_M36nb-UiVM25Kgn0n26psKjbQ6U9a1q_xpi1nNA-zBlcJ7m99hoA-vA2ha3xeWt04GQA065WFUZHVL9rDSZ8yNrV8cjd2h1L114Qupfpe7nbz1-sBRmadRe_G6SF3IYRezkcni3cFRFMP0RuAt14ONltnyK3L-fGAfVUgUD2Gy1ls1CTB9lsPludrNXdcpSM7InCg7E4UAWO2C_zS0g4hLHREnKVGtmtH1xSuvOMT8-PVF7_G62gLgkZ4j2HlN0huE1tlhKJKgLYlfqpqB0G9iJqLOKEdZ5VoVaH5feulrdWN2nv0pw5ytgpm_Fl92ESfWfUwP_R8NKE8MTT7dMd7KLf92u7O4enPF3k3633SCjZ6HAtyhbZczk5FF63Pu4Z6k0CQhNtaXdpL5MnR2KCXIxWCkVLq2jtg5aDMSAQ5a5XXetngEanQw98kzw_pTDX5QQ5MdljoXozYbMmRxmD8jx4srQOAx_Yr56RTmURcu3eo_BulN_GJ_QDtYeeaM6fPBHYszbSE-c1kduzHVJ6qVNuDywmV3zkd5rq2Uq7LhDxrFPaya8kSLcm_nYWz6qmmkzsDocV8RVMRM8a-ruRTGhw2SiRxBDDaYd7_oZJLEyB5nJo6KScA2hECwkQD7U3jVop0Apd5rGyM4Mt1h4HWtKi751t7p",
+      "status": null
+    },
+    {
+      "id": "msg_0b3737cbba8647b1016ab63a7c515487d2a8b18d9e21b52812",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nSeizure type: Generalized  \nSeizure frequency: 1 per week",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327420.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 289,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 88,
+    "output_tokens_details": {
+      "reasoning_tokens": 59
+    },
+    "total_tokens": 377
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

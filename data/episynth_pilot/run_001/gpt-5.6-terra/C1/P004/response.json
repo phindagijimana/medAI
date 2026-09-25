@@ -1,0 +1,107 @@
+{
+  "id": "resp_0bf658d91a6fc679016ab63ab01be887d28c1f6911097a888f",
+  "created_at": 1790327472.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0bf658d91a6fc679016ab63ab0ac2887d289d2196086e361da",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjq3jhN36S_iIpma1JfgFFSvmy_P4YVizt0ObWfAOrcFY-pofZh8qPv3uVs0NRf4lQUwu6WSUn_O8-EdDP2bFKtMN4Dnhdk2ZfUXuIY3yul1shNJFTOIj8igUft4ybowrJkiXrXgN5CE6hi3L2TlsZMLnHe6U5KSuVvJNEdE8j3ghNPt-wsYtaM8oJ3MAsBggzh3IDg_EGEct7kSiPu9mzRiSiUEiLB7AFcQBGgJ4lZR3J4FtWcyZJAqoRpZWBM6L1c_F3TZBtSotOH3t4n7V_HHogvvg-SayTL0uBNZ6DURMTuvzkiu4GiUNwt08SjqjNn9tQPa1z3pwUMHIvPxz6I6deipKTYa8xV1B7y3XpTa0HbT-iNq9vID-J9kJ2ww4XOP_-DNryfTsDE-rYgxH_c6RHtpz6-ASdpUTN9In5Jy26R2ssBnVaBTnLNIBxn4eeFOYF8qaXDgMcj1P88N2wCIZ7GUkVc0xprdgurXL60qjc52ia1iPABPJ4RJJXh1i5J5FMp_TN7a5kmm8o7l0p3Rva5Edv1nkJgVQx8NmutSYqAm8bCj2HTi9thfnj1gCWVWpsGXcyHMbsMpIrG-z4YjYFFApBav0V4zpVlDceWg2th2_MelZfKoHA_Gb7rUlopPYnvTqIXaeUipHpCq8Lnc80BT2BHxbiCFsKB0Wpo4ek2jvYgEfaVb5x1q7jNNjdPOYcNGRKbV7q7z483mWfdvmENTAb4x7EKD9_P4zgq1m6_eFZ-AR-zfzSBJT3duhhG1WfamyLZcHokjA9a4ykYljaaZzR8qV9pA2xZxOlyf_CwIKx09BsFs4CPvXxm01Eyxas0rwVuz5woVQg7RO3ZflVSoU3q9WBSRraVZpgkMZFjb0u5k6Gfj5CVBqjPXvbWcrrynDnJKbxhhlNB-E7kfkCUfXYA99rHM2IWomsHT08MnCSEZC9hEE5xAMB1BO4vrPC5CexVD_mbK3KX3lUttM60pCSbYXRf5JQ_FA21xZMynxnJDkuLwf8PPZF2Iljp4WzIGtrimFRxToPDy62NxHkhlReU9cNnDPe-tuKGmh3xlqMc3fpXhkoDgCidpVxV9dM2HQdN9kOfrWvaIXhkQ1cG9gO22V1ROUm2MyTS1kwFvjNU521bdUPuDdqGwg7Pf7EewCdvvJ8JD0ouctbeEfpOoDH68VnYm23C4A92JanrUlxhSdolh7W6WXJDHfbJFdClbvjXTDUNIebWE3XK0Wf_stvwM0y5pkIAId-VbGsDYoE6AVRYDoG1ynRjAiHMxC1NYYaYqJZgWSQvAz1yR863-CgKb47qPQ-NnMw3aAdJ68Xt6p_PoQpRA_0suStZkroxj81FWwSGQjD_c6vYuYVLVk7EDmWYW4JnSGOTBJClIOZyaXNBGISWpSiN-HsmojJleJ7CGxj1ezMU93okK3ALFQRNSJAQrbIzkym8Wx8M5W2gV5gDSAZNwvrpOBYo2Gp4NxS2zancXpBV4hHYMFU4ZKAAMv2GqmcAl_3CnAhrQC0-omKBbUzUjDEmgbf-wUEpMQo-2f1L_EXaXFykihJiNSlZ2hbD7diLgHlCIn-nO5_bO-l035sGfrbKAiB90YG0bhr11Tgv5JETjRjjhC8ULE6_XmGlPTnz5dhzNyC5H3A4xdZ54wgAdvk7zTQsiXbOKNVv8lvAx_PVxJSFxo55KHxVcM0WjvpJEreYfaWtgser6Vzw8ijwPGAx9QI6Es34y_cXOM4pQ3FNy_WPsLQ==",
+      "status": null
+    },
+    {
+      "id": "msg_0bf658d91a6fc679016ab63ab2abd487d28a10d5c1d8b1d893",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nDear Colleague,\n\nThank you for referring this patient for epilepsy review.\n\nAt present, the epilepsy type is classified as unknown according to the ILAE 2017 classification. Available clinical information is insufficient to determine whether the epilepsy is focal, generalized, combined generalized and focal, or of another defined type.\n\nFurther characterization should include careful review of the event history, witness descriptions, prior EEG recordings, neuroimaging, and response to any previous antiseizure treatment. If clinically appropriate, prolonged video-EEG monitoring may help clarify seizure onset and epilepsy classification.\n\nThe patient should continue to follow standard seizure-safety precautions pending further assessment, including advice regarding driving and other activities where a sudden loss of awareness or control could present a risk.\n\nPlease do not hesitate to contact the epilepsy service if further information becomes available.\n\nYours sincerely,\n\nEpilepsy Clinic",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327479.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 111,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 267,
+    "output_tokens_details": {
+      "reasoning_tokens": 85
+    },
+    "total_tokens": 378
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-terra",
+  "input": "You are rendering a synthetic clinical document for a research benchmark.\nDocument family: eeg_report\n\nALLOWED SOURCE EVENTS:\n[\n  {\n    \"id\": \"E007\",\n    \"field\": \"EEG_RESULT\",\n    \"value\": \"Normal\",\n    \"source\": \"Phase 3D frozen core; ExECTv2-compatible result layer; SCORE reporting framework\"\n  }\n]\n\nREQUIRED ASSERTIONS:\n[\n  {\n    \"event_id\": \"E007\",\n    \"field\": \"EEG_RESULT\",\n    \"value\": \"Normal\"\n  }\n]\n\nPROHIBITED ASSERTIONS:\n[\n  \"Do not infer an epilepsy diagnosis or seizure classification from EEG result alone.\"\n]\n\nUse only the authorized clinical information above. Express every required assertion. Do not add clinical facts, diagnoses, findings, treatments, laterality, certainty, negation, temporality, or causal relationships that are not authorized. Do not infer a higher-level diagnosis from a lower-level observation.\nReturn only the document text.",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

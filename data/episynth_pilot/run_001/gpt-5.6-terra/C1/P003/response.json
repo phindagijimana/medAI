@@ -1,0 +1,107 @@
+{
+  "id": "resp_0e5cc4d362df51af016ab63a95e0a087d2a190c975a5392094",
+  "created_at": 1790327445.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-terra",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0e5cc4d362df51af016ab63a965b5087d2812d6c40d4e242ec",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqcHuD9IL4W_36yXl57bZ3r1o2gtRti1W6L4b606dXytLJFLbgx7gRnwg6IwXuuNRFxbfJKOT3bG7kh-xrG5YYBDkIQDahT_cMyIIHbtsKrA3izyIdfFEyLQWOA8rRiwWOQ5ExNDZv3oi9DIKgm8zmRC7E-Y0lITX-gfVlSHoVJ-BBUPLyMmSSTH0tg32aGptP6wRXZJgqhB7bmRO1hw_EP5sDdHvI6AWP2XZKB8pwUHmOiZ4DCCrcdYqBMOfM4gHJ7f_uf5LrvBDJ7NgbKCL37F_86saxxpKqAPcOW7XwMcvmNl6282Rf4LmmTltxHYYwgEc9bUJGCYYhAgbQ2fTwxrDlkhRFwD-E10nih69lr1d3_batO_xB9ULk1rNTyqX-szv_bCpLejLXCke91radNk4aOlbkC8Og_Ob4BGMyteEwwavNFwavP1nTDQn2DmbnrX2_44J2KrdG0fRqgP7sjZE0IVu1GCuFHXc-m6nN3k9467xx7UMvAb4L-JaLaaUXpWCC752R9zSTx-v_fX3a7X5mm1b37M1yzPDpf2rH5kQ6ynqNDl0k0SgLsMsgFfLs9X7-W5FP6eaUvm10kRl-H72RUHoZcpJtsqR17u-wOni53BSRRsx-T3AgF2iFAEonSmDo3dpiICUqKjf4ghK2slhWYKNhRwWrl-q86NqYi1qQJi1Cwa--uTEIXU0guaJFrlU6f5T_uWdODNZC6PIyCyj4udiB8TZmeH1c6xjr5-QaD9ra2_LsNN_67CGvsQ8DHxN6y0fUVLDGbq0ywSymP1J5eVpv_Gb151xBNRe-KhD0v9PNyw33vxJjZbFBVgJPZWNUSh97eMgkG4FAVpTfNwzxasYaizh6yvoBue2wiZUc3S-GQbL0DQIrFomZD5jZHYZqROBgzI1u-SS9_DxuEUVez6Zrxwk69AGzJzn-4uUNDX7LXh7ToDfajX24A8X_PXlQkqCTn-TeObzm51IXXRJ7ocZT3JF2mIhdIda_XemBSLv_jBZGb-ToqKvdUml_6uk4AxtYdswfqbCmNsd8DOCCbA3M7VKekLzRCuIk8qprZObNcm0RrraaOEGupEMlRkY-NU5OsK9lpmpW7zjzXYYrh-2UvlVxIChuN3Xrnf96DZHry_O493DqMHk6GYneztz1dearUHhtJL8gOfUaTZ0uzp8Eq-gJOOr-Nf6egpgV_WhAP-blyxuspHoAbYgLSD2c9VuP5r2TEa7GLlc3IrQtVK1X-o1O6DkxT34fWiCX7C1F2zB4rCIw_529DRKsyrLmtQnOQvOotBnKiSkJK6zcTa0CyQEFPYdnUykhA6CTonJt3gP4TzJLmA_MDpsIxEoDrG-In5Lw6ifNaTlhwMsnvMFC1SWEhozmWGUY3nxKk6YDtDFVDRzOAyva4Nn_jlpGvbW033zZgTRwBahW-CSQKJu1sdijPhzJPbAHmuZ0AOYuJZ_8XarB8mj6ogEpEfMfQX1IB8Oqy8nm85ZjfgX4PqTCCq6B8iKZ10WcJf65LgXBgaLAuLUPyyKEAu8aV",
+      "status": null
+    },
+    {
+      "id": "msg_0e5cc4d362df51af016ab63a98a2c087d2a780a5a6cda71153",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nDear Colleague,\n\nThank you for referring this patient for epilepsy review.\n\nThe patient has a diagnosis of epilepsy with combined generalized and focal seizure types, consistent with the ILAE 2017 epilepsy classification. Their clinical history and available investigations support the presence of both generalized and focal epileptic manifestations.\n\nManagement should continue to take account of the mixed seizure profile when selecting and monitoring antiseizure medication. Ongoing review of seizure frequency, treatment tolerability, adherence, and safety precautions is recommended.\n\nThe patient has been advised regarding seizure safety, including avoiding unsupervised swimming or bathing, working at heights, and operating dangerous machinery where seizures remain uncontrolled. Driving advice should follow current local licensing regulations.\n\nYours sincerely,\n\nEpilepsy Clinic",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327452.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 114,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 208,
+    "output_tokens_details": {
+      "reasoning_tokens": 50
+    },
+    "total_tokens": 322
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

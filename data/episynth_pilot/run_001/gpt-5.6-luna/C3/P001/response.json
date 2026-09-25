@@ -1,0 +1,107 @@
+{
+  "id": "resp_0a2928bec4b51e35016ab63a620cd087d2b06d78d3a56fa6ca",
+  "created_at": 1790327394.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0a2928bec4b51e35016ab63a62727887d286597ddf71051a62",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjpj8genoNNgDB33tQffG8xnQQdKrcMvhq0TRTdBjx7D_YzIqoKbfHRxBPB99khVNX8e1krYEO7kZd2cucZM8-_Opl-HWp1dFSd_0xouWdozaus0-CyJ2y8e72T28rmbhjqkKDBXdx25-4VnWS_sKiTGQXxFcpLuuTn8OrREU4havE-MlVTVK5w4wYuMCHGKn1Pfgg8Vt8TeKlPNk4ML5LnO0VdoWVI6JIzvwPjluyIdUlXvzis4boaed3SsUde2l_0cetjgam2adC_jDsRzb4be8qxMvuxOI3ODxSfSrnaSekpFu7vVIPcto5uuh_rz7Oivci2DznCp70O9IXtJ0geKSf5UeG1P0Q7xKFl43gvpAjsn-Nl-eLf7mKdX56pJz4Odsc0a2ZA1j5vsasv1ePJpXS1SsRpz3_xbwqBeF3KmKDoz2gKWW-yxtW7EMgIYiP5y5brjJ4fUkZlR9aH20oYdKu5oJK7VKX_oYWJ2HuovzOsgzI4bllW9nUwidg8V0plI7bjsDQ4tsdqxSptxlz52acrZ4NZ9ObfrBiZ9oTTq5FA0eoUWU3Bfu0dhFMd0vhMO4whoIc_eTeh1umUvsSdITJOV4zklT29xy0kaIjqRnk7df4c0CjGCW2RFYuj4l-ardA-QMw7OyKam-gB3IcFx_S4mBNPfXOngycMkooVMefeIyxOBm4OQ925sLH46i7-c-Utf2YB9AYJDE-pHWo0tr3czOcJEax0j4nNInfqMs9vAaBYKUQNcsjJhuU9Q9IqSN0tFUE4oPzXrEQdC_-WFkKSSDI7pAtfpnHH5KYznIwprvI8VpobojFvYkDRRb_xdh2jCX6f8SVfQffYA8I_Q6mNM98mC5_34odD5JZlPeUhmKqVVAw7w9BCF0knTD6xpH_U9ASS9YgvhQAqIMnwAnMmV8u_QgmGcLbZxgCLNv80-7qgCq-uQ85BrFmEATLZRwHegeAXPZdJYndVi77JYtzesFAtlSRWLirRrEwDw6UC3-7yer6bvATf5rc5DTozLN8fofEW4zdk0QB_9bI8LoGzMVJWbjzvXTAk2mYA6H7zaWY1JZbvBuTaBUWlAt1lzHEgy3KJ-pitbwgppM1zcy3WtKfUfUSPfwdhKr8gw_cDix9DfLHdTZsW8Du3rhhpfb_qStzYml2nw9TZHcaUuctUdPHsEvPY4h4_nGJe1G8gL1wCytHxao3gUtT1s75RmMJoLI_mWK3FpT-Sp-lUxoHzsAWt0zkhZMqlKdovFMIQhN0RE8GwKo9EShesH5-3LdwgYRX5Mai3TeK-Mz7S0SfHtuu06YYOByd4hsA9gYMj24bci4RNyhz076Tc6vOUgoIv1z0cHfEzB73GIJkO7JKgdrbk9nvyFjpoptWpXna5_c1ri6_ZR9_U9hjoYK4UIf_KFMH8gH4fh8zMISU6QZa1-ftWFF6bayL7APH3kJVyfFFYcRPevut2AblhrlcDExatWNYTOJXrFBVJhAntOMCSgshGeiFebH1qF1UbFjSmV7gGOsXsk4nYw-BIgBqNQuXPOd9eeGhRPRPT4w8isX9kPxabiBTySuxJreMOubrw5cE3CReKB-TopzAxAYgCnNGOKwIB2lm1f2K6Eq7buH2lTNWg48xBa8Lho_Gi7rz3aPgXwbLdQDWhhYEO9yXsHedcNom-3CnyKnAXiNCgoalcbGkE43StCyPFVAWv_53zTuGjVYGfpjyi68onkUGgHpxDcMNGDD0pvTK3UaR3nbH32vG0mH1xqv6RRo6QGzTQ=",
+      "status": null
+    },
+    {
+      "id": "msg_0a2928bec4b51e35016ab63a637fa887d2b4fe3055ce44b315",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nEpilepsy type: Focal.  \nSeizure frequency: 2 per month.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327395.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 289,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 133,
+    "output_tokens_details": {
+      "reasoning_tokens": 102
+    },
+    "total_tokens": 422
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

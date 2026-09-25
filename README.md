@@ -191,6 +191,57 @@ curl -X POST http://localhost:8085/extract/chat \
 
 ---
 
+## Command-line interface (`medai-epi`)
+
+Every HTTP endpoint above is also reachable from the shell via the shipped
+CLI at `bin/medai-epi`. Add it to your `PATH`:
+
+```bash
+export PATH="$PWD/bin:$PATH"
+```
+
+Then:
+
+```bash
+# Backend probe
+medai-epi health
+
+# List and inspect prompts
+medai-epi registry
+medai-epi registry medication.M1.v1
+
+# Heuristic doc-type suggestion
+medai-epi detect note.txt
+
+# Single-document phenotype extraction → JSON on stdout
+medai-epi extract --doc-type progress_note --arm M1 note.txt
+
+# Long note with auto-chunk + merge
+medai-epi long --doc-type progress_note --arm M1 long_letter.txt
+
+# CSV batch: rows-of-notes in, long-format CSV out
+medai-epi csv notes.csv -o phenotypes.csv
+
+# Same, single note through CSV endpoint
+medai-epi csv --text-file note.txt --doc-type progress_note --arm M1
+
+# Freeform grounded Q&A
+medai-epi chat --text-file note.txt "was surgery mentioned?"
+
+# Open the browser UI (or --no-open to just print the URL)
+medai-epi ui
+```
+
+By default the CLI talks to `http://localhost:8085`. Point it elsewhere with
+`--server URL` or `$MEDAI_EPI_URL`. All output is JSON on stdout (or CSV for
+the `csv` subcommand); errors go to stderr with non-zero exit codes so it
+plugs into shell pipelines.
+
+Runs `scripts/smoke_cli.py` to verify every subcommand end-to-end against a
+mocked backend (no GPU needed, <10 s).
+
+---
+
 ## Long notes and multi-visit Excel input
 
 The extractor accepts documents longer than the model's context by chunking
@@ -255,6 +306,51 @@ Scope of gold-based scoring is documented in `docs/FONFERKO_GOLD_SCOPE.md`.
 - CUDA 12.x drivers
 - PyTorch 2.4+ with CUDA wheels (`pip install torch --index-url https://download.pytorch.org/whl/cu124`)
 - Hugging Face token to download Med42-8B weights (~16 GB, one-time)
+
+## Choose your device: CPU or GPU
+
+MedAI-EPI runs in three configurations depending on the hardware available.
+Set the `MEDAI_DEVICE` environment variable to pick one; `/extract/health`
+reports the choice back.
+
+| Mode | `MEDAI_DEVICE` | Med42-8B latency (per module) | Best for |
+|---|---|---|---|
+| **GPU (production)** | `auto` (default, if CUDA present) or `cuda` (strict) | ~4–30 s | Paper reproduction; real extraction workflows |
+| **CPU (development)** | `cpu`, or `auto` on a GPU-less host | ~5–15 min | Local testing, CI, offline demos |
+| **Offline only** | Any — no Med42 loaded | N/A (no inference) | E2E HTTP smoke test, scoring existing manifests, chunker / merger / tabular development |
+
+**All non-Med42 code paths run on any device** — schema validation, chunker,
+merger, tabular flatten, CSV upload, manifest scoring, evaluation harness,
+`Dockerfile.eval` reproducibility container. Only actual `POST /extract*`
+inference calls require a loaded model.
+
+**GPU quick start** (paper reproduction):
+```bash
+export MEDAI_DEVICE=cuda           # fail loudly if no GPU
+export HF_TOKEN=hf_...
+docker compose up                  # picks up Dockerfile.gpu + .env
+```
+
+**CPU quick start** (laptop testing):
+```bash
+export MEDAI_DEVICE=cpu
+python app.py                      # accept the slow-inference warning
+```
+
+**Verify:**
+```bash
+medai-epi health
+# schema_version    : v0.2.1
+# device_selected   : cuda (auto)          ← or "cpu (auto; no GPU)" / "cpu (forced by MEDAI_DEVICE=cpu)"
+# prompts_registered: 22
+```
+
+**Practical note**: at 8B model scale under `bfloat16`, GPU inference is
+50–100× faster than CPU inference. For batch-scale runs (200+ documents),
+GPU is a hard requirement — the paper's 1,200-inference sweep took ~6.5 h on
+an L40S 24 GB slice; the same on CPU would take weeks. For a single-note
+demo or a UI-driven demo on a laptop, CPU works fine — just expect several
+minutes per module.
 
 ---
 

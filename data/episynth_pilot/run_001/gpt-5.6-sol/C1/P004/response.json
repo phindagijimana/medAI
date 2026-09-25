@@ -1,0 +1,107 @@
+{
+  "id": "resp_015f6523d1fa6139016ab63abc072c87d28c73e1af3d201add",
+  "created_at": 1790327484.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_015f6523d1fa6139016ab63abca19c87d297e3298f5ba48a72",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjrE4hdhF-nj0gZw0RKw1kHs7Nr0tTEK1xLIUMtyX8oegnKkE2GhbaC8ZsXsQdGVIHldC_CHyBog7GsGlimRQmeBOmLe5n90qz0Tu-tRN6BrZLnY_3ExRM7KkgInf1dwHan8Da75zJL3sl8_FopGoTIrZQQKRYDw4Grwg8OuLm2sO7p8UBuGeqrLCz5bbCBUHqQLZgNHDmGXtMqlt37qjBwahmxtVqHaa5FJ0VNbN_TwwW5qlmVM1czwuJ-wnLWWOiRnUbcccTZo1uSl7by54rlIf5JoyUoHf0Zn6VWcW0Qzv5HabCovXsL4O27djV4wTLoCDmts0GYamgVSXbvJtlEjMd16tJ0dfWDnlEuQTX24eqvqP_Q5LYKhJ0DmEDsB3K17b46aDmeqWkImPOrNYe1uZSzhvQfxyN_rmfUQul13iwfKd9XmDgmzVco2b_zmOJ8bvZeDRfdL3nf0zxgHZBVjzX5lNgVjDKSNwG__MIF0OV2-0xNCas153GqkuoDAlXFArLvAYMGguEE3ZROp801K6WYLpqUzEMACfkLkGUKbrTLH2VgU0LX6RXbsko6J4fRDksMncJwQvffPH8ibuqqGCwtxtPwYkN-OsBLM16WglewlA4HjlCNl7j-ywQvKeykNTAziBP3q5YRtqYiqHYjAAzvmyQO-HS6mmVFU3mSYjeXzUCz2z7HeUtN721lkc47UvbTpeyH1UeK70vqZDsQSiguYV2MLmS28AMyN0XHSgLkP5t7Y9grdUJivGBel_wIXY01k5E7bw9jciXz-MJJLXj_FW-X8lpl8BFCcEMWQEDVTlqhoQJ5B4a_ffTkLfd0mVr51eeB_VAf33H-U7AXMkPN1JsYFHJuX91mUAgH3DCehafr-o_X_4zF7XHlYfzvSHwU3a3JPhHYay4AEYAKMCEjbQEnUFSnyO0DrIXQaibtqjVpZlviG7zpc0Gg_ZA-i3_6GdRQ5wNiq_0E2DsK7GQzOzpZAmEe87KX4gd5LoC1I59ARKqnBJyCD1YtcXIp6PSoy7LBbJeygXRWeE8XL1Lq7aTSNt4vcQOGg6mcD9pSYl4zmxQF9CklOYoCHRfv526gH8w-uXtD3G8wS90YQ2WFsjRGRU0IsPsSBivDgpl8TA6M3pta8cxaQIlneI7ci5w8bkiDX6mP2virgC9CB143k9i-muWaZOYPFtdgtEB4vGu70YcvXR_E8XICXjeHOjX681Oj4YcFUX0WZ3eHG7Wl6GzIrHBl3uMdtAOnCaB0n0vGeHqhluucH7-TGR42WXMiEhYa6qb0uIA79BG2naA-_Dlx4KIPIGR6f_N1h_sOTUN3JKyQEakF5SNrZcfqwPFl-stbJ9Cob3oQgxyqcrfeh2Pa_TUGtd0lmW-9x4ic4XmY9OUTtY8gBDxJleHJQeU7CnlS7oj49qHCPxoEsBXeXCkjJqF3TGZCLJviCmecw774EJvj-15yjyF28Z4oC-ARHhi8OttAj3A4Ah51SWB2QoCT2tPmXDu8bdHktORa-FqdcLk7kLnUCV2q8mNO9u4LuIX_LvIsD6S-G1d0yHADM0F7oEPdWOXVVDLk3BMqSHh39--ebg-2oTt7Dz4MMyQa00vDEJ9u4jHfqkJa4uxtyUmiKdIno9XVneD3mkRrhM8tBTDqMw4BELyAy1q1t49lXC6ChQWIqlAX3svAfgT8Y-F8Qz60LHtF6mWJoURm7AXQqEV8iMKqPKJ0WKb2BXa9CBemVzAPIwkWY_WE4SroeZSSzLbLmq0Jkj4xNEXM=",
+      "status": null
+    },
+    {
+      "id": "msg_015f6523d1fa6139016ab63abdf07c87d2b568c8af4c6b8704",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Dr Patel,\n\nRe: Alex Morgan  \nDOB: 14 May 1996  \nHospital No: 00481726\n\nThank you for referring Alex to the epilepsy clinic following recurrent unprovoked seizures. The available history is insufficient to determine whether the seizures have a focal or generalized onset. In accordance with the ILAE 2017 classification, the current epilepsy type is therefore **unknown**.\n\nAlex reports intermittent episodes of impaired awareness with limited recollection afterward. Witness descriptions are incomplete, and there is no consistent account of the onset. There have been no further events since the most recent episode. Neurological examination today was unremarkable.\n\nWe discussed that additional information is required before the epilepsy can be classified more precisely. I have requested a routine EEG and brain MRI with an epilepsy protocol. Alex has also been asked to obtain a video of any future event if this can be done safely and to keep a seizure diary. Treatment options will be reviewed when the investigation results are available.\n\nWe discussed seizure first aid, medication adherence, avoidance of sleep deprivation and excess alcohol, and the need to follow applicable driving restrictions. Alex was advised to seek urgent medical attention for a seizure lasting five minutes or longer, repeated seizures without recovery, significant injury, or breathing difficulty.\n\nI will review Alex in the epilepsy clinic after completion of the investigations.\n\nYours sincerely,\n\nDr Hannah Lewis  \nConsultant Neurologist  \nEpilepsy Service",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327491.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 111,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 376,
+    "output_tokens_details": {
+      "reasoning_tokens": 85
+    },
+    "total_tokens": 487
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

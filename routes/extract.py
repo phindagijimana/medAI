@@ -165,6 +165,24 @@ def extract_health() -> Any:
 
     backend = getattr(current_app, "med42_backend", None)
     load_status = getattr(current_app, "med42_backend_status", "unknown")
+
+    # Report the selected inference device so operators can verify their
+    # MEDAI_DEVICE choice was honored. Falls back to torch.cuda inspection
+    # if the backend hasn't attached yet.
+    device_selected = None
+    try:
+        import os as _os, torch as _torch
+        env_pref = (_os.environ.get("MEDAI_DEVICE") or "auto").strip().lower()
+        cuda_ok = bool(_torch.cuda.is_available())
+        if env_pref == "cpu":
+            device_selected = "cpu (forced by MEDAI_DEVICE=cpu)"
+        elif env_pref == "cuda":
+            device_selected = "cuda" if cuda_ok else "cuda-requested-but-unavailable"
+        else:
+            device_selected = "cuda (auto)" if cuda_ok else "cpu (auto; no GPU)"
+    except Exception:
+        pass
+
     return jsonify({
         "ok": True,
         "schema_version": SCHEMA_VERSION,
@@ -173,6 +191,7 @@ def extract_health() -> Any:
         "med42_backend_attached": backend is not None,
         "med42_load_status": load_status,   # not_started / starting / loading / ready / load_failed:…
         "backend_model": getattr(backend, "model_name", None) if backend else None,
+        "device_selected": device_selected,
     })
 
 

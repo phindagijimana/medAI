@@ -1,0 +1,31 @@
+{
+  "phase": "6D.2",
+  "created_at": "2026-09-25T09:12:25.735434+00:00",
+  "source_freeze": "/tmp/phase6d1v2/MedAI_Phase6D1_v2_GPT_MultiGenerator_PreRun_Freeze",
+  "source_experiment_manifest": {
+    "phase": "6D.1 v2",
+    "status": "PASS \u2014 GPT MULTI-GENERATOR PRE-RUN FREEZE; NO RESULTS",
+    "date": "2026-09-25",
+    "primary_generators": [
+      "gpt-5.6-luna",
+      "gpt-5.6-terra",
+      "gpt-5.6-sol"
+    ],
+    "conditions": [
+      "C0 deterministic control",
+      "C1 free-form",
+      "C2 structured events",
+      "C3 EpiSynth semantic plan"
+    ],
+    "pilot_case_count": 6,
+    "planned_gpt_renders": 54,
+    "planned_non_llm_controls": 6,
+    "total_planned_documents": 60,
+    "primary_question": "Does explicit EpiSynth semantic planning improve truth preservation across multiple GPT-5.6 generator tiers relative to less constrained generation conditions?",
+    "results_exist": false
+  },
+  "api_key_stored": false,
+  "adjudication_performed": false,
+  "clinical_validity_claimed": false,
+  "note": "Failures are retained as failures; reruns require a new run directory/version."
+}

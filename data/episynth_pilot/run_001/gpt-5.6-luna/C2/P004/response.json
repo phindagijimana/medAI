@@ -1,0 +1,107 @@
+{
+  "id": "resp_09716265ede79e04016ab63aad366087d295e4cb2008924e31",
+  "created_at": 1790327469.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_09716265ede79e04016ab63aadb0f487d2a71d663548e2c788",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjquBV8XzVYa8Lz14ZVNLMQ2qgaJ_6ZFjh-R5dMQ6kfFyNaTcXu1Y__guRhplo3b6t89hQIDpRBwZ4DPo_8gZ7_I6-jjhUop9vGfOrPCpspWp3w1rImKHX-TXNP0CQw8c9k6qNMIUHdgeSqLHhMfSYfpY7Dh3CgSg6VPl8115Do9ni_HKxODU6-ZkovI4QA_rb8KNCXl3qq3NzcMuMQeknf0yPYBrCAiiV9x5l5oAY76jiSrXzbHR9YFKVfcYNFvrMUYTIzB5CnTF50LgeDnuwAeOHrfI94kQVfORuUkghBvlcIlZkM_SpbDO713CSeoLYdwb7e5Sr966saLvZIq8PGLdbriDB1ba2nzv6TAuejHVnOT95r5QBI8wx3pUBay9Y4q3CrlGC_huU63tx2XV4_pUn7YyWs2I-4GmAxLJY3V6LelsXmPlgAcNLGIQFxy9MntsMqCe4GOxZH53tiWXkBiDj9c5OBdEBwn5sUF3bW5eQPC5hhIroNuJLF39CutgvtcWQFfgNG640GBIlidf8k9NOAUtHS--EkPAU9JzPiM1J0kYMA0NJqKIFGovh6-Xs995fcJKfloZd9FZak5eSNlEGtZI-docDSupguLG42qL_rAUyum0hSvQ5pLIzm2jzuQwrnZC4Uj6QGIL4K-osU3AjZKI8sqz_IGb5GqslzI-FRATuK98xxa0SXSRjccfGUr0C8HzMHor4O7uIxRu-7CzbJ9X4jUu6o59xOpnv4hPS2En4Kcth5vVnQBYuhvNY0-J_Txm8MyMOk2ClE53_VajPGyFEVXQZjpCl5VE8NApaQleakzErrq_z0mG0AYb29nFTYXECOygGAIrnw1heXEI_Ac5YPtq0XyHOJoyiS0WfzdmwwYxPc-e9cXHMb9eYVBhVEIzWCwdWaxQJLUJUpvA--oBnDPsIRUNgnM1ot7dekZc95Xs1kldrLC9zAmBewfKyzrM8C7cgLWB_SCLkODG0yz0UAu71CP-tEp7qbhY2ezE1-x3znGoS-7kyZxp8PybEmIsEHDdtnBiFEVFd8wR68FNJFFBKApZcF969ovUwcoALugPunvqm8Bh1TH0ax1cvQh5rYQUuu9ELClYe1YR8QQ22xbd8U7ZqxakSe80zwBOv98NrV47WTmXvPM_9F5j7pnwEiJBbACEnqH8lphxnXeXfPXY8ie83LeSlDzjLJYS5BxqgGJQsSxVvwFJrFjj4_nK99ICcovZgiAYf6TEFZIJmR1j2yZe3YvqsZ_8RuUFzsNI65jEdpvVFV40jRH0gDstbwdWb_iGXW2yd3pTVB6wxA7SFxg4K3H4F52OYxuP8H-HrLnaVcofTF7hTDqTzp6GOGlkDLlZMCMcYcxUxstyfeAqZXnLU-8HhBQT96ZDr5Xw9z92xQ3HD4Rq1VTcogxvBnjMumg3GM5MHGdl2NAPYcGMOjYqUy5_qvOSmyE11_tenSlpUw3YtK9aQsmvwO7mzVbanhzkb4jZFBkh_8iIJfIDOQsjBALsNxpsAeKzQOtyl6sT-tnEt8hJbpE9AGNcMVJixxytQCDrX3R3A==",
+      "status": null
+    },
+    {
+      "id": "msg_09716265ede79e04016ab63aae5c6c87d2ba0aae40bc6d8885",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nAssessment:  \n- Epilepsy type: Unknown (ILAE 2017 classification).",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327470.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 101,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 91,
+    "output_tokens_details": {
+      "reasoning_tokens": 61
+    },
+    "total_tokens": 192
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

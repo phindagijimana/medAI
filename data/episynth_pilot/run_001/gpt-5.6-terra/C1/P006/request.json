@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-terra",
+  "input": "You are rendering a synthetic clinical document for a research benchmark.\nDocument family: eeg_report\nSynthetic case information:\n[\n  {\n    \"id\": \"E008\",\n    \"field\": \"EEG_RESULT\",\n    \"value\": \"Abnormal\",\n    \"source\": \"Phase 3D frozen core; ExECTv2-compatible result layer; SCORE reporting framework\"\n  }\n]\n\nWrite one plausible document of the requested family using the supplied case information. Do not state that the patient is real. Do not deliberately add facts that conflict with the supplied information.\nReturn only the document text.",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

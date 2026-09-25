@@ -1,0 +1,107 @@
+{
+  "id": "resp_040b1dac29ba55ed016ab63aa0426087d2a5ef4f7e80f885cd",
+  "created_at": 1790327456.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_040b1dac29ba55ed016ab63aa0c2bc87d2b2d2cb8c172fb3c4",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqn6sRv8JNhLoVulwfeV4ALXXKiHdSpGrR1cEtvocUr6A5zbiRcm7qVTEdu9UGdtkNXH3ZhqImLTE5dwh1eg9D-TcQDRJ56tyNE2Zb8e809WyXKoqVYDydw-9HCHcqJTe6uk2bdfFzcVL_zPuHdrKXlQEA1j-2TqmZ0c15xK4Ng7zzDvzMppsO8GrRoud14r6gGHIPb1Japg5CKOXO6JVJ1CCfI7GdwYI2IcsxJwU6ab557ZLgQEMDGGrurW3wY1iyKzONqrgpoegvT7JbppS4EAJYySYd9LbXaFJOPwIUi8rVehJnUQQ5ZW8ginBSSN_LV6w8TwOcFQEsO07bnZOPe0FwVAG46UjwQuGYbbBK09BJepEjBfpoLXZbkM_0IefNoJqp9NM4rWA61um4IE8xUiwaq5YsurZIIJKs3UTm25iXUzJWfbDtaGvynwYqGQfzjXSamVaYDw1pb-LX1VQzi-qXdvDo9rNBww-qFHPjgX-eULEDLnuS23f4ft0fJX_uHP-tC6p3eaz0rArBxJQxUXMAWx3UU6B5081x3HZmEoCeMlri3BfXUVpbpzb66I7nhdiLt9j6Hwtbcj0VYTCB2Kj3VoILjzmyIMT0IJN4Aud9DQV_J3D-QFm15JRNAfRWZxkBARVX9O9n-vUsFxwQYDhhU-y5vMleBFnqPssF6sZwpFkjSptxvEai5oYFNjfbolIinloG_YfRGIvu4KQcRrriE3gCc9cp_4EJUazzes6_1N6xl47ldBjekAbO5qHsAQXU7Z6uxCZA3weD1Ekic9u7Hq5omqP9f4iUN6ABdvkLuugBiv4BPYUfsUW5mIfCTD44fkFyTr1k7DTC1PrAWIp0RRDTAueaq9rcsGlkvMX87ssIbPCvZOIIOMaNtYVbb0ZT158sTAcr6mnNWuAHB7DxKFJM05vQofo1Rr3UsNowggTlTdgN6UzCBf4xculPGjtuK9ODdGRs3mG5WHALdTjuyV_JRIRyZ37YaJAlHzPP4_mewot0LAmyaNWjktXw1DfSn8dbGhpi0vZ6azrJYzalP-TWWHI-5qGKf8HiMKj2h9tu-nhCSOtlVM7TmKF5UTsmjOuvdweq4kDQhcv35McAAwNlTBhVZ7TB9r49AnImUJOLF-dAzHmBOyOY23HB47GJofgZJNz54yBIo0NzL4mB4Y7Q6N1aiCHDl0knF8qpGSHByzb11EHzz3Ne_Ulg7UCPQRTE2pC35fbG-yfQYnJYJU4_K_xUKSc74nPQS1BLhdyQ7Xg04G2Kfo0WT-vnnHhuQGm55aSfjz1Bnenfa2uw_eWC5TMVzT05E0x3G19RoskbuCVF89xubUf1lkIBKOA-smTPOE-tTtqYkPUvGeQCJdHbP_JtKCkUeMvXLEwPBh9wVZOobYygB53v6qBbGv5ZETptbUbqx5U167AxbR6REN3aB3t5-C-yBpsfLFZ2fsNhk8k7it4lISYUIs6obJ9zZqOQSlYkt2kgZei4TdTstiE_ebi5CHAEMlDKyr-dlJZ5wAvghTI3LuvgyJNTmCrcdcO4inIeY9SYJjXHRPFyRuyhDyqLxS_FHjLcRUYIfahxBhMbvxA9lAdi1r5roElGCtnHMABWd0LxdHwcHo9u_fafJcdxYBO8auS8EJEw33QDIit3yg8Hgc-VoR0Fz59DpvXl2xQ34it5ZpWrJ79M87luGIvxyZvdxv_i9uHmOMQSNfArFM9ofkyMS-UU8",
+      "status": null
+    },
+    {
+      "id": "msg_040b1dac29ba55ed016ab63aa1ccc887d283b5a904aefe6e89",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Dr Patel,\n\nRe: Epilepsy follow-up\n\nThank you for asking me to review this patient in the epilepsy clinic. The clinical history and available investigations remain most consistent with **combined generalized and focal epilepsy**, classified according to the ILAE 2017 framework. The reported seizure pattern includes features suggestive of generalized seizures as well as events with a focal onset.\n\nWe discussed the diagnosis, the importance of regular antiseizure medication adherence, and avoidance of common seizure triggers such as sleep deprivation and excess alcohol. Seizure safety advice was reviewed, including precautions around bathing, swimming, heights, cooking, and operating machinery. Driving regulations were also discussed.\n\nThe current antiseizure treatment will remain unchanged pending review of the seizure diary and any available prior EEG and neuroimaging. If seizures recur or adverse effects become problematic, treatment can be reassessed with preference for a broad-spectrum antiseizure medication suitable for both generalized and focal seizure types.\n\nPlan:\n1. Continue current antiseizure medication as prescribed.\n2. Maintain a seizure diary, including possible triggers and recovery time.\n3. Review previous EEG and brain imaging results.\n4. Seek urgent medical attention for a prolonged seizure, repeated seizures without recovery, significant injury, or a marked change in seizure pattern.\n5. Follow up in the epilepsy clinic in six months, or sooner if required.\n\nYours sincerely,\n\nConsultant Neurologist  \nEpilepsy Service",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327463.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 114,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 365,
+    "output_tokens_details": {
+      "reasoning_tokens": 73
+    },
+    "total_tokens": 479
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

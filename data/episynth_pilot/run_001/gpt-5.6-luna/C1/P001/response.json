@@ -1,0 +1,107 @@
+{
+  "id": "resp_0f1be8486e5fc51e016ab63a5ac3dc87d2804b8a27af991ea1",
+  "created_at": 1790327386.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0f1be8486e5fc51e016ab63a5cc82c87d2b74e7c2e45e30e45",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjpfkX5-QDmdIiqf5EhQzBYvi1aNKWs3X2a51Ce1jEOasMdmVvBLnMM_E8WB1GHzifi8kYdaDu6iiTa6od5mz65v5bDKmOyXCSLaa2uBNTI0eyHw__8nEXX1J8NU28QJE7DcyCMJvhIoAf2DXuiOSjSjgzX5RJA-sDwGkO2SmFA4TC1ItI2Dygtrng2jok6ysfJ09D4wkioZMZOaP18m5DBinLMMaBl74EqJ_LnShysEIBPZ9AmED7mMda16tmXxz5fJaK6VOdUj6LOGSEgU3nDNdJ7KwpsV2zQJnr8zEMMsUs_sdUt7hrNipZ3RVvIXGCsxotmdT0YxGg4mtwsRgwUaT1zoPKMIQUXQGd622U-PsuqmgsUqXypBBdDs8FT5iyXLjkiqmgyH2B9yTlqssac2Y8YmGZm3acXjB0kbjGGT95idXg2uwjc-lnFW6aFAJSX2LUVq6YB-udEN7OvhHTF4ixyISCA2USVcJLEkjvhvKuPSdB7viYrOeHGP0pFJ2QJrSmSt9bwC6A7bXHptLaeOOsGKYRVmKl4TdxXAn-8ZP5UL0V1bIUV8WMaFLv4beY0oe99wYYndbX7UHQZFf1WLTZphruk2S6ZSqSgxXIBz-fTAOPUjqqouS5F_Cce1Vbcub6c0fntq1DkWB-gTEsQCCgR-YANcoko37c7T4jgWeqZ-ZqF0ZuRSMH4n4iZUXmQPMk6zeGYzsfpyPNMN2k06eXHYXS7oz4VeoBPFsKoZbmQwpr8VyQ7NQSfT9hFMAi6f3FUXHrjtudl3sRVjQxRjAr5zmSnrXxLZpAB3p8xndxA-PiSkKIe6yafPGgybZhD400uLv6CdOFg9OG_3wEtlJXsJiu4STt0Z3xFUZ1sKDXBFC6yDhQx6CFSg6y4KggZkYt3clnwJRd5RAKPVnPLRWMptA75UilVN8MdPIC4Qwgbz3Gu1VtIlcVq6GH3SD8QVbgqzP-rLwZ4UJboBLrXedtd36jzCvedXr1UpSGBjWmKilPWZIjXqvxpHdsyAGc6E1D0O7U3nPeoeacX5W_0N5VvKkXcdW5aRGFVJSvdhiNzay0ot5NHNcFoiCR0fYXAzXafv112Y9ohF1YTU4iAL9OKdPuD3JkEg4yWzOPsIoZNGiKKtbzskSOTJgRIhz_ICWUBqFfaJKykg9yjXhzh_CcC6uvtz4lUTaL-GIJxdLXHEMPUfCzlahoCDHRb9KlcxwWA-fKl8HEr0y1XuaESdI4VQXl5IefU5tHHYueU7YkzbwREZ-Ne6Rjm5ioSXIiciVMFj4C5ErVldaVjoZsxLAWGeKIJ6o5SKeBJvYTYMAohuErMIoqvSSmBhTVOYR3H6NL-n30bpup4W_kr82O8r-jYnsZ2R_UenjyuEw_-A7_AGva75dGFDXCtqb8Z0CaAyiCBRtg06_AZnanNgiqqig4AXGugeX87bFzzHT96HUuvhewRYIkzK86bSgLhGgyjM46PWVE_bZdM_oIESe2pldIODX86ymxrRM6CiXPR7r9w=",
+      "status": null
+    },
+    {
+      "id": "msg_0f1be8486e5fc51e016ab63a5d8a7487d2ae14dd00d5e8ed43",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Epilepsy Clinic Letter**\n\nDear Colleague,\n\nThank you for referring this patient for epilepsy review.\n\nThe clinical history is consistent with **focal epilepsy**. Seizures are currently occurring approximately **twice per month**. Further characterization of seizure semiology, triggers, duration, recovery, and any associated impaired awareness or focal neurological symptoms should be documented at follow-up.\n\nI recommend continued seizure monitoring with a diary, including dates, possible precipitants, symptoms, duration, and recovery. Management should be reviewed in the epilepsy clinic, with attention to treatment adherence, safety counselling, and relevant investigations as clinically indicated.\n\nYours sincerely,\n\n**Epilepsy Clinic Team**",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327391.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 181,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 193,
+    "output_tokens_details": {
+      "reasoning_tokens": 52
+    },
+    "total_tokens": 374
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

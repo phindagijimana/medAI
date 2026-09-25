@@ -1,0 +1,2 @@
+doc_id,patient_id,doc_type,doc_date,visit_date,module,field,value,evidence_text,confidence,temporal_status,char_start,char_end,source_doc_id,chunk_index,note
+EA0001,EA0001,progress_note,2024-01-01,,medication,current_asms[0],generic_name=lamotrigine; status=current; dose_text=75 mg BID,lamotrigine 75 mg twice a day,definite,current,,,SYN-CLIN-01,,

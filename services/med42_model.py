@@ -32,13 +32,40 @@ class Med42ModelService:
         self.config = config
         self.model = None
         self.tokenizer = None
-        # Auto-detect GPU, fallback to CPU
-        if torch and torch.cuda.is_available():
+        # Device selection.
+        #   MEDAI_DEVICE=auto (default) → cuda if available, else cpu
+        #   MEDAI_DEVICE=cpu            → force CPU (slow: ~5-10 min per module)
+        #   MEDAI_DEVICE=cuda           → require CUDA, fail loudly if absent
+        _dev = (os.environ.get("MEDAI_DEVICE") or "auto").strip().lower()
+        _cuda_ok = bool(torch and torch.cuda.is_available())
+        if _dev == "cuda":
+            if not _cuda_ok:
+                raise RuntimeError(
+                    "MEDAI_DEVICE=cuda but CUDA is not available. "
+                    "Either install a CUDA-enabled PyTorch build + drivers, or set "
+                    "MEDAI_DEVICE=auto to fall back to CPU (slow), or "
+                    "MEDAI_DEVICE=cpu to force CPU explicitly."
+                )
             self.device = "cuda"
-            logger.info(f"GPU detected: {torch.cuda.get_device_name(0)}")
-        else:
+            logger.info(f"MEDAI_DEVICE=cuda; GPU detected: {torch.cuda.get_device_name(0)}")
+        elif _dev == "cpu":
             self.device = "cpu"
-            logger.info("No GPU detected, using CPU")
+            logger.warning(
+                "MEDAI_DEVICE=cpu — Med42-8B inference will be ~50-100× slower "
+                "than GPU. Expect several minutes per module extraction. "
+                "For paper reproduction use MEDAI_DEVICE=auto on a GPU host."
+            )
+        else:  # auto
+            if _cuda_ok:
+                self.device = "cuda"
+                logger.info(f"MEDAI_DEVICE=auto → CUDA: {torch.cuda.get_device_name(0)}")
+            else:
+                self.device = "cpu"
+                logger.warning(
+                    "MEDAI_DEVICE=auto → CPU (no GPU detected). Med42-8B inference "
+                    "will be slow; offline components (chunker, tabular, CSV, "
+                    "smoke tests) will run fine."
+                )
         self.model_name = config.model_name
         self.model_loaded = False
         self.load_error = None
@@ -81,7 +108,7 @@ class Med42ModelService:
             # Load model with optimized settings.
             # dtype: bf16 on CUDA (Med42-8B fits ~16 GB in bf16, needed for L40S 24 GB
             # slices); fp32 on CPU for numerical stability.
-            model_dtype = torch.bfloat16 if (torch.cuda.is_available()) else torch.float32
+            model_dtype = torch.bfloat16 if self.device == "cuda" else torch.float32
             logger.info(f"Model dtype: {model_dtype}")
             model_kwargs = {
                 "trust_remote_code": True,

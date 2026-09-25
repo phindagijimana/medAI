@@ -1,0 +1,107 @@
+{
+  "id": "resp_090556a8d3c7aeb9016ab63af06ad887d2b041e9eec0ff8276",
+  "created_at": 1790327536.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_090556a8d3c7aeb9016ab63af0eea087d28dc4d082aa5af73e",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjr1Q-KGTSLpx-5VW7O0suIKDAhOHyDmKoe8Jn9hVShcFy4XzdwLZvOpsOto7x1RU1_VCYYtY_fLHSzOwXnaSs-WX_9-OLXvkvFLuNB8TmSeFiAvp6vdT3TIpa3R6QHgI7SvLEos-vwhUtXYyLzYp2ZjlFD6EaxzQTg9ezojhBdSmEr6YmZVwK532Z0eBLv-KTCJs8zjTJJbqaYJspnvFVrmmtxJo1gLxHIlEDelPTl5UgNeyPO0DsidShpWR0Kr_8zIs0f5xETt742g7b06Rojc_uLckBqiXyMBePpCvqvl8ftwZBbgXstlQuiL-SCZeMZONyD_2NZHGp8XqO9YIWcdauD7VGz7_LI7ttpQtzRbkkXTE8eIHn7YRZoW_pnztjD3bSN_XVtVEj-gjXSJflzVfrzCT_esriaIm0DkkA1giq2opFnYoSiVOAJuGfemKJFowtW142RNFxvXTOzaxwAnSjmzo6TTaGMNvL8_Dmq6Nhc9U-_WJsiy71eSObbOJuJjbUo7KIvcl4n5HCz7m_l3djLSqqwRTTl4cncTpqno8PBwjv5pfFL4L3g-pK_oJEcYIchUU8mdDp0spHaUXMCN9gWYLMy94x8mypfz4VUrD7YY4oSLJG0pF9lKy4SAs1hprApbEoC3YONaYnQCYY5XufY8a36bzJyz4CTzTAuIIV775eLDCYYWcCwldS1I49dGCICRfpNBIhQc6hBDX8xRVelqPQsFRmcxWhbiqJuWvys-JzWC8ViKGWyGrpU6EhIjgYrY2KRw1GbrK8_oo7uTZWUH_heAaVG64Wy6VcF62kfuOh8ERaQ0fzGt2sFS7jnxh2qDv5HT3-SFCCVP8guEew1qTwXnh0YXzAK2jAMgE6hwToHSDdTFOYGz6bA0VJDgtl8lS-a6u-UEIaBSmObQI-PydPg9EekdmfxR9gn7dh8IUpaHlobPQVL0Wjkhy-g46PNraTtC0DEjcT2MaoS5_0wLAd6nu1NACLDtba1YcTlu1mbFyQAKgJnJE-AdGBAdVTOrTEmUHs54YDnBSvVqhsgLDc75Zt_om8yQxFP8RrX3amMVwdUPdoQs9Er9YbghP4GdwxAIQ5vIiUtpOKU-Nl0fJMBemELUplQ4_aazIcH-mnHveJAPTA675zqMya2-npvhLmZcSpmvn9xaKZ2h3ymrQ4A830NCOTZj3Mdig0HdKCjYvYTyMLGQjO72mfXpHLyB4atR4s0BAx8GAFUzmV-u4NkJoV6VlpXy-6DvgsNbQDxr3kuDGZHoLieqHVA1UWCZmBTuDjrK1p3KtQUCpaxo_GfWjJXKYMIyhiWdxTdaqjN3Tj0Es8wdIKP-geILVOjLAji6cweEa9p0Q8gIxUS0etx9kulfubYUporveQNdNeLRah9XWzvQmFydyEJlGgDr-69XbZlnj5FWynllvMx18Y9pDKzoChUng0lkP1tepOrvEcGMaDmLiimj-oiOLIH8sKzjj_SHajPJv5wNpw==",
+      "status": null
+    },
+    {
+      "id": "msg_090556a8d3c7aeb9016ab63af199e487d299550798689cd11f",
+      "content": [
+        {
+          "annotations": [],
+          "text": "ELECTROENCEPHALOGRAM REPORT\n\nClinical Indication:\nEvaluation of episodic altered awareness.\n\nTechnique:\nRoutine EEG recorded using the international 10–20 electrode placement system. The study included wakefulness and drowsiness. Photic stimulation and hyperventilation were performed.\n\nFindings:\nThe waking background demonstrates a posterior dominant rhythm of 8 Hz that is symmetric and reactive to eye opening. Intermittent generalized theta slowing is present, with occasional brief runs of higher-amplitude delta activity. No focal slowing is identified.\n\nPhotic stimulation produces a symmetric driving response. Hyperventilation does not elicit additional abnormalities. No epileptiform discharges or electrographic seizures are recorded.\n\nImpression:\nAbnormal EEG due to intermittent generalized slowing, consistent with mild diffuse cerebral dysfunction. No epileptiform abnormalities or seizures are captured.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327541.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 124,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 219,
+    "output_tokens_details": {
+      "reasoning_tokens": 45
+    },
+    "total_tokens": 343
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

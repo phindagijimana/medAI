@@ -70,10 +70,15 @@ data/rag_cache/
 !docs/APP_*.md
 !docs/FUTURE_*.md
 
-# Environment
+# Environment (never commit — may contain API keys / secrets)
 .env
 .env.local
 .env.*.local
+.env.save
+.env.bak
+.env.old
+.env.backup
+!.env.example
 
 # Temporary files
 *.tmp

@@ -1,0 +1,107 @@
+{
+  "id": "resp_01095645ef854d8d016ab63a85b34487d2b5b43595b4cd13e4",
+  "created_at": 1790327429.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_01095645ef854d8d016ab63a8622b087d290c8b03db111832c",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqKuaVvpPaquZ_remoRdjJCZ-SzC2iOP3I_vE0Ki9h1ktBOps5B26xhpaIm5xkH4DN2k-4e3qdSk9woj9JfWDB-Jp9mByY-xzmkWkl4iLoDv4CSZrrhu0HBrNBjY2azNmtUTNiPfZaqv7kvLiYVIgo_O8YMh2UZs8EORaPHdUt0ke70TepWiW_dsQAeCiouZsyBqS4q1cdXNcjkSTetqX8AwhF15KPGfpehTEXV6f1gfDRdMau4fVMPHyQKKFfW9yjIJesKdbMkpWqRT0EXkri9Z5Yt7X1lcDx44aC_SzDgAglGVP2Z19I0Mew1tThjQ_WzKwWl6FaQsZ9BV1hp_7mO_hRZBOdc5YKbh5VsJco9z2yijbKWxvihCMRYiNlctpUMNbeSDfO_SqSMXmA2jL0pUkw0sAp6F070BJqij8sN_Chb_73utS6pbHXBzIpHAAnzBMWerKF9pvEeLsxusVA7kLpmeip1VM7U1RDwZjtwy-W3EyJ6p_ZUy4vrdXsDKBoePRhqNGBPVGs32XeqOzDuVhf4AUdZDc9dno4_i70T3lgMhpLd1gaAB82lUYuNbkihQqrBlH0G8M2EJG4gLGFoeuJIpfXkOLwjp2Sns1Tn-ryEFnvZJyH4z8YsecjSBBChm9fOhvli8tWbEAE2djTjrdqtMpRGc8i4Et9edpA67mU86vv1RkevSPBfjXkXjdOzQyuKT7O0JYpqgLmPB1zaxl5gWnt5YJ8cnD782BK7HYgCKD6x_bk2Blbk1YpmPYffNKgS9fS9hv21mjnDB0nTbFBMGYXoqVtyd_OaN38udFQDaRQvQE_KUUHQ8B3n3VCVexLRTNP3qXxTK6FL24A0RdP8eE_X152bHt5gf2DOaWThb4KLStG_doEvq8YWE2kvgegGTV8MPi4UtcAOSENrtlomp558KVEc4Ma3s4pYP2ldXXbaghuacTqh1zBkODla_wdyQ-YRkbLO3TAnZI2w6BBK-TIHopRhMwrZHTR-jV_4Af2XL_nOUu1xEwJ8NuCC5E-JuxhSgCZefX0jwCQN8JKcQl0CkuXqX5ObajrzO-ImGkpXVmdf_K6lg-viz7AIXpiQN8B3kKPqNsJChXEFjYzHO-A0pleS75eukThsYvdOcVFttuoprsOybyEVF4UsVaU35_MH2rCSFjwqVVKptzwJz8UKJgjwlZRii6gj47gr8sPtpTgVXWgSzoTnHi-u6G5m6qS7_mZgZkmkC0Nzzz8yPAjLhxSNoYmDTZQotGYkZCQsB8M9cV-iHROiYhDhje1XY93xLYZLltI0adD5NpQX0B-O-OCtEO7LssbXNBrce6SqZjPQlokZeyrwztOD68btoesecHn7jX9_p7fLA6c2H3ijSFhxlW0yIGJqNXi3dXy35gEbG3nJJfgo9PNuQWjIQ2i4xt5hqnAvkTKOtVJHolxPoqeEB9gQRzO3d2VO2elxBM26-zADpTQLxgiATbHiZp_0c6Ep4xQT9m45HTqr71hCNOiRQN5GbHJwXe9h_xU9SfxxiKEMx5ivedBDM3jDeZSG2lxHcu68b5b-AwaBCxuBt2XnfwnX0Gbb409eqUNRZF2Mq5uxNhbfy2O3gx9lZ-nNlCWipV30OpaEvLT0BHMbmIWYVAT3yzY-WtW-wPG9vL_LKBKJzcpidAIJM_DbVLwrA70SDkBAuqyaBkwtBWPVVL2wTf0mD2MgUOaZ2sbxpahZwb1ZGTvTrBKoHS3I2e8xvSLi7QVkbsMPMCZ8iaZZhL3xiw6kPVCyM02tM6MsDtgdmQW7UwlSbrJ4BZa5q54Z5z1jSU79XjBnqqwFxIq_sscSE2dMChjYOoq6i0gMJ3U_0-92xeNNHlzjYNEwIjtH9wi7zynuGg0muMSvY5F2dy2ebP8gOa8cEJA=",
+      "status": null
+    },
+    {
+      "id": "msg_01095645ef854d8d016ab63a878cf487d2ab642aadc0347dba",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**Re: Epilepsy Clinic Review**\n\nI reviewed this patient in the epilepsy clinic today. Their epilepsy is classified as **generalized epilepsy** according to the ILAE 2017 framework.\n\nThey continue to experience generalized seizures at a frequency of approximately **one seizure per week**. We discussed maintaining a seizure diary to monitor frequency and identify any potential triggers.\n\nThe current treatment plan was reviewed. General safety advice was reinforced, including avoiding unsupervised swimming or bathing, taking precautions around heights and machinery, and seeking urgent medical attention for a prolonged seizure or repeated seizures without recovery.\n\n**Impression:**  \nGeneralized epilepsy with ongoing seizures, approximately once weekly.\n\n**Plan:**  \n- Continue antiseizure treatment as prescribed.  \n- Record seizures and possible triggers in a diary.  \n- Reinforce adherence and seizure-safety precautions.  \n- Arrange follow-up in the epilepsy clinic to reassess seizure control and treatment.\n\nYours sincerely,\n\nEpilepsy Clinic Team",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327434.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 181,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 309,
+    "output_tokens_details": {
+      "reasoning_tokens": 105
+    },
+    "total_tokens": 490
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

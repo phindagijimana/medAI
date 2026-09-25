@@ -1,0 +1,107 @@
+{
+  "id": "resp_00daf8dd221d2e3b016ab63a8c673087d29a152e5969576db1",
+  "created_at": 1790327436.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_00daf8dd221d2e3b016ab63a8ce83487d299ee4788f5df24f7",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqObq12yX1mMqXuFHKn_ulFS_dH_AwACOt77zMIR8fxV524HeZ62r79nJKKyKy1pDH4aU295C0zU3LDn8yB-_xUvmV43qfCqkXOi4xIHVxT1HRXx5vgXmUNu--KXrAlWH8R0MYaPqcTkx5rrNBt4c592DTXBsqWzCNJ8Ic99shFFFP1KC1QJADbQPMXNnHT0Hsu2nDdyVW5cSlSXh32bv5GApM4jwtMHOBmPhAD_RVok2PPcWU-n4qaZZvLuonFSwUYoPWkgGQOqB85GlZpbKaxKT7IJqJ6GO5DynFNcInVncKV9aVYTglriT9PQY6JcDEIEGVQrh8EGWjaGTTiCjTu9OJm3kdbPfl-QiDZnmFH7evWvc7YnfwJV8LGz730JWMdBt9TEAchJzaD4kuhCmTWwI6MLjggNNKW377VCKFC-RlV6W3LF4jftvs2sInWAQGqlBt_b_ewTGCNMhkYkEcQba4e90dlI91UaVzDsQDrUxvRwqWf0OJVTnz7cuDqH3LBrklwf_mautn5YBHQVT31Vhiks0XtEubrp9WfH9dM4OFewz83D5pvEWU9t-QNNHh6kHjiCfO8A2DzznYV5BYpKfyQ5aWDntr2jxLglQ6Fp_dTisSJYQqzmoKw1_KO0wTGlGfoUMUNQ3ufxmo9Q3KvVK_I5o53cDPJl66KVe2FVCzkotHAeLKZV0yQRz6NbOeASdX32I4ASKtFtyiySqhWtQLaPpgHhtf4SAkSlyoP9amxA8MTuiAsTWMaIx4M53Jz-KFBdaaJRKHR5HtJOugUS6ZNUCUWDH2_Qhinr9rZtP8f45DQ0cYY0nBViBBRXaLNAUlqnfjOL3GyXC0D82qPRVeTcZ2QP8XutVZxEBmtKtuARZpfd9qUdmMkpv0U00S1iQGmwb0OyvQ9103N-V8j3RdJxJHr0tkTSf-tXGII3Ai-31KdeOoxyZsCWU4g7JNS3yT_c3MpJiIHeG0wWbrZx7GpOe1te4U6WwhSDE5I3amehZqwDn8DzHRzfJIzLLvXwvTWH3ISgft9xqi-thfljbQuFaev2GXspQl4mOL0bt_IA_P6yWMCS5YpFqvziGsHFg6J_EP_MrxiCEL3eGs0BjUxGMEguoQJ0Pja_HDFT_cAQRyhGNtSfjlhPkwWMo_EusflPrT9uvpRLYCxEywLSk4_v5T_Dg8720fiMLDfEpo6FPlR6MLoe6CjVn-qFzJB8OX9rWsnjWIxGxC3a82O4DES2kU9FfdFxuvOQawMqOf2xCVRMK70eFcg-iNEimJBuT4mYnCa_OfCKWK_nkv-or4Fl8F-EgXkzpRYZwDIy62rC63JPCXzTE7CW0n937ZkN-qIYtqnlMIbUL_tc6g_jQ0k7R1L0ktwsQYFctqfU4nemKPVa2MvMSQcGBT0udXUcWUubrbwE3dBd8dm5k0BwTrfIAYNfAg7DLZOibVfg-cWH-djVlrkRoHeft1O8RCWYSOKwr43XVsIWmzGce5TMZX_CcnK8mM3zJWt4c_vtX0twLUekSNUqaA5tn0xN6ZKK7-W6gHhf8e4z3a1AjeX9MktXBoEOmy27hipVSESGAM=",
+      "status": null
+    },
+    {
+      "id": "msg_00daf8dd221d2e3b016ab63a8dcccc87d299556e57338b9a6f",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Epilepsy Clinic Letter\n\nEpilepsy type: Generalized  \nSeizure frequency: 1 per week",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327438.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 289,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 100,
+    "output_tokens_details": {
+      "reasoning_tokens": 71
+    },
+    "total_tokens": 389
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

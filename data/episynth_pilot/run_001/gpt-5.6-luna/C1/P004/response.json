@@ -1,0 +1,107 @@
+{
+  "id": "resp_03cb3332d16aa2c6016ab63aaab2c487d29ba10d5d654f7164",
+  "created_at": 1790327466.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_03cb3332d16aa2c6016ab63aab194087d2ae8361f03adc0e91",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtjqtF4xSmfmXWAF-1I7xK7rWbg3AFiz5b5KKp0vYS2vCzJC5luwaBlLMZw3h-gKvYKxPFFQ1CQeXzv2nt8coODEs1T7u7EDJbJ5ARjPb5ZrsdqOablGRElIF0GvalrpluAqXxyTFQJxFujoqmjyHxhgplemsOXzCuYAqwkaBQBYj2QT2yRHILSfkrfEdJwOWQsar2mRLwJQ6auprbVr_C5rsq9d_Q2gd3Gj9ET_K4v7_jedV62qYno-MVq5Z2chpz7zOm1zZIFOi_RcHl-w5sWgJbnANquvduh4ycLQUlAKEsEsHe1Pm2DMgu___0Z9OkwfUps2DIpr-zfP4B48BAf32EDXxok-S04JraSFRQjtKnjiLSU-itP6m38bHPM26FOcG0E3qj0seGBi4__s_exRMRR6MdgKO5VXCpZUr0gPuw2pxqdFuFhYp1sTEbMFxBq8vQ69lLHgxnEFjpVdWOJhtLx9L3qxcg6YIj9ZnUh69MPY9Ja4MBrWxlBuMe7M4GQ8uJKu1m75JKXeRyfvqtgLXAKpOUkbF6V0_dkXZME58z_ENtKtoj77xpyF4mOtSXyI0x0jkkgJgq_t3k3KuBCgbyGUX6eL1R_uF5a1io8yNGxAcn50qlF2VHJvpGoh_8oAf0azHmmsfgZ8gWO78381KL6wF2eqNpj0IzwOotsEAR_mjUbfFiaajMRGTzl5itqnpXP_yY2qVnFZIv4dgHg5xyp77SEQS7knAqGBSxoBPm6-zNrK6lbs1nE91bgsOeJWVsd1ECkutqEtNpzeckJp0ZLGxINK6HML3-3hDahGwtv5Z8lfd4PpTanicfHzx5xdU7bXA7URpbLprImrldMzyEMceHd8NNkMmbrQGuPpTzjS8SYYXUVX043HLxMy26HfOIuDX0-FGbrkef0JO_4VtXLV52wpzQbiChq6bWFmfVhEawJu5fSh1pQkLzM_eDZrQn4_Xv-w2xY9yzR06BPZ8ICy45iIyuxrx7u3bxOhljEded0YWfg4859zWcmwjzaLDhf1mh9pdJRBDaXrn-IqRQMo_XZzb_8hGwk6qLdR17VL9nWfNAAztLqT3g7pGdEH-txaNNs9nzphFflsjpGJhVvP7suecURqS3EJgxGdkqpl5oci76Na_2hX4sZGePTA3J20jgZYVEjy7WgXklwbamI4QjmBhBiwOPNVVh_MgjZ4M7Z3Z1g6EcV_iQsloljLECkySHpAGXoWZCvZZrEPpbq8hBm1gaU4PBsy1-OAmc8eDGhXY2oHm0k7_onNY-7zSpn1_ZwfEzTBSVLkcf91UM0TaU3m_LY4tmB9tXETg-ooQ0yPDlxpL_AjQWYie_cZexyAw56K6nztZUTygjLpZcBvZNHkF1B0XoBYrAivdhhUlGCqFb-mbK5otlM0t6DYI1bjV97EeiiD_VgTABIBsVgvF0t3rtGuEvXd7P1ScyLV4eLRrCV2_FWrxN6Z0NZnu6fAyMBayaoEVlDuGsvYjnuRHVCfrWr4VGkXd9LjhcczWHeWluOu8akJNHXKRMwWkX8AUN5u35tDNFXQna2F7BTqTeqpN4p3hkUg2YwvY4wKJ-rHjvtKUEPm1NyTvcJ8W3VT-WrhUtjADUWDvgQXCxQdQw0aaPKd-eyKxKGrwpFR5QB3O4HsGLIYl425xx8tuGBXdVF-Q8jyFnfOrZOqxY7o6VD-2qHBFqmzFggGSaflLI8y0qt17k3gDSVaDbG0WoZQcq3mF1V4fYFNZFc4sWhbA8JRp0gJlCKtnlJYEl9HJvNwn57iKshMrRkrj-YPOklZPvq7hZusmt4cAzJs0lg==",
+      "status": null
+    },
+    {
+      "id": "msg_03cb3332d16aa2c6016ab63aac15f487d28bfec38f3f07d156",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Epilepsy Clinic Letter**\n\nDear Colleague,\n\n**Re: Epilepsy classification**\n\nThe patient was reviewed in the epilepsy clinic. Based on the information currently available, the epilepsy type remains **unknown**, in accordance with the ILAE 2017 classification framework.\n\nFurther clinical assessment and review of available investigations will be required before a more specific epilepsy classification can be assigned.\n\nYours sincerely,\n\n**Epilepsy Clinic**",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790327469.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 111,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 182,
+    "output_tokens_details": {
+      "reasoning_tokens": 90
+    },
+    "total_tokens": 293
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

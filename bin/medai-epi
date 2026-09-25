@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# MedAI-EPI CLI shim. Locates the repo, uses its venv if present, else system
+# python. Passes all args through to scripts/medai_epi_cli.py.
+set -euo pipefail
+
+# Resolve the real path even if this file is symlinked into $PATH.
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+REPO="$(cd "$(dirname "$SCRIPT_PATH")/.." && pwd)"
+
+# Prefer the repo's venv Python (has all deps); fall back to system python3.
+if [[ -x "$REPO/venv/bin/python" ]]; then
+  PY="$REPO/venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+  PY="python3"
+else
+  PY="python"
+fi
+
+exec "$PY" "$REPO/scripts/medai_epi_cli.py" "$@"

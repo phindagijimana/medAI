@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-terra",
+  "input": "You are rendering a synthetic clinical document for a research benchmark.\nDocument family: epilepsy_clinic_letter\nPermitted structured events:\n[\n  {\n    \"id\": \"E001\",\n    \"field\": \"EP_TYPE\",\n    \"value\": \"Focal\",\n    \"source\": \"ILAE 2017\"\n  },\n  {\n    \"id\": \"E002\",\n    \"field\": \"SZ_FREQ\",\n    \"value\": {\n      \"quantity\": 2,\n      \"unit\": \"month\"\n    },\n    \"source\": \"ExECTv2/SZFreqExtract-compatible representation\",\n    \"fixture_note\": \"Experimental quantity; not prevalence.\"\n  }\n]\n\nRender the document from these structured events. Preserve supplied values and temporal/frequency information. Do not introduce unsupported clinical conclusions.\nReturn only the document text.",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

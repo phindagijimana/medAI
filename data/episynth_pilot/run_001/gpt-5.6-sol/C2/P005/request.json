@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-sol",
+  "input": "You are rendering a synthetic clinical document for a research benchmark.\nDocument family: eeg_report\nPermitted structured events:\n[\n  {\n    \"id\": \"E007\",\n    \"field\": \"EEG_RESULT\",\n    \"value\": \"Normal\",\n    \"source\": \"Phase 3D frozen core; ExECTv2-compatible result layer; SCORE reporting framework\"\n  }\n]\n\nRender the document from these structured events. Preserve supplied values and temporal/frequency information. Do not introduce unsupported clinical conclusions.\nReturn only the document text.",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}
