@@ -1,0 +1,226 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0057",
+    "doc_type": "progress_note",
+    "doc_date": "2016-01-01",
+    "patient_id": "EA0057",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Symptomatic structural epilepsy",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 191,
+      "char_end": 222
+    },
+    "predominant_seizure_type": {
+      "value": "unknown_onset_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal to bilateral convulsive seizures",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 818,
+      "char_end": 856
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "Dissociative seizures",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Dissociative seizures",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 140,
+      "char_end": 161
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "focal motor seizures",
+        "period": "year",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal motor seizures",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 581,
+      "char_end": 601
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "focal to bilateral convulsive seizures",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal to bilateral convulsive seizures",
+        "source_doc_id": "EA0057",
+        "source_doc_type": "progress_note",
+        "source_date": "2016-01-01",
+        "char_start": 818,
+        "char_end": 856
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "cerebral abcess",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 245,
+      "char_end": 260
+    },
+    "etiology_details_text": {
+      "value": "cerebral abscess",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "cerebral abcess",
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": 245,
+      "char_end": 260
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": "1000 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Levetiracetam 1000mg bd",
+        "source_doc_id": "EA0057",
+        "source_doc_type": "progress_note",
+        "source_date": "2016-01-01",
+        "char_start": 274,
+        "char_end": 297
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0057",
+      "source_doc_type": "progress_note",
+      "source_date": "2016-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

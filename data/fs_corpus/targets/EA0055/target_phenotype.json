@@ -1,0 +1,226 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0055",
+    "doc_type": "progress_note",
+    "doc_date": "2017-01-01",
+    "patient_id": "EA0055",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ymptomatic structural focal epilepsy",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 186,
+      "char_end": 223
+    },
+    "predominant_seizure_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "Headache",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Headache",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 139,
+      "char_end": 147
+    },
+    "age_at_onset_years": {
+      "value": 10.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "pileptic seizures",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 527,
+      "char_end": 545
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "eizure",
+        "period": "year",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "eizure",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 645,
+      "char_end": 652
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "seizure free",
+          "period": "year",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": true,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "seizure free",
+        "source_doc_id": "EA0055",
+        "source_doc_type": "progress_note",
+        "source_date": "2017-01-01",
+        "char_start": 1612,
+        "char_end": 1624
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "erinatal insult)",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 225,
+      "char_end": 241
+    },
+    "etiology_details_text": {
+      "value": "perinatal insult",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "erinatal insult)",
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": 225,
+      "char_end": 241
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "current",
+          "dose_text": "150 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "he currently takes 150mg lamotrigine twice a day without any side effects.",
+        "source_doc_id": "EA0055",
+        "source_doc_type": "progress_note",
+        "source_date": "2017-01-01",
+        "char_start": 671,
+        "char_end": 745
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0055",
+      "source_doc_type": "progress_note",
+      "source_date": "2017-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

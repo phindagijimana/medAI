@@ -1,0 +1,317 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0054",
+    "doc_type": "progress_note",
+    "doc_date": "2018-01-01",
+    "patient_id": "EA0054",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "symptomatic structural frontal lobe epilepsy",
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 134,
+      "char_end": 178
+    },
+    "predominant_seizure_type": {
+      "value": "focal_impaired_awareness",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal seizures with altered awareness",
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 252,
+      "char_end": 289
+    },
+    "other_seizure_types": [
+      {
+        "value": "unknown_onset_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal to bilateral convulsive seizures",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 330,
+        "char_end": 369
+      },
+      {
+        "value": "focal_impaired_awareness",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal seizures with altered awareness",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 752,
+        "char_end": 789
+      },
+      {
+        "value": "unknown_onset_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal to bilateral convulsive seizure",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 900,
+        "char_end": 937
+      }
+    ],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "cortical dysplasia",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "cortical dysplasia",
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 205,
+      "char_end": 223
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "focal seizures with altered awareness",
+        "period": "week",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal seizures with altered awareness",
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 252,
+      "char_end": 289
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "Focal to bilateral convulsive seizure",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal to bilateral convulsive seizure",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 330,
+        "char_end": 367
+      },
+      {
+        "value": {
+          "raw_text": "Focal to bilateral convulsive seizur",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal to bilateral convulsive seizur",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 330,
+        "char_end": 366
+      },
+      {
+        "value": {
+          "raw_text": "focal seizures with altered awareness",
+          "period": "week",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal seizures with altered awareness",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 752,
+        "char_end": 789
+      },
+      {
+        "value": {
+          "raw_text": "focal to bilateral convulsive seizure",
+          "period": "year",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal to bilateral convulsive seizure",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 900,
+        "char_end": 937
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_details_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "dose_text": "150 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Current medication: Lamotrigine 150mg bd",
+        "source_doc_id": "EA0054",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 400,
+        "char_end": 440
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0054",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

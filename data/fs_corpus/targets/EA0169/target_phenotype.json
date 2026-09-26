@@ -1,0 +1,226 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0169",
+    "doc_type": "progress_note",
+    "doc_date": "1972-01-01",
+    "patient_id": "EA0169",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "predominant_seizure_type": {
+      "value": "focal_impaired_awareness",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal dyscognitive seizures",
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": 167,
+      "char_end": 194
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "s neurocysticercosis.",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "s neurocysticercosis.",
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": 127,
+      "char_end": 148
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizures",
+        "period": "day",
+        "count_min": 10.0,
+        "count_max": 15.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizures",
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": 248,
+      "char_end": 256
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "frequent focal dyscognitive seizures",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "frequent focal dyscognitive seizures",
+        "source_doc_id": "EA0169",
+        "source_doc_type": "progress_note",
+        "source_date": "1972-01-01",
+        "char_start": 158,
+        "char_end": 194
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "infectious",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "neurocysticercosis.",
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": 129,
+      "char_end": 148
+    },
+    "etiology_details_text": {
+      "value": "neurocysticercosis",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "neurocysticercosis.",
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": 129,
+      "char_end": 148
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "dose_text": "150 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "lamotrigine",
+        "source_doc_id": "EA0169",
+        "source_doc_type": "progress_note",
+        "source_date": "1972-01-01",
+        "char_start": 547,
+        "char_end": 558
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0169",
+      "source_doc_type": "progress_note",
+      "source_date": "1972-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

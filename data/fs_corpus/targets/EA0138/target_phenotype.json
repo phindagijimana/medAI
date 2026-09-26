@@ -1,0 +1,255 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0138",
+    "doc_type": "progress_note",
+    "doc_date": "2015-01-01",
+    "patient_id": "EA0138",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "temporal lobe epilepsy",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 114,
+      "char_end": 136
+    },
+    "predominant_seizure_type": {
+      "value": "focal_impaired_awareness",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Focal seizures with altered awarenes",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 418,
+      "char_end": 454
+    },
+    "other_seizure_types": [
+      {
+        "value": "unknown_onset_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal to bilateral convulsive seizure",
+        "source_doc_id": "EA0138",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 479,
+        "char_end": 517
+      }
+    ],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "brain atroph",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "brain atroph",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 616,
+      "char_end": 629
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "Focal to bilateral convulsive seizur",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Focal to bilateral convulsive seizur",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 479,
+      "char_end": 516
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "Focal seizures with altered awarene",
+          "period": "month",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal seizures with altered awarene",
+        "source_doc_id": "EA0138",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 418,
+        "char_end": 453
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "infectious",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "meningit",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 860,
+      "char_end": 869
+    },
+    "etiology_details_text": {
+      "value": "meningitis",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "meningit",
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": 860,
+      "char_end": 869
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "current",
+          "dose_text": "200 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Lamotrigine 200mg twice a day",
+        "source_doc_id": "EA0138",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 251,
+        "char_end": 280
+      },
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "current",
+          "dose_text": "100 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Zonisamide 100mg twice a day",
+        "source_doc_id": "EA0138",
+        "source_doc_type": "progress_note",
+        "source_date": "2015-01-01",
+        "char_start": 284,
+        "char_end": 312
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0138",
+      "source_doc_type": "progress_note",
+      "source_date": "2015-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

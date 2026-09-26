@@ -1,0 +1,261 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0124",
+    "doc_type": "progress_note",
+    "doc_date": "1971-01-01",
+    "patient_id": "EA0124",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ralised tonic clonic seizures, th",
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": 821,
+      "char_end": 854
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "nce even",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "nce even",
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": 909,
+      "char_end": 917
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "nce ev",
+        "period": "week",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "nce ev",
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": 909,
+      "char_end": 915
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "ralised tonic clonic seizures, t",
+          "period": "year",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ralised tonic clonic seizures, t",
+        "source_doc_id": "EA0124",
+        "source_doc_type": "progress_note",
+        "source_date": "1971-01-01",
+        "char_start": 821,
+        "char_end": 853
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "s. Sh",
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": 778,
+      "char_end": 783
+    },
+    "etiology_details_text": {
+      "value": "Measles",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "s. Sh",
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": 778,
+      "char_end": 783
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "current",
+          "dose_text": "50 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "samide 50mg bd\n\nOu",
+        "source_doc_id": "EA0124",
+        "source_doc_type": "progress_note",
+        "source_date": "1971-01-01",
+        "char_start": 199,
+        "char_end": 217
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "sodium valproate",
+          "status": "prior",
+          "dose_text": "500 mg × 1/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Medication: sodium valproate 500 milligrams mane 700 milligrams nocte \nZo",
+        "source_doc_id": "EA0124",
+        "source_doc_type": "progress_note",
+        "source_date": "1971-01-01",
+        "char_start": 124,
+        "char_end": 197
+      },
+      {
+        "value": {
+          "generic_name": "sodiumvalproate",
+          "status": "prior",
+          "dose_text": "700 mg × 1/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "sodium valproate",
+        "source_doc_id": "EA0124",
+        "source_doc_type": "progress_note",
+        "source_date": "1971-01-01",
+        "char_start": 136,
+        "char_end": 152
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0124",
+      "source_doc_type": "progress_note",
+      "source_date": "1971-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

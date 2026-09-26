@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """LoRA fine-tune Med42-8B or DeepSeek-R1-Distill-Llama-8B on MedAI-EPI pairs.
 
-Supersedes `finetune_med42_lora.py`. Accepts `--base-model` (med42 | deepseek
-| any HF id) and `--corpus` (pilot | synth-v1 | both) so the same script
-trains either model on either training set.
+Accepts `--base-model` (med42 | deepseek | any HF id) and `--corpus`
+(pilot | synth-v1 | fs | both | all) so the same script trains either
+model on any of the three training sources or their unions.
 
 Training data:
   (rendered_document, target_phenotype.json) pairs from:
-    - pilot   : data/episynth_pilot/run_001/  (60 pairs, C0 + 3 GPT tiers × C1/C2/C3)
-    - synth-v1: data/episynth_corpus/v1/      (up to 1000 pairs, GPT-5.6-sol)
-    - both    : concatenation
+    - pilot   : data/episynth_pilot/run_001/     (60 pairs, C0 + 3 GPT tiers × C1/C2/C3)
+    - synth-v1: data/episynth_corpus/v1/         (up to 1000 pairs, GPT-5.6-sol)
+    - fs      : data/fs_corpus/                  (200 pairs, real F-S clinic letters)
+    - both    : pilot + synth-v1
+    - all     : pilot + synth-v1 + fs
 
 Adapter output:
     checkpoints/{base_model_slug}_lora_epi/
@@ -38,6 +40,10 @@ PILOT_TARGETS = PILOT_RUN / "targets"
 SYNTH_ROOT = REPO / "data" / "episynth_corpus" / "v1"
 SYNTH_DOCS = SYNTH_ROOT / "documents"
 SYNTH_TARGETS = SYNTH_ROOT / "targets"
+
+FS_ROOT = REPO / "data" / "fs_corpus"
+FS_DOCS = FS_ROOT / "documents"
+FS_TARGETS = FS_ROOT / "targets"
 
 BASE_MODEL_ALIASES = {
     "med42": "m42-health/Llama3-Med42-8B",
@@ -109,12 +115,40 @@ def _synth_pairs() -> list[tuple[str, str, str]]:
     return triples
 
 
+def _fs_pairs() -> list[tuple[str, str, str]]:
+    """(pid, note, target_json) triples for the Fonferko-Shadrach corpus."""
+    triples: list[tuple[str, str, str]] = []
+    if not FS_DOCS.exists():
+        return triples
+    for pid_dir in sorted(FS_DOCS.iterdir()):
+        if not pid_dir.is_dir():
+            continue
+        pid = pid_dir.name
+        target_path = FS_TARGETS / pid / "target_phenotype.json"
+        if not target_path.exists():
+            continue
+        target_json = target_path.read_text(encoding="utf-8")
+        for doc_type_dir in sorted(pid_dir.iterdir()):
+            if not doc_type_dir.is_dir():
+                continue
+            out_path = doc_type_dir / "output.txt"
+            if not out_path.exists():
+                continue
+            note = out_path.read_text(encoding="utf-8")
+            if not note.strip():
+                continue
+            triples.append((f"{pid}/{doc_type_dir.name}", note, target_json))
+    return triples
+
+
 def _build_training_pairs(corpus: str) -> list[tuple[str, str]]:
     triples: list[tuple[str, str, str]] = []
-    if corpus in ("pilot", "both"):
+    if corpus in ("pilot", "both", "all"):
         triples.extend(_pilot_pairs())
-    if corpus in ("synth-v1", "both"):
+    if corpus in ("synth-v1", "both", "all"):
         triples.extend(_synth_pairs())
+    if corpus in ("fs", "all"):
+        triples.extend(_fs_pairs())
     return [(PROMPT_TEMPLATE.format(note=note), target) for _, note, target in triples]
 
 
@@ -131,7 +165,7 @@ def main():
     ap.add_argument("--base-model", default="med42",
                     help="med42 | deepseek | any HF model id")
     ap.add_argument("--corpus", default="pilot",
-                    choices=("pilot", "synth-v1", "both"))
+                    choices=("pilot", "synth-v1", "fs", "both", "all"))
     ap.add_argument("--output-dir", default=None,
                     help="Adapter output dir (default: checkpoints/{slug}_lora_epi)")
     ap.add_argument("--epochs", type=int, default=5)

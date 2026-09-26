@@ -1,0 +1,262 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0056",
+    "doc_type": "progress_note",
+    "doc_date": "2010-01-01",
+    "patient_id": "EA0056",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Localisation related epilepsy",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 179,
+      "char_end": 208
+    },
+    "predominant_seizure_type": {
+      "value": "focal_to_bilateral_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "d secondary generalised seizur",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 620,
+      "char_end": 650
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "Non-epileptic psychogenic seizures",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Non-epileptic psychogenic seizures",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 139,
+      "char_end": 173
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "s partial motor seizur",
+        "period": "month",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "s partial motor seizur",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 500,
+      "char_end": 522
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "d secondary generalised seizur",
+          "period": "year",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "d secondary generalised seizur",
+        "source_doc_id": "EA0056",
+        "source_doc_type": "progress_note",
+        "source_date": "2010-01-01",
+        "char_start": 620,
+        "char_end": 650
+      },
+      {
+        "value": {
+          "raw_text": "d secondary generalised seizu",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "d secondary generalised seizu",
+        "source_doc_id": "EA0056",
+        "source_doc_type": "progress_note",
+        "source_date": "2010-01-01",
+        "char_start": 620,
+        "char_end": 649
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "cerebral abcess",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 231,
+      "char_end": 246
+    },
+    "etiology_details_text": {
+      "value": "cerebral abscess",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "cerebral abcess",
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": 231,
+      "char_end": 246
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": "1000 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Levetiracetam 1000mg bd",
+        "source_doc_id": "EA0056",
+        "source_doc_type": "progress_note",
+        "source_date": "2010-01-01",
+        "char_start": 260,
+        "char_end": 283
+      },
+      {
+        "value": {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "dose_text": "300 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Oxcarbazepin",
+        "source_doc_id": "EA0056",
+        "source_doc_type": "progress_note",
+        "source_date": "2010-01-01",
+        "char_start": 286,
+        "char_end": 298
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0056",
+      "source_doc_type": "progress_note",
+      "source_date": "2010-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

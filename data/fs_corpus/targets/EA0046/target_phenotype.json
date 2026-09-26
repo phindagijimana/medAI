@@ -1,0 +1,223 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0046",
+    "doc_type": "progress_note",
+    "doc_date": "2019-01-01",
+    "patient_id": "EA0046",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Symptomatic structural epilepsy",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 91,
+      "char_end": 122
+    },
+    "predominant_seizure_type": {
+      "value": "unknown_onset_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Focal to bilateral convulsive seizures",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 270,
+      "char_end": 308
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "traumatic brain injury 2005",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "traumatic brain injury 2005",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 180,
+      "char_end": 207
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "Focal to bilateral convulsive seizures",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Focal to bilateral convulsive seizures",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 270,
+      "char_end": 308
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "traumatic brain injury 2005",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 180,
+      "char_end": 207
+    },
+    "etiology_details_text": {
+      "value": "traumatic brain injury",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "traumatic brain injury 2005",
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": 180,
+      "char_end": 207
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "current",
+          "dose_text": "750 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Levetiracetam 750mg bd",
+        "source_doc_id": "EA0046",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": 403,
+        "char_end": 425
+      },
+      {
+        "value": {
+          "generic_name": "phenytoin",
+          "status": "current",
+          "dose_text": "100 mg × 1/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Phenytoin 100mg od (reducing as detailed below)",
+        "source_doc_id": "EA0046",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": 458,
+        "char_end": 505
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0046",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}

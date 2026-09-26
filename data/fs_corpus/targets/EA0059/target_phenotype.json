@@ -1,0 +1,274 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0059",
+    "doc_type": "progress_note",
+    "doc_date": "2018-01-01",
+    "patient_id": "EA0059",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Symptomatic structural epilepsy",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 187,
+      "char_end": 218
+    },
+    "predominant_seizure_type": {
+      "value": "unknown_onset_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal to bilateral convulsive seizures",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 393,
+      "char_end": 431
+    },
+    "other_seizure_types": [
+      {
+        "value": "focal_impaired_awareness",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal seizures with altered awareness",
+        "source_doc_id": "EA0059",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 449,
+        "char_end": 486
+      }
+    ],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "meningitis",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "meningitis",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 259,
+      "char_end": 269
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "focal to bilateral convulsive seizures",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal to bilateral convulsive seizures",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 393,
+      "char_end": 431
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "Focal seizures with altered awareness",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Focal seizures with altered awareness",
+        "source_doc_id": "EA0059",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 449,
+        "char_end": 486
+      },
+      {
+        "value": {
+          "raw_text": "eizures a",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "eizures a",
+        "source_doc_id": "EA0059",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 909,
+        "char_end": 918
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "infectious",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "meningitis",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 259,
+      "char_end": 269
+    },
+    "etiology_details_text": {
+      "value": "meningitis",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "meningitis",
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": 259,
+      "char_end": 269
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "brivaracetam",
+          "status": "current",
+          "dose_text": "1000 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Brivaracetam  1000mg twice daily",
+        "source_doc_id": "EA0059",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 308,
+        "char_end": 340
+      },
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "current",
+          "dose_text": "200 mg × 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Lamotrigine 200mg bd",
+        "source_doc_id": "EA0059",
+        "source_doc_type": "progress_note",
+        "source_date": "2018-01-01",
+        "char_start": 343,
+        "char_end": 363
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0059",
+      "source_doc_type": "progress_note",
+      "source_date": "2018-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": null,
+  "eeg": null,
+  "mri": null,
+  "integrated": null
+}
