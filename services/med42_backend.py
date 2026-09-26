@@ -31,7 +31,14 @@ class Med42Backend:
                 "Med42ModelService.load_model() must succeed before wrapping in Med42Backend"
             )
         self._svc = service
-        self.model_name: str = service.model_name
+        self.lora_adapter_dir: Optional[str] = service.lora_adapter_dir
+        # When a LoRA is loaded, decorate model_name so manifests distinguish
+        # tuned from base runs at a glance (e.g. "…-8B+lora:pilot_v1").
+        if service.lora_loaded and service.lora_adapter_dir:
+            adapter_tag = service.lora_adapter_dir.rstrip("/").split("/")[-1]
+            self.model_name: str = f"{service.model_name}+lora:{adapter_tag}"
+        else:
+            self.model_name: str = service.model_name
         self.model_cache_dir: str = service.config.model_cache_dir or ""
 
     def generate(self, prompt: str, decoding: DecodingConfig) -> tuple[str, Optional[int]]:

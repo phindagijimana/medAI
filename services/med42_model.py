@@ -67,6 +67,11 @@ class Med42ModelService:
                     "smoke tests) will run fine."
                 )
         self.model_name = config.model_name
+        # Optional LoRA adapter to layer on top of the base Med42 weights.
+        # Set MEDAI_LORA_ADAPTER_DIR to a PEFT adapter directory (as produced by
+        # scripts/finetune_lora_epi.py) to load a fine-tuned MedAI-EPI model.
+        self.lora_adapter_dir = os.environ.get("MEDAI_LORA_ADAPTER_DIR") or None
+        self.lora_loaded = False
         self.model_loaded = False
         self.load_error = None
         self.request_queue = Queue(maxsize=config.max_concurrent_users)
@@ -140,13 +145,35 @@ class Med42ModelService:
                 self.model = self.model.cpu()
                 logger.info(f"Model loaded on CPU: {next(self.model.parameters()).device}")
 
+            # Optional: layer a LoRA adapter on top of the base weights.
+            if self.lora_adapter_dir:
+                try:
+                    from peft import PeftModel
+                except ImportError as _peft_err:
+                    raise RuntimeError(
+                        f"MEDAI_LORA_ADAPTER_DIR={self.lora_adapter_dir!r} set but "
+                        f"peft is not installed: {_peft_err}. "
+                        "Install with: pip install peft"
+                    )
+                logger.info(f"Loading LoRA adapter: {self.lora_adapter_dir}")
+                self.model = PeftModel.from_pretrained(
+                    self.model, self.lora_adapter_dir,
+                )
+                # Adapter tensors inherit base-model device via PeftModel, but
+                # be defensive on CUDA (older peft versions leave adapters on CPU).
+                if self.device == "cuda":
+                    self.model = self.model.cuda()
+                self.lora_loaded = True
+                logger.info("LoRA adapter loaded and active.")
+
             self.model.eval()
             self.model_loaded = True
 
             load_time = time.time() - start_time
             self.stats["model_load_time"] = load_time
 
-            logger.info(".2f")
+            logger.info(f"Med42 model ready in {load_time:.2f}s "
+                        f"(lora={'yes' if self.lora_loaded else 'no'})")
             return True
 
         except Exception as e:
@@ -370,6 +397,8 @@ class Med42ModelService:
             "queue_size": self.request_queue.qsize(),
             "max_queue_size": self.request_queue.maxsize,
             "stats": self.stats,
+            "lora_adapter_dir": self.lora_adapter_dir,
+            "lora_loaded": self.lora_loaded,
             "dependencies": {
                 "torch": TRANSFORMERS_AVAILABLE,
                 "transformers": TRANSFORMERS_AVAILABLE
