@@ -15,6 +15,7 @@ the two extractors are directly comparable:
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import sys
@@ -31,7 +32,7 @@ from schema import (
 )
 from services.smart_repair import try_smart_repair
 
-MANIFESTS = REPO / "data" / "run_manifests_pilot"
+DEFAULT_MANIFESTS = REPO / "data" / "run_manifests_pilot"
 TARGETS_DIR = REPO / "data" / "episynth_pilot" / "run_001" / "targets"
 OUT_DIR = REPO / "eval" / "results"
 
@@ -109,11 +110,16 @@ def _score_field(field_path, expected, extracted):
     return ("HIT" if hit else "VALUE_MISMATCH"), v
 
 
-def _load_all_manifests_by_key():
-    """Return {(render_arm, render_cond, pid, extraction_arm, module): parsed_module_dict_or_None}."""
+def _load_all_manifests_by_key(manifests_dir: Path):
+    """Return {(render_arm, render_cond, pid, extraction_arm, module): (parsed_module_dict_or_None, variant_tag)}.
+
+    variant_tag encodes model + decoding provenance so tuned / constrained
+    runs can be summarized in separate rows: "" (base unconstrained),
+    "lora" (tuned), "constr" (constrained), "lora+constr" (both).
+    """
     out = {}
     seen_pairs = set()
-    for f in MANIFESTS.rglob("*.json"):
+    for f in manifests_dir.rglob("*.json"):
         try:
             m = json.loads(f.read_text(encoding="utf-8"))
         except Exception:
@@ -142,34 +148,53 @@ def _load_all_manifests_by_key():
         validated, _p, _e = try_smart_repair(
             m.get("raw_response", ""), module_cls, doc,
         )
-        if validated is None:
-            out[key] = None
-        else:
-            out[key] = validated.model_dump(mode="json")
+        model_name = str(m.get("model_name", ""))
+        constrained = bool((m.get("decoding") or {}).get("constrained", False))
+        tags = []
+        if "+lora:" in model_name:
+            tags.append("lora")
+        if constrained:
+            tags.append("constr")
+        variant_tag = "+".join(tags)
+        parsed = None if validated is None else validated.model_dump(mode="json")
+        out[key] = (parsed, variant_tag)
     return out
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--manifests-dir", default=str(DEFAULT_MANIFESTS),
+                    help="Where to look for per-inference JSON manifests.")
+    ap.add_argument("--suffix", default="",
+                    help="Suffix for output filenames "
+                         "(e.g. 'tuned', 'tuned_constrained').")
+    args = ap.parse_args()
+
+    manifests_dir = Path(args.manifests_dir)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    if not MANIFESTS.exists():
-        print(f"No manifests at {MANIFESTS}. Run the SLURM job first "
+    if not manifests_dir.exists():
+        print(f"No manifests at {manifests_dir}. Run the SLURM job first "
               f"(sbatch scripts/slurm_med42_on_pilot.sh).", file=sys.stderr)
         sys.exit(2)
 
-    manifests = _load_all_manifests_by_key()
-    print(f"Manifests loaded: {len(manifests)}")
+    manifests = _load_all_manifests_by_key(manifests_dir)
+    print(f"Manifests loaded: {len(manifests)} from {manifests_dir}")
 
     per_doc_rows = []
-    # aggregate: (render_arm, render_cond, extraction_arm) → counters
+    # aggregate: (render_arm, render_cond, extraction_arm, variant_tag) → counters
     per_agg = defaultdict(lambda: {"hits": 0, "misses": 0, "mismatches": 0, "docs": 0})
 
-    # Enumerate expected (render_arm, render_cond, pid, extraction_arm) space
+    # Enumerate expected (render_arm, render_cond, pid, extraction_arm) space,
+    # bucketed by variant so tuned / constrained runs get their own aggregate rows.
     from collections import defaultdict as _dd
     per_key_docs = _dd(list)
-    for (render_arm, render_cond, pid, extraction_arm, module_name), m_dict in manifests.items():
-        per_key_docs[(render_arm, render_cond, pid, extraction_arm)].append((module_name, m_dict))
+    variant_by_group: dict = {}
+    for (render_arm, render_cond, pid, extraction_arm, module_name), (m_dict, variant_tag) in manifests.items():
+        grp = (render_arm, render_cond, pid, extraction_arm, variant_tag)
+        per_key_docs[grp].append((module_name, m_dict))
+        variant_by_group[grp] = variant_tag
 
-    for (render_arm, render_cond, pid, extraction_arm), modules in per_key_docs.items():
+    for (render_arm, render_cond, pid, extraction_arm, variant_tag), modules in per_key_docs.items():
         target_path = TARGETS_DIR / pid / "target_phenotype.json"
         if not target_path.exists():
             continue
@@ -190,7 +215,8 @@ def main():
             elif outcome == "MISS": n_miss += 1
             else: n_mis += 1
 
-        arm_key = f"{render_arm}/{render_cond}/{extraction_arm}"
+        variant_label = variant_tag or "base"
+        arm_key = f"{render_arm}/{render_cond}/{extraction_arm}/{variant_label}"
         per_agg[arm_key]["hits"] += n_hit
         per_agg[arm_key]["misses"] += n_miss
         per_agg[arm_key]["mismatches"] += n_mis
@@ -198,7 +224,8 @@ def main():
 
         per_doc_rows.append({
             "render_arm": render_arm, "render_condition": render_cond,
-            "extraction_arm": extraction_arm, "patient_id": pid,
+            "extraction_arm": extraction_arm, "variant": variant_label,
+            "patient_id": pid,
             "n_required": len(reqs), "n_hit": n_hit,
             "n_miss": n_miss, "n_value_mismatch": n_mis,
         })
@@ -208,7 +235,8 @@ def main():
               file=sys.stderr)
         sys.exit(3)
 
-    with (OUT_DIR / "med42_on_pilot_perdoc.csv").open("w", newline="", encoding="utf-8") as fh:
+    tag = f"_{args.suffix}" if args.suffix else ""
+    with (OUT_DIR / f"med42_on_pilot_perdoc{tag}.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(per_doc_rows[0].keys()))
         w.writeheader()
         for r in per_doc_rows:
@@ -229,23 +257,23 @@ def main():
             "f1": round(f1, 3),
         })
 
-    with (OUT_DIR / "med42_on_pilot_aggregate.csv").open("w", newline="", encoding="utf-8") as fh:
+    with (OUT_DIR / f"med42_on_pilot_aggregate{tag}.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(agg_rows[0].keys()))
         w.writeheader()
         for r in agg_rows:
             w.writerow(r)
 
     md = [
-        "## Med42-8B M0/M1/M2 scored against Phase 6D.2 pilot corpus\n",
-        "*Generated by `scripts/score_med42_on_pilot.py` on manifests in `data/run_manifests_pilot/`.*\n",
-        "| render_arm / cond / extract_arm | n_docs | required | HIT | MISS | mismatch | P | R | F1 |",
+        f"## Med42-8B scored against Phase 6D.2 pilot corpus{(' — ' + args.suffix) if args.suffix else ''}\n",
+        f"*Generated by `scripts/score_med42_on_pilot.py` on manifests in `{manifests_dir}`.*\n",
+        "| render_arm / cond / extract_arm / variant | n_docs | required | HIT | MISS | mismatch | P | R | F1 |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for r in agg_rows:
         md.append(f"| {r['arm_key']} | {r['n_docs']} | {r['n_required_fields']} | "
                   f"{r['hits']} | {r['misses']} | {r['value_mismatches']} | "
                   f"{r['precision']:.3f} | {r['recall']:.3f} | {r['f1']:.3f} |")
-    (OUT_DIR / "med42_on_pilot_summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    (OUT_DIR / f"med42_on_pilot_summary{tag}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
     print()
     print(f"{'arm_key':<40} {'docs':>5} {'req':>5} {'HIT':>4} {'MISS':>5} {'MISM':>5}  {'P':>5} {'R':>5} {'F1':>5}")
@@ -254,7 +282,7 @@ def main():
         print(f"{r['arm_key']:<40} {r['n_docs']:>5} {r['n_required_fields']:>5} "
               f"{r['hits']:>4} {r['misses']:>5} {r['value_mismatches']:>5}  "
               f"{r['precision']:>5.3f} {r['recall']:>5.3f} {r['f1']:>5.3f}")
-    print(f"\nwrote → {OUT_DIR/'med42_on_pilot_summary.md'}")
+    print(f"\nwrote → {OUT_DIR/f'med42_on_pilot_summary{tag}.md'}")
 
 
 if __name__ == "__main__":
