@@ -18,7 +18,7 @@ pipeline_tag: text-generation
 
 **Base model:** [`m42-health/Llama3-Med42-8B`](https://huggingface.co/m42-health/Llama3-Med42-8B)
 
-**Adapter type:** Parameter-efficient LoRA (PEFT) — rank [TBD], α [TBD]
+**Adapter type:** Parameter-efficient LoRA (PEFT) — rank 16, α 32
 
 **Release version:** v1.0 ([TBD release date])
 
@@ -61,7 +61,7 @@ pairs drawn from:
 **Held out from training:** the 60-document EpiSynth pilot corpus, used
 as an untainted evaluation set. Patients were split 90 / 10 into
 training and validation with no patient's documents straddling the
-split (validation set: [TBD] pairs).
+split (validation set: 122 pairs).
 
 ---
 
@@ -69,10 +69,10 @@ split (validation set: [TBD] pairs).
 
 - **Method:** QLoRA-style LoRA fine-tuning (bfloat16 mixed precision,
   4-bit quantized base) via `peft`.
-- **LoRA rank / alpha / dropout:** [TBD] / [TBD] / [TBD]
+- **LoRA rank / alpha / dropout:** 16 / 32 / 0.05
 - **Target modules:** attention (q/k/v/o_proj) and MLP
   (gate/up/down_proj) projections on every transformer layer.
-- **Trainable parameters:** [TBD] out of 8.03B (~[TBD]%).
+- **Trainable parameters:** 41,943,040 out of 8,072,204,288 (0.52%).
 - **Optimizer:** AdamW; **LR:** 3 × 10⁻⁴; **schedule:** cosine with
   10 % warmup; **weight decay:** 0.01.
 - **Batch:** per-device 1 × grad-accum 8 = effective 8.
@@ -81,8 +81,8 @@ split (validation set: [TBD] pairs).
 - **Loss masking:** labels set to `-100` on prompt-position tokens so
   gradients flow only from target-JSON positions (QLoRA / Han-2021
   convention).
-- **Hardware:** [TBD — NVIDIA L40S 24 GB slice].
-- **Wall-clock:** [TBD] min.
+- **Hardware:** NVIDIA L40S 24 GB slice, single GPU.
+- **Wall-clock:** [TBD — set at R4c completion] min.
 - **Best checkpoint:** epoch [TBD], validation loss [TBD].
 - **Seed:** 0.
 

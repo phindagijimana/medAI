@@ -21,9 +21,10 @@ git tag and (for v1.0+) a Zenodo software-record DOI. Numbers marked
   extraction pipeline (three-tier repair), prompt registry (M0 / M1 / M2
   × 6 modules), chunker, merger, tabular flatten, Flask service and CLI,
   evaluation harness, `Dockerfile.eval` reproducibility container.
-- **LoRA adapter** — MedAI-EPI-tuned Med42-8B (rank [TBD], α [TBD],
-  ~[TBD] MB safetensors), released on Hugging Face at
-  `[TBD huggingface-repo-url]` under the upstream Med42-8B license
+- **LoRA adapter** — MedAI-EPI-tuned Med42-8B (rank 16, α 32,
+  41.9M trainable params / 0.52% of the 8.07B base, ~168 MB safetensors),
+  released on Hugging Face at `[TBD huggingface-repo-url]` under the
+  upstream Med42-8B license
   (see [`docs/huggingface_model_card.md`](docs/huggingface_model_card.md)).
 - **Synth-v1 corpus** — 500 patients × ~1000 documents (progress notes,
   MRI reports, EEG reports) with schema-conformant Evidence[T] targets,
@@ -36,7 +37,17 @@ git tag and (for v1.0+) a Zenodo software-record DOI. Numbers marked
 
 - Fonferko-Shadrach 2024 gold (n=200 clinic letters, adjudicated).
 - EpiSynth pilot (n=60 documents, authorized-content G0 phenotypes).
-- Synth-v1 held-out validation split (n=[TBD] pairs).
+- Synth-v1 held-out validation split (n=122 pairs).
+
+### Dependencies
+
+- Python 3.9+ (venv, no conda required)
+- PyTorch 2.x with CUDA 12 for GPU inference; falls back to CPU (slow).
+- transformers 4.4x, peft 0.11+, pydantic 2.x, flask 3.x.
+- lm-format-enforcer 0.10 (schema-constrained decoding, optional).
+- openai 1.x (only if using the OpenAI comparator backend).
+- See `requirements.txt` and `Dockerfile.gpu` / `Dockerfile.eval` for
+  full pinned versions.
 
 ### Reproducing paper tables
 
