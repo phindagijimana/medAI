@@ -1,9 +1,11 @@
 # MedAI-EPI Manuscript v0.4 — R7 additions (draft)
 
-Merge target: `writing/MedAI_EPI_Manuscript_v0.2.md`. Numbers marked
-`[TBD from R4e]` are populated once the Option B fine-tune (SLURM 142628)
-and constrained-decoding sweep finish. Every subsection below states its
-insertion anchor in the v0.2 file.
+Merge target: `writing/MedAI_EPI_Manuscript_v0.2.md`. Numbers marked `[TBD]`
+are populated once the Option B fine-tune (SLURM 143696) and constrained-
+decoding sweep finish. Every subsection below states its insertion anchor
+in the v0.2 file. Known values from the running fine-tune are filled in
+now; scoring-derived cells remain [TBD] until the pilot-variant sweep
+completes.
 
 ---
 
@@ -27,15 +29,15 @@ Fonferko-Shadrach clinician-authored clinic letters with their v0.2.1
 silver targets — 1200 pairs total. The 60-document EpiSynth pilot
 corpus was **held out** as an untainted evaluation set. Patients were
 split 90:10 into training and validation such that no patient's
-documents straddled the split (validation set size: [122] pairs).
+documents straddled the split (validation set size: 122 pairs).
 
 **LoRA configuration.** Rank r = 16, alpha α = 32, dropout 0.05, no
 bias. Target modules were the attention projections
 (q/k/v/o_proj) and the MLP projections (gate/up/down_proj) of every
 transformer layer, following Dettmers et al.^{Dettmers2023} — MLP
 targets consistently improve structured-output learning at ~2× the
-attention-only parameter count. Trainable parameters were [TBD] out
-of 8.03 B (~[TBD]%).
+attention-only parameter count. Trainable parameters were
+41,943,040 out of 8,072,204,288 total parameters (0.52%).
 
 **Training details.** AdamW, learning rate 3 × 10⁻⁴, cosine schedule
 with 10% warmup, weight decay 0.01, batch size 1 with gradient
@@ -248,13 +250,21 @@ availability).
 
 ### GPT-family comparator held-out (new)
 
-When we report GPT-5.6 as a research-only extraction comparator
-(Table [TBD]), we deliberately use a GPT tier that did **not**
-generate any of the notes it is scoring (specifically, a
-gpt-5.7-family or later tier, never gpt-5.6-*). This avoids the
-circularity of scoring a generator against text it was likely to
-have shaped, and follows the analogous held-out design used in
-recent LLM-benchmark work.^{Zheng2023, Alsentzer2019}
+When we report a GPT-family model as a research-only extraction
+comparator (Table [TBD]), we deliberately use a tier that did **not**
+generate any of the notes it is scoring. Concretely: for the
+200-document Fonferko-Shadrach evaluation we use `gpt-5.6-terra`
+because F-S is real clinician-authored data with no GPT authorship,
+so any tier is admissible on grounds of provenance and we pick
+`gpt-5.6-terra` for consistency with our other research-role runs.
+For the 60-document EpiSynth pilot, whose notes were authored by
+`gpt-5.6-{luna,sol,terra}`, no GPT tier is available that authored
+zero pilot content — so we do **not** run GPT as a pilot extractor.
+For the 1000-document synth-v1 corpus (authored by `gpt-5.6-sol`
+only), the admissible extractor tiers are `gpt-5.6-luna` and
+`gpt-5.6-terra`. This avoids the circularity of scoring a generator
+against text it was likely to have shaped, and follows the analogous
+held-out design used in recent LLM-benchmark work.^{Zheng2023, Alsentzer2019}
 
 ---
 
