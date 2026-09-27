@@ -134,6 +134,16 @@ _UI_HTML = r"""<!DOCTYPE html>
   .status-ready   { background: #d1fae5; color: #067647; }
   .status-error   { background: #fee4e2; color: #b42318; }
 
+  /* Model-variant chip (base Med42 vs tuned MedAI-EPI adapter). */
+  #model-chip {
+    display: inline-block; padding: 4px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 500; margin-left: 8px;
+    background: #eef2ff; color: #1e3a8a;
+  }
+  #model-chip.tuned { background: #dcfce7; color: #14532d; }
+  #model-chip.base  { background: #e5e7eb; color: #1f2937; }
+  #model-chip.hidden { display: none; }
+
   .source-view {
     background: #f8fafc; border: 1px solid var(--border); border-radius: 6px;
     padding: 12px; font-family: ui-monospace, SFMono-Regular, "Menlo", monospace;
@@ -216,6 +226,7 @@ _UI_HTML = r"""<!DOCTYPE html>
     <a href="/extract/registry" target="_blank">Prompt registry</a>
     <a href="/extract/health" target="_blank">Health</a>
     <span id="status-badge" class="status-loading">Loading backend…</span>
+    <span id="model-chip" class="hidden" title="Which Med42 variant is currently serving requests"></span>
   </div>
 </header>
 
@@ -384,12 +395,36 @@ _UI_HTML = r"""<!DOCTYPE html>
   });
 
   // ---- Health polling ----
+  function updateModelChip(d) {
+    // Render a chip that says "Base Med42" or "Tuned MedAI-EPI (adapter: <tag>)"
+    // based on /extract/health's lora_loaded field. Robust to missing fields —
+    // if the endpoint doesn't return lora info yet, the chip stays hidden.
+    const chip = $("model-chip");
+    if (!d) { chip.classList.add("hidden"); return; }
+    const loraLoaded = d.lora_loaded === true;
+    const adapterDir = d.lora_adapter_dir || "";
+    // Derive a short tag from the last path segment.
+    const tag = adapterDir ? adapterDir.replace(/\/+$/, "").split("/").pop() : "";
+    if (loraLoaded && tag) {
+      chip.className = "tuned";
+      chip.textContent = `Tuned MedAI-EPI (adapter: ${tag})`;
+    } else if (d.backend_model) {
+      chip.className = "base";
+      chip.textContent = "Base Med42";
+    } else {
+      chip.classList.add("hidden");
+      return;
+    }
+    chip.classList.remove("hidden");
+  }
+
   async function pollHealth() {
     try {
       const r = await fetch("/extract/health");
       const d = await r.json();
       state.docTypes = d.doc_types_supported || [];
       populateDocTypes();
+      updateModelChip(d);
       const badge = $("status-badge");
       const status = d.med42_load_status || "unknown";
       if (status === "ready") {

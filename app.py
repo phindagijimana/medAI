@@ -1542,6 +1542,8 @@ def health():
                 "gpu_requirement_met": (not _req_gpu) or _cuda,
             },
             "model_name": svc.model_name,
+            "lora_loaded": getattr(svc, "lora_loaded", False),
+            "lora_adapter_dir": getattr(svc, "lora_adapter_dir", None),
             "prompt_engine": "MedAI-Optimized",
             "stats": svc.stats,
             "queue_size": svc.request_queue.qsize(),

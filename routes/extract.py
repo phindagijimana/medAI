@@ -256,6 +256,13 @@ def extract_health() -> Any:
     except Exception:
         pass
 
+    # LoRA state — surface for the /extract/ui badge so users see whether the
+    # currently-active backend is base Med42 or the tuned MedAI-EPI adapter.
+    lora_adapter_dir = getattr(backend, "lora_adapter_dir", None) if backend else None
+    # Determine "lora_loaded" — Med42Backend sets lora_adapter_dir only if the
+    # underlying service actually attached the adapter.
+    lora_loaded = bool(backend and getattr(backend, "lora_adapter_dir", None))
+
     return jsonify({
         "ok": True,
         "schema_version": SCHEMA_VERSION,
@@ -265,6 +272,8 @@ def extract_health() -> Any:
         "med42_load_status": load_status,   # not_started / starting / loading / ready / load_failed:…
         "backend_model": getattr(backend, "model_name", None) if backend else None,
         "device_selected": device_selected,
+        "lora_loaded": lora_loaded,
+        "lora_adapter_dir": lora_adapter_dir,
     })
 
 
