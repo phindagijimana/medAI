@@ -15,9 +15,19 @@ numbered reference list when merging v0.4 into v0.2.
 
 | Short key | Citation | Cited in §                    | Verified? |
 |---|---|---|---|
-| Hu2021        | Hu EJ, Shen Y, Wallis P, Allen-Zhu Z, Li Y, Wang S, Wang L, Chen W. *LoRA: Low-Rank Adaptation of Large Language Models.* arXiv:2106.09685. 2021. https://arxiv.org/abs/2106.09685 | Fine-tuning (LoRA reference) | [ ] |
-| Dettmers2023  | Dettmers T, Pagnoni A, Holtzman A, Zettlemoyer L. *QLoRA: Efficient Finetuning of Quantized LLMs.* arXiv:2305.14314. 2023. https://arxiv.org/abs/2305.14314 | Fine-tuning (target-module choice + loss-masking convention) | [ ] |
-| Willard2023   | Willard BT, Louf R. *Efficient Guided Generation for Large Language Models.* arXiv:2307.09702. 2023. https://arxiv.org/abs/2307.09702 | Schema-constrained decoding (parser-mechanics paragraph) | [ ] |
+| Hu2021        | Hu EJ, Shen Y, Wallis P, Allen-Zhu Z, Li Y, Wang S, Wang L, Chen W. *LoRA: Low-Rank Adaptation of Large Language Models.* arXiv:2106.09685. 2021. https://arxiv.org/abs/2106.09685 | Fine-tuning (LoRA reference) | ✓ arXiv ID confirmed against the ICLR 2022 record |
+| Dettmers2023  | Dettmers T, Pagnoni A, Holtzman A, Zettlemoyer L. *QLoRA: Efficient Finetuning of Quantized LLMs.* arXiv:2305.14314. 2023. https://arxiv.org/abs/2305.14314 | Fine-tuning (target-module choice + loss-masking convention) | ✓ arXiv ID confirmed against the NeurIPS 2023 spotlight record |
+| Willard2023   | Willard BT, Louf R. *Efficient Guided Generation for Large Language Models.* arXiv:2307.09702. 2023. https://arxiv.org/abs/2307.09702 | Schema-constrained decoding (parser-mechanics paragraph) | ✓ arXiv ID confirmed; underpins both outlines and lm-format-enforcer |
+
+### Vancouver-style entries (ready to paste into §References)
+
+Numbering picks up from v0.2's last entry (currently 19 per
+`writing/references_to_add.md` §b). If v0.2 finalizes 19 entries,
+these become 20, 21, 22.
+
+20. Hu EJ, Shen Y, Wallis P, Allen-Zhu Z, Li Y, Wang S, et al. LoRA: Low-Rank Adaptation of Large Language Models. arXiv:2106.09685 [Preprint]. 2021 [cited 2026-09-26]. Available from: https://arxiv.org/abs/2106.09685
+21. Dettmers T, Pagnoni A, Holtzman A, Zettlemoyer L. QLoRA: Efficient Finetuning of Quantized LLMs. In: Advances in Neural Information Processing Systems 36 (NeurIPS 2023). arXiv:2305.14314. 2023. Available from: https://arxiv.org/abs/2305.14314
+22. Willard BT, Louf R. Efficient Guided Generation for Large Language Models. arXiv:2307.09702 [Preprint]. 2023. Available from: https://arxiv.org/abs/2307.09702
 
 ---
 
