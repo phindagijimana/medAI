@@ -23,6 +23,7 @@ Writes:
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
@@ -326,9 +327,25 @@ SCORED_FIELDS = [
 
 
 def main():
+    ap = argparse.ArgumentParser(description="Score LLM arms on F-S native gold.")
+    ap.add_argument(
+        "--manifests-dir", default=None,
+        help="Manifest root (default data/run_manifests — the Med42 F-S sweep).",
+    )
+    ap.add_argument(
+        "--suffix", default="",
+        help="Suffix for output filenames (e.g. 'gpt_fs' or 'deepseek_fs').",
+    )
+    args = ap.parse_args()
+    manifests_root = Path(args.manifests_dir) if args.manifests_dir else MANIFESTS
+    if not manifests_root.exists():
+        raise SystemExit(f"Manifests directory does not exist: {manifests_root}")
+
+    suffix = ("_" + args.suffix) if args.suffix else ""
+
     # Collect all manifests, dedup per (doc, arm, module) via seen set.
     per_arm_module_doc = defaultdict(dict)   # (arm, module) -> {doc_id: pred_dict}
-    for f in MANIFESTS.rglob("*.json"):
+    for f in manifests_root.rglob("*.json"):
         try:
             m = json.loads(f.read_text(encoding="utf-8"))
         except Exception:
@@ -419,10 +436,10 @@ def main():
             "f1_ci_hi": round(hi, 3),
         })
 
-    (OUT / "llm_arms_vs_fs_gold.json").write_text(
+    (OUT / f"llm_arms_vs_fs_gold{suffix}.json").write_text(
         json.dumps(rows, indent=2), encoding="utf-8",
     )
-    with (OUT / "llm_arms_vs_fs_gold.csv").open("w", newline="", encoding="utf-8") as fh:
+    with (OUT / f"llm_arms_vs_fs_gold{suffix}.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()) if rows else
                            ["arm","module","field","n_docs_with_gold","precision","recall","f1","f1_ci_lo","f1_ci_hi"])
         w.writeheader()
@@ -444,7 +461,7 @@ def main():
             f"{r['precision']:.3f} | {r['recall']:.3f} | {r['f1']:.3f} | "
             f"[{r['f1_ci_lo']:.3f}, {r['f1_ci_hi']:.3f}] |"
         )
-    (OUT / "llm_arms_vs_fs_gold.summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    (OUT / f"llm_arms_vs_fs_gold{suffix}.summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
     # Console
     print(f"\n{'arm':>3} {'module':<18} {'field':<32}  {'n':>4}  {'P':>5} {'R':>5} {'F1':>5}  95% CI")
@@ -452,7 +469,7 @@ def main():
         print(f"{r['arm']:>3} {r['module']:<18} {r['field']:<32}  {r['n_docs_with_gold']:>4}  "
               f"{r['precision']:>5.3f} {r['recall']:>5.3f} {r['f1']:>5.3f}  "
               f"[{r['f1_ci_lo']:.3f}, {r['f1_ci_hi']:.3f}]")
-    print(f"\nwrote → {OUT / 'llm_arms_vs_fs_gold.summary.md'}")
+    print(f"\nwrote → {OUT / ('llm_arms_vs_fs_gold' + suffix + '.summary.md')}")
     return 0
 
 
