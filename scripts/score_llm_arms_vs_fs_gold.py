@@ -354,6 +354,13 @@ def main():
         if module_name is None:
             continue
         doc_id = m.get("source_doc_id", "")
+        # Some runs prefix the F-S letter id (e.g. "fs-gpt-gpt-5.6-terra-EA0001")
+        # to keep manifest ids distinct across sweeps; the gold key is the bare
+        # "EA*" tail — extract it via a substring match so scoring works either
+        # way.
+        match = re.search(r"(EA\d{4})", doc_id)
+        if match:
+            doc_id = match.group(1)
         if doc_id not in per_arm_module_doc[(arm, module_name)]:
             per_arm_module_doc[(arm, module_name)][doc_id] = pred
 
