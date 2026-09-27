@@ -35,8 +35,10 @@ module load python 2>/dev/null || module load python/3.10 2>/dev/null || echo "p
 module load cuda   2>/dev/null || module load cuda/12.2  2>/dev/null || echo "cuda module not loadable"
 
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
-# Reduce CUDA fragmentation; helpful for the 8B model in a 24 GB slice.
-export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
+# NB: PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True is unsupported on our
+# L40S-24Q vGPU driver (SLURM 143567 died with "operation not supported").
+# Leave allocator on defaults; gradient checkpointing + max_length=2048
+# already fits 8B + LoRA in 24 GB.
 _SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$(pwd)}"
 if [ -f "$_SUBMIT_DIR/.env" ]; then
     set -a; . "$_SUBMIT_DIR/.env"; set +a
