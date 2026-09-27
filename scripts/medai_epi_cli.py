@@ -131,6 +131,15 @@ def cmd_registry(args):
 
 
 def cmd_extract(args):
+    # If a LoRA adapter dir was supplied, publish it into the environment BEFORE
+    # any downstream backend is instantiated. services/med42_model.py reads
+    # MEDAI_LORA_ADAPTER_DIR at Med42ModelService.__init__ time; setting it here
+    # lets `medai-epi extract --lora-adapter DIR ...` reach the backend even in
+    # in-process / test-launch scenarios where the service is spawned by the
+    # same Python process.
+    if getattr(args, "lora_adapter", None):
+        os.environ["MEDAI_LORA_ADAPTER_DIR"] = args.lora_adapter
+
     text = _read_text_source(args)
     payload = {
         "source_text": text,
@@ -296,6 +305,11 @@ def build_parser() -> argparse.ArgumentParser:
                      help="e.g. openai:gpt-5.6-terra or deepseek")
     sp.add_argument("--doc-id", default=None)
     sp.add_argument("--patient-id", default=None)
+    sp.add_argument("--lora-adapter", dest="lora_adapter", default=None,
+                     metavar="DIR",
+                     help="path to a PEFT LoRA adapter directory to layer on "
+                          "top of the base Med42-8B weights (sets "
+                          "MEDAI_LORA_ADAPTER_DIR before the backend loads).")
     sp.set_defaults(func=cmd_extract)
 
     # csv
