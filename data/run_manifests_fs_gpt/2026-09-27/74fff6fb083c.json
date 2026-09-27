@@ -1,0 +1,45 @@
+{
+  "run_id": "74fff6fb083c",
+  "started_at": "2026-09-27T05:56:02+00:00",
+  "finished_at": "2026-09-27T05:56:10+00:00",
+  "duration_s": 8.0,
+  "code_sha": "e86b35e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0013",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 534,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"other_seizure_types\": [],\n  \"awareness\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"semiology_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"seizure_frequency\": {\n    \"value\": {\n      \"raw_text\": \"continues to get occasional seizures\",\n      \"period\": \"unspecified\",\n      \"count_min\": null,\n      \"count_max\": null,\n      \"seizure_free\": false,\n      \"duration_text\": null,\n      \"applies_to_type\": null\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"continues to get occasional seizures\",\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"other_seizure_frequencies\": [],\n  \"status_epilepticus_history\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"etiology_category\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2016-02-04\"\n  },\n  \"etiology_details_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a value at line 91 column 0 [type=json_invalid, input_value='{\\n  \"epilepsy_type\": {\\...pe\": \"progress_note\",\\n', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

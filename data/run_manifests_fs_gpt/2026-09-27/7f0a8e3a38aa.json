@@ -1,0 +1,45 @@
+{
+  "run_id": "7f0a8e3a38aa",
+  "started_at": "2026-09-27T05:46:55+00:00",
+  "finished_at": "2026-09-27T05:47:05+00:00",
+  "duration_s": 10.0,
+  "code_sha": "16c5f21",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0006",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1405,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"unknown\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"Epilepsy \u2013 unclassified, possibly generalised\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"predominant_seizure_type\":{\"value\":\"generalized_tonic_clonic\",\"certainty\":\"definite\",\"temporal_status\":\"historical\",\"evidence_text\":\"2 generalised tonic clonic seizures 2014\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"other_seizure_types\":[{\"value\":\"absence\",\"certainty\":\"uncertain\",\"temporal_status\":\"historical\",\"evidence_text\":\"\u201cabsence-like\u201d episodes\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null}],\"awareness\":{\"value\":\"impaired\",\"certainty\":\"definite\",\"temporal_status\":\"historical\",\"evidence_text\":\"convulsive seizures with loss of consciousness\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"semiology_text\":{\"value\":\"without warning; may have been preceded by leg jerking; stop and stare for a few seconds\",\"certainty\":\"definite\",\"temporal_status\":\"historical\",\"evidence_text\":\"without warning. They may have been preceded by leg jerking. Around the same time he would also have \u201cabsence-like\u201d episodes. During these he would stop and stare for a few seconds.\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"age_at_onset_years\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":\"unspecified\",\"evidence_text\":null,\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"seizure_frequency\":{\"value\":{\"raw_text\":\"remains seizure free\",\"period\":null,\"count_min\":null,\"count_max\":null,\"seizure_free\":true,\"duration_text\":null,\"applies_to_type\":null},\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"he remains seizure free\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"other_seizure_frequencies\":[{\"value\":{\"raw_text\":\"2 generalised tonic clonic seizures 2014\",\"period\":\"year\",\"count_min\":2,\"count_max\":2,\"seizure_free\":false,\"duration_text\":null,\"applies_to_type\":\"generalized_tonic",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a string at line 1 column 2049 [type=json_invalid, input_value='{\"epilepsy_type\":{\"value...ype\":\"generalized_tonic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M1"
+}

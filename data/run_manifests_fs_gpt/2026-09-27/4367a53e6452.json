@@ -1,0 +1,45 @@
+{
+  "run_id": "4367a53e6452",
+  "started_at": "2026-09-27T05:07:54+00:00",
+  "finished_at": "2026-09-27T05:08:05+00:00",
+  "duration_s": 11.0,
+  "code_sha": "16c5f21",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0008",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1089,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"focal\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"Diagnosis: symptomatic structural focal epilepsy\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"predominant_seizure_type\":{\"value\":\"focal_impaired_awareness\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"focal seizures with altered awareness every 3 weeks\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"other_seizure_types\":[],\"awareness\":{\"value\":\"impaired\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"lose awareness and contact\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"semiology_text\":{\"value\":\"warning of an unusual burning taste, then loss of awareness and contact for a few minutes, staring, and occasional lip chewing\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"He will get a warning of an unusual burning taste and then lose awareness and contact for a few minutes. His wife said that he will stare and occasionally chew his lips during these events.\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"age_at_onset_years\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":\"unspecified\",\"evidence_text\":null,\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"seizure_frequency\":{\"value\":{\"raw_text\":\"every 3 weeks\",\"period\":\"week\",\"count_min\":1,\"count_max\":1,\"seizure_free\":false,\"duration_text\":\"a few minutes\",\"applies_to_type\":\"focal_impaired_awareness\"},\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"focal seizures with altered awareness every 3 weeks\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"other_seizure_frequencies\":[],\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":\"unspecified\",\"evidence_text\":null,\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"etiology_category\":{\"value\":\"structural\",\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"Diagnosis: symptomatic structural focal epilepsy\",\"source_doc_id\":null,\"source_doc_type",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a string at line 1 column 2142 [type=json_invalid, input_value='{\"epilepsy_type\":{\"value...\":null,\"source_doc_type', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M1"
+}
