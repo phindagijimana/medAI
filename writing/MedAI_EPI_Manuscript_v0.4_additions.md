@@ -296,7 +296,7 @@ configuration surface (`services/openai_backend.py` for research use;
   provenance hashes) will be released via Zenodo (DOI:[TBD]) under
   CC-BY 4.0 alongside the paper.
 - The MedAI-EPI-tuned LoRA adapter (rank 16, α 32, 1200-pair training
-  set, ~[TBD] MB safetensors) will be released via Hugging Face
+  set, ~168 MB safetensors) will be released via Hugging Face
   ([TBD] URL) under the Med42-8B upstream license.
 - The Fonferko-Shadrach corpus is redistributed unchanged from its
   Zenodo records (8381080, 8356494, 8382589, 12520180) under CC-BY 4.0
