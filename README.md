@@ -354,6 +354,46 @@ minutes per module.
 
 ---
 
+## Fine-tuned mode (LoRA adapter + constrained decoding)
+
+The MedAI-EPI extractor is trained as a **QLoRA fine-tune of Med42-8B**
+against the synth-v1 corpus (see `scripts/finetune_lora_epi.py`). At
+inference time you can layer the released PEFT adapter on top of the base
+Med42-8B weights, and optionally enable **schema-constrained decoding**
+(logits masking via `lm-format-enforcer` / `outlines`) so every generation
+is a valid `EpilepsyPhenotype` JSON by construction — no repair pass
+required. Both are opt-in.
+
+**Environment variables:**
+
+| Variable | What it does |
+|---|---|
+| `MEDAI_LORA_ADAPTER_DIR` | Absolute path to a PEFT adapter directory (produced by `scripts/finetune_lora_epi.py`, or downloaded from the released Hugging Face repo). When set, `services/med42_model.py` loads the base Med42-8B weights and layers the LoRA adapter on top at model-load time. |
+| `MEDAI_CONSTRAINED` | Set to `1` to enable schema-constrained decoding. Every token's logits are masked to only those that would keep a valid JSON continuation under the `EpilepsyPhenotype` JSON schema. Adds ~10–20 % latency but eliminates JSON-repair calls. |
+
+**CLI flag:** the `extract` subcommand of `medai-epi` also accepts
+`--lora-adapter DIR`, which sets `MEDAI_LORA_ADAPTER_DIR` in the process
+environment before the backend is instantiated (equivalent to exporting
+the env var beforehand):
+
+```bash
+MEDAI_LORA_ADAPTER_DIR=checkpoints/llama3-med42-8b_lora_epi \
+MEDAI_CONSTRAINED=1 \
+python scripts/medai_epi_cli.py extract \
+  --doc-type progress_note --arm M2 note.txt
+
+# equivalent single-invocation form:
+python scripts/medai_epi_cli.py extract \
+  --lora-adapter checkpoints/llama3-med42-8b_lora_epi \
+  --doc-type progress_note --arm M2 note.txt
+```
+
+**Extra deps for fine-tuned mode:** `peft accelerate datasets` for adapter
+loading; `lm-format-enforcer<0.11 outlines` for constrained decoding. See
+`Dockerfile.gpu` for the pinned wheel set.
+
+---
+
 ## Repository layout
 
 ```

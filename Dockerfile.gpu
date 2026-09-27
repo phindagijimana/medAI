@@ -35,7 +35,12 @@ COPY requirements.txt .
 # torch without a CUDA index, so we pin here.
 RUN pip install --upgrade pip \
     && pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cu124 \
-    && pip install -r requirements.txt
+    && pip install -r requirements.txt \
+    && pip install \
+        peft \
+        datasets \
+        "lm-format-enforcer<0.11" \
+        outlines
 
 COPY . .
 
