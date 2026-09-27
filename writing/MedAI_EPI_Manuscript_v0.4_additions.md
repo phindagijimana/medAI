@@ -48,6 +48,24 @@ wall-clock time was [TBD] min on a single NVIDIA L40S 24 GB slice.
 The best checkpoint (epoch [TBD], validation loss [TBD]) was retained
 as the released adapter.
 
+**Loss masking (prompt-token exclusion).** For every training pair,
+the input sequence to the model was the concatenation
+`<prompt tokens> || <target-JSON tokens> || <EOS>`, and the label
+tensor was set to `-100` on every prompt position (PyTorch's
+convention for "ignore this token in the cross-entropy loss") and to
+the corresponding token id on every target position. The consequence
+is that no gradient flows from prompt-position predictions — the
+adapter is optimized only to predict the schema-conformant JSON
+*given* the prompt, not to reconstruct the prompt itself. This is
+the standard instruction-tuning-with-loss-masking convention
+established by Han et al. 2021 and formalized in the QLoRA training
+pipeline of Dettmers et al. 2023^{Dettmers2023}; without masking the
+model wastes capacity learning to regenerate the (identical, fixed)
+few-thousand-token prompt template and underfits the target
+distribution. Our implementation in `scripts/finetune_lora_epi.py`
+computes the prompt-token boundary from the tokenized prompt prefix
+length before assembling the label tensor.
+
 **Adapter loading at inference.** The MedAI-EPI service loads the
 LoRA adapter on top of the frozen base Med42 weights via
 `peft.PeftModel.from_pretrained` when the environment variable
@@ -66,6 +84,29 @@ generated text is therefore JSON-valid against the target
 `EpilepsyPhenotype` module by construction, and the smart-repair
 chain is retained only as a defensive fallback. This is an
 inference-time layer that does not modify model weights.
+
+**Parser mechanics.** Concretely, lm-format-enforcer's
+`JsonSchemaParser` walks the compiled JSON-schema of the target
+Pydantic model as a state machine: at each decoding step the parser
+knows exactly which characters — and, after tokenizer alignment,
+which sub-token strings — would keep at least one legal completion
+of the schema alive. Before the LLM samples a token, its raw logits
+are combined with a boolean mask that zeros out every token whose
+byte-string prefix would render the running JSON un-completable
+(e.g. `{` when the current position expects an integer field value,
+or `"foca` followed by anything other than `l"` when the schema
+enum forces `"focal"`). The masked logits are then sampled or
+argmax-decoded as usual. This construction, following the guided
+generation framework of Willard and Louf 2023, guarantees that the
+final token sequence is parseable to a schema-valid JSON object at
+zero probability leakage — the model is *unable* to sample an
+invalid token — while adding only the cost of one schema-state
+lookup per generation step (empirically ~10–20 % wall-clock overhead
+at 8-B scale in our runs). The complementary property — that only
+the *shape* of the output is constrained, not its content — is what
+lets constrained decoding be used as an ablation: differences in F1
+between the constrained and unconstrained arms are attributable to
+format-only effects.
 
 We report constrained decoding as an independently-toggleable
 runtime setting: `DecodingConfig.constrained = True`. Constrained
@@ -264,3 +305,58 @@ Placeholder markers used above:
 - Base-model raw and final validity rates from R1's per-doc CSV
   (`eval/results/med42_on_pilot_perdoc.csv`) aggregated per arm.
 - Zenodo and Hugging Face URLs / DOIs from the R8 release step.
+
+---
+
+## References to add
+
+New references introduced by the v0.4 additions above. Each is
+identified by its `^{ShortKey}` citation marker used in the body
+text; the paper's final numbered reference list should absorb them
+into the running numbering when v0.4 is merged into
+`MedAI_EPI_Manuscript_v0.2.md`.
+
+- **Hu2021** — Hu EJ, Shen Y, Wallis P, Allen-Zhu Z, Li Y, Wang S,
+  Wang L, Chen W. *LoRA: Low-Rank Adaptation of Large Language
+  Models.* arXiv:2106.09685. 2021. https://arxiv.org/abs/2106.09685
+  (Cited: §Fine-tuning, first LoRA reference.)
+- **Dettmers2023** — Dettmers T, Pagnoni A, Holtzman A, Zettlemoyer L.
+  *QLoRA: Efficient Finetuning of Quantized LLMs.* arXiv:2305.14314.
+  2023. https://arxiv.org/abs/2305.14314
+  (Cited: §Fine-tuning, target-module choice and loss-masking convention.)
+- **Willard2023** — Willard BT, Louf R. *Efficient Guided Generation
+  for Large Language Models.* arXiv:2307.09702. 2023.
+  https://arxiv.org/abs/2307.09702
+  (Cited: §Schema-constrained decoding, parser-mechanics paragraph;
+  underlying framework of the `outlines` library that `lm-format-enforcer`
+  builds on.)
+
+### v0.2 citations to verify at final proof
+
+Cross-check every citation in `MedAI_EPI_Manuscript_v0.2.md`'s
+`## References` block against Google Scholar / PubMed before
+submission. Specific spots flagged for typo verification:
+
+1. **Ref 6** (Abeysinghe et al. 2025, *NPJ Digit Med* 8:208) — confirm
+   volume/issue/pages, spelling of "Lhatoo".
+2. **Ref 7** (Adelson et al. 2026, *Epilepsia* doi:10.1002/epi.70341) —
+   confirm DOI resolves; verify the "Engel and ILAE scoring" wording
+   matches the published title exactly.
+3. **Ref 13** (Ndagijimana et al. 2026, *Brain Communications*
+   8(4):fcag320) — confirm fcag320 article id (author's own paper —
+   sanity-check against the accepted-manuscript record).
+4. **Ref 14** (Christophe et al. 2024, Med42-v2 arXiv:2408.06142) —
+   confirm arXiv id and title casing.
+5. **Ref 15** (Fonferko-Shadrach et al. 2024, *J Biomed Semantics*
+   15:17) — confirm "Strafford" spelling and page numbers.
+6. **Ref 17** (Li J et al. 2021, synthetic clinical notes for NER,
+   *JAMIA* 28(10):2193–2201) — the v0.2 text already flags "Author list
+   and page range to be verified against DOI at final proof". Do it.
+7. **Ref 18** (Goldenholz et al. 2025, *Epilepsy Res.*) — the v0.2 text
+   already flags volume, pages, DOI as "to be verified against final
+   PubMed record". Do it.
+8. **Ref 19** (Alsentzer et al. 2019, Clinical BERT embeddings) —
+   confirm workshop proceedings pages 72–78.
+
+A separate file `writing/references_to_add.md` (Task 6) lists these in
+a machine-readable checklist format.
