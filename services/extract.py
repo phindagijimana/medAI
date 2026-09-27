@@ -195,7 +195,15 @@ def extract_module(
         arm=prompt.arm,
     )
 
-    response, n_tokens = model_backend.generate(full_prompt, decoding)
+    # Prefer schema-constrained generation when requested and supported. The
+    # constrained path masks token probabilities so the output is JSON-valid
+    # against `module_cls` by construction (lm-format-enforcer).
+    if getattr(decoding, "constrained", False) and hasattr(model_backend, "generate_constrained"):
+        response, n_tokens = model_backend.generate_constrained(
+            full_prompt, module_cls, decoding,
+        )
+    else:
+        response, n_tokens = model_backend.generate(full_prompt, decoding)
 
     # First attempt — raw parse
     parsed_raw, err = _try_parse(module_cls, response)

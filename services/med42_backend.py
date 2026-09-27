@@ -14,7 +14,9 @@ Flask app; the adapter isolates eval-mode decoding.
 from __future__ import annotations
 
 import logging
-from typing import Optional
+from typing import Any, Optional, Type
+
+from pydantic import BaseModel
 
 from services.med42_model import Med42ModelService
 from services.extract import DecodingConfig
@@ -107,3 +109,31 @@ class Med42Backend:
             torch.cuda.empty_cache()
 
         return generated_text, n_generated
+
+    def generate_constrained(
+        self,
+        prompt: str,
+        pydantic_model: Type[BaseModel],
+        decoding: DecodingConfig,
+    ) -> tuple[str, Optional[int]]:
+        """Schema-constrained generation. Output is JSON-valid against
+        `pydantic_model` by construction (lm-format-enforcer prefix mask).
+
+        Falls back to the standard `generate()` if LMFE is unavailable — the
+        caller can still recover via the smart-repair chain.
+        """
+        from services.constrained_decode import generate_constrained, is_available
+        if not is_available():
+            logger.warning(
+                "generate_constrained called but LMFE not installed; "
+                "falling back to standard decoding."
+            )
+            return self.generate(prompt, decoding)
+        return generate_constrained(
+            model=self._svc.model,
+            tokenizer=self._svc.tokenizer,
+            prompt=prompt,
+            pydantic_model=pydantic_model,
+            max_new_tokens=decoding.max_new_tokens,
+            seed=decoding.seed,
+        )

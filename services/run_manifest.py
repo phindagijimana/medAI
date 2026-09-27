@@ -88,13 +88,19 @@ def _hardware_info() -> dict[str, Any]:
 @dataclass
 class DecodingConfig:
     """Decoding settings used for the inference. For M0/M1/M2 eval runs,
-    do_sample should be False (deterministic) or seeded."""
+    do_sample should be False (deterministic) or seeded.
+
+    When `constrained=True` and the backend exposes `generate_constrained`,
+    the model output is masked at every token so the result validates
+    against the target module's JSON schema (lm-format-enforcer).
+    """
     do_sample: bool
     temperature: float | None
     top_p: float | None
     max_new_tokens: int
     seed: int | None
     repetition_penalty: float | None = None
+    constrained: bool = False
 
 
 @dataclass

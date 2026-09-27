@@ -88,7 +88,10 @@ def main():
         do_sample=False, temperature=None, top_p=None,
         max_new_tokens=int(os.environ.get("MEDAI_MAX_NEW_TOKENS", 1024)),
         seed=0,
+        constrained=os.environ.get("MEDAI_CONSTRAINED", "").lower() in ("1", "true", "yes"),
     )
+    if decoding.constrained:
+        print("Schema-constrained decoding: ON (lm-format-enforcer)")
 
     docs = list(_pilot_docs())
     print(f"Docs to process: {len(docs)}")
