@@ -1,0 +1,107 @@
+{
+  "id": "resp_09c52aa00829d884016ab66ac69e8887d2b0450e9e07bff1af",
+  "created_at": 1790339782.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_09c52aa00829d884016ab66ac782a487d2a1662e60cdd9e14a",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmrPLo0q8e2EWu2MecilX0_U0ytbYsqaMpso1YGGlrAXpZgyjwdZm2sLASAWUlKZvSLdN8kxSzJUCV8gTiicodOzm0GkY9Js40uFUExdXV1HMQUCUk0jmGVT3zA6-oevYJWj5hue530lrIMyY3VBSf7kzpoTsQdP-xLg28kMyKxUyxv5lLo33UolBf2pUofVQQNoffh_sBOdWIzWNYetzAYY7xKj3qek3N-iP7ZyOfjwWTDPTms14zPBn8zkBrck3F6jkD419GN-Nn-ThxDliO7QtCUQOIYatVthdGC9tuzdLtisFFNyuLzHaO6roQybCRo2gLzPdvpArjFdtq99DP-f_OAkQImFHJrYa-HQBJgcbuWlKYc2Tgb0QlchI8Lh9jUbJvIuMKRi-SIkYcoVI5ds75KA8D6ADSkfoC2ERfHE7WTd57bu0HdqC-zKpTZL6B6ohmpiKA84SocMm876cktDBqN8v44Kc56jFkLwkXYUpVq2RL81XwbliGfHvvP2PNwZRO60qYlVhNTlLwBu3cCM2Pr02SQvZ98WRtpkni2HOoXZ_MQeHCTG2Q4xTMlVlpksW0u6wZBphAiNLcYOB-kNzVckX6E2HkYoVZ5aRdwO8rLgye0vgWREDl24grnJyq70ZHBlamup-7L0buHrF0PB5Pv2wMyyYz0HbraAAPoYwZlBNc2JUMRpw3nqFxtcZJZJGEmA9h-_cskxlN9hdt5GIba1VNXUcEZnDreudHhToUSBxEDtD6pbV9KhA4QHdY9Kks3clpbrRaX-W0d4pqBaXMsnCWWEqK9rD9Ss4W47QQrvDCu9l1z3L7bgWNin7dh8_Onj1IhGXNigALHPtc2nm-7wns1ClFeTNROQPXGu2VXB4RyWK_OCkFwfagzyHC27ZR3zdtlll6znE6DlQp9PKT2wz5fAnX0WYk4ZLgQk0J-cyFyCdyuitATRbLY-5FtY5xY1KRMqioRURBCMnyIybeXZuVWLwCU0GVeY9uiQ0bQfNKn98KuLqqCAdWxpR_y0ngINFlz2E67nHJ7ammahiXC4q7ij0Drj53TcgmtGuXD3UMWnSknHz9NZePWbNUifYstKKt3AAFIfxjk5hRM6r0QdJqyQ8c2d59pGkpRmbPS9V6oJGoHS7flhrgOLurKw3Hkt3gHpLPFSrZ8ZcorMZVtA19eA7ueG_baxL-wit6mumlD1wT9diB6WpX8RhtGh9knPg6l0wUsdReYFHdlO_qlTVhIM6gYZBKuj7FQaYSCawmOk5HdR-5hgAKwhedrHKo_yXLh9v6kJ6HMltX1oh-OR6XbO5yeaM2NagZH4pRSHN0FxtxG7ARhCXbTCWRE3eurPtxtnjMZq1GetiHsJEDIpOo1nKHpNoDRdbBO2Tbw2jMWLCaXAkE0k35WOmDuODQbRmIwAtqzJDLnstA5GEDuJ2FkVD4cT5PMqSkWwqMwSuQKIUIaWpULJBo3asdSzOdrl3ulZtBYZNWamwm-Xikx8Q0ZPRPRVaDx-hpzdNyerOKITm0PgJBnuZNAjGi4KuUnCrmETNJRJgNjb_HYQDE25Zc4LGjQa9D3WwqtGKIIggZi4qzT4cuUz2gUV5CCWCBnwgWKUBtPL89-rwyLuHnQD89AQV_VGL3xB3wU12LXFe8njUxxd_n199Dgv_Ox9eXHu2P2EjvQajqfsVo3hd9ebGA6oLjCjAE6-0lhLfT77hlHXS86YwkFvdRaiTA8lgHlF5VYyjitpoqpmRcmf9GtxuZKpOxQ683QbT3wH2wmKItcKbi6bpCucHr22EPil-AdcABSOYU8N8LvFte_L-19nZKdvVhC5jiBu7F7JrVt_ZQcFOIcPk2JWDRVG0ZbwEYjx2XWPhRhVl1ZcywyuxjQ-MfRF7ArygEuLyafJ07yPe-j_1KcqprIGdysZuJRCFooyjvL39-ZucjUB9_zRYIReAqRFNpwySsFo0TXQ6ok_JKIf35wH8C1kdSIQjUkp4N8Hq9OmXqFyShbIyjK-J0XBdRvbuEtzWlfWnjCBKJim_HqNjB4Igmt4anS7SCZleOIrSsuN1mpcNBEAK1BrY5mEms5yYp64iykztxWQdw5DV4sTfgsRilQqgFWSoy5_r4aLEfZmYMo6GlpFgqh8C46_2qs-WEZwUkVDxU0Z54vwjAmoMQbAbJ5WSM33C_NW6GEt5uaW4hr3_cMziDUCnk0aqr9885blpWwMvw9wKbwNE35wppHTNWpm38AfpAHx7YCBrxrTy54aqHAEfhd0W3ipPef70-PAvlm7cmJ3T4p2eyT87rIwOlYJJf0Szr8v4eYLRzEqiUJatB5vf6NLYPSy09JO5KWC4cCwi3aFAWILXKCAtBbMd4jt6zNKQ0e907cAXTvHfwiGqVPpYkmuvIqFjKxdARbg5pLbv_E-2kGKIc7wFKOyV2KTkGQEgqe7qIt5QQNwZsR7vnf6Z-SePRJk-OU61gIO2SQK25tFAhGsisr2uNz9wp-fJNd2jBnNzahTe032npXAIObpSLmU-w7qVUssEt7-0MzvEvBlzo6HKiw7axxnZOyT9z74sumD8uCayWacryqgl9G2ci39hjDotjvoGDqUi0kMMeWbJTEkYUiwhKVs4ffowKofHysjoXmXewZai-tI3XOMxwc2AkiRUWl0Jmd-rsnRZew2sw5ohfgdKdOqEHPuf4nIdWosmDyFLbqtbXv_sfqcA44A2DhID2bdBUiIajtZ2B17-Q8YEHyI0Xdh5AbjBVHmIemUH0vuRuTbrAcGbuRqCuGtPvK2tbflz8rUYORuNeDiPLTN6HV69O2eigPFHRcaP9BCZSwpcGENJRhmIS_4069hP3HCHTHrjiBG7DVfBv47cU6GhkinU-nkrXOeqJiRdqsP7gVe5C7Cx-fa7cPKWHIIRTxQxIkUTdY7w0nhKgTSa-8n62Ndr51s11EyKdN8dh_sB29ffZ17Mxy7yPGfWTr-u4fJihHUjytBCcuVCXsGjlu9lWjpZej3c1naZIvroPlGlEA0js67ifIv6rIWoUK4kPQDRDQQs_4kx25Y2TPpIRxuAGQguNOtiqyos1fw2qnl_noqEPQGZGXbLfL3MW2Y1zpvMYjsGWqwUDpX8aAH48GGdkB_8p-bSmpKtQfyUTPK2uboFB86Qpky4UUnlZSs94AdEbN3J-IQqKtsH7WTvijfpFu7DmyfOk8kUmIVCPL-yRnl3t7fzvupxRav2dKLXaPmb2BLQ4Mo03GE4nxckbhME2wYJSxjdEm3Ok0N2c_6ZEg3fUOZVsExA2h5nCXCZPUxltbO33CDigojg-pUUBMYmDF7_GcXHQMESB1eYd_iKE1KohdkV-rbrsy-ToJDO3eV3LZZ4DpkZeT8jFq_LYaF66BNgy4bQGUjGuBWdbw8ms0Wn9YJCmpcMjyI_-9vHfoQ9qItyjP-wEgSH4zNIj7FbPwVRyKj01AYrq6CfoWQ_o6VI7KTSsLtR5NCVpgrYEMhGiVGMEjXpgw2IBqfZeWw6RhNK96dLWuQFI6abjx4XKz-njJtYs777FrNd6obxQ1XGbHcGVbwDzmRRZ2ub7OyHpe_Ab5z5QJV_9UBB7pCCZDkxgKXYfE69ediurcTeEcVq5OnPXm4mwJRtRNozXCds0y9X9q0-KPct49X9lLvWqWwn5UbcDVaXlVdxJhppJ12ucxK-ngQmjjW2kB3ueSGl331MoE1HFpCS6HDMUq_ONuO6ZRM3HBS0dotb92d_Oe61Yr72U40ADNm5KHON8ADgM7nWJJklryDDaxlb306bf5vTeryj0qhkwgYoyz_zgYpFSj9Ua2z7UnipXxni2ooLdaatgUskAWMTt8ppLhpKW-8HLsdnXm1MD0-ZHG6uLswIZTI5tui0M6ZHGXfdd24DzkwwjhUIKZYWUjjp5V9NyD2z2Sv2VYkMPI0GAKYNgOXoEsdBAgtYLaU2HYQKGxmYoGHDB3ecjNfK0xHR-lCV70nPJPFK8qi5Iva0zhB7lOo48FIvVhOtikeuVr8-GjHhit6dXCmHt_RVMKAp0c7IFdQqHFcp3isJ-3-jSAoe3DhF6cIZDoUtqor4nkLcf0Ry9LazSnLK_k-bwS9JYYEYn6r1oAJTfB505rerW7Yt_qVvJylLtA8sAgwAaz6W-vqahGUh9XDOEnE5aPyv5wC3o0J_bbkPQh-X07W0sPd-QZdkm0griVwz68TJdaZ9eoOhL0OpGR-SpnvYWDGMvhzDkdHEcOaQt_hkQC4fYNEfDZu5Gz4e9kc_VDuX_bTMYCArVeBT-Mn3ikPZB4VkK6TIojswdkMT_8TcrcP64fin_fMuiPSgUZlIdg4_lFpg8E=",
+      "status": null
+    },
+    {
+      "id": "msg_09c52aa00829d884016ab66ace004c87d28323c15f68bcee33",
+      "content": [
+        {
+          "annotations": [],
+          "text": "CLINICAL INDICATION: Drug-responsive focal epilepsy with focal impaired-awareness seizures, onset at age 8 years, occurring approximately 3 times per month. Structural etiology. Current antiseizure medication: levetiracetam.\n\nTECHNIQUE: Multiplanar, multisequence MRI of the brain performed with an epilepsy protocol.\n\nFINDINGS: Hippocampal sclerosis is present.\n\nIMPRESSION: Hippocampal sclerosis.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790339791.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 231,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 535,
+    "output_tokens_details": {
+      "reasoning_tokens": 441
+    },
+    "total_tokens": 766
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

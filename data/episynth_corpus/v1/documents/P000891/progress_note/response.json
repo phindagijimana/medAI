@@ -1,0 +1,107 @@
+{
+  "id": "resp_0715e271cfcea204016ab677a88be887d2be53af389884c9f9",
+  "created_at": 1790343080.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0715e271cfcea204016ab677a946ac87d2ad1d6955f3e3c1bc",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtnethYDVe7OSZtdRxwigg7tkTAHY3Rsq2MTHe3UUnsi3iINVu2b0VflUPUzznYdg3CsXQiZPTRXk3QjqSoCwAp5-wUNrE0AaV0E5nzHknW0syczuEISE7RokQ8uN6p9wtIZtdmPC4WR_rmsq6KoCEVJp3NXRHsk1sH6R1CaGQgYh9Sx2J7wBHFaHrPS4dKH5weQa1NbVIOZJNmTE9sDhSh-wzIiPlcbpeko7FEipZKsnTL61SgEEvxD7Y_8bbvs6QygoqGTPywkrMsYk_Fme8C1YlnzVcW7VsJtiyFN9GYO-I6JzGoCuCJsKliRhcSwUSL3binS7HaJe2xY2ePu0_RW0RoOCQAwNlWhm0EkmCp7iZ7jFnph0upbEQm-u9nv3rVzblRr7_1IfP2H5jiPcHTWZRcJkoq1NoSPx7u16rkVPtDGD-9LVusUv33kJpOzT8LRB1N0d6oYgYEnIJSq3wNHqWT9NH0Idb5BExVs9ThqQ8JO2BlAS3MVni3m2C4GuZk-BHBcRCdFs3Tkxv5H12hNc6przHSbfkXLvuplgQZoTaBIXJ390oVBs-3tsVZj3zAOg2MLQbXKnUaEHnYuBEDoxnv57IamrbMZNL4xtiuYqm-sm_XP0GeSpgGf9e9wfaaZbxl9dkJRq14o2T5pSloiSiX7n2BXPd44_RgKIaGrg63rfXpxyngAkIk8sxyCo-sScngzj7aibowZLGQSVi1mpfIkgpOQx2RG6n5ii7VUu0hVj5TUberhRnrA2BCuJblng1tmzQWyHJRVVkjXTvVCVonb834cvzP_BurexLsYYBcBN0vfMRuw814DlNcPEgi_6_j0ftbHDyqWk9-8u9zL3Sxu0fuMuWO4AEXOP52Ue7Tq2DrLKkVemOQH8ofHNraAdblP5HK24F-MhaxYn_mfYph2kLDcA_QJLseA485lE5pyU-qvPnq5Hynh4Tcnv8I68ryhRg-n_VIpPY6P3CGW2A9PVvAZIfsSw_0UY5cBiBpIXFMdlmqGxfKENw0_NTAwo8CuVV7Z0feEupHcuM8Zvu7gf3qm6jM2DD15_idbZdBB3ucPpmmp0Nmj4f7qxWxLWA7uN4A20ODYBm2oNYd79Pfny80fgl4eMsKIQN5M8SubZYZnu6cBpy6L90w-Ln9RqttRcKWsIezrcOmoL4WVGgkNrFWS8fsxuz1ys3_jWIl9CHySfaF4Sgy2bCPEVuIEB_oWRwfaSAJ9cY39hnfwWn0S6eAKExJ-4D2F_rKP8SWWIe5Ec1m7vQKGUV96l8Fwicg96Vt5uIlN9qZwmy3wAnZfUF7oGiF1kBUUa8TV9ymnVSwEav57QWLZMrTwBNBWUjQJGJOf3HoOWrm_sDKsWmZWlAeACou9PyF4pF2sx3W6qntcrDfvOPEZDikLypNfLMLHQ-BICKPB1nt9m6kWLJUWPVALhI0PPjkRQziGkN6xZNzFCd3Ylluz44Y9QZBw2ScjRAiK4UwkFzhuSTe8zjbZix9eZj9RiFv6WDBbcSeroy4Z61-WnsqaV6rUOlMHFNcTFJX84Lv5_NpxQxYSacTHyk_u7kcXeYpHkTnqcnTsHwwCdLX7Um9nZda69pS7uH_CHJkAbXnyVo0WRstM-sYaewD7rQfdD7QFvcdpz1jqVcDPR6KOePGj9Vs54sW5lC9UqvZOcZCo_xxdMbInLrktUdlTxCqApKgdfJ3riKEoShOLFJNeF4vKUL9cqSCgpqU2uSPInfxoJA1ACgF_ViS55Qp8S3G8oO6Tuku6pKbL17FfBfW4P-UBKvHWmydBh",
+      "status": null
+    },
+    {
+      "id": "msg_0715e271cfcea204016ab677ab405487d290caf86de18e92ab",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:\nThe patient has focal epilepsy with focal impaired-awareness seizures, beginning at age 37. The etiology is unknown. The epilepsy is drug responsive.\n\nCurrent Medication:\n- Oxcarbazepine\n\nSeizure Burden:\nThe patient is currently seizure-free, with 0 seizures per month.\n\nAssessment:\nDrug-responsive focal epilepsy characterized by focal impaired-awareness seizures. Etiology remains unknown.\n\nPlan:\n- Continue oxcarbazepine.\n- Continue monitoring seizure frequency.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790343085.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 250,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 207,
+    "output_tokens_details": {
+      "reasoning_tokens": 98
+    },
+    "total_tokens": 457
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

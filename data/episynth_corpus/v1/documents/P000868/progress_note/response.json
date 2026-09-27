@@ -1,0 +1,107 @@
+{
+  "id": "resp_0c1843208b12c90b016ab6762fd34087d28ef8a0f76ad51f88",
+  "created_at": 1790342703.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0c1843208b12c90b016ab6763072c087d2ad6d78c6d5c6f16f",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtnY1ep-J6Xf-3nmY8K24Mb4PR0V37bsuNUPvx3XMg2u1PObIUyL4AnrsU7fgrvO3_tOuDGOS7HUN-9-A9Bp4qxhz7lYtfieYabU8ttUztZ8673oj4x1__haa-ZG6FJ0r7jmg9Z6oi5y96E8d4dRNF1BUGnMmVydrydR3K0FhBnhsMt5RihEYsz-hbvBs_qsH0fJfuFoYkHkBpsIpxcnincR5ZH1hfRKkAhiliIysxBO1TfigW8SdLAY0CiKo70zf0Cp7z8tIgx3HBBcVIHG_shLlnwmVF-k9owlDlK5K733HsvX68lU8EomwxM2_P_FkVmiYtFgIhDMoMfd0aUerBWL8iY4Yu72jRGFrFOb7X8_YBZ40Dk8b3kPlmRwB3Ad_ZorrmyyuyFen7TBYFkJ28AZjtCmJyiWowtAtblpm9M4pV8wrijbuLTdlb1mfzGGRrz7CXSFyACDq7BZlDh14xQx3v6yVhNxhSoVZ-ZaHYnEfCMF8zVkrgUJoANUcOiZOJihq--XwzERKyc2VbVzPmHOhl62efz8BZRnXpwNDkZO2HN99In36iB_8HB-PRhaz2fF2bL5NDhSCLyhy2a8HQW2uPj9dRm6DLOENgaHNfdduwZkn9OVFw9e_kpmsclxPqooqk3t4i6uPwT23LvTNyedSV0w39X8RCvp7XxEJLM6H-kbyXxjvcgQN_yxTByykiu3vnEl_D6rBPICh6d_zvlw9OWZ0YAYQjCZRIkl2VRKdW97rN9s3IJ0NvYn4Ubs64fEYKF9gzFnz81xaG5ZZy70N92rWS0e25x4bEKXM22FFz8B8SqW2iUhHy4Z7s9eaDtDAYj20_o71EKsK3u8YUdZ6ETQAqxHdKiIE8p4cVxDznBKwHcRxXxqzYyCGcbHUiSKr2DXakUzWiueTdx4467vhxIDpFAFmsPFV7OZ-RnTSyA41dGdAD1pLg4rbkFBcM5qM4EQWf3LyDVKgOzdz3HFCMrhCzDMrtiPZOUxv77SgwHV9mZGu32Lv3FLdcCnRegGBB70ZWzioc0N5FkxRrfqd_ZL-vSes5_QO1P4XtXDTGTmoyWia7RW_npIgzaNYh9HAbXfgQ6kK10tkSjbrb7FO7R-SqrHxfwjmzlbWy8l28GnEPaPdJLndNH7UMd-_NKgBN4VdKiuhUvhmC4QRuKQvricmw4H6y0vuYd7eW4pUv6PEOJI_ZpPfkTDTY-P2teDDYDaMRsopr69gDeJ7tUNJ3kiA_JvGF13v-IquHmzuaCVV0qgmKYArITbep50jK7-e67tUcEn_O8ecVcFXizHGlYx0U_YfudSD54vuotLEeLGXy3T6uchaxKvqk5U1SsSZwTWR2mwczaz5KzG2HlIjLJ_aNVZfNAzgXh7aZPDd7VAqlEgv-n5ddHJy1xIvOL36E0ncuvBH208fRl4hlqM7eiROs-1xRyLjA1ZE1P6eHOXo7mKKR3DXmgFmFvlxHQsNPV0rj4n-vGbYZZTH34Nw6yyfDLA1b_ZLKTa5HceVlYeYqpisn2z3pdQzhCdeRkhWbqaJyhGoAM7GTkRKT_lj5wtyJ5jP9BX8VVEeTNcfIFtT8KSUd6tjIHZ8wZ19DPyPQMOFHQgmiSTDTUrhewioihwtW5F8u-1Lj6Qh5YNQEg2urEP__zjqqSB6poT3WRt8r6Lp1HWhhLLmXDPfDDqNtrng1CHS7MVOqHnUaOZzCyKUpTnC9VU9hJutYSVQbx34ZNoKQe1fNa6RJraXfPAMk_kE-M6ALeEDBKjvPZpPlRHo3zdnygmzKz8eahZHg0WQskjj_3Bhh4Vs-SWzOgmuqVrbs0BksPOa5Zajgi8B7Y-oOfET_6_4F1-QIjGeIIdG3K0cF78ERIShay2ZyL56n6KPBTAk6Wmxwkrst3w2epq0111wWqY0tjwF77OdgUE_qkGzuSwbF7rxrsQe10rSvmAx6BQujyBY7eTdNXH_ZYc2RE3Ql5CpgTMRjTXXdrhLiXNugvicAygS_HZHyPisEU84zY5qsgQJlf4shSzOFGp5MpCk18LYY1BY3Dva2FAsNAJbtANkJoMVvW1EgzCzb7fywQMCXQ7vNg3TUy7gO2OUAPBLJq9utTgZ_nujtlrDkt6yWrk4OnLd_Zlo8id8eg==",
+      "status": null
+    },
+    {
+      "id": "msg_0c1843208b12c90b016ab67633136487d2821e8c21fbe25c63",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**History of Present Illness:**  \nThe patient has generalized epilepsy with myoclonic seizures, with onset at age 32. The epilepsy is classified as structural in etiology. MRI demonstrates encephalomalacia. The epilepsy is drug responsive, and the patient is currently seizure free.\n\n**Current Medication:**  \n- Brivaracetam\n\n**Seizure Burden:**  \n- Myoclonic seizures: 0 per month; seizure free.\n\n**Assessment:**  \nDrug-responsive generalized epilepsy with myoclonic seizures of structural etiology. MRI finding: encephalomalacia.\n\n**Plan:**  \nContinue brivaracetam. Continue monitoring seizure burden.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790342709.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 257,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 292,
+    "output_tokens_details": {
+      "reasoning_tokens": 153
+    },
+    "total_tokens": 549
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

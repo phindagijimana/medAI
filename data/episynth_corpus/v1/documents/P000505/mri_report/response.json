@@ -1,0 +1,107 @@
+{
+  "id": "resp_0c3413e902fe55d0016ab660db11d487d28f223e24fbf62795",
+  "created_at": 1790337243.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0c3413e902fe55d0016ab660dba17887d2902ce99a5feee412",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmDjgFy5mkGWkTVPMHaLvWriw0-CFs34BGOzGSKuol3nwBHO6oKfSkDUMqW8pvD9E31IhdWNhdZN7jdP04zOyWaS4aIbN979iwmktGMOsoX8u0VA3NfhgeAVeOH_DJr5zW0vcW2bKtj68itmo6b_DJaLuAvtN3__9ggFXBDBOW9sHymGzJ8l7Zq2VvyMC2bK0MW_TTRQB_hB6fd5YdYe2BqjQJyrtW0lNdXZVs1k9dNiWWtpavZjKQxwXvzs1SYvbZf1OZYzHmqrhe8PlgYjYdo7Jd5-eiRG61Dphslk01_DUC157AUPpPl1fSQJngHaG1W8q5ubbNZ8zdfwxWtaU3hQWSZuFppic2LtZf83xXsB6bZqa6kK6rJhGK_pIZJ8kl-zu0Cck9SypQxz5JnSrIjP8OFV1qAph04tae2KZFTfg-p7KcFjqyD7gA1LT6LCbjmBj0miZpfhpU8I_F13LaUAtWq9ikjUvMIPlWrPhyL9NnCNKVDqb-6gNoC2DF9bGFXGW7sbLhXylxXYWPNQ5fXHDKw_59vlDAZbKKw7ifABmqcoBl_N8vOIoljxNVY64ei_YCT-590FQPMxaXj-goe5KHo17lo1Ap71BcALGpSv8wQha7ERVr_ve9hfv1D7ogmDVXJvoW8_ioZXtIA0xKrLWb1aon5fbekTpWB0336xbbPXZFCUSuDdxUFvfumo3KrAAwnNAv-IWBe1hM3osvRtcJrxdu4eAauIjSdzHnJs9OtyQX7TZ7srFGsOxphMrpDTJRRrau8L0C7G33SmwqJkL7_UXbWCug5wBAlwu2hGV-cs5j-y7hIPKP74lmEgQ9CDYZMVUin2kO7AXClq1wUklrgHe_cuPvZx9opvkNNcF5Kxockm4nQIulmciw2Ch0dNrVJC_fg2PpjkydL_qrcsxSgZgqkWn_6wSyhq3QupRR1IRAjjSTlHy-5JwsDJlGd5VVULE8d1CrWAzYksXga2Dn9NrZ2vc2RlW1b5oFNxCpgF5BKDkSzKfBniFXPmBcZvVh7dDMGAyYaF33GHH-NQIyG0Ewa2CGrew5obohOwN7VnKrpUR5gdo1T1cA_ovY_FiyHqGY2jFx_oBRbneIJuKhlNYllnU34bcbTRXu8S_kidUB_AIOcZerj3WPl4rEv5GCZYnDFr1aPQBVDyWwvwaJgGPo-Vq4w4-EMao3URtRVQH_cfEzfQNDHj8ul6-11qkIKuXHFWELz681vC9FMeBp9YyuC-CpG6g4XXb3hxvj3sTUEtzGJAFbupuUd4IOU_a6mMHjKWi98VOhZGxQt-rW03g8UQ0ClsRLWmubiv2SSFvANkAn8--T13olAHq2M0O-q3j2P3m79yqgYywAIkQYqlI76UsrCR4k1rXo9VnHHBNDifvjmxFZDBwijZOVzA0t5L49dXS01zNYgAIgJYpNPdgu2lL5dJnBskWdXYjip8EYjmGMfZoXTfs_IPMnUT76x1F2up6qlxSbm4z8QkPQ4l7YnaJ_k5qoUoQnfSXLLElRD3Z4Q36vXKaY8LCI5HJpD3vT39_QtPNeq5-delTmF7m-5bgT_SHue2mNtQw-yokweGrnGOSDl-xLJCQKC0yFSPigc43IrU_Eaxr8rl6WE3Zcdl7xrrHhfr1eJ9YTDaiOJbretniQn_ZVAgDd2ubuydWvuArrboqRUZb94MOxFrM1xxf1x_2QS3M0ybYXoD4qMxUVjEPFSG5UqOUoA89nq3AsAG0YAM_OnWtqHHyab4e5Fj7TffdMLK9vvGn6ZDg95INP4rJ-WnLWUFQStf6MJrWrEWkZNzAHjAHndInGf_Hx4n-X3Ko8C1FgRdpQ69kmneVylnfl5cYEKt3GqJ_VHf1jV5upVxr9CiKzByJZ0pL4-mHCpYiHR5oaLjWFZ8QYHa10lElIKoWt64rYxpmHzQLpuBHAUnqelUIEzEwgmQYAZwhFEOOblxa47qTfATTHVzEJOBeWQM3VTdbycIcFpbOmPjLusr63WZLLFEbn5KW1FSuZkfDG6Luifv9eIzGlGbRizNUZ1bWUDZJfiNiRandPUFTm5FUTClpsEdnGflgHyUWIag3PxK5UkEfi0Vi2TO5bXcEUCbR7uwdb57hErWBOAd7_-raQQ2yLrLDEU6oczxjyPlN-VAQ2d6f-4iWvAF-Hcy7b0XWVpy0FInPOV0Ige6LQiHO3Rr46G-030IexqeSYUyMWKjLrud3ewuYTDr-OJKef5j7fh_q43ULFkP8-R1UxqNnwagWip7XiTqUrff-QBAgDu0sgh7FLoD3zvIX4s2KffM62M3Jw8-8VklvNKjp8dxTARSAWdKyUGr4-pkRGbv7bjEP57vH_zVB1cFS19eQB0VSXS89nh5YflP3g9GQAQ71hhTt8r8_4CyZojQXVY9O1UBeDxkHEFnUn9KDiq6MO06nb_7Oux-cO-bgHaorwnTCu2_2hHOaW4dvm_yH7l2ZiqN-FNZtesekxZQiEV-37X1WXomBCvMPmVdqAZ2l6tMbcuj8w_qGtiUHhE1IZCRJeLY0QPysamDHEyhYsABh_kc-ev7_mA2AkJCAxSKF7aMP9OxeEvXwi-jWntntgBLt3k1C0v6KU_2ODCUNy7mvdcWD_oZm4BeAfvs_IxN7r-E2DG-gZIGXStVPKl-JPf-GbYlQcCqSIS3RPDTAH26gOhUJlqmMILbFpU4Kgj-fiFlpZypJg-h8MQllBRk2XK_uToGU8xxOu6KBmbZ778-G2ycCo3MkyR2PXSfaw3HNoK7f8hjXo2n9_JTBJvfs2Pq-FSriTPEXVzYyCDghVWkUZLUaWCWoYzxijAC9s4OUZMr2WFvmmefyuYFVU7NdEhSdIMvdt2-1uj6ZNjIreAeTlQlTH-td_dsOHhb3wfx_wkyJf9b721LN8a1osZmOM_rwO-alYYBufxNwdlgW9oSmaOykekEgHhzBPJIbXom1jo4kKKEO7wxVzsU0mq9ZQ_LU3tvTBBE_HpoA9BhCPX4pC1jGJJaSgIcWCRRcCMV-MWwujQ4Bd7qYHPrl5A25fYPHAD8HRqU29RjI-XMJNyFi3ZWsfrwXxIc-BgU7IwyDsMILiMPVXXGCOpDY0adoFsDBs7i577uERTN2vH48GuteqILhZ23ZLeKJAfyTZzjGcLu1r62PVy2naymbt39oH3UMRI3swSfTmRFTw88H1lulNTtyqDxVxuGmDtaBAHR_b1Df_ScVwe5XnFRalWuAhC8h1wzqj05Nqsucajo61kW5M2reKOlt9VHiGvD1RR41ADrnOTwlg8BB87tPlygPd3rqjDz1KEWKHDukG_69n_vQgcRF3U0GfOJmxbyahxpaluMXXQGw_NpNx_9xPxgSZjiKOlXJa73nRccfKd9OqDzml8sKxkPbvwvErFeogEoHJaojOrxpTD2-8tfR_jo_W8-J-Jau4CBmAK73nDhDQBmzCfY-jHs6Paz0tUxUeS0o0Pix679wVXio3PlZB4xmo1YoUITurr554K7FF_kFfg3CpB_kQ8WNLJGBhyTFvbMjeKAkb_ix1f2X1iEx8_G3chh1QhhyJvPnIc=",
+      "status": null
+    },
+    {
+      "id": "msg_0c3413e902fe55d0016ab660e1c3a887d2909291669c780ba7",
+      "content": [
+        {
+          "annotations": [],
+          "text": "CLINICAL INDICATION: Drug-responsive focal epilepsy with focal impaired-awareness seizures, onset at age 7. Currently seizure-free (0 seizures/month) on brivaracetam. Etiology unknown.\n\nTECHNIQUE: Multiplanar, multisequence MRI of the brain was performed.\n\nFINDINGS: An incidental lesion is identified. No causal relationship between this lesion and the patient’s epilepsy is established by the MRI.\n\nIMPRESSION:\n1. Incidental lesion.\n2. No MRI-supported etiology for the patient’s focal epilepsy is established.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790337251.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 237,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 440,
+    "output_tokens_details": {
+      "reasoning_tokens": 325
+    },
+    "total_tokens": 677
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

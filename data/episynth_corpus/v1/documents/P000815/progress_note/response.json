@@ -1,0 +1,107 @@
+{
+  "id": "resp_078ac2739870b005016ab672f4928087d2957855f3f32081fe",
+  "created_at": 1790341876.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_078ac2739870b005016ab672f5865087d28406d78b20d6ddb2",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtnL55gmEGIbhLQYwn51CmYMDs2SqJ6FTInPMxd46MZH6OfO8nnXqdDFWM8FPXIU6YO57-b3PvGmPJ3m1CMymuNdjwkUXemtYVJFnJrVmEOJxR9Sva6GELr9UmVetM0FjuKh8nXiQISAhsZk2GCtDdepXe9wW4NjX0Z94ueIqn--uKX1Dt-DcPQplmGi9bpOUR61mSGTCcYqeif71SSx6DG_1qn19ySC-drIIN0w_PJuexyxkl9PRqLYHApGsyZE7PDc8nMnqWg8v_X7TXNf9BN3ZppalsoLbCpHc5HaBXRpGewdp5ow0t2tSPQD2gqTHaplUxMqAi6U2pzdTYjUpxOlkt6rxO8b_M0vZjyYk2xvHTWkrh-Su1zT4vfPq8c1mpatEWLrlNjtWIM-uNqPsiaTbhRwzvjm5ByMO73fnQVq0rr4t2v8kqua6C0EO6vdngMwLaGqgGjRZK3cgEx3PPIOXRDiJIsNwyhaStVpFXZxKi_kbJaDtFZacsTsREOV4JlFFudSlzaMjqmyTJ6embqzQOfnnS5RWQC8oLnd5FB_htjGPL_Zk-TR1iKlEFwM84bvmGhpBnyfatzGlOFNoEi3wT2RfSKZYNM7-Z4p2C4xWorew2hvZSMoQqf_mtjOpZ243K1Y7-HxPNzYV1M6e4EavD2Ifi_1wtcUI0xl2R2lslMwUB-RP9P1qW_XPogIAfGYeb88YNY5Y6abgp6FqqnH25gRmqODMAHmzcEmvArOGaQSeJ_kD_UYHRdeB070pHQOL7O6PdCbpm8OSJFMKthlyctxErmSNB_mciKt6iHCor9sTa8vNMCO8mRAALTsHlSwKBheeQQnzrpXg7LlsZxweWaaDx25KaYP0Gymnrs36PWT_4YV3Kadw7SWR_mNVfW36ZJ_nMVcGUclsVWDxQCqK9kGCFYupFgaJCGl8J0FlVc-4H4zQ812P_-NG_X4ZcnpYpW5fnghaA3FhGRWlDXCi-Ym_HcDJzHfcPyQVOo5JHkwG_vQ-mtiNcWPC6y1yd2HoW7n_-9USaBPLIfmSIau3Yx0idfUsCIqI5-IjMzlsJ0Mz85N9h_UFpNIDaf1IQAJk4zHot_gH3zA2sJv_zPwipYYIuv7AdEyrnnnuCwGf1v3fGrfnE0hIrXnXWRCtrp85gX0hsPaQAnCe8najr2nltX6sE9V_1sm8QAXdDlyx7OFlmpduKpxcTHUfKcWTs8USZ0QkHHyE8952pxTRXFcURunnkUC_QJcqtR7e00uPXMhWlPLWrpuiFZKdPm7Wlik8Dr81Kk54UbjM2qeRlSn0yb5comvu0vaS3wSqRcKQvbSkGNmwFvWW-_0rjzKqOIWM1R7t5zqNuGa62Rdfa0ifQFC0iNkT8Sio7aiBtGdJy7ScpcbrcT5_4x3czI5ZOKKf5RlUJR03qLq2a-dCCwQEcBR0oLvhMgB50c01rTDmNX6Bv7ol6VrWIJDMQqro2DkkLpsebZz1DTt3P4EqydwA3hcDXl1bHxMjYHkolzhegZKBV5QPP4iHHTop81OifCIXt33IsuUkgNy-o4FMxez5luQsu_-OGGIVxyam_RiEjiVLppBSlmQUyuXblSlUJpRvNR-_t9hn5tlYWwi-X3uOYBj1YuGR4jdzVDc-5s_AoGMVEuNbdPNQ4ytyo_O-WkRggbd9tNoUAoNwQUVuAHNBY3zodbt__PalMhT9ckV_wsWU-CfoKuWiCmgPRf6RzhggcRYEt9_9oRrqcYaM-6TIsnEL8fPmeWSRURRDIFMnqUvLzRAxzZGabRVlwAOO9Kuov06DQBC56UsSxCyB5dzpozEAoRoPiDSyVIyxiD4kRdX_z82erOoqWaxcZ_NLW55hKIW7rzPYgENeKQGjTZSxON8XWwqxZDfOWZL9zeoDVeSC7XJrHX9SZMq5ARsnECb1APAchO5qXojF0Dk7RjYCIkbYQi94op1M__SbfD3So9QUCxNo1xvOyXOnDzB5RK25",
+      "status": null
+    },
+    {
+      "id": "msg_078ac2739870b005016ab672f7d4f487d2a678b8503a405c3e",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:  \nThe patient has focal epilepsy with focal aware seizures, beginning at age 35. The epilepsy is classified as structural. MRI demonstrates a vascular malformation. The epilepsy is drug responsive.\n\nCurrent Antiseizure Medications:  \n- Levetiracetam  \n- Topiramate  \n\nSeizure Burden:  \nThe patient is seizure-free, with 0 seizures per month.\n\nAssessment:  \nDrug-responsive focal epilepsy with focal aware seizures and a structural etiology. MRI finding is a vascular malformation.\n\nPlan:  \nContinue levetiracetam and topiramate. Continue clinical monitoring of seizure control.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790341881.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 273,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 267,
+    "output_tokens_details": {
+      "reasoning_tokens": 129
+    },
+    "total_tokens": 540
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

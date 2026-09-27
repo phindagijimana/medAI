@@ -1,0 +1,107 @@
+{
+  "id": "resp_0afa52cec8b5dc27016ab6658a2ffc87d29853dc7802146a55",
+  "created_at": 1790338442.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0afa52cec8b5dc27016ab6658b753c87d28eaec2ac89efc140",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmWOEd_vXO01TeOP3nNKfyw2a9mZa5i4ff8Fqw15CwjKRp74st3IqBKoPKPYE-QXq5E1mFzFjADcHEQo8NRSm59Wm-iepFNhWCIx-fEggcQ2CfjKx4kLgducesoSpj_MC_L2iOCB1KhAuRCSIivhA-lT8SNgk9aGmPZfqPQMqMlVKlxO4mq26Zf3aAZJ2WcctSI5GH5Qk7jQNg5sMleOkoJhaVV3hLXcrdt2mwHWnPrvPI6iXZHadIUO1Izazk4lOl-qF6m6Yk31AkbRr4vWStWNyV8crnuNPK8Xs_Yrl1oewsD0eqEKEvOkTjUfOIEZCMgHx5YjSjIIwmEIL2PQQ9iEApYzoxkGtEzPQWK1XnJIjDjsT7MjO-hKkXELGgnSumjGh7UiVCFtFpIYNKRDHGuqfwLvM9RIg2fCW-6IsLvBs0rGRcpH0d2ujmvnqkw9_365lpSbf2_KuSuYKFfKcjx02demfb3D81nD07SqubTqScbl6KOG_wzkcxa3xxbkh03xsFuKS6DDuGIXYDDV8qvq9NuwpP55IeB-9gUO1A421SZeZ-dTcUNBsgBpGgNQmWhT_dk9aj5RY142y_b4FzSl5EvXV1U6ZLysddVgXQ-hYgz30JGogxFF-CJsLCvceckO6J9fVW_8QE_dk5HyE0KSOSAJAQh6YcWCMLB5n07ClafFKk0P4A52cZrprOj7WNe3wTmR31m1rK641EJO8JOdAixkY-pN5P191qdeww4MGJH8WORs8kqBUS0oo9Nka_a-uTXVjtJPczXy0ejYkEVOzecK0xZz8nq_mYsLg8jVi_UHBd5MDuRiOX_6liZCghj-C1EjFvyg6LAQUdriNuPYFi0NMVoTkoFWY53PxxCbgmTVzaM14myCCmN1X6FpzFdJsj50m9yoUleYDrRp7ltVC6JHrvaxqyIK8AcvU32iNyEQS8EzzcaFkBS9byBDTve3JSqlXQJ134yc5xiX5_aEC2SPkMbdQtXmIwAFyeHiGKHqoah0O6M_3eQU9pkcqVQyZM2JJ7SQSlohJ-4xv9StghVBIQAvL6gSgnvdl-kpPP1PfcW55YCu0TCSEh18AhGO4xrJ34xJaeQEW2SoCgwo1Ni5uWGOjI9R2xtHppn4XkAVNWB_Aj7rhcen3Bm98vH4XiML67kWDNOTqVi0Wq-QfusMKRJD9pVon6CgcB7FrSWUQPZwKdICgb1xX45K5TpYH_bnfFkeMSHDGwD4obvaNktYjql3I5Pe6hF3W1oHXDBfgp-3qv4h1eRsicDCaIEWluOQUw8UeriiJ6RdVz7J9xdSydNoV7PpyZnPLlRh7uGctwIBsEtrpGbb93Vgcxaf_eXdjmihuUa1TmPCDcBRLW3sTz5jsLfvC0OaTQg9HsRXUOhJROWeI2yesgxmQAAlg4xutUJMx7aZyyEdHYpYQFh1eXZedgNXqKZgn90u0JykD__E3Sn76JE0u2YW2uyAIWyYVygtB0VG8pZFLmc23CK9VFARgnq2DVHf_-MFmixNQu6j8DImsmCW5azq8ZYO6gm0zbVVmHKVZGdQw9sXPjCKxRm3oTQUP1Em-rRX-uoPVW-6MApeitlxRLzbQAVP9C6UFzLnRKqkT3kCat0C0-XonRmeQU6hbsv6c92ltnkR1ccDQolNLue-WIwKd_lJUND42kteBEZDR8nrMty_QUjTA7Ox8X3nnBCqU_Y5IWrTFYHnjmF0rk9KwQfbNva4XddgdT4tCJnHwwfgiiKqxmZqJpx0PCfa9hU-_TYXf4jDb2Q4KwtaikiAC5GAO24-oIKAwyu2Dit02ejrmNlZK_-3ScYapB6hPMyqk8LDoKtAaQohBhyACWFzHdGaH-imh4jwBBIu4pQSUBw44TrpYyxIfHyJNpUGVWcfvEwlGMIcdDZWKZpR7TnY3PLQjVSnaTR29dt1xTfaKV-MaAgR7zYbmO4pUsOAplcb41nHnJO-akLyTOWHRQQo227xtxBM9yMT1nPQAJSPqL5fanq7ESGgVWgSyPV2m9I1eRLilin-vPQEZU8e-gQy6KgQMC61Qm7i8lxqnYbFrDAP05dnYnczg41ymHcZaDwlWKO8louflk9C6BFZXMrHdj3f0G8mrY-iWu2Tka7MC5r46MdzQnFHTXlh62jQwlXSRePdOZgafWasZ-Y8Pt5t25KmHufMGDUWMXqPgW5sKky-CViCD7Jj5e9kHZeyWGuQrdWFf8X7rispWMGX22fdmzmIRKRKVM3xo05ZCDi0Giy5qvvQ7zvzEwsGHlTkA00QeAQ-JK7Se9x06FKqG_7nCwBrGrDkRiGMQWUl80doOC_3NhH4wx69jF66Stws0DhpodpWnUI_P0DuQW3C4F0M287NINR2bgvSyhDhzsO7fk4beVKj-mYIAW1_ab5NfVp-ZxYwfieknc6FDqfnVDFHWngH-I8Aj3xp-3UcGrhQtO5rV7-xjCmICKx8djjKFCWPZZbwetWLkOXrwouinMZdOuJd8BndntzGm36shm2b6ct_SrUkKcBUt8AeqEE-voMSzWIoWRDdRp7QwxSeRB9I7--asijxr-9770_rSH0MgXxMiqk4U3SneArTJBXht5DAEwG3yhSB4b5Y3z0V_vEKYysdRk3b",
+      "status": null
+    },
+    {
+      "id": "msg_0afa52cec8b5dc27016ab6658db9e087d2acfef6ba2ed0b0c6",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:\nThe patient has combined generalized and focal epilepsy with generalized tonic-clonic seizures. Seizure onset was at 11 years of age. The epilepsy has a genetic etiology associated with a causative DEPDC5 variant, c.4396C>T. The epilepsy is drug responsive.\n\nCurrent Antiseizure Medications:\n- Levetiracetam\n- Topiramate\n\nSeizure Burden:\nCurrently seizure-free, with 0 seizures per month.\n\nAssessment:\nDrug-responsive combined generalized and focal epilepsy with generalized tonic-clonic seizures, associated with the DEPDC5 c.4396C>T variant. Current seizure burden is 0 per month.\n\nPlan:\n- Continue the current antiseizure medication regimen of levetiracetam and topiramate.\n- Continue monitoring seizure burden.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790338446.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 303,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 396,
+    "output_tokens_details": {
+      "reasoning_tokens": 221
+    },
+    "total_tokens": 699
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

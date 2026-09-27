@@ -1,0 +1,107 @@
+{
+  "id": "resp_0aa0e5f126adaa20016ab66f0236d487d2ae44c6d2cbdf747a",
+  "created_at": 1790340866.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0aa0e5f126adaa20016ab66f02e2f087d2983f61b5ab8ba63e",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtm8GR1QXs0RrLhU3MDYsjqMC2xkLsdu21uFCUqMpmG3v_c1oKuB3yN_jNaQG0_dapphAv29KRJ9fnmDnZcNdzhIATyj_VVLFAWSWQThOFCHx9LeNLzAfCt1DSgPbjIZ7Fo1TBVQJD7ve37lKUWZJ5vGOn_ptRDypz7-yZWs5oLEhiMgi-GIbGrzQ6Qf6BVr488djeOveA9-qGzvaIcn_W3YCGp8rqUiVNdnjv3XTjjst7JDRHeg8JJfrf9QSdd590DSRkMb3YznoaLh5RBr_BRI6EdDB5TNdt8kU08ms5XKAkhJiKSF7npxTH9f5S3D36_VFPyp-2X0YJYKvZbMv14gF-4i9d03j_nW-d2O52uEfcvJHnfoNa6OvmZoKWqK4iBqEOz_Sm8INDdN6zz1v9_03IELnzwi_7owmUiPamQZ5Ak2THIwduVV6mIbs4pO6U43U-URT6WTC3xPCL20tVdBIrzi0dIZnLeyf3A0cJkgqz_ZOhb4AvJVOBiopjTUclNQ3_8fdeMpPgxIS1uRG72CioC6ADi_6epGqF86vaVvm9jqtx9Mxxc4sv9WF94uiQyiT3KrLWObbGQ3NXxJNKfO1WCVGvwiExcVdOjkYzBF5IEul7MfJ2NE0h5FQG8ZG4Rl8eyxhAhEE0bgRtvS-N3u6AifNVQofVFfoKn_M7p1lH6KWw8FkkfwK6jMQjmgQNhE2e5kso4mtehevDdTBNYRZ_uu50qGkcrVRF-bG46TuGGvYO1OhNJO_WdRcsK2dTfq3Vrj9ZqoRMxkyN5FZM43BW433L0ISaklmx20KgogSixTui03LSrun54lIJoDk4f_aelZxBZOCoD-pOU1DAiYWxYmQjCn7S16Ww2E-Zu-TzrY1wl8PcPysmrBHLwfhIqSqfgRGDuJJOjXe3IVKeT4zhehYDIOMceAM6rWKiVuJtl_tPh1qHUkiKRjHrtsFu7OgxHIHLa9YMnc1JlJiajeQbcFgM2Wd6Qt_1eysLHM6u9nYsUZVPGVadLkR7azRuVFCpDpSGyv7bSZTGTAfsvhn9yq9ALBPpbuq25ghQbGFnPctvdGwJLFUsqUzm7nVOmemTepWsbLZZqEYrs8lh4yd_qnq3QvT8UoeF6qBH_FnKoTL7NO3rwtFRKQmDGAxPb3YTVFVpVrf8a0lCd07ZiC5d7jYPa-CCaV4l8s3rN42wSeULlWamse9yPXyxLPZtdPiPo5hKWHKpM1R2kpPGc3IZZtxMIA1DoLSNxvRLDdnWO0DVDmuuBkipDeMUz_b9ttXMpYDmz-3FsaYm8gGkXu3zPfnPfbtMNEMtmAWFpNp2bm1-PplnHna0lPJmeXICL8gGFjpjlvYtsd4vyvERWLxmoGoy7nqsge81SARA2CIZCdp1lQYYkWV4maLah3DyyOHubK_yY-LUsKYmJdfx2ga3SstjcWEEbsRSmrzo82_i9txQkioXIK6QnAlz8zsxC5SwAc4jDdn63f09Rlzmxjiq6AAIZYEqw_n9LDbPFBAqzv8chViOnbGUSv4USAuc9bSyEfLPYPIDAPX4aA6fQuJOMBQjUKqWLFT-9qg2KiBmR_ZByG4rKS6w9YeidUUHx4PPuW3Fn90wJ0C8O4bfOPJaUfLHUwOtg4JNp6e2coChshMJyMq4H0gVAU7J2dHwyEfBu3vrF7PyWw24BG1XaOMlNy8IwEnT6ph-orCSC9PrH08cQEDvmmotq2bgLomFXBBk5lmaO9O8NA-wRbN1fOt04osL7n9c_R90e4RoiDXujEjAyz2jRbe_nmbOVFHJnnihlNFynk10QigkhObd_YpaT7GRmwCQQJansGlDhyxLx0=",
+      "status": null
+    },
+    {
+      "id": "msg_0aa0e5f126adaa20016ab66f049bdc87d2b25e8c5d1d3ed304",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**History of Present Illness:**  \nThe patient has focal epilepsy with focal aware seizures beginning at age 31. The epilepsy has an immune etiology associated with GAD65 antibodies. Seizures are drug responsive.\n\n**Current Medication:**  \n- Topiramate, current antiseizure medication\n\n**Seizure Burden:**  \nApproximately 2 focal aware seizures per year.\n\n**Imaging:**  \nBrain MRI demonstrates nonspecific white matter changes.\n\n**Assessment:**  \nDrug-responsive focal epilepsy with focal aware seizures, attributed to GAD65-associated immune etiology.\n\n**Plan:**  \nContinue topiramate and monitor seizure frequency.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790340870.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 271,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 247,
+    "output_tokens_details": {
+      "reasoning_tokens": 110
+    },
+    "total_tokens": 518
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

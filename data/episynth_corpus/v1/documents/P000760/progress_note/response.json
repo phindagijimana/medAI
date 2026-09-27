@@ -1,0 +1,107 @@
+{
+  "id": "resp_0cb4cf151e446034016ab66fb8fd7c87d28f1d552f31c14773",
+  "created_at": 1790341049.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0cb4cf151e446034016ab66fb9a46887d28c1a45acdd9780d6",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtm-9_bVMoCFItaZjcq8i-4xACImHoieXs4x3GWCexa42yNpwDDSqaCfbzemJzDOXsFCg_EyAUKWIBuWFz-R02S5ArkumRGxlzV_Fzxm51plqc_eI1LCNcaUIhGkxahBiEM-KBKqXTt0XfnBaD0_NPXqoqT8qeGNNPo96ndflV6gIv1eia3oeS1PsRwzrhpQks4wUW1WnwgOiroZ7az1N15ZQYVnRlhAHazKq-zNbTrG7dUjUV12H6OInIaLdP2vjsT60P1wkK0by1HgqnRhm_ZEs_QBXY-RQc9JQZWECg-WqYdM4Hwjq_ca0-zuJcOosTbYAj0924zmXhLtWPxEevqR5Z45Xb-1m7nog923WN-xxxVCTj9KxriEDwPcRLt7q7WPHo-zulrXCBgWnk-X47dkhNWH3GAozJN6cuLTrW785iQjNzC0hHdvUqZOFX_QCEbIzNoRmcNNBaSkCYk5TbtAVuzRLITtKtmQO4H3qZUK4OIyVoLN9gZ8BWpnJpF-bfbaXvpaAmkC-mjs4ClCkZEAd9t14jrYBqpDPj2Nl5O24Tpfpb6bIyECCO8GuPoaY-w-VtqPkgjLv00HsWytBzmkSdj3Eo6pu5635N3XxXdfqUMgWIVUivNen7IZhxs88vYniuyHxMbVrRcMCEk3gEOHTP-USGlYA8MRCa3Tu8JO2dwXE-kTWIs-N_CW6g31UBYLMx6y43OFA0SYMkwZkidjJTW7pMfulLRcR-vqEs0IM3ULwdDwr0futU5bSsoVCmpE_hWFA_aH4tXfOpY3nx1ys9Pxmfk3f443CHtwf8OIeXUKRzFXISZz9aZPZLA0IUHbf2cRN9o92YUC3fC3qCcQXttNc6zMyPsHSuZXuMFY5-3TrfFTBCvKL3DErkRdaz8QHDgsua14UsjeSeLtYHWhz9gVdSkzETgRcJT5Q5cLQKcmCp_WthEEzIiErDsXHpV6thBHKmoEYfob2p0sv6-4ELZHR2pbcDtvWMdotQi4cFLhTtk36rNF_VMmN53i7uj2Gtmt2dsQPqNpN7emsVKBg6IgoLbL8n8yThQKX-qOuhIl5eiWy0nN7c6K-zQhao1d0HlmBhvtBtSOmQKhbydaB7Ps4Nq8P4paunzMol7vtNgyq3uGzxAJ4-MFL2zMg3S9zRc0vpKQlzLrWVWFaIWCiB9StZpYFKOAwdv4pIDYhIuQNHLkntJa_R_XImJUBqNv6w2DLtrJfTx7ujsUphfpZ0eri7FkhKhQwnJT0ia3mLUgTaAIRuxXw8nsLjF2jkZWHQ9ivUzX1EpNZP1ueyNt1l0c1NNCExm4tCws0YG7YUS7W8Mkyq5IldYNqJVTh0XyKyn3moDPeppHaN8kLg11gJ7uuESiAySGAIN-SmK2n26g_2Is9VwnWgpZnxzB9Ag6GWifJkXxmekmUPx4hfdO-sZijloknI0m6KznzjU3WLcnXkJuZejIbGQmEI86BjUjVb-X_i7i1Dt6JM011HEQJiRqJx0Qlm0wCkxJ5jlWJNnveFyOAO2BIEcC4qy6CzOEyijFu75JjTElWXML1j8Z1wdvRaqfKJH2PYINcSBycJLHOLpR-15MdpMWH50sKOmlDLYpvGybqYEGEA0CiMLVhmMKVLxTLSnvqjEZCv5fh0Fo-bLdkA1ObwG6I4aAeNbx2yTXraXGUUsAs9YRKLFFFJlBg1R7xX61l5JUA-_Yb4ZXgzzGXGKGT1nQ9oRILcselU7KNj5dlpY6VGI153rWP0rIiWTNyKdBKywdubPq75oNonRowalz9tJo8bQMWXd4hHsujKPlfDejjlp6lvkBuf_FjlUj3AaS3r4xFYQt5npp1djVjy9viuAljiIf41AH1tJiVwgRaS4u_Nd6rTQOGhX4tHTyvG0vcM_X-M19ELD8C-ERxTVtYZFR-OZuhKmGW0I8D5-Bv6zg4DGeRnfgYNtJSqetTilGYmnGWrE4wbR2JPQeGpGCNqQ5Zykg7v96a",
+      "status": null
+    },
+    {
+      "id": "msg_0cb4cf151e446034016ab66fbbc8c887d2aa27728241c53e3e",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nThe patient has generalized epilepsy with typical absence seizures, beginning at age 31. Etiology remains unknown. The epilepsy is drug responsive. MRI demonstrated an incidental lesion.\n\nCurrent Medications:\n- Lacosamide\n\nSeizure Burden:\nSeizure-free, with 0 seizures per month.\n\nAssessment:\nGeneralized epilepsy with typical absence seizures, currently seizure-free on lacosamide. Etiology is unknown. MRI shows an incidental lesion.\n\nPlan:\n- Continue lacosamide.\n- Continue clinical follow-up for seizure control.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790341053.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 257,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 242,
+    "output_tokens_details": {
+      "reasoning_tokens": 122
+    },
+    "total_tokens": 499
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

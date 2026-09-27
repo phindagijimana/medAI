@@ -1,0 +1,107 @@
+{
+  "id": "resp_09cceb0a37a22920016ab66613290c87d29eea4ef1eb2c1bc5",
+  "created_at": 1790338579.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_09cceb0a37a22920016ab666142fa887d2b5a929041553ccea",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmYavBNThfo0f-FDnPBnSsTxxyjv4w67N5PLuFJpsXXAHDbiEmf5Q06AplfRyp_JWxSaPnQLLN5JYtjESNdr8va6suc51MYa_2IKI39POyQ0bjDjx4w_RnWDm36EuY9wmgg1dCyZeRam4O5knVRLlvbWFy930PVGeQ24Ixvlvp7homYGh92f7Oq4NW1sAb9GzOqH1fSkj0WEyZdvV1timRjLOwz0sNBRr3W4cVIuvRPVT7ggfjjvgOliRJ6lpx94be2y8FTXx3wt2hsEeWCHEpM93AVzZOyiB0M30qUoQ_OOSKt6-skZnKCeE4RIYkNem6dIfqn-HkQYQ94v185a3gHWZGl9iSgVB-VeTB7FNIgmkIpL1qLXFpoI5SmkpbhLyYND35ZVEBxv16NjnL0QQbbqsm2B3Z4gxx5OeoV2sEeNpoHm3QLVltKn3Jp-Cp0xrEpjPOP2ddrss6nFrNN56uuRRUi7TGbLSQGiXaEGy0GS4nmeyANKQL2oHu6ooZf45TReEbwaK_E7UZ5vsgzarB0w_mXws_-B1xXIhJ5-L833E7G5ZkHWZjUpwu8Jsrtp_wYRAbFVn9MMUHcIPYXtuZJjGbQ6ELYH5x1MmrBirQj6q5us55ygczH9_ddwNuVmqDhRUuEAWe9_Z9yl4FiEMPl1ZIn1-hhAf6BTBcJIKh3qUpUr72fDpdMVW8zHRqnYUQuERdZ4Y2JBjrM4o9pdM6LiypsB0A8b5jcyEvHGANEMT_n9nKk-E2L2pYFoJmerAIKmwYkQZn80VXc7FoVQF2FEGbQZLLgLKZFH9wGI03hQg9mM7kYUISP8X2jg89OqPJsji3k6FgMVvTyL29tEkkI_RCXXpWplLwh1EI4Pf8aM0CeQwYsK5fFRfyj9Pog0-xEbDotbdyLGHFhyN1Ezqhq9FCcPts1ocwfoVgszl_Rk84GcSRUE3aVMigH5jbfWj212kud-SSV8YBng4Ho7u4AFAcRvxBNCIMT_R4aCdlvZ04aJvWYPqir1RSaEtdLFrr_gXmtAyPJ9_k9xHURX7kToRnqhkqaHfRTa_6Jj9UDoc32wJPjMSkCLoJtpvgY4gmo04yYWctOY-E_9Ucdg0CA37Xk89Ny5ieQGA_NTsbKmibi6sgZTQaVgMuph5LRT7uWCW6jrDofkn4z2P_zEZKq0VmH9d7OMcW5eNajtXXlGDeHYk_KP4a0HPLLVlcDe9hn8r9OgbBRpYxttIKdeoiDEKM746vcK4o8foDkheyZjtA3dL5r-cRobXM0B1j1Ryl7DS7vkriHXYUq-QB8cugOIaKyY8a5lBfv7IS5Dsb3bsIIt2XmtH7MRqL8KyrCHJKAY5CjzigkCUEsU_Mx8bOyEAnA2Uw_zGmSu_DisjLxLspM2Qsz7Tt0GTMtF-9_44UJJ0qTMs8-TSZmc68iZ2ZNRB3Rt0RAfadmmnvcZsjFzeTa70WneZf_u_Tx_pP590qZTkJdJ5UkbRWWj7i3KMct8h56tze4UW0oPnNR4CE9CL6wkF5jdzCdghAIzTsOjvA13peQywVNVGiJq5I9iZ1g1-HzBFqEblB0ZXwk-5YKo2sdVA-zvC5MiaauZ2e6h-MBhdSd5X66oBFLUSgA5AeatdF5AW_OASAiuKIilXstpYxckBTA1pcNUnOw8vYc8fwg7fTP6M7HKTASYeSHCFkugx58Fx_Blnn1P3GgdLV2pmGu13c9gvuFm6IGvQKVVeOJv9dwoJAahKGndiOjK7ZMfO8fdROWiDLqizOfym55hti8OzySB9qRvZm_LkAWTSg-G4NYG_ed1F9wjdCtBZJEmTnJq0zsBM8CcAtYbCPK4jjV2OWgsZISuHwD3ipopFZOk50slAElk8y84fjLPq4L_6sZcE-WfVsKEykEaDVeC67UCyCieM0pZzEFlAtRaXEETlPnq7gq3evpnU4sLbKQODiRCoatizGaMxl09YADF6WRCDMNPuXxFN-DTh6j_0wuiOpeQbqn7YA1mEoxeyF6UxGJhD5xUy9RIpOb33mynXeDkWMeJiOMlXLOWm6Mue1eM7Smi9L3x16I0EgVJtz2aiw1dz7AsV3f9VOxWNUORBUvNNpLBB7LSoETOlQeqXO3iVkoHpjJxaXT9m_38usEU4S7DHA-lgpviE6D7h_lgPkZ9KAJOKtmvIEC7Xl7J5TYVFJ9HZYQNfYRzJAUrOUpaA8OB_S_oojcy-ufUVtOLqJM0sNK0LLEvoYLx3WTqpkwg-2RCx2sDCAX9XUl6SS9ued3D80uVPKP5Nwye8zGTCdOF4E6Ip9pVeK7JWtZiNfMBcDpxiTNZBcCmstSAX3xzRERg8gv3utKUv0nTaEQARhLiz5u3276URfvWruUvgDJycDwiKYGSXWw7h5IlF0yB7tuqbrmbM_scbCpHY8JWf273faM1pLKr3VxQMpSxXvBAZXJS9MytAkfbKZCak6fpCSex-boC7gFGiHefTq_I9CQVPOK6usJRqUtMoJytgMhAzqsIdxIIzInnydtH8Qcbk5fnU_go1GShz7czQv9GabWTlsGRFZivwJCpYvxE1zyCCP5XwfoUBP5UJC1VFbviyuBakfqnxGjTHAIBAVAHmrTXDFHWBxMuGCCCFSOCi6L9DjXLOCFrPOiRdA6VkJ9ius7EcEYbNdMTKnMtHta4TyCHuWBeVp8I-9aPKkkhHV7QsAXlQfdVhYcg-yzO1loFWV84na6zpeKCLsAocK64NoXTbjUsYuMMmkwgw0GcbFYQ6cWKqqIHJDfFKO4qsnuBBZlzVdUpxj3Ojtj__E--ImFu0FbC2aGT7dLtwnAbXXxyti7aft3fAZ90OwEeeDIyu8G93P0XXxsbZ2aUuzNnkrU9gDcUtJZkzpNQYX_VjCKJ5vgjPj13LFitP46_5yd8IaLmiDGSkFkUGrPQbB5878CyXGDHWvOcrLTsGu2wT0G6qYipMWN5HTPTDRoZzKThEwG7zkAXX4YBUTyP9eUt2tiNOGVBLX_NUj09gY2BjanjOwM_pVZmcvICSes8-idy99DrwHhiopB7rlqPjEXPBgCVoiv4Q4Z-dapZKlYNpCnzlHBnZUWsY61-wZL20_4GN401ep2bKUDk7vPlRGGgs--R6CrkGi3KuHoSOmXnjUgPGM_SE-Hi3Zokx40OXDTYAfQWESI2uB7kDVgC_FpWYapzrpq047nt4sRVGlPiGBHCYIs3A8EahwVeNbT9LIDwlb6mlJaz5YEO-lEakvq88FFS0RaGlRK9KHvpLhG70pIfr3y9L6l3zzrS2W0hJuS4Kj2tY4vQqRVoMzMnboYMDNGyScDgli_aSL-0zr5NLc0uHMjE3jrsLZQWjWfj6nGBlQ==",
+      "status": null
+    },
+    {
+      "id": "msg_09cceb0a37a22920016ab666192e0087d29b112837c083ced7",
+      "content": [
+        {
+          "annotations": [],
+          "text": "TECHNIQUE  \nMultiplanar, multisequence MRI of the brain was performed. Clinical history: generalized epilepsy with generalized tonic-clonic seizures beginning at age 8, classified as structural and drug-resistant. The patient is currently seizure-free (0 seizures per month) on brivaracetam and carbamazepine.\n\nFINDINGS  \nEncephalomalacia is present.\n\nIMPRESSION  \nEncephalomalacia.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790338586.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 254,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 396,
+    "output_tokens_details": {
+      "reasoning_tokens": 305
+    },
+    "total_tokens": 650
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

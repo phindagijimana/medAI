@@ -1,0 +1,107 @@
+{
+  "id": "resp_0e13c3e3b80e56c4016ab66bb5220087d286748256cc98dbe5",
+  "created_at": 1790340021.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0e13c3e3b80e56c4016ab66bb5b3c087d28b71c10d8b37ebf2",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmu9DqWQmClPL_tTi7yByfBEokTzpLbXPCp8blIaucgFF3GgV8vWORpdq0qDrBFSUk885tZNcd-hzQITTcM_Y0ACn_EgJDUuqxnl8lsgJULYJUXj1oXpenPTMlntTfFRfQOk9kFd7dEHwDtVGqqgaEo4lJCLszr6BOr9AyyxbUqRXoUGW5PwmpLVNB5-UZehREneyT25Ik0D9le_v0gnL7OJNeExQslNFGMke4-hwyDtwy4QGSzK0B2BYZ8MFFnGie1X1vkWwKgoXuBCVxvGIro5UPPLmhWfCuu9WUJh4kKqrrZru3ZBjHcdz7FME9VOXYg94MY08OA48qFKy_ZujoLxUM1s_nJuO8of38AFAZqxQNbpdoQ6muLu090RL7y0W-7vEJf2QAfHMxdjMBBktWy9h0PYVNMPNyrUrI0WiV_tEKxSShKvMyo0XEp3EaLwvkhLZMOuH1cqmoFZcuwJqlGqi8H2kzJmJtiiWjwBEQVUf6hQTFChZERnUg_AGs4EHxPBLfjuSImQuWMVvJ1-3lf84zobEJ3Bet6s4h3JD97_rkDWtlYZkpwyGiVTNRld_CmF1yRdjre9aGhgfMyt1L63Lf8PjHrKmTz6IdLUdoTHhX9dIxSFyx4YUvex7KF6C6c8ac-VwOIn8cXWvFaTrN2CqKIc2jlInoA97JO60BdD0rzt0k63BgoCA170mUV7xQE3cy7PrxKMcw3kS7bWAYZAq_arNsunAcrjDuqPNZ5d9jm6D0YkknToOkv8dWolii_IAK_0AhDIa7vy_EVEJBhvDCOHaoFRFaId0JjWeeQPz2aXn9ELEPxVmXHwGPBH5dw5H1WKVKywaHVhnmRDTaKwK2VWYovGbCenugjJMaFTT4JjAz3_bHsUU5TMayd7xFnrVJGHv1NBBlUQ_13aahx82yuj68g5Q-ejZXslNKxwZtkoynp2khl991NX-AlmUwUcjpuLerKceomuEsDqXird7UxsRvJQKPKqRMBFJM1md4As70m8tJC5iszo-mGM1kxgSi5olaVIgAO_KhiOBmfBrrMhYZpp6ZXi6zaOiE2_1pY4tZiWmNyqrGBSy-_p06ENNoSg-Rc10ecbfycOcD3o8iQh4NyfDAZFqDF_g4vpYvkEo9JLrcUmW-7Bk8PGdNCI4EREa3euQ1a0TtN5DC_EcM3VoMv9IrS08wzG43DzwkOh6veityM22PsIMnNHQcgrxi6hGv56TeEpORLg1vQo-UaJAhXRZnaS3sMsYcMp_fPZS99J5WLLFtxiW_9Jw_8Y7opV87X1BXu51rIdSCzCLkbk4XSOVt8dnI3Miqfka1lS0oWVnCNokNw4D0T0kXHi4Bce2O5uFPVlyUgeCf7rlZ_bC-pq24JMscgjqH2fBkilHnhehIBNzC-SKPzirQyr48xsUqZ8KYXAxbx01vG8K7pvsElKk5wJYqKYADgu-yvko37mTaz5pCZQMDhJ978d3zHaEtPmlua1CC_BaUBfD0EhIq0YLZTaLZ_c7Ct0qNq2HiC7WvEgg7O2f55elWLxfeDlv7lfWUU_TIUGv2uF234qsNd6tx1A4EV5e8I1fgph443AdEngpiIYJqZjgPNkz2BhFJFbkwmertpBbGKge-Ehe5MAeZijmGT1lJUJTBDdturoiwKywh-aNz5xvcc8l-2rGocoE52AnS1RU7uc4vSxF48lSSyTwUBdaI-zMTHSN5jEU8rzCWVQAwBvzAZGqi1JOZbW8pIKKku4IemKsJrehDHPiyWnJz6W4L45gE95RXYbyyAg9GCkPyHn0XLrqfcxU17IU5V3w0czUqU4zGbF4Jpb-CZ2uVPAm5jDLOSlXp1mn5JHLSO7eRU3vTlyrjT1CY_YHLoiTJFrO8aFiAxY_QDkP5jiXSLdmMjYZ6wvdzgQZZP0dUrdnU1ipp6cEYKu_F7_BVz5eN6FzCDtKsAi8GQmK-N3IHbaxJrXGKXDakUm7ZyOJ0PphFiYfDnKPJBWafpWMPFYosF3nSPTlvCgEUAX1Mjl--q1XbHSVndxDqUMH-1qbN2SI17cTicyHpqGp88ZZC5wEjuACAIOUtVOp9no2fWYMW9LVvucqPhzCVS8MRJq45Qsbrswa6chM6YQxkagh7nXhg2OGBds_3SyLcKZmIwqeZ_EiXUpLEPIMh-oe5uarf_kLgyX69I7nQ-rz5wsyhJKR9n4Odm_ZQBqus5Fo5dms9XL68nlPH4-2Tb5Q4u3RvxHdnn9xgou1Kex4MXRVRBNb9Z88vICiEZn23Fz0_JLzqnEHTNNfl5_2wPOWDTQPqZvpdY0zFHerP5orKl7xlsg1zlSjwBcJDJqrC_SC8Llyn5LFptOmb24euW9ExNIXygE4I3Hf5bScSpQNnrfbp6QkT60pOkC0bN-CfK2KPRuOVtn4XFJbWJkmnb4iZW2cJVgXfLHDxYg7XBelQH5m1jvrtPWl_QCXl7pJVhLYyCKqEqUrWngLYcefcd4pko0vBrQy0H5HtcYf1wbhDMpVhVlKfAiqHZXPS_OJBdXrEcuG95doZmY-PX8cTM5l6mw061lfLMHaeRIadxNHnCQQ8jvndnuBaUgUYI2CuR4Y4FZLkWoe8wuN2fKxFFWC0yhHijv3R0Ycd85tLq1ssdBVNzS_VAlEAWIbXTeAd83Zq1oxj1ARf5XsWvdEXoLJ-vc4kOjGGGVDbzODOixf3KZz43ozePL6oILcz1WIuPMpDcShI6eMQ_kmIxvdKLGcDhHdaCgGAnX3zYwbn1TvmFublh2WGbz3orW0N010JWnn4AVAJBOHSnRVGiw-aW6W2MjrKXEX2FCYYEPeYhEUVUsr4d91r-piZ66Duofscx5FCfrPjKnzQvVKN_P_XZ9DoYA4E1l20_QIduf4SBN3IQrmGO5OCcWuGwdOpMeSJBDcSf2OfRkCu8KDs17o7fcJ6E4e7dtXVvAGVCzBFYKgZIhOrpp9W3gCmSyZF7mhbZY1a70u6wrpvZZrcUcz0tus6KUHsoDFqZmm9k2JULWDYsvhNCQi5QtmqP6UhYiw5URCf5ML1uu-vP3q1Con1H74g9XTabQ8Cgx5Rba-k5ZzvFNy-DZYZqVDyp7wPdfQB78DrEEXeDPNaUX453u6y2fNRzFXmOsg_XV9LXHt7q82nus3Nk6JA0QPZ_uWw==",
+      "status": null
+    },
+    {
+      "id": "msg_0e13c3e3b80e56c4016ab66bbb393087d28ce65e4bf1d3adbf",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:\nThe patient has unknown-onset tonic-clonic seizures that began at age 30. The epilepsy type remains unknown. Current seizure frequency is 5 seizures per month. The documented etiology is immune, associated with CASPR2 antibody. Seizures are drug responsive.\n\nCurrent Medication:\n- Carbamazepine, current antiseizure medication\n\nSeizure Burden:\n- Unknown-onset tonic-clonic seizures: 5 per month\n\nAssessment:\nUnknown epilepsy type with unknown-onset tonic-clonic seizures, beginning at age 30. Immune etiology associated with CASPR2 antibody. The epilepsy is drug responsive on carbamazepine.\n\nPlan:\n- Continue current carbamazepine.\n- Continue monitoring seizure frequency and treatment response.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790340029.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 265,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 485,
+    "output_tokens_details": {
+      "reasoning_tokens": 319
+    },
+    "total_tokens": 750
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

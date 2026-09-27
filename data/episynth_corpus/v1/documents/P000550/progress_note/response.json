@@ -1,0 +1,107 @@
+{
+  "id": "resp_0ef36336b2fa0efb016ab663754e5c87d289b1636c67e1721f",
+  "created_at": 1790337909.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0ef36336b2fa0efb016ab66375fd5487d2a485a4ca3d749677",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmN6nMCf7Y6VMFIXvs1bPHR8TAzFHayVVjaGBRE1UXfhA6rc0lqZyuRZlOGb4XXXoWDL8Rlo6z8DiAwr1CaxlEJIipvuYaeB3qA3bAKErzEA3JN49TpMaT7HXyMgS_cSJEfMCNK8Vw5tsycTv3nmIhflqzv9MvJs2gAFBk3cA18AxuKv-bLXVGrcPzn-ADruMl4GqYbremkFrorqzKzz80W3IxSSx_cYQjdOZfGEMRpVKuOC4BGE_ryFyNo-ViUlZnn_QaGzBlmq7o2NE-MJIk_wgaqOTfQ6YEd-sEV-j8D2UyVoPtpDfez1pcDt7Q81KqHPoOY6YXle7yT1MA6GDvFh8w-xzwCOe2IYQA3V22u_Sk7RZVziE3OZ_D1OFrpLLFaPipbXH5geQqFqMbxNxy01bdC6s6H511E3C0_-KSmBMiaospfZSgKY_KyFrE_WQWe9CZ0BnR1vBf_f1FFpGv1f2k8bIxDXaBNyJYAQeubeXQ11FHZBgPcgRQB6EOtnWnhIUBgtv8cI5O73Fhzz6eavu1w4Nr1zkjaffx7eSxX173kfOqUyXrk2wXjsEjjrGeZNFgEzaxatszjxlMLRVubVkeROD1lIrNa_7x3Kj2JeTS4TRlsRX3uFefnxnZvc5VQpWwuJxPr10zzGvn31SMOuRK5x04vPQpNfoeWdQy7qz3ytzc7KfdZSHSnQU3ykAgwrAE9kaNRHoytzY3PwTRJ97fE-z8Fzym5JNHbp0IsSCcnu3jSww7JVx1nKG0ZpwoZkNXQbsKu_Di32rEHBlKQLxBVRTMtes7EHboGn5_P53vaqNE-G2cMo3QUB-MSSN7HsoL0tq-Yv9YIJa_RqDav-HRE_t7VmuopgoWSv17kxXx5zsAJk0GP4dOp_2DyfD4WbRJnXc5oJr7czlWWUYUqpRWF2PHhf-i-vk17WnCLwKr7Q21d55f5ovoSZTIyrFQfGQ0C2DcyCYyBQRRdknEdFOzAp7oJ9ydRJ3Abg3lIwVxPoQTSKm85SNwWY5KgcbRXruKBvCBkMy97CZWMaa37L3Sj0XPpFt2tOdfSUjfRS81MHWpu-xtRK3vG4ZCH9GVpPfZJB1lPVZjM-jFiNtyUMjHOA8UhIYqnIpzN9FSbcIlFqw5OGYOUJXvlKzYCI5C8SJ3yrYApgO_rM6W6k0lAvZApMfOQzxnkG8rQGWMUAmYCvQvNle8BYcLGe7YjJLosJxggrvHEnD7S9WZiDpdMn9dCVWLJtXaWviswNgrcnIKq5Na5nIIpBb_JDEUrL6Usa2LIuom_PD_Ct2aoyqyhAHNLWV_jzG8hMf1QBjMq1JgMtY_N0Or4gTk0N8o5ETk4F_rVCdstfrkLy-uZN_HdoNORVuzb4rtt6tDAbLEU-309z71UWv8K2ocIr_ip4vO8N62q4r0alZF1xSpLswYrazVx-d70rzNlR7sl-6MszbMGHQdQub3E3np3JK2r656fnMlPy1r_h4TUSqra25VbtuPDlYCpIm-VFrbanuZzQsx3DMGhw93ZZKta3onsVB1f9fWEs6v13X_Rom_FTNv1rv019FsSybX5B-uWX2YYUj1h2_B5pl7If7i7ZzLXLpni43s0ucK2MclvL2yAvnmdxgd7jpw8IqdhfQpv15UTzOcafRWMr_TyvsmfVgOKGBd3D4y4ihNbTnxiUiGzP2IStU92XvvmFkgOlrIhWa3YaMr9uVTb_WM3OLeg4L_irOyMD0RNz3pWx4I9Hw_FvkH9CLqM__5NXlmlNoNdVwNQolsfgKbxLebvs2WaNYqkvORhEpAh30q6FMxZH0LCBUP7TxmDXn1wLDjzAd8vt9Wz0qSmwUdKY0cpmZIU2o78qCfGSQ0XInUsJcrAF45fJUa5iSg==",
+      "status": null
+    },
+    {
+      "id": "msg_0ef36336b2fa0efb016ab6637795d087d2b86d5f59a49f9f12",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\n**History of Present Illness:**  \nThe patient has epilepsy of unknown type with unknown-onset tonic-clonic seizures. Seizure onset occurred at age 38. The etiology is categorized as structural. Brain MRI was normal. The epilepsy is drug responsive.\n\n**Current Antiseizure Medications:**  \n- Lamotrigine  \n- Perampanel  \n\n**Seizure Burden:**  \nCurrently seizure-free, with 0 seizures per month.\n\n**Assessment:**  \nDrug-responsive epilepsy of unknown type, characterized by unknown-onset tonic-clonic seizures. Structural etiology category with normal MRI. The patient remains seizure-free on lamotrigine and perampanel.\n\n**Plan:**  \nContinue lamotrigine and perampanel without change. Continue monitoring seizure control.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790337914.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 274,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 278,
+    "output_tokens_details": {
+      "reasoning_tokens": 112
+    },
+    "total_tokens": 552
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

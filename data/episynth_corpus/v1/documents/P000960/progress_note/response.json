@@ -1,0 +1,107 @@
+{
+  "id": "resp_032db395c002b50b016ab67bf9e06087d2b26e2025ef105a33",
+  "created_at": 1790344185.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_032db395c002b50b016ab67bfb343487d2bd088a6dee7b6105",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtnv_EbdznlcsbpDWxqtDPBqlYS7y2tSdZ_qkdhvtBwgA7XCvRsF4hvOi7UPjnFYgZQ7G5Ug8oqDfLCl1POXjatVUQqNsyGP3cd01ZurEHu2rD2JzCjJHsQQECb3h7vBwUwwWl7v76QlqOn6ewNIUdMxyTsNV3hOktTiyUnhSt_2PFZdjGor09GJwDxbrr7flDx2yZP5EcxmrgNAaOllN-x3RZ2wT0bfVuuBrtGTOCts29_1yfJt3AwKI0O1hOU3uB7JS0FxZTxqGyRUKw0dywEjQ9kGWDiSES681rtzuyDVW6GdzgrXlgq25IRyT5mSN2MLEkpxcxN0ZCpjyDDjfOb_CaX9u1OFtEyS44tkrie1fUL-L0Q6NpP2AQgUdUmN0X5qqU5LGnJrockzNGUVnUUpVwks6ajf5yhliCh8K97C2y997xVSnAB7nQM1HdHmY3fF_nEN8NMNUaLxHGuB9ZwWKdWer81A3nQd69xjCyzTmBptf2vFJe2LHLK8N_7Hmm6TDa6eHD6iK3P1GWaldSQyG7dL-byLwbEYPTRPcq6OHOZai8VtLHGn4ttltZtNzBO-oZEGC-645ac1ScRzbVdNBbNzYp2e7ZA9-O50_8v38_06zqYFKcpdBgh2y2u-324_bhtfcKmwXrPkP9NPaEPEItrcvQlHdsCzpfMYYFs7YQWAn8f-fmoeFXST45kdnPSuKgMS2G--Lz1d2WMr6xR-ztBMOAit8QwMQYGU9a9_Z8x-23P7rYXW_5EUguuaqsVBmb-2kyw1komNi1zJ8YU7lxtCPGmrcbEkYLHnBZFZx8Hcu8GziH9oCgGO7R-8BglBNLfbrHuFKmYuuaXscVZWB7i8NdEzgfOKxYaHLS31Vhdka-MgSPEy1gurOUlBCeWkE20qu9KjXLzOI1Umhv6XzI6azn1knQ92h1bizzcl4rIQO7ZkgqTILn2s9U3KJBMKNSnOsY3uVj_82SXjEA-YEyY4_szhfVWZtARmJWSqSci5KSLfmDKU3Kc_kqBDH18Rm_T13QzBApi09QwWGGiuJAnBuzuT5WKAlMbP9OMPQmfevC5M8sGQynaPiq5pDV6lNC_bd3_VVhgoigzZzZGqwRisN-w2vgnauV_9CR062H9EAQ2HdB16kW7md13EwfmpiUJlIydPuN6bytzsL8rvo0EpIzMRWEs2QrP8uTzxZCHP5wUUZi5dBQcDbJSjIpmqxujipuU-4BEYuf40FWIEQ9QROGN2hYy_EwYusLfdZnEzDulDQm8Ny9fjdXtWYgt7QHGaqqcoRr-NB5YqVI4OhaFsE89eNUXNPpLv7YRENPeCkte0QpyhhDIU7B_wGmYnHZEy6XSvcHax-d8XcZUkrDFyrHnHW-qnlAHeCyS9H0ZXLcUjjBUCLvwwZgTTPgEov1aauFfg76oXiGnlpVL3IajsmvJaVHQqYJS353ui9bFGfUbwI44kkEztqhucNYMZi-9EwJjKEv0nWi8MJJodPBfzO0Sf5rA3UG1VONrLMm6b0vgcVNJeM42rxP7jimB5A9DtinRlEFBFnKg3WrmzkJ-5jEtWVV2c_DYiK_EMa0CH2JdDdAbFU8tJJ9UAh_QAd8ONIQ-TFV6pRgz3BAUrLfUmCRluA_5uA8kpVgyV-G6WApIwGxPQBFHUg4Id-jTjebCvhMHx5Ihpl6YdROIaw7VZ59ZF2OwWz2eEEVh6vSJA6Io1kYEEFosKa77blAeNh78gb1hcplsQf7FnK40UBsUDLmiEK_t-Ypwk-HNxGAQFd6h86DLrrrfaZ3t2369zIPUUzp-nD8VZaVjREH7Vu0g==",
+      "status": null
+    },
+    {
+      "id": "msg_032db395c002b50b016ab67bfd375087d288ae18649b281128",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nThe patient has focal epilepsy with focal-to-bilateral tonic-clonic seizures, beginning at 5 years of age. The epilepsy has a structural etiology, with MRI demonstrating focal cortical dysplasia. The epilepsy is drug responsive.\n\nCurrent Medication:\n- Brivaracetam\n\nSeizure Burden:\nCurrently seizure-free, with 0 seizures per month.\n\nAssessment:\nFocal epilepsy due to focal cortical dysplasia, characterized by focal-to-bilateral tonic-clonic seizures. Seizures are controlled with brivaracetam.\n\nPlan:\n- Continue brivaracetam.\n- Continue monitoring seizure control.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790344191.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 265,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 239,
+    "output_tokens_details": {
+      "reasoning_tokens": 108
+    },
+    "total_tokens": 504
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

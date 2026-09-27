@@ -1,0 +1,59 @@
+{
+  "run_id": "8ffdeb5ae5ce",
+  "started_at": "2026-09-25T11:21:19+00:00",
+  "finished_at": "2026-09-25T11:21:32+00:00",
+  "duration_s": 13.0,
+  "code_sha": "bf06c9b",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null
+  },
+  "source_doc_id": "pilot-gpt-5.6-luna-C1-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 752,
+  "raw_response": "{\n  \"seizure_frequency\": {\n    \"value\": \"twice_per_month\",\n    \"certainty\": \"confirmed\",\n    \"evidence_text\": \"Seizures are currently occurring approximately twice per month\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizure_type\": {\n    \"value\": \"focal\",\n    \"certainty\": \"probable\",\n    \"evidence_text\": \"The clinical history is consistent with focal epilepsy\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizure_characterization\": {\n    \"certainty\": \"incomplete\",\n    \"evidence_text\": \"Further characterization of seizure semiology, triggers, duration, recovery, and any associated impaired awareness or focal neurological symptoms should be documented at follow-up\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"management_plan\": {\n    \"recommendation\": \"continued_seizure_monitoring\",\n    \"certainty\": \"confirmed\",\n    \"evidence_text\": \"I recommend continued seizure monitoring with a diary, including dates, possible precipitants, symptoms, duration, and recovery\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"follow_up\": {\n    \"recommendation\": \"review_in_epilepsy_clinic\",\n    \"certainty\": \"confirmed\",\n    \"evidence_text\": \"Management should be reviewed in the epilepsy clinic, with attention to treatment adherence, safety counselling, and relevant investigations as clinically indicated\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 480,
+  "raw_valid": false,
+  "parse_error_raw": "6 validation errors for ClinicalLocalizationModule\nseizure_frequency\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'twice_per_mont...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'focal', 'certa...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_characterization\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'certainty': 'incomplete...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmanagement_plan\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'recommendation': 'conti...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfollow_up\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'recommendation': 'revie...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'seizure_frequency': {'v...ce_date': '2025-01-01'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C1-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

@@ -1,0 +1,59 @@
+{
+  "run_id": "0dc4d4d0a3b3",
+  "started_at": "2026-09-25T12:08:44+00:00",
+  "finished_at": "2026-09-25T12:08:47+00:00",
+  "duration_s": 3.0,
+  "code_sha": "76bdc39",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null
+  },
+  "source_doc_id": "pilot-gpt-5.6-sol-C3-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 110,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"combined\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"ILAE 2017\",\n    \"source_doc_id\": \"LET-01\",\n    \"source_doc_type\": \"correspondence\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 77,
+  "raw_valid": false,
+  "parse_error_raw": "2 validation errors for ClinicalLocalizationModule\nepilepsy_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'combined', 'ce...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'epilepsy_type': {'value...ce_date': '2025-01-01'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

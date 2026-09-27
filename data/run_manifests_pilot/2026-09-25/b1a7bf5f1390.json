@@ -1,0 +1,74 @@
+{
+  "run_id": "b1a7bf5f1390",
+  "started_at": "2026-09-25T12:14:30+00:00",
+  "finished_at": "2026-09-25T12:14:36+00:00",
+  "duration_s": 6.0,
+  "code_sha": "76bdc39",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null
+  },
+  "source_doc_id": "pilot-gpt-5.6-terra-C1-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 551,
+  "raw_response": "{\n  \"seizure_type\": \"focal\",\n  \"seizure_frequency\": \"approximately two seizures per month\",\n  \"seizure_diary\": \"recommended\",\n  \"seizure_burden\": \"ongoing\",\n  \"seizure_response\": \"under_assessment\",\n  \"ilae_2017\": \"yes\",\n  \"certainty\": \"definite\",\n  \"temporal_status\": \"current\",\n  \"evidence_text\": \"focal epilepsy, classified according to the ILAE 2017 terminology. They continue to experience focal seizures at an estimated frequency of approximately two seizures per month.\",\n  \"source_doc_id\": \"SYN-LET-01\",\n  \"source_doc_type\": \"follow_up_letter\",\n  \"source_date\": \"2025-01-01\"\n}",
+  "raw_response_tokens": 170,
+  "raw_valid": false,
+  "parse_error_raw": "14 validation errors for MedicationModule\nseizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value='focal', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_frequency\n  Extra inputs are not permitted [type=extra_forbidden, input_value='approximately two seizures per month', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_diary\n  Extra inputs are not permitted [type=extra_forbidden, input_value='recommended', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_burden\n  Extra inputs are not permitted [type=extra_forbidden, input_value='ongoing', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_response\n  Extra inputs are not permitted [type=extra_forbidden, input_value='under_assessment', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nilae_2017\n  Extra inputs are not permitted [type=extra_forbidden, input_value='yes', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncertainty\n  Extra inputs are not permitted [type=extra_forbidden, input_value='definite', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ntemporal_status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nevidence_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='focal epilepsy, classifi...two seizures per month.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsource_doc_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='SYN-LET-01', input_type=str]\n    For further inf",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-terra-C1-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-terra-C1-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M1"
+}

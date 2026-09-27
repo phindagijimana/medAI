@@ -1,0 +1,107 @@
+{
+  "id": "resp_0b76037b6d698703016ab67da16abc87d29a75e46a21b5223a",
+  "created_at": 1790344609.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0b76037b6d698703016ab67da2864887d28ac1bb31e6b9a535",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtn2p2YQKO3TrUzAvnDsvOgSqMX0nbK8m5ZXH8ymel8NyyJE4_j98FUNpdM9fWvBJ2-zFSTMFg6gSTRcnQgoOGQf4x04bXWWYtUIhHDV80Iq6H6OQ-gUr2CLP6xnJi921dseBY5xt66dIy4ZbTixpjcn3KKADbs7TWcp7TYswg2_bHCDg-sn956hP_KuTP08jVljCeh08xxgkEiM8lvFOM7MmHw6q3OSHfPXV2a-vp9xcK_prB7hidJ8T_hY7U9rSpZT6AixCx9OLEsSRxGz45DakeqkcKe8aQn3-nBywaHWtQ1ATvu5v6PercAEgwq3O3Af8bMTQtUG5m5WrLSvpK2ahxKEUXAH-K9nUw-FHWdGcQwCHN5lzMzgIMgUHHVY73Et-t2Z-aH9DZhRumqTO_jtcc7h5iR_xvazecKms6bDnt_beXXFGToZLf9TNmAeGo4wvU3lwS7c85Hg0mKSZeMQErnecbAZa2mW7-PI-xsHzaCJ1FO8OZRHjLO5EVJ1aQi4PjpIbuCdxRAHPGQJffSFcFT5PfOl7JHVL63fcYq86pAcGXBx9dYde-k1PFJnojS5XpRNWRU1ug62OZ9GOdAgIio9kxMfaXzo_KifbNuZX-oRPV0L6lUQOY1JqZE8nP_cC0tCsJOCEPLh3RLcVGZqafDQF9airiF8T2tqxTSt3DKrwP4yXbhqvLRHqnelmKJSTpKSj3aLRCqji40GgmIZ2UJQWxEx9VgfSIzA1MIIV4HsVKC6bHj-YYEPlpM3ybE_PRtt3b1Lem51FHNlafd53obwDAJ7V-AcT5GMlzIrzywNF8HOovt1Q08ivJiXNG8sfKRgO0mfJt2nqGE_EfAOqdt8GjlCvsSW8dIogwVQOsYHXMeeBksYm7-1uZzueCCtcILtoAstnpBw54n7kj-YfwT6R3Ht2fMAPGrRRhrtVk0fUvKasEQKywM_vgOuBSKa8zdrmpoh-QpsNFairX3GbLlExPdj1OYpNeTxZ-6K3TH3PL-rHYDuIBM377--IuLllnnKD-iUCnvp0OmI5Lna2OYAt2-M4MJjnnqtNKQAkykU6aLS0NmoINTk4lQEEpNpUCaCKfstTFF6giHWoYo7UG6jHLkt1Zcb-2AScUL8crzHp41x2pklk7jfxrwU-mUEOk7odT-WuzPr6fD8G-hNqCy1CmsSLb1V6QHRtkIVuMhXzupF2gQey6KOQ6Ff7oeRMl1dmDL_oCqNy0IiUBPuZBhP4WHX52Y6jdlj_m_Zbi9_vGMI-b8gN-A4zjNbt56qE8Xrisr5bbm8FraM0xuoHV21OiVbl8AlePAORX7nrQdMfpxn4dpMbnnFJLel_S5tgn1XigOuCBFp3yW4nkta4C9wERWmqEfZQMCDIQ94T93Ry94Y71wOLvDdt7Tw4LYBl6-737N4sEO_G7v1ho5gcCqya4ciUZAgwx75SYEYCmVRXU0RwOAQ30c97hwGAQfyNmPsw-z816_CjQaYXtJwPsSv-XvyzoBXP_7_EQbi_MM5ax3kquxFCQdFil7yV4y2GGAz3VWPiviCIzCnCIKV4ITrrQ6CMfIt87aM8YFAjelM9BjCKZjWyMzRDDOImnGJp0Fb5p9IWPdD3TWn_Ae0vn632eSAUKg3VLVoRkmx47ot1dygs6cjy3Tdmc1kRsGzPi_3i6Y_RUeWi_mLK_xX3y0nqDXkKdCpPA96MlSTUJ80i82TmgHlGCrwMSUUm_M8lZ9n_Q15T_m6AYReylrUEWXWYaOx7Pys-rS5r4qtq6Hh95MT5lYzzVOz8Pzjx7Skp-EOUUG7PCsmoBLElFHq9DaP_udAhvszRgU2N0NnBCN62bwEQUJ-IVPRF3pKocRaT4PDT9f8hwYAjixw5ACBtibphxjtkvZA1MNKaSl7afWJM-JJ-mwCEIi5vem82EWD-bWRcRrIpWkAuVFVqZmOAm2KaVW4WHxXDDoKicKVYPdPmfslURmfLC9YwM-q_wilkWuHKHCk_S1tCMSOMQ96znEStfaJNzwZQ34zVnZHjuIsoYIblXvUDDkdwdI0wQPEcgpeEk9orWBbXZC5H_0xo76_8sATnm1Znapfg9jismUH2mRZrHEujkM3D5QvI4_LP1CnW6CaOmyex4rCk-z0jSnzqmrmttD5YJQIWvyzu0qUDSP417KyIGu1I_MiLcpJ8HZrV9AlO3dR4wAauKJsY8qtxrG1hRIhIXHuhYnTLMfaf_CGiyf6bgsdZLKSCY0jroWiQBK7uTjxJwZJULwhB-3h_HrPBPiBmwsWG-W8XTTWlvZ7ZGq_L9F20DHsr7n3lf7d_DL5nVO3p09J6i4cpPvZ2_NP2obsPt93jg2m-hjyuJwK0dWrnVed4lM9dhu4KaETCNdwfINEXHPuryu2ayQBVlQRBQ0JWz6NPtxAx8c-hiyFv3o-0WcDnI5l7rBHVZLUm1Gvxsv_KGU7ZED__vfDY4jx3O7JrsZzHDq67tAsRJSYjz457k1VaLz8AEL3CSeJG40DrR9v-KigmOJSy4BKBvzGObznoXwKy3jdmnBUr7UISATPuJfWkcwVz2CF5E17sIWKvGLKJIv9pQNri_k9I60zZVRN_FFOdF9ZTLS9XWLo5H9Sg-I9vBSUVVQzeYBEUC-vIgxNptK6u4GDTOyjFTzTS93n-iFWPl9HVOeVLU31nQvOV7u1ICBl_MuIh_Ia4tdB-ppNyld1TPkHTA8e_vfQDFTnhqK3ayWDuL5HuoxyWfMZyZ7SFoLlLZb2FxIYiCMBXZNhPnmnSowKhn7p_F5xqn-CuddVZA-HSYPRjuxgLW3e7kuJsQjFPtv0Yih73xKm8P-4i8Ah7u85Z_4ViRfxgv_uhZJ2IWnRhMQ0rhkyUay1ULcTrbcQ1NGHZLFus3YJbArIcIGO_bgJb6wOUWj6i4SrBPPyB2g_guxW49YY9YgdCO4FYCL81nkqpB_7JcpSLw0rGXncSv1NdZnuHhSnJssP6Xj02bbbujDQxsJSDPZCUpQQ_cE3cY9TJeYqcl0mhejFpX1OwVc7d4znF8D9VLAGLdlPSJLxUP_hyKiIobrAb1EYg3efsh4SNZTbessc8UXse8286gs6_H2jxQ6_OTxxjQyAbCsCvAMfng6aMAjSGyWEO0w6l00JmjwoTOftVQFnMPCLM7vZm-Aps5OXHcS6D4r0i7K7m1i52QV5DnwKKCeEYmz3dkAU6wg2om6aCmVN778yjo56JOcTfu_67XOfJl5L3_dcP6iYWlEk2HVNKv6soAWmvvmQsUfVeozVqL2aNKWKaAa2cuA==",
+      "status": null
+    },
+    {
+      "id": "msg_0b76037b6d698703016ab67da7ba1887d281a397f2915e7db7",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Technique:**  \nMultiplanar, multisequence MRI of the brain performed using an epilepsy protocol.\n\n**Findings:**  \nHippocampal sclerosis is present.\n\nClinical history is focal epilepsy with focal-to-bilateral tonic-clonic seizures, onset at age 39, occurring approximately twice monthly. The epilepsy is categorized as structural and is drug responsive. Current antiseizure medications are zonisamide and carbamazepine.\n\n**Impression:**  \nHippocampal sclerosis.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790344617.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 250,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 419,
+    "output_tokens_details": {
+      "reasoning_tokens": 314
+    },
+    "total_tokens": 669
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

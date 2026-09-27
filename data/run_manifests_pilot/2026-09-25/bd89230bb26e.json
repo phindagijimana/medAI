@@ -1,0 +1,181 @@
+{
+  "run_id": "bd89230bb26e",
+  "started_at": "2026-09-25T11:42:24+00:00",
+  "finished_at": "2026-09-25T11:42:53+00:00",
+  "duration_s": 29.0,
+  "code_sha": "bf06c9b",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null
+  },
+  "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 46,
+  "raw_response": "\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[FocalMotorOnset]\",\n      \"type\": \"object\"\n    },\n    \"Evidence_FocalNonmotorOnset_\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/FocalNonmotorOnset\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[FocalNonmotorOnset]\",\n      \"type\": \"object\"\n    },\n    \"FocalMotorOnset\": {\n      \"description\": \"ILAE 2017 focal motor onset subtypes (1-4).\",\n      \"enum\": [\n        \"rolandic\",\n        \"frontal\",\n        \"parietal\",\n        \"temporal\",\n        \"other\",\n        \"unknown\"\n      ],\n      \"title\": \"FocalMotorOnset\",\n      \"type\": \"string\"\n    },\n    \"FocalNonmotorOnset\": {\n      \"description\": \"ILAE 2017 focal non-motor onset subtypes (A-E).\",\n      \"enum\": [\n        \"auras\",\n        \"gaze\",\n        \"smell\",\n        \"dyscognitive\",\n        \"other\",\n        \"unknown\"\n      ],\n      \"title\": \"FocalNonmotorOnset\",\n      \"type\": \"string\"\n    },\n    \"TemporalStatus\": {\n      \"description\": \"Temporal status of the evidence in the source document.\\n\\n* unspecified: no temporal information available\\n* past: evidence only in past, not current\\n* current: evidence present in current document\\n* new: evidence newly documented in this visit\",\n      \"",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: control character (\\u0000-\\u001F) found while parsing a string at line 2 column 0 [type=json_invalid, input_value='\"\\n            }\\n      ...n this visit\",\\n      \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "epilepsy_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "predominant_seizure_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_details_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-luna-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M2"
+}

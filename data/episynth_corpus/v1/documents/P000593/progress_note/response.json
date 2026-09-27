@@ -1,0 +1,107 @@
+{
+  "id": "resp_076a9e5724c1a400016ab665d466a887d2b0f1410cb64f4aa8",
+  "created_at": 1790338516.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_076a9e5724c1a400016ab665d5441087d2a1595265d9b048d9",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmXZXIQHrYLZMUXzIAGnybMK2m_UPmWDBVS3dHT_3BWuUOJOoOpUYE6FqKtNQfJ5HZkp6NCehO_GzsZSwcVzakqNsMyrkX_yiIj_w8FluY1g8-FE5Jn8JOEyDsaT07X6T_qjG0ROHQ431b0902RJPPJfaIRrXP9bSw-w-zKEMudO9l_ML6RJFf_U_2HO-w-EL4cH-KMmacqxCsSxvItm0r-fVDqoj910DwdUkOM0HJBYcTnmjlyItIG9vZ1MUzi2UEo3LoF4ew77Ltclf3vy7NHC6SmPiEv5jpBF74Ig3FalduwCtEbvRypdsUCBVGXCJ4Ei54ko-KQk-n22PzgtIdJpTvqkXhS9e_QWeuXIlt5DA3rq7lWn3-FhnovFvS4-7Vdvz35Fv1pWYxgMEdJ9D-Bu-uBZvXfqXZKK-qsq8iRRESvU4txcrt-_jF01ho19U2RwbbbiTOHxZ-wdxYGWdHCiOIrI3cLV0zU0bV9QFZzIkBerjhT7-MdmcvALSH7XDB43GdujUmuNrpePHowjeBBztbt89fT1zeVxbbjgqw7Vp4KU7V1D8DIsHEHDy-QWX6SVfbFpEIGtiCumbuPdF5xcC0SDMsb7_xcAkhpJJ5s9PyXK4z-15yY20btoU4DM_gi10Gy-2i11bbc0YJTUsy7ymEZQTZcIH1FNd_DZZLsStU1Np4ZabtZAnHy0e1Sh3ntzVz7-eBDWaEh64a5bRoLj5Ne0xMBDlzZAz6N9T35zucvaIYQ7vl4bYSHZC2UOorOKWQqT-F9Z5_OYEI-paebv4V11wejbiGxfo3tdQ488jJRYq-PJHff17lNOaNNFdgq3TqlhvAoq8mVWc4YfG_gjRgk3kIwV2-J96dYC1NU5PwVlkbfAePOggv8Pyitean4EDD2rJdl-bwetIy3i_7llm5TmB2kB7p2ruMbzRLthlsGhxRukOOw0VbdV6yNDJwfhkw_ah2LYSnNARQ7QS_8efADTLSAFiWLqMWUhzkYfEpz2YQll4ZRI_cW4oH1qBudVJPtOd1A4yQ4aHjVmPx_RSPUB0l1kE3wnxAI-PeWvHpgNgcCibm9ZK9lGNnATuvzbpyD2FY4PVdikOp5hPrOTVqFfrUoVMsfBIsdNaDwHsh2goFp6kNXHULT1SPSNWRBDIitO4vJ_FTYBD1dvUZYM7JEuXOHH1H9advmD0DpCcG_5tba6Yb_pRF2u2bdvD1aYocOVfyowQPd-Om_5ldbm-AmLDXoky8IHfWzMXcqCOh6R85OthIIUSqo6vlUdhGPIRnnWnIMIk6ehUWalG9D4H6DgkoNTMek6tarbWHvpdmsm-gGkrLnHg-8RWaZbv9aR0GjSWky5VclAEXALAUsSQ8PLnJA3OJFyC17s12JuvcwOJVn68zl7wTRbZRPDJ_8MC0FO6v675IMILR98R-CAOAtCVPqZDpnu1H6GEzlVn0ongcyrFWkaCUboarcR9JwsDH9Lp3si3N9yBB-1uthAcj7AYBfVAetefIGJotIHQeNexOsHL9InYSBnRCzlpNMUCBei6jKhAZZgL23bvDrp0cw-ZI5iWyxz_I25M6bE-NDQ6vkKwJtPj4Cq2DVnEtkrkcCp_zkAyWuVhuDFvmQeLmBWlWbcoQTxkXcEMK2Ptp0DCxwnvt8MFYUcSyRD7KmTq5CrW8m2QTVXiP7IeSPG9ZnhDFrs0SXuree-j_V67_8MNtbSG1LOIg5MP_sz_YLLqyVv2dU-T0PmAYBQD9eyfbtrcOQAU_y_mdyXilfXnd1CI-DSMcLI27gEpA6CFrmSCAvdAmUsQzNrHKeH6zIDZBCQVbXR5YrjIyfGysCzBBAtbuZMu5Y8kOvjF7fxfefMNMMQf9cztB7WPPETGvhOsJ_k80AgqX5CuWRsZjVDz1QKysyQSCLs0h0RR8ItTpas",
+      "status": null
+    },
+    {
+      "id": "msg_076a9e5724c1a400016ab665d70d0087d2bce1df60db9049bf",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**History of Present Illness:**  \nThe patient has focal epilepsy with focal aware seizures beginning at 9 years of age. The epilepsy has a metabolic etiology and is drug-responsive. Current seizure frequency is approximately four seizures per week. Brain MRI demonstrates nonspecific white matter changes.\n\n**Current Antiseizure Medication:**  \n- Perampanel\n\n**Seizure Burden:**  \nFocal aware seizures occurring approximately four times weekly.\n\n**Assessment:**  \n- Drug-responsive focal epilepsy with focal aware seizures  \n- Metabolic etiology  \n- Nonspecific white matter changes on MRI\n\n**Plan:**  \nContinue current perampanel therapy and monitor seizure frequency.\n\nSincerely,  \nEpilepsy Clinic",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790338521.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 251,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 273,
+    "output_tokens_details": {
+      "reasoning_tokens": 122
+    },
+    "total_tokens": 524
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

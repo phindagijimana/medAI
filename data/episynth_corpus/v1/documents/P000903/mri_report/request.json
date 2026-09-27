@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-sol",
+  "input": "You are rendering a synthetic brain MRI report for a research benchmark.\n\nPatient information (authorized clinical facts — express EVERY one of these accurately, use no other clinical content):\n\n  - EP_TYPE: focal\n  - SZ_TYPE: focal_impaired_awareness\n  - AGE_AT_ONSET_YEARS: 54\n  - SZ_FREQ: {\"quantity\": 2, \"unit\": \"month\"}\n  - ETIOLOGY_CATEGORY: immune\n  - ETIOLOGY_SPECIFICS: {\"causative_antibody\": \"gad65\"}\n  - DRE_STATUS: drug_resistant\n  - CURRENT_ASMS: [{\"generic_name\": \"levetiracetam\", \"status\": \"current\"}, {\"generic_name\": \"perampanel\", \"status\": \"current\"}, {\"generic_name\": \"oxcarbazepine\", \"status\": \"current\"}]\n  - MRI_FINDING: nonspecific_white_matter_changes\n\nWrite a single realistic radiology MRI brain report. Include Technique, Findings, and Impression sections. Address the reported MRI finding directly.\n\nRULES:\n- Express every authorized fact accurately, using standard neuroradiology language.\n- Do NOT invent additional imaging findings not authorized.\n- Do NOT invent diagnostic conclusions that go beyond what the MRI itself supports.\n- Do NOT include a patient name, DOB, or accession number.\n- Return only the document text.\n",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

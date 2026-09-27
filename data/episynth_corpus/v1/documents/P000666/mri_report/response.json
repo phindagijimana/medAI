@@ -1,0 +1,107 @@
+{
+  "id": "resp_04e7f04ccbd06277016ab669fdfe7c87d2a523c2e5dc16534a",
+  "created_at": 1790339582.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_04e7f04ccbd06277016ab669fe889487d2982189985c7db848",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmoEzdBuLrDZ7Pvana4Y5YbA0TsrbFyMRaT2PbWmNLejq88sYgS1qVngogZYSgvSubh9bH4dCTpkvHXKPMuaIbI3z2C_AKpax8vAD3zJubK8nvFISKUvaQKuc8Pu539DuEsT8aXz6jjpoUtjmP8oP2lNFcLa4imgbNblNnGg52-lQg7hxxA7x_-_FSYmMqnhlRKOUZL4YzQn_t-bN9MQ5pgU2iDSpVe23ariRS2RxighGLIYpmnSdZ9zEY0T6jIBhnU52ggskgHVnUJ_MOV0Uvh0T-srbJ5EAKqOT-FbJy_eZHPD83WYIAqjvc9b5W_i9DKN9nvKuDMFTFWSLEk9mQw7HWinZ52DeIN2t-fQ0Pr44Z2NGxAdMv6hiUP2fnIImcCR9ULzYx06D5G3D8vuzJXLA4W69clg8Ri2MWrDnMxGUTsFLY-_y7fXNmyS20pxsIKl78eRH8ja9cF8jptPBrXUABqDe7ykkyCfI4y4bVp1UgxKoPieD3r2B0xL4iAaPYInp-ribCB3NAZkMwZeyXhsANh9rDy8iSJDfyVixn5RDhDeWtwAavTmzsuS487LwUBQGUrCWhKqsOTSWSFeNX1A7xQDh3wEgBzMazWPoJQ5TpMyhU6ukSl7fQkVtVp7pmhgIAcbdR9a3uRG248id0QxV28HdGpJQSnwL0CMOpr9qqDA6l4SM9jbHga9eFRuEXjF0SUF3z6tj8SgOllNAAKrRCC8TEm__Vodb1XufQdBzQVnpbeX4clmJ5Blo6A5jRwZlRhuJC5YjkAaL94YMUu61Wl2SuAjavanPMTu8xLA_wg5ur-jI5iYddZdl46ilaQ79qYzO5j82RRj1MYbINEr2OiA1vwHzRIKxljUGK-Vhhb6KuA6qDR_TK1gI_AhZS6zE2B8f6dRwP7mDGazVFtwSzHyhUf2aBJHAk9mVAloyF9r-wRuYCTKP9tvS9wIpwPPjST44EcO_NvZPdi6cN8-NJ5k14hGhgrYd3_LDtnmjfNAwvLuIaJNnHH5L4nb0cjmpq2jvJfHnJZwE9UB5Hmdwe5aCf85eRd1te2RuUtHhxjM8WYAhN8XqBkDTEAwRhmPr_n-hXPskmAwi-jO4pojQB9RldbOn3QCplLLV38RLXDlvNp8mvVcnHZ-DykRqmPjs5tr34HGwyMSuzFMa77ZrO3-f79C1U-ejp4wOU-u7K6gMK7uawTML3fmVP_Cq50aAW3Vp9zhU8YVh0gVWjpwE2u3FTczbJfMw97rbE33rsst5mtrfrIFXF-VkVUCz22GeP3j_xsYhAxW2O1X6OTbFoWWUZyaLx_H8BYY1K4mNSIaC3v34EZq_LSYXiU5tsEAiTIc85WSyt9-xK9IZcgLMKVpWqQ_77Y7A6UTTdGu8GqAshNm65XBsCmoKPr-slQyHz-tDzQGQlX6YaIIfnl44infE0DCkyuOo-qhYS7lzqGj1QiIFvrPXmLyGbUBpGSbrRMnx5Uk1iCTU7woKFD4y2Q-XZ0vmAtt4dYLMXD5bJCvajzzbVcQPLKSSuVo5uC8N2gXDBQqtBcxTrQrwMovH-gp0LvRqGfzHXXNfp1yrsi6bfFoHrnNwg78NHM1qPlPNQMME8ML9dZSvEDG5HjinU7M7Y-5z73OzOC9TAEQg2TBSaOUBRBqOV6zfhG4EnkVvuE2vqwyjHwd6ELriBv3fV3NadX83OhAAlfXBmbfeNBsCXGCFLJzXKS8rAmvjNSqAhtss8YWpyP51xCTswCnvqPe9XbKzIATiCjBtlr3ABbK9P82OeQy9ujzKtQ6lEaNkKWOhBwh90Nlh-q6tnysBqgBgTZY6CUDz67Lco94zo11Bz5buAw262iBIoHUHORNIUZeQXEOGW-2X0C0bgxX9Nlr8dKHkUOVRY2pHbNLjlVIIbFbqDzAUZiF5JK2PsfeIwKsDnk8bdxLpu513XKGxLuJhqEa8fVyqzGz48mp4UM4tiyZlNTsh5pjyj22h7mhJ1XFaEsHfU5XMC-mQPObAQ36TdOO6ocCmvpQsNscjdalCwBtYHmTCdekf8QVl-a3MY1FC5pSGMsQobjbB5rZYJfQQg4LeiRuXhNV8crDL03VuPmxMZuF7ZDqJh2ATXpUyjWBDgYBCfdQ4PpyCjOYRav4IErhMyyuIsPfZkUYfZedcsnr8VM0lvqvUhR1YbXOrbDQR7ELHlTR6Z2jsOCVKEDc3JxDPSp6Xuz5vje2WYSyl_I6G_Yg5ZWxE4vDS24E3ZWxLy1rYGXkTsPe6-w1UE5PW60d1JsI5kk8k0LEE9MdrEfllO8KEV95K8c1Wgh3lTk9uiUYhfVDPA4OsY4AussFbrKit3BWxEEZhhhr_06umEblJ0zgMwI8Dfgg_daWCf6-sz6bN3aX8jS8_7YbadhkrZZPCkegewAs9CuDgxGflV5aefjinK7_shTQjATyI6o5VF_iHrlvclpqOufFkHJwyg2Qw4oHUZqgwiPe4dJ_N1tUef_cvMzBnK1YEyPgfc_fYsPCPCHbfTOZL7OLgQXheZkDa42DYH0dAthja4OmWr4boIL0bhvcKN21sU-nXGggei5V7rLYVIdMUgvTv8z1A-juAbEAik3B1e4Kat6cOeImWMCrCUZnZpLNjY8aGuwCR-_kuB_MifCE_oc7qEk5ko3ZhWG6Rff9FA3DNzt2FieN9ucVnZdkF1R7DyOc7HKO0aUt_nYgBos7AT_ttat_M1TWAgHet3uzioQSrkqeACKSZTiVW1weYR4XvzKVw8OYWoyiXobAH-TTFgfhljFSOQa-ATX4D9PRMxK3f9wWu-udeY8nhfAAUJ84L6wNWgHSbBZcT0Dd2IP2vuwYa3pgH8QhxRjwKZblFnkVdTB2ligZd6SWsIdnguEtx2HlR3YBsWF6Atd_9BezeXLX8F3estrHz4JAIptxgvLE48rjK3C2YvwJtE4D3Ny_iIiDwwolvHDVUB_uZIojl5SGb8D_P1_PzG8Oln6pPtQ571m5tyJS_P7s-WoN2QgnpGO3qKAfHihZwUzBiyXK8-424IIarq1Ri6bLw7AuABc_iuk1HYF415R2GJkuXh1IDloN",
+      "status": null
+    },
+    {
+      "id": "msg_04e7f04ccbd06277016ab66a03891887d2bad4b5ff4af930ab",
+      "content": [
+        {
+          "annotations": [],
+          "text": "CLINICAL HISTORY: Drug-resistant epilepsy of structural etiology, type not further classified. Unknown-onset tonic-clonic seizures beginning at age 8 years, occurring approximately 4 times per week. Current antiseizure medications include topiramate, zonisamide, lacosamide, and perampanel.\n\nTECHNIQUE: Multiplanar, multisequence MRI of the brain was performed.\n\nFINDINGS: Encephalomalacia is present.\n\nIMPRESSION: Encephalomalacia.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790339588.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 276,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 385,
+    "output_tokens_details": {
+      "reasoning_tokens": 277
+    },
+    "total_tokens": 661
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

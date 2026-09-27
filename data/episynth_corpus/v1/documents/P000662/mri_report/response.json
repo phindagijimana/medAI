@@ -1,0 +1,107 @@
+{
+  "id": "resp_09342bcc7b0415b0016ab669c0629087d2acc1188aecf8cda7",
+  "created_at": 1790339520.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_09342bcc7b0415b0016ab669c1364c87d28972941876723f3b",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqtmnKtahcsNlpiEwLg7YgdMH7VZQTcWUTfk7sWyxz5OXInfLSdEC8w-7oGPHjuCfNCocNgMYWqcYxMvv7UHWz5sldKI-BftwrNW-RfNSDEePDryuBScfM2cbb4W8zXoSRAjNUq3WlGiQxT_fshoIfw9cq3lGlDQCiAOFU3jp9izQM5FLaHrxRHAL1p6EqNG6G6sG3EEQeOd-gJCrJhtKCzHP_PkSn0GiqZYp8vCU-mP1wVGn2E5ooleXBQESsMkvWTscYXyrAQiLbVi9a9-f_7-izZR9azNnOenjmI2fWU_VUrerrdoEeuUXNnDgGf6o5rnLhBpzzZ7TYl77FBO9my1YSMh72cxEUh2_43Lg7Wzk5ipbWD6jNI99wQ7uVd64gdTVrpduuYmSQFmiY-i-F-rGZ6sgGnAEzIPVoh-ca7QR5qkgpKGqN27LYWqxydAmqp9mtTEaFzzeipyXHf9XeQBV8QYhVYjY7BG5_zkIddfp5jWbMxWYXbSg2X4oWPJCbMxtWR1KM8jxJezUDBFS-JdOidzc9sXD_AkQQNrRSNz0DEuJ4vRnIqPFfzmum-XuxqG3wauzgGKVWqbtY2q6Q57PRIms7Epo1t-r4zwJm9oPxV82CBbe3TnrjZmzuSmyKoD0zV1e3lHwdi3jOgipAlBicY9eMFJcEd0pK9ZWdc5emfwCErcUaKhG2sL2rb6P--CcXn34pTBgIp2f4W1NS_yCvDMDdDnOxifbj-C6FhmmuXzvm3SqYLYERoJJw5-ovj713HhqL5QW2203yLw2ypOg1qglcsKy1I92nC80avgFv-QvhmIVIg0VVWYK7Tt5Lxrly3o03dX0ZzUz4JKG7i18e7-0E1w0nOOZTuP1gxXJVTDlO0XneFImAslReA5Kqflq1Rn9RJQiefaCny5wrHdPNR2TrbJGd1pgwjXCAortN0-vUOlK28SRBH0beXWOY0Bxr9x1etlP743gMUHTFcWGgemBJuHiKZPGRbwKh7dEB9-blFmx6xiws4lB-GSVYhDz2OvQsPUOF5ROupZoal9OJj99icJd_jlNf6tKTCGFy7gtvxCZRMnZPU0vEbdB4TW8M9yK6y4eEcHktB4qEI_RXEBdVwQX8FxMPdIWTGtgLxpmCA4Wgsk7hKCGNsNrfk7D0VZFw8_5JHtsDCTYri_DslHFj-0GLEQ3O5YsYB4BvE9hE7d9eyNEb3yW2nPn67y2EEEtiPgCyL5q2jJ0_D7Nt8CHd8hjL0oPvfZ9kDxzEs5eixTYpjTZJsL5At0bTFhOd-v233QLCR-o8eIvzo7Zdw_aEiMXmEQZ9JuOIuHdsuMNUObcOQy_Dcrtz81LCMtE2Ory8o_qD3Tn20tqDyqYkeQ9Y3MuV7nMpqg1QZk0de87zOsophscRWO3Dn_ZExVwbQ4oxvPQyVYVLhppKy01PAJ9557J3tF665tREM4ifPy3skMaLhRqwt0HPrdbBwBBRW9ZtD99Ww6JxqaBHKJNeoHGV2bd2pqz7hX2KpjsDb4f_8dTD8VuZVJyFQlUTdoO1kioAs53Vj2EvGiByNj7n52uGc2v0kACFy-KSxy_G2rON55kL_q5tY0xAqTnncfI_nG_QJC-8UYQns_HxJjHVsjRJgOPkiRozTDFXrcca34wTCPCSiwxaW-iFUqTSmYKsS3nUP_MIID-LuM9x8zbFT2j5qNms-V1lcZ7zldKgL664S3xcYXEa6UXyhjSjXNBAOl-KJImMgsVIErkSZL1ES88QzO0vzQOk4VU1oVJ8TzwPAu5KP8x0rHDwrK0cs5c-fib2sfr-vgRispL7NQiT1IVBB62wqu5jSsYMJ-kZ0F_zatR3YGRWdESofIVwyKTQj9xZnWAxwePBHKcmC7gUKwZaVDm0u7wzVkXmiMGGu4B62nEr1rM2hls_luApA51aK10wmrNdi8jwrk3HRFcymhs-8cfSmZ7IFcwzK2wd2kE67chWcJ7OATVx43gIhSKPtFG_0gfBkpd_mVody_tiU3ExytyvYv8rm4LemI6X6dym3b-uHmX-bDPaSaopaoqMNtuvdFdJL4YeE3JXngOanKWyCeuWAVELZJFVOTxqUndTjvHDfnqGsgU9uE4b2PJiuRVOntd5YuldPMWyRR6ybDlk3OUt6B0jc1DQPC0loeoiM8wqltbTQoav3gDgrWE_yErB3ctG1fbeWGjfIW0RkHJJusCbj0UDqdDNlBvoda47Relzr75bplgwFLm0VoyYqe4U_XUk4WsiccLowBdPDn8kiaomYoD2WCbRg2yCpKv0JBKOv99PCTM1B3LCQ7gG9xK4wCJ7573nkDcc4hC35rtI1GJc4Ly3NP7uR-SaOGRWKYgScPmSGxOv94WWfoKR38z7ryjWtum1GyxEoF3V3pAmXk6yuCAdiuiGmquoHL0tnVAnitw-oQx_XlOHKp1OKpZsYo-5JHeoA8_coxPELTQsJsOu2eTNsjNHAmeTTj_hN9Z-VOXcTi18-5ZcN9yMRuFG1DxfpwxZZ2Yvb_eCW1h3r7yvL_KaT9EKnaRxan06qfh-yBdeay6--YAW0XnOPZIXVH-bGIu40wAaGpY24UqlyQFoPH1pN1hLYFoDneaBqsSzIU3RgTLAWK_cT7B8fqyNKHECUN22dlG8bvMudW-Sc99wJzcoOzeSsporSBuIOcX8_PAmwZYBGp_wJmuMRdVI8Ousdfe8QsTw1Yvvch0UbaWvYZAEweeB0wljiHburrYTjAjH7HmKYNwNoUPfFsNcq3bBIIXO3Lh-iKJACrvtIVmEXEbnYMC0efUUZwg7iURjww2yO1y91CaUJyT8AdNcEX-p07qaIlXswMQQzAvgCpvPQSrUHBMaVN2B9pycNP-NERHSAAG9tvZ-IdUtUp7t3x6KpMA8oLNvvq7v_DIiTGHfXN0rXdINFUdpemK0APu0n7Sx-FEUVAzz6jxorhwzoufRhiG8ct4FSaBjmMp_72ApM9t7ykjgZdrk1KgA31ehXbtlqE1-yjPTPbG6KJEVzdVOHrC-Cma0igcNR4pKn83xDEuSXhSfVwfrAOxrmWPrsh_nW0HdbiCbq-SUxms3KZvlngu4itanRy_7n2AYupbwKvKIgRUXdvh9QiRvD1LugbrhOgdS3TEiFWV-mEHq0Ki2gD-tBsyE3j7ukEBbMEOVwv3KgiIyLE3x9-p26biv0IJriV1zWabn534fEn-lSibO8LOu0k2pGIsom5v7igBcmW3FG2qwcotZrFtl5VUjHrvIdlLJBNhJm0xfuaElsTBtjv-ZyEX2QLS_Cl7AFDLpFf4OgyTa8tbT3crX0Iw6k8HLX6K88QEeEAexEdBQkRYcR0Gmt2pjk2yGFpaG2A5iDEYcUcSKVREcyNrIYy1N9yRsT6o6a5oAg8C09pNt6BblT6jKEpVC12-Syysb8Y3K7edvesYUS-atKmVjVjw5UYRA_NCOPPo1J6XfgI23xvjSnJcyQ8KsNRFVvcLU5U87cey0XLEICk6cDynaunwzUsi53nBOb32RXtWp6x5SmOA6d7kpxFdNptk6Iuw60sCN3nx1InsHv2zU19RsgNWXM4TIFvlhDMPB2YAmvF2HxgSxoKu8Wc-7VsPpyBDvVd0w_y5HYf61lSraJx90kvkcaZ15BwaT1VowSWYLteX6_KPeJXk9HMCLwVHKWzrsT--V0lSgGOtqdy58cckH_jKggN1x9crWJKSVLyLhJyCFHHL0255VxsA0j8rQpiSqLVUSMS0QMti6BtjlvFDGYktyfcmBaYqMZjDjMOoD-y-QgrahXHNzY9X6K3xIgKSGTFPfcKqNkEaSyY8gXFPXRTKghMwL9G-nz8SOjGsXGUWtQJ2OIJ50vHTWKzUr6D9ySlTGiDomfBlvNxbaZpMbRrtjgm-54rYUx52_tapsF2Be9Kc7Rw76FvgpLMvd0nzYVQjKl2tOa8G3vP41Y1xdjP16_r76E3Qc065p2_QDy6MPZEm4_7kojIYDRWF7A81Ef1IQwMtJZg9gquO8FsmtM8RJ27nfIZWhTqHRLJeESpoy_lOQnlv4MweYb3nExFM_m-81nzMF9uo4vrneSXPW6ylOyHFpwVVD81Je95M_-xuKeYKfmW-GGs-sJTmVrJmSSRe9_xXwoX3jMPHXOTk=",
+      "status": null
+    },
+    {
+      "id": "msg_09342bcc7b0415b0016ab669c864c887d2aaf67fc96c099b92",
+      "content": [
+        {
+          "annotations": [],
+          "text": "CLINICAL HISTORY: Generalized epilepsy with typical absence seizures, onset at age 23. Structural etiology; drug-responsive and currently seizure-free (0 seizures per month) on zonisamide and perampanel.\n\nTECHNIQUE: Multiplanar, multisequence MRI of the brain performed using an epilepsy protocol.\n\nFINDINGS: Subtle cortical-subcortical abnormality characterized by blurring of the gray-white matter junction and adjacent subcortical T2/FLAIR signal alteration, demonstrating an imaging pattern compatible with mild malformation of cortical development with oligodendroglial hyperplasia in epilepsy (MOGHE).\n\nIMPRESSION: MRI features compatible with MOGHE.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790339530.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 248,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 594,
+    "output_tokens_details": {
+      "reasoning_tokens": 448
+    },
+    "total_tokens": 842
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}
