@@ -82,8 +82,9 @@ split (validation set: 122 pairs).
   gradients flow only from target-JSON positions (QLoRA / Han-2021
   convention).
 - **Hardware:** NVIDIA L40S 24 GB slice, single GPU.
-- **Wall-clock:** [TBD — set at R4c completion] min.
-- **Best checkpoint:** epoch [TBD], validation loss [TBD].
+- **Wall-clock:** 82.1 min (4,928 s train_runtime).
+- **Best checkpoint:** epoch 3, validation loss 0.00952 (per-epoch
+  trajectory 0.01008 → 0.00979 → **0.00952** → 0.00958 → 0.01030).
 - **Seed:** 0.
 
 ---

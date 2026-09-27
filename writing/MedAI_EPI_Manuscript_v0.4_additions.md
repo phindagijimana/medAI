@@ -46,9 +46,13 @@ The loss was computed on the target JSON tokens only —
 prompt-position labels were masked to `-100` so gradient signal was
 target-conditional. Training ran up to 5 epochs with validation-loss
 early stopping (patience 2 epochs) and `load_best_model_at_end`. Total
-wall-clock time was [TBD] min on a single NVIDIA L40S 24 GB slice.
-The best checkpoint (epoch [TBD], validation loss [TBD]) was retained
-as the released adapter.
+wall-clock time was 82.1 min on a single NVIDIA L40S 24 GB slice
+(SLURM job 143696, 4,928 s train_runtime).
+The best checkpoint (epoch 3, validation loss 0.00952) was retained
+as the released adapter; the per-epoch validation-loss trajectory
+was 0.01008 → 0.00979 → **0.00952** → 0.00958 → 0.01030 (early-stopping
+would have fired at patience 2 as epoch-5 val loss rose from the
+epoch-3 minimum).
 
 **Loss masking (prompt-token exclusion).** For every training pair,
 the input sequence to the model was the concatenation
