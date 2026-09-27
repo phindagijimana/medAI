@@ -47,7 +47,8 @@ fi
 export PYTHONNOUSERSITE=1
 
 if command -v nvidia-smi >/dev/null 2>&1; then
-    nvidia-smi | head -15
+    # `| head` under pipefail can trip SIGPIPE; use --query for a clean exit.
+    nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv || true
 fi
 
 cd "$APP_HOME"
