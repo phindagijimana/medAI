@@ -58,17 +58,11 @@ data/rag_cache/
 !README.md
 !DEPLOYMENT.md
 !SELF_HOSTING.md
-!docs/SCHEMA_*.md
-!docs/TRIPOD_*.md
-!docs/FONFERKO_*.md
-!docs/CORPUS_*.md
-!docs/PROTOCOL_*.md
-!docs/REVIEWER_*.md
+!RELEASE_NOTES.md
+!docs/*.md
 !paper_doc/*.md
 !eval/results/*.md
 !writing/*.md
-!docs/APP_*.md
-!docs/FUTURE_*.md
 
 # Environment (never commit — may contain API keys / secrets)
 .env
