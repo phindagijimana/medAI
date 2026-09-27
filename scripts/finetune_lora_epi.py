@@ -215,8 +215,12 @@ def main():
     ap.add_argument("--lr", type=float, default=3e-4)
     ap.add_argument("--rank", type=int, default=16)
     ap.add_argument("--alpha", type=int, default=32)
-    ap.add_argument("--max-length", type=int, default=4096)
+    ap.add_argument("--max-length", type=int, default=2048,
+                    help="Max sequence length. Reduced from 4096 to fit 8B "
+                         "model in 24 GB with gradient checkpointing.")
     ap.add_argument("--grad-accum", type=int, default=8)
+    ap.add_argument("--no-grad-ckpt", action="store_true",
+                    help="Disable gradient checkpointing (default: on, saves ~5-10 GB VRAM).")
     ap.add_argument("--val-frac", type=float, default=0.1,
                     help="Fraction of PATIENTS held out for validation (0 disables).")
     ap.add_argument("--val-seed", type=int, default=0)
@@ -283,6 +287,19 @@ def main():
         torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
         trust_remote_code=True,
     )
+    # Gradient checkpointing is required to fit 8B + LoRA + activations in a
+    # single L40S 24 GB slice. It recomputes activations on the backward pass,
+    # roughly halving memory at ~20-30% wall-clock cost.
+    if not args.no_grad_ckpt and torch.cuda.is_available():
+        base.gradient_checkpointing_enable()
+        # PEFT needs input embeddings to require grad when the base is frozen
+        # under gradient checkpointing; otherwise no gradient reaches adapters.
+        base.enable_input_require_grads()
+        # Disable KV cache — incompatible with gradient checkpointing.
+        if hasattr(base, "config"):
+            base.config.use_cache = False
+        logger.info("Gradient checkpointing: ON")
+
     target_modules = (
         ["q_proj", "k_proj", "v_proj", "o_proj"]
         if args.attn_only else

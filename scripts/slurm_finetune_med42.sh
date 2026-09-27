@@ -35,6 +35,8 @@ module load python 2>/dev/null || module load python/3.10 2>/dev/null || echo "p
 module load cuda   2>/dev/null || module load cuda/12.2  2>/dev/null || echo "cuda module not loadable"
 
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
+# Reduce CUDA fragmentation; helpful for the 8B model in a 24 GB slice.
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 _SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$(pwd)}"
 if [ -f "$_SUBMIT_DIR/.env" ]; then
     set -a; . "$_SUBMIT_DIR/.env"; set +a
