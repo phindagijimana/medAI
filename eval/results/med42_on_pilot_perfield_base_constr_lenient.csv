@@ -1,0 +1,11 @@
+variant,field,n,hits,misses,mismatches,precision,recall,f1
+constr,clinical_seizure.age_at_onset_years,180,180,0,0,1.0,1.0,1.0
+constr,clinical_seizure.epilepsy_type,180,60,120,0,1.0,0.333,0.5
+constr,clinical_seizure.etiology_category,180,180,0,0,1.0,1.0,1.0
+constr,clinical_seizure.predominant_seizure_type,180,180,0,0,1.0,1.0,1.0
+constr,clinical_seizure.seizure_frequency,120,120,0,0,1.0,1.0,1.0
+constr,clinical_seizure.seizure_frequency.count_max,60,0,60,0,0.0,0.0,0.0
+constr,clinical_seizure.seizure_frequency.count_min,60,0,60,0,0.0,0.0,0.0
+constr,clinical_seizure.seizure_frequency.period,60,0,60,0,0.0,0.0,0.0
+constr,eeg.background,180,131,43,6,0.956,0.728,0.826
+constr,medication.drug_resistance_status,180,172,0,8,0.956,0.956,0.956

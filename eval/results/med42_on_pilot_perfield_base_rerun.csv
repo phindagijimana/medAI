@@ -1,0 +1,6 @@
+variant,field,n,hits,misses,mismatches,precision,recall,f1
+base,clinical_seizure.epilepsy_type,120,0,120,0,0.0,0.0,0.0
+base,clinical_seizure.seizure_frequency.count_max,60,0,60,0,0.0,0.0,0.0
+base,clinical_seizure.seizure_frequency.count_min,60,0,60,0,0.0,0.0,0.0
+base,clinical_seizure.seizure_frequency.period,60,0,60,0,0.0,0.0,0.0
+base,eeg.background,60,9,50,1,0.9,0.15,0.257
