@@ -118,9 +118,16 @@ def _run_variant(name: str, use_lora: bool, constrained: bool, adapter_dir: Path
         constrained=constrained,
     )
 
+    # When LoRA is loaded, prepend "PATIENT_ID: <pid>" to the note so the
+    # inference prompt matches the augmentation-trained adapter's contract
+    # (see scripts/finetune_lora_epi.py::_augment_pair for the training side).
+    use_id_aug = use_lora
+
     n_ok = n_err = 0
     for i, (arm, cond, pid, text_path) in enumerate(docs, 1):
         text = text_path.read_text(encoding="utf-8")
+        if use_id_aug:
+            text = f"PATIENT_ID: {pid}\n\n{text}"
         doc_type = _doc_type_for(pid)
         doc = DocumentMetadata(
             doc_id=f"pilot-{name}-{arm}-{cond}-{pid}",

@@ -97,9 +97,23 @@ def main():
     print(f"Docs to process: {len(docs)}")
     arms = ("M0", "M1", "M2")
 
+    # When a LoRA adapter is loaded, prepend "PATIENT_ID: <pid>" to the
+    # note text. This mirrors the fine-tune-time ID augmentation (see
+    # scripts/finetune_lora_epi.py::_augment_pair): the adapter was trained
+    # to copy this token from the prompt into every ID field of the target,
+    # so at inference we hand it the ACTUAL pilot pid (P001..P006) and
+    # expect it to emit that pid into document.doc_id, document.patient_id,
+    # and every Evidence.source_doc_id. Base-model runs stay unchanged.
+    use_id_aug = bool(os.environ.get("MEDAI_LORA_ADAPTER_DIR"))
+    if use_id_aug:
+        print("LoRA adapter detected → prepending PATIENT_ID line to each note "
+              "(inference contract for the v2 augmentation-trained adapter).")
+
     n_ok = n_err = 0
     for i, (arm, cond, pid, text_path) in enumerate(docs, 1):
         text = text_path.read_text(encoding="utf-8")
+        if use_id_aug:
+            text = f"PATIENT_ID: {pid}\n\n{text}"
         doc_type = _doc_type_for(pid)
         doc = DocumentMetadata(
             doc_id=f"pilot-{arm}-{cond}-{pid}",
