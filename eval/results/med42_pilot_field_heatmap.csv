@@ -1,0 +1,6 @@
+field,M0_hit,M0_total,M0_hit_pct,M1_hit,M1_total,M1_hit_pct,M2_hit,M2_total,M2_hit_pct
+clinical_seizure.epilepsy_type,0,40,0.0,0,40,0.0,0,40,0.0
+clinical_seizure.seizure_frequency.count_max,0,20,0.0,0,20,0.0,0,20,0.0
+clinical_seizure.seizure_frequency.count_min,0,20,0.0,0,20,0.0,0,20,0.0
+clinical_seizure.seizure_frequency.period,0,20,0.0,0,20,0.0,0,20,0.0
+eeg.background,0,20,0.0,9,20,45.0,0,20,0.0

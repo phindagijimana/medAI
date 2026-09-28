@@ -1,0 +1,4 @@
+corpus,n_docs,char_q1,char_median,char_q3,wtok_q1,wtok_median,wtok_q3,ltok_q1,ltok_median,ltok_q3
+pilot,60,47,103.5,638,6,12.5,78,19,40.0,180
+synth-v1,1000,526,631.0,710,66,80.0,90,163,190.0,215
+fonferko-fs,200,886,1183.0,1659,141,199.5,278,280,368.5,486
