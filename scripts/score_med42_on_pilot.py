@@ -62,23 +62,35 @@ def _parse_doc_id(doc_id: str):
     return arm, cond, pid
 
 
-def _target_required(target: dict, include_null: bool = False):
+def _target_required(target: dict, include_null: bool = False,
+                     allowed_fields: set[str] | None = None):
     """Return list of (field_path, expected, evidence_text) tuples.
 
     When include_null=True (lenient scoring), we ALSO emit tuples for
     Evidence entries where the target says value=None + certainty=not_documented.
     A HIT for those requires the model to also emit value=None with
     certainty=not_documented (correct absence prediction).
+
+    When allowed_fields is not None, any field_path not in it is skipped
+    entirely (neither strict nor lenient row emitted). Used by
+    --only-populated-fields to restrict scoring to fields where at least
+    one pilot target has a non-null value across the corpus.
     """
     reqs = []
 
+    def _allowed(fp: str) -> bool:
+        return allowed_fields is None or fp in allowed_fields
+
     def _add(module, field, ev):
         if not isinstance(ev, dict): return
+        fp = f"{module}.{field}"
+        if not _allowed(fp):
+            return
         val = ev.get("value")
         if val is not None:
-            reqs.append((f"{module}.{field}", val, ev.get("evidence_text")))
+            reqs.append((fp, val, ev.get("evidence_text")))
         elif include_null and ev.get("certainty") == "not_documented":
-            reqs.append((f"{module}.{field}", None, None))
+            reqs.append((fp, None, None))
 
     cs = target.get("clinical_seizure") or {}
     _add("clinical_seizure", "epilepsy_type",             cs.get("epilepsy_type"))
@@ -90,14 +102,14 @@ def _target_required(target: dict, include_null: bool = False):
     if isinstance(sf_ev, dict):
         sf_val = sf_ev.get("value")
         if sf_val is not None:
-            reqs.append(("clinical_seizure.seizure_frequency.period",    sf_val.get("period"),
-                         sf_ev.get("evidence_text")))
-            reqs.append(("clinical_seizure.seizure_frequency.count_min", sf_val.get("count_min"),
-                         sf_ev.get("evidence_text")))
-            reqs.append(("clinical_seizure.seizure_frequency.count_max", sf_val.get("count_max"),
-                         sf_ev.get("evidence_text")))
+            for sub in ("period", "count_min", "count_max"):
+                fp = f"clinical_seizure.seizure_frequency.{sub}"
+                if _allowed(fp):
+                    reqs.append((fp, sf_val.get(sub), sf_ev.get("evidence_text")))
         elif include_null and sf_ev.get("certainty") == "not_documented":
-            reqs.append(("clinical_seizure.seizure_frequency", None, None))
+            fp = "clinical_seizure.seizure_frequency"
+            if _allowed(fp):
+                reqs.append((fp, None, None))
 
     med = target.get("medication") or {}
     _add("medication", "drug_resistance_status", med.get("drug_resistance_status"))
@@ -107,8 +119,9 @@ def _target_required(target: dict, include_null: bool = False):
         first_asm = asms[0]
         val = first_asm.get("value")
         if isinstance(val, dict) and val.get("generic_name"):
-            reqs.append(("medication.current_asms[0].generic_name",
-                         val.get("generic_name"), first_asm.get("evidence_text")))
+            fp = "medication.current_asms[0].generic_name"
+            if _allowed(fp):
+                reqs.append((fp, val.get("generic_name"), first_asm.get("evidence_text")))
 
     eeg = target.get("eeg") or {}
     _add("eeg", "background", eeg.get("background"))
@@ -119,7 +132,9 @@ def _target_required(target: dict, include_null: bool = False):
     if isinstance(findings, list) and findings and isinstance(findings[0], dict):
         first = findings[0]
         if first.get("value") is not None:
-            reqs.append(("mri.findings[0]", first.get("value"), first.get("evidence_text")))
+            fp = "mri.findings[0]"
+            if _allowed(fp):
+                reqs.append((fp, first.get("value"), first.get("evidence_text")))
 
     return reqs
 
@@ -174,6 +189,36 @@ def _score_field(field_path, expected, extracted):
     except Exception:
         hit = False
     return ("HIT" if hit else "VALUE_MISMATCH"), got_val
+
+
+def _compute_populated_fields() -> set[str]:
+    """Return the set of field_paths whose value is non-null in at least
+    one pilot target under TARGETS_DIR/<pid>/target_phenotype.json.
+
+    Used by --only-populated-fields to prune scoring of the ~6 fields whose
+    pilot coverage is 0% (see docs/DATA_QUALITY_AUDIT.md §B), which produce
+    only noise and inflate the required-field count.
+
+    We call _target_required(target, include_null=False, allowed_fields=None)
+    per pilot target: the reqs list from that call is precisely the set of
+    fields with a real non-null value in that target. Union across targets.
+    """
+    populated: set[str] = set()
+    if not TARGETS_DIR.exists():
+        return populated
+    for pid_dir in sorted(TARGETS_DIR.iterdir()):
+        tp = pid_dir / "target_phenotype.json"
+        if not tp.exists():
+            continue
+        try:
+            target = json.loads(tp.read_text())
+        except Exception:
+            continue
+        for field_path, _expected, _ev in _target_required(
+            target, include_null=False, allowed_fields=None,
+        ):
+            populated.add(field_path)
+    return populated
 
 
 def _load_all_manifests_by_key(manifests_dir: Path):
@@ -237,6 +282,12 @@ def main():
     ap.add_argument("--lenient", action="store_true",
                     help="Lenient scoring: correctly-emitted "
                          "not_documented Evidence counts as HIT.")
+    ap.add_argument("--only-populated-fields", action="store_true",
+                    help="Restrict scoring to fields where at least ONE "
+                         "pilot target has a real non-null value. Fields "
+                         "with 0%% populated coverage across the pilot are "
+                         "excluded (they produce only noise; see "
+                         "docs/DATA_QUALITY_AUDIT.md §B).")
     args = ap.parse_args()
 
     manifests_dir = Path(args.manifests_dir)
@@ -248,6 +299,14 @@ def main():
 
     manifests = _load_all_manifests_by_key(manifests_dir)
     print(f"Manifests loaded: {len(manifests)} from {manifests_dir}")
+
+    allowed_fields: set[str] | None = None
+    if args.only_populated_fields:
+        allowed_fields = _compute_populated_fields()
+        print(f"--only-populated-fields: restricting to "
+              f"{len(allowed_fields)} field(s) with real non-null pilot targets:")
+        for fp in sorted(allowed_fields):
+            print(f"    {fp}")
 
     per_doc_rows = []
     # aggregate: arm_key → counters
@@ -270,7 +329,9 @@ def main():
         if not target_path.exists():
             continue
         target = json.loads(target_path.read_text())
-        reqs = _target_required(target, include_null=args.lenient)
+        reqs = _target_required(
+            target, include_null=args.lenient, allowed_fields=allowed_fields,
+        )
 
         # Merge module dicts for lookup
         combined = {}
