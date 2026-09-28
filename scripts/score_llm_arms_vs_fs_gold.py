@@ -326,6 +326,20 @@ SCORED_FIELDS = [
 ]
 
 
+def _held_out_pids() -> set[str]:
+    """Return the 40 F-S patient IDs reserved as held-out test.
+
+    Single source of truth: scripts/finetune_lora_epi.py::_fs_pairs_train_test.
+    If the split contract changes there, this reflects it automatically.
+    """
+    # Late import — the finetune script has heavier deps than this scorer
+    # otherwise imports, so we pay the cost only when the flag is set.
+    sys.path.insert(0, str(REPO))
+    from scripts.finetune_lora_epi import _fs_pairs_train_test  # noqa: WPS433
+    _train, test_pids = _fs_pairs_train_test(seed=0)
+    return set(test_pids)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Score LLM arms on F-S native gold.")
     ap.add_argument(
@@ -336,10 +350,30 @@ def main():
         "--suffix", default="",
         help="Suffix for output filenames (e.g. 'gpt_fs' or 'deepseek_fs').",
     )
+    ap.add_argument(
+        "--patient-subset", default=None,
+        help="Comma-separated F-S pids (e.g. 'EA0161,EA0162,...') to restrict "
+             "scoring to. Overrides --held-out-only if both are set.",
+    )
+    ap.add_argument(
+        "--held-out-only", action="store_true",
+        help="Score only the 40 held-out test pids from "
+             "_fs_pairs_train_test(seed=0). Use with manifests from "
+             "run_med42_on_fs_test.py to compute genuine test-set F1.",
+    )
     args = ap.parse_args()
     manifests_root = Path(args.manifests_dir) if args.manifests_dir else MANIFESTS
     if not manifests_root.exists():
         raise SystemExit(f"Manifests directory does not exist: {manifests_root}")
+
+    subset: set[str] | None = None
+    if args.patient_subset:
+        subset = {p.strip() for p in args.patient_subset.split(",") if p.strip()}
+        print(f"--patient-subset: restricting scoring to {len(subset)} pid(s).")
+    elif args.held_out_only:
+        subset = _held_out_pids()
+        print(f"--held-out-only: restricting scoring to {len(subset)} "
+              f"held-out F-S pid(s).")
 
     suffix = ("_" + args.suffix) if args.suffix else ""
 
@@ -366,7 +400,12 @@ def main():
 
     # Prepare per-arm scores across all letters that have F-S gold
     fs_doc_ids = sorted([f.stem for f in FS_GOLD_DIR.glob("*.json")])
-    print(f"F-S gold letters available: {len(fs_doc_ids)}")
+    if subset is not None:
+        fs_doc_ids = [d for d in fs_doc_ids if d in subset]
+        print(f"F-S gold letters after subset filter: {len(fs_doc_ids)} "
+              f"(of {len(subset)} requested)")
+    else:
+        print(f"F-S gold letters available: {len(fs_doc_ids)}")
 
     all_gold = {d: _load_fs_gold_for_doc(d) for d in fs_doc_ids}
 
