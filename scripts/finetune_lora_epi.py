@@ -6,12 +6,13 @@ the same script trains either model on any of the training sources.
 
 Training data:
   (rendered_document, target_phenotype.json) pairs from:
-    - pilot    : data/episynth_pilot/run_001/    (60 pairs)
-    - synth-v1 : data/episynth_corpus/v1/        (up to 1000 pairs)
-    - fs       : data/fs_corpus/                 (200 real F-S clinic letters)
-    - synth+fs : synth-v1 + fs                   (1200, pilot HELD OUT)  ← Option B
-    - both     : pilot + synth-v1                (1060)
-    - all      : pilot + synth-v1 + fs           (1260)
+    - pilot      : data/episynth_pilot/run_001/    (60 pairs)
+    - synth-v1   : data/episynth_corpus/v1/        (up to 1000 pairs)
+    - fs         : data/fs_corpus/                 (200 real F-S clinic letters)
+    - synth+fs   : synth-v1 + fs                   (1200, pilot HELD OUT)  ← Option B
+    - synth+fs80 : synth-v1 + first 160 F-S pts    (1160, last 40 F-S HELD OUT for test)
+    - both       : pilot + synth-v1                (1060)
+    - all        : pilot + synth-v1 + fs           (1260)
 
 Adapter output:
     checkpoints/{base_model_slug}_lora_epi/
@@ -215,15 +216,60 @@ def _fs_pairs() -> list[tuple[str, str, str]]:
     return triples
 
 
+def _fs_pairs_train_test(
+    seed: int = 0, n_test: int = 40,
+) -> tuple[list[tuple[str, str, str]], list[str]]:
+    """Patient-level 80/20 split of the 200-doc F-S corpus.
+
+    Returns (train_triples, test_pids). Deterministic: patient IDs are
+    sorted lexicographically first (EA0001..EA0200), then the LAST n_test
+    (default 40) are held out as the test set. `seed` is currently unused
+    but is retained so a future shuffle path remains reproducible.
+
+    Any F-S patient whose pid is in test_pids contributes no training
+    triple. The 40 held-out pids are what scripts/run_med42_on_fs_test.py
+    consumes at inference time and what score_llm_arms_vs_fs_gold.py
+    --held-out-only scores against.
+    """
+    # Gather all triples once, then group by patient_id root.
+    all_triples = _fs_pairs()
+    by_pid: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
+    for pid_key, note, target in all_triples:
+        pid_root = pid_key.split("/")[0]
+        by_pid[pid_root].append((pid_key, note, target))
+
+    pids_sorted = sorted(by_pid.keys())
+    if n_test <= 0 or n_test >= len(pids_sorted):
+        raise ValueError(
+            f"n_test={n_test} invalid for corpus of {len(pids_sorted)} F-S patients"
+        )
+    test_pids = pids_sorted[-n_test:]
+    train_pids = pids_sorted[:-n_test]
+
+    train_triples: list[tuple[str, str, str]] = []
+    for pid in train_pids:
+        train_triples.extend(by_pid[pid])
+    return train_triples, test_pids
+
+
 def _collect_triples(corpus: str) -> list[tuple[str, str, str]]:
-    """Return (pid_key, note, target_json) triples for the requested corpus."""
+    """Return (pid_key, note, target_json) triples for the requested corpus.
+
+    corpus=synth+fs80 is the F-S 80/20 held-out variant: it combines
+    synth-v1 with the first 160 F-S patients (sorted) as training, and
+    reserves EA0161..EA0200 for held-out test evaluation (accessed via
+    _fs_pairs_train_test → test_pids, consumed by run_med42_on_fs_test.py).
+    """
     triples: list[tuple[str, str, str]] = []
     if corpus in ("pilot", "both", "all"):
         triples.extend(_pilot_pairs())
-    if corpus in ("synth-v1", "both", "synth+fs", "all"):
+    if corpus in ("synth-v1", "both", "synth+fs", "synth+fs80", "all"):
         triples.extend(_synth_pairs())
     if corpus in ("fs", "synth+fs", "all"):
         triples.extend(_fs_pairs())
+    if corpus == "synth+fs80":
+        train_triples, _test_pids = _fs_pairs_train_test(seed=0)
+        triples.extend(train_triples)
     return triples
 
 
@@ -336,7 +382,8 @@ def main():
     ap.add_argument("--base-model", default="med42",
                     help="med42 | deepseek | any HF model id")
     ap.add_argument("--corpus", default="pilot",
-                    choices=("pilot", "synth-v1", "fs", "synth+fs", "both", "all"))
+                    choices=("pilot", "synth-v1", "fs", "synth+fs",
+                             "synth+fs80", "both", "all"))
     ap.add_argument("--output-dir", default=None,
                     help="Adapter output dir (default: checkpoints/{slug}_lora_epi)")
     ap.add_argument("--epochs", type=int, default=5)
