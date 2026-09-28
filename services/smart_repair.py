@@ -287,6 +287,26 @@ def try_smart_repair(
     if not isinstance(parsed, dict):
         return None, parsed, "parsed_not_a_dict"
 
+    # Step 1b: if the model emitted a FULL EpilepsyPhenotype (with
+    # schema_version / document / clinical_seizure / medication / eeg / mri
+    # keys at the top level), unwrap to the requested inner module.
+    # This is common with LoRA-tuned models trained on full-phenotype targets.
+    _MODULE_KEY_BY_CLS = {
+        "ClinicalSeizureModule": "clinical_seizure",
+        "MedicationModule":      "medication",
+        "EegModule":             "eeg",
+        "MriModule":             "mri",
+        "IntegratedPhenotypeModule": "integrated_phenotype",
+    }
+    _looks_wrapped = (
+        "schema_version" in parsed
+        or "document" in parsed
+        or any(k in parsed for k in _MODULE_KEY_BY_CLS.values())
+    )
+    _target_key = _MODULE_KEY_BY_CLS.get(module_cls.__name__)
+    if _looks_wrapped and _target_key and isinstance(parsed.get(_target_key), dict):
+        parsed = parsed[_target_key]
+
     # Step 2: smart repair
     repaired = smart_repair_module(parsed, module_cls, doc)
 
