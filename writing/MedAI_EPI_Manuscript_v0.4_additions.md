@@ -9,6 +9,44 @@ completes.
 
 ---
 
+## §Materials and methods → §Evaluation (new subsection; insert before §Fine-tuning)
+
+### Evaluation corpora and held-out design
+
+We evaluate MedAI-EPI on two clinical-note corpora, each with distinct
+epistemic role and gold provenance:
+
+1. **F-S 40-letter held-out test set — PRIMARY evaluation.**
+   The 40 patient IDs `EA0161..EA0200` (sorted-lexicographic tail of
+   the 200-letter Fonferko-Shadrach 2024 corpus, split 80/20 at
+   patient level by `scripts/finetune_lora_epi.py::_fs_pairs_train_test(seed=0)`)
+   are held out from all fine-tuning. Scoring is against the F-S
+   clinician-adjudicated gold (Zenodo 8356494) on the 8 fields for
+   which F-S provides annotations; see `docs/FONFERKO_GOLD_SCOPE.md`.
+   This is the primary result set for the M4 fine-tuned arm.
+
+2. **60-doc EpiSynth pilot corpus — methodology check.**
+   The pilot corpus retains its role as a scoring-pipeline sanity
+   check but is not the primary result: the data-quality audit in
+   `docs/DATA_QUALITY_AUDIT.md` documents that of the 8 fields we
+   train the model to emit, only 3 have any non-null pilot-target
+   coverage (`clinical_seizure.epilepsy_type` at 4/6 patients,
+   `.seizure_frequency` at 2/6, `eeg.background` at 2/6). The other
+   5 fields are 100% not-documented in pilot targets, so any pilot
+   scoring that counts them (as the original 8-field metric did)
+   is dominated by absence-agreement rather than extraction skill.
+   Pilot results reported in this paper use the
+   `--only-populated-fields` scorer restriction so the number
+   quantifies extraction on fields the corpus can actually test.
+
+Both corpora are treated as clinical-note surface strings; no F-S or
+pilot patient's target JSON is fed to the model at inference time.
+The M4 fine-tune sees synthetic corpus v1 (1000 pairs) plus the first
+160 F-S patients `EA0001..EA0160` as its 1160-pair training set;
+neither corpus overlaps the F-S test tail.
+
+---
+
 ## §Materials and methods → new subsection (insert after §System arms, before §Extraction pipeline)
 
 ### Fine-tuning: MedAI-EPI-tuned Med42
@@ -166,29 +204,32 @@ validated Evidence[T] targets are at `data/episynth_corpus/v1/targets/`.
 
 ## §Results → new subsection (insert after §Med42-8B under M0, M1, and M2 prompting)
 
-### Fine-tuned Med42-8B (M4) and constrained-decoding ablation
+### Fine-tuned Med42-8B (M4) and constrained-decoding ablation — PRIMARY (F-S 40-letter held-out test)
 
 We ran the four Med42 extraction arms — base M0, few-shot M1,
-schema-injected M2, and fine-tuned M4 — each in two variants
-(unconstrained decoding and lm-format-enforcer schema-constrained
-decoding) on the 60-document EpiSynth pilot corpus, giving eight
-arm-cells per patient. Raw and final validity rates and per-field F1
-appear in Table 5b.
+schema-injected M2, and fine-tuned M4 (LoRA adapter
+`llama3-med42-8b_lora_epi_v3_fssplit`, trained on the synth-v1 +
+first-160 F-S patients corpus with the 40-letter tail held out) —
+each in two decoding variants (unconstrained and lm-format-enforcer
+schema-constrained) on the F-S 40-letter held-out test set. Scoring
+is against F-S clinician-adjudicated gold (§Evaluation) on the 8
+in-scope fields defined in `docs/FONFERKO_GOLD_SCOPE.md`. Raw and
+final validity rates and per-field F1 appear in **Table 5b**.
 
 **Base-model ceiling (M0-M2, unconstrained):** Consistent with
-inspection of individual manifests, base Med42-8B under M0/M1/M2
-produced clinically-correct values on many documents but rarely
-emitted the required Evidence[T] wrapper structure (raw validity
-[X]%, final validity after repair [Y]%). Strict-scoring F1 on the
-frozen core-field set was ≤ 0.15 across all render/extract cells
-(§Materials and methods → Metrics), which we interpret as a
+inspection of individual manifests and with the wider 200-letter F-S
+sweep in Table 4b, base Med42-8B under M0/M1/M2 produced
+clinically-correct values on many letters but rarely emitted the
+required Evidence[T] wrapper structure (raw validity [X]%, final
+validity after repair [Y]%). Strict-scoring F1 on the F-S 8-field
+gold set was [TBD] across all arms, which we interpret as a
 **format-not-knowledge** ceiling.
 
-**Fine-tuned M4, unconstrained:** After LoRA fine-tuning on 1200
-synth-v1 + Fonferko pairs (with the 60-doc pilot held out), macro F1
-on the core-field set was [TBD] (95% CI [TBD]–[TBD]), a [TBD]-fold
-lift over base Med42. Raw JSON validity climbed to [TBD]% and final
-validity to [TBD]%.
+**Fine-tuned M4, unconstrained:** After LoRA fine-tuning on the
+1160-pair synth+fs80 corpus (with the 40-letter test tail held out),
+macro F1 on the F-S 8-field set was [TBD] (95% CI [TBD]–[TBD]), a
+[TBD]-fold lift over base Med42. Raw JSON validity climbed to [TBD]%
+and final validity to [TBD]%.
 
 **Constrained-decoding ablation:** Adding lm-format-enforcer
 constrained decoding at inference lifts *raw* JSON validity to 100%
@@ -198,22 +239,38 @@ and [TBD] F1 on top of base M0 — the smaller marginal on the tuned
 model reflecting that the tuned model already emits well-formed
 JSON on its own.
 
-**Table 5b (schematic):**
+**Table 5b — F-S 40-letter held-out test (PRIMARY):**
 
-| Arm | Constrained? | Raw valid % | Final valid % | Core-F1 | 95% CI |
+| Arm | Constrained? | Raw valid % | Final valid % | F-S core-F1 | 95% CI |
 |---|---|---:|---:|---:|---|
-| M0 base | ✗ | [TBD] | [TBD] | ≤ 0.15 | [TBD] |
+| M0 base | ✗ | [TBD] | [TBD] | [TBD] | [TBD] |
 | M0 base | ✓ | 100 | 100 | [TBD] | [TBD] |
-| M1 few-shot | ✗ | [TBD] | [TBD] | ≤ 0.15 | [TBD] |
+| M1 few-shot | ✗ | [TBD] | [TBD] | [TBD] | [TBD] |
 | M1 few-shot | ✓ | 100 | 100 | [TBD] | [TBD] |
-| M2 schema | ✗ | [TBD] | [TBD] | ≤ 0.15 | [TBD] |
+| M2 schema | ✗ | [TBD] | [TBD] | [TBD] | [TBD] |
 | M2 schema | ✓ | 100 | 100 | [TBD] | [TBD] |
-| **M4 tuned** | ✗ | [TBD] | [TBD] | **[TBD]** | [TBD] |
-| **M4 tuned** | ✓ | 100 | 100 | **[TBD]** | [TBD] |
+| **M4 tuned (v3_fssplit)** | ✗ | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| **M4 tuned (v3_fssplit)** | ✓ | 100 | 100 | **[TBD]** | [TBD] |
 
-McNemar's exact test comparisons for the four (arm × constrained)
-pairs are exploratory; nominal p-values will accompany the final
-table.
+Cells populated from the manifests at
+`data/run_manifests_fs_test_{base,tuned_v3,tuned_v3_constr}/`, scored
+by `scripts/score_llm_arms_vs_fs_gold.py --held-out-only`.
+McNemar's exact test comparisons for the (arm × constrained) pairs
+are exploratory; nominal p-values will accompany the final table.
+
+### Pilot methodology check → moved to §Supplement
+
+Table S1 in the supplement reports the same set of arms scored on
+the 60-document EpiSynth pilot corpus under the
+`--only-populated-fields` restriction (§Evaluation). The pilot is
+retained as a methodology check for the extraction and repair
+pipeline; it is **not** the primary result because ≥5 of the 8
+scored fields have 0% real-value pilot-target coverage
+(`docs/DATA_QUALITY_AUDIT.md` §B), so aggregate F1 on the pilot is
+dominated by absence-agreement rather than extraction skill. Where
+this paper's earlier drafts (v0.3 and before) reported pilot F1 as
+a primary number, those values are superseded by the F-S held-out
+test in Table 5b.
 
 ---
 
@@ -235,21 +292,38 @@ without retraining the others.
 
 ### Limitations of the fine-tuning approach (new)
 
-The MedAI-EPI-tuned adapter was trained on 1200 pairs of which 1000
-are synthetic. Synthetic notes were generated by GPT-5.6-sol under
-a semantic-plan-constrained prompt (§Corpus provenance), which
-constrains but does not eliminate the risk that model idiosyncrasies
-leak into the training set. Two guards mitigate this risk in the
-paper's design: (1) the 200 Fonferko-Shadrach clinician-authored
-letters in the training set anchor the model to real clinical prose,
-and (2) all held-out evaluation is either against F-S clinician-
-adjudicated gold or against the pilot corpus's authorized-content
-G0 phenotypes (not against fresh synthetic labels).
+The MedAI-EPI-tuned adapter was trained on 1160 pairs of which 1000
+are synthetic (synth-v1) and 160 are the training partition of the
+Fonferko-Shadrach 200-letter corpus (`EA0001..EA0160`, first-sorted
+80% of the patient-level 80/20 split). Synthetic notes were
+generated by GPT-5.6-sol under a semantic-plan-constrained prompt
+(§Corpus provenance), which constrains but does not eliminate the
+risk that model idiosyncrasies leak into the training set. Two
+guards mitigate this in the paper's design: (1) the 160 F-S
+clinician-authored letters in the training set anchor the model to
+real clinical prose, and (2) all held-out evaluation is against F-S
+clinician-adjudicated gold on 40 letters (`EA0161..EA0200`) that
+the model never saw at training time.
+
+**Per-corpus field coverage caveat.** Our synth-v1 training corpus
+and the F-S / pilot evaluation corpora have differing field-coverage
+profiles (see `docs/DATA_QUALITY_AUDIT.md` §B for the full breakdown).
+For example, `medication.drug_resistance_status` is populated in
+100% of synth-v1 targets but in 0% of F-S targets, and the pilot
+has 0% real-value coverage on 5 of the 8 fields we score. This means
+aggregate cross-corpus F1 is not a well-defined single number: it
+mixes a field the eval corpus tests thoroughly with one it never
+tests. We therefore report **per-field F1 alongside macro F1** in
+Table 5b and Table S1, and interpret coverage-mismatched fields as
+non-informative rather than as failure. Table S2 in the supplement
+gives the full field-coverage matrix across training and evaluation
+corpora.
 
 A stronger evaluation would use an independent institutional
-epilepsy corpus with its own adjudicated gold. We invite such
-evaluation and provide the full extraction pipeline, adapter, and
-manifests to make it deterministic (§Reproducibility, §Data
+epilepsy corpus with its own adjudicated gold — one that populates
+all 8 core ILAE-2017 fields rather than the F-S subset. We invite
+such evaluation and provide the full extraction pipeline, adapter,
+and manifests to make it deterministic (§Reproducibility, §Data
 availability).
 
 ### GPT-family comparator held-out (new)
