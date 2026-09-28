@@ -34,6 +34,7 @@ batch=1, grad_accum=8, ≤5 epochs w/ patience=2. Deterministic (seed=0).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -69,6 +70,66 @@ PROMPT_TEMPLATE = (
     "Clinical text:\n\"\"\"\n{note}\n\"\"\"\n\n"
     "Phenotype JSON:\n"
 )
+
+
+# --------------------------------------------------------------------------
+# ID augmentation (fights adapter-memorization of training-set patient IDs)
+# --------------------------------------------------------------------------
+#
+# Problem: because we mask prompt tokens during loss computation, the model
+# never learns to condition its ID fields (document.doc_id,
+# document.patient_id, every Evidence.source_doc_id) on the source doc — it
+# just memorizes the training-set IDs and emits one at random at inference.
+#
+# Fix: for each training example, replace all patient/doc IDs in the target
+# JSON with a per-example synthetic token that ALSO appears in the prompt
+# (as a "PATIENT_ID: ..." line prepended to the note). The model then learns
+# "copy this token from the prompt to every ID field," not "memorize this
+# specific ID." At inference, we pass the ACTUAL doc_id in the prompt.
+#
+# Determinism: synthetic ID is a stable sha1 hash of the prompt text, so a
+# restart / rerun produces identical augmented data.
+
+def _synthetic_pid(prompt: str) -> str:
+    """Deterministic per-example synthetic patient ID.
+
+    sha1(prompt)[:8].upper() gives a compact, stable, per-example token
+    that will not collide with any real patient/doc ID in our corpora
+    (real IDs are EA#### or P###### — no hex prefix "SYNPID_").
+    """
+    h = hashlib.sha1(prompt.encode("utf-8")).hexdigest()[:8].upper()
+    return f"SYNPID_{h}"
+
+
+def _augment_pair(
+    pid_key: str, note: str, target_json: str,
+) -> tuple[str, str, str, str]:
+    """Return (new_note, new_target_json, old_pid, new_pid).
+
+    old_pid is the source patient/doc ID (e.g. "EA0001" or "P000501") — we
+    derive it from pid_key by taking the leading path segment (pid_key is
+    either bare like "EA0001" or "PID/doc_type" like "P000500/progress_note").
+
+    new_pid is a per-example synthetic like "SYNPID_A1B2C3D4" derived from
+    a sha1 of the (old_pid + note) so the mapping is stable across runs.
+
+    Replacement is a plain str.replace on the target JSON — safe because
+    the old_pid is a specific identifier that will not collide with any
+    legitimate content (dates, values, enum names, etc.).
+
+    The prepended "PATIENT_ID: <new_pid>" line teaches the model to copy
+    this token from the prompt into every ID field of the target.
+    """
+    old_pid = pid_key.split("/")[0]
+    # Hash on old_pid + note so different documents from the same patient
+    # get different SYNPIDs — otherwise all docs for one training patient
+    # would collapse to the same synthetic ID and the model would still
+    # over-generalize.
+    hash_input = f"{old_pid}\n{note}"
+    new_pid = _synthetic_pid(hash_input)
+    new_note = f"PATIENT_ID: {new_pid}\n\n{note}"
+    new_target_json = target_json.replace(old_pid, new_pid)
+    return new_note, new_target_json, old_pid, new_pid
 
 
 def _pilot_pairs() -> list[tuple[str, str, str]]:
@@ -191,8 +252,27 @@ def _split_by_patient(
     return train, val
 
 
-def _triples_to_pairs(triples: list[tuple[str, str, str]]) -> list[tuple[str, str]]:
-    return [(PROMPT_TEMPLATE.format(note=note), target) for _, note, target in triples]
+def _triples_to_pairs(
+    triples: list[tuple[str, str, str]],
+    id_aug: bool = True,
+) -> list[tuple[str, str]]:
+    """Convert (pid_key, note, target) triples to (prompt, target) pairs.
+
+    When id_aug=True (default), applies per-example patient-ID augmentation:
+    every training-set ID in the target JSON is replaced with a synthetic
+    token that is ALSO injected into the prompt as a "PATIENT_ID:" line.
+    This teaches the model to copy the ID from the prompt rather than
+    memorize the training-set ID (which is what caused adapter v1 to
+    hardcode "P000999" etc. into pilot outputs at F1=0.073 vs base F1=0.15).
+    """
+    pairs: list[tuple[str, str]] = []
+    for pid_key, note, target in triples:
+        if id_aug:
+            note_aug, target_aug, _old, _new = _augment_pair(pid_key, note, target)
+        else:
+            note_aug, target_aug = note, target
+        pairs.append((PROMPT_TEMPLATE.format(note=note_aug), target_aug))
+    return pairs
 
 
 def _resolve_base_model(alias_or_id: str) -> str:
@@ -201,6 +281,54 @@ def _resolve_base_model(alias_or_id: str) -> str:
 
 def _slug(model_id: str) -> str:
     return model_id.split("/")[-1].replace(".", "_").lower()
+
+
+def _dryrun_show_augmentation(triples: list[tuple[str, str, str]]) -> None:
+    """Print one synth-style and one F-S-style before/after augmentation.
+
+    Not a formal test — just enough to eyeball the substitution before we
+    commit 90 minutes of GPU time.
+    """
+    synth_example = next(
+        (t for t in triples if t[0].split("/")[0].startswith("P0")), None,
+    )
+    fs_example = next(
+        (t for t in triples if t[0].split("/")[0].startswith("EA")), None,
+    )
+
+    def _show(label: str, triple: tuple[str, str, str]):
+        pid_key, note, target = triple
+        new_note, new_target, old_pid, new_pid = _augment_pair(pid_key, note, target)
+        print(f"\n===== dry-run augmentation: {label} =====")
+        print(f"  pid_key         = {pid_key}")
+        print(f"  old_pid         = {old_pid}")
+        print(f"  new_pid         = {new_pid}")
+        print(f"  original note   (first 120 chars): {note[:120]!r}")
+        print(f"  augmented note  (first 200 chars): {new_note[:200]!r}")
+        # Find the doc.doc_id line in the target for easy comparison
+        orig_snip = _snippet_around(target, old_pid, 60)
+        new_snip = _snippet_around(new_target, new_pid, 60)
+        print(f"  target snippet before: {orig_snip}")
+        print(f"  target snippet after : {new_snip}")
+
+    if synth_example is not None:
+        _show("synth pair", synth_example)
+    else:
+        print("(no synth pair in train split — skipped synth dry-run)")
+
+    if fs_example is not None:
+        _show("F-S pair", fs_example)
+    else:
+        print("(no F-S pair in train split — skipped F-S dry-run)")
+
+
+def _snippet_around(text: str, needle: str, radius: int) -> str:
+    idx = text.find(needle)
+    if idx < 0:
+        return f"(needle {needle!r} not found)"
+    start = max(0, idx - radius)
+    end = min(len(text), idx + len(needle) + radius)
+    return repr(text[start:end])
 
 
 def main():
@@ -228,6 +356,17 @@ def main():
                     help="EarlyStopping patience in epochs (evaluated once/epoch).")
     ap.add_argument("--attn-only", action="store_true",
                     help="Restrict LoRA to attention projections (default: attn+MLP).")
+    ap.add_argument("--no-id-aug", action="store_true",
+                    help="Disable per-example patient-ID augmentation. Default is "
+                         "ON: replace training-set patient/doc IDs with synthetic "
+                         "SYNPID tokens injected into both the prompt and the "
+                         "target JSON, so the model learns to copy the ID from "
+                         "the prompt instead of memorizing training IDs.")
+    ap.add_argument("--adapter-suffix", default="v2",
+                    help="Suffix appended to the adapter output dir name. "
+                         "Default 'v2' → checkpoints/{slug}_lora_epi_v2/, so the "
+                         "existing overfit v1 adapter is not clobbered. Set to "
+                         "empty string to use the historical unsuffixed path.")
     ap.add_argument("--dry-run", action="store_true",
                     help="Report pair count and split and exit; do not load model.")
     args = ap.parse_args()
@@ -235,7 +374,14 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
     model_id = _resolve_base_model(args.base_model)
-    output_dir = args.output_dir or str(REPO / "checkpoints" / f"{_slug(model_id)}_lora_epi")
+
+    # Adapter output dir: {slug}_lora_epi[_<suffix>]. Suffix is env-overridable
+    # so the SLURM script can flip v1 → v2 without editing this file.
+    suffix = os.environ.get("MEDAI_LORA_ADAPTER_SUFFIX", args.adapter_suffix) or ""
+    slug = _slug(model_id) + "_lora_epi" + (f"_{suffix}" if suffix else "")
+    output_dir = args.output_dir or str(REPO / "checkpoints" / slug)
+
+    id_aug = not args.no_id_aug
 
     triples = _collect_triples(args.corpus)
     if args.val_frac > 0.0 and len(triples) >= 10:
@@ -244,8 +390,8 @@ def main():
         )
     else:
         train_triples, val_triples = triples, []
-    train_pairs = _triples_to_pairs(train_triples)
-    val_pairs = _triples_to_pairs(val_triples)
+    train_pairs = _triples_to_pairs(train_triples, id_aug=id_aug)
+    val_pairs = _triples_to_pairs(val_triples, id_aug=id_aug)
 
     logger.info("Base model : %s", model_id)
     logger.info("Corpus     : %s", args.corpus)
@@ -253,13 +399,20 @@ def main():
                 len(train_pairs), len(val_pairs), args.val_seed)
     logger.info("LoRA target: %s",
                 "attn-only" if args.attn_only else "attn + MLP (gate/up/down)")
+    logger.info("ID augment : %s", "ON (SYNPID copy-from-prompt)" if id_aug else "OFF")
     logger.info("Output dir : %s", output_dir)
 
     if not train_pairs:
         raise SystemExit(
             "No training pairs found. Run the corpus generator/converter first."
         )
+
+    # In dry-run mode, show side-by-side augmentation for one synth + one F-S
+    # pair so we can eyeball the substitution before spending 90 minutes on
+    # the GPU.
     if args.dry_run:
+        if id_aug:
+            _dryrun_show_augmentation(train_triples)
         return
 
     try:
