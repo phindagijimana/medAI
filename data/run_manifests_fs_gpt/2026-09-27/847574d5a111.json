@@ -1,0 +1,43 @@
+{
+  "run_id": "847574d5a111",
+  "started_at": "2026-09-27T06:30:20+00:00",
+  "finished_at": "2026-09-27T06:30:24+00:00",
+  "duration_s": 4.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0040",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 858,
+  "raw_response": "{\"primary_claim\":{\"lobe\":null,\"laterality\":null,\"source\":\"clinician_hypothesis\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"alternative_claims\":[]}",
+  "raw_response_tokens": 213,
+  "raw_valid": false,
+  "parse_error_raw": "6 validation errors for ClinicalLocalizationModule\nprimary_claim.lobe\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.laterality\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='clinician_hypothesis', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.source_doc_id\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_date\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "6 validation errors for ClinicalLocalizationModule\nprimary_claim.lobe\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.laterality\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.source\n  Extra inputs are not permitted [type=extra_forbidden, input_value='clinician_hypothesis', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.source_doc_id\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_date\n  Field required [type=missing, input_value={'lobe': None, 'lateralit..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "parsed_value": null,
+  "arm": "M0"
+}

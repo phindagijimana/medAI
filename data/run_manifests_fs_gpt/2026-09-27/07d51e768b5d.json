@@ -1,0 +1,43 @@
+{
+  "run_id": "07d51e768b5d",
+  "started_at": "2026-09-27T06:08:09+00:00",
+  "finished_at": "2026-09-27T06:08:16+00:00",
+  "duration_s": 7.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0024",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1279,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"predominant_seizure_type\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"other_seizure_types\":{\"value\":[],\"certainty\":\"not_documented\",\"evidence_text\":null},\"awareness\":{\"value\":\"impaired\",\"certainty\":\"documented\",\"evidence_text\":\"episodes of loss of consciousness\"},\"semiology_text\":{\"value\":\"No warning; unwitnessed episodes of loss of consciousness; during one episode he felt himself shaking; came around from an attack having spilt his drink.\",\"certainty\":\"documented\",\"evidence_text\":\"There has been no warning for the episodes and they have not been witnessed. During one episode he felt himself shaking. He has come around from an attack having spilt his drink.\"},\"age_at_onset_years\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"seizure_frequency\":{\"value\":\"Around 10 events over around 9 months; none for the last 2 weeks.\",\"duration_text\":\"around 9 months\",\"applies_to_type\":null,\"certainty\":\"documented\",\"evidence_text\":\"The events have been going on now for around 9 months. He has suffered around 10 events in total. He has not had any for the last 2 weeks.\"},\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"documented\",\"evidence_text\":\"unwitnessed episodes of loss of consciousness in the context of reducing his alcohol intake\"},\"etiology_details_text\":{\"value\":\"Events seemed associated with suddenly cutting down alcohol intake.\",\"certainty\":\"documented\",\"evidence_text\":\"They seemed to be associated with him cutting down his alcohol intake suddenly.\"},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoantibody\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"tumor\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"pathogen\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"metabolic_condition\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}},\"focal_motor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"focal_nonmotor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}}",
+  "raw_response_tokens": 713,
+  "raw_valid": false,
+  "parse_error_raw": "51 validation errors for ClinicalSeizureModule\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nother_seizure_types\n  Input should be a valid array [type=list_type, input_value={'value': [], 'certainty'..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nawareness.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.source_doc_id\n  Field required [type=missing, input_value={'value': 'impaired', 'ce... loss of consciousness'}, inpu",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "51 validation errors for ClinicalSeizureModule\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nother_seizure_types\n  Input should be a valid array [type=list_type, input_value={'value': [], 'certainty'..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nawareness.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.source_doc_id\n  Field required [type=missing, input_value={'value': 'impaired', 'ce... loss of consciousness'}, inpu",
+  "parsed_value": null,
+  "arm": "M0"
+}

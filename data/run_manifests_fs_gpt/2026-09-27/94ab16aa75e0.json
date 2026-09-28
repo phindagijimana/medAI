@@ -1,0 +1,43 @@
+{
+  "run_id": "94ab16aa75e0",
+  "started_at": "2026-09-27T07:20:50+00:00",
+  "finished_at": "2026-09-27T07:21:00+00:00",
+  "duration_s": 10.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0078",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 801,
+  "raw_response": "{\"current_asms\":[{\"generic_name\":\"levetiracetam\",\"status\":\"current\",\"dose_text\":\"Reduce the levetiracetam by 250mg every week until it is stopped completely.\",\"reason_discontinued\":\"the levetiracetam she is taking could well be contributing to this\",\"rxnorm_cui\":null,\"certainty\":\"documented\",\"evidence_text\":\"the levetiracetam she is taking could well be contributing to this\"},{\"generic_name\":\"carbamazepine\",\"status\":\"current\",\"dose_text\":\"Increase the carbamazepine to 600mg twice a day.\",\"reason_discontinued\":null,\"rxnorm_cui\":null,\"certainty\":\"documented\",\"evidence_text\":\"increasing the carbamazepine instead\"}],\"prior_asms\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"failed_asms\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"adverse_effects_text\":{\"value\":\"low mood as well as some agitation\",\"certainty\":\"documented\",\"evidence_text\":\"her low mood as well as some agitation is causing her some distress\"},\"drug_resistance_status\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"surgery_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"non_drug_therapies\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}}",
+  "raw_response_tokens": 818,
+  "raw_valid": false,
+  "parse_error_raw": "29 validation errors for MedicationModule\ncurrent_asms.0.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='levetiracetam', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Reduce the levetiracetam... is stopped completely.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.reason_discontinued\n  Extra inputs are not permitted [type=extra_forbidden, input_value='the levetiracetam she is...be contributing to this', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.rxnorm_cui\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.0.source_doc_id\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_doc_type\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_date\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=di",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "29 validation errors for MedicationModule\ncurrent_asms.0.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='levetiracetam', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Reduce the levetiracetam... is stopped completely.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.reason_discontinued\n  Extra inputs are not permitted [type=extra_forbidden, input_value='the levetiracetam she is...be contributing to this', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.rxnorm_cui\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.0.source_doc_id\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_doc_type\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_date\n  Field required [type=missing, input_value={'generic_name': 'levetir...e contributing to this'}, input_type=di",
+  "parsed_value": null,
+  "arm": "M0"
+}

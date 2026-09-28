@@ -1,0 +1,233 @@
+[
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "age_at_onset_years",
+    "n_docs_with_gold": 15,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "epilepsy_type",
+    "n_docs_with_gold": 170,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "predominant_seizure_type",
+    "n_docs_with_gold": 110,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_max",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_min",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.period",
+    "n_docs_with_gold": 88,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M0",
+    "module": "medication",
+    "field": "current_asms",
+    "n_docs_with_gold": 166,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "age_at_onset_years",
+    "n_docs_with_gold": 15,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "epilepsy_type",
+    "n_docs_with_gold": 170,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "predominant_seizure_type",
+    "n_docs_with_gold": 110,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_max",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_min",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.period",
+    "n_docs_with_gold": 88,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M1",
+    "module": "medication",
+    "field": "current_asms",
+    "n_docs_with_gold": 166,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "age_at_onset_years",
+    "n_docs_with_gold": 15,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "epilepsy_type",
+    "n_docs_with_gold": 170,
+    "precision": 1.0,
+    "recall": 0.006,
+    "f1": 0.012,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.035
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "predominant_seizure_type",
+    "n_docs_with_gold": 110,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_max",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.count_min",
+    "n_docs_with_gold": 24,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "clinical_seizure",
+    "field": "seizure_frequency.period",
+    "n_docs_with_gold": 88,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "f1_ci_lo": 0.0,
+    "f1_ci_hi": 0.0
+  },
+  {
+    "arm": "M2",
+    "module": "medication",
+    "field": "current_asms",
+    "n_docs_with_gold": 166,
+    "precision": 0.699,
+    "recall": 0.222,
+    "f1": 0.337,
+    "f1_ci_lo": 0.27,
+    "f1_ci_hi": 0.4
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "run_id": "4be1f55b77dd",
+  "started_at": "2026-09-27T06:51:57+00:00",
+  "finished_at": "2026-09-27T06:52:09+00:00",
+  "duration_s": 12.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0056",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1518,
+  "raw_response": "{\"current_asms\":[{\"generic_name\":\"levetiracetam\",\"status\":\"current\",\"dose_text\":\"1000mg bd\",\"reason_discontinued\":null,\"rxnorm_cui\":null,\"evidence_text\":\"Levetiracetam 1000mg bd\"},{\"generic_name\":\"oxcarbazepine\",\"status\":\"current\",\"dose_text\":\"300mg bd\",\"reason_discontinued\":null,\"rxnorm_cui\":null,\"evidence_text\":\"Oxcarbazepine 300mg bd\"}],\"prior_asms\":[],\"failed_asms\":[],\"adverse_effects_text\":{\"value\":\"quite tired and finds it difficult to concentrate\",\"certainty\":\"documented\",\"evidence_text\":\"He is quite tired and finds it difficult to concentrate\"},\"drug_resistance_status\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"surgery_history\":[{\"surgery_type\":\"brain surgery to drain an abcess\",\"target\":\"right frontal lobe\",\"laterality\":\"right\",\"year\":null,\"outcome_text\":null,\"engel_class\":null,\"ilae_outcome\":null,\"device_model_text\":null,\"stimulation_parameters_text\":null,\"pathology_notes_text\":\"abcess\",\"evidence_text\":\"brain surgery to drain an abcess in his right frontal lobe\"}],\"non_drug_therapies\":[]}",
+  "raw_response_tokens": 770,
+  "raw_valid": false,
+  "parse_error_raw": "36 validation errors for MedicationModule\ncurrent_asms.0.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='levetiracetam', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1000mg bd', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.reason_discontinued\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.rxnorm_cui\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.source_doc_id\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_doc_type\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_date\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.1.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='oxcarbazepine', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.1.status\n  Extra inputs ",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "36 validation errors for MedicationModule\ncurrent_asms.0.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='levetiracetam', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1000mg bd', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.reason_discontinued\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.rxnorm_cui\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.source_doc_id\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_doc_type\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_date\n  Field required [type=missing, input_value={'generic_name': 'levetir...evetiracetam 1000mg bd'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.1.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='oxcarbazepine', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.1.status\n  Extra inputs ",
+  "parsed_value": null,
+  "arm": "M0"
+}

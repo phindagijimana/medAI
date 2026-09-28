@@ -1,0 +1,109 @@
+{
+  "run_id": "732f7f1792e1",
+  "started_at": "2026-09-27T07:29:42+00:00",
+  "finished_at": "2026-09-27T07:29:54+00:00",
+  "duration_s": 12.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0084",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1121,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"brivaracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"50mgs bd\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Brivaracetam 50mgs bd\",\n      \"source_doc_id\": \"unknown\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"1997-04-19\",\n      \"char_start\": null,\n      \"char_end\": null\n    }\n  ],\n  \"prior_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"prior\",\n        \"dose_text\": null,\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"He switched Levetiracetam to Brivaracetam\",\n      \"source_doc_id\": \"unknown\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"1997-04-19\",\n      \"char_start\": null,\n      \"char_end\": null\n    }\n  ],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"problems with mood swings and irritability\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"he has had problems with mood swings and irritability\",\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1997-04-19\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"drug_responsive\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"he has been seizure free since starting antiepileptic medication\",\n    \"source_doc_id\": \"unknown\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1997-04-19\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}",
+  "raw_response_tokens": 965,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "brivaracetam",
+          "status": "current",
+          "dose_text": "50mgs bd",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Brivaracetam 50mgs bd",
+        "source_doc_id": "unknown",
+        "source_doc_type": "progress_note",
+        "source_date": "1997-04-19",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "He switched Levetiracetam to Brivaracetam",
+        "source_doc_id": "unknown",
+        "source_doc_type": "progress_note",
+        "source_date": "1997-04-19",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "problems with mood swings and irritability",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "he has had problems with mood swings and irritability",
+      "source_doc_id": "unknown",
+      "source_doc_type": "progress_note",
+      "source_date": "1997-04-19",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_responsive",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "he has been seizure free since starting antiepileptic medication",
+      "source_doc_id": "unknown",
+      "source_doc_type": "progress_note",
+      "source_date": "1997-04-19",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M2"
+}

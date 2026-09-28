@@ -1,0 +1,58 @@
+{
+  "run_id": "776f291f3f3e",
+  "started_at": "2026-09-27T07:16:32+00:00",
+  "finished_at": "2026-09-27T07:16:35+00:00",
+  "duration_s": 3.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0074",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2134,
+  "raw_response": "{\"primary_claim\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":\"unspecified\",\"evidence_text\":null,\"source_doc_id\":\"T5682221\",\"source_doc_type\":\"initial_consult\",\"source_date\":\"2017-08-18\"},\"alternative_claims\":[]}",
+  "raw_response_tokens": 133,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "T5682221",
+      "source_doc_type": "initial_consult",
+      "source_date": "2017-08-18",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M2"
+}

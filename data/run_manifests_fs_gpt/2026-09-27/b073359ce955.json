@@ -1,0 +1,43 @@
+{
+  "run_id": "b073359ce955",
+  "started_at": "2026-09-27T07:18:30+00:00",
+  "finished_at": "2026-09-27T07:18:41+00:00",
+  "duration_s": 11.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0076",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1428,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"predominant_seizure_type\":{\"value\":null,\"certainty\":\"unknown\",\"evidence_text\":\"I do not think that these are epileptic seizures and are more likely to be dissociative seizures.\"},\"other_seizure_types\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"awareness\":{\"value\":\"impaired_awareness\",\"certainty\":\"documented\",\"evidence_text\":\"episodes of altered awareness\"},\"semiology_text\":{\"value\":\"Zones out with difficulty following what is going on; can hear people talking but has difficulty responding; blank look and completely still.\",\"certainty\":\"documented\",\"evidence_text\":\"Mr Summers seems to \\\"zone out\\\" and he finds it diffiult to follow what's going on. He can hear people talking but it is difficult for him to responds.\"},\"age_at_onset_years\":{\"value\":19,\"certainty\":\"documented\",\"evidence_text\":\"He has been having seizure-like episodes now for around 1 year.\"},\"seizure_frequency\":{\"value\":\"several times per week\",\"certainty\":\"documented\",\"evidence_text\":\"They can happen up to several times per week.\",\"duration_text\":null,\"applies_to_type\":null},\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_details_text\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoantibody\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"tumor\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"pathogen\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"metabolic_condition\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}},\"focal_motor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"focal_nonmotor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}}",
+  "raw_response_tokens": 880,
+  "raw_valid": false,
+  "parse_error_raw": "51 validation errors for ClinicalSeizureModule\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nother_seizure_types\n  Input should be a valid array [type=list_type, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nawareness.value\n  Input should be 'aware', 'impaired' or 'unknown' [type=enum, input_value='impaired_awareness', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=st",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "51 validation errors for ClinicalSeizureModule\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'unknown', 'cer..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint...dissociative seizures.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nother_seizure_types\n  Input should be a valid array [type=list_type, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nawareness.value\n  Input should be 'aware', 'impaired' or 'unknown' [type=enum, input_value='impaired_awareness', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=st",
+  "parsed_value": null,
+  "arm": "M0"
+}

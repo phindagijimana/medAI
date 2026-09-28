@@ -1,0 +1,43 @@
+{
+  "run_id": "ee6b524a3495",
+  "started_at": "2026-09-27T06:20:41+00:00",
+  "finished_at": "2026-09-27T06:20:56+00:00",
+  "duration_s": 15.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0033",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 892,
+  "raw_response": "{\"current_asms\":[{\"generic_name\":\"sodium valproate\",\"status\":\"current\",\"dose_text\":\"1 g twice a day\",\"reason_discontinued\":null,\"rxnorm_cui\":null,\"evidence_text\":\"Medication: sodium valproate 1 g twice a day\"},{\"generic_name\":\"clobazam\",\"status\":\"current\",\"dose_text\":\"10 mg as required\",\"reason_discontinued\":null,\"rxnorm_cui\":null,\"evidence_text\":\"Clobazam 10 mg as required\"}],\"prior_asms\":[{\"generic_name\":\"lamotrigine\",\"status\":\"prior\",\"dose_text\":null,\"reason_discontinued\":\"without any good therapeutic benefit\",\"rxnorm_cui\":null,\"evidence_text\":\"he has tried lamotrigine and topiramate without any good therapeutic benefit\"},{\"generic_name\":\"topiramate\",\"status\":\"prior\",\"dose_text\":null,\"reason_discontinued\":\"without any good therapeutic benefit\",\"rxnorm_cui\":null,\"evidence_text\":\"he has tried lamotrigine and topiramate without any good",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: EOF while parsing a string at line 1 column 848 [type=json_invalid, input_value='{\"current_asms\":[{\"gener...ramate without any good', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M0"
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "b8cbde08a9e7",
+  "started_at": "2026-09-27T07:41:45+00:00",
+  "finished_at": "2026-09-27T07:41:57+00:00",
+  "duration_s": 12.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0094",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2241,
+  "raw_response": "{\"epilepsy_type\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"predominant_seizure_type\":{\"value\":\"generalized_tonic_clonic\",\"certainty\":\"documented\",\"evidence_text\":\"four generalised tonic clonic seizures\"},\"other_seizure_types\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"awareness\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"semiology_text\":{\"value\":\"stiff and jerking all over with excess salivation\",\"certainty\":\"documented\",\"evidence_text\":\"stiff and jerking all over with excess salivation\"},\"age_at_onset_years\":{\"value\":6,\"certainty\":\"documented\",\"evidence_text\":\"this 6 year old girl\"},\"seizure_frequency\":{\"value\":\"four seizures within a 10 day period; two occurred within 24 hours of each other\",\"certainty\":\"documented\",\"evidence_text\":\"She has had four generalised tonic clonic seizures, always occurring in sleep. Two of them occurred within 24 hours of each other and they all occurred within a 10 day period\"},\"duration_text\":{\"value\":\"less than a minute\",\"certainty\":\"documented\",\"evidence_text\":\"The episode lasted less than a minute\"},\"applies_to_type\":{\"value\":\"generalized_tonic_clonic\",\"certainty\":\"documented\",\"evidence_text\":\"four generalised tonic clonic seizures\"},\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"documented\",\"evidence_text\":\"Diagnosis: Nocturnal seizures ? Benign Rolandic Epilepsy of Childhood\"},\"etiology_details_text\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoantibody\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"tumor\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"pathogen\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"metabolic_condition\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}},\"focal_motor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"focal_nonmotor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}}",
+  "raw_response_tokens": 987,
+  "raw_valid": false,
+  "parse_error_raw": "51 validation errors for ClinicalSeizureModule\nduration_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'less than a mi...ted less than a minute'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\napplies_to_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': 'g",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "51 validation errors for ClinicalSeizureModule\nduration_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'less than a mi...ted less than a minute'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\napplies_to_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': None, 'certaint..., 'evidence_text': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'generalized_to... tonic clonic seizures'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.source_date\n  Field required [type=missing, input_value={'value': 'g",
+  "parsed_value": null,
+  "arm": "M0"
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "635b07bc0d70",
+  "started_at": "2026-09-27T06:48:05+00:00",
+  "finished_at": "2026-09-27T06:48:12+00:00",
+  "duration_s": 7.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0053",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1905,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"generalized\",\"certainty\":\"documented\",\"evidence_text\":\"Diagnosis: juvenile myoclonic epilepsy\"},\"predominant_seizure_type\":{\"value\":\"myoclonic\",\"certainty\":\"documented\",\"evidence_text\":\"the jerks are myoclonic seizures\"},\"other_seizure_types\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"awareness\":{\"value\":\"preserved\",\"certainty\":\"documented\",\"evidence_text\":\"She has never had any episodes of loss of conscious.\"},\"semiology_text\":{\"value\":\"Arms \u201cjerky\u201d in the morning; sometimes drops things because of jerks; sunlight through trees can provoke jerks.\",\"certainty\":\"documented\",\"evidence_text\":\"She started noticing that her arms were \u201cjerky\u201d in the morning when she was 13 years old. Sometimes she has dropped things because of these jerks. Sometimes she has notices that sunlight through trees can provoke these jerks.\"},\"age_at_onset_years\":{\"value\":13,\"certainty\":\"documented\",\"evidence_text\":\"She started noticing that her arms were \u201cjerky\u201d in the morning when she was 13 years old.\"},\"seizure_frequency\":{\"value\":null,\"duration_text\":null,\"applies_to_type\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_details_text\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoantibody\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"tumor\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"pathogen\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"metabolic_condition\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}},\"focal_motor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"focal_nonmotor_onset\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null}}",
+  "raw_response_tokens": 663,
+  "raw_valid": false,
+  "parse_error_raw": "52 validation errors for ClinicalSeizureModule\nepilepsy_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.value\n  Input should be 'focal_aware', 'focal_impaired_awareness', 'focal_unknown_awareness', 'focal_to_bilateral_tonic_clonic', 'generalized_tonic_clonic', 'generalized_tonic', 'generalized_clonic', 'generalized_myoclonic', 'generalized_absence_typical', 'generalized_absence_atypical', 'generalized_atonic', 'generalized_epileptic_spasms', 'unknown_onset_tonic_clonic', 'unknown_onset_motor_other', 'unknown_onset_nonmotor' or 'unclassified' [type=enum, input_value='myoclonic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'myoclonic', 'c...are myoclonic seizures'}, input_type=dict]\n    For further information visit http",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "52 validation errors for ClinicalSeizureModule\nepilepsy_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nepilepsy_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_doc_type\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nepilepsy_type.source_date\n  Field required [type=missing, input_value={'value': 'generalized', ...ile myoclonic epilepsy'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\npredominant_seizure_type.value\n  Input should be 'focal_aware', 'focal_impaired_awareness', 'focal_unknown_awareness', 'focal_to_bilateral_tonic_clonic', 'generalized_tonic_clonic', 'generalized_tonic', 'generalized_clonic', 'generalized_myoclonic', 'generalized_absence_typical', 'generalized_absence_atypical', 'generalized_atonic', 'generalized_epileptic_spasms', 'unknown_onset_tonic_clonic', 'unknown_onset_motor_other', 'unknown_onset_nonmotor' or 'unclassified' [type=enum, input_value='myoclonic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.certainty\n  Input should be 'definite', 'probable', 'possible', 'negated', 'unknown' or 'not_documented' [type=enum, input_value='documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_id\n  Field required [type=missing, input_value={'value': 'myoclonic', 'c...are myoclonic seizures'}, input_type=dict]\n    For further information visit http",
+  "parsed_value": null,
+  "arm": "M0"
+}

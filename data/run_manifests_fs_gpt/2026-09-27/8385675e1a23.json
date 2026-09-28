@@ -1,0 +1,43 @@
+{
+  "run_id": "8385675e1a23",
+  "started_at": "2026-09-27T07:15:42+00:00",
+  "finished_at": "2026-09-27T07:15:53+00:00",
+  "duration_s": 11.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0074",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2134,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"generalized\",\"certainty\":\"documented\",\"evidence_text\":\"the history is consistent with Juvenile Myoclonic Epilepsy\"},\"predominant_seizure_type\":{\"value\":\"myoclonic\",\"certainty\":\"documented\",\"evidence_text\":\"particularly early in the morning where he has a tendency to drop items\"},\"other_seizure_types\":[{\"value\":\"generalized tonic-clonic\",\"certainty\":\"documented\",\"evidence_text\":\"collapsed from his chair, and was noted to have jerking movements of his arms and legs for 2 minutes\"}],\"awareness\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"semiology_text\":{\"value\":\"For several months he has noticed he has been \u201cclumsy\u201d, particularly early in the morning where he has a tendency to drop items. In June this year he had a collapse episode whilst in college. He felt non-specifically unwell and collapsed from his chair, and was noted to have jerking movements of his arms and legs for 2 minutes. He recalls coming around with the paramedics around him.\",\"certainty\":\"documented\",\"evidence_text\":\"he has noticed he has been \u201cclumsy\u201d, particularly early in the morning where he has a tendency to drop items... collapsed from his chair, and was noted to have jerking movements of his arms and legs for 2 minutes\"},\"age_at_onset_years\":{\"value\":17,\"certainty\":\"documented\",\"evidence_text\":\"He is a 17-year-old male... For several months he has noticed\"},\"seizure_frequency\":[{\"value\":\"almost daily\",\"certainty\":\"documented\",\"duration_text\":null,\"applies_to_type\":\"myoclonic\",\"evidence_text\":\"The frequency of these appears to be increasing to almost daily\"},{\"value\":\"one episode in June\",\"certainty\":\"documented\",\"duration_text\":\"2 minutes\",\"applies_to_type\":\"generalized tonic-clonic\",\"evidence_text\":\"In June this year he had a collapse episode... jerking movements of his arms and legs for 2 minutes\"}],\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_details_text\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoant",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a string at line 1 column 2311 [type=json_invalid, input_value='{\"epilepsy_type\":{\"value...ce_text\":null},\"autoant', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M0"
+}

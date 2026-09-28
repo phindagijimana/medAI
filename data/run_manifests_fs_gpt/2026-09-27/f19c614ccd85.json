@@ -1,0 +1,43 @@
+{
+  "run_id": "f19c614ccd85",
+  "started_at": "2026-09-27T07:29:58+00:00",
+  "finished_at": "2026-09-27T07:30:09+00:00",
+  "duration_s": 11.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0085",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2206,
+  "raw_response": "{\"epilepsy_type\":{\"value\":\"generalized\",\"certainty\":\"documented\",\"evidence_text\":\"Diagnosis:\\n\u2022\\tJuvenile myoclonic epilepsy\"},\"predominant_seizure_type\":{\"value\":\"generalized tonic-clonic\",\"certainty\":\"documented\",\"evidence_text\":\"There is generalised stiffening and shaking, stertorous breathing and cyanosis.\"},\"other_seizure_types\":[{\"value\":\"myoclonic\",\"certainty\":\"documented\",\"evidence_text\":\"There is a history of what sound like myoclonic jerks\"}],\"awareness\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"semiology_text\":{\"value\":\"occurred without warning; generalised stiffening and shaking, stertorous breathing, cyanosis, tongue biting, and postictal state up to 48 hours; myoclonic jerks affecting limbs, sometimes in the morning after nights out\",\"certainty\":\"documented\",\"evidence_text\":\"In general, they have occurred without warning. There is generalised stiffening and shaking, stertorous breathing and cyanosis. He has bitten his tongue and is postictal for up to 48 hours afterwards. One occurred on waking and one after a night out.\\n\\nThere is a history of what sound like myoclonic jerks, sometimes in the morning affecting his limbs often after nights out.\"},\"age_at_onset_years\":{\"value\":12,\"certainty\":\"documented\",\"evidence_text\":\"had his first seizure at the age of 12\"},\"seizure_frequency\":[{\"value\":\"on average one seizure a year since the age of 17; total of 3 in 2020\",\"certainty\":\"documented\",\"evidence_text\":\"He has had on average one seizure a year since the age of 17 but a total of 3 in 2020.\",\"duration_text\":\"since the age of 17; in 2020\",\"applies_to_type\":\"generalized tonic-clonic\"},{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null,\"duration_text\":null,\"applies_to_type\":\"myoclonic\"}],\"status_epilepticus_history\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_category\":{\"value\":\"unknown\",\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_details_text\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"etiology_specifics\":{\"gene\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"variant\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"autoantibody\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"tumor\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":null},\"pathogen\":{\"value\":null,\"certainty\":\"not_documented\",\"evidence_text\":",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a value at line 1 column 2429 [type=json_invalid, input_value='{\"epilepsy_type\":{\"value...ented\",\"evidence_text\":', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M0"
+}

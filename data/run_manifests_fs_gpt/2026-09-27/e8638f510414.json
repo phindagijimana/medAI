@@ -1,0 +1,45 @@
+{
+  "run_id": "e8638f510414",
+  "started_at": "2026-09-27T06:55:48+00:00",
+  "finished_at": "2026-09-27T06:55:59+00:00",
+  "duration_s": 11.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0058",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1425,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Symptomatic structural epilepsy\",\n    \"source_doc_id\": \"AJH/LK/M6704543\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2018-02-13\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_impaired_awareness\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"focal seizures with altered awareness\",\n    \"source_doc_id\": \"AJH/LK/M6704543\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2018-02-13\"\n  },\n  \"other_seizure_types\": [\n    {\n      \"value\": \"focal_to_bilateral_tonic_clonic\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"focal to bilateral convulsive seizures\",\n      \"source_doc_id\": \"AJH/LK/M6704543\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2018-02-13\"\n    }\n  ],\n  \"awareness\": {\n    \"value\": \"impaired\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"altered awareness\",\n    \"source_doc_id\": \"AJH/LK/M6704543\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2018-02-13\"\n  },\n  \"semiology_text\": {\n    \"value\": \"smack his lips, stare into the distance and might fiddle with his clothes\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"smack his lips, stare into the distance and might fiddle with his clothes\",\n    \"source_doc_id\": \"AJH/LK/M6704543\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2018-02-13\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a string at line 52 column 5 [type=json_invalid, input_value='{\\n  \"epilepsy_type\": {\\...not_documented\",\\n    \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

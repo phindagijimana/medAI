@@ -1,0 +1,45 @@
+{
+  "run_id": "50285c41f685",
+  "started_at": "2026-09-27T06:09:55+00:00",
+  "finished_at": "2026-09-27T06:10:06+00:00",
+  "duration_s": 11.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "ood.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-570.42.2.el9_6.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": false
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "gpt-5.6-terra",
+  "model_cache_dir": "",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-gpt-gpt-5.6-terra-EA0025",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 720,
+  "raw_response": "{\"current_asms\":[{\"value\":{\"generic_name\":\"valproic acid\",\"status\":\"current\",\"dose_text\":\"epilim 500 mg BD\",\"reason_discontinued\":null,\"rxnorm_cui\":null},\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"epilim 500 mg BD\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},{\"value\":{\"generic_name\":\"lamotrigine\",\"status\":\"current\",\"dose_text\":\"100 mg in the morning, 175 mg in the afternoon\",\"reason_discontinued\":null,\"rxnorm_cui\":null},\"certainty\":\"definite\",\"temporal_status\":\"current\",\"evidence_text\":\"Lamictal 100 mg in the morning, 175 mg in the afternoon\",\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null}],\"prior_asms\":[],\"failed_asms\":[],\"adverse_effects_text\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":null,\"evidence_text\":null,\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"drug_resistance_status\":{\"value\":null,\"certainty\":\"not_documented\",\"temporal_status\":null,\"evidence_text\":null,\"source_doc_id\":null,\"source_doc_type\":null,\"source_date\":null},\"surgery_history\":[],\"non_drug_therapies\":[]}",
+  "raw_response_tokens": 800,
+  "raw_valid": false,
+  "parse_error_raw": "14 validation errors for MedicationModule\ncurrent_asms.0.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.0.source_date\n  Input should be a valid date [type=date_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/date_type\ncurrent_asms.1.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_date\n  Input should be a valid date [type=date_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/date_type\nadverse_effects_text.temporal_status\n  Input should be 'current', 'historical', 'planned', 'hypothetical' or 'unspecified' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For ",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "14 validation errors for MedicationModule\ncurrent_asms.0.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.0.source_date\n  Input should be a valid date [type=date_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/date_type\ncurrent_asms.1.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_date\n  Input should be a valid date [type=date_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/date_type\nadverse_effects_text.temporal_status\n  Input should be 'current', 'historical', 'planned', 'hypothetical' or 'unspecified' [type=enum, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For ",
+  "parsed_value": null,
+  "arm": "M1"
+}
