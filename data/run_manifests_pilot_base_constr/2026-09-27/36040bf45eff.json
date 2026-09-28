@@ -1,0 +1,47 @@
+{
+  "run_id": "36040bf45eff",
+  "started_at": "2026-09-27T06:17:58+00:00",
+  "finished_at": "2026-09-27T06:18:41+00:00",
+  "duration_s": 43.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "pilot-base_constr-gpt-5.6-sol-C1-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1075,
+  "raw_response": "{\"status_epilepticus_history\": {\n          \"certainty\": \"definite\",\n          \"value\": true,\n          \"evidence_text\": \"Patient has had status epilepticus in the past\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 145\n        },\n        \"focal_motor_onset\": {\n          \"certainty\": \"probable\",\n          \"value\": \"clonic\",\n          \"evidence_text\": \"Seizures described as clonic, suggesting focal motor onset\",\n          \"source_doc_id\": \"doc2\",\n          \"source_doc_type\": \"initial_consult\",\n          \"source_date\": \"2021-10-01\",\n          \"char_start\": 456,\n          \"char_end\": 471\n        },\n        \"predominant_seizure_type\": {\n          \"certainty\": \"definite\",\n          \"value\": \"generalized_tonic_clonic\",\n          \"evidence_text\": \"Patient's seizures are predominantly generalized tonic-clonic\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 145\n        },\n        \"other_seizure_types\": [\n          {\n           \"certainty\": \"possible\",\n           \"value\": \"focal_to_bilateral_tonic_clonic\",\n           \"evidence_text\": \"Patient has also had focal-to-bilateral tonic-clonic seizures\",\n           \"source_doc_id\": \"doc2\",\n           \"source_doc_type\": \"initial_consult\",\n           \"source_date\": \"2021-10-01\",\n           \"char_start\": 456,\n           \"char_end\": 471\n          }\n        ],\n        \"age_at_onset_years\": {\n          \"certainty\": \"definite\",\n          \"value\": 5,\n          \"evidence_text\": \"Seizures began at age 5\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 125\n        },\n        \"seizure_frequency\": {\n          \"certainty\": \"definite\",\n          \"value\": {\n           \"duration_text\": \"daily\",\n           \"applies_to_type\": \"generalized_tonic_clonic\"\n         ,\"seizure_free\": false\n         ,\"count_min\": 2,\n          \"count_max\": 3\n         ,\"period\": \"day\"\n         ,\"raw_text\": \"Patient has 2-3 daily generalized tonic-clonic seizures\"\n          },\n          \"evidence_text\": \"Patient has 2-3 daily generalized tonic-clonic seizures\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 145\n        },\n        \"awareness\": {\n          \"certainty\": \"definite\",\n          \"value\": \"impaired\",\n          \"evidence_text\": \"Patient is impaired during seizures\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 130\n        },\n        \"etiology_category\": {\n          \"certainty\": \"definite\",\n          \"value\": \"genetic\",\n          \"evidence_text\": \"Patient has a genetic etiology\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 130\n        },\n        \"etiology_details_text\": {\n          \"certainty\": \"definite\",\n          \"value\": \"SCN1A mutation\",\n          \"evidence_text\": \"Patient has an SCN1A mutation\",\n          \"source_doc_id\": \"doc1\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2022-01-15\",\n          \"char_start\": 123,\n          \"char_end\": 130\n        },\n        \"focal_nonmotor_onset\": {\n          \"certainty\": \"unknown\",\n          \"value\": null,\n          \"evidence_text\": \"Focal non-motor onset unknown\",\n          \"source_doc_id\": \"doc2\",\n          \"source_doc_type\": \"initial_consult\",\n          \"source_date\": \"2021-10-01\",\n          \"char_start\": 456,",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: EOF while parsing a value at line 108 column 28 [type=json_invalid, input_value='{\"status_epilepticus_his...     \"char_start\": 456,', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

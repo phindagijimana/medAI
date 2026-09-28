@@ -1,0 +1,47 @@
+{
+  "run_id": "02edc9ee0771",
+  "started_at": "2026-09-27T10:02:24+00:00",
+  "finished_at": "2026-09-27T10:03:03+00:00",
+  "duration_s": 39.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-tuned-gpt-5.6-sol-C2-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 164,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"combined\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Combined generalized and focal epilepsy\",\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"other_seizure_types\": [],\n  \"awareness\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"semiology_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizure_frequency\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"other_seizure_frequencies\": [],\n  \"status_epilepticus_history\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"etiology_category\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"etiology_details_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"etiology_specifics\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"focal_motor_onset\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"focal_nonmotor_onset\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"CORRESPONDENCE-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 991,
+  "raw_valid": false,
+  "parse_error_raw": "13 validation errors for ClinicalSeizureModule\nepilepsy_type.value\n  Input should be 'focal', 'generalized', 'combined_focal_generalized' or 'unknown' [type=enum, input_value='combined', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nepilepsy_type.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nsemiology_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nage_at_onset_years.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "13 validation errors for ClinicalSeizureModule\nepilepsy_type.value\n  Input should be 'focal', 'generalized', 'combined_focal_generalized' or 'unknown' [type=enum, input_value='combined', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nepilepsy_type.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\npredominant_seizure_type.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nawareness.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nsemiology_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nage_at_onset_years.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu",
+  "parsed_value": null,
+  "arm": "M1"
+}

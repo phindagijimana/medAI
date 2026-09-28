@@ -1,0 +1,75 @@
+{
+  "run_id": "b44104a1d1be",
+  "started_at": "2026-09-27T08:59:49+00:00",
+  "finished_at": "2026-09-27T09:00:31+00:00",
+  "duration_s": 42.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-tuned-gpt-5.6-luna-C2-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 134,
+  "raw_response": "icationStatus\",\n      \"type\": \"string\"\n    },\n    \"NonDrugTherapy\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Value\"\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"start_date\": {\n          \"format\": \"date\",\n          \"title\": \"Start Date\",\n          \"type\": \"string\"\n        },\n        \"end_date\": {\n          \"format\": \"date\",\n          \"title\": \"End Date\",\n          \"type\": \"string\"\n        },\n        \"dose_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Dose Text\"\n        },\n        \"reason_discontinued\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Reason Discontinued\"\n        },\n        \"rxnorm_cui\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Rxnorm Cui\"\n        }\n      },\n      \"required\": [],\n      \"title\": \"NonDrugTherapy\",\n      \"type\": \"object\"\n    },\n    \"SurgeryHistoryItem\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"surgery_type\": {\n          \"enum\": [\n            \"focal\",\n            \"nonfocal\",\n            \"unknown_onset_tonic_clonic\",\n            \"focal_motor_onset_tonic_clonic\",\n            \"focal_nonmotor_onset_tonic_clonic\",\n            \"focal_unknown_onset_tonic_clonic\",\n            \"focal_motor_onset_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_nonmotor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_unknown_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"focal_motor_onset_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_unknown_tonic_clonic\",\n            \"",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='icationStatus\",\\n      \"...clonic\",\\n            \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-luna-C2-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-luna-C2-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M2"
+}

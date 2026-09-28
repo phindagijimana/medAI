@@ -1,0 +1,64 @@
+{
+  "run_id": "0beb426c9240",
+  "started_at": "2026-09-27T05:28:27+00:00",
+  "finished_at": "2026-09-27T05:28:37+00:00",
+  "duration_s": 10.0,
+  "code_sha": "16c5f21",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "pilot-base_constr-gpt-5.6-luna-C1-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 458,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"source\": \"clinician_hypothesis\",\n      \"lobe\": \"unknown\",\n      \"laterality\": \"unknown\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"The epilepsy type remains unknown, in accordance with the ILAE 2017 classification framework\",\n    \"source_doc_id\": \"EPI-CLIN-01\",\n    \"source_doc_type\": \"emu_discharge\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 131,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": {
+        "lobe": "unknown",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "The epilepsy type remains unknown, in accordance with the ILAE 2017 classification framework",
+      "source_doc_id": "EPI-CLIN-01",
+      "source_doc_type": "emu_discharge",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

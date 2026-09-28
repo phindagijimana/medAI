@@ -1,0 +1,47 @@
+{
+  "run_id": "d03d3133aaed",
+  "started_at": "2026-09-27T10:54:41+00:00",
+  "finished_at": "2026-09-27T10:55:21+00:00",
+  "duration_s": 40.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-tuned-gpt-5.6-terra-C1-P006",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 1082,
+  "raw_response": "{\n  \"patient_id\": {\n    \"value\": \"E008\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"E008\",\n    \"source_doc_id\": \"P0008\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"study_type\": {\n    \"value\": \"routine\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Routine EEG\",\n    \"source_doc_id\": \"P0008\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"clinical_seizure\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"P0008\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"eeg\": {\n    \"value\": {\n      \"overall_normal\": {\n        \"value\": false,\n        \"certainty\": \"definite\",\n        \"temporal_status\": \"current\",\n        \"evidence_text\": \"abnormal\",\n        \"source_doc_id\": \"P0008\",\n        \"source_doc_type\": \"progress_note\",\n        \"source_date\": \"2025-01-01\",\n        \"char_start\": null,\n        \"char_end\": null\n      },\n      \"findings\": [\n        {\n          \"value\": {\n            \"epileptiform_discharge\": {\n              \"value\": false,\n              \"certainty\": \"definite\",\n              \"temporal_status\": \"current\",\n              \"evidence_text\": \"no epileptiform discharges\",\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            },\n            \"focal_motor_onset\": {\n              \"value\": null,\n              \"certainty\": \"not_documented\",\n              \"temporal_status\": \"unspecified\",\n              \"evidence_text\": null,\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            },\n            \"focal_nonmotor_onset\": {\n              \"value\": null,\n              \"certainty\": \"not_documented\",\n              \"temporal_status\": \"unspecified\",\n              \"evidence_text\": null,\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            },\n            \"generalized_tonic_clonic_seizure\": {\n              \"value\": null,\n              \"certainty\": \"not_documented\",\n              \"temporal_status\": \"unspecified\",\n              \"evidence_text\": null,\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            },\n            \"focal_impaired_awareness\": {\n              \"value\": null,\n              \"certainty\": \"not_documented\",\n              \"temporal_status\": \"unspecified\",\n              \"evidence_text\": null,\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            },\n            \"focal_seizure_onset_tonic_clonic\": {\n              \"value\": null,\n              \"certainty\": \"not_documented\",\n              \"temporal_status\": \"unspecified\",\n              \"evidence_text\": null,\n              \"source_doc_id\": \"P0008\",\n              \"source_doc_type\": \"progress_note\",\n              \"source_date\": \"2025-01-01\",\n              \"char_start\": null,\n              \"char_end\": null\n            }\n          },\n          \"value\": {\n            \"overall_normal\": {\n              \"value\": false,\n              \"certainty\": \"definite\",\n              \"temporal_status\": \"current\",\n              \"evidence_text\": \"abnormal\",\n              \"source_doc_id\": \"P0008\",",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for EegModule\n  Invalid JSON: EOF while parsing a value at line 124 column 39 [type=json_invalid, input_value='{\\n  \"patient_id\": {\\n  ...ource_doc_id\": \"P0008\",', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M1"
+}

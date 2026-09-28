@@ -1,0 +1,47 @@
+{
+  "run_id": "6a0a4febffee",
+  "started_at": "2026-09-27T10:06:05+00:00",
+  "finished_at": "2026-09-27T10:06:18+00:00",
+  "duration_s": 13.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-tuned-gpt-5.6-sol-C2-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 86,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"epilepsy_type\": \"unknown\",\n      \"evidence_text\": \"Epilepsy type: Unknown (ILAE 2017 classification)\",\n      \"source_doc_id\": \"EP-CLIN-01\",\n      \"source_doc_type\": \"epilepsy_clinic_letter\",\n      \"source_date\": \"2025-01-01\",\n      \"char_start\": 21,\n      \"char_end\": 56\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"lobe\": null,\n    \"laterality\": null,\n    \"predominant_seizure_type\": null,\n    \"awareness\": null,\n    \"semiology_text\": null,\n    \"age_at_onset_years\": null,\n    \"seizure_frequency\": null,\n    \"other_seizure_types\": [],\n    \"status_epilepticus_history\": null,\n    \"etiology_category\": null,\n    \"etiology_details_text\": null,\n    \"etiology_specifics\": null,\n    \"focal_motor_onset\": null,\n    \"focal_nonmotor_onset\": null\n  },\n  \"alternative_claims\": [],\n  \"associated_tumor_text\": null,\n  \"eeg_findings\": [],\n  \"mri_findings\": [],\n  \"integrated_localization\": null,\n  \"focal_motor_onset\": null,\n  \"focal_nonmotor_onset\": null\n}",
+  "raw_response_tokens": 312,
+  "raw_valid": false,
+  "parse_error_raw": "33 validation errors for ClinicalLocalizationModule\nassociated_tumor_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\neeg_findings\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmri_findings\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nintegrated_localization\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfocal_motor_onset\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfocal_nonmotor_onset\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.lobe\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.laterality\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.predominant_seizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.awareness\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "33 validation errors for ClinicalLocalizationModule\nassociated_tumor_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\neeg_findings\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmri_findings\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nintegrated_localization\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfocal_motor_onset\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfocal_nonmotor_onset\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.lobe\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.laterality\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.predominant_seizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.awareness\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information",
+  "parsed_value": null,
+  "arm": "M2"
+}

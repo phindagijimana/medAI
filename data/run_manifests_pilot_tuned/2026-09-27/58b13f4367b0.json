@@ -1,0 +1,126 @@
+{
+  "run_id": "58b13f4367b0",
+  "started_at": "2026-09-27T09:49:50+00:00",
+  "finished_at": "2026-09-27T09:50:29+00:00",
+  "duration_s": 39.0,
+  "code_sha": "36df4df",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 920,
+  "raw_response": "\"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[int]\",\n      \"type\": \"object\"\n    },\n    \"IedFinding\": {\n      \"description\": \"Individual epileptiform discharge\",\n      \"properties\": {\n        \"value\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"unknown_onset_tonic_clonic\",\n            \"focal_to_bilateral_tonic_clonic\",\n            \"generalized_tonic_clonic\",\n            \"focal_impaired_awareness\",\n            \"focal_unknown_awareness\",\n            \"focal_to_bilateral_tonic\",\n            \"focal_unknown_seizure_type\",\n            \"focal_to_bilateral_tonic_clonic_unknown_awareness\",\n            \"focal_unknown_seizure_type_unknown_awareness\",\n            \"focal_unknown_seizure_type_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic\",\n            \"focal_unknown_onset_tonic\",\n            \"focal_unknown_seizure_type_impaired_awareness_unknown_onset\",\n            \"focal_unknown_seizure_type_unknown_awareness_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_awareness\",\n            \"focal_unknown_onset_tonic_impaired_awareness\",\n            \"focal_unknown_onset_tonic_unknown_awareness\",\n            \"focal_unknown_seizure_type_unknown_onset_impaired_awareness\",\n            \"focal_unknown_seizure_type_unknown_onset_unknown_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset\",\n            \"focal_unknown_onset_tonic_unknown_onset\",\n            \"focal_unknown_seizure_type_unknown_onset_impaired_awareness_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_impaired_awareness_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_awareness_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_impaired_awareness_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_awareness_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset_unknown_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset_impaired_awareness\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset_unknown_onset\",\n            \"focal_unknown_onset_tonic_clonic_unknown_onset_unknown_onset_unknown_onset_unknown_on",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for EegModule\n  Invalid JSON: trailing characters at line 1 column 25 [type=json_invalid, input_value='\"#/$defs/TemporalStatus\"...nknown_onset_unknown_on', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-tuned-gpt-5.6-sol-C1-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M2"
+}
