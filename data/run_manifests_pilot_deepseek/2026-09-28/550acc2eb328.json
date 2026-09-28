@@ -1,0 +1,47 @@
+{
+  "run_id": "550acc2eb328",
+  "started_at": "2026-09-28T05:37:09+00:00",
+  "finished_at": "2026-09-28T05:37:38+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C1-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1237,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1000 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1000 mg BID\",\n      \"source_doc_id\": \"E003\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"lacosamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"200 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lacosamide 200 mg BID\",\n      \"source_doc_id\": \"E003\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"valproic_acid\",\n        \"status\": \"discontinued\",\n        \"dose_text\": \"1000 mg BID\",\n        \"reason_discontinued\": \"inadequate control\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"valproic acid 1000 mg BID (inadequate control)\",\n      \"source_doc_id\": \"E003\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects reported\",\n    \"source_doc_id\": \"E003\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"unknown\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"The ongoing weekly seizure frequency indicates that seizure control is not yet adequate.\",\n    \"source_doc_id\": \"E003\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from this epilepsy clinic letter. Let me read through the document carefully.\n\nFirst, the document mentions the patient is on levetiracetam 1000 mg BID and lacosamide 200 mg BID. That's the current_asms. I should note both of these with their doses.\n\nNext, looking for prior_asms. It says the patient was on valproic acid 1000 mg BID but it was discontinued due to inadequate control. So I'll add that to prior_asms.\n\nThere's no mention of failed_asms, so that should be an empty array.\n\nFor adverse_effects_text, the letter states there are no adverse effects reported, so I'll note that as negated.\n\nDrug_resistance_status is tricky. The letter says the ongoing seizure frequency indicates inadequate control, but it doesn't explicitly state whether the patient is drug-resistant. So I'll mark this as unknown.\n\nSurgery_history is empty since there's no mention of any surgery.\n\nNon_drug_therapies aren't mentioned either, so that's also empty.\n\nI need to make sure all the required fields are present and correctly formatted. Each medication should have generic name, status, dose, etc., with certainty definite. The prior ASM is historical, so its temporal status is historical. The drug resistance is unknown, so I'll reflect that with certainty unknown and provide the evidence text from the letter.\n\nI think that's all the information needed. I'll structure the JSON accordingly, ensuring each field is correctly populated and null where necessary.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1000 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 72 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [\\n...,\\n      \"evidence_text', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "7 validation errors for MedicationModule\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprior_asms.0.value.status\n  Input should be 'current', 'prior', 'failed', 'discontinued_adverse_effect' or 'planned' [type=enum, input_value='discontinued', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprior_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='unknown', inp",
+  "parsed_value": null,
+  "arm": "M1"
+}

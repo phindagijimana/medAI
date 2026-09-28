@@ -1,0 +1,47 @@
+{
+  "run_id": "9c3288fd1196",
+  "started_at": "2026-09-28T07:43:21+00:00",
+  "finished_at": "2026-09-28T07:43:50+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 77,
+  "raw_response": "DOCUMENT:\nPRESURGICAL ASSESSMENT: Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset. Alternative considerations include left insular onset given occasional autonomic features. The MRI shows no structural abnormalities. The EEG shows no abnormalities. The patient is on valproate. The family history is negative. The patient is right-handed. The patient has no history of trauma or infection. The patient has no history of chronic alcohol use. The patient has no history of smoking. The patient has no history of illicit drug use. The patient has no history of diabetes or hypertension. The patient has no history of sleep disorders. The other systems are negative. The patient is on valproate. The patient is not on carbamazepine. The patient is not on phenytoin. The patient is not on topiramate. The patient is not on levetiracetam. The patient is not on oxcarbazepine. The patient is not on lacosamide. The patient is not on clobazam. The patient is not on clonazepam. The patient is not on diazepam. The patient is not on pralidone. The patient is not on acetazolamide. The patient is not on bumetanide. The patient is not on hydrochlorothiazide. The patient is not on atenolol. The patient is not on metoprolol. The patient is not on propranolol. The patient is not on verapamil. The patient is not on diltiazem. The patient's medications are stable. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other medications. The patient is not on any other",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value=\"DOCUMENT:\\nPRESURGICAL A...ent is not on any other\", input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

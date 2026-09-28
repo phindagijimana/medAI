@@ -1,0 +1,73 @@
+{
+  "run_id": "f32d0c02173b",
+  "started_at": "2026-09-28T07:32:46+00:00",
+  "finished_at": "2026-09-28T07:32:59+00:00",
+  "duration_s": 13.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C2-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 114,
+  "raw_response": "Okay, so I need to extract the medication and treatment history from this clinical document. The document is an \"Epilepsy Clinic Letter\" and mentions the epilepsy type as \"Combined generalized and focal epilepsy, classified according to ILAE 2017.\" Hmm, but the task is to extract specific fields like current_asms, prior_asms, etc. \n\nFirst, I should check if there's any mention of medications or treatments. The document provided doesn't seem to have any details about medications. It only talks about the type of epilepsy. So, I don't see any information about current or prior antiepileptic medications, adverse effects, surgery history, or non-drug therapies.\n\nSince the document doesn't mention any of these fields, I should output null for each of them with certainty \"not_documented\" and no evidence text. I need to make sure I follow the ground rules and don't infer anything beyond the document. Also, I shouldn't convert any terms to specific sides or anything like that.\n\nSo, the JSON output should have all the required fields as null, indicating they're not documented in the provided text.\n</think>\n\n```json\n{\n  \"current_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"prior_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"failed_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}\n```",
+  "raw_response_tokens": 441,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Okay, so I need to extra...herapies\": null\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 4,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C2-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C2-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "47122c5b9060",
+  "started_at": "2026-09-28T05:53:29+00:00",
+  "finished_at": "2026-09-28T05:53:58+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C2-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 114,
+  "raw_response": "Okay, so I need to extract the medication and treatment history from this document. Let me start by reading through the document carefully. \n\nThe document mentions that the patient is currently on levetiracetam 1500 mg BID and lacosamide 200 mg BID. That's straightforward. So, I'll add these to the current_asms array. Each will have the generic name, status as current, dose text, and no reason discontinued or rxnorm_cui since they're current.\n\nNext, the document talks about prior failed trials. It lists valproic acid, which was inadequate for control, and carbamazepine, which was discontinued due to a rash. These go into the prior_asms and failed_asms arrays respectively. For valproic acid, the status is failed, and since it's historical, temporal_status is historical. The reason discontinued is inadequate control. For carbamazepine, the status is discontinued due to adverse effect, again historical.\n\nLooking for adverse effects, the document states there are none with the current regimen. So, I'll add that to adverse_effects_text with certainty negated.\n\nDrug resistance status is mentioned as meeting ILAE criteria, so that's current and definite.\n\nSurgery history includes a right anterior temporal lobectomy in 2018. The details are resection, right laterality, 2018 year, Engel Class IA outcome, etc. All these go into the surgery_history array.\n\nNon-drug therapies are not mentioned, so that's an empty array.\n\nI need to make sure all required fields are present, even if null where not applicable. Also, ensure the JSON is correctly formatted with all keys and no extra ones. I think that's all covered.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1500 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1500 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"lacosamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"200 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lacosamide 200 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"valproic_acid\",\n        \"status\": \"failed\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"inadequate control\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"valproic acid (inadequate control)\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"discontinued_adverse_effect\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"rash\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"carbamazepine (rash - discontinued)\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects with current regimen\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects with current regimen\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"drug_resistant\",\n    \"certainty\":",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Okay, so I need to extra...ant\",\\n    \"certainty\":', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M1"
+}

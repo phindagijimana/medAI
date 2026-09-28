@@ -1,0 +1,47 @@
+{
+  "run_id": "4d2b3e6b620b",
+  "started_at": "2026-09-28T06:35:11+00:00",
+  "finished_at": "2026-09-28T06:35:40+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P005",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 812,
+  "raw_response": "{\n  \"study_type\": {\n    \"value\": \"routine\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Routine scalp EEG\",\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"background\": {\n    \"value\": \"normal\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"symmetric, well-organized posterior dominant rhythm\",\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ied_present\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No focal slowing, epileptiform discharges, or electrographic seizures\",\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ied_findings\": [\n    {\n      \"value\": {\n        \"ied_type\": \"none\",\n        \"localization\": \"none\",\n        \"laterality\": \"none\",\n        \"dominant_frequency_hz\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"No focal slowing, epileptiform discharges, or electrographic seizures\",\n      \"source_doc_id\": \"SYN-EEG-02\",\n      \"source_doc_type\": \"eeg_report\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"seizures_captured\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No electrographic seizures captured\",\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizures_captured_count\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ictal_onset_lobe\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ictal_onset_laterality\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-02\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  }\n}<think>\nOkay, so I'm trying to figure out how to extract the EEG report phenotype fields from the given document. Let me start by reading the document carefully.\n\nThe document is an EEG report titled \"ELECTROENCEPHALOGRAM REPORT.\" The indication is for a clinical evaluation of possible seizure activity. The technique used was a routine scalp EEG with the 10-20 electrode system, including awake and drowsy states, with photic stimulation and hyperventilation.\n\nLooking at the findings, the awake background shows a symmetric, well-organized posterior dominant rhythm with normal reactivity. Drowsiness leads to expected attenuation and slowing. No focal slowing, epileptiform discharges, or electrographic seizures are noted. The same goes for photic stimulation and hyperventilation\u2014no abnormalities there.\n\nThe impression states that the EEG is normal, with no epileptiform abnormalities or seizures recorded.\n\nNow, I need to extract the required fields: study_type, background, ied_present, ied_findings, seizures_captured, seizures_captured_count, ictal_onset_lobe, and ictal_onset_laterality.\n\nStarting with study_type. The document mentions \"routine scalp EEG,\" so that's definitely \"routine.\"\n\nNext, background. It describes the posterior dominant rhythm as symmetric and well-organized, so the background is normal.\n\nFor ied_present,",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for EegModule\n  Invalid JSON: trailing characters at line 81 column 2 [type=json_invalid, input_value='{\\n  \"study_type\": {\\n  ...al.\\n\\nFor ied_present,', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for EegModule\nied_findings.0.value.ied_type\n  Input should be 'spike', 'sharp_wave', 'spike_and_wave', 'polyspike', 'polyspike_and_wave', 'sharp_and_slow', 'generalized_spike_wave_3hz' or 'other' [type=enum, input_value='none', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nied_findings.0.value.localization\n  Input should be 'frontal', 'temporal', 'parietal', 'occipital', 'insular', 'cingulate', 'multifocal' or 'unknown' [type=enum, input_value='none', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nied_findings.0.value.laterality\n  Input should be 'left', 'right', 'bilateral', 'midline', 'diffuse' or 'unknown' [type=enum, input_value='none', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

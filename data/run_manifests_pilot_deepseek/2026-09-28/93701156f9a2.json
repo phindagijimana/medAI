@@ -1,0 +1,47 @@
+{
+  "run_id": "93701156f9a2",
+  "started_at": "2026-09-28T05:19:46+00:00",
+  "finished_at": "2026-09-28T05:20:06+00:00",
+  "duration_s": 20.0,
+  "code_sha": "6afbac1",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-C0-C0-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 97,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"generalized\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"EP_TYPE: Generalized\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"synthetic_epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": []\n}<think>\nOkay, so I need to extract the clinician's localization hypothesis from the given document. Let me read through the document carefully.\n\nThe document mentions \"PRESURGICAL ASSESSMENT: Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset. Alternative considerations include left insular onset given occasional autonomic features.\"\n\nFirst, the primary claim is about the left mesial temporal lobe. The lobe is clearly stated as \"temporal,\" and the laterality is \"left.\" The source is the clinician's hypothesis. The certainty is \"probable\" because it's a clinical assessment, not definitive. The evidence text is the exact quote from the document.\n\nNext, the alternative claim is about the left insular lobe. Again, the lobe is \"insular,\" laterality is \"left,\" and the source is the clinician's hypothesis. The certainty here is \"possible\" since it's an alternative consideration. The evidence text is the part mentioning \"left insular onset.\"\n\nI need to make sure I don't add any extra information or convert \"no clear lateralization\" to a side. Also, all required fields must be present, and if something isn't mentioned, it should be null. In this case, both primary and alternative claims are present, so their details are filled out correctly.\n\nI should structure the JSON with the primary_claim and alternative_claims, each having their respective values, certainties, evidence texts, and other required fields. The source_doc_id and source_date are placeholders, but that's acceptable as per the instructions.\n\nI think that's all. I just need to format it correctly without any surrounding prose or code fences, as per the user's instructions.\n</think>\n\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"mesial_temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"insular\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Alternative considerations include left insular onset\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}",
+  "raw_response_tokens": 726,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: trailing characters at line 16 column 2 [type=json_invalid, input_value='{\\n  \"primary_claim\": {\\...5-01-01\"\\n    }\\n  ]\\n}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "2 validation errors for ClinicalLocalizationModule\nprimary_claim.value.lobe\n  Input should be 'frontal', 'temporal', 'parietal', 'occipital', 'insular', 'cingulate', 'multifocal' or 'unknown' [type=enum, input_value='generalized', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='synthetic_epilepsy_clinic_letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

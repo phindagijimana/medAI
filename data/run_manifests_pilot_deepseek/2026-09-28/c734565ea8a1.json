@@ -1,0 +1,73 @@
+{
+  "run_id": "c734565ea8a1",
+  "started_at": "2026-09-28T05:16:04+00:00",
+  "finished_at": "2026-09-28T05:16:18+00:00",
+  "duration_s": 14.0,
+  "code_sha": "6afbac1",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-C0-C0-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 92,
+  "raw_response": "Okay, so I need to extract the medication and treatment history from this clinical document. The document is a synthetic epilepsy clinic letter, with EP_TYPE as Focal and SZ_FREQ as 2 times a month. \n\nFirst, I should check if there's any information about current ASMs (Antimicrobial Susceptibility Monitoring) drugs. The document doesn't mention any medications, so current_asms will be null with certainty \"not_documented\".\n\nNext, prior_asms. Again, the document doesn't provide any details about past medications, so prior_asms is also null with certainty \"not_documented\".\n\nFailed_asms would be the same since there's no mention of any failed treatments.\n\nMoving on to adverse_effects_text. The letter doesn't discuss any adverse effects related to medications, so that's null with \"not_documented\".\n\nDrug_resistance_status isn't mentioned either, so it's null with \"not_documented\".\n\nNow, non_drug_therapies. The document doesn't talk about any alternative therapies like ketogenic diet or others, so that's null with \"not_documented\".\n\nSince there's no mention of surgery, surgery_history is null with \"not_documented\".\n\nPutting it all together, all the required fields are null because the document doesn't provide any relevant information. I need to make sure I follow the output format correctly, using JSON and including all necessary keys with null values as specified.\n</think>\n\n```json\n{\n  \"current_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"prior_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"failed_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}\n```",
+  "raw_response_tokens": 499,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Okay, so I need to extra...herapies\": null\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 4,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-C0-C0-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-C0-C0-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

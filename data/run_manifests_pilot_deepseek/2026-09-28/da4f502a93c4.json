@@ -1,0 +1,80 @@
+{
+  "run_id": "da4f502a93c4",
+  "started_at": "2026-09-28T07:03:53+00:00",
+  "finished_at": "2026-09-28T07:04:15+00:00",
+  "duration_s": 22.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C3-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 59,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"unknown\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"unknown\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Epilepsy type (ILAE 2017): Unknown\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": []\n}<think>\nOkay, so I need to extract the clinician's localization hypothesis from the given document. Let me read through the document carefully.\n\nThe document is a pre-surgical assessment. It mentions that based on semiology, which includes things like d\u00e9j\u00e0 vu, oral automatisms, and loss of awareness, the clinical localization favors a left mesial temporal onset. That seems pretty clear. So the primary claim should be that the seizure origin is in the left temporal lobe, specifically the mesial part.\n\nNow, looking for alternative considerations. The document also states that there's an alternative consideration for a left insular onset because of occasional autonomic features. So that's another possible location the clinician is considering.\n\nI need to make sure I'm not adding anything beyond what's in the document. The primary claim is definitely the left mesial temporal, and the alternative is the left insular. Both are mentioned as possibilities, so I should include both in the JSON output.\n\nI should structure the JSON with the primary_claim and alternative_claims. Each claim should have the lobe, laterality, and source as \"clinician_hypothesis\". The certainty for the primary is \"probable\" because it's the favored option, and for the alternative, it's \"possible\" since it's just a consideration.\n\nI also need to include the evidence text as verbatim quotes from the document. So for the primary, it's the sentence about clinical localization favoring the left mesial temporal, and for the alternative, it's the part about the left insular consideration.\n\nI should make sure all the fields are present and correctly formatted. No fields should be missing, and if something isn't mentioned, it should be null, but in this case, everything is covered.\n\nI think that's all. I'll structure the JSON accordingly, ensuring each part is correctly filled out with the right information from the document.\n</think>\n\n```json\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"insular\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Alternative considerations include left insular onset\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}\n```",
+  "raw_response_tokens": 772,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: trailing characters at line 16 column 2 [type=json_invalid, input_value='{\\n  \"primary_claim\": {\\...01\"\\n    }\\n  ]\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "strip_code_fence",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset",
+      "source_doc_id": "SYN-LOC-01",
+      "source_doc_type": "presurgical_evaluation",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "insular",
+          "laterality": "left",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Alternative considerations include left insular onset",
+        "source_doc_id": "SYN-LOC-01",
+        "source_doc_type": "presurgical_evaluation",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ]
+  },
+  "arm": "M1"
+}

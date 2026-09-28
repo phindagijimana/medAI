@@ -1,0 +1,47 @@
+{
+  "run_id": "07f9d41cd7fe",
+  "started_at": "2026-09-28T07:14:08+00:00",
+  "finished_at": "2026-09-28T07:14:37+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C1-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 714,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1000 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1000 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects reported\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_resistant\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"The patient has generalized epilepsy. They continue to experience seizures at an estimated frequency of approximately one seizure per week.\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from the provided clinical document. Let me start by reading the document carefully.\n\nThe document is a letter from an epilepsy clinic. It mentions that the patient has generalized epilepsy and continues to have seizures about once a week. The assessment and plan sections don't provide specific medication details, but the letter does mention the importance of medication adherence and monitoring.\n\nWait, the user's previous example included a JSON structure with current_asms, prior_asms, etc. I need to make sure I follow that structure. Since the document doesn't specify any medications, I should mark current_asms and prior_asms as not_documented. \n\nLooking at the plan, there's no mention of specific drugs, so I can't infer any. The letter doesn't talk about failed treatments either. So, all fields related to medications and treatments will be null with certainty \"not_documented.\"\n\nI should also check for non-drug therapies, but the document doesn't mention any, so that's also null. The same goes for surgery history\u2014it's not mentioned, so it's not_documented.\n\nI need to make sure all required fields are present, even if they're null. I'll structure the JSON accordingly, ensuring each field is included with the correct values or null as needed.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [\n    {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"failed_asms\": [\n    {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"adverse_effects_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 41 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [\\n...ource_doc_id\": \"SYN-MED', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "1 validation error for MedicationModule\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='not_resistant', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

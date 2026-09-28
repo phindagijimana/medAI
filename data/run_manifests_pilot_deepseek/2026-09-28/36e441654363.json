@@ -1,0 +1,47 @@
+{
+  "run_id": "36e441654363",
+  "started_at": "2026-09-28T06:29:37+00:00",
+  "finished_at": "2026-09-28T06:30:05+00:00",
+  "duration_s": 28.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1564,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"current_antiseizure_medication\",\n        \"status\": \"current\",\n        \"dose_text\": \"as prescribed\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"current antiseizure medication\",\n      \"source_doc_id\": \"SYN-MED-02\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No specific adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No specific adverse effects reported\",\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from this document. Let me read through the document carefully.\n\nThe document is a letter from a consultant neurologist to Dr. Patel. It's about an epilepsy follow-up. The patient's diagnosis is mentioned as combined generalized and focal epilepsy, classified by the ILAE 2017 framework. The letter discusses the importance of antiseizure medication adherence and avoiding triggers. The current treatment is to remain unchanged, and if seizures recur or become problematic, treatment can be reassessed.\n\nLooking for current ASMs, the letter mentions \"current antiseizure medication\" as prescribed. So I'll note that as current_asms with the generic name as \"current_antiseizure_medication\" and the status as current. The dose text is \"as prescribed\" since it's not specified. No reason for discontinuation or RXNORM CUI is provided, so those fields will be null.\n\nFor prior ASMs and failed ASMs, the document doesn't mention any previous medications, so both will be empty arrays.\n\nAdverse effects are mentioned as \"No specific adverse effects reported,\" so I'll extract that with certainty negated.\n\nDrug resistance status isn't discussed, so it's not_documented.\n\nSurgery history is empty since there's no mention of surgery.\n\nNon-drug therapies aren't mentioned either, so that's an empty array.\n\nI need to make sure all required fields are present and format everything correctly in JSON. Also, ensure that any missing fields are marked as null with the appropriate certainty.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"current_antiseizure_medication\",\n        \"status\": \"current\",\n        \"dose_text\": \"as prescribed\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"current antiseizure medication\",\n      \"source_doc_id\": \"SYN-MED-02\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No specific adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No specific adverse effects reported\",\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}\n```",
+  "raw_response_tokens": 1006,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 41 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [\\n..._therapies\": []\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 3,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "4 validation errors for MedicationModule\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='not_documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

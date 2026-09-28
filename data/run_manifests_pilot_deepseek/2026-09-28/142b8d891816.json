@@ -1,0 +1,73 @@
+{
+  "run_id": "142b8d891816",
+  "started_at": "2026-09-28T07:45:16+00:00",
+  "finished_at": "2026-09-28T07:45:31+00:00",
+  "duration_s": 15.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 57,
+  "raw_response": "<|begin_of_text|><think>\nOkay, so I need to extract the medication and treatment history from this clinical document for a research phenotyping study. Let me start by reading the document carefully.\n\nThe document mentions \"Epilepsy type: Generalized\" and \"Seizure frequency: 1 per week.\" Hmm, but I'm supposed to extract information about medications, treatments, ASMs, etc. Since there's no mention of any specific medications or treatments here, I should check each required field.\n\nLooking at the fields: current_asms, prior_asms, failed_asms, adverse_effects_text, drug_resistance_status, surgery_history, non_drug_therapies. None of these are mentioned in the document. So for each of these, I should output value=null with certainty=\"not_documented\" and evidence_text=null.\n\nWait, but the user also provided an example where they included \"No medications or treatments are mentioned.\" Maybe I should include that in the evidence_text for each field. But according to the ground rules, every non-null value must have evidence_text as a verbatim quote. Since these fields aren't mentioned, their evidence_text should be null.\n\nSo, I'll structure the JSON with each field set to null, certainty as \"not_documented,\" and evidence_text as null. Also, I need to make sure the JSON is on a single line without any surrounding prose or code fences.\n\nI think that's it. All required fields are present, and absent ones are marked appropriately.\n</think>\n\n```json\n{\n  \"current_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"prior_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"failed_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}\n```",
+  "raw_response_tokens": 521,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='<|begin_of_text|><think>...herapies\": null\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 4,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P002",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P002",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

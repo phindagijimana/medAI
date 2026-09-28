@@ -1,0 +1,73 @@
+{
+  "run_id": "f6bcb374fdd5",
+  "started_at": "2026-09-28T06:21:43+00:00",
+  "finished_at": "2026-09-28T06:21:57+00:00",
+  "duration_s": 14.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 928,
+  "raw_response": "Okay, so I need to extract the medication and treatment history from this clinical document. Let me read through the document carefully.\n\nThe document starts with a greeting and mentions the patient has focal epilepsy. It says they continue to experience approximately two seizures per month. The impression also notes focal epilepsy with ongoing seizures at that frequency.\n\nNow, looking for medications. The document doesn't mention any specific antiseizure medications. It talks about adherence to prescribed medications but doesn't list any names. So, I should mark current_asms as not documented.\n\nFor prior_asms, since there's no mention of past medications, that's also not documented. Failed_asms are similarly not mentioned, so null.\n\nAdverse_effects_text isn't discussed either, so that's not documented.\n\nDrug_resistance_status isn't mentioned either. The document focuses on seizure frequency and follow-up plans rather than medication effectiveness.\n\nSurgery_history isn't part of this document either. The patient hasn't had any surgeries related to epilepsy mentioned here.\n\nNon_drug_therapies like dietary changes or other treatments aren't discussed, so that's not documented.\n\nSo, all the required fields related to medications and treatments are not present in the document. I'll set each of them to null with certainty \"not_documented\" and no evidence text.\n</think>\n\n```json\n{\n  \"current_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"prior_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"failed_asms\": {\n    \"generic_name\": null,\n    \"status\": null,\n    \"dose_text\": null,\n    \"reason_discontinued\": null,\n    \"rxnorm_cui\": null,\n    \"evidence_text\": null\n  },\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}\n```",
+  "raw_response_tokens": 476,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Okay, so I need to extra...herapies\": null\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 4,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P001",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

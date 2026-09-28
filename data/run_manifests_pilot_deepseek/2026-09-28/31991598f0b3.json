@@ -1,0 +1,47 @@
+{
+  "run_id": "31991598f0b3",
+  "started_at": "2026-09-28T06:09:26+00:00",
+  "finished_at": "2026-09-28T06:09:55+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P002",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 81,
+  "raw_response": "{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects reported\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from the provided clinical document. Let me start by reading through the document carefully.\n\nThe document mentions that the patient is currently on levetiracetam 1500 mg BID and lacosamide 200 mg BID. That's straightforward. These are their current antiepileptic medications. \n\nNext, it says they had prior failed trials with valproic acid because of inadequate control and carbamazepine due to a rash, which was discontinued. So, these are their failed medications. \n\nThere's no mention of any adverse effects, so I'll note that as \"No adverse effects with current regimen.\" \n\nThe document also states that the patient meets ILAE criteria for drug-resistant epilepsy, which means they are drug-resistant. \n\nLooking for surgery history, it mentions a right anterior temporal lobectomy in 2018. The details include the surgery type, target, laterality, year, outcome, and Engel class. \n\nNon-drug therapies aren't mentioned, so that field will be empty.\n\nI need to structure this into the JSON format as per the schema. Each current ASM is added with their details, prior and failed ASMs are listed, adverse effects are included, drug resistance status is noted, surgery history is recorded, and non-drug therapies are left empty.\n\nI should ensure that all required fields are present, even if some are null. Also, I must not include any extra fields outside the schema. \n\nI think that's all the information needed. Now, I'll format it correctly into the JSON object.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1500 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1500 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"lacosamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"200 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lacosamide 200 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"valproic_acid\",\n        \"status\": \"failed\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"inadequate control\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"valproic acid (inadequate control)\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"discontinued_adverse_effect\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"rash\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 25 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [],...,\\n      \"certainty\": \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for MedicationModule\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='not_documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

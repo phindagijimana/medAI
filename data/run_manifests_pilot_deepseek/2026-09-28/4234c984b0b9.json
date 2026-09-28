@@ -1,0 +1,47 @@
+{
+  "run_id": "4234c984b0b9",
+  "started_at": "2026-09-28T07:05:08+00:00",
+  "finished_at": "2026-09-28T07:05:38+00:00",
+  "duration_s": 30.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C3-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 59,
+  "raw_response": "DOCUMENT:\nPRESURGICAL ASSESSMENT: Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset. Alternative considerations include left insular onset given occasional autonomic features. The MRI shows no structural abnormalities. The EEG shows no abnormalities. The patient has a history of similar episodes since age 12. The family history is negative. The patient is on valproate. The patient is right-handed. The patient has no history of trauma or infection. The patient has a normal neurological exam. The patient has a normal CT scan. The patient has a normal MRI. The imaging studies do not support a structural or metabolic cause for the seizures. The patient has a normal EKG. The patient has a normal blood pressure. The patient has a normal urinalysis. The patient has a normal chest X-ray. The patient has a normal abdominal ultrasound. The patient has a normal bone scan. The patient has a normal liver function. The patient has a normal renal function. The patient has a normal CBC. The patient has a normal electrolyte. The patient has a normal glucose. The patient has a normal thyroid function. The patient has a normal B12 and folate. The patient has a normal liver function. The patient has a normal renal function. The patient has a normal ESR. The patient has a normal CRP. The patient has a normal platelet count. The patient has a normal coagulation profile. The patient has a normal INR. The patient has a normal creatinine. The patient has a normal albumin. The patient has a normal lactic acid. The patient has a normal pyruvate. The patient has a normal lactate. The patient has a normal pH. The patient has a normal base excess. The patient has a normal blood gas. The patient has a normal CSF. The patient has a normal CT scan. The patient has a normal MRI. The patient has a normal EEG. The patient has a normal EMI. The patient has a normal PET scan. The patient has a normal SPECT scan. The patient has a normal 18F-FDG PET. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Florobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a normal 18F-Fluorobenzylglucose. The patient has a",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='DOCUMENT:\\nPRESURGICAL A...cose. The patient has a', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

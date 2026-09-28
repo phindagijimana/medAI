@@ -1,0 +1,47 @@
+{
+  "run_id": "c29c2671b9f2",
+  "started_at": "2026-09-28T07:49:03+00:00",
+  "finished_at": "2026-09-28T07:49:20+00:00",
+  "duration_s": 17.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 82,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"generalized\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Epilepsy type: Combined generalized and focal (ILAE 2017)\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": []\n}<think>\nOkay, so I need to extract the clinician's localization hypothesis from the given document. The document is an epilepsy clinic letter that states the epilepsy type as combined generalized and focal according to ILAE 2017. \n\nFirst, I should identify the primary claim. The primary claim is about the type of epilepsy, which is combined generalized and focal. The lobe here is generalized, and since it's combined, the laterality isn't specified. So, the laterality should be \"unknown\". The source is the clinician's hypothesis.\n\nNext, I need to check if there are any alternative claims. The document doesn't mention any alternatives, so the alternative_claims list will be empty.\n\nI should make sure that all required fields are present. The primary_claim has lobe, laterality, source, certainty, temporal_status, evidence_text, source_doc_id, source_doc_type, and source_date. The alternative_claims are an array of objects, each with the same structure, but since there are none, it's an empty array.\n\nI also need to ensure that if a field isn't mentioned, it's set to null with certainty \"not_documented\". Here, the laterality is explicitly stated as unknown, so it's handled correctly. There are no missing fields in this case.\n\nFinally, I'll structure the JSON output accordingly, making sure it's on a single line without any surrounding prose or code fences.\n</think>\n\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"generalized\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Epilepsy type: Combined generalized and focal (ILAE 2017)\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"epilepsy_clinic_letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": []\n}",
+  "raw_response_tokens": 559,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: trailing characters at line 16 column 2 [type=json_invalid, input_value='{\\n  \"primary_claim\": {\\...ernative_claims\": []\\n}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "2 validation errors for ClinicalLocalizationModule\nprimary_claim.value.lobe\n  Input should be 'frontal', 'temporal', 'parietal', 'occipital', 'insular', 'cingulate', 'multifocal' or 'unknown' [type=enum, input_value='generalized', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='epilepsy_clinic_letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

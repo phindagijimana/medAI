@@ -1,0 +1,95 @@
+{
+  "run_id": "9d79a62fd70f",
+  "started_at": "2026-09-28T06:30:05+00:00",
+  "finished_at": "2026-09-28T06:30:35+00:00",
+  "duration_s": 30.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C1-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1564,
+  "raw_response": "DOCUMENT:\nPRESURGICAL ASSESSMENT: Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset. Alternative considerations include left insular onset given occasional autonomic features. The MRI shows no structural abnormalities, and the EEG shows no epileptiform activity. The patient has a history of recurrent generalized tonic-clonic seizures, which are often associated with bilateral brainstem or thalamic abnormalities. The differential diagnosis includes **bilateral temporal lobe epilepsy** and **left mesial temporal epilepsy**. The most likely diagnosis is **left mesial temporal epilepsy**.\n\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"temporal\",\n        \"laterality\": \"bilateral\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"differential diagnosis includes bilateral temporal lobe epilepsy\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"lobe\": \"temporal\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"most likely diagnosis is left mesial temporal epilepsy\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}<think>\nOkay, so I need to extract the clinician's localization hypothesis from the given document. Let me read through the document carefully.\n\nThe document starts with a presurgical assessment. It mentions semiological features like deja vu, oral automatisms, and loss of awareness. Based on these, the clinical localization favors a left mesial temporal onset. That's the primary claim.\n\nThen, there are alternative considerations. The clinician notes that there's occasional autonomic features, which might point to a left insular onset. So, that's an alternative claim.\n\nNext, the MRI shows no structural abnormalities, and the EEG doesn't show epileptiform activity. The patient has a history of generalized tonic-clonic seizures, often linked to bilateral brainstem or thalamic issues. The differential diagnosis includes bilateral temporal lobe epilepsy and left mesial temporal epilepsy. The most likely diagnosis is left mesial temporal epilepsy.\n\nWait, but the primary claim was left mesial temporal, and the alternative was left insular. However, the differential diagnosis includes bilateral temporal as another alternative. So, I need to include that as well.\n\nI should structure this into primary_claim and alternative_claims. The primary is left mesial temporal with definite certainty. The alternative includes left insular and bilateral temporal, both with possible certainty.\n\nI need to make sure each alternative is a separate object in the array. Also, the evidence texts should be direct quotes from the document.\n\nSo, the primary_claim is certain, and the alternatives are possible. I'll extract the relevant sentences as evidence texts, ensuring they are verbatim.\n\nI think that's all. Now, I'll format this into the JSON structure as per the schema provided.\n</think>\n\n```json\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"insular\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Alternative considerations include left insular onset\",\n      \"source_doc_id\": \"",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='DOCUMENT:\\nPRESURGICAL A...     \"source_doc_id\": \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "regex_json_extraction",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "clinical localization favors left mesial temporal onset",
+      "source_doc_id": "SYN-LOC-01",
+      "source_doc_type": "presurgical_evaluation",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "temporal",
+          "laterality": "bilateral",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "differential diagnosis includes bilateral temporal lobe epilepsy",
+        "source_doc_id": "SYN-LOC-01",
+        "source_doc_type": "presurgical_evaluation",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "lobe": "temporal",
+          "laterality": "left",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "most likely diagnosis is left mesial temporal epilepsy",
+        "source_doc_id": "SYN-LOC-01",
+        "source_doc_type": "presurgical_evaluation",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ]
+  },
+  "arm": "M2"
+}

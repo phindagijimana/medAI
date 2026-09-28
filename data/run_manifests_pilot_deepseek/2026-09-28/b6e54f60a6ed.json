@@ -1,0 +1,47 @@
+{
+  "run_id": "b6e54f60a6ed",
+  "started_at": "2026-09-28T05:50:09+00:00",
+  "finished_at": "2026-09-28T05:50:29+00:00",
+  "duration_s": 20.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C2-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 180,
+  "raw_response": "{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No additional clinical information is available in the supplied record.\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from this clinical document. Let me read through the document carefully.\n\nThe document is an \"Epilepsy Clinic Letter\" and the assessment is \"Focal epilepsy.\" It mentions the seizure frequency as approximately 2 seizures per month. However, it also states that there's no additional clinical information available. \n\nFirst, I'll look for current medications. The document doesn't list any medications, so current_asms should be an empty array. Similarly, prior_asms and failed_asms are also empty because there's no mention of past medications or failed trials.\n\nNext, adverse effects. The document says \"No adverse effects reported,\" so I'll note that in adverse_effects_text with certainty as negated.\n\nDrug resistance status isn't mentioned at all, so it should be \"not_documented.\"\n\nSurgery history is also not present, so that's another empty array.\n\nNon-drug therapies aren't mentioned either, so that's empty.\n\nI need to make sure all required fields are included and set to null or \"not_documented\" where appropriate. Also, ensure the output is in JSON format without any extra text.\n</think>\n\n```json\n{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No additional clinical information is available in the supplied record.\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}\n```",
+  "raw_response_tokens": 676,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 25 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [],..._therapies\": []\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 3,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for MedicationModule\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='not_documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

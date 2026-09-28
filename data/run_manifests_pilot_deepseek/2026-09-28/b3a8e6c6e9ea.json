@@ -1,0 +1,126 @@
+{
+  "run_id": "b3a8e6c6e9ea",
+  "started_at": "2026-09-28T06:20:38+00:00",
+  "finished_at": "2026-09-28T06:21:08+00:00",
+  "duration_s": 30.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 21,
+  "raw_response": "\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": \"0\",\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[int]\",\n      \"type\": \"object\"\n    },\n    \"IedFinding\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"type\": {\n          \"enum\": [\n            \"spike\",\n            \"wave\",\n            \"slow\",\n            \"dts\",\n            \"pao\",\n            \"pib\",\n            \"oav\",\n            \"avh\",\n            \"other\"\n          ],\n          \"title\": \"Type\",\n          \"type\": \"string\"\n        },\n        \"localization\": {\n          \"enum\": [\n            \"bilateral\",\n            \"unilateral\",\n            \"diffuse\",\n            \"focal\",\n            \"other\"\n          ],\n          \"title\": \"Localization\",\n          \"type\": \"string\"\n        },\n        \"laterality\": {\n          \"enum\": [\n            \"left\",\n            \"right\",\n            \"both\",\n            \"unknown\",\n            \"other\"\n          ],\n          \"title\": \"Laterality\",\n          \"type\": \"string\"\n          },\n        \"dominant_frequency_hz\": {\n          \"type\": \"number\",\n          \"title\": \"Dominant Frequency HZ\",\n          \"format\": \"number\"\n        }\n      },\n      \"title\": \"IedFinding\",\n      \"type\": \"object\"\n    },\n    \"LobarLocalization\": {\n      \"enum\": [\n        \"frontal\",\n        \"parietal\",\n        \"temporal\",\n        \"occipital\",\n        \"central\",\n        \"other\"\n      ],\n      \"title\": \"LobarLocalization\",\n      \"type\": \"string\"\n    },\n    \"Laterality\": {\n      \"enum\": [\n        \"left\",\n        \"right\",\n        \"both\",\n        \"unknown\",\n        \"other\"\n      ],\n      \"title\": \"Laterality\",\n      \"type\": \"string\"\n    },\n    \"TemporalStatus\": {\n      \"enum\": [\n        \"acute\",\n        \"chronic\",\n        \"active\",\n        \"resolved\",\n        \"unspecified\",\n        \"other\"\n      ],\n      \"title\": \"TemporalStatus\",\n      \"type\": \"string\"\n    },\n    \"SeizureType\": {\n      \"enum\": [\n        \"complex_partial\",\n        \"simple_partial\",\n        \"complex_temporal\",\n        \"simple_temporal\",\n        \"myoclonic\",\n        \"static\",\n        \"other\"\n      ],\n      \"title\": \"SeizureType\",\n      \"type\": \"string\"\n    },\n    \"SeizureSubtype\": {\n      \"enum\": [\n        \"generalized_tonic_clonic\",\n        \"generalized_myoclonic\",\n        \"partial\",\n        \"other\"\n      ],\n      \"title\": \"SeizureSubtype\",\n      \"type\": \"string\"\n    },\n    \"SeizureLateralization\": {\n      \"enum\": [\n        \"bilateral\",\n        \"unilateral\",\n        \"diffuse\",\n        \"focal\",\n        \"other\"\n      ],\n      \"title\": \"SeizureLateralization\",\n      \"type\": \"string\"\n    },\n    \"SeizureDominantFrequency\": {\n      \"enum\": [\n        \"low\",\n        \"high\",\n        \"other\"\n      ],\n      \"title\": \"SeizureDominantFrequency\",\n      \"type\": \"string\"\n    },\n    \"SeizureOnset\": {\n      \"enum\": [\n        \"acute\",\n        \"chronic\",\n        \"active\",\n        \"resolved\",\n        \"unspecified\",\n        \"other\"\n      ],\n      \"title\": \"SeizureOnset",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for EegModule\n  Invalid JSON: control character (\\u0000-\\u001F) found while parsing a string at line 2 column 0 [type=json_invalid, input_value='\": {\\n          \"$ref\": ... \"title\": \"SeizureOnset', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C3-P006",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M2"
+}

@@ -1,0 +1,168 @@
+{
+  "run_id": "07ba36a0e5f7",
+  "started_at": "2026-09-28T05:57:08+00:00",
+  "finished_at": "2026-09-28T05:57:37+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C2-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 134,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1500 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1500 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"lacosamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"200 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lacosamide 200 mg BID\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"valproic_acid\",\n        \"status\": \"failed\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"inadequate control\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"valproic acid (inadequate control)\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"discontinued_adverse_effect\",\n        \"dose_text\": null,\n        \"reason_discontinued\": \"rash\",\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"carbamazepine (rash - discontinued)\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects with current regimen\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects with current regimen\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"drug_resistant\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Meets ILAE criteria for drug-resistant epilepsy\",\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [\n    {\n      \"value\": {\n        \"surgery_type\": \"resection\",\n        \"target\": \"right anterior temporal lobe\",\n        \"laterality\": \"right\",\n        \"year\": 2018,\n        \"outcome_text\": \"Engel Class IA at 18-month follow-up\",\n        \"engel_class\": \"IA\",\n        \"ilae_outcome\": null,\n        \"device_model_text\": null,\n        \"stimulation_parameters_text\": null,\n        \"pathology_notes_text\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"right anterior temporal lobectomy in 2018\",\n      \"source_doc_id\": \"SYN-MED-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I'm trying to figure out how to extract the necessary information from the provided clinical document. The user has given me a task where I need to extract specific fields related to medications and treatments for a research phenotyping study. The document provided is a letter from an epilepsy clinic, and I need to parse it correctly.\n\nFirst, I'll start by identifying the structure of the document. The document mentions",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 108 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [\\n.... The document mentions', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "regex_json_extraction",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "current",
+          "dose_text": "1500 mg BID",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "levetiracetam 1500 mg BID",
+        "source_doc_id": "SYN-MED-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "generic_name": "lacosamide",
+          "status": "current",
+          "dose_text": "200 mg BID",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "lacosamide 200 mg BID",
+        "source_doc_id": "SYN-MED-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [
+      {
+        "value": {
+          "generic_name": "valproic_acid",
+          "status": "failed",
+          "dose_text": null,
+          "reason_discontinued": "inadequate control",
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "valproic acid (inadequate control)",
+        "source_doc_id": "SYN-MED-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "generic_name": "carbamazepine",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": "rash",
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "carbamazepine (rash - discontinued)",
+        "source_doc_id": "SYN-MED-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "adverse_effects_text": {
+      "value": "No adverse effects with current regimen",
+      "certainty": "negated",
+      "temporal_status": "current",
+      "evidence_text": "No adverse effects with current regimen",
+      "source_doc_id": "SYN-MED-01",
+      "source_doc_type": "progress_note",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Meets ILAE criteria for drug-resistant epilepsy",
+      "source_doc_id": "SYN-MED-01",
+      "source_doc_type": "progress_note",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [
+      {
+        "value": {
+          "surgery_type": "resection",
+          "target": "right anterior temporal lobe",
+          "laterality": "right",
+          "year": 2018,
+          "outcome_text": "Engel Class IA at 18-month follow-up",
+          "engel_class": "IA",
+          "ilae_outcome": null,
+          "device_model_text": null,
+          "stimulation_parameters_text": null,
+          "pathology_notes_text": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "right anterior temporal lobectomy in 2018",
+        "source_doc_id": "SYN-MED-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "non_drug_therapies": []
+  },
+  "arm": "M1"
+}

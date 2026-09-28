@@ -1,0 +1,47 @@
+{
+  "run_id": "810202d5b712",
+  "started_at": "2026-09-28T07:17:40+00:00",
+  "finished_at": "2026-09-28T07:18:09+00:00",
+  "duration_s": 29.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C1-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 912,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1000 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"levetiracetam 1000 mg BID\",\n      \"source_doc_id\": \"SYN-MED-02\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"lacosamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"200 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lacosamide 200 mg BID\",\n      \"source_doc_id\": \"SYN-MED-02\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No known adverse effects\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No known adverse effects\",\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"unknown\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"The patient has a diagnosis of epilepsy with combined generalized and focal seizure types, consistent with the ILAE 2017 epilepsy classification.\",\n    \"source_doc_id\": \"SYN-MED-02\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from this epilepsy clinic letter. Let me read through the document carefully.\n\nThe letter starts by referring to a patient with a diagnosis of epilepsy, specifically mentioning combined generalized and focal seizure types. It mentions the ILAE 2017 classification, which is about epilepsy types. \n\nNext, it talks about ongoing management, suggesting that the current medications should consider the mixed seizure profile. It advises continuing the current medications and reviewing their effectiveness, tolerability, adherence, and safety. \n\nThe patient is being advised about seizure safety measures, like avoiding swimming, heights, and dangerous machinery, and driving guidelines. \n\nNow, looking for medications, the letter doesn't explicitly list any ASMs (antiseizure medications). It just mentions that management should consider the mixed profile when selecting and monitoring. So, I don't have specific medications here. \n\nSince there's no mention of prior or failed ASMs, those fields should be null. The same goes for adverse effects; the letter doesn't mention any, so that's also null. \n\nDrug resistance status is tricky. The letter doesn't state whether the patient is drug-resistant. It just mentions the mixed seizure types, which might imply some resistance, but without explicit information, I can't assume. So, it's unknown.\n\nSurgery history isn't mentioned either, so that's null. Non-drug therapies aren't discussed, so they're also null.\n\nPutting it all together, the current ASMs are unknown because they aren't listed. Prior and failed ASMs are not documented. Adverse effects are not mentioned. Drug resistance is unknown, and there's no surgery or non-drug therapy info.\n</think>\n\n```json\n{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": null,\n        \"status\": \"unknown\",\n        \"dose_text\": null,\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"unknown\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"SYN-MED-02\",\n      \"source_doc_type\": \"letter\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\":",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 56 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [\\n...,\\n    \"source_doc_id\":', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "5 validation errors for MedicationModule\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

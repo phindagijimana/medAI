@@ -1,0 +1,47 @@
+{
+  "run_id": "c4c6db764824",
+  "started_at": "2026-09-28T05:33:53+00:00",
+  "finished_at": "2026-09-28T05:34:15+00:00",
+  "duration_s": 22.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-luna-C1-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 752,
+  "raw_response": "{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No mention of adverse effects in the provided document.\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I'm trying to figure out how to extract the required information from the provided clinical document. The user has given me a task where I need to extract specific fields related to a patient's medication and treatment history for a research phenotyping study. The document provided is a letter from an epilepsy clinic, and I need to extract fields like current ASMs, prior ASMs, failed ASMs, adverse effects, drug resistance status, surgery history, and non-drug therapies.\n\nFirst, I'll start by reading the document carefully. The letter mentions that the patient has a clinical history consistent with focal epilepsy and that seizures occur about twice a month. It also recommends continued seizure monitoring and reviewing management in the epilepsy clinic. \n\nLooking at the structure, the document doesn't mention any specific medications the patient is currently taking, so the current_asms array should be empty. Similarly, there's no information about prior or failed ASMs, so those arrays will also be empty. \n\nThe letter doesn't discuss any adverse effects, so the adverse_effects_text will note that there's no mention of such effects. Regarding drug resistance, the document doesn't provide any criteria or information, so the drug_resistance_status will be marked as not_documented.\n\nSurgery history isn't mentioned either, so that field will also be empty. Lastly, non-drug therapies aren't part of the letter, so that array remains empty.\n\nI need to make sure that all required fields are included and that any missing information is clearly marked with null and the appropriate certainty. I should avoid inferring anything beyond what's stated and ensure that the output strictly follows the specified JSON format without any additional keys or information.\n</think>\n\n```json\n{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No mention of adverse effects in the provided document.\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"not_documented\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-MED-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}\n```",
+  "raw_response_tokens": 770,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 25 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [],..._therapies\": []\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 3,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for MedicationModule\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='not_documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

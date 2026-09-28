@@ -1,0 +1,80 @@
+{
+  "run_id": "51f375e0de55",
+  "started_at": "2026-09-28T07:21:39+00:00",
+  "finished_at": "2026-09-28T07:22:04+00:00",
+  "duration_s": 25.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C1-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1025,
+  "raw_response": "DOCUMENT:\nPRESURGICAL ASSESSMENT: Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset. Alternative considerations include left insular onset given occasional autonomic features. The MRI shows no structural abnormalities. The EEG shows no abnormalities. The patient has a history of good response to levetiracetam.\n\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"insular\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Alternative considerations include left insular onset\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}<think>\nOkay, so I need to extract the clinician's localization hypothesis from the given document. The document is a presurgical assessment that mentions clinical localization favoring a left mesial temporal onset. The alternative consideration is left insular onset due to autonomic features. \n\nFirst, I'll identify the primary claim. The primary claim is clearly stated as left mesial temporal onset. The certainty here is definite because the document explicitly states this localization based on the patient's semiology. \n\nNext, for the alternative claims, the clinician suggests left insular onset. The certainty for this is possible because it's an alternative consideration, not a confirmed diagnosis. \n\nI need to structure this into JSON. The primary_claim object will have the lobe as temporal, laterality as left, and source as clinician_hypothesis. The evidence text is the exact quote from the document. Certainty is definite, and the temporal status is current. The source_doc_id, type, and date are as provided.\n\nFor the alternative_claims, each entry will have the same structure but with insular as the lobe and possible certainty. The evidence text is the alternative consideration mentioned.\n\nI should ensure that all required fields are present and correctly formatted. No fields should be missing or incorrectly labeled. Also, the JSON should strictly follow the provided schema without any deviations.\n</think>\n\n```json\n{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"left\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset\",\n    \"source_doc_id\": \"SYN-LOC-01\",\n    \"source_doc_type\": \"presurgical_evaluation\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"lobe\": \"insular\",\n        \"laterality\": \"left\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Alternative considerations include left insular onset\",\n      \"source_doc_id\": \"SYN-LOC-01\",\n      \"source_doc_type\": \"presurgical_evaluation\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}\n```",
+  "raw_response_tokens": 862,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='DOCUMENT:\\nPRESURGICAL A...01\"\\n    }\\n  ]\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "strip_code_fence",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Based on semiology (deja vu, oral automatisms, loss of awareness), clinical localization favors left mesial temporal onset",
+      "source_doc_id": "SYN-LOC-01",
+      "source_doc_type": "presurgical_evaluation",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "insular",
+          "laterality": "left",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Alternative considerations include left insular onset",
+        "source_doc_id": "SYN-LOC-01",
+        "source_doc_type": "presurgical_evaluation",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ]
+  },
+  "arm": "M2"
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "632283482f21",
+  "started_at": "2026-09-28T05:28:28+00:00",
+  "finished_at": "2026-09-28T05:28:57+00:00",
+  "duration_s": 29.0,
+  "code_sha": "9b2694d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-C0-C0-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 51,
+  "raw_response": "DOCUMENT:\nInitial Consultation: Pt is 45 y/o M with new onset generalized tonic-clonic seizures. No prior history of seizures. No family history of seizures. No history of trauma or fevers. No prior neurological deficits. No prior psychiatric history. No use of medications. No history of alcohol or drug abuse. No prior imaging. No prior EEG. No prior AEDs. Vitals: normal. labs: normal. CT: no lesion. MRI: no lesion. ECG: normal. Carotid: normal. In the office, he had a normal neurological exam. He is not status epilepticus. He is not in acute stroke. He is not in status migrans. He is not in acute encephalopathy. He is not in acute meningitis. He is not in acute brain injury. He is not in acute delirium. He is not in acute hypoglycemia. He is not in acute alcohol withdrawal. He is not in acute drug withdrawal. He is not in acute infection. He is not in acute neuroleptic malignant syndrome. He is not in acute movement disorder. He is not in acute cerebellar stroke. He is not in acute brainstem compression. He is not in acute spinal cord compression. He is not in acute spinal stroke. He is not in acute spinal cord injury. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compression. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He is not in acute spinal cord compassionate. He",
+  "raw_response_tokens": 1024,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='DOCUMENT:\\nInitial Consu... cord compassionate. He', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 0,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "no_json_found",
+  "parsed_value": null,
+  "arm": "M2"
+}

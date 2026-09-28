@@ -1,0 +1,58 @@
+{
+  "run_id": "99376cc2704d",
+  "started_at": "2026-09-28T07:48:14+00:00",
+  "finished_at": "2026-09-28T07:48:23+00:00",
+  "duration_s": 9.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 82,
+  "raw_response": "Okay, so I need to extract the clinician's clinical localization hypothesis from this document. The document mentions \"Epilepsy type: Combined generalized and focal (ILAE 2017).\" Hmm, that's about the type of epilepsy, not the localization. The task is to find where the epilepsy is localized, like which lobe or side of the brain.\n\nLooking through the document again, I don't see any mention of the specific areas affected. It just talks about the type. So, I guess there's no information about the localization here. That means I should output null for the primary_claim and alternative_claims.\n\nWait, but the ground rules say if a field isn't mentioned, output value=null with certainty=\"not_documented.\" So I shouldn't infer anything. No mention of localization, so I can't make any claims based on the document.\n\nI should make sure I'm not adding anything extra. The document doesn't provide any clues about the specific brain regions involved, so I have to stick with null for both primary and alternative claims.\n\nAlright, I think that's it. No information to extract, so both fields are null with not_documented certainty.\n</think>\n\n```json\n{\n  \"primary_claim\": null,\n  \"alternative_claims\": null\n}\n```",
+  "raw_response_tokens": 261,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Okay, so I need to extra...e_claims\": null\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 4,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-deepseek-gpt-5.6-terra-C3-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M0"
+}

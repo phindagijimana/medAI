@@ -1,0 +1,47 @@
+{
+  "run_id": "271636f36fe6",
+  "started_at": "2026-09-28T06:38:36+00:00",
+  "finished_at": "2026-09-28T06:38:56+00:00",
+  "duration_s": 20.0,
+  "code_sha": "fba5f8d",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_cache_dir": "model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 1024,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-deepseek-gpt-5.6-sol-C2-P001",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 189,
+  "raw_response": "{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects reported\",\n    \"source_doc_id\": \"SYN-LET-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"unknown\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No information provided regarding drug resistance status.\",\n    \"source_doc_id\": \"SYN-LET-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}<think>\nOkay, so I need to extract the medication and treatment history from this document. Let me read through the document carefully.\n\nThe document is a letter from a colleague about a patient with focal epilepsy classified according to ILAE 2017 criteria. It mentions the seizure frequency is about 2 per month. \n\nFirst, looking for current ASMs. The letter doesn't mention any medications the patient is currently taking. So, current_asms should be an empty array.\n\nNext, prior ASMs. Similarly, there's no information about past medications, so prior_asms is empty.\n\nFailed ASMs. Again, no mention of any failed treatments, so failed_asms is empty.\n\nAdverse effects text. The letter doesn't talk about any adverse effects, so I'll note that as \"No adverse effects reported.\"\n\nDrug resistance status. The letter doesn't provide any info on this, so it's \"unknown.\"\n\nSurgery history. No surgery mentioned, so that's empty.\n\nNon-drug therapies. No mention of things like ketogenic diet or others, so that's empty too.\n\nI need to make sure all the required fields are present, even if they're null or empty arrays. Also, I should use the exact enum values and not infer anything beyond the document. No diagnosis or treatment recommendations, just extraction.\n</think>\n\n```json\n{\n  \"current_asms\": [],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"No adverse effects reported\",\n    \"certainty\": \"negated\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No adverse effects reported\",\n    \"source_doc_id\": \"SYN-LET-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"unknown\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"No information provided regarding drug resistance status.\",\n    \"source_doc_id\": \"SYN-LET-01\",\n    \"source_doc_type\": \"letter\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}\n```",
+  "raw_response_tokens": 697,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for MedicationModule\n  Invalid JSON: trailing characters at line 25 column 2 [type=json_invalid, input_value='{\\n  \"current_asms\": [],..._therapies\": []\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 3,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for MedicationModule\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.value\n  Input should be 'drug_responsive', 'undefined' or 'drug_resistant' [type=enum, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='letter', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}
