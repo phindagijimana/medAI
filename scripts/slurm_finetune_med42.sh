@@ -17,9 +17,10 @@
 # (prompt, target_phenotype) pairs. Adapter lands in
 # checkpoints/{model_slug}_lora_epi/.
 #
-# Env knobs (both optional, both default shown):
-#   BASE_MODEL=med42            # or deepseek, or any HF id
-#   CORPUS=pilot                # or synth-v1, or both
+# Env knobs (all optional, defaults shown):
+#   BASE_MODEL=med42                # or deepseek, or any HF id
+#   CORPUS=pilot                    # or synth-v1, fs, synth+fs, both, all
+#   MEDAI_LORA_ADAPTER_SUFFIX=v2    # → checkpoints/{slug}_lora_epi_v2/
 
 set -euo pipefail
 
@@ -58,9 +59,11 @@ fi
 cd "$APP_HOME"
 BASE_MODEL="${BASE_MODEL:-med42}"
 CORPUS="${CORPUS:-pilot}"
+SUFFIX="${MEDAI_LORA_ADAPTER_SUFFIX:-v2}"
 echo ""
-echo "--- Running LoRA fine-tune (base=$BASE_MODEL corpus=$CORPUS) ---"
-$PY scripts/finetune_lora_epi.py --base-model "$BASE_MODEL" --corpus "$CORPUS"
+echo "--- Running LoRA fine-tune (base=$BASE_MODEL corpus=$CORPUS suffix=$SUFFIX) ---"
+export MEDAI_LORA_ADAPTER_SUFFIX="$SUFFIX"
+$PY scripts/finetune_lora_epi.py --base-model "$BASE_MODEL" --corpus "$CORPUS" --adapter-suffix "$SUFFIX"
 
 echo ""
 echo "Finished: $(date)"
