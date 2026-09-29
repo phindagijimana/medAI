@@ -112,6 +112,10 @@ def _load_gold_dir(gold_dir: Path) -> dict[str, dict]:
         else:
             ph = j
             doc_id = ph.get("document", {}).get("doc_id", p.stem)
+            # LLM-generated silver may set document.doc_id to a placeholder;
+            # prefer the file stem in that case.
+            if doc_id in (None, "", "not_documented", "unknown"):
+                doc_id = p.stem
         out[doc_id] = ph
     return out
 
