@@ -112,11 +112,17 @@ _SEMIOLOGY_ANCHORS = re.compile(
     r"description\s+of\s+seizures?|during\s+(?:them|the\s+event|"
     r"the\s+seizure)|his\s+seizures?\s+consist|her\s+seizures?\s+consist|"
     r"the\s+events?\s+are\s+described|"
+    # MTSamples US-transcription vernacular
+    r"typical\s+spells?\s+(?:were|are)\s+described|"
+    r"his\s+spells?\s+consist|her\s+spells?\s+consist|"
+    r"spells?\s+which\s+were\s+described|"
+    r"spells?\s+(?:were|are)\s+characteri[sz]ed|"
     # Additional US/UK-neutral vernacular
-    r"during\s+(?:his|her)\s+(?:seizures?|events?|episodes?|attacks?)|"
+    r"during\s+(?:his|her)\s+(?:seizures?|events?|episodes?|attacks?|spells?)|"
     r"seizures?\s+(?:consist(?:s|ing)?|involve|characteri[sz]ed\s+by|"
     r"start(?:s|ing)?\s+(?:with|as)|begin(?:s|ning)?\s+(?:with|as))|"
     r"episodes?\s+(?:consist(?:s|ing)?|involve|start(?:s|ing)?\s+with)|"
+    r"spells?\s+(?:consist(?:s|ing)?|involve|start(?:s|ing)?\s+with)|"
     r"symptoms?\s+(?:consist(?:s|ing)?\s+of|include|are)|"
     r"aura\s+(?:consist(?:s|ing)?|involves?|described\s+as)|"
     r"(?:d[ée]j[àa]\s+vu|jamais\s+vu|automatisms?|staring\s+episodes?|"

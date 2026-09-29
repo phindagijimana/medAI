@@ -105,7 +105,7 @@ def _to_number(tok: str) -> Optional[float]:
 _RE_RANGE_WITH_SEIZURE = re.compile(
     r"(?P<n1>\d+(?:\.\d+)?)\s*(?:[-–—]|to)\s*(?P<n2>\d+(?:\.\d+)?)"
     r"(?:\s+[a-z][a-z\-]*){0,6}"
-    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)"
+    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)"
     r"\s*(?:per|a|/|every|each)\s+"
     r"(?P<unit>day|week|month|year|daily|weekly|monthly|yearly|fortnight)s?\b",
     re.IGNORECASE,
@@ -115,7 +115,7 @@ _RE_RANGE_WITH_SEIZURE = re.compile(
 # ALREADY hosts a seizure entity, so applies_to_type context is available)
 _RE_RANGE_PER_UNIT = re.compile(
     r"(?P<n1>\d+(?:\.\d+)?)\s*(?:[-–—]|to)\s*(?P<n2>\d+(?:\.\d+)?)"
-    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)?"
+    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)?"
     r"\s*(?:per|a|/|every|each)\s+"
     r"(?P<unit>day|week|month|year|daily|weekly|monthly|yearly|fortnight)s?\b",
     re.IGNORECASE,
@@ -126,7 +126,7 @@ _RE_NUM_WITH_SEIZURE = re.compile(
     r"(?P<n>\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten"
     r"|eleven|twelve|couple|several|few|many|occasional)\b"
     r"(?:\s+[a-z][a-z\-]*){0,6}"
-    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)"
+    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)"
     r"\s*(?:per|a|/|every|each)\s+"
     r"(?P<unit>day|week|month|year|daily|weekly|monthly|yearly|fortnight)s?\b",
     re.IGNORECASE,
@@ -136,7 +136,7 @@ _RE_NUM_WITH_SEIZURE = re.compile(
 _RE_NUM_PER_UNIT = re.compile(
     r"(?P<n>\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten"
     r"|eleven|twelve|couple|several|few|many|occasional)\b"
-    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)?"
+    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)?"
     r"\s*(?:per|a|/|every|each)\s+"
     r"(?P<unit>day|week|month|year|daily|weekly|monthly|yearly|fortnight)s?\b",
     re.IGNORECASE,
@@ -153,13 +153,13 @@ _RE_ONCE_TWICE = re.compile(
 # Pattern 4a: "daily seizures", "weekly jerks"
 _RE_ADJECTIVE = re.compile(
     r"\b(?P<unit>daily|weekly|monthly|yearly|nightly)\s+"
-    r"(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)\b",
+    r"(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)\b",
     re.IGNORECASE,
 )
 
 # Pattern 4b: "jerks weekly", "seizures daily" (adjective after noun)
 _RE_ADJECTIVE_POST = re.compile(
-    r"\b(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)\s+"
+    r"\b(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)\s+"
     r"(?P<unit>daily|weekly|monthly|yearly|nightly)\b",
     re.IGNORECASE,
 )
@@ -170,7 +170,7 @@ _RE_WORD_RANGE = re.compile(
     r"\s+(?:to|or)\s+"
     r"(?P<q2>one|two|three|four|five|six|seven|eight|nine|ten|once|twice|thrice)"
     r"(?:\s+[a-z][a-z\-]*){0,6}"
-    r"\s*(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)?"
+    r"\s*(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)?"
     r"\s*(?:per|a|/|every|each)\s+"
     r"(?P<unit>day|week|month|year|daily|weekly|monthly|yearly|fortnight)s?\b",
     re.IGNORECASE,
@@ -199,7 +199,7 @@ _RE_IN_LAST = re.compile(
 _RE_RANGE_OVER = re.compile(
     r"(?P<n1>\d+(?:\.\d+)?)\s*(?:[-–—]|to)\s*(?P<n2>\d+(?:\.\d+)?)"
     r"(?:\s+of\s+(?:these|those|his|her))?"
-    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?)"
+    r"\s+(?:seizures?|episodes?|events?|attacks?|fits?|jerks?|absences?|spasms?|spells?)"
     r"\s+(?:over|in|during)\s+(?:the\s+(?:past|last|preceding)\s+)?"
     r"(?P<count>\d+)?\s*"
     r"(?P<unit>day|week|month|year|fortnight|hour)s?\b",

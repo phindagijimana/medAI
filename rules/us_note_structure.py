@@ -56,12 +56,20 @@ SECTION_ALIASES: dict[str, list[str]] = {
         "PRESENT ILLNESS",
         "PRESENTING COMPLAINT",     # UK synonym still commonly seen
         "HISTORY",                  # last-resort catch-all
+        "HX",                       # MTSamples-style transcription abbreviation
+        "CC",                       # chief complaint
+        "COURSE",                   # clinical course narrative
+        "CLINICAL COURSE",
+        "HOSPITAL COURSE",
     ],
     "PMH": [
         "PMH",
         "PAST MEDICAL HISTORY",
         "MEDICAL HISTORY",
         "PAST HISTORY",
+        "PMHX",                     # MTSamples/US variant
+        "BIRTH HX",                 # MTSamples-specific perinatal history
+        "BIRTH HISTORY",
     ],
     "PSH": [
         "PSH",
