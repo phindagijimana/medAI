@@ -63,6 +63,7 @@ data/rag_cache/
 !paper_doc/*.md
 !eval/results/*.md
 !writing/*.md
+!rules/*.md
 
 # Environment (never commit — may contain API keys / secrets)
 .env
