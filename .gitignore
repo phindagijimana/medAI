@@ -108,3 +108,18 @@ model_cache/
 
 # B1 / BERT training checkpoints (regenerable from silver labels)
 checkpoints/
+
+# MedCAT + Rules pipeline (arm B1') — Phase 0 additions
+# ExECT-V2 reference clone (study-only, not for redistribution — no LICENSE upstream)
+references/
+# Isolated virtualenv for MedCAT + medspaCy + spaCy stack
+venv-medcat/
+# Phase 1c: built CDB (large binary, regenerable via scripts/build_medcat_cdb_epilepsy.py)
+data/medcat_cdb_epilepsy/
+
+# Phase 6b: MTSamples notes are externally-sourced (mtsamples.com, no LICENSE);
+#           stored locally for research-only NLP eval — do not commit.
+data/eval_corpora/mtsamples_neuro/
+# Phase 6c: synth-v1 held-out subset is a copy of data/episynth_corpus/v1/;
+#           regenerable via scripts/build_synth_v1_eval_100.py.
+data/eval_corpora/synth_v1_eval_100/
