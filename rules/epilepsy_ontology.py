@@ -334,10 +334,13 @@ EPILEPSY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "genetic generalised epilepsy", "genetic generalized epilepsy",
             "idiopathic generalized epilepsy", "IGE",
             "primary generalized epilepsy", "GGE",
+            # Batch A D2 — EPIO 2024 (CUI C0014548)
+            "idiopathic generalised epilepsy",
         ],
         source_provenance=[
             "ExECT-V2 seed C0014548", "ILAE 2017",
             "F-S train (generalised epilepsy, genetic generalised epilepsy)",
+            "EPIO 2024",
         ],
     ),
     "combined_focal_generalized": ConceptEntry(
@@ -374,10 +377,19 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "focal aware seizure", "focal seizure with retained awareness",
             "aware focal seizure", "simple partial seizure", "SPS",
             "focal onset aware seizure", "aura",
+            # Batch A D2 — EPIO 2024 (CUI C0234974)
+            "focal aware seizures",
+            "focal seizure without impairment of awareness",
+            "focal seizure without impairment of consciousness or awareness",
+            "focal seizures without impairment of consciousness or awareness",
+            "partial seizure with retained awareness",
+            "partial seizure without impairment of awareness",
+            "simple partial seizures",
         ],
         source_provenance=[
             "ExECT-V2 seed C0234974", "ILAE 2017",
             "domain-knowledge:standard-neurology-vocab",
+            "EPIO 2024",
         ],
     ),
     "focal_impaired_awareness": ConceptEntry(
@@ -388,11 +400,25 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "focal seizure with loss of awareness", "focal seizures with altered awareness",
             "complex partial seizure", "CPS", "dyscognitive seizure",
             "focal seizure with dyscognitive features",
+            # Batch A D3 — HPO 2024 (HP:0002384, HP:0007359)
+            "focal dyscognitive seizure", "dyscognitive seizures",
+            "complex focal seizures", "complex partial seizures",
+            "focal impaired awareness seizures",
+            "focal seizures with impairment of consciousness or awareness",
+            "localised dyscognitive seizure", "localized dyscognitive seizure",
+            "localised seizure with impaired awareness",
+            "localized seizure with impaired awareness",
+            "localised seizure with loss of awareness",
+            "localized seizure with loss of awareness",
+            "partial dyscognitive seizure",
+            "partial seizure with impairment of awareness",
+            "partial seizure with loss of awareness",
         ],
         source_provenance=[
             "ExECT-V2 seed C0149958", "ILAE 2017",
             "F-S train EA0001 'focal seizures with loss of awareness'",
             "F-S train (focal seizures with altered awareness)",
+            "HPO 2024",
         ],
     ),
     "focal_unknown_awareness": ConceptEntry(
@@ -402,10 +428,14 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "focal seizure", "focal seizures", "partial seizure",
             "focal-onset seizure", "focal onset seizure",
             "focal seizure of unknown awareness",
+            # Batch A D2 — EPIO 2024 (CUI C0751495)
+            "focal-onset seizures", "partial seizures",
+            "seizure affecting one half of brain",
         ],
         source_provenance=[
             "ExECT-V2 seed C0751495", "ILAE 2017",
             "F-S train (focal seizures, focal seizure)",
+            "EPIO 2024",
         ],
     ),
     "focal_to_bilateral_tonic_clonic": ConceptEntry(
@@ -433,11 +463,18 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "generalised tonic clonic seizure", "generalized tonic clonic seizure",
             "GTC", "GTCS", "grand mal seizure", "grand mal convulsion",
             "tonic-clonic seizure", "convulsive seizure", "bilateral tonic-clonic seizure",
+            # Batch A D3 — HPO 2024 (HP:0002197 Generalized-onset seizure)
+            "generalized-onset seizure", "generalised-onset seizure",
+            "generalized onset seizure", "generalised onset seizure",
+            "generalized-onset seizures", "generalized seizures",
+            "generalised seizures", "primary generalized seizure",
+            "primary generalised seizure",
         ],
         source_provenance=[
             "ExECT-V2 seed C0014549", "ExECT-V2 seed C0494475 (grand mal)",
             "ILAE 2017",
             "F-S train (Generalised tonic clonic seizure, generalised tonic clonic seizures)",
+            "HPO 2024",
         ],
     ),
     "generalized_tonic": ConceptEntry(
@@ -478,10 +515,17 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "typical absence seizure", "absence seizure", "absence",
             "petit mal seizure", "petit mal", "staring spell",
             "3 Hz spike-wave absence",
+            # Batch A D3 — HPO 2024 (HP:0002121)
+            "generalized non-motor (absence) seizure",
+            "generalised non-motor (absence) seizure",
+            "generalised non-motor seizure",
+            "petit mal seizures", "absence seizures",
+            "brief seizures with staring spells",
         ],
         source_provenance=[
             "ExECT-V2 seed C0014553", "ILAE 2017",
             "F-S train (absences, absence like seizures)",
+            "HPO 2024",
         ],
     ),
     "generalized_absence_atypical": ConceptEntry(
@@ -490,8 +534,12 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "atypical absence seizure", "atypical absence",
             "absence with atypical features", "slow spike-wave absence",
+            # Batch A D3 — HPO 2024 (HP:0007270)
+            "atypical absence seizures", "atypical petit mal seizures",
         ],
-        source_provenance=["ExECT-V2 seed C0595948", "ILAE 2017"],
+        source_provenance=[
+            "ExECT-V2 seed C0595948", "ILAE 2017", "HPO 2024",
+        ],
     ),
     "generalized_atonic": ConceptEntry(
         cui="C0270846", sctid="42365007",
@@ -499,8 +547,14 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "atonic seizure", "drop attack", "drop seizure", "astatic seizure",
             "akinetic seizure",
+            # Batch A D3 — HPO 2024 (HP:0010819)
+            "atonic seizures", "astatic seizures", "drop attacks",
+            "drop seizures", "hypotonic seizure", "hypotonic seizures",
+            "sudden loss of muscle tone",
         ],
-        source_provenance=["ExECT-V2 seed C0270846", "ILAE 2017"],
+        source_provenance=[
+            "ExECT-V2 seed C0270846", "ILAE 2017", "HPO 2024",
+        ],
     ),
     "generalized_epileptic_spasms": ConceptEntry(
         cui="C1527366", sctid="28055006",
@@ -1017,10 +1071,22 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "hippocampal sclerosis", "HS", "mesial temporal sclerosis", "MTS",
             "Ammon's horn sclerosis", "unilateral hippocampal sclerosis",
+            # Batch A D4 — compound phrases per Blumcke 2013 ILAE-CTF
+            "left hippocampal sclerosis", "right hippocampal sclerosis",
+            "bilateral hippocampal sclerosis", "mesial temporal atrophy",
+            "hippocampal atrophy", "hippocampal volume loss",
+            "mesial temporal signal abnormality", "hippocampal gliosis",
+            "sclerosis of the hippocampus", "MTS type 1", "MTS type 2",
+            "MTS type 3", "ILAE HS type 1", "ILAE HS type 2", "ILAE HS type 3",
+            "hippocampal sclerosis ILAE type",
+            # Dual pathology — HS + secondary lesion
+            "dual pathology", "hippocampal sclerosis with dual pathology",
         ],
         source_provenance=[
             "ExECT-V2 seed C4749367", "ILAE 2017",
             "F-S train (hippocampal sclerosis)",
+            "domain-knowledge:neuroradiology-standard",
+            "Blumcke 2013",
         ],
     ),
     "focal_cortical_dysplasia": ConceptEntry(
@@ -1029,10 +1095,22 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "focal cortical dysplasia", "FCD", "cortical dysplasia",
             "cortical malformation", "left frontal cortical dysplasia",
+            # Batch A D4 — compound phrases per Blumcke 2011
+            "Taylor type dysplasia", "Taylor-type cortical dysplasia",
+            "malformation of cortical development", "MCD",
+            "FCD type III", "FCD IIIa", "FCD IIIb", "FCD IIIc", "FCD IIId",
+            "FCD type IIIa", "FCD type IIIb", "FCD type IIIc", "FCD type IIId",
+            "cortical thickening", "blurring of grey-white matter junction",
+            "blurred grey-white junction", "transmantle sign",
+            "right frontal cortical dysplasia", "left temporal cortical dysplasia",
+            "right temporal cortical dysplasia", "parietal cortical dysplasia",
+            "occipital cortical dysplasia",
         ],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab", "ILAE 2017",
             "F-S train (cortical dysplasia)",
+            "domain-knowledge:neuroradiology-standard",
+            "Blumcke 2011",
         ],
     ),
     "fcd_palmini_i": ConceptEntry(
@@ -1041,8 +1119,16 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "FCD type I", "Palmini type I FCD", "FCD Ia", "FCD Ib", "FCD Ic",
             "isolated architectural dysplasia",
+            # Batch A D4
+            "FCD type Ia", "FCD type Ib", "FCD type Ic",
+            "focal cortical dysplasia type I",
+            "focal cortical dysplasia type Ia",
+            "focal cortical dysplasia type Ib",
         ],
-        source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "ILAE 2017", "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard", "Blumcke 2011",
+        ],
     ),
     "fcd_palmini_iia": ConceptEntry(
         cui=None, sctid=None,
@@ -1050,8 +1136,15 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "FCD type IIa", "FCD IIa", "Palmini type IIa",
             "FCD with dysmorphic neurons",
+            # Batch A D4
+            "focal cortical dysplasia type IIa",
+            "focal cortical dysplasia IIa",
+            "type IIa FCD",
         ],
-        source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "ILAE 2017", "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard", "Blumcke 2011",
+        ],
     ),
     "fcd_palmini_iib": ConceptEntry(
         cui=None, sctid=None,
@@ -1059,8 +1152,17 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "FCD type IIb", "FCD IIb", "Palmini type IIb",
             "FCD with balloon cells", "Taylor-type FCD",
+            # Batch A D4
+            "focal cortical dysplasia type IIb",
+            "focal cortical dysplasia IIb",
+            "type IIb FCD",
+            "Taylor-type focal cortical dysplasia",
+            "cortical dysplasia with balloon cells",
         ],
-        source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "ILAE 2017", "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard", "Blumcke 2011",
+        ],
     ),
     "moghe": ConceptEntry(
         cui=None, sctid=None,
@@ -1078,10 +1180,22 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "brain tumor", "brain tumour", "intracranial tumor",
             "DNET", "dysembryoplastic neuroepithelial tumor",
             "ganglioglioma", "low-grade glioma", "meningioma",
+            # Batch A D4 — epilepsy-associated tumor compound phrases
+            "gangliocytoma", "pleomorphic xanthoastrocytoma", "PXA",
+            "long-term epilepsy-associated tumor", "LEAT",
+            "pilocytic astrocytoma", "oligodendroglioma",
+            "epilepsy-associated tumor", "temporal lobe glioma",
+            "hypothalamic hamartoma",
+            # Batch A D2 — EPIO 2024 (CUI C0006826)
+            "neoplasm", "neoplasia", "tumor", "tumour",
+            "abnormal tissue mass", "intracranial meningioma",
+            "supratentorial meningioma", "meningeal neoplasm",
         ],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (meningioma, cavernoma in the right temporal lobe)",
+            "domain-knowledge:neuroradiology-standard",
+            "EPIO 2024",
         ],
     ),
     "vascular_malformation": ConceptEntry(
@@ -1090,10 +1204,19 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "cavernoma", "cavernous malformation", "cavernous angioma",
             "arteriovenous malformation", "AVM", "developmental venous anomaly", "DVA",
+            # Batch A D4 — compound vascular malformation phrases
+            "cerebral cavernous malformation", "CCM",
+            "cerebral arteriovenous malformation",
+            "cavernous hemangioma of the brain",
+            "cortical cavernoma", "supratentorial AVM",
+            "Sturge-Weber angiomatosis", "Sturge-Weber syndrome",
+            "leptomeningeal angioma", "leptomeningeal angiomatosis",
+            "pial angioma",
         ],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (cavernoma, cavernoma in the right temporal lobe)",
+            "domain-knowledge:neuroradiology-standard",
         ],
     ),
     "encephalomalacia": ConceptEntry(
@@ -1102,8 +1225,16 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "encephalomalacia", "cerebral encephalomalacia",
             "post-traumatic encephalomalacia", "chronic infarct with encephalomalacia",
+            # Batch A D4 — compound phrases
+            "porencephalic cyst", "porencephaly",
+            "cystic encephalomalacia", "gliotic encephalomalacia",
+            "post-traumatic gliosis and encephalomalacia",
+            "chronic encephalomalacia",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard",
+        ],
     ),
     "gliosis": ConceptEntry(
         cui="C0017639", sctid=None,
@@ -1121,10 +1252,18 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "stroke sequelae", "old infarct", "chronic infarct",
             "post-stroke changes", "MCA infarct", "prior CVA",
             "occipital lobe infarct",
+            # Batch A D4 — compound phrases
+            "perinatal stroke sequelae", "perinatal arterial ischemic stroke",
+            "chronic middle cerebral artery infarct",
+            "old MCA territory infarct", "prior middle cerebral artery infarct",
+            "chronic posterior cerebral artery infarct",
+            "watershed infarct sequelae", "post-hypoxic changes",
+            "perinatal white matter injury",
         ],
         source_provenance=[
             "ExECT-V2 seed C3662042",
             "F-S train (MCA infarct, occipital lobe infarct, stroke)",
+            "domain-knowledge:neuroradiology-standard",
         ],
     ),
     "polymicrogyria": ConceptEntry(
@@ -1133,8 +1272,17 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "polymicrogyria", "PMG", "perisylvian polymicrogyria",
             "bilateral perisylvian polymicrogyria",
+            # Batch A D4 — compound phrases
+            "unilateral perisylvian polymicrogyria",
+            "bilateral frontoparietal polymicrogyria",
+            "diffuse polymicrogyria", "focal polymicrogyria",
+            "schizencephaly with polymicrogyria",
+            "polymicrogyria-schizencephaly complex",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard",
+        ],
     ),
     "heterotopia": ConceptEntry(
         cui="C0221355", sctid=None,
@@ -1143,8 +1291,20 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "heterotopia", "grey matter heterotopia", "gray matter heterotopia",
             "periventricular nodular heterotopia", "PVNH", "subependymal heterotopia",
             "band heterotopia",
+            # Batch A D4 — compound phrases
+            "subependymal nodular heterotopia", "subcortical band heterotopia",
+            "double cortex syndrome",
+            "focal subcortical heterotopia",
+            "bilateral periventricular nodular heterotopia",
+            "gray matter heterotopia along the lateral ventricles",
+            # schizencephaly / other malformations that co-occur
+            "schizencephaly", "open-lip schizencephaly", "closed-lip schizencephaly",
+            "unilateral schizencephaly", "bilateral schizencephaly",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard",
+        ],
     ),
     "lissencephaly": ConceptEntry(
         cui="C0266463", sctid=None,
@@ -1152,8 +1312,17 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "lissencephaly", "agyria", "pachygyria",
             "lissencephaly-pachygyria complex",
+            # Batch A D4 — compound phrases
+            "classic lissencephaly", "type I lissencephaly",
+            "cobblestone lissencephaly", "type II lissencephaly",
+            "agyria-pachygyria complex",
+            "smooth brain", "lissencephaly spectrum",
+            "hemimegalencephaly", "unilateral hemimegalencephaly",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard",
+        ],
     ),
     "tuberous_sclerosis": ConceptEntry(
         cui="C0041341", sctid="63177008",
@@ -1161,10 +1330,17 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "tuberous sclerosis", "TSC", "cortical tubers", "subependymal nodules",
             "SEGA", "subependymal giant cell astrocytoma",
+            # Batch A D4 — compound phrases
+            "tuberous sclerosis complex", "TSC1", "TSC2",
+            "radial migration lines", "subependymal nodule",
+            "white-matter migration lines",
+            "cortical tuber", "subcortical tuber",
+            "multiple cortical tubers",
         ],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (Tuberous sclerosis, tuberous sclerosis)",
+            "domain-knowledge:neuroradiology-standard",
         ],
     ),
     "other_lesion": ConceptEntry(
@@ -1173,8 +1349,20 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "abnormal MRI", "MRI lesion", "MRI abnormality",
             "signal abnormality",
+            # Batch A D4 — Rasmussen and other acquired lesions
+            "Rasmussen encephalitis", "Rasmussen syndrome",
+            "progressive unilateral atrophy",
+            "chronic focal encephalitis",
+            "unilateral hemispheric atrophy",
+            "post-encephalitic changes", "post-infectious changes",
+            "post-inflammatory gliosis",
+            "arachnoid cyst",
         ],
-        source_provenance=["ExECT-V2 seed C1319851", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=[
+            "ExECT-V2 seed C1319851",
+            "domain-knowledge:standard-neurology-vocab",
+            "domain-knowledge:neuroradiology-standard",
+        ],
     ),
     "mri_negative": ConceptEntry(
         cui="C0436481", sctid=None,
@@ -2144,10 +2332,13 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "tuberous sclerosis", "tuberous sclerosis complex", "TSC",
             "Bourneville's disease",
+            # Batch A D2 — EPIO 2024 (CUI C0041341)
+            "Epiloia", "Tuberose sclerosis", "Tuberous sclerosis syndrome",
         ],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab", "ILAE 2017",
             "F-S train (Tuberous sclerosis, tuberous sclerosis)",
+            "EPIO 2024",
         ],
     ),
     "dementia": ConceptEntry(
@@ -2156,10 +2347,13 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "dementia", "senile dementia", "cognitive decline",
             "Alzheimer disease",
+            # Batch A D2 — EPIO 2024 (CUI C0002395)
+            "Alzheimer's disease", "Alzheimers dementia",
         ],
         source_provenance=[
             "ExECT-V2 seed C0002395",
             "F-S train (Dementia, dementia)",
+            "EPIO 2024",
         ],
     ),
     "glut1_deficiency": ConceptEntry(
@@ -2177,8 +2371,14 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "pyridoxine-dependent epilepsy", "pyridoxine dependent epilepsy",
             "PDE", "vitamin B6-dependent seizures",
+            # Batch A D2 — EPIO 2024 (CUI C1849508)
+            "antiquitin deficiency", "AASA dehydrogenase deficiency", "EPD",
+            "epilepsy, pyridoxine-dependent",
+            "pyridoxine dependency", "pyridoxine dependency with seizures",
         ],
-        source_provenance=["ExECT-V2 seed C1849508", "ILAE 2017"],
+        source_provenance=[
+            "ExECT-V2 seed C1849508", "ILAE 2017", "EPIO 2024",
+        ],
     ),
     "mitochondrial_disease": ConceptEntry(
         cui="C0751651", sctid=None,
@@ -2207,8 +2407,12 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "Rasmussen encephalitis", "Rasmussen syndrome",
             "chronic focal encephalitis",
+            # Batch A D2 — EPIO 2024 (CUI C0393484)
+            "Rasmussen subacute encephalitis", "CFE", "RE",
         ],
-        source_provenance=["ExECT-V2 seed C0393484", "Graus 2016"],
+        source_provenance=[
+            "ExECT-V2 seed C0393484", "Graus 2016", "EPIO 2024",
+        ],
     ),
     "neurocysticercosis": ConceptEntry(
         cui="C0270851", sctid=None,
@@ -2264,10 +2468,87 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         synonyms=[
             "intellectual disability", "learning disability", "learning disabilities",
             "severe learning difficulties", "developmental delay",
+            # Batch A D3 — HPO 2024 (HP:0001249 + severity subclasses)
+            "mental retardation", "mental deficiency",
+            "mental retardation, nonspecific",
+            "dull intelligence", "low intelligence",
+            "nonprogressive intellectual disability",
+            "nonprogressive mental retardation",
+            "mild intellectual disability", "intellectual disability, mild",
+            "mild mental retardation", "mental retardation, mild",
+            "moderate intellectual disability",
+            "intellectual disability, moderate",
+            "moderate mental retardation", "mental retardation, moderate",
+            "severe intellectual disability",
+            "intellectual disability, severe",
+            "severe mental retardation", "mental retardation, severe",
+            "profound intellectual disability",
+            "intellectual disability, profound",
+            "profound mental retardation", "mental retardation, profound",
         ],
         source_provenance=[
             "ExECT-V2 seed C3714756",
             "F-S train (Severe learning difficulties, learning disabilities)",
+            "HPO 2024",
+        ],
+    ),
+    "developmental_delay": ConceptEntry(
+        cui="C0557874", sctid="248290001",
+        label="Global developmental delay",
+        synonyms=[
+            "global developmental delay", "GDD", "developmental delay",
+            # Batch A D3 — HPO 2024 (HP:0001263, HP:0002376)
+            "cognitive delay", "delayed cognitive development",
+            "delayed development", "delayed developmental milestones",
+            "delayed intellectual development", "delayed milestones",
+            "delayed psychomotor development",
+            "developmental delay in early childhood",
+            "developmental delay, global",
+            "developmental retardation",
+            "lack of psychomotor development",
+            "mental and motor retardation",
+            "motor and developmental delay",
+            "psychomotor delay", "psychomotor developmental delay",
+            "retarded development", "retarded mental development",
+            "retarded psychomotor development",
+            # Regression (HP:0002376)
+            "developmental regression",
+            "loss of acquired milestones", "loss of developmental milestones",
+            "loss of milestones", "neurodevelopmental regression",
+            "psychomotor regression",
+        ],
+        source_provenance=[
+            "HPO 2024",
+            "domain-knowledge:standard-neurology-vocab",
+        ],
+    ),
+    "autism": ConceptEntry(
+        cui="C0004352", sctid="35919005",
+        label="Autism spectrum disorder",
+        synonyms=[
+            # Batch A D3 — HPO 2024 (HP:0000717) — verified label only
+            "autism", "autism spectrum disorder", "ASD",
+            "autistic disorder", "autistic spectrum disorder",
+            "high-functioning autism", "Asperger syndrome",
+        ],
+        source_provenance=[
+            "HPO 2024",
+            "domain-knowledge:standard-neurology-vocab",
+        ],
+    ),
+    "cognitive_impairment": ConceptEntry(
+        cui="C0338656", sctid="386806002",
+        label="Cognitive impairment",
+        synonyms=[
+            # Batch A D3 — HPO 2024 (HP:0100543)
+            "cognitive impairment", "cognitive abnormality",
+            "abnormality of cognition",
+            "cognitive defects", "cognitive deficits",
+            "intellectual impairment",
+        ],
+        source_provenance=[
+            "HPO 2024",
+            "domain-knowledge:standard-neurology-vocab",
         ],
     ),
     "anxiety_depression": ConceptEntry(
@@ -2683,3 +2964,9 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ExECT-V2 seed C0213404", "RxNorm 400732"],
     ),
 }
+
+try:
+    from .epilepsy_ontology_umls_overrides import apply as _apply_umls_overrides
+    _apply_umls_overrides()
+except ImportError:
+    pass

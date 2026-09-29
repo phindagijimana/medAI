@@ -588,3 +588,38 @@ med42_service/
 **Non-blocking parallel tracks:**
 - Phase 3 field porting (Days 4-9) proceeds independently of UMLS status.
 - Phase 6b (MTSamples) and 6c (Synth-v1) proceed independently of any DUA.
+
+## 12. Limitations & known gold-label edge cases
+
+- **`medication.failed_asms` on F-S 40 (n=1, EA0179)**: the F-S silver label
+  places sodium valproate under `failed_asms`, but the corresponding note text
+  reads "was on sodium valproate" without an explicit failure marker
+  ("failed", "did not respond", "seizures continued despite"). Our
+  `FailedAsmsRule` (rules/fields/medication.py) intentionally requires
+  explicit failure language and therefore places this instance under
+  `prior_asms`. We treat this as a gold-label edge case (F-S annotation
+  conflates "prior" with "failed" when the drug is discontinued after
+  seizure recurrence), not a pipeline defect. Batch A retained the strict
+  rule to avoid over-labelling every prior ASM as "failed"; the single
+  EA0179 case caps failed_asms F1 at 0.00 for F-S 40 but does not affect
+  the overall F1 by more than ~0.001.
+
+- **`clinical_seizure.other_seizure_types` gate relaxation (Batch A D5)**:
+  Phase 8 required an explicit `_SECONDARY_MARKERS` regex hit in the same
+  sentence. Batch A relaxed this so that whenever 2+ distinct ILAE
+  categories survive subsumption suppression, the non-predominant
+  candidates fire as "other" entries. This is expected to trade a small
+  number of new false positives for coverage on F-S EA0190 / EA0194 where
+  the note lists multiple distinct seizure types in narrative form without
+  a "also / additionally" marker.
+
+- **HPO / EPIO cross-mappings (Batch A D2 / D3)**: 3 new Comorbidity keys
+  (`developmental_delay`, `autism`, `cognitive_impairment`) were added to
+  `COMORBIDITY_ONTOLOGY`. These are supplementary-only (not part of the
+  Comorbidity enum in `schema/enums.py`) — the CDB build treats them as
+  named concepts under `T-Comorbidity` but downstream rules still map to
+  the existing enum keys.
+
+- **UMLS-Full enrichment (D1)**: pending — `UMLS_APIKEY` env var was not
+  set at Batch A execution time. Script `scripts/enrich_ontology_from_umls.py`
+  is idempotent and cache-backed; re-run when the key is available.

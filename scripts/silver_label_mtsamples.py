@@ -41,8 +41,8 @@ CORPUS_ROOT = REPO_ROOT / "data" / "eval_corpora" / "mtsamples_neuro"
 
 PROMPT_TEMPLATE = """You are a clinical NLP extractor. Read the neurology note
 below and produce a MedAI-EPI v0.2.1 EpilepsyPhenotype JSON. Extract every
-field that is documented; leave undocumented fields as {value=null,
-certainty="not_documented"}. Return ONLY valid JSON with no prose.
+field that is documented; leave undocumented fields as {{value=null,
+certainty="not_documented"}}. Return ONLY valid JSON with no prose.
 
 Clinical note:
 \"\"\"
@@ -99,7 +99,6 @@ def main(argv=None) -> int:
         resp = client.responses.create(
             model=args.model,
             input=prompt,
-            temperature=0.0,
         )
         raw = resp.output_text.strip()
         # Strip potential markdown fence.

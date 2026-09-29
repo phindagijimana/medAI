@@ -193,6 +193,19 @@ def build_cdb(concept_df: pd.DataFrame, output_dir: Path, verbose: bool = True):
     config.components.ner.check_upper_case_names = True
     config.components.ner.upper_case_limit_len = 2
 
+    # Batch A discovery (2026-09-29): the default context-based linker
+    # silently drops any name mapped to 2+ CUIs when there is no trained
+    # context vector to disambiguate (i.e. an untrained CDB). This
+    # affected 33 ambiguous names in our ontology, including
+    # "hippocampal sclerosis" (which maps to both MriFinding.hippocampal_sclerosis
+    # and the etiology umbrella C4524097) — MedCAT returned 0 hits on
+    # "hippocampal sclerosis is present" even though the name was in the
+    # CDB. Switching to `primary_name_only_linker` fixes this: it emits
+    # the entry whose `name_status == 'P'` and skips ambiguity resolution
+    # entirely. This is appropriate for our dict-mode use case; a future
+    # MetaCAT re-training would let us revert to `default`.
+    config.components.linking.comp_name = "primary_name_only_linker"
+
     maker = CDBMaker(config)
     cdb = maker.prepare_csvs([concept_df])
 

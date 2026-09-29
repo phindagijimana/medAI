@@ -454,6 +454,13 @@ class OtherSeizureTypesRule(BaseFieldRule):
             if parent in cand_values and (cand_values & specifics):
                 subsume_hits.add(parent)
 
+        # Batch A D5 (revised): retained the Phase 8 Iter 2 strict gate
+        # after a relaxation experiment added 2 FPs on F-S EA0161 and
+        # EA0183 without any TPs. F-S 40 gold uses unusual conventions
+        # for `other_seizure_types` (duplicate predominant entries;
+        # `unknown_onset_tonic_clonic` as a secondary when a specific
+        # type is already predominant) that a rule-based system cannot
+        # reproduce without over-generating. See docs/MedCAT.md §12.
         for e in cands:
             if e.enum_value == predom:
                 continue
@@ -467,15 +474,8 @@ class OtherSeizureTypesRule(BaseFieldRule):
             # present in the doc.
             if e.enum_value in subsume_hits and e.enum_value != predom:
                 continue
-            # Phase 8 Iter 2 gating: for "other" list we require an
-            # explicit secondary marker in the entity's sentence, OR the
-            # entity to appear in a text block explicitly listing multiple
-            # types (heuristic: predom_rule picked a different type via
-            # 'usual/typical' markers).  This suppresses FPs where a
-            # single sentence mentions two names for the same thing.
             sent = e.sentence_text or ""
             has_secondary_marker = bool(_SECONDARY_MARKERS.search(sent))
-            # Also allow explicit list markers in surrounding text.
             if not has_secondary_marker:
                 continue
             seen.add(e.enum_value)

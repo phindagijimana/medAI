@@ -1,0 +1,14 @@
+field,n_docs,tp,fp,fn,precision,recall,f1
+clinical_seizure.age_at_onset_years,4,3,0,1,1.0,0.75,0.8571
+clinical_seizure.epilepsy_type,17,16,0,1,1.0,0.9412,0.9697
+clinical_seizure.etiology_category,5,3,2,2,0.6,0.6,0.6
+clinical_seizure.other_seizure_types,5,0,0,8,0.0,0.0,0.0
+clinical_seizure.predominant_seizure_type,21,11,8,10,0.5789,0.5238,0.55
+clinical_seizure.seizure_frequency.count_max,4,3,1,1,0.75,0.75,0.75
+clinical_seizure.seizure_frequency.count_min,4,4,0,0,1.0,1.0,1.0
+clinical_seizure.seizure_frequency.period,12,5,1,7,0.8333,0.4167,0.5556
+clinical_seizure.seizure_frequency.seizure_free,29,26,3,3,0.8966,0.8966,0.8966
+clinical_seizure.semiology_text,33,33,0,0,1.0,1.0,1.0
+medication.current_asms,32,46,11,7,0.807,0.8679,0.8364
+medication.failed_asms,1,0,0,1,0.0,0.0,0.0
+medication.prior_asms,6,2,2,4,0.5,0.3333,0.4
