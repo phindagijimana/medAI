@@ -116,6 +116,10 @@ def _load_gold_dir(gold_dir: Path) -> dict[str, dict]:
             # prefer the file stem in that case.
             if doc_id in (None, "", "not_documented", "unknown"):
                 doc_id = p.stem
+            # If the doc_id doesn't match the filename (e.g., patient-level
+            # target being reused for per-doc scoring), prefer the file stem.
+            if doc_id != p.stem:
+                doc_id = p.stem
         out[doc_id] = ph
     return out
 
