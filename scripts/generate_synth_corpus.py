@@ -41,9 +41,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-CORPUS_ROOT = REPO / "data" / "episynth_corpus" / "v1"
-PATIENTS_DIR = CORPUS_ROOT / "patients"
-DOCS_DIR = CORPUS_ROOT / "documents"
+DEFAULT_CORPUS_VERSION = "v1"
 DEFAULT_MODEL = "gpt-5.6-sol"
 
 
@@ -149,7 +147,14 @@ def main():
                      help="Comma-separated doc types per patient; 'second' means auto-choose")
     ap.add_argument("--limit", type=int, default=None,
                      help="Optional cap on number of patients to render (for staging)")
+    ap.add_argument("--corpus-version", default=DEFAULT_CORPUS_VERSION,
+                     help="Corpus version subdir under data/episynth_corpus/")
     args = ap.parse_args()
+
+    global CORPUS_ROOT, PATIENTS_DIR, DOCS_DIR
+    CORPUS_ROOT = REPO / "data" / "episynth_corpus" / args.corpus_version
+    PATIENTS_DIR = CORPUS_ROOT / "patients"
+    DOCS_DIR = CORPUS_ROOT / "documents"
 
     if not os.getenv("OPENAI_API_KEY"):
         raise SystemExit("OPENAI_API_KEY not set. `set -a; source .env; set +a` first.")

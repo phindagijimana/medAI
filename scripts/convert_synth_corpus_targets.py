@@ -37,9 +37,7 @@ from schema import (
 from schema.enums import Laterality, LobarLocalization, MedicationStatus
 from schema.ontology import EtiologySpecifics, Medication, SeizureFrequency
 
-CORPUS_ROOT = REPO / "data" / "episynth_corpus" / "v1"
-PATIENTS_DIR = CORPUS_ROOT / "patients"
-TARGETS_DIR = CORPUS_ROOT / "targets"
+DEFAULT_CORPUS_VERSION = "v1"
 SOURCE_DATE = date(2026, 9, 25)
 
 
@@ -232,8 +230,12 @@ def _plan_to_target(pid: str, plan: dict) -> EpilepsyPhenotype:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--patients-glob", default="P*.json")
+    ap.add_argument("--corpus-version", default=DEFAULT_CORPUS_VERSION)
     args = ap.parse_args()
 
+    CORPUS_ROOT = REPO / "data" / "episynth_corpus" / args.corpus_version
+    PATIENTS_DIR = CORPUS_ROOT / "patients"
+    TARGETS_DIR = CORPUS_ROOT / "targets"
     TARGETS_DIR.mkdir(parents=True, exist_ok=True)
     n_ok = n_err = 0
     for pp in sorted(PATIENTS_DIR.glob(args.patients_glob)):
