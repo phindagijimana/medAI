@@ -1,4 +1,0 @@
-field,n_docs,tp,fp,fn,precision,recall,f1
-clinical_seizure.epilepsy_type,100,0,0,100,0.0,0.0,0.0
-clinical_seizure.etiology_category,100,0,1,100,0.0,0.0,0.0
-clinical_seizure.predominant_seizure_type,100,0,0,100,0.0,0.0,0.0

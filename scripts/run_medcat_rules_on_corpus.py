@@ -106,22 +106,11 @@ def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
                 yield f"{pid}_{doc_dir.name}", out, doc_dir.name
 
 
-def _synthea_epilepsy_docs() -> Iterator[tuple[str, Path, str]]:
-    """Yield Synthea epilepsy notes — prefer normalized narrative version."""
-    base = REPO_ROOT / "data" / "eval_corpora" / "synthea_epilepsy"
-    norm = base / "documents_normalized"
-    raw = base / "documents"
-    src = norm if norm.exists() and any(norm.glob("*.txt")) else raw
-    for p in sorted(src.glob("*.txt")):
-        yield p.stem, p, "progress_note"
-
-
 CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
     "mtsamples_neuro": _mtsamples_docs,
     "synth_v2_eval_100": _synth_v2_eval_100_docs,
-    "synthea_epilepsy": _synthea_epilepsy_docs,
 }
 
 
