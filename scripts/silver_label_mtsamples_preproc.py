@@ -64,6 +64,9 @@ def _build_prompt(note: str, schema_json: str) -> str:
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--model", default="gpt-5.6-terra")
+    p.add_argument("--out-suffix", default="",
+                   help="Suffix on the output dir. '' → silver_per_doc/, "
+                        "'_luna' → silver_per_doc_luna/, etc.")
     p.add_argument("--limit", type=int, default=None,
                    help="Optional cap on number of notes to label (smoke test)")
     args = p.parse_args(argv)
@@ -87,7 +90,7 @@ def main(argv=None) -> int:
     if args.limit:
         rows = rows[: args.limit]
 
-    out_dir = CORPUS_ROOT / "silver_per_doc"
+    out_dir = CORPUS_ROOT / f"silver_per_doc{args.out_suffix}"
     out_dir.mkdir(exist_ok=True)
 
     from openai import OpenAI  # type: ignore

@@ -1,0 +1,397 @@
+doc_id,field,tier_values,winner,agreement
+MT_V0004,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,clinical_seizure.predominant_seizure_type.value,focal_impaired_awareness || focal_impaired_awareness || focal_impaired_awareness,focal_impaired_awareness,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,clinical_seizure.age_at_onset_years.value,6.4 || 7 || 6.4,6.4,"2/3_agree(tiers=[0, 2])"
+MT_V0004,clinical_seizure.etiology_category.value,None || structural || structural,structural,"2/3_agree(tiers=[1, 2])"
+MT_V0004,clinical_seizure.awareness.value,impaired || impaired || impaired,impaired,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,clinical_seizure.focal_motor_onset.value,tonic || tonic || tonic,tonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,clinical_seizure.focal_nonmotor_onset.value,None || sensory || sensory,sensory,"2/3_agree(tiers=[1, 2])"
+MT_V0004,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0004,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0004,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0004,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0004,clinical_seizure.status_epilepticus_history.value,None || True || True,True,"2/3_agree(tiers=[1, 2])"
+MT_V0004,eeg.background.value,asymmetric || asymmetric || asymmetric,asymmetric,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,medication.drug_resistance_status.value,drug_resistant || drug_resistant || drug_resistant,drug_resistant,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0004,mri.overall_normal.value,None || None || None,,all_null
+MT_V0004,medication.current_asms,0 || 2 || 0,0_items,n_items_after_majority=0
+MT_V0004,medication.prior_asms,2 || 5 || 0,0_items,n_items_after_majority=0
+MT_V0004,medication.failed_asms,3 || 4 || 6,4_items,n_items_after_majority=4
+MT_V0004,clinical_seizure.other_seizure_types,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0004,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0004,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0012,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0012,clinical_seizure.predominant_seizure_type.value,focal_unknown_awareness || focal_impaired_awareness || focal_impaired_awareness,focal_impaired_awareness,"2/3_agree(tiers=[1, 2])"
+MT_V0012,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.etiology_category.value,unknown || unknown || unknown,unknown,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0012,clinical_seizure.awareness.value,unknown || unknown || impaired,unknown,"2/3_agree(tiers=[0, 1])"
+MT_V0012,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.focal_nonmotor_onset.value,None || cognitive || cognitive,cognitive,"2/3_agree(tiers=[1, 2])"
+MT_V0012,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0012,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0012,eeg.background.value,None || None || None,,all_null
+MT_V0012,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0012,medication.drug_resistance_status.value,drug_responsive || drug_responsive || drug_responsive,drug_responsive,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0012,mri.overall_normal.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0012,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0012,medication.prior_asms,2 || 1 || 2,2_items,n_items_after_majority=2
+MT_V0012,medication.failed_asms,0 || 1 || 0,0_items,n_items_after_majority=0
+MT_V0012,clinical_seizure.other_seizure_types,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0012,mri.findings,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0012,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0013,clinical_seizure.epilepsy_type.value,combined_focal_generalized || combined_focal_generalized || combined_focal_generalized,combined_focal_generalized,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0013,clinical_seizure.predominant_seizure_type.value,focal_impaired_awareness || focal_impaired_awareness || focal_impaired_awareness,focal_impaired_awareness,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0013,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.etiology_category.value,None || unknown || None,,disagree(no_quorum)
+MT_V0013,clinical_seizure.awareness.value,impaired || impaired || impaired,impaired,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0013,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0013,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0013,eeg.background.value,None || None || None,,all_null
+MT_V0013,eeg.ied_present.value,None || None || None,,all_null
+MT_V0013,medication.drug_resistance_status.value,None || undefined || None,,disagree(no_quorum)
+MT_V0013,mri.overall_normal.value,None || None || None,,all_null
+MT_V0013,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0013,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0013,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0013,clinical_seizure.other_seizure_types,1 || 2 || 1,1_items,n_items_after_majority=1
+MT_V0013,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0013,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0022,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,clinical_seizure.predominant_seizure_type.value,focal_unknown_awareness || focal_impaired_awareness || focal_unknown_awareness,focal_unknown_awareness,"2/3_agree(tiers=[0, 2])"
+MT_V0022,clinical_seizure.age_at_onset_years.value,27.0 || 27.0 || 27,27.0,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,clinical_seizure.etiology_category.value,None || structural || structural,structural,"2/3_agree(tiers=[1, 2])"
+MT_V0022,clinical_seizure.awareness.value,unknown || impaired || unknown,unknown,"2/3_agree(tiers=[0, 2])"
+MT_V0022,clinical_seizure.focal_motor_onset.value,clonic || clonic || clonic,clonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0022,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0022,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0022,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0022,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0022,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0022,eeg.background.value,diffuse_slowing || diffuse_slowing || diffuse_slowing,diffuse_slowing,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,medication.drug_resistance_status.value,drug_responsive || drug_responsive || drug_responsive,drug_responsive,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0022,mri.overall_normal.value,None || None || None,,all_null
+MT_V0022,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0022,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0022,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0022,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0022,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0022,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0024,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0024,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0024,eeg.background.value,normal || normal || normal,normal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0024,eeg.ied_present.value,False || False || False,False,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0024,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0024,mri.overall_normal.value,None || None || None,,all_null
+MT_V0024,medication.current_asms,3 || 3 || 3,3_items,n_items_after_majority=3
+MT_V0024,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0024,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0024,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0024,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0024,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0027,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0027,eeg.background.value,focal_slowing || None || focal_slowing,focal_slowing,"2/3_agree(tiers=[0, 2])"
+MT_V0027,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0027,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0027,mri.overall_normal.value,None || None || None,,all_null
+MT_V0027,medication.current_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0027,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0038,clinical_seizure.epilepsy_type.value,unknown || unknown || unknown,unknown,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0038,clinical_seizure.predominant_seizure_type.value,unclassified || generalized_tonic || unknown_onset_motor_other,unclassified,disagree(fallback_to_primary)
+MT_V0038,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.etiology_category.value,structural || structural || structural,structural,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0038,clinical_seizure.awareness.value,None || unknown || unknown,unknown,"2/3_agree(tiers=[1, 2])"
+MT_V0038,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0038,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0038,eeg.background.value,None || None || None,,all_null
+MT_V0038,eeg.ied_present.value,None || None || None,,all_null
+MT_V0038,medication.drug_resistance_status.value,drug_resistant || drug_resistant || drug_resistant,drug_resistant,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0038,mri.overall_normal.value,False || False || False,False,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0038,medication.current_asms,2 || 2 || 2,2_items,n_items_after_majority=2
+MT_V0038,medication.prior_asms,0 || 3 || 1,0_items,n_items_after_majority=0
+MT_V0038,medication.failed_asms,3 || 4 || 3,3_items,n_items_after_majority=3
+MT_V0038,clinical_seizure.other_seizure_types,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0038,mri.findings,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0038,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0061,clinical_seizure.epilepsy_type.value,generalized || generalized || generalized,generalized,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0061,clinical_seizure.predominant_seizure_type.value,generalized_myoclonic || generalized_myoclonic || generalized_myoclonic,generalized_myoclonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0061,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.awareness.value,None || unknown || None,,disagree(no_quorum)
+MT_V0061,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0061,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0061,eeg.background.value,None || None || None,,all_null
+MT_V0061,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0061,medication.drug_resistance_status.value,None || undefined || None,,disagree(no_quorum)
+MT_V0061,mri.overall_normal.value,None || None || None,,all_null
+MT_V0061,medication.current_asms,1 || 1 || 2,1_items,n_items_after_majority=1
+MT_V0061,medication.prior_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0061,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0061,clinical_seizure.other_seizure_types,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0061,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0061,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0063,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0063,clinical_seizure.predominant_seizure_type.value,focal_impaired_awareness || focal_impaired_awareness || focal_impaired_awareness,focal_impaired_awareness,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0063,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.etiology_category.value,structural || structural || structural,structural,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0063,clinical_seizure.awareness.value,impaired || impaired || impaired,impaired,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0063,clinical_seizure.focal_motor_onset.value,tonic || tonic || tonic,tonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0063,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0063,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0063,eeg.background.value,None || None || None,,all_null
+MT_V0063,eeg.ied_present.value,None || None || None,,all_null
+MT_V0063,medication.drug_resistance_status.value,None || undefined || None,,disagree(no_quorum)
+MT_V0063,mri.overall_normal.value,None || None || None,,all_null
+MT_V0063,medication.current_asms,1 || 1 || 2,1_items,n_items_after_majority=1
+MT_V0063,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0063,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0063,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0063,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0063,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0064,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,clinical_seizure.predominant_seizure_type.value,None || focal_impaired_awareness || None,,disagree(no_quorum)
+MT_V0064,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0064,clinical_seizure.etiology_category.value,structural || structural || None,structural,"2/3_agree(tiers=[0, 1])"
+MT_V0064,clinical_seizure.awareness.value,impaired || impaired || impaired,impaired,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,clinical_seizure.focal_motor_onset.value,None || clonic || None,,disagree(no_quorum)
+MT_V0064,clinical_seizure.focal_nonmotor_onset.value,behavior_arrest || behavior_arrest || behavior_arrest,behavior_arrest,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0064,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0064,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0064,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0064,clinical_seizure.status_epilepticus_history.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,eeg.background.value,None || None || None,,all_null
+MT_V0064,eeg.ied_present.value,None || True || True,True,"2/3_agree(tiers=[1, 2])"
+MT_V0064,medication.drug_resistance_status.value,drug_resistant || drug_resistant || drug_resistant,drug_resistant,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,mri.overall_normal.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0064,medication.current_asms,4 || 4 || 4,4_items,n_items_after_majority=4
+MT_V0064,medication.prior_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0064,medication.failed_asms,5 || 5 || 5,5_items,n_items_after_majority=5
+MT_V0064,clinical_seizure.other_seizure_types,4 || 3 || 4,5_items,n_items_after_majority=5
+MT_V0064,mri.findings,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0064,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0067,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0067,clinical_seizure.predominant_seizure_type.value,focal_impaired_awareness || focal_impaired_awareness || focal_impaired_awareness,focal_impaired_awareness,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0067,clinical_seizure.age_at_onset_years.value,2.5 || 2.5 || 2.5,2.5,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0067,clinical_seizure.etiology_category.value,unknown || None || unknown,unknown,"2/3_agree(tiers=[0, 2])"
+MT_V0067,clinical_seizure.awareness.value,impaired || impaired || impaired,impaired,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0067,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0067,clinical_seizure.focal_nonmotor_onset.value,behavior_arrest || behavior_arrest || behavior_arrest,behavior_arrest,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0067,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0067,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0067,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0067,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0067,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0067,eeg.background.value,None || None || None,,all_null
+MT_V0067,eeg.ied_present.value,None || None || None,,all_null
+MT_V0067,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0067,mri.overall_normal.value,None || None || None,,all_null
+MT_V0067,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0067,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0067,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0067,clinical_seizure.other_seizure_types,0 || 1 || 0,0_items,n_items_after_majority=0
+MT_V0067,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0067,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0069,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,clinical_seizure.predominant_seizure_type.value,generalized_tonic_clonic || generalized_tonic_clonic || generalized_tonic_clonic,generalized_tonic_clonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,clinical_seizure.age_at_onset_years.value,9 || 9 || 9,9,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,clinical_seizure.etiology_category.value,unknown || unknown || None,unknown,"2/3_agree(tiers=[0, 1])"
+MT_V0069,clinical_seizure.awareness.value,None || unknown || None,,disagree(no_quorum)
+MT_V0069,clinical_seizure.focal_motor_onset.value,clonic || clonic || clonic,clonic,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0069,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0069,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0069,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0069,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0069,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0069,eeg.background.value,None || None || None,,all_null
+MT_V0069,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,medication.drug_resistance_status.value,drug_responsive || drug_responsive || drug_responsive,drug_responsive,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,mri.overall_normal.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0069,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0069,medication.prior_asms,1 || 1 || 0,1_items,n_items_after_majority=1
+MT_V0069,medication.failed_asms,0 || 0 || 1,0_items,n_items_after_majority=0
+MT_V0069,clinical_seizure.other_seizure_types,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0069,mri.findings,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0069,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0073,clinical_seizure.epilepsy_type.value,focal || focal || focal,focal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0073,clinical_seizure.predominant_seizure_type.value,focal_unknown_awareness || focal_unknown_awareness || focal_unknown_awareness,focal_unknown_awareness,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0073,clinical_seizure.age_at_onset_years.value,4.0 || 4.0 || 4.0,4.0,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0073,clinical_seizure.etiology_category.value,None || structural || structural,structural,"2/3_agree(tiers=[1, 2])"
+MT_V0073,clinical_seizure.awareness.value,unknown || unknown || None,unknown,"2/3_agree(tiers=[0, 1])"
+MT_V0073,clinical_seizure.focal_motor_onset.value,None || clonic || None,,disagree(no_quorum)
+MT_V0073,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0073,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0073,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0073,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0073,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0073,clinical_seizure.status_epilepticus_history.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0073,eeg.background.value,None || None || None,,all_null
+MT_V0073,eeg.ied_present.value,None || None || None,,all_null
+MT_V0073,medication.drug_resistance_status.value,undefined || None || undefined,undefined,"2/3_agree(tiers=[0, 2])"
+MT_V0073,mri.overall_normal.value,None || False || None,,disagree(no_quorum)
+MT_V0073,medication.current_asms,1 || 1 || 2,1_items,n_items_after_majority=1
+MT_V0073,medication.prior_asms,1 || 0 || 1,1_items,n_items_after_majority=1
+MT_V0073,medication.failed_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0073,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0073,mri.findings,0 || 1 || 0,0_items,n_items_after_majority=0
+MT_V0073,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0074,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0074,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0074,eeg.background.value,None || None || None,,all_null
+MT_V0074,eeg.ied_present.value,None || None || None,,all_null
+MT_V0074,medication.drug_resistance_status.value,None || undefined || None,,disagree(no_quorum)
+MT_V0074,mri.overall_normal.value,None || None || None,,all_null
+MT_V0074,medication.current_asms,1 || 1 || 1,1_items,n_items_after_majority=1
+MT_V0074,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0074,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0074,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0074,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0074,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0075,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0075,eeg.background.value,normal || normal || normal,normal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0075,eeg.ied_present.value,False || False || False,False,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0075,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0075,mri.overall_normal.value,None || None || None,,all_null
+MT_V0075,medication.current_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0075,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,clinical_seizure.epilepsy_type.value,None || None || unknown,,disagree(no_quorum)
+MT_V0076,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0076,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0076,eeg.background.value,normal || normal || normal,normal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0076,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0076,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0076,mri.overall_normal.value,None || None || None,,all_null
+MT_V0076,medication.current_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0076,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0077,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0077,eeg.background.value,normal || normal || normal,normal,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0077,eeg.ied_present.value,False || False || False,False,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0077,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0077,mri.overall_normal.value,None || None || None,,all_null
+MT_V0077,medication.current_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0077,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,clinical_seizure.epilepsy_type.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.predominant_seizure_type.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.age_at_onset_years.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.etiology_category.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.awareness.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.focal_motor_onset.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.focal_nonmotor_onset.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.seizure_frequency.count_min.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.seizure_frequency.count_max.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.seizure_frequency.period.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.seizure_frequency.seizure_free.value,None || None || None,,all_null
+MT_V0078,clinical_seizure.status_epilepticus_history.value,None || None || None,,all_null
+MT_V0078,eeg.background.value,other || normal || other,other,"2/3_agree(tiers=[0, 2])"
+MT_V0078,eeg.ied_present.value,True || True || True,True,"3/3_agree(tiers=[0, 1, 2])"
+MT_V0078,medication.drug_resistance_status.value,None || None || None,,all_null
+MT_V0078,mri.overall_normal.value,None || None || None,,all_null
+MT_V0078,medication.current_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,medication.prior_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,medication.failed_asms,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,clinical_seizure.other_seizure_types,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,mri.findings,0 || 0 || 0,0_items,n_items_after_majority=0
+MT_V0078,eeg.ictal_events,0 || 0 || 0,0_items,n_items_after_majority=0
