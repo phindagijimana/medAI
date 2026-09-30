@@ -148,6 +148,51 @@ def _build_encounter_metadata(row: dict, patient_context: dict) -> dict:
     return meta
 
 
+_METACAT_REALISM_BLOCK = """
+============================================================
+METACAT AMBIGUATION + REALISM DIRECTIVES (SHARED, ALL TEMPLATES)
+============================================================
+This applies IN ADDITION to any style/realism directives above.
+
+Physician shorthand — MUST appear at least a few times per note when the
+long-form phrase would otherwise be used:
+- "s/p" instead of "status post"
+- "hx of" or "h/o" instead of "history of"
+- "r/o" instead of "rule out"
+- "BID/TID/QID/PRN" instead of "twice daily / three times daily / as needed"
+- "NKDA" for "no known drug allergies"
+- "In NAD" for "in no acute distress"
+
+Exam sections should be TERSE:
+- Use sentence fragments, not full sentences with subjects.
+- Correct: "Alert, oriented x3. In NAD. CN II-XII intact. Motor 5/5. DTRs 2+ symmetric."
+- Wrong: "The patient is alert and oriented to person, place, and time..."
+
+Devices named by BRAND when discussing surgical / neuromodulation options
+(when phenotype = presurgical or post_surgical): NeuroPace RNS System,
+Medtronic DBS Percept, LivaNova VNS SenTiva. At least one brand name in
+Assessment/Plan when the plan indicates surgery consideration.
+
+The semantic plan may include five optional MetaCAT-training-signal
+fields. When any of them are populated, express them in the note EXPLICITLY:
+
+1. **DENIED_FINDINGS** → include "denies X" or "no history of X" in HPI/ROS
+2. **FAMILY_HISTORY** → populate the Family History section with the
+   relative + condition provided
+3. **PRIOR_ASMS** → clearly separate from current: "Previously trialed X
+   (discontinued due to Y)" or "Failed adequate trials of X, Y." Do NOT
+   list under Current Medications.
+4. **HEDGED_FINDINGS** → use "possibly", "likely", "cannot exclude",
+   "consistent with", "suggestive of" for each hedged item.
+5. **HYPOTHETICAL_TRIGGERS** → weave into Plan: "If she has another
+   breakthrough seizure, will escalate to LTM."
+
+If the field is not in the plan, do NOT invent content for it.
+
+============================================================
+"""
+
+
 def _assemble_prompt(row: dict, plan: dict, patient_context: dict) -> str:
     template_id = row["note_template"]
     template = _load_template(template_id)
@@ -156,6 +201,15 @@ def _assemble_prompt(row: dict, plan: dict, patient_context: dict) -> str:
         _build_encounter_metadata(row, patient_context),
         indent=2, ensure_ascii=False,
     )
+    # Inject the shared MetaCAT + realism directives right before the
+    # template's OUTPUT INSTRUCTIONS section so they take precedence over
+    # earlier style advice.
+    if "OUTPUT INSTRUCTIONS" in template:
+        template = template.replace(
+            "OUTPUT INSTRUCTIONS",
+            _METACAT_REALISM_BLOCK + "\nOUTPUT INSTRUCTIONS",
+            1,
+        )
     prompt = template.replace("{SEMANTIC_PLAN_JSON}", plan_json)
     prompt = prompt.replace("{ENCOUNTER_METADATA_JSON}", metadata_json)
     return prompt
@@ -213,6 +267,12 @@ def main():
                     help="Cap on number of visits to render (for smoke tests)")
     ap.add_argument("--dry-run", action="store_true",
                     help="Print prompt for visit 1 and exit (no API call)")
+    ap.add_argument("--realism-pass", action="store_true", default=True,
+                    help="Apply services.us_note_realism_pass to each note "
+                         "post-generation (default: True). Use "
+                         "--no-realism-pass to disable.")
+    ap.add_argument("--no-realism-pass", dest="realism_pass",
+                    action="store_false")
     args = ap.parse_args()
 
     patients_dir = Path(args.patients_dir).resolve()
@@ -298,6 +358,16 @@ def main():
             resp = client.responses.create(**request)
             text = getattr(resp, "output_text", "") or ""
             completed = _now()
+
+            # Post-generation realism pass: probabilistic substitution of
+            # long-form phrases to physician shorthand + exam-fragment
+            # compression. Deterministic per visit_id.
+            if args.realism_pass:
+                try:
+                    from services.us_note_realism_pass import apply_realism_pass
+                    text, _ = apply_realism_pass(text, seed=hash(visit_id) & 0xFFFF)
+                except Exception:
+                    pass  # never let the polish pass break generation
 
             (docs_dir / f"{visit_id}.txt").write_text(text, encoding="utf-8")
 

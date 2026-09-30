@@ -245,6 +245,88 @@ def _sample_patient(rng: random.Random, patient_index: int, oversample_rare: boo
     mri = _mri_finding(rng, etiology)
     etio_specs = _etiology_specifics(rng, etiology, oversample_rare)
     pid = f"P{patient_index:06d}"
+
+    # ─── MetaCAT-training-signal fields (added in v3.1 sampler) ───────────
+    #
+    # These give the note-generation prompts and downstream MetaCAT training
+    # data explicit examples of each of the four+one ExECT-V2 attribute
+    # dimensions: Presence (Negation), Experiencer, Temporality, Certainty,
+    # and Hypothetical.  Without them, synth notes have almost no negation,
+    # no family history, no hedging, and no hypothetical triggers — a
+    # MetaCAT trained on them would learn only the "affirmed / current /
+    # patient / definite" majority class.
+
+    # 1. Denied findings (presence = NEGATED).  30 % of patients have
+    #    at least one clinically-plausible denied finding.  We draw from a
+    #    curated list that mirrors real HPI denials.
+    denied_pool = [
+        "aura", "loss of consciousness", "post-ictal confusion",
+        "tongue biting", "urinary incontinence", "febrile seizures in childhood",
+        "head trauma", "CNS infection", "family history of epilepsy",
+        "family history of febrile seizures", "developmental delay",
+        "photosensitivity", "psychiatric comorbidity", "syncope",
+    ]
+    n_denied = rng.choices([0, 1, 2, 3], weights=[0.55, 0.28, 0.13, 0.04], k=1)[0]
+    denied_findings = rng.sample(denied_pool, k=min(n_denied, len(denied_pool)))
+
+    # 2. Family history (experiencer = FAMILY).  15 % positive family
+    #    history — matches epilepsy epidemiology.
+    fam_positive = rng.random() < 0.15
+    if fam_positive:
+        rel = rng.choice(["mother", "father", "brother", "sister", "maternal aunt", "paternal cousin"])
+        cond = rng.choice(["epilepsy", "febrile seizures", "generalized epilepsy of childhood", "stroke"])
+        family_history = [{"relation": rel, "condition": cond}]
+    else:
+        family_history = []
+
+    # 3. Prior AEDs (temporality = PAST).  DRE patients typically have 2-5
+    #    failed prior trials; drug-responsive have 0-1.
+    n_prior = rng.choices(
+        [0, 1, 2, 3, 4, 5],
+        weights=([0.55, 0.30, 0.10, 0.03, 0.01, 0.01] if not dre
+                 else [0.05, 0.10, 0.30, 0.30, 0.15, 0.10]),
+        k=1,
+    )[0]
+    # Avoid overlap with current
+    current_names = {a["generic_name"] for a in asms}
+    candidate_prior = [x for x in ASM_LIST if x not in current_names]
+    prior_asms = []
+    for name in rng.sample(candidate_prior, k=min(n_prior, len(candidate_prior))):
+        reason = rng.choice([
+            "inadequate seizure control", "cognitive side effects", "rash",
+            "mood side effects", "GI intolerance", "sedation",
+        ])
+        prior_asms.append({"generic_name": name, "status": "prior",
+                           "reason_discontinued": reason})
+
+    # 4. Hedged findings (certainty = PROBABLE / POSSIBLE).  40 % of
+    #    patients have at least one hedged assertion — realistic for
+    #    presurgical + immune workups where localisation or aetiology is
+    #    still uncertain.
+    n_hedged = rng.choices([0, 1, 2], weights=[0.55, 0.35, 0.10], k=1)[0]
+    hedged_pool = [
+        ("focal MRI lesion likely epileptogenic", "probable"),
+        ("possibly focal onset seizures", "possible"),
+        ("consistent with mesial temporal sclerosis", "probable"),
+        ("cannot exclude atypical absence", "possible"),
+        ("likely drug-resistant focal epilepsy", "probable"),
+        ("suspected autoimmune contribution", "possible"),
+        ("suggestive of PNES component", "possible"),
+    ]
+    hedged_findings = rng.sample(hedged_pool, k=min(n_hedged, len(hedged_pool)))
+
+    # 5. Hypothetical triggers (temporality = HYPOTHETICAL).  20 % of
+    #    patients have >=1 "if X happens" plan sentence.
+    n_hyp = rng.choices([0, 1, 2], weights=[0.75, 0.20, 0.05], k=1)[0]
+    hypothetical_pool = [
+        "if she develops another breakthrough seizure, escalate to LTM",
+        "should he have a cluster, use nasal midazolam rescue and call 911",
+        "if intolerable side effects arise, cross-titrate to lacosamide",
+        "should recurrence occur, revisit presurgical workup",
+        "if MRI shows progression, obtain PET/SPECT for concordance",
+    ]
+    hypothetical_triggers = rng.sample(hypothetical_pool, k=min(n_hyp, len(hypothetical_pool)))
+
     return {
         "patient_id": pid,
         "ep_type": ep_type,
@@ -255,7 +337,12 @@ def _sample_patient(rng: random.Random, patient_index: int, oversample_rare: boo
         "seizure_frequency": freq,
         "dre_status": "drug_resistant" if dre else "drug_responsive",
         "current_asms": asms,
+        "prior_asms": prior_asms,
         "mri_finding": mri,
+        "denied_findings": denied_findings,
+        "family_history": family_history,
+        "hedged_findings": hedged_findings,
+        "hypothetical_triggers": hypothetical_triggers,
     }
 
 
@@ -291,6 +378,18 @@ def _to_semantic_plan(pat: dict) -> dict:
     _push("CURRENT_ASMS", pat["current_asms"])
     if pat["etiology"] == "structural" or pat["mri_finding"] != "normal":
         _push("MRI_FINDING", pat["mri_finding"])
+
+    # MetaCAT-training-signal fields (v3.1) — always emitted, empty lists OK.
+    if pat.get("prior_asms"):
+        _push("PRIOR_ASMS", pat["prior_asms"])
+    if pat.get("denied_findings"):
+        _push("DENIED_FINDINGS", pat["denied_findings"])
+    if pat.get("family_history"):
+        _push("FAMILY_HISTORY", pat["family_history"])
+    if pat.get("hedged_findings"):
+        _push("HEDGED_FINDINGS", pat["hedged_findings"])
+    if pat.get("hypothetical_triggers"):
+        _push("HYPOTHETICAL_TRIGGERS", pat["hypothetical_triggers"])
 
     return {
         "patient_id": pat["patient_id"],

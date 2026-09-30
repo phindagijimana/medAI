@@ -55,13 +55,48 @@ Study the reference exemplar carefully and mirror ITS STRUCTURE, NOT its content
 STYLE + REALISM DIRECTIVES
 ============================================================
 - Voice: first person ("I", "we"), past tense for HPI, present tense for exam.
-- Use US-standard physician shorthand: s/p, r/o, hx of, BID, QID, PRN, NKDA, LTM, EMU, IED, MTS, MRI, EEG, VNS, RNS, DBS, VEEG.
+- Use US-standard physician shorthand LIBERALLY: s/p (NOT "status post"), r/o (NOT "rule out"), hx of (NOT "history of"), BID, QID, PRN, NKDA, LTM, EMU, IED, MTS, MRI, EEG, VNS, RNS, DBS, VEEG. If you catch yourself writing "status post" — replace with "s/p"; "history of" — replace with "hx of".
 - Brand-then-generic drug naming when introducing a medication: "Keppra (levetiracetam) 1000 mg BID". Subsequent mentions can drop the parens.
-- Deliberate imperfection: 1-2 sentence fragments in the exam; ≤1 typo per 1000 words is acceptable but not required.
+- Deliberate imperfection: 1-3 sentence FRAGMENTS in the exam ("Alert, oriented x3. In NAD. CN II-XII intact. Motor 5/5. DTRs 2+ symmetric."). Not full sentences with subjects — real dictated exams are terse.
 - Template placeholders: "No X on file", "NKDA", "Twelve systems reviewed, all others negative", "Vitals per nursing", "Pain scale: 0/10".
 - Include 1-2 dictation artifacts if natural: "Dr. XXX and I discussed the case", "The patient was seen and evaluated by our APP xxx, who agrees with the assessment above."
 - Do NOT include structured tables. Prose only, with occasional bulleted medication list.
 - Do NOT include LOINC codes, ICD-10 codes, or CPT codes in the body text.
+
+============================================================
+MetaCAT AMBIGUATION DIRECTIVES — CRITICAL
+============================================================
+The semantic plan may include five optional fields. When any of them are populated, you MUST express them in the note explicitly so a downstream MetaCAT annotator can learn from the pattern. If the field is absent, do NOT invent content for it.
+
+1. **DENIED_FINDINGS** (Presence = NEGATED): For each item, weave in a
+   "denies X" or "no history of X" phrase in HPI or ROS. Example: if the
+   plan says `denied_findings: ["aura", "family history of epilepsy"]`,
+   include somewhere: "She denies aura preceding events. No family history
+   of epilepsy." Use natural phrasing, mix positions across the note.
+
+2. **FAMILY_HISTORY** (Experiencer = FAMILY): populate the Family History
+   section with the relative + condition. Example: "Family history: mother
+   with epilepsy." NOT "no family history" unless the plan specifically
+   omits family history.
+
+3. **PRIOR_ASMS** (Temporality = PAST): distinguish clearly from current.
+   Use narrative like "Previously trialed X (discontinued due to Y)" or
+   "In the past, failed adequate trials of X and Y." Do NOT list these
+   under Current Medications.
+
+4. **HEDGED_FINDINGS** (Certainty = PROBABLE / POSSIBLE): use hedging
+   language for each — "possibly focal onset", "cannot exclude...",
+   "consistent with...", "likely...", "suggestive of...". Do NOT commit
+   these to definite claims.
+
+5. **HYPOTHETICAL_TRIGGERS** (Hypothetical): weave into the Recommendations
+   / Plan section. Example: "If she has another breakthrough seizure, will
+   escalate to LTM."
+
+If a Presurgical / DRE patient is described, name the specific device
+being considered by BRAND when discussing options: "NeuroPace RNS System",
+"Medtronic DBS Percept", "LivaNova VNS SenTiva". Do not just say "RNS" or
+"DBS" without a brand at least once.
 
 ============================================================
 DEIDENTIFICATION REQUIREMENTS
