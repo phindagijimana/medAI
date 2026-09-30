@@ -60,6 +60,11 @@ FS_ROOT = REPO / "data" / "fs_corpus"
 FS_DOCS = FS_ROOT / "documents"
 FS_TARGETS = FS_ROOT / "targets"
 
+# synth-v3 polished corpus (universal-manifest layout: one *.txt per visit
+# + a single manifest.csv row per visit + per-patient Evidence[T] target).
+SYNTH_V3_POLISH_CORPUS = REPO / "data" / "eval_corpora" / "synth_v3_polish"
+SYNTH_V3_POLISH_TARGETS = REPO / "data" / "episynth_corpus" / "v3_polish" / "targets"
+
 BASE_MODEL_ALIASES = {
     "med42": "m42-health/Llama3-Med42-8B",
     "deepseek": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
@@ -252,6 +257,36 @@ def _fs_pairs_train_test(
     return train_triples, test_pids
 
 
+def _synth_v3_polish_pairs() -> list[tuple[str, str, str]]:
+    """(pid_key, note, target_json) triples for the polished synth-v3 corpus.
+
+    Reads the universal-manifest v1.0 layout at ``data/eval_corpora/synth_v3_polish/``.
+    One triple per visit; multiple visits per patient share the same target.
+    pid_key is ``{patient_id}/{visit_id}`` so downstream patient-level split
+    groups them correctly (leading segment before the ``/`` is used).
+    """
+    import csv as _csv
+    triples: list[tuple[str, str, str]] = []
+    manifest = SYNTH_V3_POLISH_CORPUS / "manifest.csv"
+    if not manifest.exists():
+        return triples
+    with manifest.open() as fh:
+        rows = list(_csv.DictReader(fh))
+    for row in rows:
+        note_path = SYNTH_V3_POLISH_CORPUS / row["note_path"]
+        if not note_path.exists():
+            continue
+        note = note_path.read_text(encoding="utf-8")
+        if not note.strip():
+            continue
+        target_path = SYNTH_V3_POLISH_TARGETS / row["patient_id"] / "target_phenotype.json"
+        if not target_path.exists():
+            continue
+        target_json = target_path.read_text(encoding="utf-8")
+        triples.append((f"{row['patient_id']}/{row['visit_id']}", note, target_json))
+    return triples
+
+
 def _collect_triples(corpus: str) -> list[tuple[str, str, str]]:
     """Return (pid_key, note, target_json) triples for the requested corpus.
 
@@ -268,6 +303,11 @@ def _collect_triples(corpus: str) -> list[tuple[str, str, str]]:
     if corpus in ("fs", "synth+fs", "all"):
         triples.extend(_fs_pairs())
     if corpus == "synth+fs80":
+        train_triples, _test_pids = _fs_pairs_train_test(seed=0)
+        triples.extend(train_triples)
+    if corpus in ("synth-v3-polish", "synth-v3-polish+fs80"):
+        triples.extend(_synth_v3_polish_pairs())
+    if corpus == "synth-v3-polish+fs80":
         train_triples, _test_pids = _fs_pairs_train_test(seed=0)
         triples.extend(train_triples)
     return triples
@@ -383,7 +423,8 @@ def main():
                     help="med42 | deepseek | any HF model id")
     ap.add_argument("--corpus", default="pilot",
                     choices=("pilot", "synth-v1", "fs", "synth+fs",
-                             "synth+fs80", "both", "all"))
+                             "synth+fs80", "both", "all",
+                             "synth-v3-polish", "synth-v3-polish+fs80"))
     ap.add_argument("--output-dir", default=None,
                     help="Adapter output dir (default: checkpoints/{slug}_lora_epi)")
     ap.add_argument("--epochs", type=int, default=5)
