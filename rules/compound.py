@@ -413,9 +413,39 @@ def _infer_current_age(text: str) -> Optional[int]:
 _DISCONT_RE = re.compile(
     r"\b(stopped|discontinued|no\s+longer\s+(?:on|taking)|off\s+the|"
     r"switched\s+from|held|d/?c(?:['-]?d)?|weaned\s+off|tapered\s+off|"
-    r"withdrawn|ceased)\b",
+    r"withdrawn|ceased|"
+    # US longitudinal-history cues added for MTSamples-style narrative:
+    r"initially\s+treated\s+with|initially\s+started\s+on|"
+    r"was\s+(?:on|taking|placed\s+on|started\s+on)|"
+    r"previously\s+(?:took|on|treated|tried)|prior\s+to|"
+    r"in\s+the\s+past\s+on|"
+    r"failed\s+(?:a\s+)?(?:trial(?:s)?\s+of)?|"
+    r"trial(?:s)?\s+of|had\s+failed|"
+    r"subsequently\s+(?:changed|switched|added|started|discontinued)|"
+    r"changed\s+(?:to|from)|"
+    r"then\s+(?:added|switched\s+to)"
+    r")\b",
     re.IGNORECASE,
 )
+
+# Sequential-list marker: catches "medication combinations including X, Y, Z"
+# where the list itself is historical narrative rather than current regimen.
+_HISTORICAL_LIST_RE = re.compile(
+    r"\b(?:combinations?\s+(?:of|including)|multiple\s+(?:trials?|agents?)|"
+    r"tried\s+(?:on\s+)?(?:in\s+the\s+past|previously)|"
+    r"(?:several|numerous|many)\s+antiepileptic|"
+    r"has\s+been\s+on\s+(?:multiple|numerous|various))",
+    re.IGNORECASE,
+)
+
+# Generic-name aliasing — silver labellers use varied wording for the same
+# molecule. Normalise both directions when comparing.
+_GENERIC_ALIASES: dict[str, str] = {
+    "sodiumvalproate": "valproic acid",
+    "sodium valproate": "valproic acid",
+    "valproate": "valproic acid",
+    "divalproex": "valproic acid",
+}
 
 
 def derive_medication_currently_taking(

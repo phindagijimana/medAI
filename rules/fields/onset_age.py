@@ -75,6 +75,19 @@ _RE_STARTED_AT = re.compile(
     re.IGNORECASE,
 )
 
+# 1b. Verb-first variant: "began having seizures ... at N years of age"
+#     Catches MTSamples-style "He began having seizures, however, at 9 years of age."
+_RE_VERB_FIRST_STARTED = re.compile(
+    r"(?:began|started|first\s+had|first\s+experienced|developed)"
+    r"[^.]{0,40}?"
+    r"(?:seizures?|epilepsy|episodes?|attacks?|fits?|spells?|convulsions?)"
+    r"[^.]{0,60}?"
+    r"(?:at\s+(?:the\s+)?age\s+of\s+|at\s+age\s+|aged\s+|"
+    r"at\s+(?P<n_alt>\d+(?:\.\d+)?)\s*(?:months?|years?|yrs?|mo\b)?\s+of\s+age)"
+    r"(?:(?P<n>\d+(?:\.\d+)?)(?:\s*(?P<u>months?|years?|yrs?|mo\b))?)?",
+    re.IGNORECASE,
+)
+
 # 2. "first seizure at N" (compact form)
 _RE_FIRST_SEIZURE_AT = re.compile(
     r"(?:her|his|their|the)?\s*first\s+(?:seizure|fit|episode)"
@@ -115,6 +128,31 @@ _RE_HISTORY_OF = re.compile(
     r"[^.]{0,60}?"
     r"(?P<hist>\d+)[- ]year(?:s)?\s+history\s+of\s+"
     r"(?:seizures?|epilepsy)",
+    re.IGNORECASE,
+)
+
+# 6b. Compound reasoning: "N-year-old ... developed/began seizures M year(s) ago"
+#     Onset = current_age − years_ago.  Catches MTSamples MT_V0073 pattern.
+_RE_HISTORY_YEARS_AGO = re.compile(
+    r"(?P<age>\d+)[- ]year[- ]?old"
+    r"[^.]{0,140}?"
+    r"(?:developed|began\s+having|started\s+having|first\s+had)"
+    r"\s+(?:seizures?|epilepsy|episodes?|spells?)"
+    r"[^.]{0,40}?"
+    r"(?:about\s+|approximately\s+|~\s*)?"
+    r"(?P<hist>\d+)\s+year(?:s)?\s+ago",
+    re.IGNORECASE,
+)
+
+# 7. Fractional / hyphenated age: "2-1/2-year-old", "18-month-old", "3½-year-old"
+#    Common in pediatric neurology notes.  Catches MTSamples MT_V0067.
+_RE_FRACTIONAL_AGE = re.compile(
+    r"(?P<whole>\d+)"
+    r"(?:[- ](?:1/2|½|1/4|3/4))?"
+    r"[- ](?:month|year|yr)[- ]?old"
+    r"[^.]{0,80}?"
+    r"(?:history\s+of|with\s+(?:known\s+)?|"
+    r"(?:known|febrile|myoclonic|absence)\s+seizures?)",
     re.IGNORECASE,
 )
 
@@ -176,6 +214,18 @@ class OnsetAgeRule(BaseFieldRule):
                 if age is not None:
                     return self._emit(age, m, meta)
 
+        # Verb-first variant ("began having seizures at N years of age") —
+        # handles insertions like "however," between the verb phrase and the age.
+        for m in _RE_VERB_FIRST_STARTED.finditer(text):
+            if not self._sentence_ok(doc, m.start()):
+                continue
+            n_str = m.group("n") or m.group("n_alt")
+            if not n_str:
+                continue
+            age = _normalise_age(float(n_str), m.group("u"))
+            if age is not None:
+                return self._emit(age, m, meta)
+
         # "since age N" only if the same sentence mentions a seizure/epilepsy word.
         for m in _RE_SINCE_AGE.finditer(text):
             sent_text, _ = _find_sentence(doc, m.start())
@@ -211,6 +261,41 @@ class OnsetAgeRule(BaseFieldRule):
                 age = _normalise_age(onset, None)
                 if age is not None:
                     return self._emit(age, m, meta, certainty=Certainty.PROBABLE)
+
+        # "N-year-old ... developed seizures M years ago" → onset = N − M
+        for m in _RE_HISTORY_YEARS_AGO.finditer(text):
+            if not self._sentence_ok(doc, m.start()):
+                continue
+            try:
+                current_age = float(m.group("age"))
+                hist = float(m.group("hist"))
+                onset = current_age - hist
+            except ValueError:
+                continue
+            age = _normalise_age(onset, None)
+            if age is not None:
+                return self._emit(age, m, meta, certainty=Certainty.PROBABLE)
+
+        # Fractional-age composite ("2-1/2-year-old with a history of ...
+        # seizures") — the age itself is the onset when history is present.
+        for m in _RE_FRACTIONAL_AGE.finditer(text):
+            if not self._sentence_ok(doc, m.start()):
+                continue
+            whole = float(m.group("whole"))
+            # Detect the fraction in the raw match text.
+            raw = m.group(0).lower()
+            if "1/2" in raw or "½" in raw:
+                whole += 0.5
+            elif "1/4" in raw:
+                whole += 0.25
+            elif "3/4" in raw:
+                whole += 0.75
+            # Month-old → convert to years.
+            if "month" in raw:
+                whole = whole / 12.0
+            age = _normalise_age(whole, None)
+            if age is not None:
+                return self._emit(age, m, meta, certainty=Certainty.PROBABLE)
 
         return None
 
