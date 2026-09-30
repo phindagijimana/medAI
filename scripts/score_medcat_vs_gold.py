@@ -428,15 +428,18 @@ def main(argv: list[str] | None = None) -> int:
         holdout = {f"EA{i:04d}" for i in range(161, 201)}
         doc_ids = sorted([d for d in preds if d in holdout and d in gold])
     elif args.corpus == "mtsamples_neuro_preprocessed":
-        # Preds keyed as MT_V####; gold keyed as mt_sample_####. Bridge by index.
-        def _norm_pred(d: str) -> str:
-            if d.startswith("MT_V"):
-                try:
-                    return f"mt_sample_{int(d[4:]):04d}"
-                except ValueError:
-                    return d
-            return d
-        preds = {_norm_pred(k): v for k, v in preds.items()}
+        # Preds always MT_V####. Gold may be MT_V#### (fresh preproc-aligned silver)
+        # OR mt_sample_#### (legacy silver from raw MTSamples). Bridge only if
+        # the gold set does not already contain MT_V####.
+        if not any(k.startswith("MT_V") for k in gold):
+            def _norm_pred(d: str) -> str:
+                if d.startswith("MT_V"):
+                    try:
+                        return f"mt_sample_{int(d[4:]):04d}"
+                    except ValueError:
+                        return d
+                return d
+            preds = {_norm_pred(k): v for k, v in preds.items()}
         doc_ids = sorted([d for d in preds if d in gold])
     else:
         doc_ids = sorted([d for d in preds if d in gold])
