@@ -95,6 +95,16 @@ def _mtsamples_docs() -> Iterator[tuple[str, Path, str]]:
             yield d.name, p, "progress_note"
 
 
+def _mtsamples_preprocessed_docs() -> Iterator[tuple[str, Path, str]]:
+    """Yield preprocessed MTSamples docs (canonical H&P headers + AED annotation)."""
+    base = REPO_ROOT / "data" / "eval_corpora" / "mtsamples_neuro_preprocessed"
+    docs = base / "documents"
+    if not docs.exists():
+        return
+    for p in sorted(docs.glob("*.txt")):
+        yield p.stem, p, "progress_note"
+
+
 def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
     """Yield synth-v2 held-out docs (P002250-P002299 patients, both doc types)."""
     base = REPO_ROOT / "data" / "episynth_corpus" / "v2" / "documents"
@@ -110,6 +120,7 @@ CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
     "mtsamples_neuro": _mtsamples_docs,
+    "mtsamples_neuro_preprocessed": _mtsamples_preprocessed_docs,
     "synth_v2_eval_100": _synth_v2_eval_100_docs,
 }
 
