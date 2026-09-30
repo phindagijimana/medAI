@@ -1,0 +1,117 @@
+TEMPLATE_ID: I
+NOTE_TYPE: neuropsych
+CARE_SETTING: academic_medical_center
+PROVIDER_PERSONA: psychologist
+LENGTH_TARGET: 700-1200 words
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified neuropsychologist dictating a presurgical or diagnostic neuropsychological evaluation for a patient with epilepsy. Your report will inform surgical decision-making at PRC.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: outpatient neuropsychological evaluation.
+- Time: typically 4-6 hours of testing plus 1-hour interview.
+- Testing battery: US-standard adult neuropsych battery (WAIS, WMS, BNT, RAVLT, CVLT, ROCF, Trail Making, WCST, BDI, BAI).
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Neuropsychological Evaluation
+
+Patient:  xxx xxx
+DOB:  xx/xx/20xx (age xx)
+Handedness:  <right | left | ambidextrous>
+Referral Source:  Dr. xxx, Epileptology
+Date of Evaluation:  xx/xx/20xx
+
+Referral Question:  <1-2 lines — e.g., "Presurgical neuropsychological baseline. Assess memory laterality and language dominance ahead of potential left temporal resection.">
+
+Relevant History:
+    - Epilepsy diagnosis at age xx
+    - Current AEDs
+    - Seizure semiology
+    - Prior imaging and EEG findings
+    - Psychiatric history (depression, anxiety, PNES if applicable)
+    - Educational and occupational history
+
+Behavioral Observations:
+    Appearance and Cooperation:
+    Speech and Language:
+    Mood and Affect:
+    Effort and Engagement:  (mention symptom validity test, e.g., "TOMM Trial 2 = 50/50, indicating adequate effort.")
+
+Tests Administered:
+    Intellectual Functioning: WAIS-IV
+    Attention/Processing Speed: Trail Making A/B, WAIS-IV Processing Speed Index
+    Language: Boston Naming Test (BNT), Verbal Fluency (COWAT-FAS, animals)
+    Verbal Memory: RAVLT or CVLT-3, WMS-IV Logical Memory
+    Visual Memory: WMS-IV Visual Reproduction, ROCF (Rey-Osterrieth Complex Figure)
+    Executive Function: WCST, Stroop, Trail Making B
+    Visuospatial: ROCF Copy, WAIS-IV Block Design
+    Motor: Grooved Pegboard (dominant/non-dominant)
+    Mood/Personality: BDI-II, BAI, PHQ-9
+
+Results:  <organized by domain — each subheader gives standardized scores and interpretation>
+
+    Intellectual Functioning:
+        <scores + interpretation>
+
+    Attention/Processing Speed:
+
+    Language:  <especially important for temporal lobe patients — comment on BNT confrontation naming as a marker of dominant temporal function>
+
+    Verbal Memory:  <critical for left temporal patients — RAVLT/CVLT scores + WMS Logical Memory>
+
+    Visual Memory:  <critical for right temporal patients — ROCF Delayed Recall>
+
+    Executive Function:
+
+    Visuospatial:
+
+    Motor:
+
+    Mood/Personality:
+
+Summary and Impressions:  <2-3 paragraphs>
+    - Cognitive strengths
+    - Cognitive weaknesses
+    - Pattern of findings relative to imaging/EEG lateralization
+    - Comment on surgical risk if presurgical: "Left temporal resection carries moderate risk for further decline in verbal memory given already borderline scores. Consider Wada or fMRI language mapping before final surgical planning."
+
+Recommendations:
+    1. Discuss findings at PRC.
+    2. <e.g., "Recommend fMRI language mapping.">
+    3. <e.g., "Consider Wada test if fMRI is discordant.">
+    4. <e.g., "Post-surgical neuropsychological re-evaluation at 6 and 12 months.">
+    5. Cognitive rehabilitation referral if appropriate.
+
+Signed:  xxx, PhD, ABPP-CN
+Board-Certified Clinical Neuropsychologist
+xxx Medical Center
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Formal, precise scientific voice.
+- Standardized score reporting: T-scores (M=50, SD=10), z-scores, scaled scores (M=10, SD=3), percentile ranks.
+- Standard descriptors: "Average", "Low Average", "Borderline", "Impaired", "High Average", "Superior".
+- Include a symptom validity test result (TOMM, RDS, VSVT).
+- Use neuropsych-specific terminology: verbal fluency, confrontation naming, list learning, visual reproduction, executive functioning, processing speed.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Neuropsychological Evaluation". End with the signature block. Length target: 700-1200 words.

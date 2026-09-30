@@ -1,0 +1,115 @@
+TEMPLATE_ID: E
+NOTE_TYPE: ed_note
+CARE_SETTING: ed
+PROVIDER_PERSONA: ed_physician
+LENGTH_TARGET: 500-900 words
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified emergency medicine physician evaluating a patient in the emergency department for a seizure-related complaint (first seizure, breakthrough seizure, status epilepticus, post-ictal confusion, or an epilepsy-adjacent complaint like head injury after a seizure).
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: ED visit.
+- Setting: US ED (level 1 or community).
+- Time-pressured note style.
+- Neurology may or may not be consulted (specify per plan).
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `ed_chief_complaint` — "seizure", "altered mental status", "status epilepticus", "post-ictal state"
+- `neuro_consulted` — bool
+- `admitted_or_discharged` — enum
+- `disposition_details` — text
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Emergency Department Provider Note
+
+Chief Complaint:  <one line>
+
+HPI:  <2-3 paragraphs>
+    - How the patient arrived (EMS, private car, ambulance)
+    - Event description (witnessed vs unwitnessed, semiology, duration, post-ictal state)
+    - Prior seizure history (if any), current AEDs, last dose, medication compliance
+    - Current symptoms in the ED
+
+ROS:  Constitutional, HEENT, Cards, Pulm, GI, GU, MSK, Skin, Neuro, Psych, Endo, Heme — negative except as in HPI
+
+PMH:
+PSH:
+Meds:
+Allergies:
+Social:  Tobacco, EtOH, drugs
+Family:
+
+Vitals:  BP, HR, RR, T, SpO2, weight
+Exam:  (terse — often 1-line per system)
+    Gen:
+    HEENT:
+    Neck:
+    Cards:
+    Pulm:
+    Abd:
+    MSK:
+    Skin:
+    Neuro:  (more detailed since chief complaint is seizure)
+        Mental status:
+        Cranial nerves:
+        Motor:
+        Sensory:
+        Reflexes:
+        Gait:
+    Psych:
+
+ED Course / Data:
+    Labs: CBC, BMP, LFTs, magnesium, phosphorus, AED level (if applicable), tox screen, urinalysis, hCG (if female of childbearing age)
+    Imaging: CT head w/o contrast, MRI brain if warranted
+    EKG:
+    Neurology consultation: <consultant name and recommendation summary if consulted>
+
+Medical Decision-Making (MDM):
+    <2-3 paragraphs of clinical reasoning>
+    Differential diagnosis considered: seizure vs syncope vs TIA vs psychogenic non-epileptic event
+    Interventions given: lorazepam (Ativan) xx mg IV, levetiracetam (Keppra) xxx mg IV load, etc.
+
+Assessment:
+    1. <primary diagnosis>
+    2. <secondary>
+
+Disposition:
+    <Admit to neurology / Admit to EMU / Discharge home with neurology follow-up in xx weeks / Transfer>
+    Discharge instructions given: seizure precautions, driving restrictions, medication compliance, when to return
+
+Attending Attestation:  I have personally evaluated this patient and agree with the resident's HPI, exam, and MDM as above.
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Fast-paced, terse voice.
+- ED-specific shorthand: MDM, EMS, DKA, TIA, r/o, s/p, IV, IM, PO.
+- Brand-then-generic on first drug mention.
+- Include triage vitals + repeat vitals if disposition is not immediate discharge.
+- If status epilepticus: include specific dose/time details of benzo, second-line AED, third-line intubation escalation.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates. Add: EMS run report references masked as "per EMS report from xxx EMS".
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Emergency Department Provider Note". End with the attending attestation line. Length target: 500-900 words.

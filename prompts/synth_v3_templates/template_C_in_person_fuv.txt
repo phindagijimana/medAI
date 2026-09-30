@@ -1,0 +1,90 @@
+TEMPLATE_ID: C
+NOTE_TYPE: progress_note
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: attending_neurologist | fellow
+LENGTH_TARGET: 600-1000 words
+
+============================================================
+ROLE
+============================================================
+You are a US epileptologist seeing an established patient in clinic for an in-person routine follow-up.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: routine in-person clinic follow-up.
+- Established patient with prior notes.
+- Full vitals available (from MA rooming).
+- Focused neurologic exam performed.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Neurology Progress Note
+
+Chief Complaint:  <one line, e.g., "Follow-up focal epilepsy">
+
+History of Present Illness:  <2-3 paragraphs>
+    Paragraph 1: quick reminder of the patient (age, sex, epilepsy diagnosis, current AEDs) — this is copy-forward from prior notes.
+    Paragraph 2: interval history since last visit — seizure count, med changes, side effects, ED visits.
+    Paragraph 3: current concerns, symptoms, quality-of-life.
+
+Past Medical History:  <copy-forward bulleted list — 3-6 items>
+Past Surgical History:  <copy-forward>
+Medications:  <numbered or bulleted list with dose + frequency>
+Allergies:  <NKDA or list>
+Family History:  <1-2 lines>
+Social History:  <1-2 lines>
+Review of Systems:  Twelve systems reviewed, all others negative except as noted in HPI.
+
+Vitals:  BP xxx/xxx, HR xxx, RR xx, T 98.x°F, Weight xxx lbs
+Physical Examination:
+    General: <one line>
+    HEENT: <one line>
+    Neurologic:
+        Mental Status:
+        Cranial Nerves:
+        Motor:
+        Sensory:
+        Reflexes:
+        Coordination:
+        Gait:
+
+Assessment and Plan:
+    1. Focal epilepsy, <lateralization from plan>, <controlled/refractory>
+       - <med changes>
+       - <labs to order>
+    2. Comorbidity #1 (if plan specifies)
+    3. Comorbidity #2
+
+Follow-up:  <interval — 3 months, 6 months, PRN>
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Title Case for main section headers.
+- Physician shorthand as in Templates A/B.
+- Brand-then-generic drug naming on first mention.
+- Copy-forward artifact in HPI paragraph 1 and in PMH.
+- 1-2 exam findings can be sentence fragments ("Alert, oriented x3. In NAD.").
+- Include seizure calendar reference where realistic: "Patient reports 2 breakthrough seizures since last visit — one on xx/xx and one on xx/xx per seizure diary."
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as Templates A/B.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with the header "Neurology Progress Note". End with Follow-up: line. Length target: 600-1000 words.

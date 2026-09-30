@@ -1,0 +1,87 @@
+TEMPLATE_ID: B
+NOTE_TYPE: telephone_fuv
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: attending_neurologist
+LENGTH_TARGET: 500-900 words
+ANCHOR: references/real_us_note_templates/template_B_neurology_telephone_fuv.txt
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified epileptologist conducting a scheduled telephone or video follow-up visit for an established patient. You are dictating the visit note that will file to the EHR.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: telemedicine follow-up (telephone or video).
+- Patient is ESTABLISHED — you have prior notes to reference.
+- No physical vitals available; no formal neuro exam (video observation only).
+- Consent language for telemedicine required at the top.
+- Time-based billing statement required at the end.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields consumed:
+- `prior_visit_summary` — 2-4 sentence paraphrase of the last in-person visit
+- `interval_events` — list of seizures / med changes / ED visits since last contact
+- `is_video` — bool (true = video visit, false = telephone-only)
+- `time_spent_min` → "xx minutes" placeholder
+
+============================================================
+STRUCTURAL EXEMPLAR (real deidentified US EHR note)
+============================================================
+Mirror the reference exemplar's structure:
+
+Header block (key: value on each line):
+    Neurology - Telephone Consultation Note
+    (blank line)
+    Patient: xxx xxx
+    Patient's DOB: xxx
+    Patient's Location: home
+    Other Attendees: none
+    Provider: xxx xxx, MD
+    Location of Telemedicine Provider: Clinical office, xxx, xxx, NY
+    (blank line)
+    Consent was previously obtained from the patient to complete this telephone/televideo consult; including informing the patient of the potential for financial liability.  xxxx was unaccompanied for today's visit.
+    (blank line)
+    Reason for Visit:  <copy from plan>
+
+Body sections (Title Case, single blank line between):
+- History (a longer paragraph that includes prior LTM/EMU findings, PRC discussion if relevant, and the therapeutic plan established last visit — this section is "copy-forward" from prior notes)
+- Previous Visit (2-3 paragraph paraphrase of the last visit's narrative)
+- Interval History (what has happened since — seizures, med changes, side effects)
+- Social History (1-2 lines, brief)
+- Data (any objective data — recent EEG/MRI results, blood levels)
+- Physical Examination section headers are still present (CONSTITUTIONAL:, NEUROLOGIC:, etc.) but each subsection notes video-visit limitations: "No Vitals were taken as this was a video visit.", "Gait not observed."
+- Impression and Recommendations (narrative — free-flowing paragraphs, not numbered)
+- "I have personally spent xx minutes on the calendar day of the visit including previsit and postvisit time."
+- Plan: (final section — bulleted medication list with dose + frequency)
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- ALL CAPS: section labels within Physical Examination (CONSTITUTIONAL:, NEUROLOGIC:, GENERAL EXAM:, MENTAL STATUS:).
+- Copy-forward artifact: the "History" section repeats content from prior visits verbatim (the exemplar shows this — a paragraph that reads like it was pasted from the LTM discharge summary).
+- Time-based billing statement required near the end.
+- Brand-then-generic drug naming on first mention per note.
+- Physician shorthand as in Template A.
+- Use "xxxx" (4 x's) for patient first name references (the exemplar has this pattern).
+- Add typos of the exemplar type occasionally: "siezues" instead of "seizures", "xxax" instead of "xxxx" — these represent real dictation drift.
+
+============================================================
+DEIDENTIFICATION REQUIREMENTS
+============================================================
+Same as Template A. All names/dates/locations masked to xxx.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Neurology - Telephone Consultation Note" header. End with the Plan: bulleted list. Length target: 500-900 words.

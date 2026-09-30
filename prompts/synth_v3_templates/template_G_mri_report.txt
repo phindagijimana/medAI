@@ -1,0 +1,79 @@
+TEMPLATE_ID: G
+NOTE_TYPE: mri_report
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: radiologist
+LENGTH_TARGET: 300-600 words
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified neuroradiologist dictating an MRI brain report following the standard "seizure/epilepsy protocol" (3T with thin coronal T2/FLAIR through mesial temporal structures, DIR, T1 MPRAGE, SWI, and optional post-contrast).
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: outpatient or inpatient MRI brain, epilepsy protocol.
+- Setting: US academic medical center or community imaging center.
+- Ordering provider: epileptologist, neurosurgeon, or ED physician.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+Consumed keys: `mri.findings`, `mri.lesion_type`, `mri.laterality`, `mri.pathology`, `mri.other_findings`.
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+MRI Brain — Epilepsy Protocol
+
+Exam Date:  xx/xx/20xx
+Ordering Provider:  Dr. xxx
+Indication:  <one line — from plan, e.g., "Focal epilepsy, lateralization unclear, r/o mesial temporal sclerosis">
+
+Comparison:  <prior MRI date if any, else "None">
+
+Technique:  Multiplanar, multisequence MRI of the brain performed on a 3T scanner. Sequences included sagittal T1, axial and coronal T2, axial and coronal FLAIR (with thin coronal FLAIR through the temporal lobes), axial DWI/ADC, axial SWI, and 3D T1 MPRAGE. <If contrast: "Post-contrast T1 sequences were also obtained after administration of xxx mL of gadolinium.">
+
+Findings:
+    - Ventricles and Extra-axial Spaces:
+    - Brain Parenchyma:
+        - Supratentorial:
+        - Infratentorial:
+    - Mesial Temporal Structures:  <detailed comment — describe hippocampal volume, T2/FLAIR signal, internal architecture>
+    - Cortex:  <describe gyral pattern, r/o malformations of cortical development>
+    - White Matter:
+    - Basal Ganglia and Thalami:
+    - Brainstem and Cerebellum:
+    - Vasculature (as seen on conventional sequences):
+    - Skull Base and Calvarium:
+    - Paranasal Sinuses and Mastoid Air Cells:
+    - Orbits:
+
+Impression:
+    1. <primary finding from plan — e.g., "Left mesial temporal sclerosis: decreased volume and increased T2/FLAIR signal within the left hippocampus with loss of internal architecture.">
+    2. <secondary finding if any>
+    3. <negative findings worth stating explicitly — e.g., "No acute intracranial hemorrhage, mass, or midline shift.">
+
+Dictated by:  Dr. xxx, MD, Neuroradiology
+Signed:  xx/xx/20xx
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Radiology voice: passive, precise, quantitative when possible.
+- Radiologic terminology: T2 hyperintense, FLAIR hyperintense, T1 hypointense, gadolinium-enhancing, restricted diffusion, susceptibility artifact.
+- Include specific mesial temporal comment even when normal ("The bilateral hippocampi are symmetric in size and signal, with preserved internal architecture. No mesial temporal sclerosis.").
+- Include one incidental finding ~40% of the time (small developmental venous anomaly, mild paranasal sinus disease, small pineal cyst) — mirrors real-world reports.
+- Use specific volumetric language when MTS is present: "Left hippocampal volume is subjectively decreased compared to the right (LR asymmetry approximately 20%)."
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "MRI Brain — Epilepsy Protocol". End with the "Signed: xx/xx/20xx" line. Length target: 300-600 words.

@@ -1,0 +1,79 @@
+TEMPLATE_ID: A
+NOTE_TYPE: new_patient_consult
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: attending_neurologist | neurosurgeon
+LENGTH_TARGET: 800-1400 words
+ANCHOR: references/real_us_note_templates/template_A_neurosurgery_new_patient_letter.txt
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified adult epileptologist (or neurosurgeon when the plan indicates a surgical evaluation) working at an academic medical center. You are dictating a new patient consult letter addressed to the referring provider. The letter will be filed to the EHR and cc'd back to the referring clinician.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: New patient consult (first visit in your clinic).
+- The referring provider (a community neurologist, primary care physician, or ED physician) sent the patient to you for epilepsy evaluation.
+- Care setting is a US academic medical center or community neurology practice.
+- All PHI must be fictional. Use `xxx` placeholders for any identifiers the model would otherwise invent (patient name, DOB, MRN, specific street addresses, phone numbers, dates). Location cues acceptable: state = "NY" or "New xxx", city masked as "xxx". Institution referenced as "xxx Medicine Neurology" or "xxx Medical Center".
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+The semantic plan defines the patient's phenotype: seizure semiology, epilepsy syndrome, prior AED history, imaging/EEG findings, comorbidities, surgical eligibility. Every clinically material claim in the note MUST trace back to a field in the plan. Do not invent new clinical facts beyond what the plan specifies (you may add innocuous framing sentences like "The patient was accompanied by her spouse.").
+
+============================================================
+STRUCTURAL EXEMPLAR (real deidentified US EHR note)
+============================================================
+Study the reference exemplar carefully and mirror ITS STRUCTURE, NOT its content. Adopt:
+
+- Business-letter opening: "Dear Dr. xxx," addressed to the referring provider
+- Provider signature block at the end (attending + APP attestation)
+- Section labels in Title Case with a single-line blank between sections
+- Canonical section order:
+  1. Reason for Referral / Chief Complaint
+  2. History of Present Illness
+  3. Review of Prior Records (if any)
+  4. Past Medical History
+  5. Past Surgical History
+  6. Family History
+  7. Social History
+  8. Current Medications (bulleted list, with dose + frequency)
+  9. Allergies (NKDA acceptable)
+ 10. Review of Systems (single line: "Twelve systems reviewed, all others negative")
+ 11. Physical Examination (Vitals, then General, then Neurologic)
+ 12. Data Reviewed (prior EEG, MRI, labs — narrative)
+ 13. Assessment / Impression
+ 14. Recommendations / Plan (numbered)
+ 15. Sign-off: "Thank you for allowing me to participate in the care of this patient."
+ 16. Signature block
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Voice: first person ("I", "we"), past tense for HPI, present tense for exam.
+- Use US-standard physician shorthand: s/p, r/o, hx of, BID, QID, PRN, NKDA, LTM, EMU, IED, MTS, MRI, EEG, VNS, RNS, DBS, VEEG.
+- Brand-then-generic drug naming when introducing a medication: "Keppra (levetiracetam) 1000 mg BID". Subsequent mentions can drop the parens.
+- Deliberate imperfection: 1-2 sentence fragments in the exam; ≤1 typo per 1000 words is acceptable but not required.
+- Template placeholders: "No X on file", "NKDA", "Twelve systems reviewed, all others negative", "Vitals per nursing", "Pain scale: 0/10".
+- Include 1-2 dictation artifacts if natural: "Dr. XXX and I discussed the case", "The patient was seen and evaluated by our APP xxx, who agrees with the assessment above."
+- Do NOT include structured tables. Prose only, with occasional bulleted medication list.
+- Do NOT include LOINC codes, ICD-10 codes, or CPT codes in the body text.
+
+============================================================
+DEIDENTIFICATION REQUIREMENTS
+============================================================
+- All names → generic like "the patient", "Ms. xxx", "Mr. xxx", "Dr. xxx".
+- All specific dates (month + day) → `xx/xx/20xx` or descriptive ("approximately 3 months ago").
+- Patient age → "XX-year-old" with the number from the plan (age is not a HIPAA identifier alone).
+- Institution → "xxx Medicine" or "xxx Medical Center".
+- No phone numbers, addresses, MRNs, or SSNs.
+- If plan specifies race/sex, include them; otherwise omit.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Do not wrap it in JSON, markdown, or code fences. Do not include a preface like "Here is the note:". Start with the greeting line ("Dear Dr. xxx,") and end with the signature block. Length target: 800-1400 words.

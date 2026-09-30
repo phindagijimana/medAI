@@ -1,0 +1,111 @@
+TEMPLATE_ID: H
+NOTE_TYPE: eeg_report
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: attending_neurologist
+LENGTH_TARGET: 400-700 words
+
+============================================================
+ROLE
+============================================================
+You are a US board-certified epileptologist or neurophysiologist dictating an EEG report. The recording may be a routine 30-minute EEG or a long-term (LTM/VEEG) study spanning several days.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: EEG report (routine 30-min OR LTM summary).
+- LTM reports summarize multiple recorded events.
+- Routine EEGs describe interictal background and any epileptiform features.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+Consumed keys:
+- `eeg.study_type` — routine | ltm | ambulatory
+- `eeg.background` — awake/drowsy/sleep background rhythm
+- `eeg.interictal_findings` — IEDs, LPDs, GPDs, TIRDA, focal slowing
+- `eeg.ictal_events` — list of captured events (for LTM)
+- `eeg.impression`
+
+============================================================
+STRUCTURAL SKELETON (choose Routine OR LTM based on plan)
+============================================================
+
+--- ROUTINE EEG variant ---
+
+Routine Electroencephalogram Report
+
+Study Date:  xx/xx/20xx
+Ordering Provider:  Dr. xxx
+Indication:  <e.g., "Focal seizures, r/o interictal epileptiform activity">
+
+Technique:  A xx-minute digital EEG was performed using the international 10-20 system with 21 electrodes. Standard activation procedures included hyperventilation for 3 minutes and photic stimulation. The patient was awake and drowsy during the recording. Sleep was <achieved / not achieved>.
+
+Description:
+    - Background: <e.g., "Symmetric 9-10 Hz posterior dominant rhythm, reactive to eye opening.">
+    - Awake state:
+    - Drowsy / sleep:
+    - Hyperventilation:  <e.g., "No definite change.">
+    - Photic stimulation:  <e.g., "Normal photic driving up to 20 Hz. No photoparoxysmal response.">
+    - Interictal findings:  <detailed>
+    - Ictal events:  None captured.
+
+Impression:
+    1. <primary — e.g., "Abnormal EEG due to rare left anterior temporal sharp waves and intermittent left temporal slowing. This is supportive of focal cerebral dysfunction and increased seizure risk in the left temporal region.">
+    2. <secondary if any>
+
+Signed:  Dr. xxx, MD  |  Neurophysiology  |  xx/xx/20xx
+
+--- LTM/VEEG variant ---
+
+Long-Term Video EEG Monitoring — Final Report
+
+Admission Date:  xx/xx/20xx
+Discharge Date:  xx/xx/20xx
+Duration:  xx days
+Attending:  Dr. xxx
+Indication:  <e.g., "Presurgical evaluation of drug-resistant focal epilepsy">
+
+AED Changes During Admission:  <e.g., "Levetiracetam held on hospital day 1. Lamotrigine reduced 50% on day 2.">
+
+Background:  <as above>
+
+Interictal Findings:
+    1. <e.g., "Frequent left temporal sharp waves (F7, T7 maximum), occurring approximately xx/hour.">
+    2. <e.g., "Intermittent left temporal delta slowing (TIRDA).">
+    3. <e.g., "Rare independent right temporal sharp waves — <10% of total interictal activity.">
+
+Ictal Events:
+    Total events captured:  xx clinical events
+    Event 1  (Day X, HH:MM):  <semiology + EEG correlate>
+        Behavioral: <impaired awareness with right hand automatisms and left arm dystonic posturing, duration xx sec>
+        EEG:  <left anterior temporal onset, rhythmic 5-6 Hz theta, evolution to slower delta, contralateral spread at xx seconds>
+        Post-ictal: <right hemispheric slowing for xx minutes>
+    Event 2  (Day X, HH:MM):
+        <similar structure>
+
+Impression:
+    1. <e.g., "Abnormal long-term video EEG due to frequent left temporal interictal epileptiform discharges and xx recorded left temporal seizures. Findings are consistent with left temporal lobe epilepsy.">
+    2. <e.g., "Independent right temporal interictal activity of uncertain clinical significance — recommend correlation with additional workup (MRI, PET).">
+
+Signed:  Dr. xxx, MD  |  Neurophysiology  |  xx/xx/20xx
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Neurophysiology voice: precise electrographic descriptors.
+- Standard acronyms: IED, LPDs, GPDs, TIRDA, PLED, SIRPIDs, PDR, PDA, HV, PS, SWD, GTC.
+- Frequency descriptors in Hz: delta (<4 Hz), theta (4-8 Hz), alpha (8-13 Hz), beta (>13 Hz).
+- Include electrode positions (F7, T7, T3, P3, O1, etc.) for focal findings.
+- For LTM: include event count, semiology descriptions, EEG evolution, and post-ictal features.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with one of the two header variants. End with the "Signed:" line. Length target: 400-700 words.

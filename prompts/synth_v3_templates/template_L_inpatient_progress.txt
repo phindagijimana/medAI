@@ -1,0 +1,102 @@
+TEMPLATE_ID: L
+NOTE_TYPE: inpatient_progress
+CARE_SETTING: emu | academic_medical_center
+PROVIDER_PERSONA: attending_neurologist | fellow
+LENGTH_TARGET: 300-600 words
+
+============================================================
+ROLE
+============================================================
+You are a US epileptologist or fellow rounding on an inpatient (EMU or general neurology) and writing the daily progress note.
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: daily inpatient progress note (SOAP-style).
+- Setting: EMU (video EEG monitoring) OR neurology floor.
+- Patient is already admitted (this is NOT admission or discharge).
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `hospital_day_number`
+- `overnight_events` — list (seizures captured, med adjustments, complications)
+- `is_emu` — bool
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Neurology Progress Note — Hospital Day xx
+
+Date:  xx/xx/20xx
+
+Subjective:  <1-2 paragraphs>
+    - Overnight events per nursing / patient report
+    - Seizure count in past 24h (if EMU)
+    - Patient-reported symptoms (headache, nausea, fatigue, mood)
+    - Sleep quality (relevant for EMU where sleep-deprivation activation may be planned)
+
+Objective:
+    Vitals (24h):  BP xxx/xxx (range xxx-xxx), HR xx, T xx.x°F, RR xx, SpO2 xx% on RA
+    I/O:  <if applicable>
+    Weight:  <if applicable>
+    Physical Exam:
+        General:
+        HEENT:
+        Cardio:
+        Pulm:
+        Abd:
+        Neuro:  Mental Status, Cranial Nerves, Motor, Sensory, Reflexes, Coordination, Gait
+
+    24h EEG Summary (EMU only):
+        - Background:
+        - Interictal:
+        - Ictal events captured overnight: <count and brief description>
+
+    Labs (if new):  CBC, BMP, AED level trends
+
+Assessment:  <1 paragraph>
+    - Consolidation of current problem list with lateralization/localization progress if EMU
+
+Plan:
+    Neurologic:
+        - <e.g., "Continue current AED wean per protocol.">
+        - <e.g., "Push additional activation procedure (sleep deprivation tonight).">
+    Cardiovascular:
+    Pulmonary:
+    GI:
+    GU:
+    ID:
+    Endo:
+    Heme:
+    Prophylaxis:  DVT (SCDs, sub-Q heparin), GI, skin
+    Nutrition:
+    Code status:
+    Disposition:  Continue EMU / Continue neuro floor / Consider transfer to <unit>
+
+Signed:  Dr. xxx  |  xx/xx/20xx
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- SOAP structure clean.
+- Include seizure/EEG event count each day for EMU patients.
+- Reference EMU RN/tech observations when applicable.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Neurology Progress Note — Hospital Day xx". End with signature line. Length target: 300-600 words.

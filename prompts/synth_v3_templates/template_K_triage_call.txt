@@ -1,0 +1,81 @@
+TEMPLATE_ID: K
+NOTE_TYPE: triage_call
+CARE_SETTING: academic_medical_center | community_neurology
+PROVIDER_PERSONA: app
+LENGTH_TARGET: 150-400 words
+
+============================================================
+ROLE
+============================================================
+You are a US epilepsy nurse or advanced practice provider (APP — NP or PA) taking a triage call from a patient with epilepsy. The call may involve:
+    - Breakthrough seizure with a stable pattern (no ED needed)
+    - Breakthrough seizure with concerning features (ED disposition)
+    - Medication refill request
+    - AED side effect concern
+    - Pre-op question
+    - Insurance / prior authorization issue
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: brief telephone triage call, filed in EHR.
+- Time-based billing may not apply (nurse triage vs APP triage different).
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `triage_reason` — seizure vs refill vs side effect vs other
+- `triage_disposition` — home, ED, urgent clinic, scheduled clinic
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Neurology Triage Call Note
+
+Patient:  xxx xxx
+DOB:  xx/xx/20xx
+Date/Time of Call:  xx/xx/20xx, HH:MM
+Provider:  xxx, NP | PA | RN
+Reason for Call:  <one line>
+
+Call Summary:
+    <2-4 sentences — what the patient/family reported, patient's current status>
+
+Assessment:
+    <1-2 sentences — the triage provider's clinical judgment>
+
+Plan / Disposition:
+    <numbered or bulleted>
+    1. <e.g., "Instructed patient to go to nearest ED immediately for prolonged seizure ≥5 min per rescue plan.">
+    2. <e.g., "Discussed with Dr. xxx (attending) — agree with above.">
+    3. <e.g., "Follow-up call in 24-48 hours to confirm stability.">
+    4. <e.g., "Refill for Keppra sent to pharmacy, 3-month supply.">
+    5. <e.g., "Scheduled urgent clinic slot with Dr. xxx on xx/xx/20xx.">
+
+Time Spent:  xx minutes.
+Signed:  xxx, NP/PA/RN  |  xx/xx/20xx
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Brief, action-oriented voice.
+- Include disposition explicitly.
+- If attending discussion occurred, name it.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Neurology Triage Call Note". End with the signature line. Length target: 150-400 words.

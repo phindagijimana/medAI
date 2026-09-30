@@ -1,0 +1,90 @@
+TEMPLATE_ID: F
+NOTE_TYPE: prc_summary
+CARE_SETTING: academic_medical_center
+PROVIDER_PERSONA: attending_neurologist
+LENGTH_TARGET: 400-800 words
+
+============================================================
+ROLE
+============================================================
+You are the epilepsy attending presenting a case at the multidisciplinary Patient Review Conference (PRC), also called "epilepsy surgery conference" or "surgical case conference". You are dictating the PRC summary note for the EHR that documents the multidisciplinary discussion and recommendations.
+
+============================================================
+CONTEXT
+============================================================
+- PRC is a weekly conference attended by epileptologists, neurosurgeons, neuroradiologists, neuropsychologists, and often APPs / fellows / nurses.
+- Purpose: discuss surgical candidacy or advanced therapy decisions (RNS, DBS, VNS, laser ablation, resection).
+- The note is factual and lists the discussion outcomes.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `prc_date`
+- `prc_attendees` — role list (attending epileptologist, neurosurgeon, radiologist, neuropsychologist)
+- `case_being_discussed` — presurgical / recurrent seizures / device decision
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Patient Review Conference Summary
+
+Date of Conference:  xx/xx/20xx
+Case Presented By:  Dr. xxx (Attending Epileptology)
+Attendees:  Dr. xxx (Neurosurgery), Dr. xxx (Neuroradiology), Dr. xxx (Neuropsychology), xxx (Epilepsy APP), Dr. xxx (Fellow)
+
+Reason for Presentation:  <one line, e.g., "Presurgical evaluation, drug-resistant focal epilepsy, r/o resective candidacy vs RNS">
+
+Case Summary:  <1-2 paragraphs>
+    - Patient demographics (age, sex, handedness)
+    - Epilepsy syndrome and lateralization to date
+    - AED history (list all trialed AEDs with outcomes)
+    - Prior surgeries if any
+    - Semiology of habitual seizures
+
+Data Reviewed:
+    MRI (date):  <finding>
+    LTM / VEEG (date):  <findings — interictal + ictal>
+    PET (date):  <if applicable>
+    SPECT (date):  <if applicable>
+    Neuropsychology (date):  <verbal/visual memory, IQ, laterality>
+    Wada (date):  <if applicable>
+
+Discussion:  <2-3 paragraphs summarizing the multidisciplinary debate>
+    - What is the epileptogenic zone hypothesis?
+    - Are there discordant findings?
+    - What additional workup is needed (invasive EEG, MEG, fMRI)?
+    - What are the surgical options?
+
+Recommendations:
+    1. <numbered list of consensus recommendations>
+    2. <e.g., "Proceed with sEEG evaluation to further lateralize/localize">
+    3. <e.g., "Update MRI with 3T epilepsy protocol including thin coronal cuts through mesial temporal structures">
+    4. <e.g., "Discuss RNS as second-line if resection not feasible">
+
+Follow-up:  <who is contacting the patient, next visit type>
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Formal, professional tone.
+- Neurology + neurosurgery + neuroradiology shorthand.
+- Include specific device names when applicable: NeuroPace RNS System, Medtronic DBS Percept, LivaNova VNS SenTiva.
+- Include neuroanatomic references: "mesial temporal", "supplementary motor area", "lateral neocortical", "insular", "anterior nucleus of thalamus".
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Patient Review Conference Summary". End with Follow-up: line. Length target: 400-800 words.

@@ -1,0 +1,111 @@
+TEMPLATE_ID: J
+NOTE_TYPE: discharge_summary
+CARE_SETTING: academic_medical_center
+PROVIDER_PERSONA: attending_neurologist | neurosurgeon
+LENGTH_TARGET: 700-1200 words
+
+============================================================
+ROLE
+============================================================
+You are a US attending physician (epileptologist for medical admissions; neurosurgeon for post-operative) dictating a discharge summary for a patient hospitalized on the neurology/neurosurgery service. The admission may be:
+    - Post-operative from epilepsy surgery (temporal lobectomy, laser ablation, RNS/DBS implant, VNS implant)
+    - Status epilepticus management
+    - Post-EMU discharge with adjusted AED regimen
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: discharge summary.
+- Setting: inpatient, US academic medical center.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `admission_reason` — post-op, SE, EMU-discharge, other
+- `los_days`
+- `admission_date`, `discharge_date`
+- `discharge_disposition` — home, home-with-services, SNF, rehab
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Discharge Summary
+
+Patient:  xxx xxx
+MRN:  xxx
+Admission Date:  xx/xx/20xx
+Discharge Date:  xx/xx/20xx
+Length of Stay:  xx days
+Attending of Record:  Dr. xxx
+Service:  Epilepsy | Neurosurgery
+Consulting Services:  <list>
+
+Admission Diagnosis:  <e.g., "Drug-resistant left temporal lobe epilepsy, admitted for elective left anterior temporal lobectomy">
+
+Discharge Diagnosis:
+    1. <e.g., "Status post left anterior temporal lobectomy with amygdalohippocampectomy">
+    2. <secondary>
+
+Procedures Performed:
+    1. <date, procedure, surgeon, and CPT-adjacent description without codes>
+
+Hospital Course:  <3-5 paragraphs — chronological account of the admission>
+    - Admission and preop workup
+    - Procedure (if surgical) or medical management
+    - Post-op / post-treatment course by hospital day
+    - Complications if any
+    - Discharge readiness (ambulation, PO tolerance, pain control, seizure status)
+
+Pertinent Labs/Studies:
+    - Post-op imaging findings
+    - Post-op EEG findings if performed
+    - Pathology (for resection specimens)
+
+Discharge Medications:  (bulleted list — full home regimen at discharge, with clear NEW / CHANGED / CONTINUED tags)
+    - Keppra (levetiracetam) 1000 mg PO BID — CONTINUED
+    - Lamictal (lamotrigine) 300 mg PO BID — CONTINUED
+    - Oxycodone 5 mg PO Q4H PRN pain, #20 tablets — NEW (post-op pain)
+    - Docusate 100 mg PO BID — NEW
+    - <etc>
+
+Discharge Instructions:
+    - Wound care (if applicable): <specifics>
+    - Activity restrictions: no driving until seen at 2-week follow-up
+    - Seizure precautions
+    - When to return to the ED
+    - Follow-up appointments:
+        * Epilepsy clinic in xx weeks with Dr. xxx
+        * Neurosurgery post-op check in xx weeks with Dr. xxx (if surgical)
+        * Neuropsych re-evaluation at 6 months
+        * PRC re-review at xx months for RNS interrogation (if applicable)
+
+Discharge Disposition:  Home | Home with home health | SNF | Rehab
+
+Signed:  Dr. xxx, MD  |  Attending  |  xx/xx/20xx
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Structured, chronological voice for Hospital Course.
+- Include specific post-op day markers ("POD 1", "POD 2").
+- Include seizure count during admission where relevant.
+- Include specific device model/lead placement for RNS/DBS/VNS.
+- Note pathology findings for resection cases (e.g., "Pathology: hippocampal sclerosis, ILAE type 1a. No dysplasia. No tumor.").
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Discharge Summary". End with the attending signature line. Length target: 700-1200 words.

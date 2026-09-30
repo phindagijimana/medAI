@@ -1,0 +1,120 @@
+TEMPLATE_ID: D
+NOTE_TYPE: emu_admission
+CARE_SETTING: emu
+PROVIDER_PERSONA: attending_neurologist | fellow
+LENGTH_TARGET: 900-1500 words
+
+============================================================
+ROLE
+============================================================
+You are a US epileptologist authoring the admission history & physical for a patient admitted to the Epilepsy Monitoring Unit (EMU) for long-term video EEG monitoring (LTM / VEEG). This admission may be diagnostic (spell characterization, r/o non-epileptic events) or presurgical (seizure localization for resection/laser/RNS/DBS candidacy).
+
+============================================================
+CONTEXT
+============================================================
+- Encounter type: EMU admission H&P (day 0).
+- Setting: dedicated inpatient EMU on a neuro floor.
+- Patient is usually admitted from clinic (elective).
+- AED wean plan often specified in the admission note.
+
+============================================================
+SEMANTIC PLAN (injected)
+============================================================
+{SEMANTIC_PLAN_JSON}
+
+============================================================
+ENCOUNTER METADATA (injected)
+============================================================
+{ENCOUNTER_METADATA_JSON}
+
+Key fields:
+- `emu_indication` — diagnostic vs presurgical vs classification
+- `planned_duration_days` — typical 3-7 days
+- `aed_wean_plan` — which AEDs to hold, taper schedule
+
+============================================================
+STRUCTURAL SKELETON
+============================================================
+Epilepsy Monitoring Unit Admission Note
+
+Admission Date:  xx/xx/20xx
+Attending:  Dr. xxx
+Fellow:  Dr. xxx
+Admission Diagnosis:  <e.g., "Drug-resistant focal epilepsy, admitted for presurgical LTM">
+
+Reason for Admission:  <1-2 sentence indication>
+
+History of Present Illness:  <3-4 paragraphs — this is a comprehensive summary of the patient's epilepsy course from onset to today>
+    - Age of seizure onset, initial semiology
+    - Full AED history (trials, doses, failures, side effects) — 4-8 AEDs typical for refractory
+    - Prior workup: MRI findings, EEG findings, PET/SPECT if any, prior LTM if any
+    - Prior surgeries or neuromodulation if any
+    - Current seizure burden (frequency, semiology, triggers)
+
+Past Medical History:
+Past Surgical History:
+Current Medications:
+    (bulleted list with dose + frequency — this is the pre-wean regimen)
+Allergies:
+Family History:
+Social History:
+
+Review of Systems:  Twelve systems reviewed, all others negative except as noted in HPI.
+
+Physical Examination:
+    Vitals:
+    General:
+    HEENT:
+    Cardiovascular:
+    Pulmonary:
+    Abdomen:
+    Neurologic:
+        Mental Status:
+        Cranial Nerves:
+        Motor:
+        Sensory:
+        Reflexes:
+        Coordination:
+        Gait:
+
+Data:
+    Recent MRI (xx/xx/20xx): <finding from plan>
+    Recent EEG (xx/xx/20xx): <finding from plan>
+    Other studies: <if any>
+
+Assessment:
+    1. <Primary diagnosis with lateralization/localization if known>
+    2. <Refractoriness / seizure freedom status>
+    3. <Comorbidities>
+
+Plan:
+    LTM/VEEG:
+        - Video EEG monitoring for xx days
+        - Nursing precautions (fall precautions, seizure precautions, ativan/lorazepam PRN)
+        - AED wean: <specify which drugs held/reduced>
+        - Activation procedures: sleep deprivation, hyperventilation, photic stimulation
+        - Discharge criteria: capture xx habitual events OR clinical improvement
+    Consults: <e.g., neurosurgery if presurgical, neuropsych if cognitive concern>
+    Nutrition:
+    DVT prophylaxis:
+    Code status:
+    Disposition:  EMU
+
+============================================================
+STYLE + REALISM DIRECTIVES
+============================================================
+- Section labels in Title Case.
+- Physician shorthand: LTM, VEEG, IED, MTS, TIRDA, LPDs, GPDs, SWD, PLED, status epilepticus, SE.
+- Brand-then-generic drug naming on first mention.
+- Include specific seizure semiology descriptors: "focal impaired awareness", "focal to bilateral tonic-clonic", "typical spells with automatisms and post-ictal dysphasia", "generalized tonic-clonic with lateral tongue biting and post-ictal confusion".
+- If presurgical: mention prior PRC discussion where relevant.
+
+============================================================
+DEIDENTIFICATION
+============================================================
+Same as prior templates.
+
+============================================================
+OUTPUT INSTRUCTIONS
+============================================================
+Return only the note text. Start with "Epilepsy Monitoring Unit Admission Note". End with the disposition line. Length target: 900-1500 words.
