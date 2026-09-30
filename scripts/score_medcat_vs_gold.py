@@ -405,7 +405,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--corpus", required=True,
                     choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10",
                              "mtsamples_neuro_preprocessed", "synth_v2_eval_100",
-                             "synth_v3"])
+                             "synth_v3", "synth_v3_polish"])
     ap.add_argument("--predictions-dir", required=True)
     ap.add_argument("--gold-dir", required=True)
     ap.add_argument("--out-csv", required=True,
@@ -428,7 +428,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.corpus == "fs_test_40":
         holdout = {f"EA{i:04d}" for i in range(161, 201)}
         doc_ids = sorted([d for d in preds if d in holdout and d in gold])
-    elif args.corpus == "synth_v3":
+    elif args.corpus in ("synth_v3", "synth_v3_polish"):
         # Preds keyed as P######_V## (visit_id). Gold keyed as P###### (patient).
         # Clone gold across visits so every visit is scored against its patient's plan.
         import re as _re

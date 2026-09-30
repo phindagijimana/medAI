@@ -1,0 +1,16 @@
+field,n_docs,tp,fp,fn,precision,recall,f1
+clinical_seizure.age_at_onset_years,492,403,23,89,0.946,0.8191,0.878
+clinical_seizure.epilepsy_type,492,483,9,9,0.9817,0.9817,0.9817
+clinical_seizure.etiology_category,492,446,16,46,0.9654,0.9065,0.935
+clinical_seizure.etiology_specifics,69,63,4,6,0.9403,0.913,0.9265
+clinical_seizure.predominant_seizure_type,455,381,73,74,0.8392,0.8374,0.8383
+clinical_seizure.seizure_frequency.count_max,492,210,0,282,1.0,0.4268,0.5983
+clinical_seizure.seizure_frequency.count_min,492,210,0,282,1.0,0.4268,0.5983
+clinical_seizure.seizure_frequency.period,334,202,0,132,1.0,0.6048,0.7537
+clinical_seizure.seizure_frequency.seizure_free,492,446,46,46,0.9065,0.9065,0.9065
+medication.current_asms,492,965,81,2,0.9226,0.9979,0.9588
+medication.drug_resistance_status,492,260,231,232,0.5295,0.5285,0.529
+mri.findings,279,230,125,49,0.6479,0.8244,0.7256
+mri.focal_cortical_dysplasia,279,77,0,202,1.0,0.276,0.4326
+mri.hippocampal_sclerosis,279,97,35,182,0.7348,0.3477,0.472
+mri.overall_normal,279,232,16,47,0.9355,0.8315,0.8805

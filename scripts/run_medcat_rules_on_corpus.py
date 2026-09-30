@@ -130,6 +130,20 @@ def _synth_v3_docs() -> Iterator[tuple[str, Path, str]]:
                 yield row["visit_id"], note_path, row.get("note_type", "progress_note")
 
 
+def _synth_v3_polish_docs() -> Iterator[tuple[str, Path, str]]:
+    """Yield polished synth-v3 docs (with realism pass + 5 MetaCAT signals)."""
+    import csv as _csv
+    base = REPO_ROOT / "data" / "eval_corpora" / "synth_v3_polish"
+    manifest = base / "manifest.csv"
+    if not manifest.exists():
+        return
+    with manifest.open() as fh:
+        for row in _csv.DictReader(fh):
+            note_path = base / row["note_path"]
+            if note_path.exists():
+                yield row["visit_id"], note_path, row.get("note_type", "progress_note")
+
+
 CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
@@ -137,6 +151,7 @@ CORPUS_LOADERS = {
     "mtsamples_neuro_preprocessed": _mtsamples_preprocessed_docs,
     "synth_v2_eval_100": _synth_v2_eval_100_docs,
     "synth_v3": _synth_v3_docs,
+    "synth_v3_polish": _synth_v3_polish_docs,
 }
 
 
