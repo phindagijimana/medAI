@@ -404,7 +404,8 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--corpus", required=True,
                     choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10",
-                             "mtsamples_neuro_preprocessed", "synth_v2_eval_100"])
+                             "mtsamples_neuro_preprocessed", "synth_v2_eval_100",
+                             "synth_v3"])
     ap.add_argument("--predictions-dir", required=True)
     ap.add_argument("--gold-dir", required=True)
     ap.add_argument("--out-csv", required=True,
@@ -427,6 +428,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.corpus == "fs_test_40":
         holdout = {f"EA{i:04d}" for i in range(161, 201)}
         doc_ids = sorted([d for d in preds if d in holdout and d in gold])
+    elif args.corpus == "synth_v3":
+        # Preds keyed as P######_V## (visit_id). Gold keyed as P###### (patient).
+        # Clone gold across visits so every visit is scored against its patient's plan.
+        import re as _re
+        def _pid(vid: str) -> str:
+            m = _re.match(r"(P\d+)_V\d+", vid)
+            return m.group(1) if m else vid
+        gold = {vid: gold[_pid(vid)] for vid in preds if _pid(vid) in gold}
+        doc_ids = sorted([d for d in preds if d in gold])
     elif args.corpus == "mtsamples_neuro_preprocessed":
         # Preds always MT_V####. Gold may be MT_V#### (fresh preproc-aligned silver)
         # OR mt_sample_#### (legacy silver from raw MTSamples). Bridge only if

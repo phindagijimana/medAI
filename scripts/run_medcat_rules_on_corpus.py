@@ -116,12 +116,27 @@ def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
                 yield f"{pid}_{doc_dir.name}", out, doc_dir.name
 
 
+def _synth_v3_docs() -> Iterator[tuple[str, Path, str]]:
+    """Yield synth-v3 docs from the universal-manifest corpus."""
+    import csv as _csv
+    base = REPO_ROOT / "data" / "eval_corpora" / "synth_v3"
+    manifest = base / "manifest.csv"
+    if not manifest.exists():
+        return
+    with manifest.open() as fh:
+        for row in _csv.DictReader(fh):
+            note_path = base / row["note_path"]
+            if note_path.exists():
+                yield row["visit_id"], note_path, row.get("note_type", "progress_note")
+
+
 CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
     "mtsamples_neuro": _mtsamples_docs,
     "mtsamples_neuro_preprocessed": _mtsamples_preprocessed_docs,
     "synth_v2_eval_100": _synth_v2_eval_100_docs,
+    "synth_v3": _synth_v3_docs,
 }
 
 
