@@ -34,7 +34,7 @@ Primary target evaluation is **micro-F1 on F-S test 40** (`EA0161-EA0200`) score
 |---|---:|---|---|
 | B0 rules | ~0.10 (estimate, per-field varies) | `eval/results/b0_on_pilot_summary.md`, `b0_on_synth_v1_summary.md` | Landed; needs F-S 40 direct score for parity |
 | B1 concept-link only | **not built** | — | Needs a new runner (see §5) |
-| **B1' MedCAT+Rules** | **0.5627 micro-F1** | `eval/results/medcat_rules_fs_test_40.summary.md` | **Below target** — gap 0.19+ |
+| **B1' MedCAT+Rules** | **0.8064 micro-F1** (P=0.8444 R=0.7716) | `eval/results/medcat_iterations/us_fixes_fs_test_40.summary.md` | **AT TARGET** — inside the 0.75-0.85 band. Latest prediction dir: `data/run_manifests_medcat_rules_fs_test_40_us_fixes` |
 | M0 Med42 | 0.000 on most fields | `eval/results/llm_arms_vs_fs_gold_fs_test_base.summary.md` | Expected floor |
 | M1 Med42 | ~0.05 | same | Expected floor |
 | M2 Med42 | ~0.10 | same | Expected floor |
@@ -46,7 +46,9 @@ Primary target evaluation is **micro-F1 on F-S test 40** (`EA0161-EA0200`) score
 | M4+CR | **not built** | — | Needs RAG + CoT plumbing |
 | M4+CRV | **not built** | — | Needs verifier arm (`services/llm_verifier.py` exists, needs wiring) |
 
-**Biggest gap = B1' MedCAT+Rules.** The current 0.5627 falls short of the 0.75-0.85 range. Because most other arms are benchmarked *relative to B1'*, closing this gap is the single highest-leverage work item.
+**B1' MedCAT+Rules is already at target (0.8064 in the 0.75-0.85 band).** Phase 8 iterations (iter1→iter3→us_fixes) closed the gap already; the recall lift work items previously listed under §3.3 have been done. Remaining work is on the **LLM-arm side**: M1' RAG (not built), M4 v3 (blocked on synth-v3 completion), M4+CR (not built), M4+CRV (not built).
+
+**Also on MTSamples preprocessed:** B1' scored 0.5130 micro-F1 (P=0.6699 R=0.4157) on 16 of 18 docs with existing silver. Recall gap is uniform across corpora, so it's a rules-level issue not corpus-specific — but MTSamples silver quality is a confounder (raw-text-labelled silver used on preprocessed docs).
 
 ---
 
@@ -112,30 +114,25 @@ Primary target evaluation is **micro-F1 on F-S test 40** (`EA0161-EA0200`) score
 
 ---
 
-### 3.3. B1' MedCAT + rules — **primary gap to close**
+### 3.3. B1' MedCAT + rules — **at target**
 
 - **What it is.** MedCAT concept spans + ExECT-V2 rule vocabulary + medspaCy ConText + section-aware post-processing.
-- **Current.** **F1 = 0.5627** micro on F-S test 40 (P=0.7077, R=0.4670).
-- **Target.** 0.75–0.85.
-- **Gap analysis.** Precision is high (0.71). Recall is the killer (0.47). We are missing ~half of the gold assertions. Per-field:
-  - `epilepsy_type` — 0.97 (near-ceiling, no work needed).
+- **Current.** **F1 = 0.8064** micro on F-S test 40 (P=0.8444, R=0.7716). Per-doc median F1 = 0.857.
+- **Target.** 0.75–0.85 — **inside the band.**
+- **Per-field status (from `us_fixes_fs_test_40.summary.md`):**
+  - `epilepsy_type` — 0.97 (near-ceiling).
   - `age_at_onset_years` — 0.86 (near-ceiling).
-  - `current_asms` — 0.65 (17 FP / 19 FN — moderate).
-  - `predominant_seizure_type` — 0.53 (7 FP / 11 FN — moderate).
-  - `semiology_text` — 0.11 (1 TP / 31 FN — **recall floor**).
-  - `other_seizure_types` — 0.15 (1 TP / 7 FN — recall floor).
-  - `failed_asms` — 0.00 (0 TP / 1 FN — sparse, but zero).
-- **Work items (highest leverage first).**
-  - [ ] **`semiology_text` recall lift** — currently the extractor only pulls text when a canonical semiology cue phrase fires. Extend to grab the sentence around any known seizure-type CUI when applicable. Realistic lift: 0.11 → 0.30.
-  - [ ] **`other_seizure_types` recall lift** — most FNs are because the rule only captures the *predominant* type. Add a rule that emits every additional seizure-type mention beyond the first as `other_seizure_types`. Realistic lift: 0.15 → 0.35.
-  - [ ] **`current_asms` FP reduction** — 17 FPs mostly stem from grabbing non-current AED mentions (dose changes, allergies, historical). Add a ConText `temporal_status ≠ current` filter. Realistic lift: 0.65 → 0.75.
-  - [ ] **`predominant_seizure_type` disambiguation** — 7 FPs are cases where the rule picked the wrong candidate. Add a "which is described most often" tiebreaker. Realistic lift: 0.53 → 0.65.
-  - [ ] **Field-scoped section reads** — after preprocessing, use the canonical H&P labels to bias medication rules to the `Medications:` section, seizure-frequency rules to `HPI` / `Assessment`.
-  - [ ] Rerun MedCAT+Rules on F-S test 40 after each change; keep a running scoreboard in `eval/results/medcat_iterations/`.
-- **Predicted post-fix F1.** ~0.72–0.78. If we plateau below 0.72, the paper reports the honest number and reframes B1' as "matched to ExECT recall on shared fields".
+  - `semiology_text` — 1.00 (n=33) — Phase 8 iterations closed the recall floor.
+  - `current_asms` — 0.84 (P=0.807, R=0.868).
+  - `seizure_frequency.seizure_free` — 0.897.
+  - `predominant_seizure_type` — 0.55 (still recovery-limited).
+  - `other_seizure_types` — 0.00 — persistent floor, low n=5.
+  - `failed_asms` — 0.00 — sparse n=1.
+- **Remaining stretch (optional, not blocking).** Getting to the top of the band (0.85+) would require the sparse-field cluster (`other_seizure_types`, `failed_asms`, `prior_asms`) to lift — but those have low gold-n, so gains are noisy. Not worth pursuing until the LLM arms are further along, at which point B1' can also be recompared honestly.
+- **On MTSamples preprocessed:** 0.5130 F1 using existing silver labels labelled on RAW notes. The delta vs F-S (0.8064 → 0.5130) is partly real (US narrative style trips a few rules) and partly silver-mismatch (silver was labelled on raw text; preprocessed docs have re-annotated ILAE + brand-generic that the silver doesn't have). Re-silvering on preprocessed text is in-flight (see §4.3).
 - **Failure modes.**
   - Sparse gold on some fields (`failed_asms` n=1) makes F1 volatile; report per-field n throughout.
-  - Preprocessing produced +0 delta here (see [US_NOTE_PREPROCESSING](US_NOTE_PREPROCESSING.md)), so do not expect it to close the gap by itself.
+  - Preprocessing produces +0 field delta on this pipeline (see [US_NOTE_PREPROCESSING](US_NOTE_PREPROCESSING.md)) — it is deployed for downstream benefit (LLM arms), not to fix B1'.
 
 ---
 
@@ -388,10 +385,11 @@ Primary target evaluation is **micro-F1 on F-S test 40** (`EA0161-EA0200`) score
 
 Critical path to a shippable table:
 
-1. **B1' recall lift** (§3.3) — biggest single-arm gap.
-2. **synth-v3 completes → silver labels → M4 v3 fine-tune** — biggest ML work item.
-3. **F1 DeepSeek zero-shot + M4+CR + M4+CRV** — extends the ablation.
-4. **B1 concept-only + M1' RAG** — fills the honest floor rows.
+1. **synth-v3 completes → silver labels → M4 v3 fine-tune** — biggest ML work item, in-flight.
+2. **M4+C constrained decoding on new v3 weights** — cheap wire-up once M4 lands.
+3. **M1' RAG-few-shot + B1 concept-only** — build the missing floor rows.
+4. **F1 DeepSeek zero-shot + M4+CR + M4+CRV** — extends the ablation.
+5. ~~B1' recall lift~~ — **DONE** in Phase 8 (0.8064 achieved). MetaCAT training is deferred (see `docs/BATCH_B_METACAT_PLAN.md`) since the +2-3% projected lift isn't worth the cross-domain regression risk while we are already in band.
 
 Parallelisable:
 
@@ -428,6 +426,7 @@ If any of these fail after honest effort, **the paper reports the negative resul
 
 | Date | Change | By |
 |---|---|---|
-| 2026-09-30 | Initial draft. B1' current = 0.5627; synth-v3 generation in-flight (PID 1530836). | Session on `main` |
+| 2026-09-30 | Initial draft. B1' misreported as 0.5627 from stale summary file. Synth-v3 generation in-flight (PID 1530836). | Session on `main` |
+| 2026-09-30 | **Correction:** B1' current = **0.8064** on F-S 40 (per `medcat_iterations/us_fixes_fs_test_40.summary.md`, verified by rescoring). Phase 8 iterations closed the recall gap; the earlier 0.5627 was the pre-iteration Phase 7 baseline. B1' is now AT target, not below. Critical path reordered accordingly. Also added MTSamples F1 0.5130 on 16 preprocessed docs. MetaCAT training deferred per BATCH_B_METACAT_PLAN.md — projected +2-3% lift not worth cross-domain risk while already in band. | Session on `main` |
 
 Add a row here on every update to prevent drift.
