@@ -403,7 +403,8 @@ def _percentile(vals: list[float], q: float) -> float:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--corpus", required=True,
-                    choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10", "synth_v2_eval_100"])
+                    choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10",
+                             "mtsamples_neuro_preprocessed", "synth_v2_eval_100"])
     ap.add_argument("--predictions-dir", required=True)
     ap.add_argument("--gold-dir", required=True)
     ap.add_argument("--out-csv", required=True,
@@ -426,6 +427,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.corpus == "fs_test_40":
         holdout = {f"EA{i:04d}" for i in range(161, 201)}
         doc_ids = sorted([d for d in preds if d in holdout and d in gold])
+    elif args.corpus == "mtsamples_neuro_preprocessed":
+        # Preds keyed as MT_V####; gold keyed as mt_sample_####. Bridge by index.
+        def _norm_pred(d: str) -> str:
+            if d.startswith("MT_V"):
+                try:
+                    return f"mt_sample_{int(d[4:]):04d}"
+                except ValueError:
+                    return d
+            return d
+        preds = {_norm_pred(k): v for k, v in preds.items()}
+        doc_ids = sorted([d for d in preds if d in gold])
     else:
         doc_ids = sorted([d for d in preds if d in gold])
 
