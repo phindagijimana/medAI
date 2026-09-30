@@ -106,11 +106,19 @@ def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
                 yield f"{pid}_{doc_dir.name}", out, doc_dir.name
 
 
+def _synthea_epilepsy_docs() -> Iterator[tuple[str, Path, str]]:
+    """Yield Synthea epilepsy-mentioning encounter notes."""
+    base = REPO_ROOT / "data" / "eval_corpora" / "synthea_epilepsy" / "documents"
+    for p in sorted(base.glob("*.txt")):
+        yield p.stem, p, "progress_note"
+
+
 CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
     "mtsamples_neuro": _mtsamples_docs,
     "synth_v2_eval_100": _synth_v2_eval_100_docs,
+    "synthea_epilepsy": _synthea_epilepsy_docs,
 }
 
 

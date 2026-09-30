@@ -399,7 +399,7 @@ def _percentile(vals: list[float], q: float) -> float:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--corpus", required=True,
-                    choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10", "synth_v2_eval_100"])
+                    choices=["fs_test_40", "synth_v1_eval_100", "mtsamples_neuro_10", "synth_v2_eval_100", "synthea_epilepsy"])
     ap.add_argument("--predictions-dir", required=True)
     ap.add_argument("--gold-dir", required=True)
     ap.add_argument("--out-csv", required=True,

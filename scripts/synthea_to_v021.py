@@ -55,27 +55,54 @@ def _not_documented(source_doc_id=None):
                           source_doc_id=source_doc_id)
 
 
-def _load_synthea_conditions(csv_dir: Path) -> dict[str, list[dict]]:
-    """{patient_uuid: [condition dict]}"""
-    out: dict[str, list[dict]] = {}
-    cp = csv_dir / "conditions.csv"
-    if not cp.exists():
-        return out
-    with cp.open() as fh:
-        for row in csv.DictReader(fh):
-            out.setdefault(row["PATIENT"], []).append(row)
-    return out
+def _load_from_fhir(fhir_dir: Path):
+    """Parse FHIR bundles for conditions + medications keyed by patient UUID.
 
-
-def _load_synthea_medications(csv_dir: Path) -> dict[str, list[dict]]:
-    out: dict[str, list[dict]] = {}
-    mp = csv_dir / "medications.csv"
-    if not mp.exists():
-        return out
-    with mp.open() as fh:
-        for row in csv.DictReader(fh):
-            out.setdefault(row["PATIENT"], []).append(row)
-    return out
+    Returns (conditions, medications, uuid_by_stem) where the last dict maps
+    the FHIR filename stem (e.g. 'Abe604_Rogahn59_f75caf9c-...') to the
+    patient's FHIR UUID — used to correlate with text_encounters filenames
+    (Synthea per-encounter notes are named with the same stem + encounter idx).
+    """
+    conditions: dict[str, list[dict]] = {}
+    medications: dict[str, list[dict]] = {}
+    uuid_by_stem: dict[str, str] = {}
+    for bp in sorted(fhir_dir.glob("*.json")):
+        try:
+            bundle = json.loads(bp.read_text(encoding="utf-8", errors="replace"))
+        except Exception:
+            continue
+        pid = None
+        for e in bundle.get("entry", []):
+            r = e.get("resource", {})
+            if r.get("resourceType") == "Patient":
+                pid = r.get("id")
+                if pid:
+                    uuid_by_stem[bp.stem] = pid
+                break
+        if not pid:
+            continue
+        for e in bundle.get("entry", []):
+            r = e.get("resource", {})
+            t = r.get("resourceType")
+            if t == "Condition":
+                c = (r.get("code", {}).get("coding", []) or [{}])[0]
+                conditions.setdefault(pid, []).append({
+                    "CODE": c.get("code", ""),
+                    "DESCRIPTION": c.get("display", ""),
+                    "START": (r.get("onsetDateTime", "") or "")[:10],
+                    "STOP": (r.get("abatementDateTime", "") or "")[:10],
+                })
+            elif t in ("MedicationRequest", "MedicationStatement"):
+                m = r.get("medicationCodeableConcept", {}) or {}
+                c = (m.get("coding", []) or [{}])[0]
+                period = r.get("effectivePeriod", {}) or {}
+                medications.setdefault(pid, []).append({
+                    "CODE": c.get("code", ""),
+                    "DESCRIPTION": c.get("display", "") or m.get("text", ""),
+                    "START": ((r.get("authoredOn", "") or period.get("start", "")) or "")[:10],
+                    "STOP": (period.get("end", "") or "")[:10],
+                })
+    return conditions, medications, uuid_by_stem
 
 
 def _patient_has_epilepsy(conditions: list[dict]) -> bool:
@@ -235,14 +262,15 @@ def main():
     (out_dir / "documents").mkdir(exist_ok=True)
     (out_dir / "gold_v0_2_1").mkdir(exist_ok=True)
 
-    csv_dir = synth / "csv"
-    notes_dir = synth / "notes"
-    if not csv_dir.exists() or not notes_dir.exists():
-        print(f"[synthea-conv] ERROR: expected {csv_dir} and {notes_dir}", file=sys.stderr)
+    fhir_dir = synth / "fhir"
+    notes_dir = synth / "text_encounters"
+    if not fhir_dir.exists() or not notes_dir.exists():
+        print(f"[synthea-conv] ERROR: expected {fhir_dir} and {notes_dir}", file=sys.stderr)
         return 2
 
-    conditions_by_pid = _load_synthea_conditions(csv_dir)
-    meds_by_pid = _load_synthea_medications(csv_dir)
+    print(f"[synthea-conv] Loading FHIR bundles from {fhir_dir}...")
+    conditions_by_pid, meds_by_pid, uuid_by_stem = _load_from_fhir(fhir_dir)
+    stem_by_uuid = {v: k for k, v in uuid_by_stem.items()}
 
     epilepsy_pids = {pid for pid, conds in conditions_by_pid.items()
                     if _patient_has_epilepsy(conds)}
@@ -254,16 +282,19 @@ def main():
     manifest_rows = []
     n_docs = 0
     for pid in sorted(epilepsy_pids):
-        # Look for note files that reference this patient
-        # Synthea's per-encounter export: notes/{PID}_{ENCOUNTER}.txt
-        for note_path in sorted(notes_dir.glob(f"{pid}_*.txt")):
+        stem = stem_by_uuid.get(pid)
+        if not stem:
+            continue
+        # Synthea per-encounter file naming: {stem}{encounter_idx}.txt
+        # where {stem} is FirstName_LastName_UUID
+        for note_path in sorted(notes_dir.glob(f"{stem}*.txt")):
             note_text = note_path.read_text(encoding="utf-8", errors="replace")
             if not note_text.strip():
                 continue
             # Keep only notes that reference epilepsy/seizure
             if not re.search(r"epilep|seizur|convuls|spell", note_text, re.IGNORECASE):
                 continue
-            doc_id = note_path.stem  # {pid}_{encounter}
+            doc_id = note_path.stem
             # Save note text
             (out_dir / "documents" / f"{doc_id}.txt").write_text(note_text)
             # Derive gold
