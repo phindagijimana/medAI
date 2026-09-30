@@ -107,9 +107,12 @@ def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
 
 
 def _synthea_epilepsy_docs() -> Iterator[tuple[str, Path, str]]:
-    """Yield Synthea epilepsy-mentioning encounter notes."""
-    base = REPO_ROOT / "data" / "eval_corpora" / "synthea_epilepsy" / "documents"
-    for p in sorted(base.glob("*.txt")):
+    """Yield Synthea epilepsy notes — prefer normalized narrative version."""
+    base = REPO_ROOT / "data" / "eval_corpora" / "synthea_epilepsy"
+    norm = base / "documents_normalized"
+    raw = base / "documents"
+    src = norm if norm.exists() and any(norm.glob("*.txt")) else raw
+    for p in sorted(src.glob("*.txt")):
         yield p.stem, p, "progress_note"
 
 
