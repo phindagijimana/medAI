@@ -95,10 +95,22 @@ def _mtsamples_docs() -> Iterator[tuple[str, Path, str]]:
             yield d.name, p, "progress_note"
 
 
+def _synth_v2_eval_100_docs() -> Iterator[tuple[str, Path, str]]:
+    """Yield synth-v2 held-out docs (P002250-P002299 patients, both doc types)."""
+    base = REPO_ROOT / "data" / "episynth_corpus" / "v2" / "documents"
+    for i in range(2250, 2300):
+        pid = f"P{i:06d}"
+        for doc_dir in sorted((base / pid).glob("*")) if (base / pid).exists() else []:
+            out = doc_dir / "output.txt"
+            if out.exists():
+                yield f"{pid}_{doc_dir.name}", out, doc_dir.name
+
+
 CORPUS_LOADERS = {
     "fs_test_40": _fs_test_40_docs,
     "synth_v1_eval_100": _synth_v1_eval_100_docs,
     "mtsamples_neuro": _mtsamples_docs,
+    "synth_v2_eval_100": _synth_v2_eval_100_docs,
 }
 
 
