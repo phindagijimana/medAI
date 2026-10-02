@@ -35,6 +35,26 @@ sys.path.insert(0, str(REPO))
 DEFAULT_TASKS = ["Presence", "Experiencer", "Temporality", "Certainty"]
 
 
+def _unique_labels_for_task(export_path: Path, task: str) -> set[str]:
+    """Collect distinct meta-annotation values for one MetaCAT task."""
+    with export_path.open(encoding="utf-8") as f:
+        data = json.load(f)
+    labels: set[str] = set()
+    for project in data.get("projects", []):
+        for document in project.get("documents", []):
+            anns = document.get("annotations")
+            if anns is None:
+                anns = list(document.get("entities", {}).values())
+            for ann in anns:
+                meta = (ann.get("meta_anns") or {}).get(task)
+                if not meta:
+                    continue
+                val = meta.get("value")
+                if val:
+                    labels.add(str(val))
+    return labels
+
+
 def _train_one_task(export_path: Path, task: str, out_dir: Path,
                     tokenizer_model: str, epochs: int, seed: int = 0) -> None:
     """Train a single MetaCAT classifier for `task` from the silver export."""
@@ -53,17 +73,24 @@ def _train_one_task(export_path: Path, task: str, out_dir: Path,
     # Extract initial embedding weights
     embeddings = embedder.embeddings.word_embeddings.weight.detach().clone()
 
+    labels = _unique_labels_for_task(export_path, task)
+    if not labels:
+        raise ValueError(f"No meta-annotation labels for task {task!r} in {export_path}")
+
     config = ConfigMetaCAT()
     config.general.category_name = task
-    config.model.nclasses = 0  # auto-detected from training data
+    config.model.nclasses = len(labels)
+    print(f"[train-metacat]   classes ({len(labels)}): {sorted(labels)}", flush=True)
     config.train.nepochs = epochs
     config.train.batch_size = 32
     config.train.lr = 2e-5
-    config.train.class_weights = None  # will be inferred from data
+    config.train.class_weights = None
+    config.train.compute_class_weights = True
     config.train.test_size = 0.1
     config.train.shuffle_data = True
     config.model.model_name = "bert"  # BERT-family classifier head
-    config.train.metric = {"base": "weighted", "score": "f1"}
+    # Keys must match sklearn classification_report output.
+    config.train.metric = {"base": "weighted avg", "score": "f1-score"}
 
     mc = MetaCAT(tokenizer=tokenizer, embeddings=embeddings, config=config)
 
@@ -71,7 +98,11 @@ def _train_one_task(export_path: Path, task: str, out_dir: Path,
     task_out.mkdir(parents=True, exist_ok=True)
 
     t0 = time.time()
-    result = mc.train_raw(json_path=str(export_path), save_dir_path=str(task_out))
+    result = mc.train_from_json(
+        str(export_path),
+        save_dir_path=str(task_out),
+        overwrite=True,
+    )
     print(f"[train-metacat]   {task} done in {time.time()-t0:.1f}s")
     print(f"[train-metacat]   result: {result}")
 
