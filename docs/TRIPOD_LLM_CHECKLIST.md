@@ -42,11 +42,11 @@ Legend for the "Status" column:
 | 18 | Model version + weights + tokenizer hash | ✅ | Recorded per inference in run manifest (`services/run_manifest.py`) | (Methods §3.3) |
 | 19 | Decoding config (deterministic, seeded, temperature/top-p, max_new_tokens) | ✅ | `services/med42_backend.py` uses `DecodingConfig(do_sample=False, seed=0)` for eval | (Methods §3.4) |
 | 20 | Prompt registry (versioned, change-history) | ✅ | `services/prompt_registry.py` with prompt_id / version fields | (Methods §3.5) |
-| 21 | Schema-constrained decoding? Prompt-only or token-level? | ✅ | Prompt-only injection; token-level constrained decoding explicitly avoided to preserve raw-validity measurement per §11 | (Methods §3.6) |
+| 21 | Schema-constrained decoding? Prompt-only or token-level? | ✅ | Both, reported separately. M-family arms: prompt-only schema injection (raw validity measured; negative result F3). LEO flat arms L0C/L1C/L2C: token-level constrained decoding with lm-format-enforcer and the `FlatAnswer` schema (`services/flat_extract.py`); free-decoding twins L0/L1/L2 are kept, and constraint gave +0.059 [+0.017, +0.110] on L2 (`EVAL_PROTOCOL_LEO.md` 10.3). Arm H: free decoding. | (Methods §3.6) |
 | 22 | Evidence grounding methodology | ✅ | `services/evidence_verifier.py`; every Evidence carries source_doc_id + date + verbatim span | (Methods §3.7) |
 | 23 | Applicability mask per doc type | ✅ | `schema/applicability.py` with `enforce()` guard | (Methods §3.8) |
 | **Methods — evaluation** ||||
-| 24 | Primary endpoint declared before test set opened | ❌ | Reviewer sign-off needed | (Methods §4.1) |
+| 24 | Primary endpoint declared before test set opened | 🚧 | Declared and frozen in `docs/EVAL_PROTOCOL_LEO.md` (written before the first LEO score); amendments D1 to D13 are dated. Reviewer sign-off still needed. | (Methods §4.1) |
 | 25 | Secondary endpoints (schema validity, evidence correctness, unsupported-claim rate) | ✅ | `eval/metrics.py` `ArmSummary` reports all three | (Methods §4.2) |
 | 26 | Per-field metrics (P/R/F1 with support) | ✅ | `eval/metrics.py` `FieldMetrics` | (Methods §4.3) |
 | 27 | Partial-list scoring for multi-valued fields | ✅ | `eval/metrics.py` uses multiset diff | (Methods §4.4) |
@@ -88,3 +88,15 @@ Legend for the "Status" column:
 - v0.2.1 initial draft — 2026-09-22. Reflects state at commit `<TBD>`.
 - Regenerate this table after every schema version bump or after each
   results milestone. Keep the ✅/🚧/❌ column honest.
+
+## LEO additions (2026-10-01)
+
+| # | Item | Status | Artifact / evidence |
+|---|---|---|---|
+| L1 | Fusion and routing rules stated in one place, with switches | ✅ | `docs/LEO_ROUTING_RULES.md` |
+| L2 | Deviations from the frozen protocol dated and justified | ✅ | `docs/EVAL_PROTOCOL_LEO.md` section 9 (D1 to D13) |
+| L3 | Results that did not support a pre-registered claim reported as such | ✅ | `docs/EVAL_PROTOCOL_LEO.md` 10.2, 10.3 (C1, C3, C5) |
+| L4 | Rules designed after seeing test notes flagged | ✅ | D11, D12, 10.6, 10.7 |
+| L5 | Test data independent of rule and model development | 🚧 | F-S held-out: yes. Synthetic US: EpExtra rules were developed on these corpora; the adapter never saw `synth_v3` patients. Unused synth-v2/v1 validation pending. |
+| L6 | Real (non-synthetic) clinical text | ❌ | `docs/US_ANNOTATION_PLAN.md`, not started |
+

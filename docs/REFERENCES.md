@@ -129,12 +129,22 @@ Consolidated bibliography of papers, tools, corpora, and standards that inform t
 
 ---
 
+### Medication roles: current, maintenance, rescue (added 2026-10-01, used for SCOPE_DECISIONS D6)
+- **Loring DW et al. (2011).** "Common data elements in epilepsy research: development and implementation of the NINDS Epilepsy CDE Project." *Epilepsia* 52:1186-91. DOI 10.1111/j.1528-1167.2011.03018.x. NINDS CDE site: <https://www.commondataelements.ninds.nih.gov/epilepsy>. The CDEs keep an antiepileptic-drug log (name, formulation, schedule, dose, start and end dates, ongoing status, reason for discontinuation) separate from a non-AED medication log. **[cite — verify]** (field list read from the MDM-Portal copy <https://medical-data-models.org/14646>, not from the NINDS CRF itself).
+- **Inclusion and exclusion criteria for epilepsy clinical trials: recommendations from the April 30, 2011 NINDS workshop.** PMC4028380. Intermittent rescue benzodiazepines should be documented and are generally not an exclusion. **[cite — verify]**
+- **ILAE Nomenclature Task Force (position paper; year to confirm).** "Which terms should be used to describe medications used in the treatment of seizure disorders? An ILAE position paper." *Epilepsia*. DOI 10.1111/epi.17877. Recommends "antiseizure medications". **[cite — verify authors and year]**
+- **Pina-Garza JE et al. (2024).** "Outpatient management of prolonged seizures and seizure clusters to prevent progression to a higher-level emergency: consensus recommendations of an expert working group." Proposes "REST medication" (prolonged seizure) and "acute cluster treatment" for what was called rescue treatment, and defines a seizure cluster as an increase over the patient's usual pattern. **[cite — verify]** (read from the working group's PDF <https://epi-care.eu/wp-content/uploads/2024/09/Pina-Garza-etal_2024_Experts-Consensus_Outpatient-management-of-prolonged-seizures-and-seizure-clusters-1.pdf>; confirm journal and DOI).
+- **Epilepsy Foundation, Seizure rescue therapies.** <https://www.epilepsy.com/treatment/seizure-rescue-therapies>. Rescue therapy is used as needed and does not replace daily seizure medication. **[background]**
+- **ILAE (2025).** "Updated classification of epileptic seizures: position paper of the ILAE." <https://www.ilae.org/guidelines/definition-and-classification/updated-classification-of-epileptic-seizures-2025>. Four classes, 21 seizure types, "consciousness" replaces "awareness" as a classifier (relevant to SCOPE_DECISIONS D1). **[cite]**
+
 ## Status legend
 
 - **[cite]** — needs to appear in manuscript reference list
 - **[cite — verify]** — needs BibTeX / DOI / venue confirmation before manuscript submission
 - **[tool]** — cite in Methods (URL + brief version note is often sufficient)
 - **[background]** — footnote-level; include if space allows
+
+- **Fonferko-Shadrach B et al. (2024).** "Annotation of epilepsy clinic letters for natural language processing." *J Biomed Semantics*. https://link.springer.com/article/10.1186/s13326-024-00316-z. The 200 **synthetic** letters, annotations and guidelines are on Zenodo (10.5281/zenodo.8381079; JSON annotations 10.5281/zenodo.8356493). ExECT v2 validation: per-item F1 0.87, per-letter 0.90; seizure frequency 0.66 / 0.68; human inter-annotator F1 0.73. Used in `docs/EXECT_EPEXTRA_PARITY.md` §3. Figures read from the search-result abstract and table text on 2026-10-01; re-check against the paper before submission.
 
 ## Update discipline
 

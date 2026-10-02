@@ -21,6 +21,13 @@ Local documentation files (not tracked in GitHub, see root for public docs).
   - Port forwarding
   - Troubleshooting
 
+- **`LEO_USER_GUIDE.md`**: how to run LEO (`bin/leo`, Slurm GPU/CPU, web app), input and output formats, phenotype panels, questions, long notes, data protection
+- **`LEO_ROUTING_RULES.md`**: how LEO fuses the specialist (EpExtra) and the LLM and decides ACCEPT, REVIEW or REJECT
+  - Fusion table, verification order, reason codes, the leo-v0.4 and v0.5 rules (acute, rescue, frequency) and their switches
+- **`EVAL_PROTOCOL_LEO.md`**: frozen evaluation protocol, deviations log (D1 to D11), append-only results log
+- **`SCOPE_DECISIONS.md`**: deferred scope items (ILAE 2025, NINDS CDE, ICD-10-CM, EpSO, ORDO, definition of current ASM)
+- **`CHAIN_OF_THREE_ALIGNMENT.md`**: mapping of the Chain-of-Three design to the code, with change log
+
 ## Public Documentation
 
 Main documentation (tracked in GitHub):

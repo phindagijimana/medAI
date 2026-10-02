@@ -155,3 +155,29 @@ undermines Shape A's contribution.
 For the manuscript's §Discussion, the current phrasing ("future work" and
 "institutional-cohort validation studies") is sufficient. This document is
 the extended internal version.
+
+## LEO open items (2026-10-01, after leo-v0.4)
+
+Not started. Order is by value for the LEO paper.
+
+1. ~~Validate leo-v0.4 on an unused set.~~ Done on `ext` and `v1v2` (EVAL_PROTOCOL_LEO 10.13); Arm H2 synthetic runs still to score. Original note: Run the LLM arms on the synth-v2 / synth-v1 notes already on disk (no new generation) and score with `scripts/score_leo_vs_synth_gold.py`. The four v0.4 changes were designed on the notes they were first scored on.
+2. **Current-ASM convention (SCOPE_DECISIONS D6).** Built in leo-v0.5 (rescue path, two views). Remaining: a clinician picks the headline view; check the rescue cues on US notes (the rule has fired on 1 F-S drug so far); add a role split to the `llm` system for a like-for-like comparison.
+3. ~~Confirm "LLM wins on disagreement"~~ Done 2026-10-02 (D15): seizure type model-primary, other scalar fields specialist-primary. Still open: confirm on real clinic notes; the synthetic sets share a generator with the rules' development data.
+4. **Hard-slice scoring** from existing gold: patients whose notes carry prior, denied, hedged or hypothetical ASM or seizure statements (polish gold has counts per slice).
+5. **Learned auto-accept calibrator** on v1/v2 outputs, compared with the rule-based routing, so the rules are not tuned on test data.
+6. ~~Arm H2~~ Trained and scored on the F-S letters (0.743 alone, 10.13); synthetic runs queued.
+7. **Environment H9:** one environment with Flask and MedCAT (`REPO_HOUSEKEEPING.md`).
+8. **Human-blocked:** ILAE 2025 decision (D1), US clinician annotation (`US_ANNOTATION_PLAN.md`), ExECT parity column (`EXECT_EPEXTRA_PARITY.md`).
+
+### LEO in the app (added 2026-10-01; see `LEO_USER_GUIDE.md`)
+
+1. ~~First live GPU run~~ Done 2026-10-02 (EVAL_PROTOCOL_LEO 10.12).
+2. **Long notes.** Chunking now measured on joined synthetic documents (10.12; model 0.991, rules lose accuracy on joined text). Still open: hand-check long real notes.
+3. **Patient-level roll-up.** Built as an option (`bin/leo rollup`, D16); per-note rows stay the default. Open: conflict flags between notes, and a clinician's rule for "latest" per field.
+4. **Unscored phenotypes** (15 of 23, plus all questions): no gold yet. Pick the ones the clinic needs first and annotate for them.
+5. **Real notes.** After IRB and secure compute: run a small set, review by hand, record under `EVAL_PROTOCOL_LEO.md`.
+6. **Learning from review.** Step 1 is built (in-app review, `reviewed.csv`, merge; see the guide). Next, in order: (a) per-field accepted / corrected / wrong rates from reviewer decisions, as real-note evidence once real notes are approved; (b) let reviewers add values LEO missed, so recall can be measured; (c) recalibrate the auto-accept rules from decisions and test on notes the rules never saw; (d) retrain an adapter on corrected values and quotes (IRB and secure compute). Each outcome ships as a new pipeline version with a re-run evaluation, never as a live change.
+7. **Environment H9** is done: `venv-medcat` holds MedCAT, torch, peft, lm-format-enforcer and Flask.
+
+- `chain_llm.ground_value`: accept hyphenated words between the count and "per" and "once monthly" (see EVAL_PROTOCOL_LEO 10.8). Re-score Arm H after the change and label it a new pipeline version.
+- NINDS CDE mapping (`docs/NINDS_CDE_MAPPING.md`): settle the partial and missing rows on the live NINDS site; no export script before that.

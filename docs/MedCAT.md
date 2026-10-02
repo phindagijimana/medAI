@@ -1,6 +1,6 @@
 # MedCAT + Rules Pipeline (arm B1') — Full Build Plan
 
-**Status (2026-09-29):** Phases 0-8 COMPLETE. Phase 9 manuscript integration in progress. Phases 1d, 6d, 6e, 6f PENDING external approvals.
+**Status (2026-10-01):** Phases 0-8 and 1d COMPLETE. Phase 9 manuscript integration in progress. Phases 6d, 6e, 6f PENDING external approvals.
 **Owner:** MedAI-EPI team
 **Estimated effort:** ~19 working days end-to-end; first F1 measurement at Day 11
 **Scope:** all 24 v0.2.1 enums, 6 evaluation corpora
@@ -13,8 +13,9 @@
 | 0 | Setup & study (ExECT-V2 clone, ILAE XLSX, venv) | **DONE** | 2026-09-22 |
 | 1a | Extract CUI seed from ExECT dictionaries | **DONE** | 2026-09-23 |
 | 1b | Re-derive synonyms from public sources | **DONE** | 2026-09-23 |
-| 1c | MedCAT CDB build + UMLS-Small fallback | **DONE** | 2026-09-24 |
-| 1d | UMLS-Full enrichment | **PENDING** — UMLS Metathesaurus License submitted but not yet cleared |
+| 1c | MedCAT CDB build + UMLS-Small fallback | **DONE** (custom CDB only — the UMLS-Small fallback hook exists in `services/medcat_extractor.py` but no pack is downloaded or passed in production) | 2026-09-24 |
+| 1d | UMLS-Full enrichment | **DONE** — via UTS REST API, not a Metathesaurus download: 152 CUIs → +1,055 synonyms, +36 SCTIDs; CDB 1,438 → 2,398 rows. F1 unchanged (0.8064 F-S 40). Commit `60e1c54` | 2026-09-29 |
+| 1e | Pinned local ontology releases | **DONE** — HPO, MONDO, EPIO, SNOMED CT US, RxNorm full in `data/ontologies/` (`scripts/fetch_ontologies.py`, `MANIFEST.json`) | 2026-10-01 |
 | 2 | Rule translation infrastructure | **DONE** | 2026-09-24 |
 | 3a | Field-rule port P1 (8 pilot fields) | **DONE** | 2026-09-25 |
 | 3b | Field-rule port P2 (16 extra fields) | **DONE** | 2026-09-26 |
@@ -84,7 +85,7 @@ Critical path: MIMIC-IV DUA (~2 weeks). Non-blocking — the plan produces F1 nu
 
 All three registrations initiated in parallel because they are the longest lead times.
 
-- [x] **UMLS Metathesaurus License** — [uts.nlm.nih.gov](https://uts.nlm.nih.gov) — submitted. **Does NOT block Phase 1** — see Phase 1a below (reference-only path using ExECT's public UMLS-derived dictionaries + BioPortal SNOMED browser + published ILAE codes). UMLS enrichment folds in at Phase 1d whenever license clears.
+- [x] **UMLS Metathesaurus License** — [uts.nlm.nih.gov](https://uts.nlm.nih.gov) — **approved**; API key in `.env` as `UMLS_APIKEY`. **Did NOT block Phase 1** — see Phase 1a below (reference-only path using ExECT's public UMLS-derived dictionaries + BioPortal SNOMED browser + published ILAE codes). UMLS enrichment folds in at Phase 1d whenever license clears.
 - [ ] **PhysioNet Credentialing + CITI course** — [physionet.org](https://physionet.org) — CITI ~4 h, credentialing 1-2 weeks. Blocks Phase 6f (MIMIC-IV) only.
 - [ ] **Harvard DBMI Portal** — [portal.dbmi.hms.harvard.edu](https://portal.dbmi.hms.harvard.edu) — DUA per challenge, ~1-2 weeks. Blocks Phase 6d + 6e (n2c2 2018/2019) only.
 
@@ -193,6 +194,14 @@ When UMLS license is approved (uts.nlm.nih.gov ticket clears), run one-shot enri
 **Expected effect:** +3-5% F1 on all corpora (mostly on rare-synonym cases).
 
 **Non-critical path:** if UMLS never clears, we ship at Phase 1c quality. Expected F1 range 0.68-0.82 on F-S 40 without UMLS; 0.72-0.85 with UMLS-Full.
+
+**Outcome (2026-09-29, commit `60e1c54`):** run through the UTS REST API rather than a Metathesaurus download (`.cache/umls_api/`, sources SNOMEDCT_US, RXNORM, MSH, HPO, ICD10CM). +1,055 synonyms and +36 SCTIDs applied via `rules/epilepsy_ontology_umls_overrides.py`; CDB 1,438 → 2,398 rows. The predicted +3-5 % F1 did **not** materialise: F-S 40 stayed at 0.8064 and synth-v1 at 0.8236, because the remaining errors are compound-rule, temporality and annotation-convention errors rather than vocabulary gaps. Expected pay-off is on real US notes. Full local releases (Phase 1e) are now pinned in `data/ontologies/`; the enrichers read from there.
+
+**Correction (2026-10-01):** auditing the curated codes against the pinned releases (`scripts/audit_curated_codes.py`) showed that 20 curated UMLS CUIs point at unrelated concepts. Examples: `aware` → "Structure of cerebral vein", `progress_note` → "Virgin", `neurocysticercosis` → "Benign neonatal epilepsies". The enrichment had copied those concepts' names in as synonyms, so MedCAT was detecting "benign neonatal convulsions" as neurocysticercosis. `apply_umls_enrichment.py` now drops patches whose synonyms share no word with the entry and only fills SCTIDs whose SNOMED name relates to the entry. Regenerating removed 138 synonyms and 8 SCTIDs; the CDB rebuilt to `data/medcat_cdb_epilepsy_v2/` has 2,319 rows. F-S 40 and synth-v1 predictions are byte-identical to the old CDB. The wrong CUIs themselves, and 59 bad curated SCTIDs, still need fixing in `rules/epilepsy_ontology.py`; see `data/curated/curated_code_known_issues.json`. `anti_nmdar` and `procedure_seeg` share CUI C4517211, so MedCAT cannot tell them apart.
+
+**Fixed (2026-10-01, later):** all curated codes corrected from the pinned releases. The corrections are in `data/curated/curated_code_corrections.csv` (93 rows, each with source and reason) and are applied by `scripts/apply_curated_code_corrections.py`. The audit now reports 0 issues. `anti_nmdar` is now C2919931 and `procedure_seeg` C5396675. The rebuilt CDB is now the default `data/medcat_cdb_epilepsy/` (2,406 rows); the previous one is archived at `data/medcat_cdb_epilepsy_archive_20260930/`. F-S 40 is 0.8064 and synth-v1 0.8192. That is the same as the 2026-10-01 baseline before these changes; the 0.8236 recorded above was measured on an earlier revision. Sources and citations are in `docs/ONTOLOGY_SOURCES.md`.
+
+**MetaCAT (2026-10-01):** the job-159296 models were evaluated end to end and are not adopted (`docs/METACAT_EVAL.md`). This also fixed `services/metacat_backend.py`, which had never applied a prediction because of MedCAT 2.9 API drift, and recovered the label maps that MedCAT 2.9 fails to save.
 
 **Acceptance (Phase 1 overall):**
 - CDB builds without warnings.
