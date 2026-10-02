@@ -1,0 +1,95 @@
+{
+  "patient_id": "P004025",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_unknown",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 61,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 1,
+        "unit": "year"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        },
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "family history of epilepsy"
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "HYPOTHETICAL_TRIGGERS",
+      "value": [
+        "if intolerable side effects arise, cross-titrate to lacosamide"
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

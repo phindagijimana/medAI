@@ -1,0 +1,107 @@
+{
+  "id": "resp_006be816093e67ea016abc51605bac87d2800d95de5cdb3aac",
+  "created_at": 1790726496.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_006be816093e67ea016abc51626de087d287fea7aaf2fd4d9a",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFFn8W_lYDTjcX0tfn0ignK4udpZ0YfrnoflgjdHB3A42hh1wXlQ0Yyq065LkiCmDBjuQXdtasGtFhfDhDOTzQX744GgY0Lb53oDfvgP4asqMTKtUXFde2jLrmR9E-KSvqE74XZpHJJQLl6IItpdM6aOUu4LHtC8YPHaq7cwaDOmmr5ZRsCJFWWt2MXNlVR4wPQvLDgNf7Z2awNi1UXun_YohKLqbM16wfJDz9qaBEcgDoaACrwC4oAfJxRk8KcxDKcYvbUI6O5xpi10Nsj2Yt3izFTt5VP93roLOr1x1diXxbtBpYcMjXY0_zrz56GQ3OvpkTCzw7XLlcdtYHAzcu9_rMUpS91mqdPZAH_4zXjyoj6XRZZFx-uIb2x7dxQnhhXEewYLuWTvXJkgAKZ_G1jQUIOtpkiOzvA8IfiCdWXZdAh3nNROMar9rrgaNRz7tE_z-TjeBeqDCfa6yqecosvqQ9XerixhTLByYinyOTR9q3GHG4alMlvSYc-eEElKi_4lBp1RrbsTIHKZAslg3CRwB1Vjf-j5m2ouT_gbrth0S8RBHWOWyRQnJJly-BYG1L4nqgZDIaVHVh5enDdjGrZWOmCYZbYXGdy60bTNuSmPn04Phrvi90NKZwckJRjwC1D7MCQiRifzShDDygkymQRhIzoWIRDSnb1w2vMH3oaJM-ftu9Q46Crr81A1yj8OUV3kyFpLvuRKXlEBtvWLeRhsrq4J4cH1c8B7pZPjHG2liFqWXO4ofiSMLaeHkbQwuKVqXixAFYVr5PwLR1Z2-fIfmUjq-BJkQR0ufVWsa3klRWgQgj1Mr9kSnDmnaOcnZyN2JaoO0aRHbguFPhfqCyxvDIeDnB3laMKEq8JbYYFYeMiCBHCr8qTeaFjFK_PhlwbOqL3heC_c9jprJnk6il_fsF3Qd0pGpJ0JJtlTGGR2SGAqLWhOQtEUSow9gRTeCeKm5I1Z-8SdjAw7PF8TToRTRhnf7tsHNXqik_EGlE40Oad-XvpQzLMYeys9hd30LZmVz0PC8wxnJSpIzhAyM7vP5iMkLmam9naHpsiCGVg-J6xMqR3ir7NFXpq1vpu1JQoEziJrRb6GhWZJUZOCKS3ovmPnq6gk4yzw2soNywUSpgNP5U3WmqCqZs9diHw05wREi_RJjaXm6awia5LjyfwOii_-hgkXTxFsAuShHf2jYj8KzQ06FtpKYMVqJZ15BlJW1thitfIPdhD9GCPbgN4H0XWMYXDeUGRSJTzhmomII4tMdSTtcH7RFT1KpyLL9CuNcQs9UA5AA75evVXqgbcm1-nwwKPAbdkRavB8xPmEGo7YYHNfEy97mHwGEd4kzBrHiETsv3tlRSCdVijaS-F4ipZDPEULHpKnRWyE_r-5NdnpXgNY0usRdfJzHEzYbwV9DhRaBWBNaArJ-AHVOn9R6llSA91hDtXgFmKs7sBwaa93urEzichVtuw0stp3xQ2b5N8mPKZClCT5N7pZK97__YRFtn-9o2zpJTSN8-cEwxp8OD8sj-bYt_qbkO10emA8I5OICD7nUJurwDVg5pe5HIdt1VCuq7rduO62KlZH4ogUxHjlXwI9SqWU_4LnBYxCiMpfNIHV-sKKwi1jCTEye67GuN37VcsMM-0TUcxcwil42jDMcjq3McRl8P4byQNAUWE4sKFmFfoI6nMeppn_6MUx_erG7Ty0it1Ui8m7l-Pp4QAH_qTRn-Vm33dAjmpybJIaxR-QqY1HG2BqCcGo_Bps5CQMFle4vVIEN8vl2LydeK9_i-y5YwQJQkdD1MFu_F9ekNzTlzjdo4z94jI1edf8Gu9ed-JyQctIJdugBDlJmNxZV7JFegZFrKtuTDtHmTSc6BeUncugPq2y3exeHDWyQqCUHp14DqPjmx67q9cWffVU12AjFq4vPJZAnrCBQ-8qpUXhGxFg25MQwekAfCjDnikcZ6yjolW_cyGfOrlsgzggOSYSYRJ8hw9ipary7cdKCV3Zg0bZApTZq20Cb-vHgGEXeySo86hMhs5oKn9rGOTiDo7hPCq3iJEdgtvg9i4uQvqICpY1i2uUCDFy5ZehbKDhGXIA8nid2OqoS-f7f63sLs4RAT4qBXHl0mScj672ol9Ikg4KKiN39LXmY2EAgy6OAqKzt3BymBlHRKdCWsjSO0-MSyuRLTRJTMQ_ewOxARAZnaJKTpoIiIWWptuxOE6qmXA5C9cymE_0vUZPre-1LrT4a9SzC4X1KHktm4BUAgEGwMjoG4AV9l9cuPdAEdI3O51P62lp4ZCujI1mrvWWeO5oVmNylO7z1OIwz9uWN7alMwe4Ba0bjr93y3wF3JKfD5BpdZrWOZ116dY9xWTbydejYM61EjKUxaKZx11jQcpZTFgn4YBcxnlGWVEhXxmwMpKcf2tOPl5FDitZXnrsgBBptgiHdLuSplfxLDWI6dxrkpbobAekgVotzSZEq7EPSSzWFHS2i6_OjX9GBuvdyFyZhuskV3LVdyluWViBSbHEylERzuyUbRqFAqAQy-maUwF4eWdZGszgTN2Fp4vlyb25XSg72ouhs1hsYve8zPJhnThj-A4zK5mB0H3JBTNCk5_x8xQaNVLIYX8Da2TiSm2LH1DwmhYTMUIwecra8XSN-m0gw01dgUDphisrwtVTP1TsyXbDQAe5cSF_4VhGtXKsGzLt1ndeB7K3exVxE8oUgi3vSIJByu9pJHTUbk7sRJCg0_vApCvm71YtEL8tnmzMbSXkgg0o9IsawUHKB5MJ-K5rQD5pMp3B7Z7_ujG1gSgTiKa-_1vBWEwfsWXTibLcDhzWf2kq2LN0uOPMcowIDlnl-CYGnhQETK_CWILiG3TW6oqb0mruT2UnWjOxcLVpqcEryUjFvh2J",
+      "status": null
+    },
+    {
+      "id": "msg_006be816093e67ea016abc51662f3487d29a22f1028f385356",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:\nThe patient has focal epilepsy of structural etiology, with focal aware seizures beginning at age 12. Current seizure frequency is approximately one seizure per week. The epilepsy is drug-responsive.\n\nCurrent Medication:\n- Lamotrigine, current antiseizure medication\n\nSeizure Burden:\nFocal aware seizures occurring approximately once weekly.\n\nAssessment:\nDrug-responsive focal epilepsy with focal aware seizures and structural etiology. MRI demonstrates encephalomalacia.\n\nPlan:\nContinue the current lamotrigine regimen.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726503.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 250,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 383,
+    "output_tokens_details": {
+      "reasoning_tokens": 268
+    },
+    "total_tokens": 633
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

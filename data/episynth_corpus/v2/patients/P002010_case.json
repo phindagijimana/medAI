@@ -1,0 +1,75 @@
+{
+  "patient_id": "P002010",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "unknown_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "unknown_onset_motor_other",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 22,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 5,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "KCNQ2",
+        "causative_variant": "c.881C>T"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "levetiracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        },
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

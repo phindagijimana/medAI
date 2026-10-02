@@ -1,0 +1,107 @@
+{
+  "id": "resp_0e187b320f5d02ae016abc59e4926887d2980e7ed5f4a97b3c",
+  "created_at": 1790728676.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0e187b320f5d02ae016abc59e51fb887d2b8a07db45a42e3d0",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFnpxhmDlIOi-Qxrdoxlgv8yGtiTm5zcCgDQs3HXJgrcLKxmypXYE8flnUVtKySHASjK5D7AURv3XUK2592cfEPbIiu-HpQkvw3ftardNOWsZ_ngm0spataKH0EVX6YW7wpY5ZJ_XCGmHoIFuXql90viwxifLDuYPehqhesP3EXJ3GBx1475Mb5BF1LeBbQq6d-Yiqdid7DUi0KM4Sb_RYMzi-AWFI2E0H9KlcTcRP9MUSKSlobWDTjxNHo17QEAG4FkknX_IkI4sgAqSEEHV4yPVms0njlp5HVy0Bj-EBAVvmP6CSNBaTK1HDvm7IFhA2a-_u9v7EjC-ny7XwAB_HarUU2_CBAmpeX0El1VOEHJbDfQYJWFErqCmA-ncAKScF-ZlwFrH5tKTLt6pAugU6I2Qj-yCzRBWkKW6MJAikqwirbqoOIHRLz__TxZ70tDcmFDYSe1eEhhIsGgl_eoUiva8VlKXe2SnzEsiChWXuV0skcWPlA_mgPc72Ae1OlDkFWh5bq-6KNZfglXmVqSfwCXMEVHsOQEzDHZrAj8aXniZkFeY5ColUTFISgkTsJdhN7Tv5UEvJqjtvc0T_3kiVz99yhUbU3SvYfvjvRSomaVqiyBrrIdndHGRfEsi5TUcRFsUODctFc3S6eHQnrV7a80zlQ2MdfQnRrAb7RIViFxL_0upihLdIG8b8GUEs-77l3GyMzDY-eB6DioCgV8sTkS_L22bxUsGLZ4sIGUn_t2n7howtfipdZvjasS-4wSaC0__6PrFr-RaHEunOHi33zZ-VFq2q-UkXj7a80Am_sTGEpLWnlPnTvuO9Or_6tlJ9ztWgexiHYvJlJcs_tS74hNKorp2RNN714H_auwbNGDD5uGKmhx2Ap9_HhmbIdl49l101lXhWq92dnqUj3dRHzZVCL6Lt6STty7bp_F1n1anCVjbdAylbmHVdHk4WauVD-zxlwQaQaMxyrXAss162u8teLiYJCBw1cYFWu3n4cKvE3wdsDYMuM-aBy5k28FRnyyAHud2ek7fg2uqsNvNZw5BrTAIPk9Zc__d-B9yJ_nxxYfPWJaPvgIWOkC0uwuczqE0gWKunecq2UP81KW09VChzBkDRIi1e2FjCfFrWakdtGlvKNZsan0NZ5YUn_zvSakbmsIsAKwjzv9oPwGdS1wpK5JJzyjY1uguA2LVEfC7X9JOHTNWX5MLwsmqNdzKY2ZNvyx1vUlrfYp5wQbdtv9neeKuUpKHgxK3oc4JiBA4bouGeqCJR5DJDLxuEshPA7mZ1ufnQSUqIkl1BUSBcDefey2LuDHse_RkRTkVKW5LiVHXBnpZ8qeUgrCjjeRiKVusIyn0p_-sSaLBMqaSACpN0Hc51JvFeTLRyKRf9fdrsWglg0vVkqor0QID2Cph_lTSQx7wkgRLCpRkXpsih7kXo5LSEXeM8O6gf69Nn8lLOs-ooolX0AYZunK5Gl8rWsRshnQ9xrVQmE40OrIlNbZSwIGBtDRpTnhZ45QQSIE5PRynrUjxd2bZE3rUU4HKNHcAdKZs-Zh6eumsze56JEZTuTMUJQyDFGwdB64RgKM2czLLdrgHAdLtbfB1hfbglRZ55Tan-t2M-Tsi7irujxLKtKDtZig029o91sm00faJYdVoPN5LzDJeIbYGxJ3e3np_oMjtSiuYbrntNJwFm1jEhXejZhtMEuNTycFoe31j4nve-6oKjfs_lu9KUVUSmpRy8PK2rTqksVcjhUfTPWIANhAx-HzQ2yRg29FSoTQpYOTpGkady4t4hGFiwWCijgBUvKFKZrfRzZouhcQDTAl60kM0BKdwVz01BXyL9Fz5rFTczaEZa3joyU-nsacmKdzTykC9FeLyxRdeMofnWRkXdx0fBdSDFjrs47FLl4GVsfTeBHLKbJH5cZC7cQua0l9",
+      "status": null
+    },
+    {
+      "id": "msg_0e187b320f5d02ae016abc59e7044487d2b749fa64b4d98127",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\n**History of Present Illness:**  \nThe patient has generalized epilepsy with generalized tonic-clonic seizures, beginning at 3 years of age. The epilepsy etiology is unknown. The patient is currently seizure-free.\n\n**Current Medication:**  \n- Levetiracetam, current antiseizure medication\n\n**Seizure Burden:**  \n- Generalized tonic-clonic seizures: 0 per month  \n- Seizure-free: Yes\n\n**Imaging:**  \nMRI demonstrates an incidental lesion.\n\n**Assessment:**  \nGeneralized epilepsy with generalized tonic-clonic seizures, drug responsive on levetiracetam. Etiology remains unknown. The patient is currently seizure-free.\n\n**Plan:**  \n- Continue levetiracetam without change.\n- Continue clinical monitoring of seizure control.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790728681.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 260,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 280,
+    "output_tokens_details": {
+      "reasoning_tokens": 116
+    },
+    "total_tokens": 540
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

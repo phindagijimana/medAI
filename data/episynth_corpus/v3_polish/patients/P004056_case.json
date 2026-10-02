@@ -1,0 +1,105 @@
+{
+  "patient_id": "P004056",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "generalized_unknown",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "generalized",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "absence_typical",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 10,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 4,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        },
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        },
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        },
+        {
+          "generic_name": "perampanel",
+          "status": "prior",
+          "reason_discontinued": "sedation"
+        },
+        {
+          "generic_name": "valproate",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "loss of consciousness"
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

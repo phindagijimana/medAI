@@ -1,0 +1,107 @@
+{
+  "id": "resp_0f569f71207e8708016abc569f97dc87d2b6db3ff3c5cb756d",
+  "created_at": 1790727839.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0f569f71207e8708016abc56a09d8487d2bbae3988beda0e7b",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFalOcM9ya3f9-zUO89ca4JO-LTwXsT--ILdEhYdJWPPVBgqi_--UZBStFGNEJT8ZXp6iXrcL8TNSwexDjfZ27_f9Aqf3EsVLdMm43lJGob-O5OP9PeC8TOxMgsUh_uif93Xc8B4xkdCIcPP6S8UALpbvpNQtBByD5l7HvR169MoqtLNNDL61XdDmepIVzxuyctompMkZUos6aKab9MNSFLQiYPkYMWuJIOwybYRtJ1YeG2jEQxPFcCS7AlHyUlj2DexDIPYsOIGz2IPg7CCo1fCp1yUDHnlgxImj1_m7lmno18E2mgdnMBuJjix7pdZAY4XRU6pwfOADn31-2y0hweT2bDgTh4Onp39Iq9HH2jL7xBISGQA92lB6Iod9dWabnSbkVs1dglp0LA03Cm3VyaF3ql2Lns5IfluneQY1EzKvJZPkKe5e7vZRHNxJi5PPAn7cnydJj05TQKSxrPZRr8LX4pCAjR3-5xExGXzJQkOg9Vc_UPr0jF1KUxDfxWvno6f7mtQ1Xgxi9eDxyn3ON-NeMw9FJ6b3svwFG-FbNqfTtUk4YbODbuMstyJej8FSXWYjWCfeOkCf-12ROMnqH4lUh3fS6t-pmcVxkd0ED803a8UPLyZ7qJLBAYdExbucMYHSjy3CKPBvxEJV9CY9CeFLKuwdGRQ12pJUnViTthwxwTeu7-H0uClozdrazoZMWQl1wfp7HErpPdXNMac4FYMMDNmGHNRulKcEvG5bTNlIKVVE3Xht-7NCjuDGJZyinLsdjGG8vi0YGuzKXfp4KiuwIyoR2PXsxrAmU_OeC02BeKYWEip5DZ9krcitslN9FH2pLErqrtQw0z7G7gfeEFKd9cMeKFJD7qxKeFOHtybrdvmRhuOkya4878sRG8qWY08kEZOk0hlZuWK9XsVLeBB8AmSI1FF63W-u4h8vSD47urKRYDwJK1PpMO9lWtuymYSm1YgHn8WOJkzP3a-vg3kLpvlIU2kF6V1XUgy2xiIYbSUhJomVUKaMZd-uNnUhEhONfpEpzk4VvGqZh3VaWYsVA9o6bE87ahYt5dp9ps3w9n95WyRBQYvNUea8_9IJ06FNNd77qO-pk-N8RE6LJRZdVY_l2a1Gx1l9uHACauHw-t3y40au4P3XehCFE1Jlzkh__WXaUx1UemJnwRzq1hbW2ixG3K4LDXn33G4Dls4luSKRqeylicXhM_FmIXns1ep3IPR7BR6VPyL844OVpBvmJcp-quz2PxSdoLvv3cW6lhULOPjJODj1DjKh7YTEjVkRHnLo2JHH3eJFB-9fjBo_oRAAYqAfprLmPHC3BUsVm0-sPmt0Z_Uggag7mvusKAvirHUBfwcpolfN98KEC5HeflDcmcVNdi71YSZm2-hdWtSjZvWJn_I-c8i8d7HZRORM936Ol9X6TfdhzmYyTlCxLwr2vM37Z8iVJNMfEJPvBIc1k7JIcniVWAojYMyRQLDLsVlXKbU3-wLDwysqio3kc_xBoTiB6uKX0YiC4ec2QYwjV0huSUKJA9VXD9WmdCZdWHVD0CRfIhwCXwpTqFe_OpSQUXCRwTFRo8aJxBLl4THFg4O7Wy2PXCDr_jRCncUoch50AuuzkD_DPnIgclWtLAnn2yPMnV7rhZ41hF5d89-VKAA8m2zxkJDWcMNaJ-xqyRnHRd8t0wz5yP_YsF9pwB5i5bEkQ1oMocy2K0EviiMJC2XyA7KuYvcyqMShF4I4MQlv1tQ3aVIUyCP0Hr1P-rGnxtVeqxQ0-0Bf-iGDo60ecUDUc-ixjpZFY3IRBEGQZJiApZLZu5Ct-NmN9mhd9mp-ZA_7YM6Q0gZ50BTvhu40qAfuQgkyXJt-ML9yMuz95ENmB2n4a8dhmJ8VSlfiMbTMfxwtQXXpKI9cm6ASYr3QWWVzSAzvhB9V6V4wsTN_Odd8_3Yo6IcJTNH37MlCLqxC4sNQ0rsgaKSosR6b9GzfFC7YKC5PehtDdum3vtwUIRMJ0hyV-CIsD35VYgPM4i8Mw-0gBo9IzbVn0wiBVwbxO1aq8KviDIogS6iBqm1qCONbaD4mtXkEh8tTEjDiF6oPgEuqFwS71GZ6DD6MoY_in8rHO4p-dQZwJPS61PaHVsNU_0l4iz5mDHd885lBwi5dg9fPc4UXktC0uM8Ze13dn2Mo_c1_v67wiVA7IiZD8VbX3-6Np3iukQx89KqPr_UwigJH4N3zTe5NMI1Hgj96bVa4M4LFRIyr5YI690dy2PovygmmUlKum3B7VkVwLXmqQHnrjDd43V5og29mhTzAUOhog9rx7EbiMhtYVa2FCeHiMuw_a0YicKfAUeTESiB9rxXLResshxxqLFQBUi1Du-dmq4XfRQNTwNkdFWi6A3bEcw8Gw98Uz9Vaq85oLqpuY1FjCnUYHTRt2lOIQfJ6OSPZ62C71UJwp3wFYRWsRVgkVqMXHpKpBAEfkZbxst0rxKbLD7joMluBjBmU664vj_u0zlmxDK2QsjJ8azQLmCRXhMMKi9TM94KqXWNaa2A05ZpG2esv3BtMvFCqpcG_wU-a7mDqxJpKVCqnUvR4rtBwBxbn6C81E8eaQyQmQHFnriWe7ak4JJ7bU2xJnYE4kinKI7AnAI0a_03oAcIeTx6EmypvM0mmT7xv14dUcvkb_vO995y_Wn09uBOqvg=",
+      "status": null
+    },
+    {
+      "id": "msg_0f569f71207e8708016abc56a3db4c87d2b3444332ecdc693f",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nThe patient has generalized epilepsy with generalized tonic-clonic seizures, beginning at 10 years of age. The etiology is unknown. The epilepsy is drug-responsive.\n\nCurrent Antiseizure Medications:\n- Perampanel\n- Oxcarbazepine\n\nSeizure Burden:\nCurrently seizure-free, with 0 seizures per month.\n\nAssessment:\nDrug-responsive generalized epilepsy characterized by generalized tonic-clonic seizures, with unknown etiology. Current seizure control is complete.\n\nPlan:\nContinue the current antiseizure medication regimen of perampanel and oxcarbazepine.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790727845.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 265,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 369,
+    "output_tokens_details": {
+      "reasoning_tokens": 240
+    },
+    "total_tokens": 634
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

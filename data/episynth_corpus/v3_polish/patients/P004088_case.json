@@ -1,0 +1,107 @@
+{
+  "patient_id": "P004088",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_unknown",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_to_bilateral_tonic_clonic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 10,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 3,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "valproate",
+          "status": "current"
+        },
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "GI intolerance"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "consistent with mesial temporal sclerosis",
+          "probable"
+        ],
+        [
+          "suspected autoimmune contribution",
+          "possible"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "HYPOTHETICAL_TRIGGERS",
+      "value": [
+        "if she develops another breakthrough seizure, escalate to LTM",
+        "if MRI shows progression, obtain PET/SPECT for concordance"
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

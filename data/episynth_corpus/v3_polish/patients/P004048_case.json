@@ -1,0 +1,73 @@
+{
+  "patient_id": "P004048",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_unknown",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 7,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 5,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        },
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "possibly focal onset seizures",
+          "possible"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

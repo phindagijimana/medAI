@@ -1,0 +1,107 @@
+{
+  "id": "resp_08db07359fef230b016abc552e912487d28bf8195fbd7f71ca",
+  "created_at": 1790727470.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_08db07359fef230b016abc552f404887d2a787fee5144f0169",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFU2UnIAxbDqggyVxd2vXNJIAmgc2_lQh3MvFZWku4QgPCOkYY_BxdrHYWZh3_qWedUKnDzxrvjIhoGPbQf8xsgmG3eq4Z4CyAbkOQVr9SMCXIsZGZONWY_CvX9NlO-3hwWvAuDd5zuK8GfpLVpbVK2nr3n5DnWp99-bW98zoDlHXH9zBiDiz8Og5oG27OCETmqgzkziVmKUaoKTAp9ArEkKBwrNkpKqoFqmEbjNpFpioG8CDr5mSFzAmcGxl042QpNevszMQwe2gP7E0iU5vT-SNESAHdHV1uVJGPnKewnslD5rK4RNKJZCyz6fXevJF8ODZJRawJwq2YirbcfwDmBiHz7TJ567UTHkA6rYWq9XKXeyt_8_G7dJJSfos97MqM-URfWBGpZ5I7RW8zhZ9daa0Br6U0wDQ9_bsjeXNQudE2HjxLG20ZBs9AQrHymUUTgbWCMG8uzPRFTy3mI4heg9CSw_f1K0M0gXyx7bdSiRLNA2DA8a24nwGECzu7QELqArAXQaNDAoUt7Uu5AwGydNgEFN7NnQrI561gXZWXZumZXBVb80fLOkToobo-BS-pVTrilLupoyrghszOEyqxYtKTfq7SJBMD-puIV5fJRzT_i9AHVkW-Q34yf5XydVfEiah0ukRwc2fkak7n6sUmfaMltsBWWmUeXuwvZb8se1rGhsI6lniUcXsJUPhL5Mm11B699D75pQG4oEtTlVTfHDM3ZdRooEjaLXd7dTpXUWBIEdbPVaRS2asNgtOGuvnm3DQ9gPZZyvvOHmuAgCWzQuBGqZeCZF8NYhGoDsqTf3hiGFr2UUjxbc1-nctteZSDzQWZ6HeTrpXMMKi9kvVMIrdwxSgMvC0rWb9IYTH81IzIPVbn-Njewk-HVD5sWXhNwqgwWK2dkG7OCzHRcC1SejI8Gm4ZriM4lmkJkAtxPEuBR4gcQRXTJSSjQlh5O4PMdR6nQda9ghZ9m7bBd_rnybjhZI0KF8Ebth5EczZcpjwxK00F3PHwuZYNT4Esa1u-Mc8c35IEL-zKBfhlQDdbnKDlfAqAvEqXFnefDb_kz0tYA-qrNf0tj6y8H3qpHOxNz2Oq7_6rMV5UfyTRCA4bNwl7IpoeeJSHuyGxHBsxRqkES-TcxybZfXKkOktI1A-iWhaNCpaYeC4aKB4unZ2nDveeRQAKdE4ICIPn7sFLweC8sWN0strgjNnGiU03PZFPqlTXjgn0YyzKjDJypq0UYyXyX-z7gZ4_D54X7AT1pqdkPUJ8Wm91gBoV2WoZMXsvZbq0OG1vNt0zDMvfaA7vaDWdzBs6QXhdFPJZM5ZtFSS8XPXyjSZ_KwqQC6T4NkjdsPq9IF3aqm2zha9CxPJbRkG-nv9Ic4L1s1tbas2h9ptq9j4IGq7RzS7FPEH4v8lW16hj_u4u-g7w6QTAR_8fSD1CmmEXGdBm9NfGf6nMkbeohbbUQOWGMm8N9MTgvRSaiMKz5ArYaE44sFvxQ0FIP1iaHkzga8tYPxMRLd8b7mCNBfRV_Qy0G4rSrAdjelMftJXjelh7bHwA3S_IjYt_yfSK7ocuX6VPeuAZEbOrtsV0JWEAkk1lw_ZhUrSXCNG_h7RhpK-9uI1QMhAK78BzzP4slzW_b1j7RJv3v-8EWKI0mdQkMHg0o7I6SF6Uwg0zlAGDG507Gg_zFJtMOtFkEK0nKbFinRQlbFCDz7bmAfox-fGyczA69M8YOk7Ifd9fru8N3h0Y_tLkE1onD52oycqfPCbaclACAgrd8JeSSNHF6TJLdh2IjRRrPbBZHgz597cmniOoNzPtOGraQpqXuShi0oy0gLgtU4oWJiLsdOh7Bin3fTkLphx2T2rKVzFRWycW1vv73Xcz92nbz6q2uQ3BeKLolsLuHN6uP9HYTKcQIfmrRc3KxeynWJ_ZuMq2zIYdZcy5IBQBIWnsSvIin4E-1MBc3G7E7AovDBNpESxyTogtJsnT5zt8tD5w04LSCUTij0bVG_xbyoYopyyU3UbGrcPs-zeSRsrVtfEkGVTbHUvOKdPYetGOP42GBo6Vy7VRV59oZ9PUII72ECGcHXKOh9ohc-G7vd5uMBn7ZmB9j5xirDrcoKmNWURKGx9-PKBpslxSv6JgtSW7GN6JClWdJNxXYiqBdpdZ5EnJKSImjMrKvsGiRlNnGXjWmzqqqAi0MTMwUNGKhZjXli8-73i9VfIIRBCXr5sE_VOwaqOzDnXfzEwZmJOXQfezRFojlobCqPqHuBq_u6QL3n-b7tvQMDxUNTcsf9q57x_xw6jmHkZSPomxc-tH9QBpjiqIQuJsYEAa93XisAAE3jWqiJAjvn5fBgPf_ZxZMUtWkXO35rqW_RnDB-IuLTlajeMcGJkPbTJ-cHh8aYXaBPs9KFQqrxqF92YPh5D0KpWpwMivfacl-6SQmkWODN2x5_Ka0oHGvXVB9fXxSil4WOpK8fs9VCQmabo6bqp-FiTeOo4KSwpPtQNWQSjGdUjjWimgoZjj0JTw96ZCpbm-Q3MMjWF-R2anHNbfr59sIZyMufOyWt-D9mx3iJ7d27hFDfoXVbuZH83PXoGqA2O5dn2DKUW8qAn6w34T1FE19J8VS7dbRzQiC1MdjbqqMn-yldPjoO3v_CcqfiDnqHOCxetZGJQnirEG01NXn81gGoDPP0k7dWiScghM20peNk-OHcq_OUE_NQeNsVxVElQKt-Zquzdq_kDuniQG5pHKSXY11LfP7nrBiymRNPK7uwqzBbfQ_223NEe7x2FbKP0g3DZrYWJfD3Cxg_dtjLZfYVQmrMw-6nRqo68W0JZm8zGFRZdWmlwEAfqrBzTWNIW4vBcqkf9CSel6q_4sJOFJOTjBvZo5jSU1pThZ7EC0ZDKwjTHjQUaKNZSSrqubCoUJ-O8ycnkMgp_aCJSI6AJg4P-6JH_f_F8XDGnLy0d8zNXM58npg8CHQiRYY8Dn4tKmtHvQ88bF5FzAMLpY54EQvKpr7ertPSSzGufVqJB49ICwwSynmj5IcspMmqp73kX8BNtanrFJVsH-jbsZD8wi-ZazLqIv-6Ekiw7--1CtlDdXY1O8JZlJd-C_DTyma3WDW2IEJ9ibPm5ToXMM7ZrxzfuMHebcFN0yl3UWChYhbiGIvHOoBMNvkHfy10VbUEyACv-3hDxHAiLkq2YaOfqjCPyIxaGLTe1N-f1MgiJVAXtR6m489ZJQymTRugwa2ilXggxXM5DUWwydkDIP2o7TptPKVYsw6XgxqtUli3YhiY57VazeeiCDuCN9nFcABogho7lr-Ud-0KzSD_Ovq42UIZd21G-mzTUyhUAC1q-UdkFV0oXVzeOwyMxM0KLNGxIwUaQ6waL_IPFi942oLTWpjIL7EzGXcY9lUZ4VKRGK6ATrSoORovybjDnmbU7J4KBdH7RFG35MI_JRU2OIH2DyrqSZ5OK0edQkYlcF6VAuEp19zAHM8F3acgY0veFhM4cGhNevxFig==",
+      "status": null
+    },
+    {
+      "id": "msg_08db07359fef230b016abc553494ac87d2847b831f08349e65",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\n**History of Present Illness:**  \nThe patient has focal epilepsy with onset at 34 years of age. Seizures are focal to bilateral tonic-clonic and currently occur approximately twice per month. The epilepsy etiology is unknown and is drug responsive.\n\n**Current Antiseizure Medication:**  \n- Brivaracetam\n\n**Seizure Burden:**  \nApproximately 2 focal to bilateral tonic-clonic seizures per month.\n\n**Assessment:**  \nDrug-responsive focal epilepsy with focal to bilateral tonic-clonic seizures. Etiology remains unknown.\n\n**Plan:**  \nContinue the current brivaracetam regimen and monitor seizure frequency.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790727478.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 243,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 482,
+    "output_tokens_details": {
+      "reasoning_tokens": 350
+    },
+    "total_tokens": 725
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_07ca482caaaf5feb016abc51270f5087d29ea9cebb42fd4ce3",
+  "created_at": 1790726439.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_07ca482caaaf5feb016abc5127a7b087d29a389e528ba66edc",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFEuD2xVdF3CQvYlEQVp5I6Qteu6rEKTuu9TFuxo0kH2N0Mo5LifvS0oawQSSGDkpQVonC5QpzcDBuSRepaSLwfJCkQKPDRKxAyd39rQirlgxnNEwE64Kz4dHH2DqxaeHd-swPqDP_jWQIvr2uob_kZOD8l4zslDr9vOCjcHFE7t2xGYeKiCM3rkmimOFt_K11GOtlod_NYpJ1rmDePiKoo_yOZ6TXy8j9a5sw38gdJmBi7etM7UtKJ9BHmPic1ewwGBGdCr7VtoD4st92hLBNMCoaXgTak0NtPXyF2CgwsBPsXXqQrkiNsa-czkfebZ8St3-5Iguv29moY9-NPLMZE2EV-sLgyHGuUMD6pTxVFXgl1YNDzxq0oNo_593uBMNoQWSUgqSyxUnzEjVQgeKJ8IjcXZ0AYFFxcZY7_oDKvXLx3Hm-ozPOz9Mu6HfP5iDkYW4lzElXvBRwtaQcfpKrUDFp9RGLxrqypMjQhZ7ZPyX2rRpkfsxZAa8FhiwuuJFjPruvs9lXgtrwLuhSzIb5o1bfhGrZiNFvoY0pJP547HYDw0p50hK3Nt5f8SIImQikxHOYeoJZqYu2Y6lGelccNgJcPM1TPuCUiPFpFzWs4ZwX0mKY4IXU7adCkUpYmI2BzQwX00FtZBa6cZeBEvyOj8Qa3hqdyG-IV7VyY0vVw-HaNpv3fDPq3r0XURp7LHvTaJkZDIJquREPqbGQgFRnZ4KHns7OcuFybpkhQSlkC-Q4hhGNbm5CpYRDpCrEfBFZH7mpf-BEiuRiJfP-Dmm0HGhx7ucP8T1BHZz5FHTwydpbNcWHwxtnMj9zU6lgcYHZNnvzC6Xdklg4fZ1dq68hDcNozlLKu9dKnUJIv_2NeGyhklwLzlOJO18bbkefPuYoH5QTeGs1O3g-5yZ5L1-9pkXScD-4lUrmlc19-t3u_IhU_f78KTHnHlz-WCp7aPGAcHRisCyHLe1wL8P8u7aLGts7cJpjv9mR4aiuAeifIOJ5tq9m7zNafat-r8MlYmbd1zIdkJ-vHvGrVDebsTLGz0Gv6ddvST0tjTbpOYpjq5vrZXfHznijdjZqqgol3H0ti7y94q7e-j7xtjtKANOqoJclX9-QkJFuUmIPTqqBya5VH1QWXpmAS6nbzOpr609CArwbtn1-ifrAcM3BRG6S8jmF_mvTFxIAR9L_Vte50jhAdQXFEOicACGTh_nlLf6sEITSxV1n8_GZVxPrIh1BC5zBCoxFUwz5GRV0fahf_1SXCiSQlutnaG4uRGjpdEj_2VgNl45r39gs3BK24FLYoKE84c84txpjA4aJdgdr5NWgX33_JfmNUl08Cv_-tI4W5rHD4YpsXpGjKvZl0ZNJD_bf8Q-G8mcrrvHmu9kiP7DFegMdtH2bR9keBcB8L4iB3dod7PmJWV-5IhvaxDnYOE_rXyd9oGNRBabkm4lhJxh8c0Oc_21VTlhMvJ7X5kF27cPwQREnAK3DNIUT0rfwKou6SOKXuSdEolBcIAU380cEExRO3DXdIKV4bR0dZrbmbYYvijfCEr0ov7Tx8qiPRXt5YqlMWpkQAYWszpztNNrkkSjDe88by-fkkIDRK9HFIw9_k4ESof6SjFBfXKioE5qMN8q1by4Z8izoRncb8w99lgwbfzpY3UBqNpgX24VeU9wHoo678ptXm_T3q5-se39mFvMQe-eQXL0BT9qGZqx2XTzqzTLOqqwengPjsiFRggwFNvwqqqrCuT9hMkVyjYbk42w8Rl2QS_H_VtuI-Zahe26jP4dXK7KbTiIX93f3uFvkHz2MVNRdXWNKq8RJHDOMn8YV7MHMEBMErRfMemfl1fVtT4Qnh01NLfoUCIEhDBQONiFOnoet_98FOiUTGkC9dIqehVKuhYcYUgpiwzpDOSRdJcvzXwI4Gp9Hvf8-76AGEs8R1CcpBZbyqYcWlmkjbFBzvuKnWZUTin772nd9BQ43LyoB5IVpGC57gox2NNxZQqejIwXUq-2c1kLPswxxkI1YWeVp2hObrD0FpT3eGn_i8nHASlvhs4IKrBOnMlr9BzvTkmiaxyyMq-XneM49G9ahPGHlaVUPOYzwQKKHOzKSe8T7g7dBGjrxBJDJsXl_Z1xxp9EJDuofR3XagSNDCNojPmNBFSA43yUb5Mk2uOQ5BDceIBJEp1xbthrdyYM-VVC5IcOT09WttfQ7KW8vNrz4U94VDJT5WgXUnjmi2ayDk3yHphoENyuMgPf6EoSYCDe8b32TcJ3aM0XqBOUYJmNhSLQFeA4WAePnEH2eGIULr3lAAN1D06um5ARIqDam3GSEGY3QZWnY4rr6tDCp64fL7d1SxVSDwcnVLuvyw7bbk5S2qk8LvKuoxGdj5b7CMPAX4JibTd_zVGVgc-ym3nkyhTblJL7DT6dq_qtk3nc_EQwi3pJzJNV5r4ZQgcXvcGbe_r8A46KvKrBoWsStNguIWJhdSWP9QZuM0GcgHEsdHCmgVqqRN5MEQKeD3Iy8XwvTgcrM8CRWMRSn0S4CetbC0jklCoxJcQPVecVP-t89mYnNBTPKbwpwpAkAwDD_ER2FKtnTGKqux7bi6rdeYbNhDC28CYgWiHpwtRM7TXvBbONk_a9A6Sw6ZAr0L8uR_CgjT4M8TWNHO8bU0wMnUUqCMAkZ7pCS2mTx4qZV_ArDfLcXDqugFxHPbvM89-_p3krgeAdIEksIQVf7MXGQTeoZOFhnMA6RxvQV8J2UbinWLZIZWFAB_9q-hQ2lqQX4HIHVEGy93xN98dwYeEEUwJ4g0XGnQnpk9H03ze6Yk28me2PDK_rJ3UWbXH3Icu-8PnPgyQnfR5rnrNoUxjvyJbupRdAsny3Jy2gvEtiHFYB3o-Br1DO-zM1R0wQ773DdqHEEd_DHRqMWIk78MphFcBORvazDNqBc2pKm4pXce-lEXTwGbYxLBXse6E9ug1BugLSRu2Rq5fbwLScAtqnQp90RC988FmKKpAwsh_0eQxlFN3akPLk9VQChazlZzPPvRve7T0kkFpQjzYioOe_S44rbe1x9xfakR97TCD-JlBSt3yVb7RxganOSGjg7imUU5_dXdvb1jBMBh3D9gAySjbmBEVJPcLJ1df2A83htyigQ5cRSVA3D1b7n5Y8oG9Hpy97gf0QshsffFBcbIMN9XW9ovQnYJJllDGxq2EPSQ8i1Tds3UrhUn-GPmaQwVZJh_9WzlwqKMY3Ax5nergPmZsmF3oy3MwUY5w-x1uClkhaj_Vbsed5I6GO9JVsUTvyPh0IoicWJNp46okNPf6r674cKb3qNsYSEqRQYYvNcI=",
+      "status": null
+    },
+    {
+      "id": "msg_07ca482caaaf5feb016abc512ca29087d2b352dac079bd5a82",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Dear Colleague,\n\nHistory of Present Illness:\nThe patient has generalized epilepsy with generalized tonic-clonic seizures beginning at age 17. Seizures currently occur approximately four times per week. The epilepsy is drug-resistant. The etiology is genetic, due to a causative STXBP1 variant, c.902A>G. Brain MRI demonstrates nonspecific white matter changes.\n\nCurrent Antiseizure Medications:\n- Valproate\n- Levetiracetam\n- Lacosamide\n- Oxcarbazepine\n\nSeizure Burden:\nApproximately four generalized tonic-clonic seizures per week despite the current antiseizure medication regimen.\n\nAssessment:\nDrug-resistant generalized epilepsy with generalized tonic-clonic seizures, with onset at age 17 and a genetic etiology related to STXBP1 c.902A>G. MRI shows nonspecific white matter changes.\n\nPlan:\nContinue management on the current antiseizure medication regimen, with ongoing assessment of seizure burden and drug-resistant epilepsy.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726446.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 336,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 533,
+    "output_tokens_details": {
+      "reasoning_tokens": 326
+    },
+    "total_tokens": 869
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

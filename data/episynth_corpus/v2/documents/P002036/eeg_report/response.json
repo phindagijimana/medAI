@@ -1,0 +1,107 @@
+{
+  "id": "resp_0d8873bc0803abc9016abc52f9ab6c87d2b5c5b8015850b5b0",
+  "created_at": 1790726905.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0d8873bc0803abc9016abc52fac36487d2a4eb397ad8163dfb",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFMEiQA2P_2qXPN7ptmCqfbDStRIbXyd_gqGWIRxOMHjqI9GUeaN6ewkgXCtOleCXlkjXvnwVcpqMKPMufrT9asl57SXQJottcck1aaSxjuOkazud_8L7QSimbhVqZoAAlDtVJxy78VyascjJX1RyXmJiza0hNUuvmrbCcAaTiYQH6UVeUourMAYXVuJdCRrRcooAlFxIa_FXg3HLMcEFw02KDn3_HqyAGHTP-7b7M3RmKeO7euR7_vLSjYaNchE6hUsnU9FJcq4TOaiHfPAgKG_zo60g5tOTx5q2aQMXxrcqlPkOp8mjiF4bhk7sOKSGe5UeDrhsiJNCQlLOaM4kN8AfsFBgxe29NqZwhPEGMmGc8PB_1Gs2Z8daLAVt9SSp1TYeH5Q8FI5yHgCzfi80-PQlFhT_ML9Rktsjc-f8FeMW6B1KbMXge5eDJIIyVygAA2MCI8nMS1qEkjc-hyr9S7W-tBIxDV8r3WgJa1M4yuYP6ni2f_8MjXk_P26eVTt8BfrpBZSJ4VqXt9GTNAAFdWhixAOhBSZjAjcxeYvPph7iivb51lkSoX1EbPp9hFooLEkfbnKSFM8jfKp7FVGSJISBWkqllENxD0Y34JDUdZDH4qIkQRtwKccTB-fCjgKScTCilrwPxJdOAhxcQhruMK9vOrLO5kEWhVqLHkGlhbS7HyQKxA6w-gEWq5z3nvvbvl_irrg37dG7jRCRkU3YLZ-_NmJfHJUUtdbsQGbY3AnYQTZJPECf4N2_ws8nJ5lPGnQJ72q0wHSWJGih2BPinRHRd5TXjH8BwR9xpChbZcgNZZ0T_gatx1nOt_J85ULmWS36mFyRcGwPQbsZDadtW9WN8Gcixi2qv25LVlp83UJ10AzdmuMjd0eWxa8OZUd_ITwJiHYYkUKqpIBAAGCCBl8ZZj2kKY9CqY7wPU5LgXUe1ARsPa_MyqC2V4rRHqEKhUc27tBGL_mWJt5gCBq9La0IZO4oMHWqVPl1ULrGUCfJzf98cEunmw7Jxmk8Y6FjqUinnrVHt6EIZNB5iBECHp6mWurm-hZAjFsrhs2iENrNGZEXfd5Xl7Wu6dNs6woz3Ax_4s53tnGH3ETRLXo4UHBY8oU9SycU0uAVj1PDEoLvmrG01O_jhdEfPFP_pOcO6blrCpCYKBl_uabrGUopo3N-Yu24q8oXKE_kNeCHjMA1L--jgxicXcmq4xhMuqAERph-VBY8YrOVFmzhU0osCvWvnD6ZZnjQ5nAq6eunu4-e41mu9Pu_t6iNMn-YdWxkkfthoGWmsqvCV3ziplgVV4ZWI-4jy4Gs7CMEsQTnnf1-Y8L9suPJnBqkeXr-EZYA2jpL3sHHIe_aaBHQs_0RCvs0bRWOKAc6dN5vNuuZdkzvgDUTSeOQcQl_AntUo6UnC2g4ZXJTXeqlExf5BtwLoe7wolbm4VBYUHdK6w0lPZ1ofRhawQlqgtftzunXRT2Kf2Sz7VnYL4rW90z9PgDECjMwbcTwtf5EDPwZHesOCk5k7SYXmgO6yHOcT3QjHh3SrLyqLYMKXCHN4r78WhCTghbhB1Mb3o6vTFcASNKYNWama6M3AMAGP18IEbtuAOExjGh90FQs62WGgSGPhaYQW4QZnhojLXvUHJ7F9xtZ7H9P2qPqoRPVsVYID9sgKTnaBoVQz40DML0vsht4kKLstyWMHdAAVnfLbiy_sBk8Pglop9dBKSzSR7rGtCSqxzfrhJUaxO49Mmy4l-lMkzKYtAv8J2RL8vjGT96jm_X5uNn3-fnnvuqSZ4rpMlno3hf7AdnS7ascwYrX52MGxZplyKTns9brwQRBI-vL1HmEfj9n7LSLGZ4iodGBelig46Uq_Vw1c35UDyRdl-QUSAjK9_06gg4CXnnWLWdk6cm4r0QqSaHIq5ec6eIKBri7aOoi_af8ARd8XP1A_-WzzRJ9OzG0xCU6Dz_-_qZ12qcZeIV658S-rh3A_I3eTmaT_5sB1yo3rcqSRHJob_RMDbp17kM5jiKVemKsVfjaBQxA9z0mMrgYbIYBWPO12mvcArvtYi6YbdYc9eSAiSNqlcW9h3JVIYfiyakmAnbOU7UL2lCC65fzRqIOz7rWmNo2bsInVIreaI7YiGM6b34ITyvZJeXi4QKT3vomFR7JVyjE9POQIVuIYYp2LdCp-Mr9nM52w2kvyGmR7-rcbml6mpe8eWxjyYslkRcKm__R1T41Bpmo4xD2jTQ3dqZyv0GxUrm4IQVo_XAgL803_U7tvcJ_i4nLT_UdqGsS8AW6PWdTyQaSntcHHgNsWpDWlbVyuNkLDnBxy3vJsWwQR0iNx3AVcxbjuAiBp-qBqnGhMMVb6Qyb39lQXD4tt_TFMxj8p_X_UEhdQOSybTFEKSwbnmAWkwfQ6ZzTOHtKNyMq5ayev6r7UODf1B1FXtlbdkBxgD2ylVTewK1H8XjUUdnx7ou8EY68mVyONyh-wd_grEBAvKNy1n685Dsx74yxKeq8EEvYDIQknsw8dx_iSRXCYbOIm8vTo-dz6Sz0ROZWo0KWsR0uYtaIz5so7OKa_M0Mni5aCUvomziTb7xGUZAheXNvXOw5RtU2Vk0D8OoQKebjz2S_i8L5cwL0YBPKtjAC90pIlld3vEI1To2PHGD7UhCIMfVNPW5al_p-gb-COEX7Sp7zIKxvAoHYe4mJ2umUWv7qYTBPJEq3FEKs77kMylYAFwHFrfezw5ayq7Uz-zfbXvescvxxWmYj1gT3IAkjeOnN6OYiXaKhson_FvqaFB22_HxhEH7thraIirEJRdVUyLGMKSMdy2fPmGizeWUQVOlggbOyJIZGWxsEkW6z-tHCUsIi2s8KztPsmRfYmemdHEuZzPni4CcchczvhngVYV2tQJoazVsIgdxQh4qu7Mmacg-BC7oszztwghlCPOshpGMMx_B3UkQsU-6gOhAmsHrjLMdCIH2VdQvpbjM1zACAw7fX0in4Ge8ftr1P2xF075LXFhZ5O98iskclZBVZhqlJ3XjDWQNHVAu2rplMq3mrma4nG_2NYr9go5wYXY8iEQZu6ICZxwufQSrDGUCoJVVgx0SE7S_wRqqenhYAlq74KVUot-5sKZBL5gC-ZbMGeHWWrTdF7omqLigbXhA6giKzTBDzBNGqdf2cNUPhGFtL9XwwuKpSPU6lsmKgjwpaxzCRTCMjHgNcjmBab188saxGJoCEujhUp1rSTuIqVt0gXsJcrF3fM96JvkoiGEmd-WPRgoNewRHZ9JoE4iTsneSh9JJdW1EzijKajJpxtaSRQPRXPl3LeuW3I7QSA3zTmRit48boWR-Vq7j5HUiJ1HjMuTrUBHPgu_zg6vwsbMwf8ilfb7XCj26iTRXEOZKoG3EMw6VFJRoWRgz9-n_g8t5hmIjb90edvcUJALinZ8NJmX_amQmKHFXTp6abEe6wS3HQRuzKZv0RCpMvegKurrzeyj9BsDbEuTBZtMqmeqAmT-xrkEXrTLCCmpSQ3PwmbrH_a7ejsNTTNhAVU0e5UhKiGWo2LybNkgy0UPTPqAXixp0gT-AwITEGra0iSHwowEgwqDepL1iftVMAGwuw9aXUSEb3jFSZVSSzcoeWdrHmD_0o0kB5b9DHp8HsVxttJJH8_3zZRrY5x0SNeGc6lx6DUEcCw5cARwim_ewhEQjPhbV2Y7_7EQO2eJLPZuuxMliWLLXfrpb0J53B2D-zGQKn4hjy0NvfRYUPhva3SVInGu7gtcP1l5gDbkAVUC1hHpOUjdk0FZySpZLvqOutakZYzYdeWvuIPYa_5QBUCdGBpQ3eDvlcblVmbnQPrHaIrEf3vLe61XokEFJ0dVVntCmijtfWm21quBUzydEn0_A9TmpUWEjZxalCtt67TETamboarPh0GCUV33SlMg7bNhx1aTWaM02loWrz_z15WQNHIuFxu5jNwn7G78uO7-7d_KNtY2j4DrNvLyKKStYGvfofGvQ4sFvuGRWNilMjFc_scK8RPAG0DWfjN4R5jkLdY6KbIxWObej8ZLN-m1SRr6F3FSQyRoLsKgkCt5A9a8tC3NmTHRgk1qhhGSe47R_pjdYmtOwt3fYT26LZ5mPhIfkfb-671EQ1eKgKCCo_z_D-lJJsWt_qSzpGIo12b7g9mHG5Sz2XMcU4ToWamSuJiBp66UTdOzTz6L-gsvAiayO8ueNeym8pO4JBwvt-gQJ2zXSjcFyxY7rqZxHdu-1PVsU44pWFrUct0BBMtes3BIRqDdzeF_kOKha3m9LEur8jxd6wm2NZ6WvOg1SQyj-Uf64jwcLVlaEMNByq1Kx_HtZxW2nY0bKP4EKHQqxh5aUInpGuNaFnN-755wSROqQm6_ZDCbH50Y87lro7VYcNgA3DVnlpE80vev5Q_wxwXUvCpYvZymHO9gq65W8gty7J29Fbhdo7rlWFHsaKSkedA1rBIc5n8MpYNvRqkDRq4jW_BY77HDlxgJHZUr-42OWho6HCLq4ugA0efhNHm5pEFPXdECjy0ZU9dx2hMI2h5uhR1M_LqRvb9MGPh9pZ-pjq-R0rBw9RWF38oFTkNFuPCooa15SnLzrfxm2EaNFOofmVJ92_07tWL0nHDvgolXBAvwAZfsgBuE1botyzA8JTr6CMtlXdaCttar3FUC-46tt4wzb-B4wCvHwWtXVqROeDn0EvJFVnNyJIQ_92O70-cTD3pB2BZcWzOTkSRpCvdOk8R84LBNzVk4yVDKqNYIqtdLfyTZLWJyQGGYdE9q-1bABGupMMilK0bVqCMsb03XJL5IdikpBleEfwQzJVA4zX-b49EO9L74RQHpezJmxhx1p2nir0PgHQlJud7hxYWIcvlL7HQIDJh2fj_aTbirxt5oBRIzd",
+      "status": null
+    },
+    {
+      "id": "msg_0d8873bc0803abc9016abc530241e487d2a4f7e72898c0ddf2",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Clinical Indication:**  \nHistory of focal epilepsy with focal impaired-awareness seizures beginning at age 38. Seizures occur approximately five times per week, are drug-responsive, and have an unknown etiology. Current antiseizure medication is levetiracetam.\n\n**Technique:**  \nRoutine scalp EEG performed using the standard international 10–20 electrode placement system.\n\n**Findings:**  \nNo authorized EEG background, interictal, or ictal findings were provided; therefore, no specific electrophysiologic abnormalities are reported.\n\n**Impression:**  \nEEG interpretation is indeterminate in the absence of authorized electrographic findings. No conclusions regarding epileptiform activity or ictal localization can be made from the supplied information.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726916.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 220,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 666,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 886
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

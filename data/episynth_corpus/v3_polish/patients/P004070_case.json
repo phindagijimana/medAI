@@ -1,0 +1,107 @@
+{
+  "patient_id": "P004070",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_metabolic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 6,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 1,
+        "unit": "year"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "metabolic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "lacosamide",
+          "status": "current"
+        },
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "perampanel",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "prior",
+          "reason_discontinued": "sedation"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "prior",
+          "reason_discontinued": "inadequate seizure control"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "family history of epilepsy"
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "likely drug-resistant focal epilepsy",
+          "probable"
+        ],
+        [
+          "consistent with mesial temporal sclerosis",
+          "probable"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

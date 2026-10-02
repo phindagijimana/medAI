@@ -1,0 +1,107 @@
+{
+  "id": "resp_012d6da67930b077016abc5224617887d28e023f631a938412",
+  "created_at": 1790726692.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_012d6da67930b077016abc5224f0d487d2b085cf46b002a8cd",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFIqSY3hCOh1buyf_m1w29c16j1PPxGtXjZ_mpxQpsjXpGcoK0md7Er4SXwJRUA1pLXdY9sF7V8Is5LfI8CyN_EpixoNv7Gj93ZQ-9a_oWn0nKbMaoWp1AKojKblag_EVvjagnT77EroC01vOnGqz1h4I32XwFuRq8nG1uJY-b1T6v10GfqnNS-aUCZAu1djkx7kGs8NREgVmcBIGclFF0B0S3trirjKnna2e4asNxhwsdSmg-fX0pU3-x3FhJcPXlnDv4yO7os2lQQvaysXV7IP1OtkqKXEjqGfPjJSFkjrTFDAkSsIrMD3VNf6uIyAmE9KJ2mVt6VFuYge-c7WGO2H7eXCwhitU0_bIBZbJTVO_vRu3BwqQpnSMfI2W07z3dVBTq_VjSzwCZ8MMIuuWzzvl8QbmJ7q1kweJknTVCNO-1oSqe1h9VN7GTMHxH9LmC1NboUo1hyTVZuahl6yAOGN3U2Dzu1J2bphvtRB3-3zW2m5I2_Ssw190AbilBM9HcS8SkSN0o2DeCa6c2plvr5NRNNKjUOdYOiNKTlJr0pIpINHaCMHmbH3IYWAscYgkNtd9tv60dnwOH9EK5rlQtE7LKi6QFPscCJ69CVddkqsqrDk282OXTc3UZ7RL_mnWHdPjmmsJeXjnqSP8Jta5ph-Fm8LhNLlSkdujiPS90xnDnDOq39KizX3ejJ0jDmcovYw1wYA49AjtkGDNeDZjSCv5fRKjfT1Kjm8aj6nDKK87TIytR_ZNsLX68pDelX3KxEfJkWhX3egPR98qhLjQWJjizvm3jiFB-DKNk3ydoWbj4PiyCWKd9tS3dd_GRET6HdW0LUKFfyVPdCDipcUF0uE04ZBlF75xjVEZpunPitTUVeLfe7z7Fdan5qtuvu3eQiL3rDbQJYbY1Vrz8NLra8bZXXtZzcqw_24jwkIAw83TsLLqjRUAiGSG9AcLa5c1BYzs9sa9pPlFT9vtdScNJsY0lFXkgaKXklm9W7KwTehDYmPvToCb4Qii3VXsDEc14Afj-GsHPiGYDNyEdc1BHLR0nUd1od2Dno5BMyt7RuimdwWgln_0i2hZcIOmLVlJbX9p48PbD5ohC2VghfpvyTa_GFnSIeKRsYVHgeJqoWFX-CxapcYYEDbd8c8wT6Ppz0usciGxXXAyRXvLvbWo_ZNPsLePqBuRmRr52J4Epl1S1Q-BqedjXhXvFf8SbcsYCCpeNMNLjED5dSZIbreRO6B1SFr-bvTkZvOxMncBaynrjmkfhLL9d-d6YUBW1KZIQLmC141kzLF-lhh3nzA8mubbZUZI9XKmXSaBNbtIvJ0swQ4myxL9bX-Pim1lL9C4bVtMWZPoDd_PIJ6fNjMaDAY-x_vdQ9EpPKAg7Y9aLBbwF3V2fsRuPe37BNzNebcA8GiqQi3mP08FDZyfqtKNOcfWOM6hViGtWTiIZ9uqPI4spfMI-SZxBO6E14plpZBf7Z8kJfze-8u6QYmnwbFQLzxW21R605AxS8egqN5oAIohoaagVCO-kynWE-PBBSJVaiea_L5dgjm53bdCom61N_aCpt70SPuJdHbWUclP_qqsHo8TdMrDDgQUEN64PFF5Mpzu4dt8D_dlDB4m1nmnkk1ZrSs9yfUP1Ks7BEZdIHu_Wpm7rg-qXYzfEk2PsdsYa2-wxBiTKx-Uk9nF_HT7Ozhcx43w14VKQDKToPdzNeLYTH9lHa03MS3ai-cimljSQfVaNcO9pQsLAtJ_sg_-XiR7LgmcqvZkWASPMIOhkL4gYNqx9p8CKyoNqio39m1U1BkNUl7lpRjAYzek0IWFu8JsxKqDja0qWWKntvgIonClzNH1QPL276Jbzb4TAKAxqn7i4S8ezMVLYOZqybAkT0swrjAFwaAM_1S-0A86_2khlJHqbrWGk8izL7QGjqIssFMlRAvqOSW7P2-3u5ztGfI_OmEE6vEzqFiCQ4QGfWWoYf_qK5tHc0igrux747uJaJSg7EhcnRhWAoDZPgmmsRWUytp0RufSX0EN3XKU8k7x8pzH9xbpCM2XVAQCjk9M3bsu6sRuY9k211mnkdgcSOjjoidNADmsV6TbQd5-CGV4JFpMUMBA7LsGgyeaUWaQlI4N5t01S2txaJmrGCrvFQFfojH5uoXL_WCy3DnX9vNrurxVP9F5oUG8ktZSZqO31qQ0qjuyYOSkrTQvKHtDCksvNZ8br8emG6iZPR581Yh1kCP8OgkYC-1M986yMMbNxQhM1Y3QcwzNZxNry4TMwuGxJputPyebI3KUOPYUlOPgiZYon5HUDbLxrXN3S0xe7opci0Yc7jE2j0QM6uTM2DrkQBdcs9oZ5bmgMj8Le7ecpx9XsBMAyYoxP2M-BNDIL-gy5MM8rOm997YDl2hCmeWKj4665gnrYSVmvDUOy1fGiXYVw3BQZmcfhsvNEwv5mgRXrdvnVHOT8edrs2lA720CQu3TOOsworI-RSOykqr4QMUzYYA_qutLIX8XoiZ_DxbKu6AgnHAJG7e9m10fEKopQF5kMsIpQnXftPYmWu7JZkS7uzRcB_Do5icWQr7MD_EuJVP2Gh-mUYj1Xv9cUY69WBPgAIXRTciG2PczjT8xdOfDNomvCbjhCHDRNW756ukxVVO3tG2b_rmQKcLOrLSu5QGUjVUDnmARyYmDLangutL8htLtCbxHyaHIGwI-A0Mig7LlBncigEUr4qeSIMxXnGm-NpmVgHZTOttrT2aO-6XtPev-Nz4tCsfhHVIvpVCotGG6P1wGLdiBG3cB3vRLAQjtq7lZicltS4ltsraq187Vr4vflbDfvTQw3FzUx-k08iEf5kBUWzzuqMDpQhmBkQP8BmcYGWM-dN7WTPTCZa5B8WyxmirUZv-xhSY6peLouK2Zw0faQ3dzQUyvH0zHAQa0Ij7UTaw9sehzjZCcjrMoNZEnFnHZbX_6drYTpx0wz35G-kCaNT2bpJIvwcYajvJATzAEqHtkSkwzzvp3XU1ZRBcJt203RII4HBM0Ucp3-dBjUnSIibc17Q02OcreD23qNxcCvgc8Aw49j3VSeqQuwz5NBA7LaRClpluXDYM",
+      "status": null
+    },
+    {
+      "id": "msg_012d6da67930b077016abc5229022087d29b48307d30b4ff69",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nEpilepsy began at age 27. Epilepsy type is combined generalized and focal, with focal impaired awareness seizures. Etiology is unknown.\n\nCurrent Medications:\n- Zonisamide\n- Lacosamide\n- Perampanel\n\nSeizure Burden:\nApproximately 1 seizure per month.\n\nAssessment:\nDrug-resistant combined generalized and focal epilepsy with focal impaired awareness seizures of unknown etiology.\n\nPlan:\nContinue the current antiseizure medication regimen of zonisamide, lacosamide, and perampanel.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726698.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 275,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 390,
+    "output_tokens_details": {
+      "reasoning_tokens": 271
+    },
+    "total_tokens": 665
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

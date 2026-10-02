@@ -1,0 +1,77 @@
+{
+  "patient_id": "P002258",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_aware",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 12,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 7,
+        "unit": "week"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "KCNQ2",
+        "causative_variant": "c.881C>T"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        },
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "MRI_FINDING",
+      "value": "nonspecific_white_matter_changes",
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

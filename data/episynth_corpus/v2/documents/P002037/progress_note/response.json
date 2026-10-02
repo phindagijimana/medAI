@@ -1,0 +1,107 @@
+{
+  "id": "resp_0b8a88a270a7efa1016abc53045b2087d2a6f971ec03bc3d96",
+  "created_at": 1790726916.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0b8a88a270a7efa1016abc5304eae887d2b74161583f21e694",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFMJ2FAOiHb_EQn_NgIakqI5-j7s3wWDi9SuPZZnJgRHZM7OWGCADct50TYVpFdPCLZSWwjdbNyewSbjVhJfzjo73D6rTDNK4TvTZxDIKcATAVlyUq6ACdGBnkb8G2112WNjA3Y32EAM1aq3Ly-tF6madB5YZSJnifvPdVsYCkKvu6Th3KTOE2A8r8_I9oTVAG6S5z80rOK9CgaPZ30EU4CEdNKuqqsYD1kN-gNqAf8ls28ACaSAipgi9I39sFSdTbuFrj5SxiDKSt3qikQ_7TtbqiNXSLzRQAoCTP5C1s-4WMPweuLoutCTpPVGrPr4if5xxerX9XZC1S_8R9hpLnzyrqPkvCL9z_CfkTdV_6lao0aWVOSA_o-8vGN_v8PXKDLLzcxUIiLsvr4PrzhNAOvHuQXpsI-jm3J02-FnVBS5uH6qSnf-4qgy3QWvyZTGmkNDNBBvMGjEorJicHQsQ7W42DYxVCrNp1QJGJfFgXH78zMSuoQRqiWyUEZ6q_y3MTacfVMmtFZ2eueVeWEWr0MMTUujIBch_-8uWuXuCeC6shQ9BhOHMfWJvcWTHmv46ht7JuXuOBqTFCxeOgkjBKPukqWt1mroeePhnQR0ao6eQWyS7mG14ZzqdFwCCjml-kMiktPrRE5u1mYx_Y2SECT38sr1E142y7HLyAvfnb8Fl3TJrFIF5_wvET8ZdBPAPVj48zE57_pswVqTteZ8GRYJHsp-AJpn5L31h5RfKDsG91IzS1osIInBTVfUqYBCOC2cK_zLL8Pj4OSypHAI5T31Jei84EM3yXRCbni2WQpSld73P-9znKU99kzMexc4p3tnUhPVesWGsHBR8ws2-D6t0gnlEgAWhxXJ8GzWJb4R_329DLPcnCCOC2POjB1v29P0tXlkVRN-lS4BuhbAixX-VScshZVz2u99i_6T2xK_qAFl7pB1PETleurTGi0I2QaCmo6D5J0KTzcxZTq5uv8BQmIUkSakp2Bi02ZNi0j91sywF7P9tj9_zCq9BK27cnTw6XNZpQqE3715xW4Uk8y0F1Vzu6nXEQFginT8KuR1f3taLVGw3GT71kvSNn-roBuwAq4x30KEmTMhUpF1yYTyWHw2VEW6wcxNKc6uMlx8ka-ZtRVCMAkMknpgY35Wlpzkv0PpGylVtm_2BZkKAR_25PaH3QjcS1su_tTkaELV3DgkTMJ3bzyJ8iM-XMmhVPVWXir1NE3rdTlzvb4ivFn3KnsVcnYJDmBDtkkrPXqhGFqgLb_LDBJhmh6ZpJNQxgbXJv9bMhEE2ZpBm_sViANzhSWZMGGXNJrLjow6uYfGH-2nN-tD8sXkdbugZy0k15Vbppg8aXAWOSnGYUNWGwYpEwfGJBQ8Gil4yX-k85OLIVu8Ehgpgemn9DWZPwTdJ-a10xWJsjn9_mBVy19rNRpC1YMNQNhSyFuMQgS2Qdh_UvRX4gXmr80imdq1qKH7VgmBCPxOkDZc2IMnJ27E_iJd3SpH62nUHxC5KKdFPzI7TLkxqATOU2qgLVaMyNHWH9Zx-EU7ll32Fv54gGijzYeA8FtRLPMbZMl6SQFpB5RQNgjJaxGGB7_4L2En4jMa9zEe2Q9GVzZiMkx-W2zDWK2vi_X2e-0NqNGgPN0JXT728QJHsPt9oKqJYWyDfMYi1ZnBOx-hcenK-c-GDKsWzlB51kGcU0xL7md-Bw4ZgUY5VxobAmGaGlgLGv85UXssutRoh56Dn7lOXqpepBTMh8FkVcdHkOBwLI_44DbA8XUNG4CsH5e8MVJ1afQdSxNhnnZJu49pIkPclCd_V_ebfLOZqfMzwAKdNKbS32eHZw02PNg=",
+      "status": null
+    },
+    {
+      "id": "msg_0b8a88a270a7efa1016abc530697dc87d2b3e766ca8727cacf",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nThe patient has generalized epilepsy with generalized tonic-clonic seizures beginning at age 40. The epilepsy has a genetic etiology associated with a pathogenic DEPDC5 variant, c.4396C>T. The patient is drug responsive and currently seizure-free, with 0 seizures per month.\n\nCurrent Antiseizure Medications:\n- Levetiracetam\n- Brivaracetam\n\nSeizure Burden:\nNo current seizures; seizure frequency is 0 per month.\n\nAssessment:\nGeneralized epilepsy with generalized tonic-clonic seizures, onset at age 40, due to the DEPDC5 c.4396C>T variant. Epilepsy is drug responsive, and the patient remains seizure-free on the current regimen.\n\nPlan:\nContinue current antiseizure medications, levetiracetam and brivaracetam. Continue monitoring seizure burden.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726920.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 298,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 280,
+    "output_tokens_details": {
+      "reasoning_tokens": 99
+    },
+    "total_tokens": 578
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

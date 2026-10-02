@@ -1,0 +1,107 @@
+{
+  "id": "resp_01be6a3fbc9e8dff016abc570b5acc87d281331d429ab0eaaa",
+  "created_at": 1790727947.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_01be6a3fbc9e8dff016abc570c0d9087d2a957b1e763249ca1",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFcRP72ULwwdYMnRIPhwZr8Fz4QCuRzlamAs2Tq3qK7wtOD6jOQ95WOjZ3gYyGxWBu_ZNtiHoaoC0NFYaiPCyKNLLKrB7UwxLVcNfIovH2e0R-bY_NMbx9S4HN1YdPl2ex5zhJx2-dmtRW795YT8ZL09WYh6lmtc5XIfF4Vrl52YkseLLDhcWLx1f6YnEWMRma48-t4sBKwBPfl5TdljGWBUK_Dr2MuRBBsBVymJVRozN06quCvs0mtaTkkTIOsq2lHUCSbV_rsecnDETIJot0whK8bYvRKc9S2ygaGYjxQaPu03gPzVVdVrGpLeWkQerqzTkUJV9Inn3EMe8r7nqCpsLnLG2Dv3eNi63fQTmV6Dm3lK-La75nmjfSZYSKzQ-cBmWtq4rPSrQfdS7mF74pYFt1GVIn2hrx7QYpSQrYIuPspl9OdBbtUwDAyLAlK_PJBJJPPEjJJ7WO34VK6pNOYxP3fatWWaaAfL6Wkoh6Mk_rpLw04PbDR0g4ZbxhUtPjF0rwgPD4MHUa7AeFtcVM6kvKEKCKZOdYaDtlP5my5g-yNafviZN9v1Wd9FJBgcje_X8KpKyRmRVolnvTdJxhZzPT3PV3aTg9ihPs9p1ZXutoXgJvLIyR-xzYvMKNJAp4zLy4FjHKV1Q0zz4c-GtL0Qf2WKFBsfXddHFyMWo79ESCmyHy7bcyruRVAWGhviQVy-9HMnpsnNVnkTz7TFGJ9miUplSFQDoh9QCsxEShEalbA_yBMrWwxlQ59mPTudlyQvPfM1qGzsFpkjziUQ-brN-XNCn7BVux1k0IAbVi7UT3YpaHBdYxgMR9XEkhGm1ee9mcxI8GB3tB9yJqv4R8dXaMdQHMf0dacLjuWyqL4eRvyDWHVrG7q09kptOncaryUXhWoHcOEGgA0Ycub1gQer1VafJlrY4RiAaJ6YTRUsYM3Pkss1Ex3MIrApKZXVtm1jVCuL8VA5hECLUSIcd82dsX6nKh48686ftw3Gb6k6UQ-CAf5srmuKB81uRR6rmyHOiP9tTF0QRtEkNlJEqAYAr1F9SwgYSqVgg7rO5T2Vx_ynxwskEqDcYu_eth4V8BC8xIrHIrM6NGMaO1NjmfH3VW0lZaJonZX7dNcEQ3rtDkMyc_hXBCHFTUm939KitixMoX_lj228T67wRY3ae_R2z-vJm-vHYbB4aUTfT-VpJ8ybo_p8Nh4xeQiPotVZUZHXq9Msh0f8ITTuSlVLU7WmMhpcJIFTEebaCub2IZkPdQqVf_70yG-8Gh0kjPSPUgVJOWxfHSKGxzGw3_FUaztD6mk5DuMceOuAAVkNUJuiqubkYwED7AeGgyv1AVZP3JKSvO1HTKPHRQQ2LTS75g9UasW4qe7lsBYRhrb3xBKxJNNdAwPj62DjwMmalvWvnRM5AF1IDGXgiLw9PxLCIaARcbKlTrA83MNU22lGeJIC6Hweh4-cfPjAT8UVPYTPbRBkjY2P6Kr-D6sIceRbNnn7zqZrFmEsJ6nN_KIl_zDCKfq7JsZ7z5vws0ETgYaHOAr62FpUC9GmSGDsCEu9gBYCYRL8Sd6k5dc6gRmmHhg_4k4XcOM9_i988-OY06756BTCKfV1E_4LlEMpss5JrYManaeaDsttyP1Lm3j6cFEISVcHiHVvYp5yjGJaQ4nZTic_xCWlilnBKXXaGNLGm1fPnKj5u16pprpiXhgo-X4rh2IxmTVOieX7bYkJfM2_iFSrhEhZiFFdMCwkWcKDqFDjmYuYuFYmzMqLaVLGp6jXguTurxrIF23Lw6ThA-V5koLk-N1Fy8LeLYjAXX4G_Gk8Gaq910AynIQTGf2IHd394O_vGC4nE7FlU8SzN3eDUIzslBjN7As1_dZEoyfJ8gMIVpr-T4I1KksZgPofRStRLVlXpntuYYZ6ZlJ0duluIiBUU3qbpXrJCvEkSScSAGpGyV3BM1rKkdMpm5TYag3A25taSQz0XBL_NwIcREtJXHYYSGe5emOxEm-kpiauUJG9bS5EoD3ElstNTWZEeaVDSsTUKf9UndJj-nepuq6GF8PLiGQzXJMIhVLyLHvhWdB-ev0DG8eyP3WDNbvxvjj3mTBEg_K53fBVNQvhIokipOQy1206tOfl68zpIyz82CFUDu2OkfGqXnf4Pi1Gxnxeub9pH0vAMzs-DZ_oZ4wAeWQrkwLhhl6CwlyMFvan29Q6oKYj5-T46c_zXOjIELt6is_e6rFlxCYOn_bukqtGVssiNOBHDB8sxd7c6X5-Gxv7e3EYCC3QQKRqFYPB9SU8PJYJF6LJVJuinHgaV3fM69LhRi7bgOV6z5oqBAEHAhdzE8B5UjWKxpZ4ZDO9bTTgF11oDJmYiV63E-PFHZbzsncmr9S3dx_cq7vBGCJ5SlLpsJzOrZflR4WSYqpHqvRNVoHGkz84nkSZDZqg7z1_WkE6cFF8z46P893jHFHTdS8xJqmG_sZ0twe1uSbP6nqoCAcTBGWvaPPYzNIFmUe1hZlScCQMTv5TVJNiZ1sUeoOwCukM7TPKtRq5UD0sh18xOj2-jv0QXf0JB3k3Y4VHJIbFlzuLYSfbu9mkCj-4ty2gF31UDW1mObOZj4Qn2oOlRZinKeH6JBuaY_-44Zm3ZtICTrE3S_FgykW9tvsvVl9CKA==",
+      "status": null
+    },
+    {
+      "id": "msg_01be6a3fbc9e8dff016abc570f4c1487d2b375002cb8dd9776",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Hello,\n\nHistory of Present Illness:\nFocal epilepsy began at age 30. Seizures are focal aware seizures. Current seizure frequency is approximately three per year. The epilepsy is drug responsive.\n\nCurrent Medications:\n- Zonisamide\n- Valproate\n\nSeizure Burden:\nApproximately three focal aware seizures per year.\n\nAssessment:\n- Drug-responsive focal epilepsy with focal aware seizures\n- Structural etiology\n- MRI finding of hippocampal sclerosis\n\nPlan:\n- Continue current zonisamide and valproate.\n- Continue monitoring seizure frequency.\n\nRegards,",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790727953.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 265,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 350,
+    "output_tokens_details": {
+      "reasoning_tokens": 229
+    },
+    "total_tokens": 615
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

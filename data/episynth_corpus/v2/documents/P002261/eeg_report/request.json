@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-luna",
+  "input": "You are rendering a synthetic EEG report for a research benchmark.\n\nPatient information (authorized clinical facts — express EVERY one of these accurately, use no other clinical content):\n\n  - EP_TYPE: focal\n  - SZ_TYPE: focal_impaired_awareness\n  - AGE_AT_ONSET_YEARS: 12\n  - SZ_FREQ: {\"quantity\": 4, \"unit\": \"month\"}\n  - ETIOLOGY_CATEGORY: infectious\n  - DRE_STATUS: drug_resistant\n  - CURRENT_ASMS: [{\"generic_name\": \"oxcarbazepine\", \"status\": \"current\"}, {\"generic_name\": \"zonisamide\", \"status\": \"current\"}]\n\nWrite a single realistic routine EEG interpretation report. Include Clinical Indication, Technique, Findings, and Impression sections.\n\nRULES:\n- Express every authorized fact accurately using standard neurophysiology language.\n- Do NOT invent additional interictal or ictal findings not authorized.\n- Do NOT infer epilepsy diagnosis, seizure type, or ictal localization solely from EEG.\n- Do NOT include a patient name, DOB, or accession number.\n- Return only the document text.\n",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

@@ -1,0 +1,104 @@
+{
+  "patient_id": "P004020",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_structural",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 33,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 2,
+        "unit": "year"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "structural",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        },
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "MRI_FINDING",
+      "value": "fcd_palmini_iia",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "inadequate seizure control"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "photosensitivity"
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E011",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "consistent with mesial temporal sclerosis",
+          "probable"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

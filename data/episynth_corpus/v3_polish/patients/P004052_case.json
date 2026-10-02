@@ -1,0 +1,126 @@
+{
+  "patient_id": "P004052",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_aware",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 37,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 5,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "DEPDC5",
+        "causative_variant": "c.4396C>T"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "levetiracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        },
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        },
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "valproate",
+          "status": "prior",
+          "reason_discontinued": "sedation"
+        },
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "post-ictal confusion"
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E011",
+      "field": "FAMILY_HISTORY",
+      "value": [
+        {
+          "relation": "sister",
+          "condition": "stroke"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E012",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "cannot exclude atypical absence",
+          "possible"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

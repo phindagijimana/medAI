@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-luna",
+  "input": "You are rendering a synthetic clinical epilepsy progress note for a research benchmark.\n\nPatient information (authorized clinical facts — express EVERY one of these accurately, use no other clinical content):\n\n  - EP_TYPE: generalized\n  - SZ_TYPE: myoclonic\n  - AGE_AT_ONSET_YEARS: 8\n  - SZ_FREQ: {\"quantity\": 4, \"unit\": \"week\"}\n  - ETIOLOGY_CATEGORY: infectious\n  - DRE_STATUS: drug_responsive\n  - CURRENT_ASMS: [{\"generic_name\": \"valproate\", \"status\": \"current\"}]\n\nWrite a single realistic epilepsy clinic progress note. Include a brief salutation, history of present illness, current medications, seizure burden summary, assessment, and plan.\n\nRULES:\n- Express every authorized fact accurately, using standard clinical language.\n- Do NOT invent additional clinical facts, diagnoses, findings, treatments, or investigations that are not authorized.\n- Do NOT infer higher-level conclusions from lower-level observations.\n- Do NOT include a patient name, DOB, or hospital number.\n- Return only the document text (no JSON, no code fence, no explanations).\n",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}

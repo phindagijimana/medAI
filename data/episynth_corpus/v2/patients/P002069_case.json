@@ -1,0 +1,73 @@
+{
+  "patient_id": "P002069",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "generalized_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "generalized",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "generalized_tonic_clonic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 6,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 6,
+        "unit": "week"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "PCDH19",
+        "causative_variant": "c.918G>A"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "MRI_FINDING",
+      "value": "nonspecific_white_matter_changes",
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

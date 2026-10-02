@@ -1,0 +1,107 @@
+{
+  "id": "resp_0bcc36e1f7ae0b8d016abc5259411887d2bb05646948b41f13",
+  "created_at": 1790726745.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_0bcc36e1f7ae0b8d016abc525a293087d2822fbd650eb980a3",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFJhYda_ZK4God52kQL3kUPuKqlPUVRTTUJXWYOFoTKgXo2xYnOqrqMUJNQ2Bedc1fevYXtnbDQe6q_MDylqRQ7Fuf2oltIaP7q961QymxQxvb14hrlO87ijCBWG-vqAAZe-sQ9qiLYCTpJwSzde31hVHCXfZcPdsYRdy29GGLT--orvgIMcN1BhfqJFAiRVELOYIEUkNmu7zH7gM5MFgArPsIaewd8Q6CmK-Kq6WOasVceBfjXTSorEHsQEpGr7tV7RTZ3Sfq-KztV890E_nWP-BotTA4P3io2K2L7AEhERol12D-WnyyeAt8pTtJHCv8-DgnqLqoNF1fbBaE-knsOTYwNth8HPaklEvpTlP4g7C-zJKKOYu6FuPKLPg5kvs9Z0f3dgqR36gjH6k-z07bnTfJLHcwkol4rbZhCjClYXjbsWS8QBEN3hbPqyGQFTOf613Ls-C9SqB2HzPcIokpPhjXxkqcF0Zb-HRn2UZw8bBHAttR8OLdVgq46FTLfLKA8lIvb3Uj7ah1Wj5LpzUmrmV548z1UYIRTFzBT1f1jiOyHe6duARQiTIcuX4yl4xaUh0KNkt8wYJMMX_SOCbzGl0ENPRR2E37rtoTZI-NIGZDjuuzOAB8xWni_GhpVZuFVG7__ka_VFom-PSHQ8kLfhFdHmDoIPluHALGCcWWFuGlHQ-a7204qj7QnCDl1AjWuLI52BCQa-g3vT4FnuF3l1ZhUf_CJQWr53vd_XXaRh7fDLAR2ODXM8E-B5-1GAYt36t5T-6aHU3Pz4_rKuqv0VqRdOLFcrkv6ce3D0tz5aCMD3tw4tBPF68n5ylqvb4agdWpNJKHZIAYt3-HVMAKbiVxJuwjmoKrFG1AnkUn_apJoB7V3Dhl12TppoD6sryulRRUMz09dB882-auYPo0FJR4zcpzDpraJwr86Bma1dofOPcsBQ0MhW5f_gpaDItJMRICf0iH_wDvLkxZP0VECAnz0ILWO195wEbnhQGnFYf4S-zAGkil05b768m3CH7MEWCToJVlvxnQyXVkASID7BUUFSlQaTos3lRQ_zLnwUBVT0-XJkI_KaiJnOYFFvxT7Hl2iEW6v6Rl4hpUfr30gFnUjAJ5-p5nxOJZCRD9mEQarfeIzFT_4tnyQklB04mFy6kngzqxs6GXXuFjKbXmPNwN-NH7irZLyaCBl0wx0SyL5q_csBewZJ1D7XehWQnQPOckCmH0TtoSm1PRpiiwHs2ubz_e9nByYy7Wfoo8AWSmAKIDYtBGHRk0irxU6KPiB0xOQka9sgYOCRCChBjDSUDUIK6u6fOoFi3Cu8BJ8-yUfAG7MbmxPsi_-849SflBHBM4fijthcZMSH8uu4GC54jp2oUTFRWYBffvgc4cqxCme2sig-j7iQIVsVrtEOde5mBVMEWtAq6RN9LgakZ6DxB-B0OUXWfWrQaKy8E_4OaT6CFS6dVUSY75OVwKjjTDvWelcCRtqSYLFgEnTjnMbltxWNGw8yiJtEvaNNmF_K8kaBiPd79dikw85R-z2ZgFutXo5vjR-kfP2xL8Ri51peBHg1Dbg-I7_-h9huxMaftQA_gVFFAgItX5_z5R2_sYFV5ZqACXYhlwD-0mZmdLDcJc6w1v8ucC2wmdjjvhSqg7_dthMbvRc1yeQgB8dPRz_Jyc3pcsj_H0qKCLrSOohDWk_uKOQjeXfUgWIywjsev_RSv0uFtmRiJjHcvRpIDsLR81cO0ETWIT2kv9FZ3RBsg4ZqQT32N804WkhAih3Pfh2yjR7Tr0fVMmr2uUc4pjmxURaTricTVnrCS_ozHpTH87neZwygzdrOsUzXkVm59LBWJBPWBRWk7YpONxv6bAvURqFKS2XqFA_UiVZ2px5aZqNVMkUVpEgq-PKZXvnsxgcVttbw1lQaxAzwuKUl8VwHDWDZaLkBQ8yuwwq9DbViN5nDQubHA9uICPL6tUgzaAt0VhYDFHrDgB-WaIBLYbLSZs5QGaPS0XZ-DpKEUL4wULQBahzBGwFlsvQ9xU7dLUlZyBRlJHK2fQbhJwwSGZkZaGUUIy24fF25YDbWd3_auJYHCq0l4QFo1I2r3HQIrxfCfFg9z_wDio5_QqfY4NQ8ZpFGxujb9_tyC-zSjwDa-_R80ahIwAwbslDzPsXoNBZSerQukdcF1r9SxXVO9bs6ESA4tVHL0aD1ghl0atgUrDEyhglSXKTVryIBJoPFgJfID7WuQXiuksBF3wwYpPEmFSytAdlPicRUPOVkRxV0-SfZOPfwA7zfQi514dntEodjOOmPfXXjJZb3bmYDEVKov0s4CtVoCawR31LLF-DgN_dj970eKPADlHcaWfasHNHY4JOZXDiUrJXfzb6a9dufShss_U8tzKVysQ6W9PlwdVYAtYcRPuy34cOZYpe0IW7wlaClbfh_AhFF_2bnTlltvPCQ-tslYoqPm2jmwfFNIUOo339AUWHSOptss2LOb3iB3f8nunwktN3i-bjkm9m4ETsi4-UW-_6wHZNuuvQtDlHbbYh7X7sU_8rafk35DkI4y6ZH_UWdHAFPf2gdqnYok3ICvZAym2gYR8HtndUWr9-TJ7dhmSQrm4F3S23nPvbf_gAw4mI-crgZWuPaPEAl_kyaIEHMjFVnsLFUo99XhHyNoMG5o2YbD8B3T34GhmXzhmAxFQ39JI15p6PXrpPiS0JGN1aG4hfJb_dyOCx8lnB5_oqU2OmTLilP0bRxF4c0i4wKTRgVWByFJRsS18Pe8uJM8OyWlfaL_gsYzv3h_waE-L66GfG4_F6H8DVXL1xrFDttLFrFbICtSJCMS54yBEiG7h4c_wby6pN0nyO8OXOstkiXRxR8Ajy5qAVKwRhqYL1V8dV5v6GtgqHB6mMM2CqIX2ti3Wl32VybavbSvivy4MOEGu7_C7KIwi-WI7oOgGKw7hVb3iSb1cHwbdJFV_TqvHuAN9rw4O9Wk0VVYSxI5MKQvtdKaZCJDVQ1EhucsbuJowN9iEbUQofADI-LjUvNeQn8JvZpYUKLUQLvIHQmQvneshS5Nychc-d9cPhRnB1RG_QYaUzCZsdBx6-CE7ZiDohRBYRiY2eNgt5ng2DgjUxln0X5FlV4leGqRgqXmFj37lApAxDd1_JJckBwbQg_aTn86LBGDfi6QQ8HZXvlheQlxQGt_bi_ocTaS0NFTjjcN8CXEMKtIqG_nV3nYdN33hU7P05uvel1UThZ1NH_NHB6ax1AdnS7SpbrpGE2-1gLyQM4ujhyimBWA61e8uo9d7rpNhtoEPGaQggq3B1cVhkWcP9GLEso09qSTRDz-FRloBSPqRjReQdovBfuvxM8LTlwALwEtOy6oAd8xBg0R063xDoYSksiOgq150AFOSQ82wMA91hMU8ZogbWUZyicORZkq3QsuVim1AbvLVY62RFOZ9sg3A0Fs5-lJZDojnWEWP0TqJ3KF-A_1Vge2EnJwsUYdRLh1CS0E7iRTGsV098YD0r9KKRYIiatRMxDEpCVKQc5Vk7uYKjgwAvVUmbajnkMItpd69sQkRYnutw5-jIhCzd9dp5T61NQso8wswAlBBKASJWOmlqaDVTOnhiK8AVH5A99SA7FL8R4a_9vJN-D9oYJLNzuWq23oRGk5-2RRNch47GpqiAFYnbZHy-VjcFXIfbukg4M3JwOUKE4JW6T6af3H7rvQieZ7xg6077c2vpfsh1uBhr4E9UxuGUp0Du97CDup9nF8X4I88sHzGlM7zAH5hOx2y1B97keWtNgtA6OAmqzLMW2dXMej6LilX6eX8knvQKX30mLeShbkibaTZogVXkFdbYTV6DdPIFCV1Bc9F0eTk3nvmrT",
+      "status": null
+    },
+    {
+      "id": "msg_0bcc36e1f7ae0b8d016abc52608b6087d29b90f778bfbc9128",
+      "content": [
+        {
+          "annotations": [],
+          "text": "CLINICAL HISTORY: Focal epilepsy with focal impaired-awareness seizures beginning at age 13, occurring approximately 3 times per year. Structural etiology. Drug-responsive on current levetiracetam therapy.\n\nTECHNIQUE: Multiplanar, multisequence MRI of the brain performed using an epilepsy protocol.\n\nFINDINGS: Focal cortical dysplasia is identified.\n\nIMPRESSION: Focal cortical dysplasia, consistent with the reported structural etiology of focal epilepsy.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790726753.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 233,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 477,
+    "output_tokens_details": {
+      "reasoning_tokens": 377
+    },
+    "total_tokens": 710
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

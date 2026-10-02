@@ -1,0 +1,88 @@
+{
+  "patient_id": "P004057",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "unknown_infectious",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "unknown",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "unknown_onset_tonic_clonic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 14,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 7,
+        "unit": "week"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "infectious",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "lacosamide",
+          "status": "current"
+        },
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        },
+        {
+          "generic_name": "valproate",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "zonisamide",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "prior",
+          "reason_discontinued": "GI intolerance"
+        },
+        {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

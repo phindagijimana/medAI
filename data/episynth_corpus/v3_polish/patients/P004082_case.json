@@ -1,0 +1,104 @@
+{
+  "patient_id": "P004082",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "combined_generalized_and_focal_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "combined_generalized_and_focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "generalized_tonic_clonic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 8,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 7,
+        "unit": "week"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "SCN1A",
+        "causative_variant": "c.5734C>T"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        },
+        {
+          "generic_name": "valproate",
+          "status": "current"
+        },
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        },
+        {
+          "generic_name": "lacosamide",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "topiramate",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "GI intolerance"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "family history of epilepsy"
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

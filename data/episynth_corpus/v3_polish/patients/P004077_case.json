@@ -1,0 +1,106 @@
+{
+  "patient_id": "P004077",
+  "family": "epilepsy_clinic_letter",
+  "scenario": "focal_genetic",
+  "events": [
+    {
+      "id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 35,
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 1,
+        "unit": "month"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "genetic",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_gene": "SCN1A",
+        "causative_variant": "c.5734C>T"
+      },
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive",
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        },
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        }
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E010",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "family history of epilepsy"
+      ],
+      "source": "MEDAI-EPI"
+    },
+    {
+      "id": "E011",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "likely drug-resistant focal epilepsy",
+          "probable"
+        ],
+        [
+          "suspected autoimmune contribution",
+          "possible"
+        ]
+      ],
+      "source": "MEDAI-EPI"
+    }
+  ],
+  "fixture_status": "MEDAI-PROPOSED COVERAGE FIXTURE — NOT PREVALENCE"
+}

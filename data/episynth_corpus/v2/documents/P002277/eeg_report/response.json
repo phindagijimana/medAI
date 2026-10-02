@@ -1,0 +1,107 @@
+{
+  "id": "resp_080bf21f23cf23aa016abc54ed329087d285788ac5456bdb2e",
+  "created_at": 1790727405.0,
+  "error": null,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.6-luna",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_080bf21f23cf23aa016abc54ed9f9c87d2be5ffe5ddf0a0761",
+      "summary": [],
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvFTzl4UvBCoJG4NYXMMxxcgPvIEqBFIBsehp9QNPeJtYzmQ8_zi65iivchg6qfg4CSEzmoCTqgKO_FKHxA1nEdjT8jyORfaHnt-Y4JxrUnLYfaQI31femAoqooeMXDJ0k5FW8bRXZPI9vsS9_3TVse2ni4WEiCz4NK02-Jf6WGrVRejM-Kl266euSDNwixQP7XNwyiTPiGrRU8KlbHT3EgcqtPZV6AGIL8HIW6fuEizLsJe-4ZI5IaBDpCHFvoadRzIjJaarwQ9e4WXmnE3IJjKmfh4ahARrx2ZZe-QMaiTTb_YMmJk5TTMfkKLgLwc3cPLfDnq_9ueB8HX5mNhKZxFcEBAy3Jz5CO5AJiT96LmiCN7nwZTE6slf5ndj7aMxNDDXnY5_jUpgWMRyZBZR_5MzAN8guTzWHYQTQbXwxGJli-KKYC-8r78DUQHZFt7qOlmjJHSvto80RRqrWibUZT3zTNdEmcKtkXuUVKVkVIk6h95sHdMHHrvEB_Kae0wV3XoVC1Go7XlDkctMWpueIBAEP-fg4V0WLBrYIJr79rEx_O0WF7rLFmy4eAB7_jRW6Decf6LRUG60n4Vk0Kydf9489fKS6-v4KqVjXeEgxk2R3YZl1NVwXH693Lc-1tBbl1b7WXN-v9aGVAcyO0FFlBQtlznxlYJRBZiTvyGNElZjbwtCusjTfBFHxDYialAGuliluBB3v00DIw_3Xfwdgdp7ALNr8XVjQnCTud-7s5nChuv1r4l2hVB-hrCp1mEbNXWkxB26fyMpBONrX46EDEA63GJ1buQNoYrbX-JDHHI20BblxKuJ4W61hNTuK2KL6Vs2QiWpUUS2_kkChbflv2AabqsvtlriZ5tfZ5FhJXfSw5ICbswDKYFT76KJBkhMBXeSqGv9h3gOCZsliDlHhW23b8RUyxDMbVFBIcNnNfCyrbpsgeXi4E4B_33yhvtxiTZE9yB2qBXIwI2UICcuGYC4iaSgK0ZIt8CKSW-yXMhkHMutudSH_Bvmdtzpg87BrrxTMIIW-daWkWIUlivhj4z8qSSStrEGwn3AjtVmVaGQUuzM0UqCtyvFn5c5Z0lB6ReMjn_Yx9CrXeusa_ucq9mNFPP2ZXnZBb5op4wnjw70QhhUenHnd84jzKqL8JU5MexNmX2HD220eTsV9kPfmunJt-7p0u5cI61R8rNN84z3w0yplQD2AF-kWjTUOuUQtN_Vca0lhbJteINoddRFnUR3FMwT4oZbsgjD5mdFvrUIycH2EJth5WgOnWdD-4g-yXeWETTUxpad-YR9CcBYNjmGaIg6quJKb__CWvgt5CSCkEeLzszzdkuVzZwJs8-HXwzNWYW93Ga3hKh2G8YA_b6FGHRwQj0mX3BVtkGFAy6AbZ7-57NCExIBsTTbcj-A3afcMedoVJJGCyibaYsc8s9jJWUDqmWx-uVV-q2KKr5qtY1eDM3cPXVrxOAe8SxcwIDxmPXY5ldgECgrZaUz80Qs7E0yvF9XZoyJnq8PpQZKb4mrb_IY8SnREiEP4-tWoovrCYklo1nOjuMdZYVf7XQJWY0T1K8rufCfzmA-II3Lyibq6lGbd8CCpA5ZGz0va8ezAin5Qt8CpqqPOj4NdLEfOVC9nHpM2RvpNYoaJZXRiS2xqU7TGu3CnLwNRt-A24B-KpehvDAY92UsdmfMmOCSh6qpK_84_KlpJgde2yaRrBMX6eB5Su27kYmo-GW4edggnmTE0s1j2gdH6G3ga3kCILacA9fTzKu2pIusnDZ3H5foH9sfEiQs3m1qGjiznm0nOVxkImHIXW0v03H8RA4FIj0NQ0ruMvaNkzffCk-pR6bLE3zScqUBSAHPgNAq2vLemaJC6HhMRiJLeQ1Y7q2EFKjGm_bUYik-1QIw2jUVlCQWbv2AQIM8XPgDYwzFKeqbijDV9O4Y01DrAfB7y8o-YqJtgY43GFXnxbtMMWs3Est6aoRprLk2zVjHO_E-aLLsqqj3fzUUZszgN4eu44AT0WHKnIZ86v5YCtOqDytQ30FPP5TjtaMHhpApyJDtXExw1rQ6O9QLiKwEZJb0WjVqwYjcOcCG3g8SVUJBoCsQtcK0hy7UJNuFRJ3OVJe0wmT13XJqpJQ_uUwZ90Yau_nEOEWJ4OEMMVhAxkj5KWFZ3HdQC8Uge_FrIj0zMrdg9dtqPnhkfCHsbZoXyx2w7Hzy_rWZbeTXfMWeKBcVpAxKJZ__hdKQ18-jBtzl4r789jQAXhc1IKXlsx5lPLy13_MiwBqma7cH8bc3_faK4qs2nZXH_XjVtyOkXVZlR4W2UXEYa_cRdpqJXIhuCm-9FY1csZkM39DsymkHkvs7PkOQQVHe12AuMGjeNBwasDLvaBbt74L_k3z2tpQvh7YTK_cKxxoBA_LZawzdhlh1UPDvR3HWqnGhCeZC4eIDSTV7egvmtzRFf8vIb0_hL2MgjS8LktckOMdc5JccBU1fG7JUsC-I36aiCnUUcqIF6PP_MzCCAKfWVg0uprZPS_vjzRU7OvuQzaf8Nwb-HDrx7ZfkLTq1Uk6-gLxE7eOkq8d1FAvaH2s6oKrT2yMNmiYA2aqDAvDk0fQeVxwTJgU7r-qr8IhTn0Z45-ZtBymKebKFV3FOnBeSrFDYi1kxoHiJJwblXeOqdEQJJj2J89HIyLjd-J722PUXzdh3hGYvRZAvGwcVRv7pERJl-JNT8q_BtfUH1jU5tXGWVyFBAiiQSrVXznvA0m4FuDDr1MDJxMrWKnatYwgo03UVM72yca4vu1OkG-0kES09QF2X6dR2JPxCYdPHK1KK8VkBKZFHrjU9hogwu157VqSjbDyxdUCdLUgQfPXE0tjf1pW3qXEdkjmpNY7TBtCaLFPJvrxR-MLhVpUZdfxuQOkT-i-XVDDN-w4M1ek9OYQ_Tx6I877s_FLNfoYp7w261rDg7mTkwEGqov-MzKc-obBoapuaCxjg0D67LSnBQ3bABobjpKK0g6TsYPI1elDyyKvmVjWZI95kPbj4g_XKCCWvi1PnnDQfbTrEshrgOqWsFHu1ez4yFmjRf1g9oHs7X3g6IAEjZ4pEAYRF5q83Nm-mQJ-xURgTn19wUpS7E-aMCXKuQigoZb_nlvj3iBIEow5oQLAuc_98pwQAESr94hJNky-CpJAyLVwfz6oX23eCqlfadM77t8moQk9Zt4TLgTy86GZ5YsWq1FxvrV1bTyxTLp7tAOF4BqlbhD_2Q72IgqcyUY4GIS7ncDzz7AgU82a0pSJPrSMftCn58fRH9XYKaMZT24S-DqHdu2CR96u2kZK_064tXQUfshPdJtONXGx80fDfIFMqDmyXVmofr-X-hc1YonBfr2Drlmadq2H-0Ugi6dzWlJ-YqhsTGfbxY9PTisRAR0HUzm8IjtqUbhczeDNt02sk0dLMLn-_RfxrYSNKTmPj-8gYv6dpsVZxGdFSFJhF1bUaROHCLGbUdw6LIibH8bifYELzTlOHpYCsS1EOlmfM3cAn117OxvjJ_i9j4DBl4LWbeYc7J2nJnToFw3tW6sgL82p4JXmEgpD96mDdNaE_3nlfspLWLFlNm9vQx-c4xHnF4_AHiZoqIynkN7QwOa0JtViJiQ-q1xjO97vXwQZX9SAfnxKRImo4fYQxssJGkFsrvYLPCXfWsWLiFQ-Nd4HFjLOqASq2xtpw3Ax9u00gcMFu_8u-ptuz7OUXJXuFjb7EidQKcLs3q0stKXjOdDnXGabxpZobQzYVvnVNMbe4Bvs1M6Yeu5VKMrOXAcp3ukSNMsoatzKuG1FFVPq5d--HrNZfTagXMRS7UxiuzRE2nMVvtuNMH9cV3SYxc_DLXmsnArmJMx3un2dipTceaA8ZEMiihrDm6etBPG__vocNSwwSpCwADnJx1cLMES1COYG8Ol8FvhsqESziD0Y8CRCKdmsm7Q8sXLjs-nY6i8y7xvVioCPx0Cy31nHSfXCNkjIQQrnznR_0yGhAQ8Eb-24FdKT6HR8WRK20N4soJAJp-iN_mMRa-o-sEc3YmXtPIyNACPrn_Ly35p2mIQgZ_EsJC0gyfnzWqohcu-5U5_7Zf6PPE4LMkElTLAuhB63tDbMlLcczXU2E9tgPj2rhD-iji4MYxbTg1fl631xeAwt2IbaOHaG3zc0zxpzYQnkHaMhMJ33FtFDuN7O86JmzOrRq9Qm4diAlRr6D7Qiyz1h-oQx_zhwA0Qxri5mert6AOpYzHuVA3_aMR_Uqwj-GoG7ZOuBjNFI6LvF4AjTdTjx2eqLnWoWJhPg_YW3RXp-4xVkfgRrANuUV2M2DZ8qTZoeJBCOo9_5yvzMGSdDHO9lt8rosmqChohMCPxEwiCQnCwZoCbrKuPddTg44zm89HRr6OAuxibhhLAn0EHQG7Lu5yjRJcJZLTNdKksXfqbA04XHdmtpI0NJtKRP3dMWupyicjR4Y-Iqwp-tMngknpJME1DdPLlhhLQ7V6nDk5zh6_xlMO31yNyDpTnim8xtii2acpMkWixP97TNtBOSFAwG0ETLaag7e2fy6w5zY53bKzyFkpFlZzqKoqXt_VI0fJZBaehcYPOqUnEvkpKyxZZY-vAxeX0VIbjpxFgpJM7EMEzluPDG7yUz5DnNi-h4bVnIfcaU6GPtJNis83aoWYfgleMkpGPAPcakKlNPlT71FjpNSfOXwS2sXoAqs5Bu9_lLsNxxfCshsZusBkav5wOXyodY-zluYmz_W7h1Lfh3Md-y2yTYKO1nwvUW5mpAfR1mLvPjz_A==",
+      "status": null
+    },
+    {
+      "id": "msg_080bf21f23cf23aa016abc54f2357887d2a1d47e4358993155",
+      "content": [
+        {
+          "annotations": [],
+          "text": "**Clinical Indication:**  \nPatient with combined generalized and focal epilepsy, clinically characterized by generalized tonic-clonic seizures beginning at age 39, occurring approximately 5 times per month. Etiology is genetic, associated with an **STXBP1 c.902A>G** variant. Seizures are drug-resistant. Current antiseizure medications are oxcarbazepine and valproate.\n\n**Technique:**  \nRoutine scalp EEG performed using standard international 10–20 electrode placement with bipolar and referential montages.\n\n**Findings:**  \nSpecific background, interictal, and ictal EEG findings are not provided in the authorized clinical information.\n\n**Impression:**  \nRoutine EEG interpretation is limited because electrographic findings are not available in the provided data. Clinical history is notable for drug-resistant combined generalized and focal epilepsy with generalized tonic-clonic seizures, genetic etiology associated with an **STXBP1 c.902A>G** variant.",
+          "type": "output_text",
+          "logprobs": []
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": "final_answer"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 0.98,
+  "background": false,
+  "completed_at": 1790727411.0,
+  "conversation": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "moderation": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 276,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 708,
+    "output_tokens_details": {
+      "reasoning_tokens": 509
+    },
+    "total_tokens": 984
+  },
+  "user": null,
+  "access_programs": null,
+  "billing": {
+    "payer": "developer"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": false,
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "corpus": "synth_v3",
+  "corpus_version": "v1.0",
+  "generator_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "encounter_manifest": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/episynth_corpus/v3/encounter_manifest.csv",
+  "n_visits_planned": 493,
+  "n_generated_new": 483,
+  "n_skipped_existing": 10,
+  "n_errors": 0,
+  "ingest_batch": "synth_v3_20260930_030024",
+  "created_at": "2026-09-30T10:31:57.987963+00:00"
+}
