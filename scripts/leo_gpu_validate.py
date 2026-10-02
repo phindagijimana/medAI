@@ -213,7 +213,7 @@ def stage_parity_fs(args) -> dict:
     return _parity(args, "parity_fs", docs, REPO / "data" / "run_manifests_fs_test_flat_c",
                    REPO / "data" / "run_manifests_fs_test_flat_c_live",
                    ["scripts/score_leo_vs_fs_gold.py", "--llm", "L1C=data/run_manifests_fs_test_flat_c_live:L1C",
-                    "--disagree-llm", "predominant_seizure_type", "--out", "eval/results/leo_vs_fs_gold_v05_live"])
+                    "--out", "eval/results/leo_vs_fs_gold_v05_live"])
 
 
 def stage_parity_synth(args) -> dict:
@@ -224,7 +224,7 @@ def stage_parity_synth(args) -> dict:
     return _parity(args, "parity_synth", docs, REPO / "data" / "run_manifests_synth_eval_flat",
                    REPO / "data" / "run_manifests_synth_eval_flat_live",
                    ["scripts/score_leo_vs_synth_gold.py", "--llm", "L1C=data/run_manifests_synth_eval_flat_live:L1C",
-                    "--disagree-llm", "predominant_seizure_type", "--out", "eval/results/leo_vs_synth_gold_v05_live"])
+                    "--out", "eval/results/leo_vs_synth_gold_v05_live"])
 
 
 # ---- long documents -------------------------------------------------------------------------
@@ -298,7 +298,7 @@ def stage_long(args) -> dict:
         def summ(pd):
             return {n: {s: dict(zip(("p", "r", "f1"), map(lambda x: round(x, 3), fs.micro(v)))) | {"n_patients": len(v)}
                         for s, v in d.items()} for n, d in pd.items() if d}
-        ref = _reference("leo_vs_synth_gold_v05_shipped.json")
+        ref = _reference("leo_vs_synth_gold_v05_maint.json")
         save("long", {"environment": environment(), "unchunked_max_chars": UNCHUNKED_MAX, "n_done": i, "n_patients": len(docs),
                       "all_patients_chunked": summ({"chunked": per_doc["chunked"]}),
                       "subset_up_to_20000_chars": summ(per_doc_sub), "per_field_chunked_leo_review":

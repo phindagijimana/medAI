@@ -11,15 +11,15 @@ Current-ASM view: maintenance + rescue (rescue drugs count as current); acute ad
 | llm | 0.737 | 0.667 | 0.700 | [0.642, 0.761] |
 | specialist | 0.695 | 0.619 | 0.655 | [0.582, 0.723] |
 | leo_auto | 0.851 | 0.544 | 0.664 | [0.584, 0.734] |
-| leo_review | 0.695 | 0.714 | 0.705 | [0.644, 0.767] |
+| leo_review | 0.669 | 0.687 | 0.678 | [0.613, 0.743] |
 
 Paired difference in micro-F1 (letters resampled):
 
 | contrast | mean | 95% CI |
 |---|---:|---|
 | leo_auto-llm | -0.037 | [-0.082, +0.005] |
-| leo_review-llm | +0.005 | [-0.029, +0.045] |
-| leo_review-specialist | +0.051 | [+0.009, +0.094] |
+| leo_review-llm | -0.022 | [-0.062, +0.022] |
+| leo_review-specialist | +0.024 | [-0.005, +0.056] |
 | leo_auto-specialist | +0.009 | [-0.029, +0.046] |
 
 Per-field F1:
@@ -31,7 +31,7 @@ Per-field F1:
 | `seizure_frequency.count_min` | 6 | 1.000 | 1.000 | 0.909 | 1.000 |
 | `seizure_frequency.count_max` | 6 | 1.000 | 0.833 | 0.909 | 0.833 |
 | `epilepsy_type` | 38 | 0.333 | 0.424 | 0.386 | 0.417 |
-| `predominant_seizure_type` | 18 | 0.563 | 0.343 | 0.308 | 0.571 |
+| `predominant_seizure_type` | 18 | 0.563 | 0.343 | 0.308 | 0.343 |
 | `age_at_onset_years` | 4 | 1.000 | 0.857 | 0.857 | 1.000 |
 | `epilepsy_type|typed` (extra view, not in micro) | 13 | 0.923 | 0.960 | 0.917 | 1.000 |
 | `epilepsy_type|abstain` (extra view, not in micro) | 38 | 0.421 | 0.605 | 0.737 | 0.500 |
@@ -41,14 +41,14 @@ Claim precision by detector agreement (claims with a gold reference):
 | category | scored | precision |
 |---|---:|---:|
 | agree | 85 / 99 | 0.835 |
-| disagree | 8 / 11 | 0.500 |
-| llm_only | 30 / 51 | 0.500 |
+| disagree | 16 / 21 | 0.312 |
+| llm_only | 22 / 41 | 0.455 |
 | specialist_only | 20 / 253 | 0.250 |
 
-Letter-level bootstrap, claim precision 95% CI: agree [0.75, 0.91]; disagree [0.20, 1.00]; llm_only [0.33, 0.66]; specialist_only [0.07, 0.46].
-Agree minus other category: agree-disagree +0.32 [-0.16, +0.64]; agree-llm_only +0.34 [+0.15, +0.53]; agree-specialist_only +0.58 [+0.36, +0.78].
+Letter-level bootstrap, claim precision 95% CI: agree [0.75, 0.91]; disagree [0.11, 0.53]; llm_only [0.25, 0.65]; specialist_only [0.07, 0.46].
+Agree minus other category: agree-disagree +0.52 [+0.31, +0.73]; agree-llm_only +0.38 [+0.16, +0.60]; agree-specialist_only +0.58 [+0.36, +0.78].
 
-Safety: accept 0.413, review 0.558, reject 0.029; ontology-grounded 0.266; LLM claims without a specialist match 41 of which 5 had a quote not in the note.
+Safety: accept 0.413, review 0.558, reject 0.029; ontology-grounded 0.283; LLM claims without a specialist match 41 of which 5 had a quote not in the note.
 
 ## H2  (arm L0C, 40 letters, 40 with a schema-valid LLM phenotype, 40 with at least one populated field)
 
@@ -57,15 +57,15 @@ Safety: accept 0.413, review 0.558, reject 0.029; ontology-grounded 0.266; LLM c
 | llm | 0.820 | 0.680 | 0.743 | [0.682, 0.803] |
 | specialist | 0.695 | 0.619 | 0.655 | [0.582, 0.723] |
 | leo_auto | 0.843 | 0.585 | 0.691 | [0.613, 0.761] |
-| leo_review | 0.734 | 0.714 | 0.724 | [0.667, 0.783] |
+| leo_review | 0.699 | 0.680 | 0.690 | [0.624, 0.757] |
 
 Paired difference in micro-F1 (letters resampled):
 
 | contrast | mean | 95% CI |
 |---|---:|---|
 | leo_auto-llm | -0.054 | [-0.097, -0.013] |
-| leo_review-llm | -0.019 | [-0.048, +0.010] |
-| leo_review-specialist | +0.071 | [+0.033, +0.114] |
+| leo_review-llm | -0.054 | [-0.103, -0.006] |
+| leo_review-specialist | +0.036 | [+0.010, +0.064] |
 | leo_auto-specialist | +0.036 | [+0.006, +0.065] |
 
 Per-field F1:
@@ -77,7 +77,7 @@ Per-field F1:
 | `seizure_frequency.count_min` | 6 | 1.000 | 1.000 | 0.909 | 1.000 |
 | `seizure_frequency.count_max` | 6 | 1.000 | 0.833 | 0.909 | 0.833 |
 | `epilepsy_type` | 38 | 0.394 | 0.424 | 0.467 | 0.435 |
-| `predominant_seizure_type` | 18 | 0.621 | 0.343 | 0.296 | 0.629 |
+| `predominant_seizure_type` | 18 | 0.621 | 0.343 | 0.296 | 0.343 |
 | `age_at_onset_years` | 4 | 1.000 | 0.857 | 0.857 | 1.000 |
 | `epilepsy_type|typed` (extra view, not in micro) | 13 | 1.000 | 0.960 | 0.960 | 1.000 |
 | `epilepsy_type|abstain` (extra view, not in micro) | 38 | 0.605 | 0.605 | 0.763 | 0.579 |
@@ -87,14 +87,14 @@ Claim precision by detector agreement (claims with a gold reference):
 | category | scored | precision |
 |---|---:|---:|
 | agree | 89 / 102 | 0.831 |
-| disagree | 4 / 5 | 0.000 |
-| llm_only | 20 / 32 | 0.750 |
+| disagree | 11 / 12 | 0.091 |
+| llm_only | 13 / 25 | 0.692 |
 | specialist_only | 21 / 259 | 0.286 |
 
-Letter-level bootstrap, claim precision 95% CI: agree [0.75, 0.90]; disagree [0.00, 0.00]; llm_only [0.56, 0.93]; specialist_only [0.11, 0.50].
-Agree minus other category: agree-disagree +0.83 [+0.75, +0.90]; agree-llm_only +0.08 [-0.13, +0.30]; agree-specialist_only +0.54 [+0.32, +0.73].
+Letter-level bootstrap, claim precision 95% CI: agree [0.75, 0.90]; disagree [0.00, 0.33]; llm_only [0.42, 0.92]; specialist_only [0.11, 0.50].
+Agree minus other category: agree-disagree +0.74 [+0.52, +0.88]; agree-llm_only +0.14 [-0.12, +0.43]; agree-specialist_only +0.54 [+0.32, +0.73].
 
-Safety: accept 0.462, review 0.510, reject 0.028; ontology-grounded 0.291; LLM claims without a specialist match 25 of which 4 had a quote not in the note.
+Safety: accept 0.462, review 0.510, reject 0.028; ontology-grounded 0.299; LLM claims without a specialist match 25 of which 4 had a quote not in the note.
 
 ## Paired contrasts across systems and sources (micro-F1, letters resampled)
 

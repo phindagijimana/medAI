@@ -1,0 +1,2181 @@
+{
+  "strata": {
+    "synth_v3": [
+      "P003001",
+      "P003002",
+      "P003003",
+      "P003004",
+      "P003006",
+      "P003007",
+      "P003008",
+      "P003009",
+      "P003011",
+      "P003012",
+      "P003013",
+      "P003014",
+      "P003016",
+      "P003017",
+      "P003018",
+      "P003019",
+      "P003021",
+      "P003022",
+      "P003023",
+      "P003024",
+      "P003026",
+      "P003027",
+      "P003028",
+      "P003029",
+      "P003031",
+      "P003032",
+      "P003033",
+      "P003034",
+      "P003036",
+      "P003037",
+      "P003038",
+      "P003039",
+      "P003041",
+      "P003042",
+      "P003043",
+      "P003044",
+      "P003046",
+      "P003047",
+      "P003048",
+      "P003049",
+      "P003051",
+      "P003052",
+      "P003053",
+      "P003054",
+      "P003056",
+      "P003057",
+      "P003058",
+      "P003059",
+      "P003061",
+      "P003062",
+      "P003063",
+      "P003064",
+      "P003066",
+      "P003067",
+      "P003068",
+      "P003069",
+      "P003071",
+      "P003072",
+      "P003073",
+      "P003074",
+      "P003076",
+      "P003077",
+      "P003078",
+      "P003079",
+      "P003081",
+      "P003082",
+      "P003083",
+      "P003084",
+      "P003086",
+      "P003087",
+      "P003088",
+      "P003089",
+      "P003091",
+      "P003092",
+      "P003093",
+      "P003094",
+      "P003096",
+      "P003097",
+      "P003098",
+      "P003099"
+    ]
+  },
+  "rescue_as_current": false,
+  "sources": {
+    "L1C": {
+      "arm": "L1C",
+      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_flat_ext",
+      "n_letters": 80,
+      "n_notes": 399,
+      "n_llm_phenotype_valid": 398,
+      "n_llm_phenotype_populated": 398,
+      "systems": {
+        "llm": {
+          "micro_p": 0.985172981878089,
+          "micro_r": 0.9917081260364843,
+          "micro_f1": 0.9884297520661157,
+          "f1_ci": [
+            0.980015987210232,
+            0.9958915365653246
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 4,
+              "fn": 0,
+              "p": 0.9757575757575757,
+              "r": 1.0,
+              "f1": 0.9877300613496933
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 75,
+              "fp": 5,
+              "fn": 5,
+              "p": 0.9375,
+              "r": 0.9375,
+              "f1": 0.9375
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 66,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 75,
+              "fp": 5,
+              "fn": 5,
+              "p": 0.9375,
+              "r": 0.9375,
+              "f1": 0.9375
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "specialist": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_auto": {
+          "micro_p": 0.9932885906040269,
+          "micro_r": 0.9817578772802653,
+          "micro_f1": 0.987489574645538,
+          "f1_ci": [
+            0.9773299748110832,
+            0.9966159052453468
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 76,
+              "fp": 2,
+              "fn": 4,
+              "p": 0.9743589743589743,
+              "r": 0.95,
+              "f1": 0.9620253164556962
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 59,
+              "fp": 2,
+              "fn": 7,
+              "p": 0.9672131147540983,
+              "r": 0.8939393939393939,
+              "f1": 0.9291338582677166
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_review": {
+          "micro_p": 0.9653465346534653,
+          "micro_r": 0.9701492537313433,
+          "micro_f1": 0.967741935483871,
+          "f1_ci": [
+            0.9528706083976007,
+            0.9821138211382113
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 4,
+              "fn": 0,
+              "p": 0.9757575757575757,
+              "r": 1.0,
+              "f1": 0.9877300613496933
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 53,
+              "fp": 13,
+              "fn": 13,
+              "p": 0.803030303030303,
+              "r": 0.803030303030303,
+              "f1": 0.803030303030303
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        }
+      },
+      "paired_diff_micro_f1": {
+        "leo_auto-llm": {
+          "mean": -0.0011951354756917518,
+          "ci": [
+            -0.008456277402872359,
+            0.006651170135759998
+          ],
+          "p_le_0": 0.65
+        },
+        "leo_review-llm": {
+          "mean": -0.02072402144400712,
+          "ci": [
+            -0.03433476994432838,
+            -0.008347245409015103
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_review-specialist": {
+          "mean": -0.0013803084941154194,
+          "ci": [
+            -0.008085747426277767,
+            0.004372377123019855
+          ],
+          "p_le_0": 0.668
+        },
+        "leo_auto-specialist": {
+          "mean": 0.018148577474199973,
+          "ci": [
+            0.006612044197640166,
+            0.031152870565538948
+          ],
+          "p_le_0": 0.0
+        }
+      },
+      "prior_drugs_in_plan": 0,
+      "claim_precision_ci": {
+        "precision": {
+          "agree": [
+            0.9984059511158342,
+            1.0
+          ],
+          "disagree": [
+            0.16417910447761194,
+            0.3
+          ],
+          "llm_only": [
+            0.8421052631578947,
+            1.0
+          ],
+          "specialist_only": [
+            0.6973684210526315,
+            0.9382716049382716
+          ]
+        },
+        "agree_minus": {
+          "agree-disagree": {
+            "ci": [
+              0.6989094874591057,
+              0.8353203950218875
+            ],
+            "mean": 0.7689804158115315
+          },
+          "agree-llm_only": {
+            "ci": [
+              -0.0005202913631633388,
+              0.1578947368421053
+            ],
+            "mean": 0.05741297737875032
+          },
+          "agree-specialist_only": {
+            "ci": [
+              0.06172839506172845,
+              0.3015926179084074
+            ],
+            "mean": 0.17838852205293323
+          }
+        }
+      },
+      "claim_precision_by_category": {
+        "agree": {
+          "correct": 1980,
+          "scored": 1981,
+          "total": 2031,
+          "precision": 0.9994952044422009
+        },
+        "disagree": {
+          "correct": 30,
+          "scored": 130,
+          "total": 132,
+          "precision": 0.23076923076923078
+        },
+        "llm_only": {
+          "correct": 119,
+          "scored": 127,
+          "total": 127,
+          "precision": 0.937007874015748
+        },
+        "specialist_only": {
+          "correct": 64,
+          "scored": 78,
+          "total": 4422,
+          "precision": 0.8205128205128205
+        }
+      },
+      "safety": {
+        "claims": 6712,
+        "accept_rate": 0.6477949940405244,
+        "review_rate": 0.33715733015494637,
+        "reject_rate": 0.015047675804529202,
+        "ontology_grounded_rate": 0.441746126340882,
+        "llm_proposed_unmatched": 127,
+        "llm_unsupported_quote": 0,
+        "llm_unsupported_rate_of_unmatched": 0.0,
+        "counts": {
+          "claims": 6712,
+          "accept": 4348,
+          "review": 2263,
+          "reject": 101,
+          "llm_agree": 2031,
+          "llm_disagree": 132,
+          "specialist_only": 4408,
+          "llm_only": 127,
+          "llm_unsupported": 0
+        }
+      }
+    },
+    "L1C [synth_v3]": {
+      "arm": "L1C",
+      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_flat_ext",
+      "n_letters": 80,
+      "n_notes": 399,
+      "n_llm_phenotype_valid": 398,
+      "n_llm_phenotype_populated": 398,
+      "systems": {
+        "llm": {
+          "micro_p": 0.985172981878089,
+          "micro_r": 0.9917081260364843,
+          "micro_f1": 0.9884297520661157,
+          "f1_ci": [
+            0.980015987210232,
+            0.9958915365653246
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 4,
+              "fn": 0,
+              "p": 0.9757575757575757,
+              "r": 1.0,
+              "f1": 0.9877300613496933
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 75,
+              "fp": 5,
+              "fn": 5,
+              "p": 0.9375,
+              "r": 0.9375,
+              "f1": 0.9375
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 66,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 75,
+              "fp": 5,
+              "fn": 5,
+              "p": 0.9375,
+              "r": 0.9375,
+              "f1": 0.9375
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "specialist": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_auto": {
+          "micro_p": 0.9932885906040269,
+          "micro_r": 0.9817578772802653,
+          "micro_f1": 0.987489574645538,
+          "f1_ci": [
+            0.9773299748110832,
+            0.9966159052453468
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 76,
+              "fp": 2,
+              "fn": 4,
+              "p": 0.9743589743589743,
+              "r": 0.95,
+              "f1": 0.9620253164556962
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 59,
+              "fp": 2,
+              "fn": 7,
+              "p": 0.9672131147540983,
+              "r": 0.8939393939393939,
+              "f1": 0.9291338582677166
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_review": {
+          "micro_p": 0.9653465346534653,
+          "micro_r": 0.9701492537313433,
+          "micro_f1": 0.967741935483871,
+          "f1_ci": [
+            0.9528706083976007,
+            0.9821138211382113
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 4,
+              "fn": 0,
+              "p": 0.9757575757575757,
+              "r": 1.0,
+              "f1": 0.9877300613496933
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 53,
+              "fp": 13,
+              "fn": 13,
+              "p": 0.803030303030303,
+              "r": 0.803030303030303,
+              "f1": 0.803030303030303
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        }
+      },
+      "paired_diff_micro_f1": {
+        "leo_auto-llm": {
+          "mean": -0.0011951354756917518,
+          "ci": [
+            -0.008456277402872359,
+            0.006651170135759998
+          ],
+          "p_le_0": 0.65
+        },
+        "leo_review-llm": {
+          "mean": -0.02072402144400712,
+          "ci": [
+            -0.03433476994432838,
+            -0.008347245409015103
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_review-specialist": {
+          "mean": -0.0013803084941154194,
+          "ci": [
+            -0.008085747426277767,
+            0.004372377123019855
+          ],
+          "p_le_0": 0.668
+        },
+        "leo_auto-specialist": {
+          "mean": 0.018148577474199973,
+          "ci": [
+            0.006612044197640166,
+            0.031152870565538948
+          ],
+          "p_le_0": 0.0
+        }
+      },
+      "prior_drugs_in_plan": 0,
+      "claim_precision_ci": {
+        "precision": {
+          "agree": [
+            0.9984059511158342,
+            1.0
+          ],
+          "disagree": [
+            0.16417910447761194,
+            0.3
+          ],
+          "llm_only": [
+            0.8421052631578947,
+            1.0
+          ],
+          "specialist_only": [
+            0.6973684210526315,
+            0.9382716049382716
+          ]
+        },
+        "agree_minus": {
+          "agree-disagree": {
+            "ci": [
+              0.6989094874591057,
+              0.8353203950218875
+            ],
+            "mean": 0.7689804158115315
+          },
+          "agree-llm_only": {
+            "ci": [
+              -0.0005202913631633388,
+              0.1578947368421053
+            ],
+            "mean": 0.05741297737875032
+          },
+          "agree-specialist_only": {
+            "ci": [
+              0.06172839506172845,
+              0.3015926179084074
+            ],
+            "mean": 0.17838852205293323
+          }
+        }
+      },
+      "claim_precision_by_category": {
+        "agree": {
+          "correct": 1980,
+          "scored": 1981,
+          "total": 2031,
+          "precision": 0.9994952044422009
+        },
+        "disagree": {
+          "correct": 30,
+          "scored": 130,
+          "total": 132,
+          "precision": 0.23076923076923078
+        },
+        "llm_only": {
+          "correct": 119,
+          "scored": 127,
+          "total": 127,
+          "precision": 0.937007874015748
+        },
+        "specialist_only": {
+          "correct": 64,
+          "scored": 78,
+          "total": 4422,
+          "precision": 0.8205128205128205
+        }
+      },
+      "safety": {
+        "claims": 6712,
+        "accept_rate": 0.6477949940405244,
+        "review_rate": 0.33715733015494637,
+        "reject_rate": 0.015047675804529202,
+        "ontology_grounded_rate": 0.441746126340882,
+        "llm_proposed_unmatched": 127,
+        "llm_unsupported_quote": 0,
+        "llm_unsupported_rate_of_unmatched": 0.0,
+        "counts": {
+          "claims": 6712,
+          "accept": 4348,
+          "review": 2263,
+          "reject": 101,
+          "llm_agree": 2031,
+          "llm_disagree": 132,
+          "specialist_only": 4408,
+          "llm_only": 127,
+          "llm_unsupported": 0
+        }
+      }
+    },
+    "H2": {
+      "arm": "L0C",
+      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_h2_ext",
+      "n_letters": 80,
+      "n_notes": 399,
+      "n_llm_phenotype_valid": 399,
+      "n_llm_phenotype_populated": 399,
+      "systems": {
+        "llm": {
+          "micro_p": 0.994991652754591,
+          "micro_r": 0.988391376451078,
+          "micro_f1": 0.9916805324459236,
+          "f1_ci": [
+            0.9848739495798319,
+            0.9983498349834984
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 75,
+              "fp": 3,
+              "fn": 5,
+              "p": 0.9615384615384616,
+              "r": 0.9375,
+              "f1": 0.9493670886075949
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 64,
+              "fp": 0,
+              "fn": 2,
+              "p": 1.0,
+              "r": 0.9696969696969697,
+              "f1": 0.9846153846153847
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 77,
+              "fp": 3,
+              "fn": 3,
+              "p": 0.9625,
+              "r": 0.9625,
+              "f1": 0.9625000000000001
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "specialist": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_auto": {
+          "micro_p": 0.9900166389351082,
+          "micro_r": 0.9867330016583747,
+          "micro_f1": 0.9883720930232558,
+          "f1_ci": [
+            0.9787928221859706,
+            0.9966442953020134
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 59,
+              "fp": 5,
+              "fn": 7,
+              "p": 0.921875,
+              "r": 0.8939393939393939,
+              "f1": 0.9076923076923077
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_review": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        }
+      },
+      "paired_diff_micro_f1": {
+        "leo_auto-llm": {
+          "mean": -0.003318571384457879,
+          "ci": [
+            -0.0076798958973264275,
+            0.0
+          ],
+          "p_le_0": 0.978
+        },
+        "leo_review-llm": {
+          "mean": -0.022374515351923793,
+          "ci": [
+            -0.03636662116158906,
+            -0.010238666854963885
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_review-specialist": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_auto-specialist": {
+          "mean": 0.019055943967465877,
+          "ci": [
+            0.007401964712321685,
+            0.0317195325542573
+          ],
+          "p_le_0": 0.0
+        }
+      },
+      "prior_drugs_in_plan": 0,
+      "claim_precision_ci": {
+        "precision": {
+          "agree": [
+            0.9957527135441245,
+            1.0
+          ],
+          "disagree": [
+            0.0379746835443038,
+            0.18292682926829268
+          ],
+          "llm_only": [
+            1.0,
+            1.0
+          ],
+          "specialist_only": [
+            0.25,
+            0.5714285714285714
+          ]
+        },
+        "agree_minus": {
+          "agree-disagree": {
+            "ci": [
+              0.8151583789653118,
+              0.9599164232970059
+            ],
+            "mean": 0.8974664607343473
+          },
+          "agree-llm_only": {
+            "ci": [
+              -0.004247286455875465,
+              0.0
+            ],
+            "mean": -0.0019515693246917394
+          },
+          "agree-specialist_only": {
+            "ci": [
+              0.4285714285714286,
+              0.7476448422044277
+            ],
+            "mean": 0.629677710490187
+          }
+        }
+      },
+      "claim_precision_by_category": {
+        "agree": {
+          "correct": 2049,
+          "scored": 2053,
+          "total": 2053,
+          "precision": 0.9980516317584024
+        },
+        "disagree": {
+          "correct": 9,
+          "scored": 91,
+          "total": 93,
+          "precision": 0.0989010989010989
+        },
+        "llm_only": {
+          "correct": 114,
+          "scored": 114,
+          "total": 114,
+          "precision": 1.0
+        },
+        "specialist_only": {
+          "correct": 16,
+          "scored": 45,
+          "total": 4439,
+          "precision": 0.35555555555555557
+        }
+      },
+      "safety": {
+        "claims": 6699,
+        "accept_rate": 0.6620391103149724,
+        "review_rate": 0.322884012539185,
+        "reject_rate": 0.015076877145842663,
+        "ontology_grounded_rate": 0.4433497536945813,
+        "llm_proposed_unmatched": 114,
+        "llm_unsupported_quote": 0,
+        "llm_unsupported_rate_of_unmatched": 0.0,
+        "counts": {
+          "claims": 6699,
+          "accept": 4435,
+          "review": 2163,
+          "reject": 101,
+          "llm_agree": 2053,
+          "llm_disagree": 93,
+          "specialist_only": 4439,
+          "llm_only": 114,
+          "llm_unsupported": 0
+        }
+      }
+    },
+    "H2 [synth_v3]": {
+      "arm": "L0C",
+      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_h2_ext",
+      "n_letters": 80,
+      "n_notes": 399,
+      "n_llm_phenotype_valid": 399,
+      "n_llm_phenotype_populated": 399,
+      "systems": {
+        "llm": {
+          "micro_p": 0.994991652754591,
+          "micro_r": 0.988391376451078,
+          "micro_f1": 0.9916805324459236,
+          "f1_ci": [
+            0.9848739495798319,
+            0.9983498349834984
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 75,
+              "fp": 3,
+              "fn": 5,
+              "p": 0.9615384615384616,
+              "r": 0.9375,
+              "f1": 0.9493670886075949
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 64,
+              "fp": 0,
+              "fn": 2,
+              "p": 1.0,
+              "r": 0.9696969696969697,
+              "f1": 0.9846153846153847
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 77,
+              "fp": 3,
+              "fn": 3,
+              "p": 0.9625,
+              "r": 0.9625,
+              "f1": 0.9625000000000001
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "specialist": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_auto": {
+          "micro_p": 0.9900166389351082,
+          "micro_r": 0.9867330016583747,
+          "micro_f1": 0.9883720930232558,
+          "f1_ci": [
+            0.9787928221859706,
+            0.9966442953020134
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 56,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 59,
+              "fp": 5,
+              "fn": 7,
+              "p": 0.921875,
+              "r": 0.8939393939393939,
+              "f1": 0.9076923076923077
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        },
+        "leo_review": {
+          "micro_p": 0.9700996677740864,
+          "micro_r": 0.9684908789386402,
+          "micro_f1": 0.9692946058091286,
+          "f1_ci": [
+            0.9540517961570594,
+            0.9834437086092715
+          ],
+          "per_field": {
+            "current_asms": {
+              "n": 80,
+              "tp": 161,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "seizure_frequency.period": {
+              "n": 56,
+              "tp": 55,
+              "fp": 0,
+              "fn": 1,
+              "p": 1.0,
+              "r": 0.9821428571428571,
+              "f1": 0.9909909909909909
+            },
+            "seizure_frequency.count_min": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "seizure_frequency.count_max": {
+              "n": 80,
+              "tp": 79,
+              "fp": 1,
+              "fn": 1,
+              "p": 0.9875,
+              "r": 0.9875,
+              "f1": 0.9875
+            },
+            "epilepsy_type": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            },
+            "predominant_seizure_type": {
+              "n": 66,
+              "tp": 52,
+              "fp": 14,
+              "fn": 14,
+              "p": 0.7878787878787878,
+              "r": 0.7878787878787878,
+              "f1": 0.7878787878787878
+            },
+            "age_at_onset_years": {
+              "n": 80,
+              "tp": 80,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|typed": {
+              "n": 75,
+              "tp": 75,
+              "fp": 0,
+              "fn": 0,
+              "p": 1.0,
+              "r": 1.0,
+              "f1": 1.0
+            },
+            "epilepsy_type|abstain": {
+              "n": 80,
+              "tp": 78,
+              "fp": 2,
+              "fn": 2,
+              "p": 0.975,
+              "r": 0.975,
+              "f1": 0.975
+            }
+          },
+          "prior_leak": {
+            "leaked": 0,
+            "prior_drugs": 0,
+            "rate": null
+          }
+        }
+      },
+      "paired_diff_micro_f1": {
+        "leo_auto-llm": {
+          "mean": -0.003318571384457879,
+          "ci": [
+            -0.0076798958973264275,
+            0.0
+          ],
+          "p_le_0": 0.978
+        },
+        "leo_review-llm": {
+          "mean": -0.022374515351923793,
+          "ci": [
+            -0.03636662116158906,
+            -0.010238666854963885
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_review-specialist": {
+          "mean": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "p_le_0": 1.0
+        },
+        "leo_auto-specialist": {
+          "mean": 0.019055943967465877,
+          "ci": [
+            0.007401964712321685,
+            0.0317195325542573
+          ],
+          "p_le_0": 0.0
+        }
+      },
+      "prior_drugs_in_plan": 0,
+      "claim_precision_ci": {
+        "precision": {
+          "agree": [
+            0.9957527135441245,
+            1.0
+          ],
+          "disagree": [
+            0.0379746835443038,
+            0.18292682926829268
+          ],
+          "llm_only": [
+            1.0,
+            1.0
+          ],
+          "specialist_only": [
+            0.25,
+            0.5714285714285714
+          ]
+        },
+        "agree_minus": {
+          "agree-disagree": {
+            "ci": [
+              0.8151583789653118,
+              0.9599164232970059
+            ],
+            "mean": 0.8974664607343473
+          },
+          "agree-llm_only": {
+            "ci": [
+              -0.004247286455875465,
+              0.0
+            ],
+            "mean": -0.0019515693246917394
+          },
+          "agree-specialist_only": {
+            "ci": [
+              0.4285714285714286,
+              0.7476448422044277
+            ],
+            "mean": 0.629677710490187
+          }
+        }
+      },
+      "claim_precision_by_category": {
+        "agree": {
+          "correct": 2049,
+          "scored": 2053,
+          "total": 2053,
+          "precision": 0.9980516317584024
+        },
+        "disagree": {
+          "correct": 9,
+          "scored": 91,
+          "total": 93,
+          "precision": 0.0989010989010989
+        },
+        "llm_only": {
+          "correct": 114,
+          "scored": 114,
+          "total": 114,
+          "precision": 1.0
+        },
+        "specialist_only": {
+          "correct": 16,
+          "scored": 45,
+          "total": 4439,
+          "precision": 0.35555555555555557
+        }
+      },
+      "safety": {
+        "claims": 6699,
+        "accept_rate": 0.6620391103149724,
+        "review_rate": 0.322884012539185,
+        "reject_rate": 0.015076877145842663,
+        "ontology_grounded_rate": 0.4433497536945813,
+        "llm_proposed_unmatched": 114,
+        "llm_unsupported_quote": 0,
+        "llm_unsupported_rate_of_unmatched": 0.0,
+        "counts": {
+          "claims": 6699,
+          "accept": 4435,
+          "review": 2163,
+          "reject": 101,
+          "llm_agree": 2053,
+          "llm_disagree": 93,
+          "specialist_only": 4439,
+          "llm_only": 114,
+          "llm_unsupported": 0
+        }
+      }
+    }
+  }
+}

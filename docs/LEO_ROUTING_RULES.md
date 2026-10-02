@@ -22,7 +22,7 @@ Terms. **Specialist** = EpExtra (ExECT-derived rules on MedCAT). **LLM** = Med42
 Scalar fields: `epilepsy_type`, `predominant_seizure_type`, `age_at_onset_years`, seizure frequency.
 List field: `current_asms` (one claim per drug; names compared after brand/salt canonicalisation).
 
-`disagree_primary` (shipped default: `predominant_seizure_type` → LLM; epilepsy type, onset age and frequency show the specialist value). Chosen on F-S development letters and confirmed on the unused synthetic set `ext` (seizure type 0.80 → 1.00; epilepsy type got worse with the model's value, 0.975 → 0.938), tied on `v1v2` (EVAL_PROTOCOL_LEO D15, 10.13). The policy only picks which value is shown; every disagreement is still REVIEW `source_disagreement`. Change it with `--disagree-llm` (`none` for the specialist value everywhere).
+`disagree_primary` (shipped default: none, so the specialist value is shown for every field and the model's value is the claim's `alternative`). A candidate policy, `--disagree-llm candidate` (seizure type → model), helped on synthetic sets (`ext`: seizure type 0.80 → 1.00 but epilepsy type 0.975 → 0.938 if the model were shown there; tied on `v1v2`) but is not validated on real notes, so it is not the default (EVAL_PROTOCOL_LEO D15, D17, 10.13). The policy only picks which value is shown; every disagreement is still REVIEW `source_disagreement`. To collect and score the cases that would decide it per field: `docs/DISAGREEMENT_ADJUDICATION.md`.
 
 ### Frequency agreement
 Two frequencies agree only if every field both sides state (count_min, count_max, period) matches

@@ -48,9 +48,11 @@ class NoteResult:
 
 
 # Fields where, if the model and the rules give different values, the model's value is the one shown
-# (both values still go to a person).  Decided in docs/EVAL_PROTOCOL_LEO.md D15 from the F-S development
-# letters and two unused synthetic sets: it helps predominant_seizure_type and hurts epilepsy_type.
-DEFAULT_DISAGREE_LLM: tuple[str, ...] = ("clinical_seizure.predominant_seizure_type",)
+# (both values always go to a person).  Pilot default: NONE, i.e. the rules' value is shown everywhere.
+# Candidate policy CANDIDATE_DISAGREE_LLM (seizure type -> model) helped on synthetic sets but is not
+# validated on real notes; see docs/EVAL_PROTOCOL_LEO.md D15/D17 and docs/DISAGREEMENT_ADJUDICATION.md.
+DEFAULT_DISAGREE_LLM: tuple[str, ...] = ()
+CANDIDATE_DISAGREE_LLM: tuple[str, ...] = ("clinical_seizure.predominant_seizure_type",)
 
 _SHORT_PATH = {
     "epilepsy_type": "clinical_seizure.epilepsy_type",
@@ -61,7 +63,8 @@ _SHORT_PATH = {
 
 
 def parse_disagree_llm(value) -> tuple[str, ...]:
-    """``None`` -> default; ``""``/``none`` -> no override; otherwise comma-separated names or claim paths."""
+    """``None`` -> default (no override); ``""``/``none`` -> no override; ``candidate`` -> the candidate policy;
+    otherwise comma-separated field names or claim paths."""
     if value is None:
         return DEFAULT_DISAGREE_LLM
     if isinstance(value, (tuple, list)):
@@ -71,6 +74,8 @@ def parse_disagree_llm(value) -> tuple[str, ...]:
     names = [n for n in names if n]
     if not names or names == ["none"]:
         return ()
+    if names == ["candidate"]:
+        return CANDIDATE_DISAGREE_LLM
     return tuple(_SHORT_PATH.get(n, n) for n in names)
 
 

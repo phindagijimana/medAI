@@ -7,7 +7,7 @@ file and system it came from are returned with it.  If a file is missing the phe
 "no evidence file", never as a guess.
 
 The configuration scored is the configuration shipped: pipeline leo-v0.5, arm L1C (base Med42-8B, two
-fixed examples, schema-constrained decoding), the model value shown on a disagreement for seizure type only (D15).  A test checks that
+fixed examples, schema-constrained decoding), the rules' value shown on a disagreement (D17).  A test checks that
 the files exist and that the arm is L1C.
 """
 
@@ -21,21 +21,21 @@ RESULTS = Path(__file__).resolve().parent.parent / "eval" / "results"
 
 DATASETS: dict[str, dict[str, Any]] = {
     "fs": {
-        "file": "leo_vs_fs_gold_v05_shipped.json", "source": "L1C",
+        "file": "leo_vs_fs_gold_v05_default.json", "source": "L1C",
         "label": "40 held-out clinic letters (Fonferko-Shadrach, UK style)",
         "unit": "letters", "text": "synthetic",
         "gold": "clinician-adjudicated annotations from the ExECT corpus (the epilepsy type in the gold is a keyword "
                 "rule over the diagnosis text)",
         "convention": "a rescue drug counts as a current ASM (the F-S gold convention)",
-        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.1-10.7; scored with the shipped configuration, section 10.13",
+        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.1-10.7; scored with the shipped configuration (no override), section 10.9",
     },
     "synth": {
-        "file": "leo_vs_synth_gold_v05_shipped.json", "source": "L1C",
+        "file": "leo_vs_synth_gold_v05_maint.json", "source": "L1C",
         "label": "30 synthetic US-style patients (143 notes)",
         "unit": "patients", "text": "synthetic",
         "gold": "the generator's own ground truth, aggregated over each patient's notes",
         "convention": "rescue drugs do not count as current ASMs",
-        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.4, 10.7, 10.13",
+        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.4, 10.7",
     },
 }
 
@@ -81,7 +81,7 @@ def _pf(src: dict, system: str, key: str) -> Optional[dict]:
 def evidence() -> dict:
     """The full evidence object for the UI and ``GET /leo/evidence``."""
     out: dict[str, Any] = {"datasets": [], "fields": {}, "claim_precision": {}, "caveats": CAVEATS,
-                           "config": "leo-v0.5, arm L1C (Med42-8B, schema-constrained); on a disagreement the model value is shown for seizure type only"}
+                           "config": "leo-v0.5, arm L1C (Med42-8B, schema-constrained); on a disagreement the rules' value is shown and the model's is kept as the alternative"}
     srcs: dict[str, Optional[dict]] = {}
     for did, d in DATASETS.items():
         raw = _load(d["file"])

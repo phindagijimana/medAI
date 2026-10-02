@@ -1,7 +1,7 @@
 {
   "environment": {
     "python": "3.11.13",
-    "host": "smdodwork04.urmc-sh.rochester.edu",
+    "host": "smdodwork05.urmc-sh.rochester.edu",
     "torch": "2.14.0+cu130",
     "cuda": "13.0",
     "cuda_available": true,
@@ -53,22 +53,22 @@
     },
     "current_drug_yes_no": {
       "n": 114,
-      "status_needs_review": 100,
-      "quote_found": 100,
+      "status_needs_review": 59,
+      "quote_found": 59,
       "answerable": 114,
-      "correct": 91,
-      "status_rejected": 11,
-      "quote_not_found": 11,
+      "correct": 94,
+      "status_rejected": 52,
+      "quote_not_found": 52,
       "status_not_documented": 3,
-      "accuracy": 0.798,
+      "accuracy": 0.825,
       "tp": 52,
-      "fp": 18,
+      "fp": 15,
       "fn": 2,
-      "precision_yes": 0.743,
+      "precision_yes": 0.776,
       "recall_yes": 0.963
     }
   },
-  "seconds_total": 4955,
+  "seconds_total": 5250,
   "rows": [
     {
       "patient": "P003000",
@@ -78,6 +78,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "The patient developed seizures at age 33. The events have been classified as focal impaired-awareness seizures.",
           "status": "needs_review",
           "ok": true
         },
@@ -85,6 +86,7 @@
           "kind": "age_at_onset",
           "expected": 33.0,
           "answer": "33",
+          "quote": "The patient developed seizures at age 33.",
           "status": "needs_review",
           "ok": true
         },
@@ -92,6 +94,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Current therapy includes topiramate and brivaracetam.",
           "status": "needs_review",
           "ok": true
         },
@@ -99,6 +102,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Briviact (brivaracetam);",
           "status": "needs_review",
           "ok": true
         },
@@ -106,20 +110,23 @@
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "No focal or generalized interictal epileptiform discharges were identified. Specifically, there were no spikes, sharp waves, spike-and-wave complexes, TIRDA, LPDs, or GPDs. No definite focal slowing was present.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "No focal or generalized interictal epileptiform discharges were identified. Specifically, there were no spikes, sharp waves, spike-and-wave complexes, TIRDA, LPDs, or GPDs. No definite focal slowing was present.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "no",
+          "quote": "No mesial temporal sclerosis or additional malformation of cortical development.",
           "status": "needs_review",
           "ok": true
         },
@@ -127,6 +134,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -134,6 +142,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -141,6 +150,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -154,6 +164,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "generalized epilepsy with generalized tonic-clonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -161,6 +172,7 @@
           "kind": "age_at_onset",
           "expected": 7.0,
           "answer": "7",
+          "quote": "The patient is an adult with a history of seizures beginning at age 7.",
           "status": "needs_review",
           "ok": true
         },
@@ -168,6 +180,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Zonegran (zonisamide).",
           "status": "needs_review",
           "ok": true
         },
@@ -175,6 +188,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Zonegran (zonisamide).",
           "status": "needs_review",
           "ok": true
         },
@@ -182,20 +196,23 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Zonegran (zonisamide).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_levetiracetam",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "The patient is currently seizure-free by the reported frequency of zero seizures per month and is considered drug responsive while taking topiramate and zonisamide.",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -203,6 +220,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -210,6 +228,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -217,6 +236,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -230,6 +250,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "45-year-old male with drug-resistant focal epilepsy due to focal cortical dysplasia, onset at age 36",
           "status": "needs_review",
           "ok": true
         },
@@ -237,6 +258,7 @@
           "kind": "age_at_onset",
           "expected": 36.0,
           "answer": "36",
+          "quote": "onset at age 36",
           "status": "needs_review",
           "ok": true
         },
@@ -244,6 +266,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "At baseline he has approximately 2 focal aware seizures/month despite perampanel, carbamazepine, and valproate.",
           "status": "needs_review",
           "ok": true
         },
@@ -251,6 +274,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "At baseline he has approximately 2 focal aware seizures/month despite perampanel, carbamazepine, and valproate.",
           "status": "needs_review",
           "ok": true
         },
@@ -258,6 +282,7 @@
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "yes",
+          "quote": "At baseline he has approximately 2 focal aware seizures/month despite perampanel, carbamazepine, and valproate.",
           "status": "needs_review",
           "ok": false
         },
@@ -265,6 +290,7 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "no",
+          "quote": "He remains on perampanel, carbamazepine, and valproate.... No interval antiseizure medication changes,...",
           "status": "rejected",
           "ok": true
         },
@@ -272,6 +298,7 @@
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "no",
+          "quote": "Structural MRI finding of focal cortical dysplasia and ongoing seizures despite three agents support continued epilepsy specialist follow-up and evaluation of additional treatment options.",
           "status": "needs_review",
           "ok": true
         },
@@ -279,6 +306,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -286,6 +314,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -293,6 +322,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -306,6 +336,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "generalized epilepsy with generalized tonic-clonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -313,6 +344,7 @@
           "kind": "age_at_onset",
           "expected": 57.0,
           "answer": "57",
+          "quote": "The patient is an adult whose seizures began at age 57.",
           "status": "needs_review",
           "ok": true
         },
@@ -320,6 +352,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Tegretol (carbamazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -327,6 +360,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "no",
           "answer": "no",
+          "quote": "",
           "status": "rejected",
           "ok": true
         },
@@ -334,13 +368,15 @@
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The current antiseizure medication is carbamazepine.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -348,6 +384,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -355,6 +392,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -368,6 +406,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "The reason for referral was evaluation and management of generalized epilepsy with myoclonic seizures.",
           "status": "needs_review",
           "ok": true
         },
@@ -375,6 +414,7 @@
           "kind": "age_at_onset",
           "expected": 13.0,
           "answer": "13",
+          "quote": "Seizures began at age 13",
           "status": "needs_review",
           "ok": true
         },
@@ -382,6 +422,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient\u2019s epilepsy is considered drug responsive and is currently treated with Fycompa (perampanel).",
           "status": "needs_review",
           "ok": true
         },
@@ -389,13 +430,15 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "He is currently treated with Fycompa (perampanel) monotherapy",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_topiramate",
           "expected": "no",
           "answer": "no",
+          "quote": "Current treatment consists of Fycompa (perampanel).",
           "status": "rejected",
           "ok": true
         },
@@ -403,6 +446,7 @@
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Brain MRI demonstrated hippocampal sclerosis",
           "status": "needs_review",
           "ok": true
         },
@@ -410,6 +454,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -417,6 +462,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -424,6 +470,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -437,6 +484,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "generalized epilepsy with myoclonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -444,6 +492,7 @@
           "kind": "age_at_onset",
           "expected": 28.0,
           "answer": "28",
+          "quote": "The patient reported seizure onset at 28 years of age.",
           "status": "needs_review",
           "ok": true
         },
@@ -451,6 +500,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -458,20 +508,23 @@
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Current antiseizure therapy is valproate",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Current antiseizure therapy is valproate",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Brain MRI was reported to demonstrate hippocampal sclerosis.",
           "status": "needs_review",
           "ok": true
         },
@@ -479,6 +532,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -486,6 +540,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -493,6 +548,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -506,6 +562,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "generalized epilepsy with generalized tonic-clonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -513,6 +570,7 @@
           "kind": "age_at_onset",
           "expected": 36.0,
           "answer": "36",
+          "quote": "seizures began at 36 years of age",
           "status": "needs_review",
           "ok": true
         },
@@ -520,6 +578,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with zonisamide and brivaracetam.",
           "status": "needs_review",
           "ok": true
         },
@@ -527,6 +586,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with zonisamide and brivaracetam.",
           "status": "needs_review",
           "ok": true
         },
@@ -534,20 +594,23 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Current antiseizure medications are zonisamide and brivaracetam.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "Current antiseizure medications are zonisamide and brivaracetam",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -555,6 +618,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -562,6 +626,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -575,6 +640,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "drug-resistant generalized epilepsy with generalized tonic-clonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -582,6 +648,7 @@
           "kind": "age_at_onset",
           "expected": 26.0,
           "answer": "26",
+          "quote": "The patient reported seizure onset at age 26.",
           "status": "needs_review",
           "ok": true
         },
@@ -589,6 +656,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient continues to have frequent seizures despite treatment with three antiseizure medications: Fycompa (perampanel), Keppra (levetiracetam), and Tegretol (carbamazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -596,6 +664,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient continues to have frequent seizures despite treatment with three antiseizure medications: Fycompa (perampanel), Keppra (levetiracetam), and Tegretol (carbamazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -603,20 +672,23 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "He continues to have an ongoing seizure burden of approximately two generalized tonic-clonic seizures per week despite treatment with multiple concurrent ASMs. His current regimen consists of Fycompa (perampanel), Keppra (levetiracetam),",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "He continues to have an ongoing seizure burden of approximately two generalized tonic-clonic seizures per week despite treatment with multiple concurrent ASMs. His current regimen consists of Fycompa (perampanel), Keppra (levetiracetam),",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -624,6 +696,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -631,6 +704,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -644,6 +718,7 @@
           "kind": "epilepsy_type",
           "expected": "unknown",
           "answer": "unknown",
+          "quote": "The available history does not establish whether the epilepsy is focal, generalized, or combined; therefore, the epilepsy type remains unknown at this time.",
           "status": "needs_review",
           "ok": true
         },
@@ -651,6 +726,7 @@
           "kind": "age_at_onset",
           "expected": 54.0,
           "answer": "54",
+          "quote": "The patient is an adult whose seizures began at age 54.",
           "status": "needs_review",
           "ok": true
         },
@@ -658,6 +734,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Briviact (brivaracetam) and Tegretol (carbamazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -665,6 +742,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Briviact (brivaracetam) and Tegretol (carbamazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -672,20 +750,23 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with Briviact (brivaracetam) and Tegretol (carbamazepine).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with brivaracetam and carbamazepine and reports no seizures during the past month.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Brain MRI has demonstrated hippocampal sclerosis, supporting a structural etiology.",
           "status": "needs_review",
           "ok": true
         },
@@ -693,6 +774,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -700,6 +782,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -707,6 +790,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -720,6 +804,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "The patient presented for an initial epilepsy consultation. Seizures began at age 70. The documented seizure type is focal to bilateral tonic-clonic. The available history classifies the epilepsy as focal and structural, with encephalomalac",
           "status": "needs_review",
           "ok": true
         },
@@ -727,6 +812,7 @@
           "kind": "age_at_onset",
           "expected": 70.0,
           "answer": "70",
+          "quote": "Seizures began at age 70",
           "status": "needs_review",
           "ok": true
         },
@@ -734,6 +820,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -741,6 +828,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -748,20 +836,23 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Topamax (topiramate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Topamax (topiramate).",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "yes",
+          "quote": "MRI evidence of encephalomalacia",
           "status": "needs_review",
           "ok": false
         },
@@ -769,6 +860,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -776,6 +868,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -783,6 +876,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -796,6 +890,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "The patient is a 66-year-old woman with drug-responsive generalized epilepsy of unknown etiology, characterized by generalized tonic-clonic seizures beginning at age 56.",
           "status": "needs_review",
           "ok": true
         },
@@ -803,6 +898,7 @@
           "kind": "age_at_onset",
           "expected": 56.0,
           "answer": "56",
+          "quote": "Seizure onset at age 56",
           "status": "needs_review",
           "ok": true
         },
@@ -810,6 +906,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "She remains treated with Briviact (brivaracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -817,6 +914,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "She remains treated with Briviact (brivaracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -824,20 +922,23 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She remains treated with Briviact (brivaracetam) and Topamax (topiramate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She remains treated with Briviact (brivaracetam) and Topamax (topiramate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -845,6 +946,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -852,6 +954,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -865,6 +968,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "The patient is a 54-year-old woman with structurally mediated generalized epilepsy characterized by generalized tonic-clonic seizures. Seizure onset was at age 37. As previously documented, brain MRI demonstrated focal cortical dysplasia, .",
           "status": "rejected",
           "ok": true
         },
@@ -872,6 +976,7 @@
           "kind": "age_at_onset",
           "expected": 37.0,
           "answer": "37",
+          "quote": "Seizure onset was at age 37.",
           "status": "needs_review",
           "ok": true
         },
@@ -879,6 +984,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "She remains on Tegretol (carbamazepine) monotherapy.",
           "status": "needs_review",
           "ok": true
         },
@@ -886,20 +992,23 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She remains on Tegretol (carbamazepine) monotherapy.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
-          "answer": "yes",
-          "status": "needs_review",
-          "ok": false
+          "answer": "no",
+          "quote": "No additional antiseizure medications are currently listed",
+          "status": "rejected",
+          "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "no",
+          "quote": "brain MRI has demonstrated focal cortical dysplasia, supporting a structural etiology. No hippocampal sclerosis is noted in today\u2019s documentation.",
           "status": "rejected",
           "ok": true
         },
@@ -907,6 +1016,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -914,6 +1024,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -921,6 +1032,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -934,6 +1046,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "focal epilepsy with focal impaired awareness seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -941,6 +1054,7 @@
           "kind": "age_at_onset",
           "expected": 38.0,
           "answer": "38",
+          "quote": "The patient\u2019s seizures began at age 38.",
           "status": "needs_review",
           "ok": true
         },
@@ -948,6 +1062,7 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The epilepsy is currently classified as drug-responsive. The patient remains on dual antiseizure medication therapy with Lamictal (lamotrigine) and Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -955,6 +1070,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The epilepsy is currently classified as drug-responsive. The patient remains on dual antiseizure medication therapy with Lamictal (lamotrigine) and Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -962,6 +1078,7 @@
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "yes",
+          "quote": "The patient remains on dual antiseizure medication therapy with Lamictal (lamotrigine) and Depakote (valproate).",
           "status": "needs_review",
           "ok": false
         },
@@ -969,13 +1086,15 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient remains on dual antiseizure medication therapy with Lamictal (lamotrigine) and Depakote (valproate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -983,6 +1102,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -990,6 +1110,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1003,6 +1124,7 @@
           "kind": "epilepsy_type",
           "expected": "combined_focal_generalized",
           "answer": "combined_focal_generalized",
+          "quote": "The available history supports combined generalized and focal epilepsy of unknown etiology.",
           "status": "needs_review",
           "ok": true
         },
@@ -1010,6 +1132,7 @@
           "kind": "age_at_onset",
           "expected": 23.0,
           "answer": "23",
+          "quote": "The patient is an adult whose seizures began at age 23.",
           "status": "needs_review",
           "ok": true
         },
@@ -1017,6 +1140,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient continues to have frequent seizures while taking three antiseizure medications: Lamictal (lamotrigine), Briviact (brivaracetam), and Vimpat (lacosamide).",
           "status": "needs_review",
           "ok": true
         },
@@ -1024,6 +1148,7 @@
           "kind": "yes_no_drug_lacosamide",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient continues to have frequent seizures while taking three antiseizure medications: Lamictal (lamotrigine), Briviact (brivaracetam), and Vimpat (lacosamide).",
           "status": "needs_review",
           "ok": true
         },
@@ -1031,6 +1156,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "no",
+          "quote": "No seizures were documented over the last 24 hours by patient report or EMU staff documentation available for this note. Current antiseizure medications are lamotrigine, brivaracetam, and lacosamide; continue medication management according",
           "status": "rejected",
           "ok": true
         },
@@ -1038,6 +1164,7 @@
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "no",
+          "quote": "No seizures were documented over the last 24 hours by patient report or EMU staff documentation available for this note. Current antiseizure medications are lamotrigine, brivaracetam, and lacosamide; continue medication management according",
           "status": "rejected",
           "ok": true
         },
@@ -1045,6 +1172,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1052,6 +1180,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1059,6 +1188,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1072,6 +1202,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "Drug-resistant generalized epilepsy with typical absence seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1079,6 +1210,7 @@
           "kind": "age_at_onset",
           "expected": 38.0,
           "answer": "38",
+          "quote": "The patient developed seizures at age 38.",
           "status": "needs_review",
           "ok": true
         },
@@ -1086,6 +1218,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "no",
+          "quote": "She continues to have events despite concurrent treatment with Tegretol (carbamazepine), Keppra (levetiracetam), and Depakote (valproate), meeting clinical criteria for drug-resistant epilepsy.",
           "status": "needs_review",
           "ok": false
         },
@@ -1093,6 +1226,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "no",
+          "quote": "She continues to have events despite concurrent treatment with Tegretol (carbamazepine), Keppra (levetiracetam), and Depakote (valproate), meeting clinical criteria for drug-resistant epilepsy.",
           "status": "needs_review",
           "ok": false
         },
@@ -1100,6 +1234,7 @@
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "yes",
+          "quote": "She continues to have events despite concurrent treatment with Tegretol (carbamazepine), Keppra (levetiracetam), and Depakote (valproate), meeting clinical criteria for drug-resistant epilepsy.",
           "status": "needs_review",
           "ok": false
         },
@@ -1107,13 +1242,15 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Her current antiseizure regimen consists of Tegretol (carbamazepine), Keppra (levetiracetam), and Depakote (valproate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1121,6 +1258,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1128,6 +1266,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1141,6 +1280,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "Evaluation and management of focal aware seizures.",
           "status": "needs_review",
           "ok": true
         },
@@ -1148,6 +1288,7 @@
           "kind": "age_at_onset",
           "expected": 64.0,
           "answer": "64",
+          "quote": "The patient is an adult with focal epilepsy that began at age 64.",
           "status": "needs_review",
           "ok": true
         },
@@ -1155,6 +1296,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is presently treated with Briviact (brivaracetam) and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1162,6 +1304,7 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is presently treated with Briviact (brivaracetam) and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1169,6 +1312,7 @@
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1176,13 +1320,15 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is presently treated with Briviact (brivaracetam) and Trileptal (oxcarbazepine).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "no",
+          "quote": "No hippocampal volume loss or abnormal T2/FLAIR hyperintensity. The amygdalae and parahippocampal gyri are unremarkable. No evidence of mesial temporal sclerosis.",
           "status": "needs_review",
           "ok": true
         },
@@ -1190,6 +1336,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1197,6 +1344,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1204,6 +1352,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1217,6 +1366,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "Chief Complaint: Follow-up generalized epilepsy with myoclonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1224,6 +1374,7 @@
           "kind": "age_at_onset",
           "expected": 11.0,
           "answer": "11",
+          "quote": "seizure onset at age 11",
           "status": "needs_review",
           "ok": true
         },
@@ -1231,6 +1382,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "She remains on combination therapy with Trileptal (oxcarbazepine) and Keppra (levetiracetam).",
           "status": "needs_review",
           "ok": true
         },
@@ -1238,6 +1390,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "She remains on combination therapy with Trileptal (oxcarbazepine) and Keppra (levetiracetam).",
           "status": "needs_review",
           "ok": true
         },
@@ -1245,6 +1398,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "no",
+          "quote": "She remains on combination therapy with Trileptal (oxcarbazepine) and Keppra (levetiracetam). No medication changes have been made for today\u2019s visit.",
           "status": "rejected",
           "ok": true
         },
@@ -1252,13 +1406,15 @@
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She remains on combination therapy with Trileptal (oxcarbazepine) and Keppra (levetiracetam).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "0 seizures/month",
+          "quote": "She remains seizure-free, with a current reported seizure frequency of 0 per month",
           "status": "needs_review",
           "ok": null
         },
@@ -1266,6 +1422,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "no",
+          "quote": "no pet dog",
           "status": "rejected",
           "ok": null
         },
@@ -1273,6 +1430,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1286,6 +1444,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "focal epilepsy characterized by focal impaired-awareness seizures, with onset at approximately age 10. Etiology remains unknown.",
           "status": "needs_review",
           "ok": true
         },
@@ -1293,6 +1452,7 @@
           "kind": "age_at_onset",
           "expected": 10.0,
           "answer": "10",
+          "quote": "seizures, with onset at approximately age 10",
           "status": "needs_review",
           "ok": true
         },
@@ -1300,6 +1460,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "He is currently treated with Trileptal (oxcarbazepine) and Fycompa (perampanel).",
           "status": "needs_review",
           "ok": true
         },
@@ -1307,6 +1468,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Continue Trileptal (oxcarbazepine) at the current prescribed dose and frequency.",
           "status": "needs_review",
           "ok": true
         },
@@ -1314,20 +1476,23 @@
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
+          "quote": "Continue Trileptal (oxcarbazepine) at the current prescribed dose and frequency. Continue Fycompa (perampanel) at the current prescribed dose and frequency. No antiseizure medication changes today given current seizure control.",
           "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
-          "answer": "yes",
-          "status": "needs_review",
-          "ok": false
+          "answer": "no",
+          "quote": "Continue Trileptal (oxcarbazepine) at the current prescribed dose and frequency. Continue Fycompa (perampanel) at the current prescribed dose and frequency. No antiseizure medication changes today given current seizure control.",
+          "status": "rejected",
+          "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1335,6 +1500,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1342,6 +1508,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1349,6 +1516,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1362,6 +1530,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "The patient has focal epilepsy with focal impaired-awareness seizures beginning at age 24. The current reported seizure burden is approximately five events per month. The epilepsy is attributed to a genetic etiology on the basis of a causat",
           "status": "needs_review",
           "ok": true
         },
@@ -1369,6 +1538,7 @@
           "kind": "age_at_onset",
           "expected": 24.0,
           "answer": "24",
+          "quote": "The patient is an adult who developed seizures at age 24. The current seizure type is described as focal impaired-awareness seizures, occurring approximately five times per month.",
           "status": "needs_review",
           "ok": true
         },
@@ -1376,6 +1546,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Keppra (levetiracetam) and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1383,6 +1554,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Keppra (levetiracetam) and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1390,20 +1562,23 @@
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Continue Keppra (levetiracetam) and Trileptal (oxcarbazepine) at the established current doses pending formal medication reconciliation. No medication change can be safely specified without confirmed doses, adherence, and tolerability.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She remains on dual antiseizure therapy with Keppra (levetiracetam) and Trileptal (oxcarbazepine).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1411,6 +1586,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1418,6 +1594,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1425,6 +1602,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1438,6 +1616,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "focal epilepsy with ongoing focal impaired-awareness seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1445,6 +1624,7 @@
           "kind": "age_at_onset",
           "expected": 21.0,
           "answer": "21",
+          "quote": "The patient reported seizure onset at 21 years of age.",
           "status": "needs_review",
           "ok": true
         },
@@ -1452,6 +1632,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Zonegran (zonisamide) and Fycompa (perampanel).",
           "status": "needs_review",
           "ok": true
         },
@@ -1459,6 +1640,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Zonegran (zonisamide) and Fycompa (perampanel).",
           "status": "needs_review",
           "ok": true
         },
@@ -1466,20 +1648,23 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with Zonegran (zonisamide) and Fycompa (perampanel).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with Zonegran (zonisamide) and Fycompa (perampanel).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "no",
+          "quote": "The available MRI report was reviewed and was reported as normal. The actual MRI images were not available for direct review. No identified lesion, including MTS or another focal structural abnormality, was described in the supplied report.",
           "status": "needs_review",
           "ok": true
         },
@@ -1487,6 +1672,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1494,6 +1680,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1501,6 +1688,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1514,6 +1702,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "The primary seizure type has been classified as generalized tonic-clonic seizures in the setting of generalized epilepsy.",
           "status": "needs_review",
           "ok": true
         },
@@ -1521,6 +1710,7 @@
           "kind": "age_at_onset",
           "expected": 8.0,
           "answer": "8",
+          "quote": "The patient developed seizures at 8 years of age.",
           "status": "needs_review",
           "ok": true
         },
@@ -1528,6 +1718,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently maintained on Fycompa (perampanel), Keppra (levetiracetam), and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1535,6 +1726,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently maintained on Fycompa (perampanel), Keppra (levetiracetam), and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1542,6 +1734,7 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "no",
+          "quote": "Prior treatment included Topamax (topiramate), discontinued because of inadequate seizure control; Vimpat (lacosamide), discontinued because of sedation; Tegretol (carbamazepine), discontinued because of cognitive side effects; and Lamictal",
           "status": "needs_review",
           "ok": true
         },
@@ -1549,6 +1742,7 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "yes",
+          "quote": "He continues all three current ASMs (Fycompa, Keppra, and Trileptal).",
           "status": "rejected",
           "ok": false
         },
@@ -1556,6 +1750,7 @@
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The available MRI report was reviewed and describes hippocampal sclerosis.",
           "status": "needs_review",
           "ok": true
         },
@@ -1563,6 +1758,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1570,6 +1766,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1577,6 +1774,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1590,6 +1788,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "Ms. xxx is a XX-year-old adult with seizure onset at age 11. The available hx is consistent with focal epilepsy characterized by focal impaired awareness seizures.",
           "status": "needs_review",
           "ok": true
         },
@@ -1597,6 +1796,7 @@
           "kind": "age_at_onset",
           "expected": 11.0,
           "answer": "11",
+          "quote": "Ms. xxx is a XX-year-old adult with seizure onset at age 11",
           "status": "needs_review",
           "ok": true
         },
@@ -1604,6 +1804,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "the patient is presently seizure-free on dual antiseizure medication therapy with levetiracetam and perampanel.",
           "status": "needs_review",
           "ok": true
         },
@@ -1611,6 +1812,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Fycompa (perampanel).",
           "status": "needs_review",
           "ok": true
         },
@@ -1618,20 +1820,23 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Fycompa (perampanel).",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "The patient is currently taking Keppra (levetiracetam) and Fycompa (perampanel).",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The epilepsy is considered structural in etiology based on the reported MRI finding of hippocampal sclerosis.",
           "status": "needs_review",
           "ok": true
         },
@@ -1639,6 +1844,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1646,6 +1852,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1653,6 +1860,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1666,6 +1874,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "generalized epilepsy with generalized tonic-clonic seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1673,6 +1882,7 @@
           "kind": "age_at_onset",
           "expected": 55.0,
           "answer": "55",
+          "quote": "Seizure onset was reported at age 55",
           "status": "needs_review",
           "ok": true
         },
@@ -1680,6 +1890,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The current antiseizure medication regimen consisted of Keppra (levetiracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -1687,6 +1898,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The current antiseizure medication regimen consisted of Keppra (levetiracetam) and Topamax (topiramate).",
           "status": "needs_review",
           "ok": true
         },
@@ -1694,20 +1906,23 @@
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "He is currently treated with levetiracetam and topiramate. No interval seizure has been entered in the seizure calendar since the recent consultation, although the observation period is brief.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_carbamazepine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The current antiseizure medication regimen consisted of Keppra (levetiracetam) and Topamax (topiramate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1715,6 +1930,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1722,6 +1938,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1735,6 +1952,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "39-year-old woman with h/o focal epilepsy with focal to bilateral tonic-clonic seizures, onset at age 21",
           "status": "needs_review",
           "ok": true
         },
@@ -1742,6 +1960,7 @@
           "kind": "age_at_onset",
           "expected": 21.0,
           "answer": "21",
+          "quote": "seizure onset at age 21",
           "status": "needs_review",
           "ok": true
         },
@@ -1749,6 +1968,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Current ASMs are Depakote (valproate) 500 mg BID and Topamax (topiramate) 100 mg BID.",
           "status": "needs_review",
           "ok": true
         },
@@ -1756,6 +1976,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Continue Depakote (valproate) 500 mg BID.  \n   - Continue Topamax (topiramate) 100 mg BID.  \n   - No ASM change today given sustained seizure control. Refills provided.",
           "status": "needs_review",
           "ok": true
         },
@@ -1763,6 +1984,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "no",
           "answer": "no",
+          "quote": "Current ASMs are Depakote (valproate) 500 mg BID and Topamax (topiramate) 100 mg BID. No ASM change today given sustained seizure control.",
           "status": "rejected",
           "ok": true
         },
@@ -1770,6 +1992,7 @@
           "kind": "yes_no_drug_valproate",
           "expected": "no",
           "answer": "yes",
+          "quote": "Continue Depakote (valproate) 500 mg BID",
           "status": "needs_review",
           "ok": false
         },
@@ -1777,6 +2000,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1784,6 +2008,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1791,6 +2016,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1804,6 +2030,7 @@
           "kind": "epilepsy_type",
           "expected": "combined_focal_generalized",
           "answer": "combined_focal_generalized",
+          "quote": "The patient presented for an initial evaluation of epilepsy beginning at age 10. The available clinical description classifies the habitual events as focal impaired-awareness seizures. The epilepsy has been characterized as combined  [..] .",
           "status": "rejected",
           "ok": true
         },
@@ -1811,6 +2038,7 @@
           "kind": "age_at_onset",
           "expected": 10.0,
           "answer": "10",
+          "quote": "The patient presented for an initial evaluation of epilepsy beginning at age 10. The available clinical description classifies the habitual events as focal impaired-awareness seizures.",
           "status": "needs_review",
           "ok": true
         },
@@ -1818,6 +2046,7 @@
           "kind": "yes_no_drug_topiramate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -1825,6 +2054,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -1832,20 +2062,23 @@
           "kind": "yes_no_drug_zonisamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "The patient is currently treated with Topamax (topiramate) and Depakote (valproate).",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "Previously trialed Lamictal (lamotrigine), discontinued due to inadequate seizure control. This is a prior ASM and should not be included with the active medications.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1853,6 +2086,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1860,6 +2094,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1867,6 +2102,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1880,6 +2116,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "focal epilepsy with focal impaired-awareness seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1887,6 +2124,7 @@
           "kind": "age_at_onset",
           "expected": 75.0,
           "answer": "75",
+          "quote": "The patient is an adult whose seizures began at age 75.",
           "status": "needs_review",
           "ok": true
         },
@@ -1894,6 +2132,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "He remains on Tegretol (carbamazepine) 200 mg BID and Depakote (valproate) 500 mg BID",
           "status": "needs_review",
           "ok": true
         },
@@ -1901,6 +2140,7 @@
           "kind": "yes_no_drug_carbamazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The epilepsy has been described as drug responsive on the current antiseizure medication regimen of Tegretol (carbamazepine) and Depakote (valproate).",
           "status": "needs_review",
           "ok": true
         },
@@ -1908,6 +2148,7 @@
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "no",
+          "quote": "The medication record identifies carbamazepine and valproate as current ASMs. Perampanel was used previously and stopped because of rash. No additional medication listed.",
           "status": "rejected",
           "ok": true
         },
@@ -1915,13 +2156,15 @@
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The epilepsy has been described as drug responsive on the current antiseizure medication regimen of Tegretol (carbamazepine) and Depakote (valproate).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_hs",
           "expected": "yes",
           "answer": "yes",
+          "quote": "Prior MRI reportedly demonstrated hippocampal sclerosis, supporting a structural etiology for the focal epilepsy.",
           "status": "needs_review",
           "ok": true
         },
@@ -1929,6 +2172,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1936,6 +2180,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -1943,6 +2188,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -1956,6 +2202,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "focal epilepsy with ongoing focal impaired awareness seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -1963,6 +2210,7 @@
           "kind": "age_at_onset",
           "expected": 7.0,
           "answer": "7",
+          "quote": "Seizures began at approximately 7 years of age.",
           "status": "needs_review",
           "ok": true
         },
@@ -1970,6 +2218,7 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Fycompa (perampanel) and Lamictal (lamotrigine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1977,6 +2226,7 @@
           "kind": "yes_no_drug_perampanel",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Fycompa (perampanel) and Lamictal (lamotrigine).",
           "status": "needs_review",
           "ok": true
         },
@@ -1984,6 +2234,7 @@
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1991,6 +2242,7 @@
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -1998,6 +2250,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2005,6 +2258,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2012,6 +2266,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -2025,6 +2280,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "The patient has a hx of seizures beginning at age 7 years. The established seizure type is focal impaired-awareness seizure.... The epilepsy has been classified as focal, with a genetic etiology.",
           "status": "rejected",
           "ok": true
         },
@@ -2032,6 +2288,7 @@
           "kind": "age_at_onset",
           "expected": 7.0,
           "answer": "7",
+          "quote": "The patient has a hx of seizures beginning at age 7 years.",
           "status": "needs_review",
           "ok": true
         },
@@ -2039,6 +2296,7 @@
           "kind": "yes_no_drug_sodiumvalproate",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with valproate and has been drug responsive. Current seizure frequency is 0 per month, consistent with ongoing seizure freedom.",
           "status": "needs_review",
           "ok": true
         },
@@ -2046,13 +2304,15 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "She is maintained on Depakote (valproate) monotherapy.",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "yes_no_drug_carbamazepine",
           "expected": "no",
           "answer": "no",
+          "quote": "The patient is currently treated with valproate and has been drug responsive. Current seizure frequency is 0 per month, consistent with ongoing seizure freedom. No breakthrough events were reported in the information provided for this ... .",
           "status": "rejected",
           "ok": true
         },
@@ -2060,6 +2320,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2067,6 +2328,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2074,6 +2336,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -2087,6 +2350,7 @@
           "kind": "epilepsy_type",
           "expected": "generalized",
           "answer": "generalized",
+          "quote": "Generalized epilepsy with generalized tonic-clonic seizures beginning at age 6, currently reported at approximately two seizures per week.",
           "status": "needs_review",
           "ok": true
         },
@@ -2094,6 +2358,7 @@
           "kind": "age_at_onset",
           "expected": 6.0,
           "answer": "6",
+          "quote": "Generalized epilepsy with generalized tonic-clonic seizures beginning at age 6",
           "status": "needs_review",
           "ok": true
         },
@@ -2101,6 +2366,7 @@
           "kind": "yes_no_drug_levetiracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The patient is currently treated with Keppra (levetiracetam).",
           "status": "needs_review",
           "ok": true
         },
@@ -2108,20 +2374,23 @@
           "kind": "yes_no_drug_lamotrigine",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "She remains on Keppra (levetiracetam) 1000 mg BID",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_drug_lacosamide",
           "expected": "no",
           "answer": "yes",
-          "status": "needs_review",
+          "quote": "She remains on Keppra (levetiracetam) 1000 mg BID",
+          "status": "rejected",
           "ok": false
         },
         {
           "kind": "yes_no_hs",
           "expected": "no",
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": false
         },
@@ -2129,6 +2398,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2136,6 +2406,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2143,6 +2414,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -2156,6 +2428,7 @@
           "kind": "epilepsy_type",
           "expected": "focal",
           "answer": "focal",
+          "quote": "drug-resistant focal epilepsy with focal impaired-awareness seizures",
           "status": "needs_review",
           "ok": true
         },
@@ -2163,6 +2436,7 @@
           "kind": "age_at_onset",
           "expected": 63.0,
           "answer": "63",
+          "quote": "The patient is an adult whose seizures began at age 63.",
           "status": "needs_review",
           "ok": true
         },
@@ -2170,6 +2444,7 @@
           "kind": "yes_no_drug_oxcarbazepine",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The current regimen consists of Briviact (brivaracetam), Depakote (valproate), Topamax (topiramate), and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
@@ -2177,27 +2452,31 @@
           "kind": "yes_no_drug_brivaracetam",
           "expected": "yes",
           "answer": "yes",
+          "quote": "The current regimen consists of Briviact (brivaracetam), Depakote (valproate), Topamax (topiramate), and Trileptal (oxcarbazepine).",
           "status": "needs_review",
           "ok": true
         },
         {
           "kind": "yes_no_drug_clobazam",
           "expected": "no",
-          "answer": "yes",
-          "status": "needs_review",
-          "ok": false
+          "answer": "no",
+          "quote": "No medication changes were made for this study.",
+          "status": "rejected",
+          "ok": true
         },
         {
           "kind": "yes_no_drug_phenytoin",
           "expected": "no",
           "answer": "no",
-          "status": "needs_review",
+          "quote": "The current regimen consists of Briviact (brivaracetam), Depakote (valproate), Topamax (topiramate), and Trileptal (oxcarbazepine).",
+          "status": "rejected",
           "ok": true
         },
         {
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2205,6 +2484,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         },
@@ -2212,6 +2492,7 @@
           "kind": "unanswerable",
           "expected": null,
           "answer": "not_documented",
+          "quote": "",
           "status": "not_documented",
           "ok": null
         }
@@ -2220,5 +2501,5 @@
   ],
   "note": "Answers are LEO's: a quote must be found in the note (status needs_review) or the answer is rejected. 'accuracy' counts only answers equal to the reference. Documents are a patient's notes joined.",
   "stage": "ask",
-  "written_utc": "2026-10-02T07:00:04+00:00"
+  "written_utc": "2026-10-02T19:14:39+00:00"
 }

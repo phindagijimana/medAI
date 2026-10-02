@@ -282,6 +282,34 @@ def cmd_rollup(args) -> int:
     return 0
 
 
+def cmd_disagreements(args) -> int:
+    """Export model-vs-rules disagreements for blind adjudication, or score an adjudicated sheet."""
+    from services import leo_disagree as ld
+    if args.score:
+        res = ld.score_cases(ld.load(Path(args.score).expanduser()), args.shown)
+        for field, r in res.items():
+            print(f"{field}: {r['n_cases']} cases, {r['n_scored']} scored "
+                  f"(both {r['both']}, neither {r['neither']}, unclear {r['unclear']}, not yet adjudicated {r['unadjudicated']})")
+            for reader in ("rules", "model"):
+                x = r[f"{reader}_right"]
+                rate = "n/a" if x["rate"] is None else f"{x['rate']:.2f} [{x['ci95'][0]:.2f}, {x['ci95'][1]:.2f}]"
+                print(f"    {reader:<6} right {x['k']}/{x['n']}  {rate}")
+        return 0
+    if not args.table:
+        raise SystemExit("give the claims table (RESULT.claims.csv), or --score SHEET")
+    src = Path(args.table).expanduser()
+    import pandas as pd
+    claims = pd.read_csv(src, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    cases = ld.export_cases(claims)
+    dest = Path(args.output) if args.output else src.with_name(src.name.replace(".claims.csv", "") + ".disagreements.csv")
+    if dest.exists() and not args.force:
+        raise SystemExit(f"{dest} exists; use --force to overwrite (adjudications in it would be lost)")
+    cases.to_csv(dest, index=False, encoding="utf-8-sig")
+    print(f"[leo] wrote {dest}: {len(cases)} disagreement(s). Remove the key_A_is column before giving it to an adjudicator, "
+          f"keep a copy with it; score with: leo disagreements --score <copy with key>")
+    return 0
+
+
 def cmd_extract(args) -> int:
     phen, asks = _selection(args)
     text = sys.stdin.read() if args.note == "-" else Path(args.note).read_text(encoding="utf-8")
@@ -490,7 +518,8 @@ def _common(sp, *, model=True):
         sp.add_argument("--chunk-chars", type=int, default=8000, help="split notes longer than this (default 8000)")
         sp.add_argument("--disagree-llm", default=None,
                         help="fields where the model's value is shown when model and rules disagree "
-                             "(default predominant_seizure_type; 'none' = rules value everywhere)")
+                             "(default: none, the rules' value is shown and the model's goes to the 'alternative'; "
+                             "'candidate' = seizure type, not validated on real notes)")
 
 
 def main(argv=None) -> int:
@@ -563,6 +592,15 @@ def main(argv=None) -> int:
     sp.add_argument("--date-col", default="", help="note date column (default: later row = later note)")
     sp.add_argument("-o", "--output", default=None, help="default: <table>.patients.csv")
     sp.set_defaults(fn=cmd_rollup)
+
+    sp = sub.add_parser("disagreements", help="export model-vs-rules disagreements for blind adjudication, or score them")
+    sp.add_argument("table", nargs="?", help="RESULT.claims.csv from a run")
+    sp.add_argument("-o", "--output", default=None, help="default: <result>.disagreements.csv")
+    sp.add_argument("--force", action="store_true")
+    sp.add_argument("--score", default=None, help="an adjudicated sheet (with key_A_is) to tally per field")
+    sp.add_argument("--shown", choices=["rules", "model"], default="rules",
+                    help="who produced the value LEO displayed (default policy: rules)")
+    sp.set_defaults(fn=cmd_disagreements)
 
     sp = sub.add_parser("extract", help="one note")
     sp.add_argument("note", help="text file or - for stdin")

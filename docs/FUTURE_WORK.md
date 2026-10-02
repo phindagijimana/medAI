@@ -162,7 +162,7 @@ Not started. Order is by value for the LEO paper.
 
 1. ~~Validate leo-v0.4 on an unused set.~~ Done on `ext` and `v1v2` (EVAL_PROTOCOL_LEO 10.13); Arm H2 synthetic runs still to score. Original note: Run the LLM arms on the synth-v2 / synth-v1 notes already on disk (no new generation) and score with `scripts/score_leo_vs_synth_gold.py`. The four v0.4 changes were designed on the notes they were first scored on.
 2. **Current-ASM convention (SCOPE_DECISIONS D6).** Built in leo-v0.5 (rescue path, two views). Remaining: a clinician picks the headline view; check the rescue cues on US notes (the rule has fired on 1 F-S drug so far); add a role split to the `llm` system for a like-for-like comparison.
-3. ~~Confirm "LLM wins on disagreement"~~ Done 2026-10-02 (D15): seizure type model-primary, other scalar fields specialist-primary. Still open: confirm on real clinic notes; the synthetic sets share a generator with the rules' development data.
+3. **Per-field disagreement policy.** Checked on unused synthetic sets (D15) but not adopted: the default stays "rules' value everywhere" (D17) until adjudicated disagreements from real notes exist. Tooling and decision rule: `DISAGREEMENT_ADJUDICATION.md` (`bin/leo disagreements`).
 4. **Hard-slice scoring** from existing gold: patients whose notes carry prior, denied, hedged or hypothetical ASM or seizure statements (polish gold has counts per slice).
 5. **Learned auto-accept calibrator** on v1/v2 outputs, compared with the rule-based routing, so the rules are not tuned on test data.
 6. ~~Arm H2~~ Trained and scored on the F-S letters (0.743 alone, 10.13); synthetic runs queued.

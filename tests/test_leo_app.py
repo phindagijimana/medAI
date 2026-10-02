@@ -343,7 +343,7 @@ def test_evidence_numbers_are_read_from_the_result_files():
         assert d["systems"]["leo_review"]["micro_f1"] == round(src["systems"]["leo_review"]["micro_f1"], 3)
         assert d["text"] == "synthetic"
     fs = ev["fields"]["current_asms"][0]["fs"]["reviewed"]
-    raw = json.loads((le.RESULTS / "leo_vs_fs_gold_v05_shipped.json").read_text())
+    raw = json.loads((le.RESULTS / "leo_vs_fs_gold_v05_default.json").read_text())
     assert fs["f1"] == round(raw["sources"]["L1C"]["systems"]["leo_review"]["per_field"]["current_asms"]["f1"], 3)
     assert fs["n"] == 37
     assert any("synthetic" in c for c in ev["caveats"]) and any("No real clinical note" in c for c in ev["caveats"])
@@ -358,10 +358,11 @@ def test_evidence_reports_missing_files_instead_of_inventing(monkeypatch, tmp_pa
 
 
 def test_shipped_configuration_is_the_scored_configuration():
-    """Only predominant_seizure_type shows the model's value on a disagreement (D15); it is what was scored."""
+    """Pilot default (D17): the rules' value is shown on a disagreement; the seizure-type policy is opt-in."""
     from services.leo_runtime import LeoRuntime, parse_disagree_llm
-    assert LeoRuntime(backend=None, use_llm=False).disagree_llm == ("clinical_seizure.predominant_seizure_type",)
-    assert parse_disagree_llm("none") == () and parse_disagree_llm("") == ()
+    assert LeoRuntime(backend=None, use_llm=False).disagree_llm == ()
+    assert parse_disagree_llm(None) == () and parse_disagree_llm("none") == () and parse_disagree_llm("") == ()
+    assert parse_disagree_llm("candidate") == ("clinical_seizure.predominant_seizure_type",)
     assert parse_disagree_llm("epilepsy_type") == ("clinical_seizure.epilepsy_type",)
     assert LeoRuntime(backend=None, use_llm=False, disagree_llm=()).disagree_llm == ()
     assert LeoRuntime(backend=None, use_llm=False).versions()["pipeline"] == "leo-v0.5"
@@ -533,3 +534,47 @@ def test_rollup_takes_the_latest_note_that_states_a_value_and_never_mixes_notes(
     assert rollup(t, "patient").set_index("patient").loc["a", "epilepsy_type_from_row"] == 3
     with pytest.raises(ValueError):
         rollup(t, "nope")
+
+
+# ---- model-vs-rules disagreements: blind export and scoring --------------------------------------------
+
+def _claims_with_disagreements():
+    return pd.DataFrame({
+        "document_id": ["n1", "n1", "n2", "n3"], "row_index": ["1", "1", "2", "3"],
+        "field_path": ["clinical_seizure.epilepsy_type", "clinical_seizure.age_at_onset_years",
+                       "clinical_seizure.epilepsy_type", "clinical_seizure.epilepsy_type"],
+        "value": ["focal", "5", "generalised", "focal"], "verdict": ["review"] * 4,
+        "reason_codes": ["source_disagreement", "", "source_disagreement", "source_disagreement"],
+        "alternative": ["generalised", "", "focal", "unknown"], "evidence": ["q1", "q2", "q3", "q4"]})
+
+
+def test_disagreement_export_is_blind_and_reproducible():
+    from services import leo_disagree as ld
+    a = ld.export_cases(_claims_with_disagreements())
+    b = ld.export_cases(_claims_with_disagreements())
+    assert len(a) == 3 and list(a["case_id"]) == list(b["case_id"]) and list(a["key_A_is"]) == list(b["key_A_is"])
+    for _, r in a.iterrows():                                  # A and B are the two readings, in a hidden order
+        assert {r["reading_A"], r["reading_B"]} in ({"focal", "generalised"}, {"focal", "unknown"})
+        assert r["truth"] == "" and r["key_A_is"] in ("shown", "other")
+    with pytest.raises(ValueError):
+        ld.export_cases(pd.DataFrame({"x": [1]}))
+
+
+def test_disagreement_scoring_maps_blind_answers_back_to_the_readers():
+    from services import leo_disagree as ld
+    sheet = ld.export_cases(_claims_with_disagreements())
+    # adjudicator always picks "focal" (the rules' value in n1 and n3, the other reader's in n2)
+    truths = []
+    for _, r in sheet.iterrows():
+        truths.append("A" if r["reading_A"] == "focal" else "B")
+    sheet["truth"] = truths
+    res = ld.score_cases(sheet, "rules")["clinical_seizure.epilepsy_type"]
+    assert res["rules"] == 2 and res["model"] == 1 and res["n_scored"] == 3
+    assert res["rules_right"]["k"] == 2 and res["model_right"]["k"] == 1
+    sheet.loc[0, "truth"] = "unclear"
+    res = ld.score_cases(sheet, "rules")["clinical_seizure.epilepsy_type"]
+    assert res["unclear"] == 1 and res["n_scored"] == 2
+    sheet.loc[1, "truth"] = "C"
+    with pytest.raises(ValueError):
+        ld.score_cases(sheet, "rules")
+    assert 0 <= ld.wilson(2, 3)[0] < ld.wilson(2, 3)[1] <= 1

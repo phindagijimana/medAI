@@ -15,6 +15,7 @@ bin/leo batch notes.xlsx              # submits a Slurm GPU job; writes notes_le
 bin/leo start                         # web app as a Slurm GPU job; then `bin/leo status`
 bin/leo review notes_leo.csv         # list the values to review in notes_leo.reviewed.csv (fill in `decision`)
 bin/leo merge notes_leo.csv notes_leo.reviewed.csv   # add the reviewed values as new columns
+bin/leo disagreements notes_leo.claims.csv   # optional: export model-vs-rules disagreements for blind adjudication
 bin/leo rollup notes_leo.csv --patient-col patient_id [--date-col visit_date]   # optional: one row per patient
 ```
 
@@ -103,7 +104,7 @@ bin/leo ask note.txt "Has the patient had a seizure in the last year?" --type ye
 
 Templates: `status_epilepticus, epilepsy_surgery, neurostimulation, family_history, febrile_seizures, aura, nocturnal, triggers, adverse_effects, driving, pregnancy, developmental, psychiatric, seizure_free_duration`.
 
-Questions are answered by the LLM alone (the specialist has no concept for them) and need the GPU. The LLM must give a quote and LEO checks that the quote is in the note. That check shows the quote exists, not that it supports the answer. Outcomes: `needs_review` (quote found; always reviewed, because there is one reader), `rejected` (quote not in the note; the answer is shown but not trusted), `not_documented` (the note does not say). Question accuracy is in section 11; a stricter quote check (the quote must be about the drug asked) was added after that test and has not been re-measured yet. Columns: `ask_<id>`, `_status`, `_evidence`, `_question`.
+Questions are answered by the LLM alone (the specialist has no concept for them) and need the GPU. The LLM must give a quote and LEO checks that the quote is in the note. That check shows the quote exists, not that it supports the answer. Outcomes: `needs_review` (quote found; always reviewed, because there is one reader), `rejected` (quote not in the note; the answer is shown but not trusted), `not_documented` (the note does not say). Question accuracy is in section 11. A drug question is also checked for the quote being about that drug; a quote about other drugs gives `rejected`. Columns: `ask_<id>`, `_status`, `_evidence`, `_question`.
 
 ## 6. Long notes
 
@@ -113,24 +114,25 @@ Caveat: chunking was measured on long synthetic documents only (section 11), not
 
 ## 7. What the evidence supports
 
-**LEO versus the model alone, in one paragraph.** On the tests so far, LEO is not more accurate than Med42-8B used by itself; it is level with it. On the 40 F-S letters the model alone scored 0.70 and LEO's reviewed output 0.705 (difference +0.005, 95% CI -0.03 to +0.05); on the near-saturated synthetic US notes the model scored 0.993 and LEO reviewed 0.978 (-0.015, CI -0.04 to 0.00). What LEO adds is a record of where each value came from (a quote, a source, a reason), a second reader that catches some mistakes (values where the model and rules agreed were right 83% of the time on the F-S letters and 99.9% on the synthetic notes), and a review flag instead of silent guessing. Whether that is worth the extra machinery for your use depends on whether you need the audit trail. That has not been tested with real clinicians, and none of this has been tested on real notes.
+**LEO versus the model alone, in one paragraph.** On the tests so far, LEO is not more accurate than Med42-8B used by itself. On the 40 F-S letters the model alone scored 0.70 and LEO's reviewed output 0.68 (difference -0.02, 95% CI -0.06 to +0.02, so no detectable difference). On the near-saturated synthetic US notes the model scored 0.993 and LEO reviewed 0.969 (-0.024, CI -0.053 to -0.004). What LEO adds is a record of where each value came from (a quote, a source, a reason), a second reader that catches some mistakes (values where the model and rules agreed were right 83% of the time on the F-S letters and 99.9% on the synthetic notes, against 31% and 12% where they disagreed), and a review flag instead of silent guessing. Whether that is worth the extra machinery for your use depends on whether you need the audit trail. That has not been tested with real clinicians, and none of this has been tested on real notes.
 
-`bin/leo evidence` (also `GET /leo/evidence`) prints the figures; they are read from the evaluation scorer outputs, not typed into the code, and a test checks they match. They describe the shipped configuration: `leo-v0.5`, arm L1C (base Med42-8B, two fixed examples, schema-constrained decoding), and the disagreement policy below (evaluation protocol 10.13).
+`bin/leo evidence` (also `GET /leo/evidence`) prints the figures; they are read from the evaluation scorer outputs, not typed into the code, and a test checks they match. They describe the shipped configuration: `leo-v0.5`, arm L1C (base Med42-8B, two fixed examples, schema-constrained decoding), with the rules' value shown on a disagreement.
 
-**When the model and the rules disagree**, both values are kept and the cell is flagged `needs_review` (`source_disagreement`); the policy only chooses which value is shown first. Seizure type shows the model's value; epilepsy type, onset age and seizure frequency show the rules' value. This was chosen per field: showing the model's value raised seizure-type F1 from 0.80 to 1.00 on 80 unused synthetic patients and from 0.34 to 0.57 on the F-S letters, but lowered epilepsy-type F1 from 0.975 to 0.938 on the same 80, and made no difference for onset age and frequency. Change it with `--disagree-llm` (`none` shows the rules' value everywhere). The synthetic sets share a generator with the rules' development data, so treat the confirmation as moderate.
+**When the model and the rules disagree**, both values are kept: LEO shows the rules' value, flags the cell `needs_review` (`source_disagreement`), and stores the model's value as `alternative` in `claims.csv`. Which reader to show first, per field, is **not settled**. On synthetic notes, showing the model's value for seizure type scored better (F1 0.80 → 1.00 on 80 unused synthetic patients; 0.34 → 0.57 on the F-S letters) and for epilepsy type worse (0.975 → 0.938), with no difference for onset age and frequency. Those sets share a generator with the rules' development data and the F-S epilepsy-type reference is weak, so the default stays with the rules' value everywhere until disagreements from real notes have been adjudicated. The cost of that default is visible: on the F-S letters the reviewed micro-F1 is 0.68 instead of 0.71 with the seizure-type option (`--disagree-llm candidate`). To help settle it, `bin/leo disagreements RESULT.claims.csv` exports every disagreement for blind adjudication (the two values appear as A and B in a hidden order) and `bin/leo disagreements --score SHEET` reports per field how often each reader was right, with intervals. Protocol: `docs/DISAGREEMENT_ADJUDICATION.md`.
 
 | Test set | n | Model alone | Rules alone | LEO auto-accepted | LEO reviewed |
 |---|---|---|---|---|---|
-| 40 held-out F-S letters (UK style, synthetic) | 40 letters | 0.70 | 0.66 | 0.66 | 0.70 |
-| 30 synthetic US-style patients | 30 patients | 0.99 | 0.97 | 1.00 | 0.98 |
+| 40 held-out F-S letters (UK style, synthetic) | 40 letters | 0.70 | 0.66 | 0.66 | 0.68 |
+| 30 synthetic US-style patients | 30 patients | 0.99 | 0.97 | 1.00 | 0.97 |
 
 Micro-F1 over seven fields. What this does and does not show:
 
 - Every test note is synthetic. Nothing here measures performance on real clinical notes.
-- On the F-S letters, LEO's reviewed output does not beat the model alone (paired difference +0.005, 95% CI -0.03 to +0.05) and beats the rules alone only moderately (+0.05, CI +0.01 to +0.09). With a fine-tuned model (Arm H2, not offered by the app yet) the model alone scored 0.74 and LEO reviewed 0.72. The fusion's value shown so far is the audit trail (quotes, sources, review flags), not higher accuracy.
+- On the F-S letters, LEO's reviewed output (0.68) does not beat the model alone (0.70; paired difference -0.02, 95% CI -0.06 to +0.02). It beats the rules alone only narrowly (+0.02, CI -0.01 to +0.06). With a fine-tuned model (Arm H2, not offered by the app yet) the model alone scored 0.74 and LEO reviewed 0.69 (difference -0.05, CI -0.10 to -0.01). The fusion's value shown so far is the audit trail (quotes, sources, review flags), not higher accuracy.
+- Seizure type is weak on the F-S letters (F1 0.34 reviewed, 0.56 for the model alone) with the default, because the rules' value is shown when the two disagree; this is the field where the candidate option helps most.
 - Epilepsy type: the F-S reference says "unknown" when the diagnosis line names no type (25 of 38 letters). Where the reference names a type (13 letters) reviewed F1 is 1.00; over all 38 letters it is 0.42 because LEO often states a type where the reference says unknown. Whether those are errors was not adjudicated.
 - Onset age has only 4 reference values on the F-S letters, so 1.00 there is weak evidence.
-- Agreement is informative: values where model and rules agreed were right 83% (F-S) and 100% (synthetic) of the time; rules alone 25% and 86%; model alone 50% and 93%. Values where they disagreed were right 50% (8 values) and 23% (22 values), too few to rely on.
+- Agreement is informative: values where model and rules agreed were right 83% (F-S) and 100% (synthetic) of the time; rules alone 25% and 86%; model alone 46% and 94%; where they disagreed 31% (16 values) and 12% (43 values).
 - The synthetic US-style notes are close to saturated (the model alone scores 0.99) because they were written from the same plan as their reference; they cannot rank methods. The EpExtra rules were developed against these corpora.
 - The live GPU path was compared with the evaluation outputs on 2026-10-02: same text for 30 of 40 F-S letters and 125 of 143 synthetic notes, and the scores moved by 0.01 or less (section 11).
 
@@ -142,7 +144,7 @@ Micro-F1 over seven fields. What this does and does not show:
 |---|---|---|---|
 | Epilepsy type | all records | 0.42 / 0.39 / 0.33 (38) | 0.97 / 1.00 / 0.97 (30) |
 | Epilepsy type | only where the reference names a type | 1.00 / 0.92 / 0.92 (13) | 1.00 / 1.00 / 1.00 (29) |
-| Seizure type | predominant type | 0.57 / 0.31 / 0.56 (18) | 1.00 / 0.98 / 1.00 (26) |
+| Seizure type | predominant type | 0.34 / 0.31 / 0.56 (18) | 0.92 / 0.98 / 1.00 (26) |
 | Age at onset | within 1 year | 1.00 / 0.86 / 1.00 (4) | 1.00 / 1.00 / 1.00 (30) |
 | Seizure frequency | period | 0.71 / 0.48 / 0.71 (15) | 0.97 / 1.00 / 1.00 (19) |
 | Seizure frequency | count, lower bound | 1.00 / 0.91 / 1.00 (6) | 0.97 / 1.00 / 1.00 (30) |
@@ -174,8 +176,8 @@ Rule fixes made on 2026-10-02 (surgery options no longer count as history, negat
 | Values where | F-S letters | Synthetic US |
 |---|---|---|
 | Model and rules agree | 0.835 | 0.999 |
-| They disagree (value shown by the policy above) | 0.500 (8 values) | 0.227 (22 values) |
-| Model only | 0.500 | 0.932 |
+| They disagree (rules' value shown) | 0.312 (16 values) | 0.116 (43 values) |
+| Model only | 0.455 | 0.943 |
 | Rules only | 0.250 | 0.857 |
 
 Definitions follow Fisher et al. 2017 and Scheffer et al. 2017 (ILAE) and Kwan et al. 2010 (drug resistance); the full citations are listed in the project's references document.
@@ -217,12 +219,12 @@ API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/sta
 
 ## 10. Adapters
 
-A flat-contract LoRA adapter (Arm H2) is used with `--adapter DIR` (arm becomes `L0C`). On the F-S letters H2 alone scored 0.74 against 0.70 for the base model with examples (difference +0.04, 95% CI +0.01 to +0.08); its synthetic-note evaluation was not finished when this was written, so the app's displayed figures are for the base model. Arm H adapters trained on the full phenotype contract are not used by this path.
+A flat-contract LoRA adapter (Arm H2) is used with `--adapter DIR` (arm becomes `L0C`). On the F-S letters H2 alone scored 0.74 against 0.70 for the base model with examples (difference +0.04, 95% CI +0.01 to +0.08); on the synthetic notes it scored 0.996 (30 patients) and 0.992 (80 patients) against 0.993 and 0.988 for the base model, which is saturated. The app's displayed figures are for the base model. Arm H adapters trained on the full phenotype contract are not used by this path.
 
 ## 11. Known limits
 
 - Live GPU path: run on an L40S GPU on 2026-10-02 (evaluation protocol 10.12). The live model reproduces the stored evaluation text exactly for 30 of 40 F-S letters and 125 of 143 synthetic notes; the rest differ slightly (newer software) and the scores move by 0.01 or less.
-- Long documents (10-40k characters, chunked): the model alone scores 0.991 and LEO's auto-accepted values 0.970; the rules lose accuracy on long joined text, which pulls LEO's reviewed output down to 0.928. Synthetic data.
-- Free-text questions (synthetic, 30 patients, before the stricter quote check): epilepsy type and onset age 30/30; hippocampal sclerosis 11/17; "currently taking this drug?" 91/114 (yes-answers: precision 0.74, recall 0.96); 2 of 90 unanswerable questions got an invented answer. A located quote proves the words are in the note, not that they support the answer: always read the quote.
+- Long documents (10-40k characters, chunked; 30 synthetic patients, rerun 2026-10-02 after the rule fixes, with the seizure-type candidate option on): the model alone scores 0.991, LEO's auto-accepted values 0.970 and its reviewed output 0.967 (it was 0.928 before the rule fixes). The rules still lose accuracy on long joined text (0.932). Up to 20k characters, chunked and whole-document model runs scored 1.000 and 0.987 (11 documents).
+- Free-text questions (synthetic, 30 patients, rerun with the stricter quote check): epilepsy type and onset age 30/30; hippocampal sclerosis 11/17; "currently taking this drug?" 94/114 (yes-answers: precision 0.78, recall 0.96); 2 of 90 unanswerable questions got an invented answer. The stricter check marks an answer `rejected` when its quote is not about the drug asked: of 15 false "yes" answers it rejected 11, and of the answers it still trusted (quote found, `needs_review`) 110 of 116 were right (95%, against 88% before). The price is that it also rejected 44 correct answers (they are still shown, marked untrusted). A located quote proves the words are in the note, not that they support the answer: always read the quote.
 - Patient-level roll-up exists but is not measured; per-note rows are the supported output. The long-document figures above come from several visits joined into one text, which mixes visit states; they test chunking, not how a patient should be summarised.
 - Not validated on real clinical notes yet (needs IRB and secure compute; plan in the evaluation protocol).
