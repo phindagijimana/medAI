@@ -184,6 +184,33 @@ _DR_DIRECT_RE = re.compile(
     re.IGNORECASE,
 )
 
+_DR_STATED_RESPONSIVE_RE = re.compile(r"\bdrug[- ]?responsive\b|\bpharmaco[- ]?responsive\b", re.IGNORECASE)
+# "... drug-resistant epilepsy have not been met", "no determination of drug resistance" (the negation follows)
+_DR_NEG_AFTER_RE = re.compile(r"^[^.;\n]{0,60}\bnot\s+(?:yet\s+)?(?:been\s+)?(?:met|established|confirmed|demonstrated|"
+                              r"satisfied)\b", re.IGNORECASE)
+
+
+def _stated_drug_response(text: str):
+    """The note's own statement, read at sentence level: ``(match, status)`` for the last usable one.
+
+    "does not establish drug-resistant epilepsy", "if seizures become drug resistant" and "criteria ... have not
+    been met" are not statements that the patient is resistant.  Later mentions win (notes joined in date order).
+    """
+    from rules import sentence_context as sc
+    found = []
+    for pat, status in ((_DR_DIRECT_RE, DrugResistanceStatus.DRUG_RESISTANT),
+                        (_DR_STATED_RESPONSIVE_RE, DrugResistanceStatus.DRUG_RESPONSIVE)):
+        for m in pat.finditer(text):
+            if _preceded_by_neg(text, m.start()) or sc.negated(text, m.start(), m.end()) \
+                    or sc.hedged(text, m.start(), m.end()) or _DR_NEG_AFTER_RE.search(text[m.end():m.end() + 80]):
+                continue
+            found.append((m.start(), m, status))
+    if not found:
+        return None
+    _, m, status = max(found, key=lambda t: t[0])
+    return m, status
+
+
 _DR_RESPONSIVE_RE = re.compile(
     r"\bseizure[- ]?free\b|\bwell[- ]?controlled\b|"
     r"has\s+had\s+no\s+(?:further\s+)?seizures?|"
@@ -231,11 +258,13 @@ def derive_drug_resistance(
 
     # 1. Direct-trigger DRUG_RESISTANT — highest confidence.
     if text:
-        m = _DR_DIRECT_RE.search(text)
-        if m and not _preceded_by_neg(text, m.start()):
-            _ensure_derived(pheno)["drug_resistance_detail"] = "drug_resistant"
+        stated = _stated_drug_response(text)
+        if stated is not None:
+            m, status = stated
+            _ensure_derived(pheno)["drug_resistance_detail"] = (
+                "drug_resistant" if status == DrugResistanceStatus.DRUG_RESISTANT else "responding_to_treatment")
             return _make_ev(
-                DrugResistanceStatus.DRUG_RESISTANT,
+                status,
                 meta,
                 certainty=Certainty.DEFINITE,
                 evidence_text=m.group(0),

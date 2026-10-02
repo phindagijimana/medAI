@@ -1,4 +1,4 @@
-"""Claim contract (Chain-of-Three P1.2).
+"""Claim contract for the LEO chain (Chain-of-Three spec P1.2).
 
 Verbatim JSON shape from the compendium page 8.  A Claim is the atomic
 unit the pipeline produces: a structured phenotype assertion tied to an
@@ -92,7 +92,15 @@ class ReasonCode(str, Enum):
     MEDICATION_DERIVED = "medication_derived"
     LOW_CONFIDENCE = "low_confidence"
     MULTI_CANDIDATE_TIE = "multi_candidate_tie"
+    LLM_ONLY = "llm_only"  # LLM proposed it, the specialist did not: never auto-accepted
+    # Specialist proposed a drug, the LLM listed other drugs but not this one: not auto-accepted
+    SPECIALIST_ONLY_UNCONFIRMED = "specialist_only_unconfirmed"
+    # Drug given as a one-off dose during the encounter (IV load, ED bolus ...), not the regimen
+    ACUTE_ADMINISTRATION = "acute_administration"
+    # As-needed seizure-emergency drug (rescue); informational, the claim is judged like any other
+    RESCUE_ROLE = "rescue_role"
     # Accept
+    # One detector made the claim and no second source contradicted or was asked to confirm it
     ACCEPT_UNANIMOUS = "accept_unanimous"
     ACCEPT_SPECIALIST_LLM_AGREE = "accept_specialist_llm_agree"
 
@@ -167,18 +175,35 @@ class Claim(BaseModel):
     mention: Mention
     concept: Concept
 
+    # Which schema field this claim populates and the value it asserts.  The
+    # compendium JSON identifies a claim by concept alone; these two optional
+    # fields make a claim self-describing (reviewer UI, field-level scoring).
+    field_path: Optional[str] = Field(
+        None, description="Schema field, e.g. 'clinical_seizure.epilepsy_type'")
+    value: Optional[Any] = Field(
+        None, description="Value asserted for field_path (enum string, number or object)")
+
     assertion: Assertion
     experiencer: Experiencer
     temporality: Temporality
 
     detectors: list[str] = Field(
         default_factory=list,
-        description="Which detectors fired: e.g. ['llm', 'exect_us']",
+        description="Which detectors fired: e.g. ['llm', 'epextra']",
     )
     candidate_rank: int = Field(1, ge=1, description="Rank of the selected candidate in retrieval")
     model_confidence: Optional[float] = Field(
         None,
         description="Model's self-reported confidence; NOT a calibrated probability",
+    )
+
+    alternative: Optional[str] = Field(
+        None,
+        description=(
+            "Value proposed by the dissenting detector when the specialist and the "
+            "LLM disagree (reason code source_disagreement). Shown to the reviewer; "
+            "null when the detectors agree or only one fired."
+        ),
     )
 
     validator_verdict: ValidatorVerdict = ValidatorVerdict.REVIEW

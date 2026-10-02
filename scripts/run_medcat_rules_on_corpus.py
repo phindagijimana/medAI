@@ -178,6 +178,11 @@ def main(argv: list[str] | None = None) -> int:
                     help="Path to MedCAT CDB directory.")
     ap.add_argument("--doc-date", default="2020-01-01",
                     help="Fallback doc_date (YYYY-MM-DD) if not in corpus.")
+    ap.add_argument("--metacat", default=None, metavar="DIR",
+                    help="Trained MetaCAT checkpoints (e.g. checkpoints/metacat); "
+                         "their labels replace ConText's negation/experiencer/temporality flags.")
+    ap.add_argument("--metacat-tasks", default="Presence,Experiencer,Temporality",
+                    help="Comma-separated MetaCAT tasks to apply (default: %(default)s).")
     args = ap.parse_args(argv)
 
     out_dir = Path(args.out_dir)
@@ -187,6 +192,18 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"[run] Loading MedCAT extractor from {args.cdb}", flush=True)
     extractor = MedCATExtractor(args.cdb, verbose=False)
+    if args.metacat:
+        from services.metacat_backend import MetaCATBackend
+        mc = MetaCATBackend.from_dir(args.metacat, tasks=args.metacat_tasks.split(","))
+        print(f"[run] MetaCAT tasks: {sorted(mc.models)}", flush=True)
+        _with_context = extractor.extract_with_context
+
+        def _extract_with_metacat(text, nlp):
+            entities, doc = _with_context(text, nlp)
+            mc.enrich(entities, text)
+            return entities, doc
+
+        extractor.extract_with_context = _extract_with_metacat
     print(f"[run] Building PhenotypeAssembler", flush=True)
     assembler = PhenotypeAssembler(extractor)
     n_rules = len(assembler._rules)

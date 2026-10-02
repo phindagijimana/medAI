@@ -52,6 +52,7 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
+from rules.asm_lexicon import ASM_LEXICON
 from rules.base_rule import BaseFieldRule
 from schema.enums import Certainty, MedicationStatus, TemporalStatus
 from schema.evidence import Evidence
@@ -321,7 +322,7 @@ def _extract_medications(
             status=status,
             dose_text=dose_text,
             reason_discontinued=None,
-            rxnorm_cui=None,
+            rxnorm_cui=ASM_LEXICON.get(e.enum_value or "", {}).get("rxcui"),
         )
 
         certainty = Certainty.POSSIBLE if e.is_hypothetical else Certainty.DEFINITE

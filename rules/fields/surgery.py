@@ -44,6 +44,7 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
+from rules import sentence_context as sc
 from rules.base_rule import BaseFieldRule
 from schema.enums import (
     Certainty,
@@ -215,6 +216,15 @@ class SurgeryHistoryRule(BaseFieldRule):
                 # Basic negation guard.
                 pre = text[max(0, m.start() - 30):m.start()].lower()
                 if re.search(r"\b(?:no|without|denies?|never|not)\b\s*$", pre):
+                    continue
+                # Sentence-level reading: "No epilepsy surgery is documented", "future options could include
+                # VNS", "candidacy for resection", "would not pursue DBS" are not a surgical history.
+                if sc.negated(text, m.start(), m.end()) or sc.hedged(text, m.start(), m.end()):
+                    continue
+                if sc.option_only(text, m.start(), m.end()):
+                    continue
+                # The generic "epilepsy surgery" wording counts only when the sentence says it happened.
+                if surg_type == SurgeryType.UNKNOWN and not sc.history_cue(text, m.start(), m.end()):
                     continue
 
                 key = (surg_type, default_target)

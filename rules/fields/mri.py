@@ -56,6 +56,7 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
+from rules import sentence_context as sc
 from rules.base_rule import BaseFieldRule
 from schema.enums import Certainty, MriFinding, TemporalStatus
 from schema.evidence import Evidence
@@ -134,6 +135,22 @@ def _preceded_by_negation(text: str, span_start: int, back: int = 30) -> bool:
     return bool(_NEG_PREFIX.search(lookback))
 
 
+_HS_RE = re.compile(r"hippocampal\s+sclerosis|mesial\s+temporal\s+sclerosis|\bHS\b|\bMTS\b")
+_FCD_RE = re.compile(r"focal\s+cortical\s+dysplasia|\bFCD\b|Palmini|MOGHE", re.IGNORECASE)
+
+
+def _negated_mention(text: str, pat: re.Pattern[str]):
+    """First mention of the finding that its own sentence rules out ("no hippocampal sclerosis", "MTS not seen"),
+    only inside a sentence that talks about imaging."""
+    for m in pat.finditer(text):
+        if not sc.negated(text, m.start(), m.end()):
+            continue
+        s, e = sc.sentence_span(text, m.start(), m.end())
+        if _MRI_CONTEXT_RE.search(text[max(0, s - 200):e + 200]):
+            return m
+    return None
+
+
 def _mri_sentence(sent_text: str) -> bool:
     return bool(_MRI_CONTEXT_RE.search(sent_text or ""))
 
@@ -165,18 +182,20 @@ def _detect_findings(
             continue
         if e.is_negated:
             continue
+        if sc.negated(text, e.char_start, e.char_end):      # "No identified lesion, including MTS"
+            continue
         if finding in seen:
             continue
         seen.add(finding)
         hits.append((finding, e.char_start, e.char_end, e.text,
-                     e.is_hypothetical, e.is_historical))
+                     e.is_hypothetical or sc.hedged(text, e.char_start, e.char_end), e.is_historical))
 
     # 2. Fallback regex — plug gaps for findings the CDB missed.
     for pat, finding in _FINDING_FALLBACK:
         for m in pat.finditer(text):
             if finding in seen:
                 continue
-            if _preceded_by_negation(text, m.start()):
+            if _preceded_by_negation(text, m.start()) or sc.negated(text, m.start(), m.end()):
                 continue
             # Rough MRI-sentence check — same as above using rough sentence
             # boundaries.
@@ -188,7 +207,7 @@ def _detect_findings(
                 continue
             quote = text[max(0, m.start() - 5):min(len(text), m.end() + 30)].strip()
             seen.add(finding)
-            hits.append((finding, m.start(), m.end(), quote, False, False))
+            hits.append((finding, m.start(), m.end(), quote, sc.hedged(text, m.start(), m.end()), False))
 
     return hits
 
@@ -246,14 +265,14 @@ class MriHippocampalSclerosisRule(BaseFieldRule):
                     )
         # Explicit negation — "no hippocampal sclerosis" — set False.
         text = getattr(doc, "text", "") or ""
-        m = re.search(r"no\s+(?:evidence\s+of\s+)?(?:hippocampal|mesial\s+temporal)\s+sclerosis",
-                      text, re.IGNORECASE)
+        m = _negated_mention(text, _HS_RE)
         if m:
+            s0, e0 = sc.sentence_span(text, m.start(), m.end())
             return Evidence[bool](
                 value=False,
                 certainty=Certainty.DEFINITE,
                 temporal_status=TemporalStatus.CURRENT,
-                evidence_text=m.group(0),
+                evidence_text=text[max(s0, m.start() - 40):min(e0, m.end() + 40)].strip(),
                 source_doc_id=meta["doc_id"],
                 source_doc_type=meta["doc_type"],
                 source_date=meta["doc_date"],
@@ -290,6 +309,21 @@ class MriFcdRule(BaseFieldRule):
                     char_start=cs,
                     char_end=ce,
                 )
+        text = getattr(doc, "text", "") or ""
+        m = _negated_mention(text, _FCD_RE)          # "no focal cortical dysplasia" -> False
+        if m:
+            s, e = sc.sentence_span(text, m.start(), m.end())
+            return Evidence[bool](
+                value=False,
+                certainty=Certainty.DEFINITE,
+                temporal_status=TemporalStatus.CURRENT,
+                evidence_text=text[max(s, m.start() - 40):min(e, m.end() + 40)].strip(),
+                source_doc_id=meta["doc_id"],
+                source_doc_type=meta["doc_type"],
+                source_date=meta["doc_date"],
+                char_start=m.start(),
+                char_end=m.end(),
+            )
         return None
 
 
@@ -320,9 +354,11 @@ class MriOverallNormalRule(BaseFieldRule):
     def apply(self, entities, doc, meta):
         text = getattr(doc, "text", "") or ""
         hits = _detect_findings(entities, doc)
-        # If we found any positive finding → overall_normal False.
-        if hits:
-            f, cs, ce, quote, _hyp, _hist = hits[0]
+        # If we found any positive finding -> overall_normal False.  The "normal" finding itself is not a
+        # lesion, and a hedged one ("probable abnormality consistent with MTS") does not make the report abnormal.
+        positives = [h for h in hits if h[0] != MriFinding.NORMAL and not h[4]]
+        if positives:
+            f, cs, ce, quote, _hyp, _hist = positives[0]
             return Evidence[bool](
                 value=False,
                 certainty=Certainty.DEFINITE,
