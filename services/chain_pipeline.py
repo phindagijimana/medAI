@@ -1,4 +1,9 @@
-"""Chain-of-Three orchestrator: Prepare → Reason → Verify → Publish.
+"""LEO chain orchestrator: Prepare → Reason → Verify → Publish.
+
+LEO = LLM + EpExtra + Ontology, our implementation of the Chain-of-Three
+spec.  EpExtra is our US adaptation of ExECT (Fonferko-Shadrach et al.):
+ExECT-V2 rules ported onto MedCAT.  The three components corroborate one
+another; none is the sole authority.
 
 Compendium pages 6-7 define four stages with explicit contracts at each
 boundary.  This module wires the components together:
@@ -6,12 +11,15 @@ boundary.  This module wires the components together:
     Prepare       → services.us_note_preprocessing  (canonicalises
                     headers, segments, hashes)
     Reason A      → services.phenotype_assembler    (B1' MedCAT+Rules,
-                    the ExECT-US specialist channel)
-    Reason B      → LLM backend (optional in v0; the specialist alone
-                    already drives most output)
-    Reason C      → services.ontology_candidates    (candidate retrieval
-                    + LLM selection; in v0 we auto-pick the top candidate
-                    emitted by B1')
+                    the EpExtra specialist channel)
+    Reason B      → services.chain_llm  (Med42-8B, optional; live or
+                    replayed from run manifests).  Agreement with the
+                    specialist is the accept signal; the LLM never
+                    accepts a fact on its own
+    Reason C      → services.ontology_candidates    (candidate retrieval;
+                    the top candidate is adopted only on an exact
+                    label/synonym hit, otherwise the claim keeps its
+                    internal enum ID and goes to review)
     Verify        → schema + hard + policy checks → ValidatorVerdict
     Publish       → services.ledger.EvidenceLedger
 
@@ -25,10 +33,13 @@ be callable end-to-end from one function:
 Each extracted Evidence[T] from the specialist is converted to a Claim,
 validated, assigned a ValidatorVerdict, and routed via ledger.publish().
 
-The LLM reasoner is a late addition — in v0 the specialist does the
-heavy lifting and the LLM path is reserved for review items where the
-reviewer sees candidate alternatives.  This is deliberate: the compendium
-treats the LLM as *interpreter*, not *authority*.
+The LLM reasoner is optional (``llm_reasoner=``).  Without it the chain
+is specialist-only (leo-v0.1 behaviour).  With it, specialist and LLM
+values are fused per field by ``services.chain_llm.fuse``: agreement adds
+the ``llm`` detector, disagreement routes to review with the LLM value
+shown as ``Claim.alternative``, and LLM-only facts are never auto-accepted.
+This is deliberate: the compendium treats the LLM as *interpreter*, not
+*authority*.
 """
 
 from __future__ import annotations
@@ -45,22 +56,51 @@ from schema.claim import (
 
 logger = logging.getLogger(__name__)
 
+SPECIALIST_DETECTOR = "epextra"
+
 
 # ─── Config ──────────────────────────────────────────────────────────────
+
+# Field path of a drug given once during the encounter; kept for the reviewer, outside current_asms.
+ACUTE_FIELD_PATH = "medication.acute_administration"
+RESCUE_FIELD_PATH = "medication.rescue_medication"
+_PLACEHOLDER_VALUES = {"undefined", "not_assessed", "not assessed", "not_applicable"}
+
 
 @dataclass
 class ChainPipelineConfig:
     """Knobs for the pipeline. Freeze these in run manifests."""
     rules_version: str = "medai-epi-rules-v0.2.1"
-    pipeline_version: str = "chain-of-three-v0.1"
+    pipeline_version: str = "leo-v0.5"
     ontology_release: str = "medai-enum-v0.2.1+ilae2017"
     min_confidence_for_accept: float = 0.0   # unused in v0 (no calibrated conf)
-    auto_accept_detectors: tuple[str, ...] = ("exect_us",)  # specialist alone can accept
+    min_candidate_score: float = 0.9         # exact label (1.0) or exact synonym (0.9)
+    auto_accept_detectors: tuple[str, ...] = (SPECIALIST_DETECTOR,)  # specialist alone can accept
     require_llm_for_accept: bool = False
     section_whitelist_for_auto_accept: tuple[str, ...] = (
         "assessment", "medications", "diagnostic_studies", "history_of_present_illness",
     )
     enable_preprocessing: bool = True
+    # On a scalar specialist/LLM disagreement, which side's value becomes the claim.
+    # {"clinical_seizure.epilepsy_type": "llm", ...}; absent = "specialist".  Chosen on
+    # development letters only (docs/EVAL_PROTOCOL_LEO.md 10.3), never on the held-out set.
+    disagree_primary: dict = field(default_factory=dict)
+    # Locate a span for LLM-only values whose own quote is not in the note.
+    ground_llm_values: bool = True
+    # Seizure-frequency values with no counts and no period (specialist placeholder) are not claims.
+    drop_empty_frequency: bool = True
+    # A specialist-only drug is not auto-accepted when the LLM listed other drugs but not this one.
+    specialist_only_drug_review: bool = True
+    # One-off drug administrations (IV load, ED dose) are routed to review, outside current_asms.
+    acute_administration_filter: bool = True
+    # As-needed seizure-rescue drugs (PRN, buccal/intranasal/rectal, "rescue") are kept apart from
+    # the maintenance regimen: field path medication.rescue_medication, not current_asms.
+    rescue_role_split: bool = True
+    # The specialist marks a frequency PROBABLE only when the note says "about/approximately N"
+    # (rules/fields/seizure_frequency.py).  That is an approximate quantity, not an uncertain
+    # assertion, so it is read as asserted; otherwise no approximate frequency can auto-accept.
+    approx_frequency_is_asserted: bool = True
+    llm_arm: str = ""   # provenance label of the LLM arm, e.g. "M3" (set by the caller)
 
 
 @dataclass
@@ -70,6 +110,19 @@ class ExtractionStats:
     n_review: int = 0
     n_rejected: int = 0
     reasons: dict[str, int] = field(default_factory=dict)
+    # LLM channel (all zero when no reasoner is attached)
+    llm_available: bool = False
+    n_llm_agree: int = 0          # specialist claim corroborated by the LLM
+    n_llm_disagree: int = 0       # scalar field, different values
+    n_specialist_only: int = 0    # specialist claim the LLM did not produce
+    n_llm_only: int = 0           # LLM claim with a verbatim quote, routed to review
+    n_placeholders_dropped: int = 0   # specialist schema defaults not turned into claims
+    n_empty_frequency_dropped: int = 0   # empty seizure-frequency values (no counts, no period)
+    n_specialist_only_unconfirmed: int = 0  # specialist-only drugs sent to review: LLM listed others
+    n_acute_rerouted: int = 0     # one-off drug administrations kept out of current_asms
+    n_rescue_routed: int = 0      # as-needed rescue drugs kept out of current_asms
+    n_llm_grounded: int = 0       # subset of n_llm_only whose span was found by value grounding, not by the model's quote
+    n_llm_unsupported: int = 0    # LLM claim whose quote is not in the note
 
     def tally(self, verdict: ValidatorVerdict, reasons: list[ReasonCode]) -> None:
         self.n_claims_emitted += 1
@@ -101,13 +154,18 @@ class ChainPipeline:
         extractor: Any = None,   # services.medcat_extractor.MedCATExtractor
         assembler: Any = None,   # services.phenotype_assembler.PhenotypeAssembler
         candidate_service: Any = None,  # services.ontology_candidates.OntologyCandidateService
-        llm_backend: Any = None,         # optional
+        llm_backend: Any = None,         # optional Med42Backend -> wrapped in LiveLLMReasoner
+        llm_reasoner: Any = None,        # optional callable(text, doc_id, doc_date) -> phenotype dict
     ):
         self.cfg = config or ChainPipelineConfig()
         self._extractor = extractor
         self._assembler = assembler
         self._candidate_service = candidate_service
         self._llm = llm_backend
+        if llm_reasoner is None and llm_backend is not None:
+            from services.chain_llm import LiveLLMReasoner
+            llm_reasoner = LiveLLMReasoner(llm_backend, arm=self.cfg.llm_arm or "M3")
+        self._llm_reasoner = llm_reasoner
         self._lazy_init_done = False
 
     def _lazy_init(self) -> None:
@@ -156,21 +214,131 @@ class ChainPipeline:
         if pheno is None:
             return (stats, claims) if return_claims else stats
 
-        # ── Reason C: for every Evidence output, retrieve candidates, pick top ──
-        # (v0 skips Reason B / LLM detection — specialist already provides spans.)
-        for ev, section, field_type in self._iter_evidence(pheno, text):
+        # ── Reason B: LLM phenotype (optional) ──
+        from services.chain_llm import fuse, flatten
+        llm_pheno = self._reason_llm(text, document_id=document_id, doc_date=doc_date)
+        stats.llm_available = llm_pheno is not None
+
+        spec_items = flatten(
+            pheno.model_dump(mode="json") if hasattr(pheno, "model_dump") else pheno)
+        # Schema defaults ("undefined", "not_assessed") are not findings; emitting them as claims
+        # only produces rejects (audit finding F1: valid is not populated).
+        n0 = len(spec_items)
+        spec_items = [it for it in spec_items
+                      if not (isinstance(it.ev.get("value"), str)
+                              and it.ev["value"].strip().lower() in _PLACEHOLDER_VALUES)]
+        stats.n_placeholders_dropped = n0 - len(spec_items)
+        llm_items = flatten(llm_pheno) if llm_pheno is not None else []
+        if self.cfg.drop_empty_frequency:
+            from services.chain_llm import is_empty_frequency
+            n1 = len(spec_items) + len(llm_items)
+            keep = lambda it: not (it.field_path.endswith("seizure_frequency")
+                                   and is_empty_frequency(it.ev.get("value")))
+            spec_items = [it for it in spec_items if keep(it)]
+            llm_items = [it for it in llm_items if keep(it)]
+            stats.n_empty_frequency_dropped = n1 - len(spec_items) - len(llm_items)
+        llm_has_meds = any(it.field_path == "medication.current_asms" for it in llm_items)
+        if llm_pheno is not None:
+            fusion = fuse(spec_items, llm_items)
+            fused_spec = fusion.specialist
+            llm_only = fusion.llm_only
+        else:
+            from services.chain_llm import FusedSpecialist
+            fused_spec = [FusedSpecialist(it, "specialist_only") for it in spec_items]
+            llm_only = []
+
+        # ── Reason C + Verify + Publish, specialist claims ──
+        for fs in fused_spec:
+            it = fs.item
+            detectors = [SPECIALIST_DETECTOR]
+            initial: list[ReasonCode] = []
+            alternative = None
+            swapped = False
+            if (llm_pheno is not None and fs.status == "disagree" and fs.llm_item is not None
+                    and self.cfg.disagree_primary.get(it.field_path) == "llm"):
+                swapped_ev = self._llm_evidence(fs.llm_item, text)
+                if swapped_ev is not None:
+                    from services.chain_llm import display_value
+                    spec_display = display_value(it.ev.get("value"))
+                    it = fs.llm_item
+                    it = type(it)(field_path=it.field_path, module=it.module, ev=swapped_ev, multi=it.multi)
+                    detectors = ["llm"]
+                    swapped = True
+            if llm_pheno is not None:
+                if fs.status == "agree":
+                    detectors.append("llm")
+                    stats.n_llm_agree += 1
+                elif fs.status == "disagree":
+                    initial.append(ReasonCode.SOURCE_DISAGREEMENT)
+                    alternative = spec_display if swapped else fs.alternative
+                    stats.n_llm_disagree += 1
+                else:
+                    stats.n_specialist_only += 1
+            role, _rule = self._drug_role(it.field_path, it.ev, text)
+            acute = role == "acute"
+            rescue = role == "rescue"
+            if acute:
+                initial.append(ReasonCode.ACUTE_ADMINISTRATION)
+                stats.n_acute_rerouted += 1
+            elif rescue:
+                initial.append(ReasonCode.RESCUE_ROLE)
+                stats.n_rescue_routed += 1
+            if (not acute and self.cfg.specialist_only_drug_review and fs.status == "specialist_only"
+                    and it.field_path == "medication.current_asms" and llm_has_meds):
+                initial.append(ReasonCode.SPECIALIST_ONLY_UNCONFIRMED)
+                stats.n_specialist_only_unconfirmed += 1
+            claim = self._evidence_to_claim(
+                ev=it.ev, source_text=text, document_id=document_id,
+                section=_section_hint(it.module), field_type=it.field_path,
+                detectors=detectors, initial_reasons=initial,
+            )
+            claim.alternative = alternative
+            if acute:
+                claim.field_path = ACUTE_FIELD_PATH
+            elif rescue:
+                claim.field_path = RESCUE_FIELD_PATH
+            self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
+            claims.append(claim)
+
+        # ── LLM-only claims: verbatim quote required, never auto-accepted ──
+        from services.chain_llm import locate_quote
+        for it in llm_only:
+            ev = dict(it.ev)
+            span = locate_quote(ev.get("evidence_text") or "", text)
+            grounded = False
+            if span is None and getattr(self.cfg, "ground_llm_values", True):
+                from services.chain_llm import ground_value
+                span = ground_value(it.field_path, ev.get("value"), text)
+                grounded = span is not None
+            if span is not None:
+                ev["char_start"], ev["char_end"] = span
+                ev["evidence_text"] = text[span[0]:span[1]]
+            else:
+                ev["char_start"] = ev["char_end"] = None
+            role, _rule = self._drug_role(it.field_path, ev, text)
+            acute = role == "acute"
+            rescue = role == "rescue"
+            if acute:
+                stats.n_acute_rerouted += 1
+            elif rescue:
+                stats.n_rescue_routed += 1
             claim = self._evidence_to_claim(
                 ev=ev, source_text=text, document_id=document_id,
-                section=section, field_type=field_type,
+                section=_section_hint(it.module), field_type=it.field_path,
+                detectors=["llm"],
+                initial_reasons=([ReasonCode.ACUTE_ADMINISTRATION] if acute else
+                                 [ReasonCode.RESCUE_ROLE] if rescue else []),
             )
-
-            # ── Verify ──
-            self._verify(claim, field_type=field_type)
-
-            # ── Publish ──
-            stats.tally(claim.validator_verdict, claim.reason_codes)
-            if ledger is not None:
-                ledger.publish(claim)
+            if acute:
+                claim.field_path = ACUTE_FIELD_PATH
+            elif rescue:
+                claim.field_path = RESCUE_FIELD_PATH
+            if span is None:
+                stats.n_llm_unsupported += 1
+            else:
+                stats.n_llm_only += 1
+                stats.n_llm_grounded += int(grounded)
+            self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
             claims.append(claim)
 
         if return_claims:
@@ -178,6 +346,65 @@ class ChainPipeline:
         return stats
 
     # ---- Stage implementations -----------------------------------------
+
+    def _drug_role(self, field_path: str, ev: dict, text: str) -> tuple[str, Optional[str]]:
+        """("acute" | "rescue" | "maintenance", rule) for a current-ASM mention.
+
+        Each role has its own switch; a disabled role is reported as maintenance."""
+        if field_path != "medication.current_asms" or not (
+                self.cfg.acute_administration_filter or self.cfg.rescue_role_split):
+            return "maintenance", None
+        from services.chain_llm import locate_quote
+        from services.med_context import drug_role
+        start, end = ev.get("char_start"), ev.get("char_end")
+        if start is None or end is None:
+            span = locate_quote(ev.get("evidence_text") or "", text)
+            if span is None:
+                return "maintenance", None
+            start, end = span
+        role, rule = drug_role(text, int(start), int(end))
+        if role == "acute" and not self.cfg.acute_administration_filter:
+            from services.med_context import rescue_role
+            r = rescue_role(text, int(start), int(end))
+            role, rule = ("rescue", r) if r else ("maintenance", None)
+        if role == "rescue" and not self.cfg.rescue_role_split:
+            return "maintenance", None
+        return role, rule
+
+    def _acute_rule(self, field_path: str, ev: dict, text: str) -> Optional[str]:
+        """Rule name when a current-ASM mention is a one-off administration, else None."""
+        role, rule = self._drug_role(field_path, ev, text)
+        return rule if role == "acute" else None
+
+    def _llm_evidence(self, item, text: str):
+        """Evidence dict of an LLM item with a span found in the note (its quote, else value grounding)."""
+        from services.chain_llm import ground_value, locate_quote
+        ev = dict(item.ev)
+        span = locate_quote(ev.get("evidence_text") or "", text)
+        if span is None and getattr(self.cfg, "ground_llm_values", True):
+            span = ground_value(item.field_path, ev.get("value"), text)
+        if span is None:
+            return None
+        ev["char_start"], ev["char_end"] = span
+        ev["evidence_text"] = text[span[0]:span[1]]
+        return ev
+
+    def _finish(self, claim: Claim, *, field_type: str, stats: ExtractionStats, ledger: Any) -> None:
+        """Verify, tally and publish one claim."""
+        self._verify(claim, field_type=field_type)
+        stats.tally(claim.validator_verdict, claim.reason_codes)
+        if ledger is not None:
+            ledger.publish(claim)
+
+    def _reason_llm(self, text: str, *, document_id: str, doc_date: str):
+        """Reason B: obtain an LLM phenotype dict, or None (specialist-only)."""
+        if self._llm_reasoner is None:
+            return None
+        try:
+            return self._llm_reasoner(text, document_id, doc_date)
+        except Exception:
+            logger.exception("LLM reasoner failed; continuing specialist-only")
+            return None
 
     def _prepare(self, text: str) -> str:
         """Normalise + canonicalise section headers (reversible)."""
@@ -238,6 +465,8 @@ class ChainPipeline:
     def _evidence_to_claim(
         self, *, ev: dict, source_text: str, document_id: str,
         section: str, field_type: str,
+        detectors: Optional[list[str]] = None,
+        initial_reasons: Optional[list[ReasonCode]] = None,
     ) -> Claim:
         """Build a Claim from an Evidence[T], attaching a retrieved candidate."""
         # Attempt candidate retrieval if we have a quote
@@ -245,22 +474,29 @@ class ChainPipeline:
         concept_system = "MEDAI-ENUM"
         concept_id = str(ev.get("value") or "unknown")
         concept_label = concept_id
+        concept_release = self.cfg.ontology_release
         candidate_rank = 1
 
         if mention_text and self._candidate_service is not None:
             cands = self._candidate_service.get_candidates(
                 mention=mention_text, field_type=field_type, k=5,
             )
-            if cands:
+            # Without the LLM selection step, only an exact label/synonym hit is
+            # trusted; anything fuzzier keeps the enum ID and is left to review.
+            if cands and cands[0].rank_score >= self.cfg.min_candidate_score and not cands[0].is_obsolete:
                 top = cands[0]
                 concept_system = top.system
                 concept_id = top.id
                 concept_label = top.label
+                concept_release = top.release or concept_release
                 candidate_rank = 1
 
         # Map Evidence certainty / temporal_status → claim labels
         certainty = (ev.get("certainty") or "").lower()
         temporal = (ev.get("temporal_status") or "").lower()
+        if (self.cfg.approx_frequency_is_asserted and field_type.endswith("seizure_frequency")
+                and certainty == "probable"):
+            certainty = "definite"
 
         assertion = _assertion_from_certainty(certainty)
         experiencer = Experiencer.PATIENT  # v0: specialist doesn't yet emit experiencer per-field
@@ -274,22 +510,27 @@ class ChainPipeline:
             concept_system=concept_system,
             concept_id=concept_id,
             concept_label=concept_label,
-            ontology_release=self.cfg.ontology_release,
+            ontology_release=concept_release,
             assertion=assertion,
             experiencer=experiencer,
             temporal_status=temporal_status,
-            detectors=["exect_us"],
+            detectors=detectors or [SPECIALIST_DETECTOR],
             candidate_rank=candidate_rank,
             model_confidence=None,
             versions=Versions(
-                model="",
-                prompt="",
+                model=getattr(getattr(self._llm_reasoner, "info", None), "model", "")
+                if "llm" in (detectors or []) else "",
+                prompt=getattr(getattr(self._llm_reasoner, "info", None), "prompt", "")
+                if "llm" in (detectors or []) else "",
                 rules=self.cfg.rules_version,
                 retriever=self.cfg.ontology_release,
                 pipeline=self.cfg.pipeline_version,
             ),
             initial_verdict=ValidatorVerdict.REVIEW,  # Verify will re-decide
+            initial_reasons=initial_reasons,
         )
+        claim.field_path = field_type
+        claim.value = ev.get("value")
         return claim
 
     # ---- Verify --------------------------------------------------------
@@ -323,6 +564,31 @@ class ChainPipeline:
             claim.reason_codes = reasons
             return
 
+        # Policy: a one-off drug administration is not the regimen; a person decides
+        if ReasonCode.ACUTE_ADMINISTRATION in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
+        # Policy: the LLM listed drugs and did not list this one
+        if ReasonCode.SPECIALIST_ONLY_UNCONFIRMED in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
+        # Policy: specialist and LLM committed to different values for a scalar field
+        if ReasonCode.SOURCE_DISAGREEMENT in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
+        # Policy: a fact only the LLM proposed is never auto-accepted
+        if claim.detectors == ["llm"]:
+            reasons.append(ReasonCode.LLM_ONLY)
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
         # Policy: uncertain / hypothetical never auto-accept
         if claim.assertion == Assertion.UNCERTAIN:
             reasons.append(ReasonCode.UNCERTAIN_ASSERTION)
@@ -343,7 +609,7 @@ class ChainPipeline:
             return
 
         # Policy: medication-derived phenotype inference is never auto
-        if field_type.startswith("clinical_seizure") and claim.detectors == ["exect_us"] \
+        if field_type.startswith("clinical_seizure") and claim.detectors == [SPECIALIST_DETECTOR] \
                 and claim.concept.system == "MEDAI-ENUM":
             # Specialist linked only to our internal enum — a weak code source.
             reasons.append(ReasonCode.SPECIFICITY_UNSUPPORTED)
@@ -398,4 +664,4 @@ def _temporal_from_evidence(temporal: str) -> TemporalStatus:
     return TemporalStatus.UNKNOWN
 
 
-__all__ = ["ChainPipeline", "ChainPipelineConfig", "ExtractionStats"]
+__all__ = ["ChainPipeline", "ChainPipelineConfig", "ExtractionStats", "SPECIALIST_DETECTOR"]

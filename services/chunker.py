@@ -185,16 +185,39 @@ def _pack_paragraphs(
     return windows
 
 
+def _pack_windows(text: str, windows: list[tuple[str, int, str | None]], max_chars: int):
+    """Join neighbouring windows into one while the result fits ``max_chars``.
+
+    Splitting at every section header gives fragments of a few dozen characters (an
+    "Allergies" line, a medication list on its own) that the model reads without the history
+    they belong to, and one model call each.  Neighbours are joined from the original text, so
+    the headers between them stay; windows that overlap are never joined.
+    """
+    out: list[tuple[str, int, str | None]] = []
+    for w_text, w_off, hint in windows:
+        if out:
+            p_text, p_off, p_hint = out[-1]
+            p_end, end = p_off + len(p_text), w_off + len(w_text)
+            if w_off >= p_end and end - p_off <= max_chars:
+                out[-1] = (text[p_off:end], p_off, p_hint)
+                continue
+        out.append((w_text, w_off, hint))
+    return out
+
+
 def chunk_text(
     text: str,
     *,
     max_chars: int = 8000,
     overlap_chars: int = 400,
+    pack: bool = False,
 ) -> list[Chunk]:
     """Chunk a single free-text note by clinical section, then paragraph.
 
     `max_chars` targets ~2k input tokens (roughly 4 chars/token English
     prose). `overlap_chars` guards against a fact straddling two chunks.
+    With ``pack=True`` neighbouring sections are joined up to ``max_chars``
+    (what LEO uses); the default keeps one chunk per section.
     """
     if not text or not text.strip():
         return []
@@ -206,6 +229,8 @@ def chunk_text(
             _pack_paragraphs(body, offset, max_chars, overlap_chars, hint)
         )
 
+    if pack:
+        all_windows = _pack_windows(text, all_windows, max_chars)
     total = len(all_windows)
     return [
         Chunk(

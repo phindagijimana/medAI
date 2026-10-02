@@ -78,6 +78,27 @@ def _text_path_for(pid: str) -> Path:
     return FS_GOLD_TEXT_DIR / f"{pid}.txt"
 
 
+def _done_arms(doc_id: str, manifest_dir: Path) -> set[str]:
+    """Arms for which every applicable module already has a manifest.
+
+    Makes the run resumable: a job that hits its wall-clock limit (the
+    first Arm H attempt did, after 12 of 40 letters) can be resubmitted
+    and continues instead of redoing finished letters.
+    """
+    import json
+    from schema import modules_for
+    need = len(modules_for(DocumentType.PROGRESS_NOTE))
+    seen: dict[str, set[str]] = {}
+    for p in manifest_dir.rglob("*.json"):
+        try:
+            m = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if m.get("source_doc_id") == doc_id and m.get("arm"):
+            seen.setdefault(m["arm"], set()).add(m["prompt_id"].split(".")[0])
+    return {a for a, mods in seen.items() if len(mods) >= need}
+
+
 def main():
     print("=== Med42-8B M0/M1/M2 on 40 held-out F-S clinician letters ===")
     pids = _held_out_pids()
@@ -112,8 +133,12 @@ def main():
         print("LoRA adapter detected → prepending PATIENT_ID line to each note "
               "(inference contract for the v2/v3 augmentation-trained adapter).")
 
-    arms = ("M0", "M1", "M2")
-    n_ok = n_err = 0
+    # MEDAI_ARMS=M2 runs a single arm; MEDAI_RESUME=1 skips finished (letter, arm).
+    arms = tuple(a.strip() for a in os.environ.get("MEDAI_ARMS", "M0,M1,M2").split(",") if a.strip())
+    resume = os.environ.get("MEDAI_RESUME", "").lower() in ("1", "true", "yes")
+    manifest_dir = Path(os.environ["MEDAI_MANIFEST_DIR"])
+    print(f"Arms: {arms}  resume={resume}")
+    n_ok = n_err = n_skip = 0
     for i, pid in enumerate(pids, 1):
         text = _text_path_for(pid).read_text(encoding="utf-8")
         if use_id_aug:
@@ -128,7 +153,11 @@ def main():
             doc_type=DocumentType.PROGRESS_NOTE,
             doc_date=date(2019, 1, 1),
         )
+        done = _done_arms(doc.doc_id, manifest_dir) if resume else set()
         for extraction_arm in arms:
+            if extraction_arm in done:
+                n_skip += 1
+                continue
             try:
                 result = extract_phenotype(
                     doc=doc, source_text=text, model_backend=backend,
@@ -145,7 +174,7 @@ def main():
                 print(f"  [{i:3d}/{len(pids)}] {pid} {extraction_arm} ERR: {e}",
                       file=sys.stderr)
 
-    print(f"\nDone. ok={n_ok}, err={n_err}")
+    print(f"\nDone. ok={n_ok}, err={n_err}, skipped_done={n_skip}")
 
 
 if __name__ == "__main__":

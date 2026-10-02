@@ -450,6 +450,11 @@ def main():
                          "SYNPID tokens injected into both the prompt and the "
                          "target JSON, so the model learns to copy the ID from "
                          "the prompt instead of memorizing training IDs.")
+    ap.add_argument("--train-jsonl", default=None,
+                    help="Train on (prompt, completion) rows of this JSONL instead of --corpus "
+                         "(Arm H2: scripts/emit_flat_training_pairs.py).  The prompt is used as "
+                         "written; patient-ID augmentation is off.")
+    ap.add_argument("--val-jsonl", default=None, help="Validation rows for --train-jsonl.")
     ap.add_argument("--adapter-suffix", default="v2",
                     help="Suffix appended to the adapter output dir name. "
                          "Default 'v2' → checkpoints/{slug}_lora_epi_v2/, so the "
@@ -471,15 +476,35 @@ def main():
 
     id_aug = not args.no_id_aug
 
-    triples = _collect_triples(args.corpus)
-    if args.val_frac > 0.0 and len(triples) >= 10:
+    if args.train_jsonl:
+        def _rows(path):
+            with open(path, encoding="utf-8") as fh:
+                rows = [(r["prompt"], r["completion"]) for r in map(json.loads, fh) if r.get("completion")]
+            # Truncation would cut the completion off.  Drop rows whose prompt is too long
+            # (about 3.2 characters per token is a safe lower bound for these notes).
+            keep = [(p, c) for p, c in rows if len(p) <= 3.2 * (args.max_length - 400)]
+            if len(keep) < len(rows):
+                logger.warning("%s: dropped %d of %d rows with prompts too long for --max-length %d",
+                               path, len(rows) - len(keep), len(rows), args.max_length)
+            return keep
+        triples = []
+        train_triples, val_triples = [], []
+        train_pairs = _rows(args.train_jsonl)
+        val_pairs = _rows(args.val_jsonl) if args.val_jsonl else []
+        id_aug = False
+    else:
+        triples = _collect_triples(args.corpus)
+    if args.train_jsonl:
+        pass
+    elif args.val_frac > 0.0 and len(triples) >= 10:
         train_triples, val_triples = _split_by_patient(
             triples, args.val_frac, args.val_seed,
         )
     else:
         train_triples, val_triples = triples, []
-    train_pairs = _triples_to_pairs(train_triples, id_aug=id_aug)
-    val_pairs = _triples_to_pairs(val_triples, id_aug=id_aug)
+    if not args.train_jsonl:
+        train_pairs = _triples_to_pairs(train_triples, id_aug=id_aug)
+        val_pairs = _triples_to_pairs(val_triples, id_aug=id_aug)
 
     logger.info("Base model : %s", model_id)
     logger.info("Corpus     : %s", args.corpus)

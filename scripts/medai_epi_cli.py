@@ -222,6 +222,52 @@ def cmd_chat(args):
     return 0
 
 
+def cmd_chain(args):
+    """Run the LEO chain on one note; prints claims (or writes them as JSONL)."""
+    text = _read_text_source(args)
+    payload = {"source_text": text, "persist": not args.no_persist}
+    if args.doc_id:
+        payload["document_id"] = args.doc_id
+    if args.doc_date:
+        payload["doc_date"] = args.doc_date
+    status, body, _ = _http("POST", f"{args.server}/extract/chain", body=payload)
+    _die_on_error(status, body)
+    res = json.loads(body)
+    if args.output:
+        Path(args.output).write_text(
+            "\n".join(json.dumps(c) for c in res["claims"]) + "\n", encoding="utf-8")
+        st = res["stats"]
+        print(f"claims={st['n_claims_emitted']} accept={st['n_accepted']} review={st['n_review']} "
+              f"reject={st['n_rejected']} -> {args.output}")
+    else:
+        print(json.dumps(res, indent=2))
+    return 0
+
+
+def cmd_review_list(args):
+    status, body, _ = _http("GET", f"{args.server}/extract/review/pending?limit={args.limit}")
+    _die_on_error(status, body)
+    res = json.loads(body)
+    for p in res["pending"]:
+        alt = f"  (other source: {p['alternative']})" if p.get("alternative") else ""
+        print(f"{p.get('claim_id')}  {p.get('field_path') or '-':44s} {str(p.get('value'))[:50]}{alt}")
+    print(f"{res['count']} pending", file=sys.stderr)
+    return 0
+
+
+def cmd_review_resolve(args):
+    payload = {"action": args.action, "reviewer": args.reviewer, "notes": args.notes or ""}
+    if args.action == "edit":
+        if not args.claim_json:
+            sys.stderr.write("ERROR: --claim-json FILE is required for action=edit\n")
+            return 2
+        payload["claim"] = json.loads(Path(args.claim_json).read_text(encoding="utf-8"))
+    status, body, _ = _http("POST", f"{args.server}/extract/review/{args.claim_id}/resolve", body=payload)
+    _die_on_error(status, body)
+    print(json.dumps(json.loads(body)))
+    return 0
+
+
 def cmd_ui(args):
     url = f"{args.server}/extract/ui"
     if args.no_open:
@@ -347,6 +393,31 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--json", action="store_true",
                      help="also emit the full JSON body")
     sp.set_defaults(func=cmd_chat)
+
+    # chain (LEO)
+    sp = sub.add_parser("chain", help="LEO chain on one note -> claims (ACCEPT/REVIEW/REJECT)")
+    sp.add_argument("positional_file", nargs="?", help="note text file")
+    sp.add_argument("--text-file")
+    sp.add_argument("--text")
+    sp.add_argument("--doc-id")
+    sp.add_argument("--doc-date")
+    sp.add_argument("--no-persist", action="store_true", help="do not write to the evidence ledger")
+    sp.add_argument("--output", "-o", help="write claims as JSONL here")
+    sp.set_defaults(func=cmd_chain)
+
+    # review queue
+    sp = sub.add_parser("review", help="human review queue for REVIEW claims")
+    rsub = sp.add_subparsers(dest="review_cmd", required=True)
+    rp = rsub.add_parser("list", help="claims awaiting review")
+    rp.add_argument("--limit", type=int, default=100)
+    rp.set_defaults(func=cmd_review_list)
+    rp = rsub.add_parser("resolve", help="accept_as_is | edit | reject one claim")
+    rp.add_argument("claim_id")
+    rp.add_argument("action", choices=["accept_as_is", "edit", "reject"])
+    rp.add_argument("--reviewer", default="cli")
+    rp.add_argument("--notes")
+    rp.add_argument("--claim-json", help="full Claim JSON file (action=edit)")
+    rp.set_defaults(func=cmd_review_resolve)
 
     # ui
     sp = sub.add_parser("ui", help="open the /extract/ui browser page")

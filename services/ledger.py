@@ -1,4 +1,4 @@
-"""Append-only evidence ledger (Chain-of-Three P1.4).
+"""Append-only evidence ledger for the LEO chain (Chain-of-Three spec P1.4).
 
 Compendium (page 7): *"Reviewed items enter the ledger only after a
 clinician action. The record is marked human-adjudicated and retains the
