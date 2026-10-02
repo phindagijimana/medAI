@@ -1,0 +1,161 @@
+{
+  "patient_id": "P005017",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E013",
+    "E014"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 43
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 2,
+        "unit": "month"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "structural"
+    },
+    {
+      "event_id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant"
+    },
+    {
+      "event_id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "carbamazepine",
+          "status": "current"
+        },
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E008",
+      "field": "MRI_FINDING",
+      "value": "hippocampal_sclerosis"
+    },
+    {
+      "event_id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        },
+        {
+          "generic_name": "lamotrigine",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        }
+      ]
+    },
+    {
+      "event_id": "E010",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "cannot exclude atypical absence",
+          "possible"
+        ]
+      ]
+    },
+    {
+      "event_id": "E011",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "mild_diffuse_slowing",
+        "ied_lobe": "temporal",
+        "ied_laterality": "right",
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E012",
+      "field": "SEMIOLOGY",
+      "value": {
+        "aura": "deja vu",
+        "motor_features": [
+          "automatisms",
+          "tonic posturing"
+        ],
+        "awareness": "impaired"
+      }
+    },
+    {
+      "event_id": "E013",
+      "field": "FOCAL_ONSET",
+      "value": {
+        "motor": "automatisms",
+        "nonmotor": null
+      }
+    },
+    {
+      "event_id": "E014",
+      "field": "RESCUE_MEDS",
+      "value": [
+        {
+          "generic_name": "lorazepam",
+          "route": "sublingual"
+        }
+      ]
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}

@@ -193,9 +193,40 @@ If the field is not in the plan, do NOT invent content for it.
 """
 
 
+_EXTENDED_FIELDS = ("EEG_STUDY", "SEMIOLOGY", "FOCAL_ONSET", "RESCUE_MEDS", "SURGERY_HISTORY")
+
+_EXTENDED_BLOCK = """
+============================================================
+EXTENDED PLAN FIELDS (only when present in the plan)
+============================================================
+The semantic plan may carry five more assertions. Each is the reference for this patient, so state it exactly
+and never contradict it. Write each one in this note when the note type naturally covers it (a note type that
+does not, for example a brief triage call, may leave it out), and never invent a different value.
+
+- EEG_STUDY: study_type (routine / prolonged / ambulatory / video EEG monitoring), background (normal, focal
+  slowing, mild diffuse slowing), ied_lobe + ied_laterality (where interictal epileptiform discharges are; null =
+  none seen), ictal_onset_lobe + ictal_onset_laterality (only for video EEG monitoring; null = none recorded).
+  In EEG reports, EMU admission and discharge notes, PRC summaries and consult letters describe it in the usual
+  words ("rare left temporal sharp waves", "normal background", "seizure onset from the right frontal region").
+  If ied_lobe is null say no epileptiform discharges were seen.
+- SEMIOLOGY: aura (null = no aura), motor_features, awareness (preserved / impaired). Describe the event the way
+  a patient or witness would, in the history of present illness.
+- FOCAL_ONSET: motor / nonmotor onset feature in ILAE 2017 terms (for example "automatisms", "behavior arrest").
+  Use that wording or a close clinical equivalent.
+- RESCUE_MEDS: as-needed seizure rescue drug and route; list it separately from daily medicines, as "rescue
+  medication" or "PRN". It is NOT a current maintenance ASM.
+- SURGERY_HISTORY: past epilepsy procedure with side and year; state it as history (s/p ...).
+If a field is not in the plan, do NOT invent content for it (no rescue drug, no surgery).
+============================================================
+"""
+
+
 def _assemble_prompt(row: dict, plan: dict, patient_context: dict) -> str:
     template_id = row["note_template"]
     template = _load_template(template_id)
+    if any(r.get("field") in _EXTENDED_FIELDS for r in plan.get("required_assertions", [])) \
+            and "OUTPUT INSTRUCTIONS" in template:
+        template = template.replace("OUTPUT INSTRUCTIONS", _EXTENDED_BLOCK + "\nOUTPUT INSTRUCTIONS", 1)
     plan_json = json.dumps(plan, indent=2, ensure_ascii=False)
     metadata_json = json.dumps(
         _build_encounter_metadata(row, patient_context),

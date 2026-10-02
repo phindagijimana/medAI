@@ -1,0 +1,187 @@
+{
+  "patient_id": "P005023",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E013",
+    "E014",
+    "E015",
+    "E016"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_aware"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 66
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 3,
+        "unit": "year"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "immune"
+    },
+    {
+      "event_id": "E006",
+      "field": "ETIOLOGY_SPECIFICS",
+      "value": {
+        "causative_antibody": "lgi1"
+      }
+    },
+    {
+      "event_id": "E007",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant"
+    },
+    {
+      "event_id": "E008",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        },
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E009",
+      "field": "MRI_FINDING",
+      "value": "incidental_lesion"
+    },
+    {
+      "event_id": "E010",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "valproate",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        },
+        {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "cognitive side effects"
+        }
+      ]
+    },
+    {
+      "event_id": "E011",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "post-ictal confusion"
+      ]
+    },
+    {
+      "event_id": "E012",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "likely drug-resistant focal epilepsy",
+          "probable"
+        ]
+      ]
+    },
+    {
+      "event_id": "E013",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "focal_slowing",
+        "ied_lobe": null,
+        "ied_laterality": null,
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E014",
+      "field": "SEMIOLOGY",
+      "value": {
+        "aura": "epigastric rising sensation",
+        "motor_features": [
+          "versive head turning",
+          "clonic jerking"
+        ],
+        "awareness": "preserved"
+      }
+    },
+    {
+      "event_id": "E015",
+      "field": "FOCAL_ONSET",
+      "value": {
+        "motor": "versive head turning",
+        "nonmotor": null
+      }
+    },
+    {
+      "event_id": "E016",
+      "field": "SURGERY_HISTORY",
+      "value": [
+        {
+          "procedure": "laser interstitial thermal therapy",
+          "side": "right",
+          "year": 2017
+        }
+      ]
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}

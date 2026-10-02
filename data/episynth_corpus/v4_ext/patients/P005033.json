@@ -1,0 +1,129 @@
+{
+  "patient_id": "P005033",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "combined_generalized_and_focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "generalized_tonic_clonic"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 12
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "seizure_free": true,
+        "quantity": 0,
+        "unit": "month"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown"
+    },
+    {
+      "event_id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive"
+    },
+    {
+      "event_id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "zonisamide",
+          "status": "current"
+        },
+        {
+          "generic_name": "perampanel",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E008",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "loss of consciousness"
+      ]
+    },
+    {
+      "event_id": "E009",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "suspected autoimmune contribution",
+          "possible"
+        ]
+      ]
+    },
+    {
+      "event_id": "E010",
+      "field": "HYPOTHETICAL_TRIGGERS",
+      "value": [
+        "if intolerable side effects arise, cross-titrate to lacosamide"
+      ]
+    },
+    {
+      "event_id": "E011",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "focal_slowing",
+        "ied_lobe": "temporal",
+        "ied_laterality": "left",
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E012",
+      "field": "SEMIOLOGY",
+      "value": {
+        "aura": null,
+        "motor_features": [
+          "tonic stiffening followed by clonic jerking"
+        ],
+        "awareness": "impaired"
+      }
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}

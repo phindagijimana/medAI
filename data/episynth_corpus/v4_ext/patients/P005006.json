@@ -1,0 +1,167 @@
+{
+  "patient_id": "P005006",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E013"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "unknown"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "unknown_onset_nonmotor"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 7
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "seizure_free": true,
+        "quantity": 0,
+        "unit": "month"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "structural"
+    },
+    {
+      "event_id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_resistant"
+    },
+    {
+      "event_id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "brivaracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        },
+        {
+          "generic_name": "zonisamide",
+          "status": "current"
+        },
+        {
+          "generic_name": "lacosamide",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E008",
+      "field": "MRI_FINDING",
+      "value": "hippocampal_sclerosis"
+    },
+    {
+      "event_id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "perampanel",
+          "status": "prior",
+          "reason_discontinued": "sedation"
+        },
+        {
+          "generic_name": "carbamazepine",
+          "status": "prior",
+          "reason_discontinued": "rash"
+        },
+        {
+          "generic_name": "valproate",
+          "status": "prior",
+          "reason_discontinued": "inadequate seizure control"
+        },
+        {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "reason_discontinued": "sedation"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "mood side effects"
+        }
+      ]
+    },
+    {
+      "event_id": "E010",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "syncope"
+      ]
+    },
+    {
+      "event_id": "E011",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "normal",
+        "ied_lobe": null,
+        "ied_laterality": null,
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E012",
+      "field": "RESCUE_MEDS",
+      "value": [
+        {
+          "generic_name": "midazolam",
+          "route": "intranasal"
+        }
+      ]
+    },
+    {
+      "event_id": "E013",
+      "field": "SURGERY_HISTORY",
+      "value": [
+        {
+          "procedure": "responsive neurostimulation implantation",
+          "side": null,
+          "year": 2019
+        }
+      ]
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}

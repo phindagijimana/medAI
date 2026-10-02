@@ -1,0 +1,151 @@
+{
+  "patient_id": "P005016",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E013",
+    "E014"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_aware"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 41
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 4,
+        "unit": "month"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "structural"
+    },
+    {
+      "event_id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive"
+    },
+    {
+      "event_id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "lamotrigine",
+          "status": "current"
+        },
+        {
+          "generic_name": "topiramate",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E008",
+      "field": "MRI_FINDING",
+      "value": "hippocampal_sclerosis"
+    },
+    {
+      "event_id": "E009",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "prior",
+          "reason_discontinued": "GI intolerance"
+        }
+      ]
+    },
+    {
+      "event_id": "E010",
+      "field": "HEDGED_FINDINGS",
+      "value": [
+        [
+          "focal MRI lesion likely epileptogenic",
+          "probable"
+        ]
+      ]
+    },
+    {
+      "event_id": "E011",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "normal",
+        "ied_lobe": "temporal",
+        "ied_laterality": "right",
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E012",
+      "field": "SEMIOLOGY",
+      "value": {
+        "aura": null,
+        "motor_features": [
+          "epileptic spasms",
+          "hyperkinetic movements"
+        ],
+        "awareness": "preserved"
+      }
+    },
+    {
+      "event_id": "E013",
+      "field": "FOCAL_ONSET",
+      "value": {
+        "motor": "epileptic spasms",
+        "nonmotor": null
+      }
+    },
+    {
+      "event_id": "E014",
+      "field": "RESCUE_MEDS",
+      "value": [
+        {
+          "generic_name": "midazolam",
+          "route": "intranasal"
+        }
+      ]
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}

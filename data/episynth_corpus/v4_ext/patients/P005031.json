@@ -1,0 +1,130 @@
+{
+  "patient_id": "P005031",
+  "document_family": "epilepsy_clinic_letter",
+  "allowed_source_event_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012"
+  ],
+  "required_assertions": [
+    {
+      "event_id": "E001",
+      "field": "EP_TYPE",
+      "value": "focal"
+    },
+    {
+      "event_id": "E002",
+      "field": "SZ_TYPE",
+      "value": "focal_impaired_awareness"
+    },
+    {
+      "event_id": "E003",
+      "field": "AGE_AT_ONSET_YEARS",
+      "value": 54
+    },
+    {
+      "event_id": "E004",
+      "field": "SZ_FREQ",
+      "value": {
+        "quantity": 1,
+        "unit": "week"
+      }
+    },
+    {
+      "event_id": "E005",
+      "field": "ETIOLOGY_CATEGORY",
+      "value": "unknown"
+    },
+    {
+      "event_id": "E006",
+      "field": "DRE_STATUS",
+      "value": "drug_responsive"
+    },
+    {
+      "event_id": "E007",
+      "field": "CURRENT_ASMS",
+      "value": [
+        {
+          "generic_name": "levetiracetam",
+          "status": "current"
+        },
+        {
+          "generic_name": "oxcarbazepine",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "event_id": "E008",
+      "field": "PRIOR_ASMS",
+      "value": [
+        {
+          "generic_name": "lacosamide",
+          "status": "prior",
+          "reason_discontinued": "GI intolerance"
+        }
+      ]
+    },
+    {
+      "event_id": "E009",
+      "field": "DENIED_FINDINGS",
+      "value": [
+        "developmental delay"
+      ]
+    },
+    {
+      "event_id": "E010",
+      "field": "EEG_STUDY",
+      "value": {
+        "study_type": "routine_eeg",
+        "background": "normal",
+        "ied_lobe": "temporal",
+        "ied_laterality": "left",
+        "ictal_onset_lobe": null,
+        "ictal_onset_laterality": null
+      }
+    },
+    {
+      "event_id": "E011",
+      "field": "SEMIOLOGY",
+      "value": {
+        "aura": "deja vu",
+        "motor_features": [
+          "epileptic spasms"
+        ],
+        "awareness": "impaired"
+      }
+    },
+    {
+      "event_id": "E012",
+      "field": "FOCAL_ONSET",
+      "value": {
+        "motor": null,
+        "nonmotor": "emotional"
+      }
+    }
+  ],
+  "prohibited_assertions": [],
+  "optional_assertions": [],
+  "information_scope_status": "MEDAI-PROPOSED EXPERIMENTAL INPUT CONTROL",
+  "_meta": {
+    "sampler": "scripts/synth_patient_sampler.py",
+    "sampler_version": "v1.0+ext1",
+    "extended_fields": [
+      "EEG_STUDY",
+      "SEMIOLOGY",
+      "FOCAL_ONSET",
+      "RESCUE_MEDS",
+      "SURGERY_HISTORY"
+    ]
+  }
+}
