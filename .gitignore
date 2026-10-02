@@ -116,7 +116,7 @@ references/
 # Isolated virtualenv for MedCAT + medspaCy + spaCy stack
 venv-medcat/
 # Phase 1c: built CDB (large binary, regenerable via scripts/build_medcat_cdb_epilepsy.py)
-data/medcat_cdb_epilepsy/
+data/medcat_cdb_epilepsy*/
 
 # Phase 6b: MTSamples notes are externally-sourced (mtsamples.com, no LICENSE);
 #           stored locally for research-only NLP eval — do not commit.
@@ -124,3 +124,28 @@ data/eval_corpora/mtsamples_neuro/
 # Phase 6c: synth-v1 held-out subset is a copy of data/episynth_corpus/v1/;
 #           regenerable via scripts/build_synth_v1_eval_100.py.
 data/eval_corpora/synth_v1_eval_100/
+# Ontology releases (scripts/fetch_ontologies.py). RxNorm + SNOMED CT are
+# UMLS-licensed and must never be committed; only the manifest is tracked.
+data/ontologies/*
+!data/ontologies/MANIFEST.json
+# Concept-retrieval eval output quotes SNOMED CT / RxNorm labels (UMLS-licensed): never commit.
+eval/results/concept_retrieval*
+# SLURM stdout at repo root
+slurm-*.out
+
+# LEO: uploads, results and logs contain note text (protected health information)
+data/leo_jobs/
+leo_out/
+*_leo.csv
+*_leo.xlsx
+*_leo.claims.csv
+*_leo.provenance.json
+.leo_server.json
+logs/leo_jobs/
+
+# MTSamples-derived notes and their extraction outputs (externally sourced, no licence): never commit.
+data/eval_corpora/mtsamples_neuro_preprocessed/
+data/run_manifests_*mtsamples*/
+# Regenerable MetaCAT silver set (34 MB) and training logs
+data/metacat_training/silver.json
+logs/metacat_train_*
