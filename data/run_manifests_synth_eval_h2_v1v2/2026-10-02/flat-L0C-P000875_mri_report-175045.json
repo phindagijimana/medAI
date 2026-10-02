@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0C-P000875_mri_report-175045",
+  "started_at": "2026-10-02T17:50:45.908674+00:00",
+  "finished_at": "2026-10-02T17:50:57.831896+00:00",
+  "duration_s": 11.92,
+  "code_sha": "92f8a8fd",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork04.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_h2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P000875_mri_report",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 391,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"Generalized\"}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"generalized tonic-clonic\"}, \"age_at_onset_years\": {\"value\": 38.0, \"quote\": \"onset at age 38\"}, \"seizure_frequency\": {\"count_min\": 7.0, \"count_max\": 7.0, \"period\": \"week\", \"seizure_free\": null, \"quote\": \"7 times per week\"}, \"current_asms\": [{\"name\": \"brivaracetam\", \"dose\": null, \"quote\": \"brivaracetam\"}, {\"name\": \"oxcarbazepine\", \"dose\": null, \"quote\": \"oxcarbazepine\"}]}",
+  "raw_response_tokens": 180,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L0C"
+}

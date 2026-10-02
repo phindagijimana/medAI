@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0C-P003097_V04-185624",
+  "started_at": "2026-10-02T18:56:24.954832+00:00",
+  "finished_at": "2026-10-02T18:56:36.261458+00:00",
+  "duration_s": 11.31,
+  "code_sha": "92f8a8fd",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_h2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003097_V04",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 6012,
+  "raw_response": "{\"epilepsy_type\": {\"value\": null, \"quote\": null}, \"predominant_seizure_type\": {\"value\": null, \"quote\": null}, \"age_at_onset_years\": {\"value\": 14.0, \"quote\": \"onset at age 14\"}, \"seizure_frequency\": {\"count_min\": 6.0, \"count_max\": 6.0, \"period\": \"week\", \"seizure_free\": null, \"quote\": \"6 seizures per week\"}, \"current_asms\": [{\"name\": \"levetiracetam\", \"dose\": null, \"quote\": \"levetiracetam\"}, {\"name\": \"lacosamide\", \"dose\": null, \"quote\": \"lacosamide\"}]}",
+  "raw_response_tokens": 163,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L0C"
+}

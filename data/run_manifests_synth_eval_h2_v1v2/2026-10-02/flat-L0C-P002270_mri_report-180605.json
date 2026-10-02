@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0C-P002270_mri_report-180605",
+  "started_at": "2026-10-02T18:06:05.486429+00:00",
+  "finished_at": "2026-10-02T18:06:16.416576+00:00",
+  "duration_s": 10.93,
+  "code_sha": "92f8a8fd",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork04.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_h2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P002270_mri_report",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 342,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Focal\"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"Focal aware\"}, \"age_at_onset_years\": {\"value\": 30.0, \"quote\": \"at age 30\"}, \"seizure_frequency\": {\"count_min\": 1.0, \"count_max\": 1.0, \"period\": \"week\", \"seizure_free\": null, \"quote\": \"once weekly\"}, \"current_asms\": [{\"name\": \"perampanel\", \"dose\": null, \"quote\": \"perampanel\"}, {\"name\": \"lacosamide\", \"dose\": null, \"quote\": \"lacosamide\"}]}",
+  "raw_response_tokens": 166,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L0C"
+}
