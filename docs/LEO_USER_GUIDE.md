@@ -227,4 +227,12 @@ A flat-contract LoRA adapter (Arm H2) is used with `--adapter DIR` (arm becomes 
 - Long documents (10-40k characters, chunked; 30 synthetic patients, rerun 2026-10-02 after the rule fixes, with the seizure-type candidate option on): the model alone scores 0.991, LEO's auto-accepted values 0.970 and its reviewed output 0.967 (it was 0.928 before the rule fixes). The rules still lose accuracy on long joined text (0.932). Up to 20k characters, chunked and whole-document model runs scored 1.000 and 0.987 (11 documents).
 - Free-text questions (synthetic, 30 patients, rerun with the stricter quote check): epilepsy type and onset age 30/30; hippocampal sclerosis 11/17; "currently taking this drug?" 94/114 (yes-answers: precision 0.78, recall 0.96); 2 of 90 unanswerable questions got an invented answer. The stricter check marks an answer `rejected` when its quote is not about the drug asked: of 15 false "yes" answers it rejected 11, and of the answers it still trusted (quote found, `needs_review`) 110 of 116 were right (95%, against 88% before). The price is that it also rejected 44 correct answers (they are still shown, marked untrusted). A located quote proves the words are in the note, not that they support the answer: always read the quote.
 - Patient-level roll-up exists but is not measured; per-note rows are the supported output. The long-document figures above come from several visits joined into one text, which mixes visit states; they test chunking, not how a patient should be summarised.
-- Not validated on real clinical notes yet (needs IRB and secure compute; plan in the evaluation protocol).
+- Not validated on real clinical notes (needs IRB and secure compute; deferred beyond the MVP, section 12). Until then, no result here says anything about real notes.
+
+## 12. Deferred beyond the MVP
+
+Three things are deliberately not built or done yet. The full record is in the project's `DEFERRED_BEYOND_MVP.md`.
+
+- **Reviewers adding a value LEO missed.** The Review tab covers only values LEO found, so review files measure precision, not recall. Do not quote them as recall.
+- **Learning from review decisions.** Decisions are stored but nothing learns from them. This needs real review data; any change (recalibrated acceptance, a per-field disagreement policy, a retrained adapter) will ship as a new pipeline version with the evaluation re-run.
+- **Real clinical notes.** This needs IRB approval and secure compute. **Until then, no result in this guide says anything about real notes.** Do not run patient data through LEO on a machine that is not approved for it: the app has no login, and job files are not encrypted on disk.
