@@ -137,7 +137,7 @@ def cmd_phenotypes(args) -> int:
         return 0
     print("EXTRACT (LLM + EpExtra + ontology, fused and verified)")
     print("  accuracy: measured = tested against reference notes (synthetic only); rules_only = the specialist alone was")
-    print("  scored (synthetic); indirect = only its effect on another field was tested; none = not tested.")
+    print("  scored (synthetic or F-S letters); indirect = only its effect on another field was tested; none = not tested.")
     print("  `leo evidence` prints the figures.\n")
     for p in d["extract"]:
         lvl = p["evidence"] + (" (inferred)" if p["derived"] else "")

@@ -112,11 +112,10 @@
     "examples": []
   },
   "not_scoreable": [
-    "EEG study type, background, ictal onset",
+    "EEG study type, background, ictal onset (the F-S letters give only normal/abnormal)",
     "seizure semiology",
     "focal motor / non-motor onset",
-    "failed, prior and rescue drugs",
-    "surgery history (reference lists none)",
-    "etiology details"
-  ]
+    "surgery history (reference lists none)"
+  ],
+  "scored_elsewhere": "prior/failed/rescue drugs, etiology specifics and coarse EEG: scripts/score_plan_phenotypes.py"
 }

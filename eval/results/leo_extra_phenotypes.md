@@ -13,4 +13,5 @@ A yes/no finding the note never mentions gets no value from the rules (absence i
 MRI findings (list, micro): precision 0.517, recall 0.882, F1 0.652
 Surgery: rules report a procedure for 0 of 30 patients whose reference lists none.
 
-Not scoreable (the reference has no entry): EEG study type, background, ictal onset; seizure semiology; focal motor / non-motor onset; failed, prior and rescue drugs; surgery history (reference lists none); etiology details.
+Not scoreable (the reference has no entry): EEG study type, background, ictal onset (the F-S letters give only normal/abnormal); seizure semiology; focal motor / non-motor onset; surgery history (reference lists none).
+Prior / failed / rescue drugs, etiology specifics and coarse EEG are scored by scripts/score_plan_phenotypes.py (eval/results/leo_plan_phenotypes.md).

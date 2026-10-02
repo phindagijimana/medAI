@@ -1,0 +1,896 @@
+{
+  "system": "EpExtra specialist, no LLM",
+  "synthetic": {
+    "stopped_drugs": {
+      "polish90 (90; the adapter was trained on these)": {
+        "tp": 116,
+        "fp": 99,
+        "fn": 15,
+        "precision": 0.54,
+        "recall": 0.885,
+        "f1": 0.671,
+        "patients": 90,
+        "patients_with_reference": 65,
+        "leaked_into_current": 25
+      },
+      "polish_val (10, held out from the adapter)": {
+        "tp": 8,
+        "fp": 11,
+        "fn": 2,
+        "precision": 0.421,
+        "recall": 0.8,
+        "f1": 0.552,
+        "patients": 10,
+        "patients_with_reference": 5,
+        "leaked_into_current": 2
+      }
+    },
+    "reason_class": {
+      "polish90 (90; the adapter was trained on these)": {
+        "intolerance -> unspecified": 8,
+        "intolerance -> intolerance": 84,
+        "inefficacy -> unspecified": 7,
+        "inefficacy -> intolerance": 12,
+        "inefficacy -> inefficacy": 4,
+        "intolerance -> inefficacy": 1
+      },
+      "polish_val (10, held out from the adapter)": {
+        "inefficacy -> intolerance": 1,
+        "intolerance -> intolerance": 7
+      }
+    },
+    "failed_inefficacy": {
+      "polish90 (90; the adapter was trained on these)": {
+        "tp": 4,
+        "fp": 6,
+        "fn": 23,
+        "precision": 0.4,
+        "recall": 0.148,
+        "f1": 0.216
+      },
+      "polish_val (10, held out from the adapter)": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "etiology_specifics": {
+      "synth_v3 eval (20)": {
+        "no_reference_no_claim": 19,
+        "patients": 1,
+        "causative_gene_ref": 1,
+        "causative_gene_right": 1,
+        "causative_variant_ref": 1,
+        "causative_variant_right": 1,
+        "any_specifics_claim": 1
+      },
+      "synth_v3 ext (80; not looked at while the v0.4/v0.5 rules were written)": {
+        "patients": 12,
+        "causative_gene_ref": 7,
+        "causative_gene_right": 7,
+        "causative_variant_ref": 7,
+        "causative_variant_right": 7,
+        "any_specifics_claim": 12,
+        "no_reference_no_claim": 68,
+        "causative_antibody_ref": 5,
+        "causative_antibody_right": 5
+      },
+      "polish90 (90; the adapter was trained on these)": {
+        "no_reference_no_claim": 77,
+        "patients": 13,
+        "causative_antibody_ref": 6,
+        "causative_antibody_right": 6,
+        "any_specifics_claim": 13,
+        "causative_gene_ref": 7,
+        "causative_gene_right": 7,
+        "causative_variant_ref": 7,
+        "causative_variant_right": 7
+      },
+      "polish_val (10, held out from the adapter)": {
+        "no_reference_no_claim": 9,
+        "patients": 1,
+        "causative_gene_ref": 1,
+        "causative_gene_right": 1,
+        "causative_variant_ref": 1,
+        "causative_variant_right": 1,
+        "any_specifics_claim": 1
+      }
+    },
+    "wrong": {
+      "prior_fp": [
+        {
+          "patient": "P004002",
+          "extra": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004005",
+          "extra": [
+            "perampanel",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004006",
+          "extra": [
+            "carbamazepine",
+            "perampanel",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004007",
+          "extra": [
+            "levetiracetam",
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004008",
+          "extra": [
+            "levetiracetam"
+          ]
+        },
+        {
+          "patient": "P004011",
+          "extra": [
+            "sodiumvalproate",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004015",
+          "extra": [
+            "carbamazepine",
+            "lacosamide",
+            "lamotrigine"
+          ]
+        },
+        {
+          "patient": "P004016",
+          "extra": [
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004020",
+          "extra": [
+            "brivaracetam",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004022",
+          "extra": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004025",
+          "extra": [
+            "perampanel",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004026",
+          "extra": [
+            "carbamazepine",
+            "perampanel",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004029",
+          "extra": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004031",
+          "extra": [
+            "sodiumvalproate",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004032",
+          "extra": [
+            "lacosamide",
+            "levetiracetam",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004033",
+          "extra": [
+            "sodiumvalproate",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004035",
+          "extra": [
+            "carbamazepine",
+            "lacosamide",
+            "lamotrigine"
+          ]
+        },
+        {
+          "patient": "P004036",
+          "extra": [
+            "lacosamide",
+            "perampanel",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004037",
+          "extra": [
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004039",
+          "extra": [
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004040",
+          "extra": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004042",
+          "extra": [
+            "lacosamide",
+            "perampanel",
+            "sodiumvalproate",
+            "zonisamide"
+          ]
+        },
+        {
+          "patient": "P004043",
+          "extra": [
+            "carbamazepine",
+            "lamotrigine",
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004045",
+          "extra": [
+            "lamotrigine",
+            "levetiracetam"
+          ]
+        },
+        {
+          "patient": "P004046",
+          "extra": [
+            "levetiracetam",
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004051",
+          "extra": [
+            "brivaracetam",
+            "levetiracetam"
+          ]
+        },
+        {
+          "patient": "P004052",
+          "extra": [
+            "carbamazepine",
+            "levetiracetam",
+            "perampanel",
+            "sodiumvalproate",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004053",
+          "extra": [
+            "carbamazepine",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004054",
+          "extra": [
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004055",
+          "extra": [
+            "zonisamide"
+          ]
+        },
+        {
+          "patient": "P004056",
+          "extra": [
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004057",
+          "extra": [
+            "lacosamide",
+            "perampanel",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004058",
+          "extra": [
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004059",
+          "extra": [
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004061",
+          "extra": [
+            "lamotrigine",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004064",
+          "extra": [
+            "lacosamide",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004065",
+          "extra": [
+            "levetiracetam",
+            "lorazepam"
+          ]
+        },
+        {
+          "patient": "P004066",
+          "extra": [
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004067",
+          "extra": [
+            "brivaracetam"
+          ]
+        },
+        {
+          "patient": "P004070",
+          "extra": [
+            "carbamazepine",
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004075",
+          "extra": [
+            "oxcarbazepine"
+          ]
+        },
+        {
+          "patient": "P004077",
+          "extra": [
+            "brivaracetam",
+            "lamotrigine"
+          ]
+        },
+        {
+          "patient": "P004078",
+          "extra": [
+            "brivaracetam",
+            "zonisamide"
+          ]
+        },
+        {
+          "patient": "P004083",
+          "extra": [
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004084",
+          "extra": [
+            "levetiracetam",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004086",
+          "extra": [
+            "carbamazepine",
+            "lacosamide",
+            "lamotrigine",
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004087",
+          "extra": [
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004089",
+          "extra": [
+            "lacosamide",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004090",
+          "extra": [
+            "brivaracetam",
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004091",
+          "extra": [
+            "levetiracetam"
+          ]
+        },
+        {
+          "patient": "P004092",
+          "extra": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004093",
+          "extra": [
+            "carbamazepine",
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004094",
+          "extra": [
+            "brivaracetam",
+            "oxcarbazepine",
+            "sodiumvalproate",
+            "topiramate"
+          ]
+        },
+        {
+          "patient": "P004095",
+          "extra": [
+            "carbamazepine",
+            "lacosamide"
+          ]
+        },
+        {
+          "patient": "P004096",
+          "extra": [
+            "sodiumvalproate",
+            "zonisamide"
+          ]
+        },
+        {
+          "patient": "P004097",
+          "extra": [
+            "lacosamide",
+            "sodiumvalproate"
+          ]
+        },
+        {
+          "patient": "P004098",
+          "extra": [
+            "brivaracetam"
+          ]
+        }
+      ],
+      "prior_fn": [
+        {
+          "patient": "P004000",
+          "missed": [
+            "lacosamide",
+            "zonisamide"
+          ]
+        },
+        {
+          "patient": "P004013",
+          "missed": [
+            "lamotrigine"
+          ]
+        },
+        {
+          "patient": "P004014",
+          "missed": [
+            "carbamazepine",
+            "lamotrigine"
+          ]
+        },
+        {
+          "patient": "P004016",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004023",
+          "missed": [
+            "perampanel"
+          ]
+        },
+        {
+          "patient": "P004027",
+          "missed": [
+            "brivaracetam"
+          ]
+        },
+        {
+          "patient": "P004030",
+          "missed": [
+            "levetiracetam"
+          ]
+        },
+        {
+          "patient": "P004036",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004042",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004052",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004056",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004063",
+          "missed": [
+            "carbamazepine"
+          ]
+        },
+        {
+          "patient": "P004066",
+          "missed": [
+            "valproate"
+          ]
+        },
+        {
+          "patient": "P004069",
+          "missed": [
+            "brivaracetam"
+          ]
+        },
+        {
+          "patient": "P004099",
+          "missed": [
+            "levetiracetam"
+          ]
+        }
+      ],
+      "etiology_missed": []
+    }
+  },
+  "fs": {
+    "held-out letters EA0161-EA0200 (40)": {
+      "rescue": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "eeg_confusion": {
+        "Abnormal -> Abnormal": 7,
+        "Normal -> Normal": 1,
+        "Abnormal -> none": 5,
+        "Normal -> none": 1
+      },
+      "eeg_n": 14,
+      "eeg_correct": 8,
+      "cause": {
+        "reference False, rules False": 28,
+        "reference False, rules True": 7,
+        "reference True, rules True": 5
+      },
+      "wrong": {
+        "rescue_wrong": [],
+        "eeg_wrong": [
+          {
+            "letter": "EA0182",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0185",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0188",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0190",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0196",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0197",
+            "reference": "Abnormal",
+            "rules": "none"
+          }
+        ]
+      }
+    },
+    "all 200 letters": {
+      "rescue": {
+        "tp": 6,
+        "fp": 6,
+        "fn": 3,
+        "precision": 0.5,
+        "recall": 0.667,
+        "f1": 0.571
+      },
+      "eeg_confusion": {
+        "Abnormal -> none": 18,
+        "Abnormal -> Abnormal": 34,
+        "Normal -> Normal": 3,
+        "Normal -> none": 11,
+        "Normal -> Abnormal": 1
+      },
+      "eeg_n": 67,
+      "eeg_correct": 37,
+      "cause": {
+        "reference False, rules True": 51,
+        "reference False, rules False": 121,
+        "reference True, rules True": 24,
+        "reference True, rules False": 4
+      },
+      "wrong": {
+        "rescue_wrong": [
+          {
+            "letter": "EA0011",
+            "reference": [],
+            "rules": [
+              "clobazam"
+            ]
+          },
+          {
+            "letter": "EA0032",
+            "reference": [
+              "clobazam"
+            ],
+            "rules": []
+          },
+          {
+            "letter": "EA0060",
+            "reference": [
+              "buccalmidazolam"
+            ],
+            "rules": [
+              "midazolam"
+            ]
+          },
+          {
+            "letter": "EA0069",
+            "reference": [],
+            "rules": [
+              "midazolam"
+            ]
+          },
+          {
+            "letter": "EA0072",
+            "reference": [],
+            "rules": [
+              "midazolam"
+            ]
+          },
+          {
+            "letter": "EA0087",
+            "reference": [],
+            "rules": [
+              "midazolam"
+            ]
+          },
+          {
+            "letter": "EA0110",
+            "reference": [],
+            "rules": [
+              "sodiumvalproate"
+            ]
+          },
+          {
+            "letter": "EA0152",
+            "reference": [
+              "clobazam"
+            ],
+            "rules": []
+          }
+        ],
+        "eeg_wrong": [
+          {
+            "letter": "EA0004",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0022",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0037",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0040",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0041",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0051",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0056",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0058",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0059",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0065",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0067",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0075",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0076",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0079",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0094",
+            "reference": "Normal",
+            "rules": "Abnormal"
+          },
+          {
+            "letter": "EA0102",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0117",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0123",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0129",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0138",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0145",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0146",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0149",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0150",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0182",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0185",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0188",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0190",
+            "reference": "Abnormal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0196",
+            "reference": "Normal",
+            "rules": "none"
+          },
+          {
+            "letter": "EA0197",
+            "reference": "Abnormal",
+            "rules": "none"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -186,7 +186,7 @@ def _about_rows(prov: dict, phenotypes: list[Phenotype]) -> list[list[str]]:
     rows += [["", ""], ["Evidence",
               "Accuracy was tested on synthetic notes only (40 UK-style letters, 30 synthetic US-style patients), never on real "
               "clinical notes. Figures: docs/EVAL_PROTOCOL_LEO.md and the Evidence page of the app. 'measured' = accuracy tested "
-              "against reference annotations; 'rules_only' = the specialist alone was scored on synthetic notes, no LLM; 'indirect' = only its effect on another field was tested; 'none' = not tested."]]
+              "against reference annotations; 'rules_only' = the specialist alone was scored on synthetic notes or F-S letters, no LLM; 'indirect' = only its effect on another field was tested; 'none' = not tested."]]
     rows += [["", ""], ["Column suffixes", "_status: accepted | needs_review | not_found.  _evidence: the note's own words.  "
              "_source: specialist, llm.  _why: reason codes when review is needed."],
              ["Warning", "Evidence columns contain note text. Treat this file like the input notes."]]

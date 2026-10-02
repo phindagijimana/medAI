@@ -66,11 +66,12 @@ def test_evidence_levels_match_what_was_measured():
     measured = [p.id for p in EXTRACT if p.evidence == "measured"]
     assert measured == ["epilepsy_type", "seizure_type", "age_at_onset", "seizure_frequency", "current_asms"]
     assert set(FIELD_MAP) == set(measured)                   # a "measured" label needs numbers behind it, and vice versa
-    assert {p.id for p in EXTRACT if p.evidence == "indirect"} == {"rescue_medication", "acute_administration", "prior_asms"}
+    assert {p.id for p in EXTRACT if p.evidence == "indirect"} == {"acute_administration"}
     assert all(p.evidence in ("measured", "rules_only", "indirect", "none") for p in EXTRACT)
     assert {p.id for p in EXTRACT if p.evidence == "rules_only"} == {
         "etiology_category", "drug_resistance", "mri_findings", "mri_normal", "hippocampal_sclerosis",
-        "focal_cortical_dysplasia", "surgery_history"}
+        "focal_cortical_dysplasia", "surgery_history", "rescue_medication", "prior_asms", "failed_asms",
+        "etiology_details", "eeg_background"}
     assert all(r in REFERENCES for p in EXTRACT for r in p.refs)
     assert next(p for p in EXTRACT if p.id == "drug_resistance").derived
 

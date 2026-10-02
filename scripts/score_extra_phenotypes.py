@@ -9,8 +9,9 @@ the specialist's claims (no LLM).  Only these phenotypes have a reference to com
     mri_normal, hippocampal_sclerosis,
     focal_cortical_dysplasia, mri_findings      (the 17 patients who have an MRI report)
 
-The reference has no entries for EEG findings, semiology, focal onset features, failed / prior / rescue
-drugs or surgery, so nothing can be scored for them.  For surgery history the script only counts patients
+The reference has no entries for detailed EEG findings, semiology, focal onset features or surgery, so nothing
+can be scored for them here (prior / failed / rescue drugs, etiology specifics and coarse EEG are scored by
+scripts/score_plan_phenotypes.py, which reads the generation plans and the F-S gold).  For surgery history the script only counts patients
 where the rules report a procedure although the reference lists none (a false-alarm count, with examples).
 
     venv-medcat/bin/python scripts/score_extra_phenotypes.py            # -> eval/results/leo_extra_phenotypes.{json,md}
@@ -153,9 +154,9 @@ def main(argv=None) -> int:
                             "f1": rate(2 * tp, 2 * tp + fp + fn)},
            "surgery_history": {"patients_with_no_reference_surgery": surg_n, "patients_where_rules_report_surgery": surg_with,
                                "examples": ex_surgery},
-           "not_scoreable": ["EEG study type, background, ictal onset", "seizure semiology", "focal motor / non-motor onset",
-                             "failed, prior and rescue drugs", "surgery history (reference lists none)",
-                             "etiology details"]}
+           "not_scoreable": ["EEG study type, background, ictal onset (the F-S letters give only normal/abnormal)",
+                             "seizure semiology", "focal motor / non-motor onset", "surgery history (reference lists none)"],
+           "scored_elsewhere": "prior/failed/rescue drugs, etiology specifics and coarse EEG: scripts/score_plan_phenotypes.py"}
     path = REPO / f"{args.out}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, indent=2, default=str), encoding="utf-8")
@@ -171,7 +172,9 @@ def main(argv=None) -> int:
     m = out["mri_findings"]
     md += ["", f"MRI findings (list, micro): precision {m['precision']}, recall {m['recall']}, F1 {m['f1']}",
            f"Surgery: rules report a procedure for {surg_with} of {surg_n} patients whose reference lists none.", "",
-           "Not scoreable (the reference has no entry): " + "; ".join(out["not_scoreable"]) + "."]
+           "Not scoreable (the reference has no entry): " + "; ".join(out["not_scoreable"]) + ".",
+           "Prior / failed / rescue drugs, etiology specifics and coarse EEG are scored by scripts/score_plan_phenotypes.py "
+           "(eval/results/leo_plan_phenotypes.md)."]
     (REPO / f"{args.out}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     print("\n".join(md))
     return 0

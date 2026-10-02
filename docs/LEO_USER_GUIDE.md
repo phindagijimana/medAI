@@ -153,7 +153,7 @@ Micro-F1 over seven fields. "LEO reviewed" is the output before a person has loo
 
 **Current ASMs and rescue drugs.** `current_asms` is the maintenance regimen. As-needed rescue drugs (for example rectal diazepam, intranasal midazolam) go to a separate `rescue_medication` column and one-off doses given during the visit go to `acute_administration`. The F-S reference counts rescue drugs as current (it follows ExECT), so the F-S column above scores them in; the synthetic reference does not, so that column scores them out. Both are shown for what they are. Whether a rescue-only drug counts as "on an ASM" for your study is for you to decide.
 
-Partly tested: rescue medication, acute administration and prior ASMs (only their effect on current ASMs was checked).
+Partly tested: acute administration (only its effect on current ASMs was checked). Rescue and prior ASMs are scored in the next table.
 
 ### Other phenotypes (rules only, synthetic)
 
@@ -169,7 +169,22 @@ Scored with the rules alone, on 80 synthetic patients the rules were not develop
 | Focal cortical dysplasia | 11 of 14 answered right (answered for 14 of 30) |
 | Surgery history | the rules wrongly reported a procedure for 5 of 80 patients whose reference lists none |
 
-Rule fixes made on 2026-10-02 (surgery options no longer count as history, negated MRI findings are not reported, drug-resistance statements read per sentence) raised drug resistance from 15 to 29 of 30 and cut surgery false alarms from 19 of 30 to 0 on the patients that showed the problems; the 80-patient figures above are the ones to rely on. Read drug resistance and surgery history as drafts to review. Not scoreable because the synthetic reference has no entry: semiology, focal onset features, failed ASMs, EEG findings, etiology details. Free-text questions are covered in section 11.
+Rule fixes made on 2026-10-02 (surgery options no longer count as history, negated MRI findings are not reported, drug-resistance statements read per sentence) raised drug resistance from 15 to 29 of 30 and cut surgery false alarms from 19 of 30 to 0 on the patients that showed the problems; the 80-patient figures above are the ones to rely on. Read drug resistance and surgery history as drafts to review. Not scoreable because no reference has an entry: semiology, focal onset features, detailed EEG findings (study type, ictal onset), surgery history. Prior, failed and rescue drugs, etiology details and coarse EEG are covered in the next table. Free-text questions are covered in section 11.
+
+### Drugs stopped, failed and rescue; etiology details; EEG (rules only)
+
+Scored with the rules alone (no model) from the generation plans (synthetic polish notes, where the rules were developed, so read these as upper-end figures) and from the F-S letters (real clinic-style letters, 200 in all). Numbers are small; read them as a guide, not a measurement. Details and caveats are in `docs/EVAL_PROTOCOL_LEO.md` section 10.16.
+
+| Item | Result |
+|---|---|
+| Prior (stopped) drugs, synthetic | found 89% of stopped drugs (80% on 10 held-out patients); of the drugs the rules list, 54% are in the plan (a lower bound); for 25 of 90 patients a stopped drug was also listed as current |
+| Failed drugs (stopped for lack of effect), synthetic | weak: 4 of 27 found; a drug stopped for lack of effect was usually labelled as a side-effect stop. Do not use without review |
+| Etiology specifics (gene, variant, antibody), synthetic | right for all 27 patients that have one, no false alarms; the generator uses a limited vocabulary |
+| Rescue drugs, F-S letters | 9 reference prescriptions in 200 letters: 6 found, 3 missed, 6 false alarms (one a naming mismatch, two a letter only suggesting a drug) |
+| EEG normal / abnormal, F-S letters | right 37 of 38 times when the rules gave an answer, but no answer for 29 of the 67 letters with an EEG result |
+| Etiology cause stated, F-S letters | found 24 of 28; 51 extra where annotators marked no cause (part annotation convention) |
+
+LEO's second reader (the model) was not run on these, so they say nothing about the combined result. Treat these columns as drafts to review.
 
 ### Precision of accepted values, by agreement
 

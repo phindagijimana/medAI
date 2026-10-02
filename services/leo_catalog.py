@@ -5,7 +5,8 @@ Two kinds of predefined phenotype, kept apart because they carry different evide
 * **extract** phenotypes are read by the full LEO chain (LLM + EpExtra specialist + ontology),
   fused and verified.  Each carries an ``evidence`` level that says what has actually been measured:
   ``measured`` (own accuracy against gold, numbers in ``services.leo_evidence``), ``rules_only`` (the
-  specialist alone was scored against synthetic gold, no LLM; ``eval/results/leo_extra_phenotypes.md``),
+  specialist alone was scored against synthetic or F-S gold, no LLM; ``eval/results/leo_extra_phenotypes.md`` and
+  ``leo_plan_phenotypes.md``),
   ``indirect`` (only its effect on another field was measured) or ``none`` (nothing measured).  Five are ``measured``.  The
   level is shown in the UI, ``leo phenotypes`` and the About sheet.
 * **ask** phenotypes are questions put to the LLM alone, with a verbatim quote that is checked
@@ -47,15 +48,17 @@ REFERENCES: dict[str, str] = {
 
 _M = "measured"
 _I = "indirect"
-_NOTE_RESCUE = ("No accuracy of its own was measured. Its effect on the current-ASM list was measured; the rescue "
-                "rule re-routed one drug in 40 F-S letters (docs/EVAL_PROTOCOL_LEO.md 10.7).")
+_NOTE_RESCUE = ("Specialist alone, F-S letters (As_Required prescriptions): 9 in 200 letters, so only a rough guide. "
+                "6 found right, 6 false alarms (one a naming mismatch, two a letter merely suggesting a drug), 3 missed "
+                "(docs/EVAL_PROTOCOL_LEO.md 10.16).")
 _NOTE_ACUTE = ("No accuracy of its own was measured. The rule moved no drug in 40 F-S letters (10.6); it is a "
                "text-pattern rule written from guidelines.")
 _R = "rules_only"
 _SYN = ("Synthetic notes, each patient's notes joined, rules only (no LLM). Held-out figures are 80 patients the rules "
         "were not adjusted on (leo_extra_phenotypes_ext). ")
-_NOTE_PRIOR = ("No accuracy of its own was measured. Only stopped drugs wrongly listed as current were counted "
-               "(10.5).")
+_NOTE_PRIOR = ("Specialist alone on synthetic polish notes (the rules were developed on them): recall 0.89 on 90 patients "
+               "and 0.80 on 10 held out; precision 0.54 and 0.42 but a lower bound. A stopped drug was listed as current "
+               "for 25 of 90 patients (10.16).")
 
 EXTRACT: tuple[Phenotype, ...] = (
     Phenotype("epilepsy_type", "Epilepsy type", ("clinical_seizure.epilepsy_type",), "scalar",
@@ -78,15 +81,18 @@ EXTRACT: tuple[Phenotype, ...] = (
               _M, ("core", "medication"), (),
               "Whether a rescue drug counts as current differs between the two test sets; see Evidence."),
     Phenotype("rescue_medication", "Rescue medication", ("medication.rescue_medication",), "list",
-              "As-needed seizure-rescue drugs (PRN, buccal, intranasal, rectal).", _I, ("medication",), (),
+              "As-needed seizure-rescue drugs (PRN, buccal, intranasal, rectal).", _R, ("medication",), (),
               _NOTE_RESCUE),
     Phenotype("acute_administration", "One-off administration", ("medication.acute_administration",), "list",
               "A drug given once during the encounter (IV load, ED dose). Always listed for review.",
               _I, ("medication",), (), _NOTE_ACUTE),
     Phenotype("prior_asms", "Prior (stopped) ASMs", ("medication.prior_asms",), "list",
-              "ASMs the patient used before and no longer takes.", _I, ("medication",), (), _NOTE_PRIOR),
+              "ASMs the patient used before and no longer takes.", _R, ("medication",), (), _NOTE_PRIOR),
     Phenotype("failed_asms", "Failed ASMs", ("medication.failed_asms",), "list",
-              "ASMs stopped for lack of effect or side effects.", "none", ("medication",)),
+              "ASMs stopped for lack of effect or side effects.", _R, ("medication",), (),
+              "Weak. Synthetic polish notes: a drug stopped for lack of effect was labelled as such for 4 of 23 "
+              "(called a side effect for 12); against the ILAE sense of failure precision 0.40, recall 0.15. "
+              "Do not rely on this column without review (10.16)."),
     Phenotype("drug_resistance", "Drug resistance status", ("medication.drug_resistance_status",), "scalar",
               "Drug responsive, drug resistant or undefined, worked out by a rule from the ASM history and seizure status "
               "(an approximation of the ILAE 2010 definition).", _R, ("medication",), ("ilae2010_drug_resistance",),
@@ -98,7 +104,10 @@ EXTRACT: tuple[Phenotype, ...] = (
               ("ilae2017_epilepsies",),
               _SYN + "Held-out: right for 77 of 80; all 3 errors name a structural cause where the reference says unknown."),
     Phenotype("etiology_details", "Etiology details", ("clinical_seizure.etiology_details_text",), "scalar",
-              "Free-text etiology as written in the note.", "none", ("etiology",)),
+              "Free-text etiology as written in the note.", _R, ("etiology",), (),
+              "Presence only, on 200 F-S letters: found a stated cause for 24 of 28, but 51 more where the F-S "
+              "annotators marked none (precision 0.32; part annotation convention, not separated). Synthetic gene, "
+              "variant and antibody values were right for all 27 patients that have one (10.16)."),
     Phenotype("semiology", "Seizure semiology (text)", ("clinical_seizure.semiology_text",), "scalar",
               "How the seizure looks, as written in the note.", "none", ("seizure",)),
     Phenotype("focal_motor_onset", "Focal motor onset", ("clinical_seizure.focal_motor_onset",), "scalar",
@@ -109,7 +118,10 @@ EXTRACT: tuple[Phenotype, ...] = (
     Phenotype("eeg_study_type", "EEG study type", ("eeg.study_type",), "scalar",
               "Routine, prolonged, ambulatory, video-EEG, EMU and so on.", "none", ("eeg",)),
     Phenotype("eeg_background", "EEG background", ("eeg.background",), "scalar",
-              "Background activity or slowing.", "none", ("eeg",)),
+              "Background activity or slowing.", _R, ("eeg",), (),
+              "Only the coarse normal/abnormal call was scored (F-S letters, 67 with an EEG result): when the rules "
+              "gave a result it was right 37 of 38 times, but they gave none for 29 of 67 (10.16). Study type and "
+              "ictal onset are untested."),
     Phenotype("eeg_ictal_onset", "EEG ictal onset", ("eeg.ictal_onset_lobe", "eeg.ictal_onset_laterality"),
               "scalar", "Lobe and side of seizure onset on EEG.", "none", ("eeg",)),
     Phenotype("mri_findings", "MRI findings", ("mri.findings",), "list",
