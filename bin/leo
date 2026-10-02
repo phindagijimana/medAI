@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# leo: install / check / start / batch / extract / ask for LEO (see `leo --help`).
+set -euo pipefail
+HERE="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+PY="$HERE/venv-medcat/bin/python"
+if [ ! -x "$PY" ]; then
+  echo "leo: $PY not found (create venv-medcat first; see docs/LEO_USER_GUIDE.md)" >&2
+  # `leo install` still gets a clear message from the CLI when run with any python
+  PY="$(command -v python3)"
+fi
+export APP_HOME="$HERE" PYTHONNOUSERSITE=1
+if [ -f "$HERE/.env" ]; then set -a; . "$HERE/.env"; set +a; fi
+exec "$PY" "$HERE/scripts/leo_cli.py" "$@"

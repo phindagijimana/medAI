@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEO · Epilepsy phenotype extraction</title>
+<style>
+  :root{
+    --ink:#0a2342; --muted:#0a2342; --line:#0a2342; --bg:#fff; --card:#fff;
+    /* palette: dark navy #0a2342 and white #fff only */
+    --navy:#0a2342; --navy-2:#0a2342; --brand:#0a2342; --brand-d:#0a2342; --focus:#0a2342;
+    --none:#0a2342; --none-bg:#fff; --blue-bg:#fff;
+  }
+  html,input{color:var(--ink)}
+  *{box-sizing:border-box} input[type=checkbox],input[type=radio]{accent-color:var(--navy)}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{background:var(--navy);color:#fff}
+  .bar{max-width:980px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{font-weight:700;font-size:20px;letter-spacing:.4px;color:#fff}
+  .brand small{font-weight:400;color:#fff;margin-left:12px;font-size:13px;letter-spacing:0}
+  nav{display:flex;gap:4px}
+  nav button{background:none;border:0;border-bottom:3px solid transparent;border-radius:0;padding:8px 14px;color:#fff;font:inherit;cursor:pointer}
+  nav button:hover{background:none;color:#fff}
+  nav button[aria-selected=true]{color:#fff;border-bottom-color:#fff;font-weight:600}
+  nav a{color:#fff;text-decoration:none;padding:8px 14px;font-size:14px} nav a:hover{color:#fff}
+  a{color:var(--navy)} main{max-width:980px;margin:22px auto 60px;padding:0 20px}
+  .notice{border:1px solid var(--line);border-left:4px solid var(--navy);background:#fff;padding:10px 14px;border-radius:4px;font-size:14px;margin-bottom:18px}
+  section.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:4px;padding:22px 24px;margin-bottom:18px}
+  h2{font-size:17px;margin:0 0 4px;font-weight:700;color:var(--navy)}
+  h3{font-size:14px;margin:18px 0 6px;font-weight:700;color:var(--navy)}
+  .step{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;align-items:center;justify-content:center;margin-right:8px;vertical-align:1px}
+  .hint{color:var(--muted);font-size:13px;margin:2px 0 12px}
+  label{cursor:pointer}
+  input[type=text],select,textarea{font:inherit;color:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:#fff}
+  textarea{width:100%;resize:vertical}
+  :is(input,select,textarea,button,summary):focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+  button{font:inherit;font-weight:600;padding:9px 20px;border-radius:4px;border:1px solid var(--brand);background:var(--brand);color:#fff;cursor:pointer}
+  button:hover{background:#fff;color:var(--navy)}
+  button.ghost{background:#fff;color:var(--brand);font-weight:500} button.ghost:hover{background:var(--navy);color:#fff}
+  button:disabled{background:#fff;color:var(--navy);border-style:dashed;cursor:default}
+  .seg{display:inline-flex;border:1px solid var(--navy);border-radius:4px;overflow:hidden;margin-bottom:12px}
+  .seg label{padding:7px 16px;font-size:14px;border-right:1px solid var(--navy)} .seg label:last-child{border-right:0}
+  .seg input{position:absolute;opacity:0} .seg input:checked+span{font-weight:600}
+  .seg label:has(input:checked){background:var(--navy)} .seg input:checked+span{color:#fff}
+  .row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:6px 22px}
+  .item{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:3px 0}
+  .item input{margin-top:4px}
+  .tag{font-size:12px;font-style:italic;margin-left:8px;white-space:nowrap}
+  details{margin:6px 0} summary{cursor:pointer;font-weight:600;font-size:14px;padding:4px 0}
+  details>div{padding:4px 0 2px 2px} summary{color:var(--navy)}
+  .q{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap} .q input[type=text]{flex:1;min-width:240px}
+  .progress{height:8px;background:#fff;border:1px solid var(--navy);border-radius:4px;overflow:hidden;margin-top:12px}
+  .progress>div{height:100%;width:0;background:var(--brand);transition:width .3s}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th{font-weight:700;color:var(--navy);text-align:left;border-bottom:2px solid var(--navy);padding:6px 8px;white-space:nowrap}
+  td{border-bottom:1px solid #0a2342;padding:7px 8px;vertical-align:top}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .status{display:inline-block;font-size:12px;padding:1px 8px;border-radius:9px}
+  .status.accepted{background:var(--navy);color:#fff} .status.needs_review{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);font-weight:600}
+  .status.not_found,.status.not_documented{background:#fff;color:var(--none);box-shadow:inset 0 0 0 1px var(--navy);border-style:dotted} .status.rejected,.status.error{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);text-decoration:line-through}
+  .quote{color:var(--muted);font-style:italic}
+  .msg{font-size:14px;color:var(--muted)} .msg.err{color:var(--navy);font-weight:600}
+  .legend{font-size:13px;color:var(--muted);margin-top:10px}
+  ul.plain{margin:6px 0 0;padding-left:18px} ul.plain li{margin:3px 0}
+  .stat{display:flex;gap:28px;flex-wrap:wrap;margin:8px 0 4px} .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+  .stat span{font-size:12px;color:var(--muted)}
+  .small{font-size:13px;color:var(--muted)}
+  .ritem{border-top:1px solid var(--navy);padding:12px 0}
+  .ritem .top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .ritem .val{font-weight:600}
+  .ritem .act{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+  .ritem button{padding:5px 14px;font-size:13.5px} button.on{background:var(--navy);color:#fff}
+  .ritem input[type=text]{min-width:260px}
+  .note{white-space:pre-wrap;border:1px solid var(--navy);max-height:220px;overflow:auto;padding:8px;position:relative;font-size:13px;margin-top:8px}
+  mark{background:var(--navy);color:#fff;padding:0 2px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand">LEO<small>Epilepsy phenotype extraction</small></div>
+  <nav role="tablist">
+    <button role="tab" id="tab-extract" aria-selected="true">Extract</button>
+    <button role="tab" id="tab-review" aria-selected="false">Review</button>
+    <a href="/leo/guide" target="_blank" rel="noopener">User guide</a>
+    <a href="/extract/ui">MedAI-EPI</a>
+  </nav>
+</div></header>
+
+<main>
+<div class="notice"><strong>Research use only.</strong> Tested on synthetic notes, not real ones. Check each value against its quote.</div>
+
+<!-- ============ EXTRACT ============ -->
+<div id="view-extract">
+
+<section class="card">
+  <h2><span class="step">1</span>Notes</h2>
+  <p class="hint">One note per spreadsheet row, or a single pasted note. Results are added as new columns.</p>
+  <div class="seg" role="radiogroup" aria-label="Input type">
+    <label><input type="radio" name="src" value="file" checked><span>Upload a file</span></label>
+    <label><input type="radio" name="src" value="paste"><span>Paste one note</span></label>
+  </div>
+  <div id="src-file">
+    <input type="file" id="file" accept=".csv,.tsv,.xlsx,.xlsm,.jsonl,.txt">
+    <details><summary>Column settings (optional)</summary><div class="row">
+      <label>Note column <input type="text" id="textcol" size="14" placeholder="auto"></label>
+      <label>ID column <input type="text" id="idcol" size="12" placeholder="none"></label>
+      <label>Sheet <input type="text" id="sheet" size="12" placeholder="first"></label>
+    </div></details>
+  </div>
+  <div id="src-paste" hidden>
+    <textarea id="note" rows="9" placeholder="Paste a clinic note"></textarea>
+  </div>
+</section>
+
+<section class="card">
+  <h2><span class="step">2</span>What to extract</h2>
+  <p class="hint">Choose a set, then adjust. Hover for a definition.</p>
+  <div class="row"><label for="panel">Set</label><select id="panel"></select></div>
+  <div id="groups" style="margin-top:10px"></div>
+  <div class="legend">Items marked <em>rules tested</em> were scored on synthetic notes without the LLM; <em>partly tested</em> and <em>not tested</em> items have no figures of their own. Details are in the guide.</div>
+</section>
+
+<section class="card">
+  <h2><span class="step">3</span>Questions <span class="small">(optional)</span></h2>
+  <p class="hint">Answered by the language model alone, with a quote from the note. Always marked for review. Not yet tested.</p>
+  <details><summary>Ready-made questions</summary><div id="asks" class="grid"></div></details>
+  <details open><summary>Your own questions</summary><div><div id="custom"></div>
+    <button type="button" class="ghost" id="addQ">Add a question</button></div></details>
+</section>
+
+<section class="card">
+  <h2><span class="step">4</span>Run</h2>
+  <div class="row">
+    <label>Reader <select id="llm">
+      <option value="auto">Model and rules (when the model is ready)</option>
+      <option value="on">Model and rules (start the model)</option>
+      <option value="off">Rules only</option></select></label>
+    <label>Output <select id="fmt"><option value="csv">CSV</option><option value="xlsx">Excel</option></select></label>
+    <label><input type="checkbox" id="increv" checked> Include values that need review</label>
+  </div>
+  <div class="small" id="engine" style="margin-top:8px">Checking the model…</div>
+  <div class="msg" id="rulesonly" hidden style="margin-top:6px">Rules only: every value is marked “needs review”.</div>
+  <div class="row" style="margin-top:14px">
+    <button id="run">Run extraction</button>
+    <button class="ghost" id="cancel" disabled>Cancel</button>
+    <span class="msg" id="msg" role="status"></span>
+  </div>
+  <div class="progress" id="progress" hidden><div id="bar"></div></div>
+</section>
+
+<section class="card" id="out" hidden>
+  <h2>Result</h2>
+  <div id="summary"></div>
+  <div id="links" class="row" style="margin:10px 0"></div>
+  <div id="rlink" class="row" hidden><button id="goReview"></button></div>
+  <div id="tbl" style="overflow-x:auto"></div>
+  <div class="legend" id="legend" hidden><strong>Accepted</strong> passed automatic checks (not a guarantee). <strong>Needs review</strong> check the quote. <strong>Not found</strong> not stated, or missed.</div>
+</section>
+
+
+</div>
+
+<div id="view-review" hidden>
+<section class="card" id="review">
+  <h2>Review</h2>
+  <p class="msg" id="rnone">Run a file on the Extract tab first. The values that need review will be listed here.</p>
+  <div id="rbody" hidden>
+  <p class="hint">Check each value against its quote. Decisions are saved as you go. LEO’s own columns are never changed.</p>
+  <div class="row">
+    <label>Reviewer <input type="text" id="reviewer" size="14" maxlength="60" placeholder="initials or ID"></label>
+    <label>Show <select id="rscope"><option value="flagged">Values that need review</option><option value="all">All values found</option></select></label>
+    <span class="msg" id="rcount" role="status"></span>
+  </div>
+  <div class="small" style="margin-top:4px">Use initials or a pseudonym, never a patient name.</div>
+  <div id="ritems" style="margin-top:12px"></div>
+  <div class="row" style="margin-top:10px"><button class="ghost" id="rmore" hidden>Show more</button><span class="msg" id="rmsg" role="status"></span></div>
+  <h3>Download</h3>
+  <div class="row">
+    <button id="rmerge">Results with reviewed values</button>
+    <button class="ghost" id="rdec">Decisions only (reviewed.csv)</button>
+    <label>Values nobody reviewed <select id="runrev"><option value="blank">left blank in the final column</option><option value="proposal">keep LEO’s value</option></select></label>
+  </div>
+  <div class="small" style="margin-top:6px">The merged file adds <em>&lt;field&gt;_final</em> and <em>&lt;field&gt;_review</em> after each field. Values LEO accepted without anyone looking are marked <em>auto_accepted</em>.</div>
+  </div>
+</section>
+</div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+function el(tag, attrs = {}, kids = []) {
+  const e = document.createElement(tag);
+  for (const k in attrs) { if (k === 'text') e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]); }
+  (Array.isArray(kids) ? kids : [kids]).forEach(x => x != null && e.append(x));
+  return e;
+}
+const LEVEL = {rules_only: 'rules tested', indirect: 'partly tested', none: 'not tested'};
+let CAT = null, job = null, timer = null;
+
+/* ---------- tabs ---------- */
+function show(which) {
+  $('#view-extract').hidden = which !== 'extract'; $('#view-review').hidden = which !== 'review';
+  $('#tab-extract').setAttribute('aria-selected', which === 'extract'); $('#tab-review').setAttribute('aria-selected', which === 'review');
+}
+$('#tab-extract').onclick = () => show('extract');
+$('#tab-review').onclick = () => { show('review'); if (!RJ && sessionStorage.getItem('leo_job')) openReview(sessionStorage.getItem('leo_job')); };
+$('#goReview').onclick = () => show('review');
+
+/* ---------- extract view ---------- */
+const GROUPS = [['core', 'Core'], ['seizure', 'Seizure details'], ['medication', 'Medication'], ['etiology', 'Etiology'],
+                ['eeg', 'EEG'], ['mri', 'MRI'], ['surgery', 'Surgery and devices']];
+function pill(p) {
+  const out = [];
+  if (LEVEL[p.evidence]) out.push(el('span', {class: 'tag', text: LEVEL[p.evidence]}));
+  if (p.derived) out.push(el('span', {class: 'tag', text: 'inferred'}));
+  return out;
+}
+function tip(p) {
+  let t = p.definition;
+  if (p.note) t += '\n\n' + p.note;
+  if (p.refs && p.refs.length) t += '\n\nDefinition: ' + p.refs.join('; ');
+  return t;
+}
+async function init() {
+  CAT = await (await fetch('/leo/phenotypes')).json();
+  CAT.panels.forEach(p => $('#panel').append(el('option', {value: p.id, text: p.label})));
+  const seen = new Set();
+  GROUPS.forEach(([tag, label]) => {
+    const members = CAT.extract.filter(p => p.tags.includes(tag) && !seen.has(p.id));
+    if (!members.length) return;
+    members.forEach(p => seen.add(p.id));
+    const d = el('details', tag === 'core' ? {open: ''} : {});
+    d.append(el('summary', {text: label}));
+    const g = el('div', {class: 'grid'});
+    members.forEach(p => {
+      const cb = el('input', {type: 'checkbox', value: p.id, class: 'ph'});
+      g.append(el('label', {class: 'item', title: tip(p)}, [cb, el('span', {}, [p.label, ...pill(p)])]));
+    });
+    d.append(el('div', {}, g)); $('#groups').append(d);
+  });
+  CAT.ask_templates.forEach(a => {
+    const cb = el('input', {type: 'checkbox', value: a.id, class: 'ask'});
+    $('#asks').append(el('label', {class: 'item', title: a.question}, [cb, el('span', {text: a.label})]));
+  });
+  $('#panel').value = 'core'; applyPanel(); addQuestion();
+  try {
+    const st = await (await fetch('/leo/status')).json();
+    $('#engine').textContent = (st.llm_ready ? 'Language model ready.' : 'Language model not loaded (' + st.llm_status + ').') +
+      ' Pipeline ' + st.versions.pipeline + '.';
+  } catch (e) { $('#engine').textContent = ''; }
+}
+function applyPanel() {
+  const m = CAT.panels.find(p => p.id === $('#panel').value).members;
+  document.querySelectorAll('.ph').forEach(c => c.checked = m.includes(c.value));
+  document.querySelectorAll('#groups details').forEach(d => { if (d.querySelector('.ph:checked')) d.open = true; });
+}
+$('#panel').onchange = applyPanel;
+function addQuestion() {
+  const q = el('input', {type: 'text', placeholder: 'e.g. Which medication caused the rash?', 'aria-label': 'Question'});
+  const t = el('select', {'aria-label': 'Answer type'}, [['text', 'Text'], ['yes_no', 'Yes / no'], ['number', 'Number']].map(([v, l]) => el('option', {value: v, text: l})));
+  const b = el('button', {type: 'button', class: 'ghost', text: 'Remove'});
+  const d = el('div', {class: 'q'}, [q, t, b]); b.onclick = () => d.remove(); $('#custom').append(d);
+}
+$('#addQ').onclick = addQuestion;
+document.querySelectorAll('input[name=src]').forEach(r => r.onchange = () => {
+  const paste = document.querySelector('input[name=src]:checked').value === 'paste';
+  $('#src-file').hidden = paste; $('#src-paste').hidden = !paste;
+});
+$('#llm').onchange = () => { $('#rulesonly').hidden = $('#llm').value !== 'off'; };
+const selected = () => [...document.querySelectorAll('.ph:checked')].map(c => c.value);
+function questions() {
+  const out = [...document.querySelectorAll('.ask:checked')].map(c => ({template: c.value}));
+  document.querySelectorAll('#custom .q').forEach((d, i) => {
+    const q = d.querySelector('input').value.trim();
+    if (q) out.push({question: q, answer_type: d.querySelector('select').value, id: 'q' + (i + 1)});
+  });
+  return out;
+}
+const WHY = {uncertain_assertion: 'Stated as uncertain', hypothetical_assertion: 'Stated as hypothetical',
+  family_experiencer: 'May describe a family member', source_disagreement: 'Model and rules disagree',
+  accept_unanimous: 'One reader found it; nothing contradicted it', llm_only: 'Only the model found it', specialist_only_unconfirmed: 'Only the rules found this drug',
+  specificity_unsupported: 'Found by the rules only; no standard ontology code', medication_derived: 'Weak or ambiguous match',
+  low_confidence: 'Weak or ambiguous match', multi_candidate_tie: 'Weak or ambiguous match',
+  acute_administration: 'One-off dose, not the regular regimen', rescue_role: 'As-needed rescue drug',
+  no_second_reader: 'Rules only: not cross-checked', conflicting_values: 'Different values in the note',
+  offsets_unresolved: 'Quote not found in the note', quote_mismatch: 'Quote not found in the note'};
+const why = s => [...new Set(String(s || '').split(/[;,]\s*/).filter(Boolean).map(c => WHY[c] || c))].join('; ');
+function say(text, err) { const m = $('#msg'); m.textContent = text; m.className = 'msg' + (err ? ' err' : ''); }
+function table(cols, rows, statusCol) {
+  const t = el('table'); t.append(el('tr', {}, cols.map(c => el('th', {text: c.label}))));
+  rows.forEach(r => t.append(el('tr', {}, cols.map(c => {
+    const v = r[c.key] == null ? '' : String(r[c.key]);
+    const td = el('td');
+    if (c.key === statusCol && v) td.append(el('span', {class: 'status ' + v, text: v.replace('_', ' ')}));
+    else if (c.key === 'evidence' && v) td.append(el('span', {class: 'quote', text: '“' + v + '”'}));
+    else td.textContent = v;
+    return td;
+  }))));
+  return t;
+}
+async function runPaste() {
+  const body = {source_text: $('#note').value, phenotypes: selected(), questions: questions(), llm: $('#llm').value, include_review: $('#increv').checked};
+  const r = await fetch('/leo/extract', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+  const j = await r.json(); if (!r.ok) { say(j.error, true); finish(); return; }
+  const rows = j.phenotypes.map(p => ({phenotype: p.label, value: j.row[p.id], status: j.row[p.id + '_status'],
+    evidence: j.row[p.id + '_evidence'], source: j.row[p.id + '_source'], why: why(j.row[p.id + '_why'])}));
+  j.asks.forEach(a => rows.push({phenotype: a.question, value: a.answer, status: a.status, evidence: a.quote, source: 'model', why: why(a.reason)}));
+  $('#out').hidden = false; $('#legend').hidden = false; $('#links').replaceChildren();
+  $('#summary').textContent = (j.llm_used ? 'Model and rules' : 'Rules only') + ' · ' + j.n_chunks + ' part(s) · ' + j.seconds + ' s';
+  $('#tbl').replaceChildren(table([{key: 'phenotype', label: 'Phenotype'}, {key: 'value', label: 'Value'}, {key: 'status', label: 'Status'},
+    {key: 'evidence', label: 'Quote from the note'}, {key: 'source', label: 'Source'}, {key: 'why', label: 'Why'}], rows, 'status'));
+  say(''); finish();
+}
+async function runFile() {
+  const f = $('#file').files[0]; if (!f) { say('Choose a file first.', true); finish(); return; }
+  const fd = new FormData(); fd.append('file', f); fd.append('phenotypes', selected().join(',')); fd.append('questions', JSON.stringify(questions()));
+  fd.append('llm', $('#llm').value); fd.append('format', $('#fmt').value); fd.append('include_review', $('#increv').checked ? '1' : '0');
+  fd.append('text_col', $('#textcol').value); fd.append('id_col', $('#idcol').value); fd.append('sheet', $('#sheet').value);
+  const r = await fetch('/leo/batch', {method: 'POST', body: fd}); const j = await r.json();
+  if (!r.ok) { say(j.error, true); finish(); return; }
+  job = j.job_id; $('#cancel').disabled = false; $('#progress').hidden = false; say('Running…'); poll();
+}
+async function showReviewLink(id) {
+  const ok = await openReview(id); if (!ok) return;
+  const c = (await rget('&offset=0&limit=1')).counts;
+  $('#goReview').textContent = c.total ? 'Review ' + c.total + ' value' + (c.total === 1 ? '' : 's') : 'Open review';
+  $('#rlink').hidden = false;
+}
+async function poll() {
+  const j = await (await fetch('/leo/jobs/' + job)).json();
+  $('#bar').style.width = (j.total ? Math.round(100 * j.done / j.total) : 0) + '%';
+  say(j.state + ' ' + j.done + ' of ' + j.total);
+  if (j.state === 'done' || j.state === 'cancelled') {
+    $('#out').hidden = false; $('#legend').hidden = true; $('#tbl').replaceChildren();
+    const s = j.summary || {};
+    $('#summary').replaceChildren(el('div', {class: 'stat'}, [
+      el('div', {}, [el('b', {text: s.rows_processed}), el('span', {text: 'notes processed'})]),
+      el('div', {}, [el('b', {text: s.rows_error}), el('span', {text: 'with errors'})]),
+      el('div', {}, [el('b', {text: s.mode === 'llm+specialist' ? 'Model and rules' : 'Rules only'}), el('span', {text: 'reader'})])]));
+    const a = el('a', {href: '/leo/jobs/' + job + '/download', text: 'Download result (' + (j.format === 'xlsx' ? 'Excel' : 'zip of CSV files') + ')'});
+    const del = el('button', {class: 'ghost', type: 'button', text: 'Delete from server'});
+    const id = job; del.onclick = async () => { await fetch('/leo/jobs/' + id, {method: 'DELETE'}); $('#links').replaceChildren(el('span', {class: 'msg', text: 'Deleted.'})); };
+    $('#links').replaceChildren(a, del); say(''); finish(); showReviewLink(job); return;
+  }
+  if (j.state === 'error') { say('Error: ' + j.error, true); finish(); return; }
+  timer = setTimeout(poll, 1500);
+}
+function finish() { $('#run').disabled = false; if (!job) $('#cancel').disabled = true; }
+$('#cancel').onclick = () => fetch('/leo/jobs/' + job + '/cancel', {method: 'POST'});
+$('#run').onclick = () => {
+  $('#run').disabled = true; say(''); $('#rlink').hidden = true; $('#bar').style.width = '0'; $('#progress').hidden = true; job = null; clearTimeout(timer);
+  if (!selected().length && !questions().length) { say('Select at least one phenotype or question.', true); finish(); return; }
+  (document.querySelector('input[name=src]:checked').value === 'paste' ? runPaste : runFile)();
+};
+
+/* ---------- review ---------- */
+let RJ = null, rOffset = 0;
+const rmsg = (t, err) => { const m = $('#rmsg'); m.textContent = t || ''; m.className = 'msg' + (err ? ' err' : ''); };
+async function rget(extra) {
+  const r = await fetch('/leo/jobs/' + RJ + '/review?scope=' + $('#rscope').value + extra); return r.json();
+}
+function showCounts(c) {
+  $('#rcount').textContent = c.reviewed + ' of ' + c.total + ' reviewed (' + c.accept + ' right, ' + c.correct + ' corrected, ' + c.reject + ' wrong)';
+}
+async function openReview(jobId) {
+  RJ = jobId; sessionStorage.setItem('leo_job', jobId); $('#reviewer').value = sessionStorage.getItem('leo_reviewer') || '';
+  const j = await rget('&offset=0&limit=1');
+  if (j.error) { RJ = null; sessionStorage.removeItem('leo_job'); $('#rbody').hidden = true; $('#rnone').hidden = false;
+    $('#rnone').textContent = 'That result is no longer on the server (results are deleted after 24 hours). Run the file again.'; return false; }
+  $('#rnone').hidden = true; $('#rbody').hidden = false; await loadReview(true); return true;
+}
+async function loadReview(reset) {
+  if (reset) { rOffset = 0; $('#ritems').replaceChildren(); }
+  const j = await rget('&offset=' + rOffset + '&limit=25');
+  if (j.error) { rmsg(j.error, true); return; }
+  showCounts(j.counts);
+  j.items.forEach(it => $('#ritems').append(renderItem(it)));
+  rOffset += j.items.length; $('#rmore').hidden = rOffset >= j.counts.total;
+  if (!j.counts.total) $('#ritems').replaceChildren(el('p', {class: 'msg', text: 'Nothing to review in this view.'}));
+}
+function highlight(box, text, evidence) {
+  const spans = [];
+  evidence.split(' | ').map(q => q.replace(/^'/, '').trim()).filter(Boolean).forEach(q => {
+    let i = text.indexOf(q); if (i < 0) i = text.toLowerCase().indexOf(q.toLowerCase());
+    if (i >= 0) spans.push([i, i + q.length]);
+  });
+  spans.sort((a, b) => a[0] - b[0]);
+  let pos = 0, first = null;
+  spans.forEach(([a, b]) => {
+    if (a < pos) return;
+    box.append(text.slice(pos, a)); const m = el('mark', {text: text.slice(a, b)}); box.append(m); first = first || m; pos = b;
+  });
+  box.append(text.slice(pos));
+  if (!spans.length) box.prepend(el('div', {class: 'small', text: 'The quote was not found in the note text.'}));
+  if (first) box.scrollTop = Math.max(0, first.offsetTop - 60);
+}
+function renderItem(it) {
+  const wrap = el('div', {class: 'ritem'});
+  const top = el('div', {class: 'top'}, [el('strong', {text: it.doc_id + ' · ' + it.label}),
+    el('span', {class: 'status ' + it.status, text: it.status.replace('_', ' ')})]);
+  const val = el('div', {}, [el('span', {class: 'small', text: 'LEO: '}), el('span', {class: 'val', text: it.value || '(blank)'})]);
+  const bits = [];
+  if (it.why) bits.push(el('div', {class: 'small', text: 'Why: ' + why(it.why)}));
+  if (it.evidence) bits.push(el('div', {class: 'quote', text: '“' + it.evidence.replace(/^'/, '') + '”'}));
+  const note = el('div', {class: 'note', hidden: ''}); let loaded = false;
+  const showNote = el('button', {type: 'button', class: 'ghost', text: 'Show in note'});
+  showNote.onclick = async () => {
+    note.hidden = !note.hidden; showNote.textContent = note.hidden ? 'Show in note' : 'Hide note';
+    if (!note.hidden && !loaded) {
+      const j = await (await fetch('/leo/jobs/' + RJ + '/note/' + it.row)).json();
+      if (j.error) { note.textContent = j.error; return; }
+      highlight(note, j.text, it.evidence); loaded = true;
+    }
+  };
+  const bY = el('button', {type: 'button', class: 'ghost', text: 'Right'}), bA = el('button', {type: 'button', class: 'ghost', text: 'Correct it'});
+  const bB = el('button', {type: 'button', class: 'ghost', text: 'Wrong'}), undo = el('button', {type: 'button', class: 'ghost', text: 'Undo'});
+  const fix = el('input', {type: 'text', 'aria-label': 'Right value', placeholder: 'Type the right value', maxlength: '500'});
+  const saveFix = el('button', {type: 'button', text: 'Save correction'});
+  const fixRow = el('div', {hidden: '', style: 'margin-top:8px'}, [fix, ' ', saveFix]);
+  const state = el('span', {class: 'small'});
+  function paint() {
+    bY.className = 'ghost' + (it.decision === 'accept' ? ' on' : ''); bA.className = 'ghost' + (it.decision === 'correct' ? ' on' : '');
+    bB.className = 'ghost' + (it.decision === 'reject' ? ' on' : ''); undo.hidden = !it.decision;
+    state.textContent = it.decision === 'correct' ? 'Corrected to: ' + it.final : it.decision === 'reject' ? 'Marked wrong; final value blank' : it.decision === 'accept' ? 'Marked right' : '';
+  }
+  async function send(decision, value) {
+    const rv = $('#reviewer').value.trim();
+    if (!rv) { rmsg('Enter a reviewer name or ID first.', true); $('#reviewer').focus(); return; }
+    sessionStorage.setItem('leo_reviewer', rv); rmsg('');
+    const r = await fetch('/leo/jobs/' + RJ + '/review', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({reviewer: rv, decisions: [{row: it.row, field: it.field, decision, value: value || ''}]})});
+    const j = await r.json(); if (!r.ok) { rmsg(j.error, true); return; }
+    it.decision = decision === 'undo' ? '' : (decision === 'correct' && value === it.value ? 'accept' : decision);
+    it.final = it.decision === 'correct' ? value : it.decision === 'accept' ? it.value : ''; fixRow.hidden = true; paint();
+    const c = await rget('&offset=0&limit=1'); showCounts(c.counts);
+  }
+  bY.onclick = () => send('accept'); bB.onclick = () => send('reject'); undo.onclick = () => send('undo');
+  bA.onclick = () => { fixRow.hidden = !fixRow.hidden; if (!fixRow.hidden) { fix.value = it.decision === 'correct' ? it.final : ''; fix.focus(); } };
+  saveFix.onclick = () => send('correct', fix.value.trim());
+  fix.onkeydown = e => { if (e.key === 'Enter') saveFix.click(); };
+  paint();
+  wrap.append(top, val, ...bits, el('div', {class: 'act'}, [bY, bA, bB, undo, showNote, state]), fixRow, note);
+  return wrap;
+}
+$('#rscope').onchange = () => loadReview(true);
+$('#rmore').onclick = () => loadReview(false);
+async function download(url) {
+  rmsg('');
+  const r = await fetch(url); if (!r.ok) { rmsg((await r.json()).error, true); return; }
+  const name = ((r.headers.get('Content-Disposition') || '').match(/filename\*?=(?:UTF-8'')?"?([^";]+)/) || [])[1] || 'leo_reviewed.csv';
+  const a = el('a', {href: URL.createObjectURL(await r.blob()), download: decodeURIComponent(name)}); document.body.append(a); a.click(); a.remove();
+}
+$('#rmerge').onclick = () => download('/leo/jobs/' + RJ + '/review/export?kind=merged&unreviewed=' + $('#runrev').value);
+$('#rdec').onclick = () => download('/leo/jobs/' + RJ + '/review/export?kind=reviewed');
+init();
+</script>
+</body>
+</html>

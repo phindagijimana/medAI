@@ -159,6 +159,27 @@ try:
 except Exception as e:
     logger.warning(f"⚠️ /extract/ui not registered: {e}")
 
+try:
+    from routes.chain_extract import chain_bp
+    app.register_blueprint(chain_bp)
+    logger.info("[OK] /extract/chain + review API registered")
+except Exception as e:
+    logger.warning(f"⚠️ /extract/chain routes not registered: {e}")
+
+try:
+    from routes.review_ui import review_ui_bp
+    app.register_blueprint(review_ui_bp)
+    logger.info("[OK] /extract/ui/review registered")
+except Exception as e:
+    logger.warning(f"⚠️ /extract/ui/review not registered: {e}")
+
+try:
+    from routes.leo import leo_bp
+    app.register_blueprint(leo_bp)
+    logger.info("[OK] /leo (LEO phenotype extraction UI + batch API) registered")
+except Exception as e:
+    logger.warning(f"⚠️ /leo routes not registered: {e}")
+
 # Initialize database
 try:
     from core.database import init_db
@@ -1596,8 +1617,11 @@ if __name__ == "__main__":
     except Exception as e:
         logger.warning("Could not create PID file: {}".format(e))
     
-    logger.info("Starting background MedAI model load (server binds immediately)...")
-    svc.ensure_model_load_started()
+    if os.environ.get("MEDAI_LOAD_MED42", "1") == "1":
+        logger.info("Starting background MedAI model load (server binds immediately)...")
+        svc.ensure_model_load_started()
+    else:
+        logger.info("MEDAI_LOAD_MED42=0: not loading Med42 (LEO runs specialist-only).")
     
     logger.info("Starting MedAI-EPI server on {}:{}".format(host, port))
     logger.info("Access URLs:")
