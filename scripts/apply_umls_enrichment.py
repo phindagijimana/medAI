@@ -41,9 +41,26 @@ def main() -> int:
         return 2
 
     from rules.epilepsy_ontology import all_enum_ontologies, supplementary_ontologies
+    from services.curated_code_audit import _stems, _umls_added
+    from services.ontology_loaders import semantic_tag, snomed_lookup
     live_ontologies = {**all_enum_ontologies(), **supplementary_ontologies()}
+    previously_added = _umls_added()
+    try:
+        from rules.epilepsy_ontology_umls_overrides import UMLS_OVERRIDES as _prev
+    except ImportError:
+        _prev = {}
+    previous_sctid = {(g, k): p["set_sctid"] for g, v in _prev.items() for k, p in v.items() if p.get("set_sctid")}
+    corrections = REPO_ROOT / "data" / "curated" / "curated_code_corrections.csv"
+    corrected_away = set()
+    if corrections.exists():
+        import csv
+        with corrections.open(encoding="utf-8") as f:
+            corrected_away = {(r["group"], r["key"], r["old"]) for r in csv.DictReader(f)
+                              if r["field"] == "sctid" and r["old"]}
 
     enrichment = report["enrichment"]
+    sct_info = snomed_lookup({s for g in enrichment.values() for p in g.values() for s in p.get("sctids", [])})
+    skipped_unrelated = 0
 
     overrides: dict[str, dict[str, dict]] = {}
     total_syns_added = 0
@@ -58,8 +75,17 @@ def main() -> int:
             live_entry = live_group.get(value_key)
             if not live_entry:
                 continue
-            existing_syns_lc = {s.lower().strip() for s in live_entry.synonyms}
-            existing_syns_lc.add((live_entry.label or "").lower().strip())
+            # Names the entry had before this script ever ran.
+            stale = set(previously_added.get((group_name, value_key), []))
+            own_names = [live_entry.label, value_key.replace("_", " "),
+                         *(s for s in live_entry.synonyms if s not in stale)]
+            own_stems = _stems(*own_names)
+            # A wrong curated CUI returns a different concept's names; if none of
+            # them relate to the entry, drop the whole patch.
+            if not (own_stems & _stems(*patch.get("candidate_synonyms", []))):
+                skipped_unrelated += 1
+                continue
+            existing_syns_lc = {s.lower().strip() for s in own_names}
             new_syns: list[str] = []
             for cand in patch.get("candidate_synonyms", []):
                 lc = _clean(cand).lower()
@@ -72,11 +98,18 @@ def main() -> int:
                 existing_syns_lc.add(lc)
 
             set_sctid = None
-            if not live_entry.sctid and patch.get("sctids"):
-                # Take the shortest SCTID (most canonical) if multiple.
-                sct = sorted(patch["sctids"], key=len)[0]
-                if sct.isdigit():
-                    set_sctid = sct
+            base_sctid = None if live_entry.sctid == previous_sctid.get((group_name, value_key)) \
+                else live_entry.sctid
+            if not base_sctid and patch.get("sctids"):
+                # Active SCTIDs whose SNOMED name relates to the entry, shortest first.
+                for sct in sorted(patch["sctids"], key=len):
+                    info = sct_info.get(sct)
+                    if sct.isdigit() and info and info["active"] \
+                            and (group_name, value_key, sct) not in corrected_away \
+                            and own_stems & _stems(info["pt"] or "", info["fsn"] or "") \
+                            and semantic_tag(info["fsn"]) != "situation":
+                        set_sctid = sct
+                        break
 
             if new_syns or set_sctid:
                 entry_patch: dict = {}
@@ -149,6 +182,7 @@ def main() -> int:
     print(f"  Entries touched:       {total_entries_touched}")
     print(f"  Synonyms added:        {total_syns_added}")
     print(f"  SCTIDs filled:         {total_sctids_filled}")
+    print(f"  Skipped (unrelated):   {skipped_unrelated}")
     return 0
 
 

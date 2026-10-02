@@ -33,7 +33,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-DEFAULT_OBO = REPO_ROOT / ".cache" / "hpo" / "hp.obo"
+try:
+    from services.ontology_releases import release_path
+    DEFAULT_OBO = release_path("hpo")
+except Exception:
+    DEFAULT_OBO = REPO_ROOT / ".cache" / "hpo" / "hp.obo"
 DEFAULT_OUT = REPO_ROOT / ".cache" / "hpo" / "hpo_enrichment_report.json"
 
 # HPO roots we care about — each maps to zero or more schema enum groups.

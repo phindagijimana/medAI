@@ -1,4 +1,4 @@
-"""Ontology candidate retrieval service (Chain-of-Three P1.1).
+"""Ontology candidate retrieval service — the O in the LEO chain (Chain-of-Three spec P1.1).
 
 Implements the compendium's *generation-to-selection* principle: instead of
 letting the LLM invent identifiers, this service deterministically retrieves
@@ -8,23 +8,19 @@ candidate or abstain.
 Coverage strategy
 -----------------
 The compendium (page 10) names HPO + EPIO + RxNorm as target vocabularies
-with SNOMED bridges under license.  We don't yet ship an HPO release on
-disk, so the initial implementation builds candidates from artifacts we
-DO have:
+with SNOMED bridges under license.  Candidates come from two sources:
 
-  * ``rules.epilepsy_ontology`` — 24 v0.2.1 enum-value ConceptEntry maps
-    with UMLS CUIs, SNOMED SCTIDs, canonical labels, and curated
-    synonyms.
-  * ``references/exect_v2_ilae_map.csv`` — ILAE 2017 → UMLS/SNOMED
-    mapping table (150 rows).
-  * ``references/exect_v2_cui_seed.csv`` — CUI seed with schema field
-    hints.
+  * Pinned ontology releases (``services.ontology_loaders``): epilepsy-
+    relevant subsets of HPO, MONDO, EPIO, SNOMED CT US and RxNorm, each
+    candidate tagged with its own release (e.g. ``hpo:2026-09-01``).
+    Routed by ``field_type`` via ``_FIELD_SCOPE_ROUTE``.
+  * Curated artifacts: ``rules.epilepsy_ontology`` (24 v0.2.1 enum-value
+    ConceptEntry maps with UMLS CUIs, SNOMED SCTIDs and synonyms — these
+    carry the ``schema_enum_value`` bridge) and
+    ``references/exect_v2_ilae_map.csv`` (ILAE 2017 → UMLS/SNOMED).
 
 Every candidate carries ``system``, ``id``, ``label``, ``synonyms``,
-``definition``, ``parents``, ``is_obsolete``, and ``release`` — the same
-shape a future HPO-backed candidate must have.  Swapping HPO in later is
-a one-file change: add ``_load_hpo_release()`` and register it in
-``_CANDIDATE_SOURCES``.
+``definition``, ``parents``, ``is_obsolete``, and ``release``.
 
 API
 ---
@@ -102,21 +98,59 @@ class Candidate:
 # routing — fall through to the full search".
 
 _FIELD_ONTOLOGY_ROUTE: dict[str, str] = {
-    "clinical_seizure.epilepsy_type":            "EPILEPSY_TYPE_ONTOLOGY",
-    "clinical_seizure.predominant_seizure_type": "SEIZURE_TYPE_ONTOLOGY",
-    "clinical_seizure.other_seizure_types":      "SEIZURE_TYPE_ONTOLOGY",
-    "clinical_seizure.awareness":                "AWARENESS_ONTOLOGY",
-    "clinical_seizure.etiology_category":        "ETIOLOGY_CATEGORY_ONTOLOGY",
-    "clinical_seizure.focal_motor_onset":        "FOCAL_MOTOR_ONSET_ONTOLOGY",
-    "clinical_seizure.focal_nonmotor_onset":     "FOCAL_NONMOTOR_ONSET_ONTOLOGY",
-    "clinical_seizure.status_epilepticus_history": "SEIZURE_TYPE_ONTOLOGY",
-    "medication.drug_resistance_status":         "DRUG_RESISTANCE_STATUS_ONTOLOGY",
-    "medication.surgery_history":                "SURGERY_TYPE_ONTOLOGY",
-    "medication.non_drug_therapies":             "NON_DRUG_THERAPY_TYPE_ONTOLOGY",
-    "mri.findings":                              "MRI_FINDING_ONTOLOGY",
-    "eeg.background":                            "EEG_BACKGROUND_ONTOLOGY",
-    "eeg.ied_present":                           "IED_TYPE_ONTOLOGY",
+    "clinical_seizure.epilepsy_type":            "EpilepsyType",
+    "clinical_seizure.predominant_seizure_type": "SeizureType",
+    "clinical_seizure.other_seizure_types":      "SeizureType",
+    "clinical_seizure.awareness":                "Awareness",
+    "clinical_seizure.etiology_category":        "EtiologyCategory",
+    "clinical_seizure.focal_motor_onset":        "FocalMotorOnset",
+    "clinical_seizure.focal_nonmotor_onset":     "FocalNonmotorOnset",
+    "clinical_seizure.status_epilepticus_history": "SeizureType",
+    "medication.drug_resistance_status":         "DrugResistanceStatus",
+    "medication.surgery_history":                "SurgeryType",
+    "medication.non_drug_therapies":             "NonDrugTherapyType",
+    "mri.findings":                              "MriFinding",
+    "eeg.background":                            "EegBackground",
+    "eeg.ied_present":                           "IedType",
 }
+
+# Maps a dotted schema path to the release-backed term scopes it may draw
+# from (see services.ontology_loaders).  Fields not listed get no release
+# candidates; field_type=None searches every scope.
+_SEIZURE = ["seizure", "epio"]
+_FIELD_SCOPE_ROUTE: dict[str, list[str]] = {
+    "clinical_seizure.epilepsy_type":             ["epilepsy", "epio"],
+    "clinical_seizure.predominant_seizure_type":  _SEIZURE,
+    "clinical_seizure.other_seizure_types":       _SEIZURE,
+    "clinical_seizure.awareness":                 _SEIZURE,
+    "clinical_seizure.focal_motor_onset":         _SEIZURE,
+    "clinical_seizure.focal_nonmotor_onset":      _SEIZURE,
+    "clinical_seizure.status_epilepticus_history": _SEIZURE,
+    "clinical_seizure.etiology_category":         ["epilepsy", "epio"],
+    "clinical_seizure.etiology_specifics":        ["epilepsy", "epio", "mri"],
+    "medication.current_asms":                    ["medication"],
+    "medication.prior_asms":                      ["medication"],
+    "medication.failed_asms":                     ["medication"],
+    "eeg.background":                             ["eeg", "epio"],
+    "eeg.ied_present":                            ["eeg", "epio"],
+    "eeg.ied_findings":                           ["eeg", "epio"],
+    "mri.findings":                               ["mri", "epio"],
+    "mri.hippocampal_sclerosis":                  ["mri", "epio"],
+    "mri.focal_cortical_dysplasia":               ["mri", "epio"],
+}
+
+# Tie-break among equally scored candidates: standard ontologies before
+# cross-walk IDs before our internal enum.
+_SYSTEM_PRIORITY = {"HPO": 0, "MONDO": 1, "EPIO": 2, "SNOMED": 3, "RxNorm": 4, "UMLS": 5, "MEDAI-ENUM": 9}
+_MEDICATION_PRIORITY = {**_SYSTEM_PRIORITY, "RxNorm": -1}
+
+# Obsolete terms stay retrievable (so the verifier can flag them) but rank
+# below their live replacements.
+_OBSOLETE_PENALTY = 0.8
+
+_MIN_SUBSTRING_LEN = 4
+
+_ILAE_SCTID = re.compile(r"/SNOMEDCT_US/\w+/(\d+)\]")
 
 
 # ─── Text normalization ──────────────────────────────────────────────────
@@ -146,11 +180,50 @@ class OntologyCandidateService:
     Load-once, query-many.  Thread-safe for reads.
     """
 
-    def __init__(self, release: str = "medai-enum-v0.2.1+ilae2017"):
+    def __init__(self, release: str = "medai-enum-v0.2.1+ilae2017", *, use_releases: bool = True):
         self._release = release
         self._enum_ontologies = self._load_enum_ontologies()
         self._ilae_map = self._load_ilae_map()
         self._cui_seed = self._load_cui_seed()
+        self._terms_by_scope = self._load_release_terms() if use_releases else {}
+        self._sct_status, self._curated_issues = self._load_curated_audit() if use_releases else ({}, {})
+        self._term_index = {(t.system, t.id): t for ts in self._terms_by_scope.values() for t in ts}
+
+    @staticmethod
+    def _load_curated_audit() -> tuple[dict[str, dict], dict[tuple[str, str], set[str]]]:
+        """SNOMED release status of curated SCTIDs, and the issue kinds that
+        services.curated_code_audit found per (group, key) entry."""
+        try:
+            from services.curated_code_audit import audit, curated_sctids
+            from services.ontology_loaders import snomed_lookup
+            status = snomed_lookup(curated_sctids())
+            failed: dict[tuple[str, str], set[str]] = {}
+            for i in audit():
+                failed.setdefault((i.group, i.key), set()).add(i.kind)
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"curated code audit unavailable: {e}")
+            return {}, {}
+        return status, failed
+
+    @staticmethod
+    def _load_release_terms() -> dict[str, list]:
+        """Group pinned-release terms by scope. Empty if no releases are fetched."""
+        try:
+            from services.ontology_loaders import load_terms
+            terms = load_terms()
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"ontology releases unavailable: {e}")
+            return {}
+        by_scope: dict[str, list] = {}
+        for t in terms:
+            by_scope.setdefault(t.scope, []).append(t)
+        return by_scope
+
+    @property
+    def releases_loaded(self) -> bool:
+        return bool(self._terms_by_scope)
 
     # ---- construction --------------------------------------------------
 
@@ -174,7 +247,9 @@ class OntologyCandidateService:
                 # what we can defensively.
                 label = (r.get("Column1", "") or "").strip()
                 cui = (r.get("Column3", "") or "").strip()
-                snomed = (r.get("Column4", "") or "").strip()
+                # Column4 holds a UMLS atom string, "Name [A123/SNOMEDCT_US/PT/54200006]".
+                m = _ILAE_SCTID.search(r.get("Column4", "") or "")
+                snomed = m.group(1) if m else ""
                 synonyms_str = (r.get("Column6", "") or "").strip()
                 if not label:
                     continue
@@ -227,6 +302,7 @@ class OntologyCandidateService:
         search_dicts = self._route_dicts(field_type)
 
         seen_ids: set[tuple[str, str]] = set()
+        seen_curated: set[tuple[str, str, str]] = set()
         out: list[Candidate] = []
         for onto_name, onto in search_dicts:
             for enum_val, entry in onto.items():
@@ -236,9 +312,18 @@ class OntologyCandidateService:
                 cui = getattr(entry, "cui", None)
                 sctid = getattr(entry, "sctid", None)
 
+                # Codes the curated-code audit rejected are not emitted.
+                issues = self._curated_issues.get((onto_name, enum_val), set())
+                if any(k.startswith("sctid_") for k in issues):
+                    sctid = None
+                if issues & {"cui_name_mismatch", "umls_synonyms_unrelated"}:
+                    cui = None
+
+                # One code may back entries in different groups (a resection is
+                # both a SurgeryType and a DocumentType); dedupe within a group.
                 system, cid = self._pick_system_id(cui, sctid, enum_val)
                 key = (system, cid)
-                if key in seen_ids:
+                if (onto_name, *key) in seen_curated:
                     continue
 
                 score, mtype = self._score(
@@ -247,20 +332,44 @@ class OntologyCandidateService:
                     label=label,
                     synonyms=syns,
                 )
+
+                # A curated SNOMED code found in the pinned release takes the
+                # release's US preferred term, status and tag; curated wording
+                # stays as synonyms.
+                release, definition, parents, obsolete = self._release, None, [], False
+                sct = self._sct_status.get(cid) if system == "SNOMED" else None
+                if sct and sct.get("exists"):
+                    term = self._term_index.get(key)
+                    pt = sct.get("pt") or label
+                    syns = list(dict.fromkeys(
+                        [s for s in (label, *syns, *(term.synonyms if term else ())) if s != pt]))
+                    rel_score, rel_type = self._score(
+                        mention_norm=mention_norm, mention_toks=mention_toks, label=pt, synonyms=syns)
+                    if rel_score > score:
+                        score, mtype = rel_score, rel_type
+                    label = pt
+                    release = self._snomed_release()
+                    obsolete = not sct.get("active")
+                    if term:
+                        definition, parents = term.definition, term.parents
+                    if obsolete:
+                        score *= _OBSOLETE_PENALTY
                 if score <= 0.0:
                     continue
 
                 seen_ids.add(key)
-                schema_field = _ONTONAME_TO_SCHEMA_FIELD.get(onto_name)
+                seen_curated.add((onto_name, *key))
+                schema_field = field_type if _FIELD_ONTOLOGY_ROUTE.get(field_type or "") == onto_name \
+                    else _ONTONAME_TO_SCHEMA_FIELD.get(onto_name)
                 out.append(Candidate(
                     system=system,
                     id=cid,
                     label=label,
                     synonyms=syns,
-                    definition=None,  # ConceptEntry doesn't carry definitions
-                    parents=[],
-                    is_obsolete=False,
-                    release=self._release,
+                    definition=definition,
+                    parents=parents,
+                    is_obsolete=obsolete,
+                    release=release,
                     match_type=mtype,
                     rank_score=score,
                     schema_field=schema_field,
@@ -279,17 +388,45 @@ class OntologyCandidateService:
             if score <= 0.0:
                 continue
             cui = row["cui"]
-            sctid = row["sctid"]
+            sct = self._sct_status.get(row["sctid"])
+            # Only SCTIDs confirmed active in the pinned release are emitted.
+            sctid = row["sctid"] if sct and sct.get("active") else None
             system, cid = self._pick_system_id(cui, sctid, label.lower().replace(" ", "_"))
             if (system, cid) in seen_ids:
                 continue
             seen_ids.add((system, cid))
             out.append(Candidate(
                 system=system, id=cid, label=label, synonyms=row["synonyms"],
-                release=self._release, match_type=mtype, rank_score=score * 0.9,
+                release=self._snomed_release() if sctid else self._release,
+                match_type=mtype, rank_score=score * 0.9,
             ))
 
-        out.sort(key=lambda c: -c.rank_score)
+        # Pinned-release terms for the scopes this field may draw from
+        for term in self._route_terms(field_type):
+            key = (term.system, term.id)
+            if key in seen_ids:
+                continue
+            score, mtype = self._score(
+                mention_norm=mention_norm,
+                mention_toks=mention_toks,
+                label=term.label,
+                synonyms=term.synonyms,
+            )
+            if score <= 0.0:
+                continue
+            if term.is_obsolete:
+                score *= _OBSOLETE_PENALTY
+            seen_ids.add(key)
+            out.append(Candidate(
+                system=term.system, id=term.id, label=term.label,
+                synonyms=term.synonyms, definition=term.definition,
+                parents=term.parents, is_obsolete=term.is_obsolete,
+                release=term.release, match_type=mtype, rank_score=score,
+                schema_field=field_type,
+            ))
+
+        priority = _MEDICATION_PRIORITY if (field_type or "").startswith("medication.") else _SYSTEM_PRIORITY
+        out.sort(key=lambda c: (-c.rank_score, priority.get(c.system, 8)))
         return out[:k]
 
     # ---- helpers -------------------------------------------------------
@@ -307,9 +444,23 @@ class OntologyCandidateService:
         return pairs
 
     @staticmethod
+    @lru_cache(maxsize=1)
+    def _snomed_release() -> str:
+        from services.ontology_releases import release_tag
+        return release_tag("snomed")
+
+    def _route_terms(self, field_type: Optional[str]) -> list:
+        if not self._terms_by_scope:
+            return []
+        if field_type is None:
+            scopes = list(self._terms_by_scope)
+        else:
+            scopes = _FIELD_SCOPE_ROUTE.get(field_type, [])
+        return [t for s in scopes for t in self._terms_by_scope.get(s, ())]
+
+    @staticmethod
     def _pick_system_id(cui: Optional[str], sctid: Optional[str], fallback: str) -> tuple[str, str]:
-        """Prefer HPO if we ever attach it, then SNOMED, UMLS, else MEDAI-ENUM."""
-        # (HPO support goes here when a release is loaded)
+        """For curated entries: SNOMED, then UMLS, else MEDAI-ENUM."""
         if sctid:
             return ("SNOMED", str(sctid))
         if cui:
@@ -330,12 +481,15 @@ class OntologyCandidateService:
         syn_norms = [_normalize(s) for s in synonyms]
         if mention_norm in syn_norms:
             return (0.9, "exact_synonym")
-        if label_norm and mention_norm in label_norm:
+        # Short strings ("L", "R", "LEV") match inside almost anything, so they
+        # only count as exact matches.
+        min_sub = _MIN_SUBSTRING_LEN
+        if len(mention_norm) >= min_sub and label_norm and mention_norm in label_norm:
             return (0.7, "substring_label")
-        if label_norm and label_norm in mention_norm:
+        if len(label_norm) >= min_sub and label_norm in mention_norm:
             return (0.7, "substring_label_rev")
         for s in syn_norms:
-            if s and (mention_norm in s or s in mention_norm):
+            if len(s) >= min_sub and len(mention_norm) >= min_sub and (mention_norm in s or s in mention_norm):
                 return (0.5, "substring_synonym")
         # Token-set overlap
         best_j = 0.0
@@ -349,9 +503,9 @@ class OntologyCandidateService:
 
 
 # Reverse map: ontology dict name → schema dotted path (best-effort).
-_ONTONAME_TO_SCHEMA_FIELD: dict[str, str] = {
-    onto_name: field_type for field_type, onto_name in _FIELD_ONTOLOGY_ROUTE.items()
-}
+_ONTONAME_TO_SCHEMA_FIELD: dict[str, str] = {}
+for _field, _onto in _FIELD_ONTOLOGY_ROUTE.items():
+    _ONTONAME_TO_SCHEMA_FIELD.setdefault(_onto, _field)
 
 
 __all__ = ["Candidate", "OntologyCandidateService"]

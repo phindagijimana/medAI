@@ -1,0 +1,6 @@
+group,key,kind,code,reviewed,reason
+Laterality,bilateral,sctid_name_mismatch,51440002,2026-10-01,51440002 [term] is SNOMED's bilateral qualifier; the word-overlap check misses it.
+Laterality,bilateral,umls_synonyms_unrelated,C0238767,2026-10-01,The added synonyms ([term]) are SNOMED's own wording for bilateral.
+EegStudyType,routine,sctid_name_mismatch,54550000,2026-10-01,SNOMED has no routine-EEG concept; the generic EEG procedure is the closest.
+LocalizationSource,mri_confirmed,sctid_name_mismatch,113091000,2026-10-01,The MRI procedure is the localising modality.
+LocalizationSource,eeg_confirmed,sctid_name_mismatch,54550000,2026-10-01,The EEG procedure is the localising modality (same pattern as mri_confirmed).

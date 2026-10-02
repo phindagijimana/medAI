@@ -100,6 +100,11 @@ RULES_ONLY_ENUMS: dict[str, str] = {
         "Derived from post-operative seizure days/year using Wieser 2001 "
         "classification (classes 1–6)."
     ),
+    "MedicationStatus": (
+        "Derived from medication-section context and ConText temporality. "
+        "SNOMED CT has no concepts for current/prior/failed ASM status; the "
+        "earlier codes were wrong (data/curated/curated_code_corrections.csv)."
+    ),
 }
 
 
@@ -108,31 +113,31 @@ RULES_ONLY_ENUMS: dict[str, str] = {
 # ---------------------------------------------------------------------------
 DOCUMENT_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
     "mri_report": ConceptEntry(
-        cui="C0412675", sctid="241615005",
+        cui="C0412675", sctid="816077007",
         label="MRI report",
         synonyms=[
             "MRI report", "MRI brain report", "MR imaging report",
             "magnetic resonance imaging report", "MR brain", "brain MRI",
         ],
-        source_provenance=["ExECT-V2 seed C0412675", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0412675", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 241615005 -> 816077007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "eeg_report": ConceptEntry(
-        cui="C0013819", sctid="164727004",
+        cui="C0013819", sctid="54550000",
         label="EEG report",
         synonyms=[
             "EEG report", "electroencephalogram report", "EEG study",
             "EEG interpretation", "routine EEG", "video EEG report",
         ],
-        source_provenance=["ExECT-V2 seed C0013819", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0013819", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 164727004 -> 54550000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "progress_note": ConceptEntry(
-        cui="C0555061", sctid="371531000",
+        cui="C1299498", sctid="371531000",
         label="Progress note",
         synonyms=[
             "progress note", "clinic note", "follow-up note",
             "follow up visit", "clinic letter", "outpatient note",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "F-S train EA0001"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "F-S train EA0001", "corrected 2026-10-01: cui C0555061 -> C1299498 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "initial_consult": ConceptEntry(
         cui="C0009818", sctid="11429006",
@@ -184,34 +189,34 @@ DOCUMENT_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["domain-knowledge:standard-neurology-vocab"],
     ),
     "procedure_seeg": ConceptEntry(
-        cui="C4517211", sctid=None,
+        cui="C5396675", sctid="870257001",
         label="Stereo-EEG procedure note",
         synonyms=[
             "sEEG procedure note", "stereo-EEG placement",
             "stereotactic EEG procedure", "intracranial monitoring procedure",
             "depth electrode placement",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 870257001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C4517211 -> C5396675 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "procedure_resection": ConceptEntry(
-        cui="C0195028", sctid="107963003",
+        cui="C0195028", sctid="53423001",
         label="Epilepsy resective surgery",
         synonyms=[
             "temporal lobectomy", "anterior temporal lobectomy",
             "amygdalohippocampectomy", "focal cortical resection",
             "epilepsy surgery", "lesionectomy",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017", "corrected 2026-10-01: sctid 107963003 -> 53423001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "procedure_neurostim": ConceptEntry(
-        cui=None, sctid="257538000",
+        cui=None, sctid="898184003",
         label="Neurostimulator procedure note",
         synonyms=[
             "VNS implantation", "vagus nerve stimulator placement",
             "RNS implantation", "responsive neurostimulation placement",
             "DBS implantation", "deep brain stimulator placement",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 257538000 -> 898184003 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "other": ConceptEntry(
         cui=None, sctid=None,
@@ -312,7 +317,7 @@ TEMPORAL_STATUS_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 EPILEPSY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
     "focal": ConceptEntry(
-        cui="C0014547", sctid="230381004",
+        cui="C0014547", sctid="230381009",
         label="Focal epilepsy (ILAE 2017)",
         synonyms=[
             "focal epilepsy", "partial epilepsy", "localization-related epilepsy",
@@ -324,7 +329,7 @@ EPILEPSY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "ExECT-V2 seed C0014547", "ILAE 2017",
             "F-S train EA0001 'symptomatic, structural right temporal lobe epilepsy'",
             "F-S train EA0002 'focal epilepsy'",
-        ],
+            "corrected 2026-10-01: sctid 230381004 -> 230381009 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized": ConceptEntry(
         cui="C0014548", sctid="19598007",
@@ -393,7 +398,7 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "focal_impaired_awareness": ConceptEntry(
-        cui="C0149958", sctid="230456007",
+        cui="C0149958", sctid="407675009",
         label="Focal impaired awareness seizure (ILAE 2017; formerly complex partial)",
         synonyms=[
             "focal impaired awareness seizure", "focal seizure with impaired awareness",
@@ -419,7 +424,7 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "F-S train EA0001 'focal seizures with loss of awareness'",
             "F-S train (focal seizures with altered awareness)",
             "HPO 2024",
-        ],
+            "corrected 2026-10-01: sctid 230456007 -> 407675009 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "focal_unknown_awareness": ConceptEntry(
         cui="C0751495", sctid="29753000",
@@ -448,6 +453,8 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "secondary generalized tonic clonic seizure",
             "secondary generalised seizure", "secondary generalisation",
             "focal seizure with secondary generalisation",
+            "secondarily generalized seizures", "secondarily generalised seizures",
+            "secondary generalized seizures", "secondary generalised seizures",
         ],
         source_provenance=[
             "ExECT-V2 seed C0877017", "ILAE 2017",
@@ -456,7 +463,7 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "generalized_tonic_clonic": ConceptEntry(
-        cui="C0014549", sctid="86181006",
+        cui="C0014549", sctid="1217209006",
         label="Generalized tonic-clonic seizure (ILAE 2017)",
         synonyms=[
             "generalized tonic-clonic seizure", "generalised tonic-clonic seizure",
@@ -475,28 +482,28 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "ILAE 2017",
             "F-S train (Generalised tonic clonic seizure, generalised tonic clonic seizures)",
             "HPO 2024",
-        ],
+            "corrected 2026-10-01: sctid 86181006 -> 1217209006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_tonic": ConceptEntry(
-        cui="C0086241", sctid="51887003",
+        cui="C0086241", sctid="1208969008",
         label="Generalized tonic seizure (ILAE 2017)",
         synonyms=[
             "generalized tonic seizure", "generalised tonic seizure",
             "tonic seizure", "tonic epilepsy",
         ],
-        source_provenance=["ExECT-V2 seed C0086241", "ExECT-V2 seed C0270844", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C0086241", "ExECT-V2 seed C0270844", "ILAE 2017", "corrected 2026-10-01: sctid 51887003 -> 1208969008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_clonic": ConceptEntry(
-        cui="C0234535", sctid="6208003",
+        cui="C0234535", sctid="1208970009",
         label="Generalized clonic seizure (ILAE 2017)",
         synonyms=[
             "generalized clonic seizure", "generalised clonic seizure",
             "clonic seizure", "clonic epileptic seizure",
         ],
-        source_provenance=["ExECT-V2 seed C0234535", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C0234535", "ILAE 2017", "corrected 2026-10-01: sctid 6208003 -> 1208970009 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_myoclonic": ConceptEntry(
-        cui="C4317123", sctid="37356005",
+        cui="C4317123", sctid="1208972001",
         label="Generalized myoclonic seizure (ILAE 2017)",
         synonyms=[
             "generalized myoclonic seizure", "generalised myoclonic seizure",
@@ -506,10 +513,10 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "ExECT-V2 seed C4317123", "ILAE 2017",
             "F-S train (myoclonic jerks, myoclonus)",
-        ],
+            "corrected 2026-10-01: sctid 37356005 -> 1208972001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_absence_typical": ConceptEntry(
-        cui="C0014553", sctid="79631006",
+        cui="C0014553", sctid="1173024006",
         label="Typical absence seizure (ILAE 2017)",
         synonyms=[
             "typical absence seizure", "absence seizure", "absence",
@@ -526,7 +533,7 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
             "ExECT-V2 seed C0014553", "ILAE 2017",
             "F-S train (absences, absence like seizures)",
             "HPO 2024",
-        ],
+            "corrected 2026-10-01: sctid 79631006 -> 1173024006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_absence_atypical": ConceptEntry(
         cui="C0595948", sctid="23374007",
@@ -542,7 +549,7 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "generalized_atonic": ConceptEntry(
-        cui="C0270846", sctid="42365007",
+        cui="C0270846", sctid="192981006",
         label="Atonic seizure (ILAE 2017)",
         synonyms=[
             "atonic seizure", "drop attack", "drop seizure", "astatic seizure",
@@ -554,16 +561,16 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
         source_provenance=[
             "ExECT-V2 seed C0270846", "ILAE 2017", "HPO 2024",
-        ],
+            "corrected 2026-10-01: sctid 42365007 -> 192981006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "generalized_epileptic_spasms": ConceptEntry(
-        cui="C1527366", sctid="28055006",
+        cui="C1527366", sctid="1217008005",
         label="Epileptic spasms (ILAE 2017)",
         synonyms=[
             "epileptic spasms", "infantile spasms", "salaam spasms",
             "salaam attack", "West syndrome spasms", "flexor spasms",
         ],
-        source_provenance=["ExECT-V2 seed C1527366", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C1527366", "ILAE 2017", "corrected 2026-10-01: sctid 28055006 -> 1217008005 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "unknown_onset_tonic_clonic": ConceptEntry(
         cui="C4476643", sctid=None,
@@ -615,16 +622,16 @@ SEIZURE_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 AWARENESS_ONTOLOGY: dict[str, ConceptEntry] = {
     "aware": ConceptEntry(
-        cui="C0007797", sctid="248220008",
+        cui="C0424523", sctid="271591004",
         label="Awareness retained",
         synonyms=[
             "aware", "awareness retained", "retained awareness",
             "consciousness preserved", "fully aware", "conscious",
         ],
-        source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 248220008 -> 271591004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0007797 -> C0424523 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "impaired": ConceptEntry(
-        cui="C0234450", sctid="418072004",
+        cui="C0234450", sctid="3006004",
         label="Impaired awareness / consciousness",
         synonyms=[
             "impaired awareness", "loss of awareness", "altered awareness",
@@ -634,7 +641,7 @@ AWARENESS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "ILAE 2017",
             "F-S train (loss of awareness, altered awareness, loss of consciousness)",
-        ],
+            "corrected 2026-10-01: sctid 418072004 -> 3006004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "unknown": ConceptEntry(
         cui=None, sctid=None,
@@ -668,16 +675,16 @@ LATERALITY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["SNOMED-CT US Edition 51440002", "domain-knowledge:standard-neurology-vocab"],
     ),
     "midline": ConceptEntry(
-        cui="C0444667", sctid="255561001",
+        cui="C0444667", sctid="399488007",
         label="Midline",
         synonyms=["midline", "central", "medial", "midsagittal"],
-        source_provenance=["SNOMED-CT US Edition 255561001", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["SNOMED-CT US Edition 255561001", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 255561001 -> 399488007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "diffuse": ConceptEntry(
-        cui="C0205219", sctid="49755003",
+        cui="C0205219", sctid="19648000",
         label="Diffuse",
         synonyms=["diffuse", "diffusely", "widespread", "generalized"],
-        source_provenance=["SNOMED-CT US Edition 49755003", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["SNOMED-CT US Edition 49755003", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 49755003 -> 19648000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "unknown": ConceptEntry(
         cui=None, sctid=None,
@@ -693,13 +700,13 @@ LATERALITY_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 LOBAR_LOCALIZATION_ONTOLOGY: dict[str, ConceptEntry] = {
     "frontal": ConceptEntry(
-        cui="C0085541", sctid="102299003",
+        cui="C0085541", sctid="83251001",
         label="Frontal lobe",
         synonyms=[
             "frontal lobe", "frontal", "frontal region", "frontal cortex",
             "prefrontal", "frontal lobe epilepsy", "FLE",
         ],
-        source_provenance=["ExECT-V2 seed C0085541", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0085541", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 102299003 -> 83251001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "temporal": ConceptEntry(
         cui="C0014556", sctid="78277001",
@@ -736,22 +743,22 @@ LOBAR_LOCALIZATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "insular": ConceptEntry(
-        cui="C0228281", sctid="90351000",
+        cui="C0021640", sctid="36169008",
         label="Insular cortex",
         synonyms=[
             "insula", "insular", "insular cortex", "insular lobe",
             "insular epilepsy", "island of Reil",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017", "corrected 2026-10-01: sctid 90351000 -> 36169008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0228281 -> C0021640 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "cingulate": ConceptEntry(
-        cui="C0152314", sctid="83251001",
+        cui="C0152314", sctid="25221002",
         label="Cingulate cortex",
         synonyms=[
             "cingulate", "cingulate cortex", "cingulate gyrus",
             "anterior cingulate", "posterior cingulate", "cingulate epilepsy",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017", "corrected 2026-10-01: sctid 83251001 -> 25221002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "multifocal": ConceptEntry(
         cui=None, sctid=None,
@@ -785,13 +792,13 @@ LOCALIZATION_SOURCE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["domain-knowledge:standard-neurology-vocab"],
     ),
     "eeg_confirmed": ConceptEntry(
-        cui="C0013819", sctid="164727004",
+        cui="C0013819", sctid="54550000",
         label="EEG-confirmed localization",
         synonyms=[
             "EEG showed", "EEG confirmed", "on EEG", "EEG revealed",
             "video EEG captured", "ictal EEG showed", "interictal EEG showed",
         ],
-        source_provenance=["ExECT-V2 seed C0013819", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0013819", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 164727004 -> 54550000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "mri_confirmed": ConceptEntry(
         cui=None, sctid="113091000",
@@ -838,31 +845,31 @@ EEG_STUDY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ExECT-V2 seed C0013819", "ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
     ),
     "prolonged": ConceptEntry(
-        cui=None, sctid="35935001",
+        cui=None, sctid="397796008",
         label="Prolonged EEG",
         synonyms=[
             "prolonged EEG", "long-term EEG monitoring", "LTM",
             "extended EEG",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 35935001 -> 397796008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "ambulatory": ConceptEntry(
-        cui=None, sctid="426405006",
+        cui=None, sctid="252735006",
         label="Ambulatory EEG",
         synonyms=[
             "ambulatory EEG", "aEEG", "outpatient ambulatory EEG",
             "24-hour ambulatory EEG", "48-hour ambulatory EEG",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 426405006 -> 252735006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "video_eeg": ConceptEntry(
-        cui=None, sctid="426405006",
+        cui=None, sctid="252738008",
         label="Video EEG",
         synonyms=[
             "video EEG", "vEEG", "video-EEG monitoring", "video telemetry",
             "video EEG monitoring", "VEM",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 426405006 -> 252738008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "emu": ConceptEntry(
         cui=None, sctid=None,
@@ -981,13 +988,13 @@ EEG_BACKGROUND_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 IED_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
     "spike": ConceptEntry(
-        cui="C0234533", sctid="79745007",
+        cui=None, sctid=None,
         label="Spike (interictal epileptiform discharge)",
         synonyms=[
             "spike", "spikes", "epileptiform spike", "interictal spike",
             "focal spike",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 79745007 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0234533 -> None (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "sharp_wave": ConceptEntry(
         cui=None, sctid=None,
@@ -999,13 +1006,13 @@ IED_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
     ),
     "spike_and_wave": ConceptEntry(
-        cui=None, sctid=None,
+        cui="C4023683", sctid=None,
         label="Spike-and-wave complex",
         synonyms=[
             "spike-and-wave", "spike and wave complex", "spike-wave discharge",
             "SWD", "generalised spike-and-wave", "generalized spike wave",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: cui None -> C4023683 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "polyspike": ConceptEntry(
         cui=None, sctid=None,
@@ -1014,13 +1021,13 @@ IED_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
     ),
     "polyspike_and_wave": ConceptEntry(
-        cui=None, sctid=None,
+        cui="C4021757", sctid=None,
         label="Polyspike-and-wave",
         synonyms=[
             "polyspike-and-wave", "polyspike and wave complex",
             "polyspike-wave discharge",
         ],
-        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ACNS terminology", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: cui None -> C4021757 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "sharp_and_slow": ConceptEntry(
         cui=None, sctid=None,
@@ -1057,16 +1064,16 @@ IED_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
     "normal": ConceptEntry(
-        cui="C0436481", sctid=None,
+        cui="C0436481", sctid="416318006",
         label="Normal MRI brain",
         synonyms=[
             "normal MRI", "MRI normal", "unremarkable MRI",
             "MRI brain normal", "no abnormality on MRI",
         ],
-        source_provenance=["ExECT-V2 seed C0436481", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0436481", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 169082008 -> 416318006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "hippocampal_sclerosis": ConceptEntry(
-        cui="C4749367", sctid="230368004",
+        cui="C4749367", sctid="448705004",
         label="Hippocampal sclerosis",
         synonyms=[
             "hippocampal sclerosis", "HS", "mesial temporal sclerosis", "MTS",
@@ -1087,10 +1094,10 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "F-S train (hippocampal sclerosis)",
             "domain-knowledge:neuroradiology-standard",
             "Blumcke 2013",
-        ],
+            "corrected 2026-10-01: sctid 230368004 -> 448705004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "focal_cortical_dysplasia": ConceptEntry(
-        cui="C0431384", sctid="253175007",
+        cui="C0431380", sctid="253153000",
         label="Focal cortical dysplasia (unspecified subtype)",
         synonyms=[
             "focal cortical dysplasia", "FCD", "cortical dysplasia",
@@ -1111,7 +1118,8 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "F-S train (cortical dysplasia)",
             "domain-knowledge:neuroradiology-standard",
             "Blumcke 2011",
-        ],
+            "corrected 2026-10-01: sctid 253175007 -> 253153000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C0431384 -> C0431380 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "fcd_palmini_i": ConceptEntry(
         cui=None, sctid=None,
@@ -1174,7 +1182,7 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["domain-knowledge:standard-neurology-vocab"],
     ),
     "tumor": ConceptEntry(
-        cui="C0006826", sctid="126906006",
+        cui="C0006826", sctid="126952004",
         label="Brain tumor",
         synonyms=[
             "brain tumor", "brain tumour", "intracranial tumor",
@@ -1196,10 +1204,10 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "F-S train (meningioma, cavernoma in the right temporal lobe)",
             "domain-knowledge:neuroradiology-standard",
             "EPIO 2024",
-        ],
+            "corrected 2026-10-01: sctid 126906006 -> 126952004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "vascular_malformation": ConceptEntry(
-        cui="C0339277", sctid="80078006",
+        cui="C0752155", sctid="253193002",
         label="Vascular malformation",
         synonyms=[
             "cavernoma", "cavernous malformation", "cavernous angioma",
@@ -1217,10 +1225,11 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (cavernoma, cavernoma in the right temporal lobe)",
             "domain-knowledge:neuroradiology-standard",
-        ],
+            "corrected 2026-10-01: sctid 80078006 -> 253193002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C0339277 -> C0752155 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "encephalomalacia": ConceptEntry(
-        cui="C0270819", sctid="230752002",
+        cui="C0014068", sctid="58762006",
         label="Encephalomalacia",
         synonyms=[
             "encephalomalacia", "cerebral encephalomalacia",
@@ -1234,7 +1243,8 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "domain-knowledge:neuroradiology-standard",
-        ],
+            "corrected 2026-10-01: sctid 230752002 -> 58762006 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C0270819 -> C0014068 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "gliosis": ConceptEntry(
         cui="C0017639", sctid=None,
@@ -1285,7 +1295,7 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "heterotopia": ConceptEntry(
-        cui="C0221355", sctid=None,
+        cui="C0266491", sctid="253150002",
         label="Grey matter heterotopia",
         synonyms=[
             "heterotopia", "grey matter heterotopia", "gray matter heterotopia",
@@ -1304,7 +1314,8 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "domain-knowledge:neuroradiology-standard",
-        ],
+            "corrected 2026-10-01: sctid None -> 253150002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C0221355 -> C0266491 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "lissencephaly": ConceptEntry(
         cui="C0266463", sctid=None,
@@ -1325,7 +1336,7 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "tuberous_sclerosis": ConceptEntry(
-        cui="C0041341", sctid="63177008",
+        cui="C0041341", sctid="7199000",
         label="Tuberous sclerosis complex (MRI features)",
         synonyms=[
             "tuberous sclerosis", "TSC", "cortical tubers", "subependymal nodules",
@@ -1341,7 +1352,7 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (Tuberous sclerosis, tuberous sclerosis)",
             "domain-knowledge:neuroradiology-standard",
-        ],
+            "corrected 2026-10-01: sctid 63177008 -> 7199000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "other_lesion": ConceptEntry(
         cui="C1319851", sctid=None,
@@ -1371,7 +1382,7 @@ MRI_FINDING_ONTOLOGY: dict[str, ConceptEntry] = {
             "MRI negative", "MRI-negative epilepsy", "non-lesional MRI",
             "no epileptogenic lesion on MRI",
         ],
-        source_provenance=["ExECT-V2 seed C0436481", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0436481", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 169082008 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: sctid 169082008 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
 }
 
@@ -1417,7 +1428,7 @@ DRUG_RESISTANCE_STATUS_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 MEDICATION_STATUS_ONTOLOGY: dict[str, ConceptEntry] = {
     "current": ConceptEntry(
-        cui="C1720988", sctid="182840001",
+        cui=None, sctid=None,
         label="Currently taking",
         synonyms=[
             "current medication", "currently taking", "on", "is on",
@@ -1427,16 +1438,17 @@ MEDICATION_STATUS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (Current antiepileptic medication, He is on, She is currently taking)",
-        ],
+            "corrected 2026-10-01: sctid 182840001 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C1720988 -> None (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "prior": ConceptEntry(
-        cui=None, sctid="410534003",
+        cui=None, sctid=None,
         label="Previously taken (historical)",
         synonyms=[
             "previous medication", "previously taken", "prior medication",
             "past medication", "used to take", "history of ASM",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 410534003 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "failed": ConceptEntry(
         cui=None, sctid=None,
@@ -1474,14 +1486,14 @@ MEDICATION_STATUS_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 SURGERY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
     "resection": ConceptEntry(
-        cui="C0195028", sctid="107963003",
+        cui="C0195028", sctid="53423001",
         label="Epilepsy resective surgery",
         synonyms=[
             "resection", "resective surgery", "anterior temporal lobectomy",
             "ATL", "temporal lobectomy", "amygdalohippocampectomy",
             "focal cortical resection", "lesionectomy", "frontal lobectomy",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017", "corrected 2026-10-01: sctid 107963003 -> 53423001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "laser_ablation": ConceptEntry(
         cui=None, sctid=None,
@@ -1503,31 +1515,31 @@ SURGERY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["domain-knowledge:standard-neurology-vocab"],
     ),
     "hemispherectomy": ConceptEntry(
-        cui="C0195035", sctid="70536001",
+        cui="C0175763", sctid="14247003",
         label="Hemispherectomy",
         synonyms=[
             "hemispherectomy", "anatomical hemispherectomy",
             "functional hemispherectomy", "hemispherotomy",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 70536001 -> 14247003 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0195035 -> C0175763 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "callosotomy": ConceptEntry(
-        cui="C0195037", sctid="230861005",
+        cui="C0195037", sctid="304848009",
         label="Corpus callosotomy",
         synonyms=[
             "corpus callosotomy", "callosotomy", "anterior 2/3 callosotomy",
             "complete callosotomy",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 230861005 -> 304848009 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "neurostimulation_vns": ConceptEntry(
-        cui="C0949961", sctid="384719000",
+        cui="C2919763", sctid="445319001",
         label="Vagus nerve stimulation (VNS)",
         synonyms=[
             "VNS", "vagus nerve stimulator", "vagus nerve stimulation",
             "vagal nerve stimulator", "AspireSR",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 384719000 -> 445319001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0949961 -> C2919763 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "neurostimulation_rns": ConceptEntry(
         cui=None, sctid=None,
@@ -1629,14 +1641,14 @@ ETIOLOGY_CATEGORY_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "genetic": ConceptEntry(
-        cui="C0270850", sctid=None,
+        cui=None, sctid=None,
         label="Genetic etiology (ILAE 2017)",
         synonyms=[
             "genetic epilepsy", "genetic etiology", "idiopathic generalized epilepsy",
             "IGE", "SCN1A mutation", "Dravet syndrome",
             "juvenile myoclonic epilepsy", "JME", "genetic generalised epilepsy",
         ],
-        source_provenance=["ExECT-V2 seed C0270850", "ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0270850", "ILAE 2017", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 36803009 -> None (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0270850 -> None (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "infectious": ConceptEntry(
         cui="C4510970", sctid=None,
@@ -1694,22 +1706,22 @@ ETIOLOGY_CATEGORY_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 FOCAL_MOTOR_ONSET_ONTOLOGY: dict[str, ConceptEntry] = {
     "automatisms": ConceptEntry(
-        cui="C0270837", sctid="193004006",
+        cui="C0270837", sctid="1264275009",
         label="Automatisms (ILAE 2017 focal motor onset)",
         synonyms=[
             "automatisms", "oroalimentary automatisms", "manual automatisms",
             "lip smacking", "chewing automatisms", "epileptic automatism",
         ],
-        source_provenance=["ExECT-V2 seed C0270837", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C0270837", "ILAE 2017", "corrected 2026-10-01: sctid 193004006 -> 1264275009 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "atonic": ConceptEntry(
-        cui="C0270846", sctid="42365007",
+        cui="C0270846", sctid="1269366008",
         label="Focal atonic seizure (ILAE 2017)",
         synonyms=[
             "focal atonic", "atonic focal seizure", "focal drop attack",
             "atonic component",
         ],
-        source_provenance=["ExECT-V2 seed C0270846", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C0270846", "ILAE 2017", "corrected 2026-10-01: sctid 42365007 -> 1269366008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "clonic": ConceptEntry(
         cui="C0752323", sctid=None,
@@ -1721,13 +1733,13 @@ FOCAL_MOTOR_ONSET_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ExECT-V2 seed C0752323", "ILAE 2017"],
     ),
     "epileptic_spasms": ConceptEntry(
-        cui="C1527366", sctid="28055006",
+        cui="C1527366", sctid="1269359007",
         label="Epileptic spasms, focal onset (ILAE 2017)",
         synonyms=[
             "epileptic spasms", "focal epileptic spasms",
             "focal-onset spasms", "salaam spasms (focal)",
         ],
-        source_provenance=["ExECT-V2 seed C1527366", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C1527366", "ILAE 2017", "corrected 2026-10-01: sctid 28055006 -> 1269359007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "hyperkinetic": ConceptEntry(
         cui=None, sctid=None,
@@ -1739,13 +1751,13 @@ FOCAL_MOTOR_ONSET_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
     ),
     "myoclonic": ConceptEntry(
-        cui="C4317123", sctid="37356005",
+        cui="C4317123", sctid="1259197000",
         label="Focal myoclonic seizure (ILAE 2017)",
         synonyms=[
             "focal myoclonic", "focal myoclonic seizure",
             "focal myoclonic jerk", "focal myoclonus",
         ],
-        source_provenance=["ExECT-V2 seed C4317123", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C4317123", "ILAE 2017", "corrected 2026-10-01: sctid 37356005 -> 1259197000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "tonic": ConceptEntry(
         cui="C0752324", sctid=None,
@@ -1784,14 +1796,14 @@ FOCAL_NONMOTOR_ONSET_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ILAE 2017", "domain-knowledge:standard-neurology-vocab"],
     ),
     "cognitive": ConceptEntry(
-        cui="C0422860", sctid="246536003",
+        cui="C0422860", sctid="33941008",
         label="Focal cognitive seizure (ILAE 2017)",
         synonyms=[
             "cognitive seizure", "focal cognitive seizure",
             "déjà vu", "jamais vu", "dysphasic seizure",
             "aphasic aura", "cognitive aura",
         ],
-        source_provenance=["ExECT-V2 seed C0422860", "ILAE 2017"],
+        source_provenance=["ExECT-V2 seed C0422860", "ILAE 2017", "corrected 2026-10-01: sctid 246536003 -> 33941008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "emotional": ConceptEntry(
         cui="C4732752", sctid=None,
@@ -1949,13 +1961,13 @@ ILAE_OUTCOME_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 NON_DRUG_THERAPY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
     "ketogenic_diet": ConceptEntry(
-        cui="C0011245", sctid="437931000124103",
+        cui="C0011245", sctid="765060000",
         label="Ketogenic diet",
         synonyms=[
             "ketogenic diet", "keto diet", "classical ketogenic diet",
             "4:1 ketogenic diet",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 437931000124103 -> 765060000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "modified_atkins": ConceptEntry(
         cui=None, sctid=None,
@@ -1975,32 +1987,32 @@ NON_DRUG_THERAPY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["domain-knowledge:standard-neurology-vocab"],
     ),
     "ivig": ConceptEntry(
-        cui="C0020971", sctid="333684004",
+        cui="C0020971", sctid="698802001",
         label="Intravenous immunoglobulin",
         synonyms=[
             "IVIG", "IVIg", "intravenous immunoglobulin",
             "intravenous immune globulin",
         ],
-        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 333684004 -> 698802001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "plasmapheresis": ConceptEntry(
-        cui="C0032202", sctid="14130001000004108",
+        cui="C0032113", sctid="225067007",
         label="Plasmapheresis / plasma exchange",
         synonyms=[
             "plasmapheresis", "plasma exchange", "PLEX",
             "therapeutic plasma exchange", "TPE",
         ],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "Graus 2016"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "Graus 2016", "corrected 2026-10-01: sctid 14130001000004108 -> 225067007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0032202 -> C0032113 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "steroids": ConceptEntry(
-        cui="C0038317", sctid="59058001",
+        cui="C0038317", sctid="1290388005",
         label="Corticosteroid therapy",
         synonyms=[
             "steroids", "corticosteroids", "high-dose steroids",
             "IV methylprednisolone", "prednisone", "prednisolone",
             "solumedrol",
         ],
-        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 59058001 -> 1290388005 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "rituximab": ConceptEntry(
         cui="C0393022", sctid="386919002",
@@ -2009,13 +2021,13 @@ NON_DRUG_THERAPY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["RxNorm 121191", "Graus 2016"],
     ),
     "acth": ConceptEntry(
-        cui="C0001529", sctid=None,
+        cui="C0001655", sctid="40789008",
         label="ACTH (adrenocorticotropic hormone)",
         synonyms=[
             "ACTH", "adrenocorticotropic hormone", "corticotropin",
             "H.P. Acthar Gel", "Acthar",
         ],
-        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["RxNorm", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 40789008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0001529 -> C0001655 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "other": ConceptEntry(
         cui=None, sctid=None,
@@ -2031,13 +2043,13 @@ NON_DRUG_THERAPY_TYPE_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
     "anti_lgi1": ConceptEntry(
-        cui="C3494340", sctid=None,
+        cui="C4296564", sctid="1382119007",
         label="Anti-LGI1 antibody",
         synonyms=[
             "anti-LGI1", "LGI1 antibody", "leucine-rich glioma-inactivated 1 antibody",
             "anti-LGI1 encephalitis", "faciobrachial dystonic seizures antibody",
         ],
-        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 1382119007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C3494340 -> C4296564 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "anti_caspr2": ConceptEntry(
         cui="C3812876", sctid=None,
@@ -2049,13 +2061,13 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
     ),
     "anti_nmdar": ConceptEntry(
-        cui="C4517211", sctid=None,
+        cui="C2919931", sctid="445544008",
         label="Anti-NMDA receptor antibody",
         synonyms=[
             "anti-NMDAR", "anti-NMDA receptor", "NMDAR antibody",
             "N-methyl-D-aspartate receptor antibody", "anti-NMDA receptor encephalitis",
         ],
-        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 445544008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C4517211 -> C2919931 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "anti_gababr": ConceptEntry(
         cui=None, sctid=None,
@@ -2111,13 +2123,13 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
     ),
     "anti_hu": ConceptEntry(
-        cui="C0201868", sctid=None,
+        cui="C3203619", sctid=None,
         label="Anti-Hu (ANNA-1) antibody",
         synonyms=[
             "anti-Hu", "ANNA-1", "anti-neuronal nuclear antibody type 1",
             "Hu antibody",
         ],
-        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: cui C0201868 -> C3203619 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "anti_ma2": ConceptEntry(
         cui=None, sctid=None,
@@ -2128,13 +2140,13 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
     ),
     "anti_yo": ConceptEntry(
-        cui="C0201865", sctid=None,
+        cui="C1254704", sctid="1373790001",
         label="Anti-Yo (PCA-1) antibody",
         synonyms=[
             "anti-Yo", "Yo antibody", "PCA-1",
             "Purkinje cell cytoplasmic antibody type 1",
         ],
-        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 1373790001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0201865 -> C1254704 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "anti_ri": ConceptEntry(
         cui=None, sctid=None,
@@ -2152,13 +2164,13 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
     ),
     "anti_gad65": ConceptEntry(
-        cui="C1531509", sctid=None,
+        cui="C0443891", sctid="259892002",
         label="Anti-GAD65 antibody",
         synonyms=[
             "anti-GAD65", "GAD antibody", "GAD65 antibody",
             "glutamic acid decarboxylase antibody", "GADA",
         ],
-        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["Graus 2016", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid None -> 259892002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C1531509 -> C0443891 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "anti_sox1": ConceptEntry(
         cui=None, sctid=None,
@@ -2208,7 +2220,7 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
 
 ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
     "hippocampal_sclerosis": ConceptEntry(
-        cui="C4749367", sctid="230368004",
+        cui="C4749367", sctid="448705004",
         label="Hippocampal sclerosis (structural etiology detail)",
         synonyms=[
             "hippocampal sclerosis", "HS", "mesial temporal sclerosis", "MTS",
@@ -2216,7 +2228,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "ExECT-V2 seed C4749367", "ILAE 2017",
             "F-S train (hippocampal sclerosis)",
-        ],
+            "corrected 2026-10-01: sctid 230368004 -> 448705004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "stroke": ConceptEntry(
         cui="C0038454", sctid="230690007",
@@ -2258,7 +2270,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "cavernoma": ConceptEntry(
-        cui="C0333282", sctid="253064006",
+        cui="C2919945", sctid="444869007",
         label="Cerebral cavernous malformation",
         synonyms=[
             "cavernoma", "cavernous malformation", "cavernous angioma",
@@ -2267,7 +2279,8 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (cavernoma, cavernoma in the right temporal lobe)",
-        ],
+            "corrected 2026-10-01: sctid 253064006 -> 444869007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)",
+            "corrected 2026-10-01: cui C0333282 -> C2919945 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
     "meningitis": ConceptEntry(
         cui="C0025289", sctid="7180009",
@@ -2281,7 +2294,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "herpes_encephalitis": ConceptEntry(
-        cui="C0019341", sctid="45170000",
+        cui="C0019341", sctid="427796004",
         label="Herpes simplex encephalitis",
         synonyms=[
             "herpes encephalitis", "HSV encephalitis", "herpes simplex encephalitis",
@@ -2290,10 +2303,10 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab", "Graus 2016",
             "F-S train (Herpes encephalitis)",
-        ],
+            "corrected 2026-10-01: sctid 45170000 -> 427796004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "cerebral_abscess": ConceptEntry(
-        cui="C0007765", sctid="18365005",
+        cui="C0007765", sctid="60404007",
         label="Cerebral abscess",
         synonyms=[
             "cerebral abscess", "brain abscess", "cerebral abcess",  # F-S misspell
@@ -2301,10 +2314,10 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (cerebral abcess)",
-        ],
+            "corrected 2026-10-01: sctid 18365005 -> 60404007 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "meningioma": ConceptEntry(
-        cui="C0025286", sctid="20366004",
+        cui="C0025286", sctid="302820008",
         label="Meningioma",
         synonyms=[
             "meningioma", "cranial meningioma", "intracranial meningioma",
@@ -2312,7 +2325,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (meningioma, meningioma resection)",
-        ],
+            "corrected 2026-10-01: sctid 20366004 -> 302820008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "subarachnoid_haemorrhage": ConceptEntry(
         cui="C0038525", sctid="21454007",
@@ -2327,7 +2340,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "tuberous_sclerosis": ConceptEntry(
-        cui="C0041341", sctid="63177008",
+        cui="C0041341", sctid="7199000",
         label="Tuberous sclerosis complex",
         synonyms=[
             "tuberous sclerosis", "tuberous sclerosis complex", "TSC",
@@ -2339,7 +2352,7 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
             "domain-knowledge:standard-neurology-vocab", "ILAE 2017",
             "F-S train (Tuberous sclerosis, tuberous sclerosis)",
             "EPIO 2024",
-        ],
+            "corrected 2026-10-01: sctid 63177008 -> 7199000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "dementia": ConceptEntry(
         cui="C0002395", sctid="52448006",
@@ -2415,16 +2428,16 @@ ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "neurocysticercosis": ConceptEntry(
-        cui="C0270851", sctid=None,
+        cui="C5235044", sctid="187148002",
         label="Neurocysticercosis",
         synonyms=["neurocysticercosis", "NCC", "cerebral cysticercosis"],
-        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017"],
+        source_provenance=["domain-knowledge:standard-neurology-vocab", "ILAE 2017", "corrected 2026-10-01: sctid None -> 187148002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)", "corrected 2026-10-01: cui C0270851 -> C5235044 (UMLS UTS REST (current); data/curated/curated_code_corrections.csv)"],
     ),
 }
 
 COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
     "psychogenic_nonepileptic_seizures": ConceptEntry(
-        cui=None, sctid="17470006",
+        cui=None, sctid="191714002",
         label="Psychogenic non-epileptic seizures (PNES)",
         synonyms=[
             "PNES", "psychogenic non-epileptic seizures",
@@ -2436,7 +2449,7 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (Dissociative seizures, non-epileptic psychogenic seizures,"
             " Psychogenic nonepileptic attack disorder, non-epileptic attacks)",
-        ],
+            "corrected 2026-10-01: sctid 17470006 -> 191714002 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "migraine": ConceptEntry(
         cui="C0149931", sctid="37796009",
@@ -2493,7 +2506,7 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "developmental_delay": ConceptEntry(
-        cui="C0557874", sctid="248290001",
+        cui="C0557874", sctid="224958001",
         label="Global developmental delay",
         synonyms=[
             "global developmental delay", "GDD", "developmental delay",
@@ -2520,7 +2533,7 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "HPO 2024",
             "domain-knowledge:standard-neurology-vocab",
-        ],
+            "corrected 2026-10-01: sctid 248290001 -> 224958001 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "autism": ConceptEntry(
         cui="C0004352", sctid="35919005",
@@ -2570,13 +2583,13 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=["ExECT-V2 seed C0033845", "domain-knowledge:standard-neurology-vocab"],
     ),
     "hemiparesis": ConceptEntry(
-        cui="C0018989", sctid="127377007",
+        cui="C0018989", sctid="20022000",
         label="Hemiparesis",
         synonyms=["hemiparesis", "hemiplegia", "unilateral weakness"],
         source_provenance=[
             "domain-knowledge:standard-neurology-vocab",
             "F-S train (hemiparesis)",
-        ],
+            "corrected 2026-10-01: sctid 127377007 -> 20022000 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "hydrocephalus": ConceptEntry(
         cui="C0020255", sctid="230745008",
@@ -2588,7 +2601,7 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "febrile_seizures": ConceptEntry(
-        cui="C0585108", sctid="14135000",
+        cui="C0585108", sctid="41497008",
         label="Febrile seizures (history)",
         synonyms=[
             "febrile seizures", "febrile convulsions", "febrile seizure",
@@ -2597,7 +2610,7 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "ExECT-V2 seed C0585108",
             "F-S train (febrile seizures)",
-        ],
+            "corrected 2026-10-01: sctid 14135000 -> 41497008 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "ischaemic_heart_disease": ConceptEntry(
         cui="C0151744", sctid="414545008",
@@ -2635,17 +2648,17 @@ COMORBIDITY_ONTOLOGY: dict[str, ConceptEntry] = {
 
 BIRTH_HISTORY_ONTOLOGY: dict[str, ConceptEntry] = {
     "term_birth": ConceptEntry(
-        cui="C0233324", sctid="30039006",
+        cui="C0233324", sctid="21243004",
         label="Term birth (≥37 weeks)",
         synonyms=[
             "born at term", "term birth", "term delivery",
             "full-term delivery", "normal spontaneous vaginal delivery",
             "NSVD",
         ],
-        source_provenance=["ExECT-V2 seed C0233324", "domain-knowledge:standard-neurology-vocab"],
+        source_provenance=["ExECT-V2 seed C0233324", "domain-knowledge:standard-neurology-vocab", "corrected 2026-10-01: sctid 30039006 -> 21243004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "preterm_birth": ConceptEntry(
-        cui="C0151526", sctid="399261000",
+        cui="C0151526", sctid="367494004",
         label="Preterm birth (<37 weeks)",
         synonyms=[
             "preterm birth", "premature birth", "premature delivery",
@@ -2654,7 +2667,7 @@ BIRTH_HISTORY_ONTOLOGY: dict[str, ConceptEntry] = {
         source_provenance=[
             "ExECT-V2 seed C0151526",
             "F-S train (premature delivery)",
-        ],
+            "corrected 2026-10-01: sctid 399261000 -> 367494004 (snomed:2026-09-01; data/curated/curated_code_corrections.csv)"],
     ),
     "late_preterm_birth": ConceptEntry(
         cui="C3829315", sctid=None,
@@ -2754,7 +2767,7 @@ def total_concept_count() -> int:
 # ---------------------------------------------------------------------------
 MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
     "lamotrigine": ConceptEntry(
-        cui="C0064636", sctid="386859008",
+        cui="C0064636", sctid="387562000",
         label="Lamotrigine",
         synonyms=[
             "lamotrigine", "Lamictal", "LTG",
@@ -2768,7 +2781,7 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "levetiracetam": ConceptEntry(
-        cui="C0377265", sctid="386846007",
+        cui="C0377265", sctid="387000003",
         label="Levetiracetam",
         synonyms=["levetiracetam", "Keppra", "LEV"],
         source_provenance=[
@@ -2777,7 +2790,7 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "carbamazepine": ConceptEntry(
-        cui="C0006949", sctid="386887009",
+        cui="C0006949", sctid="387222003",
         label="Carbamazepine",
         synonyms=[
             "carbamazepine", "Tegretol", "CBZ", "Carbatrol",
@@ -2790,13 +2803,13 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "oxcarbazepine": ConceptEntry(
-        cui="C0069751", sctid="386854003",
+        cui="C0069751", sctid="387025007",
         label="Oxcarbazepine",
         synonyms=["oxcarbazepine", "Trileptal", "OXC"],
         source_provenance=["ExECT-V2 seed C0069751", "RxNorm 32624", "F-S train (Oxcarbazepin)"],
     ),
     "sodium_valproate": ConceptEntry(
-        cui="C0037567", sctid="386842001",
+        cui="C0037567", sctid="264325000",
         label="Sodium valproate / Valproic acid",
         synonyms=[
             "sodium valproate", "valproic acid", "valproate", "divalproex",
@@ -2804,12 +2817,12 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
         source_provenance=[
             "ExECT-V2 seed C0037567", "ExECT-V2 seed C0591451 (Epilim)",
-            "RxNorm 11118",
+            "RxNorm 40254",
             "F-S train (sodium valproate, Epilim)",
         ],
     ),
     "topiramate": ConceptEntry(
-        cui="C0076829", sctid="386845005",
+        cui="C0076829", sctid="386844006",
         label="Topiramate",
         synonyms=["topiramate", "Topamax", "TPM"],
         source_provenance=[
@@ -2818,7 +2831,7 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "zonisamide": ConceptEntry(
-        cui="C0078844", sctid="386853009",
+        cui="C0078844", sctid="125693002",
         label="Zonisamide",
         synonyms=[
             "zonisamide", "Zonegran", "ZNS",
@@ -2826,12 +2839,12 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
             "zonsiamide",  # F-S 40 misspelling (EA0174)
         ],
         source_provenance=[
-            "ExECT-V2 seed C0078844", "RxNorm 42347",
+            "ExECT-V2 seed C0078844", "RxNorm 39998",
             "F-S train (Zonisamide, Zonegran)",
         ],
     ),
     "phenytoin": ConceptEntry(
-        cui="C0031507", sctid="386854003",
+        cui="C0031507", sctid="387220006",
         label="Phenytoin",
         synonyms=["phenytoin", "Dilantin", "PHT"],
         source_provenance=[
@@ -2840,16 +2853,16 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "clobazam": ConceptEntry(
-        cui="C0055891", sctid="387042000",
+        cui="C0055891", sctid="387572002",
         label="Clobazam",
         synonyms=["clobazam", "Onfi", "CLB"],
         source_provenance=[
-            "ExECT-V2 seed C0055891", "RxNorm 2597",
+            "ExECT-V2 seed C0055891", "RxNorm 21241",
             "F-S train (Clobazam, clobazam)",
         ],
     ),
     "brivaracetam": ConceptEntry(
-        cui="C1699861", sctid=None,
+        cui="C1699861", sctid="420813001",
         label="Brivaracetam",
         synonyms=[
             "brivaracetam", "Briviact", "BRV",
@@ -2859,55 +2872,55 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
             "brivaracetam",
         ],
         source_provenance=[
-            "ExECT-V2 seed C1699861", "RxNorm 1741248",
+            "ExECT-V2 seed C1699861", "RxNorm 1739745",
             "F-S train (Brivaracetam, Brivetiracetam)",
             "F-S test EA0188 (Brivitiracetam, briviteracetam)",
         ],
     ),
     "perampanel": ConceptEntry(
-        cui="C2698764", sctid=None,
+        cui="C2698764", sctid="703127006",
         label="Perampanel",
         synonyms=["perampanel", "Fycompa"],
         source_provenance=[
-            "ExECT-V2 seed C2698764", "RxNorm 1373737",
+            "ExECT-V2 seed C2698764", "RxNorm 1356552",
             "F-S train (Perampanel)",
         ],
     ),
     "lacosamide": ConceptEntry(
-        cui="C0893761", sctid=None,
+        cui="C0893761", sctid="441647003",
         label="Lacosamide",
         synonyms=["lacosamide", "Vimpat", "LCM"],
-        source_provenance=["ExECT-V2 seed C0893761", "RxNorm 727708"],
+        source_provenance=["ExECT-V2 seed C0893761", "RxNorm 623400"],
     ),
     "gabapentin": ConceptEntry(
-        cui="C0060926", sctid="386896005",
+        cui="C0060926", sctid="386845007",
         label="Gabapentin",
         synonyms=["gabapentin", "Neurontin", "GBP"],
         source_provenance=["ExECT-V2 seed C0060926", "RxNorm 25480"],
     ),
     "pregabalin": ConceptEntry(
-        cui="C0657912", sctid=None,
+        cui="C0657912", sctid="415160008",
         label="Pregabalin",
         synonyms=["pregabalin", "Lyrica", "PGB"],
         source_provenance=["ExECT-V2 seed C0657912", "RxNorm 187832"],
     ),
     "eslicarbazepine": ConceptEntry(
-        cui="C2725260", sctid=None,
+        cui="C2725260", sctid="697998007",
         label="Eslicarbazepine acetate",
         synonyms=["eslicarbazepine", "eslicarbazepine acetate", "Aptiom", "Zebinix"],
         source_provenance=[
-            "ExECT-V2 seed C2725260", "RxNorm 1160723",
+            "ExECT-V2 seed C2725260", "RxNorm 1482502",
             "F-S train (Eslicarbazepine 800mg od)",
         ],
     ),
     "clonazepam": ConceptEntry(
-        cui="C0009011", sctid="387248006",
+        cui="C0009011", sctid="387383007",
         label="Clonazepam",
         synonyms=["clonazepam", "Klonopin", "Rivotril", "CZP"],
         source_provenance=["ExECT-V2 seed C0009011", "RxNorm 2598"],
     ),
     "phenobarbital": ConceptEntry(
-        cui="C0031412", sctid="387519009",
+        cui="C0031412", sctid="373505007",
         label="Phenobarbital",
         synonyms=["phenobarbital", "phenobarbitone", "Luminal", "PB"],
         source_provenance=["ExECT-V2 seed C0031412", "RxNorm 8134"],
@@ -2922,48 +2935,69 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
         ],
     ),
     "ethosuximide": ConceptEntry(
-        cui="C0015043", sctid="387139008",
+        cui="C0015043", sctid="387244008",
         label="Ethosuximide",
         synonyms=["ethosuximide", "Zarontin", "ESM"],
-        source_provenance=["ExECT-V2 seed C0015043", "RxNorm 4064"],
+        source_provenance=["ExECT-V2 seed C0015043", "RxNorm 4135"],
     ),
     "vigabatrin": ConceptEntry(
-        cui="C0048044", sctid="386850004",
+        cui="C0048044", sctid="310283001",
         label="Vigabatrin",
         synonyms=["vigabatrin", "Sabril", "VGB"],
-        source_provenance=["ExECT-V2 seed C0048044", "RxNorm 39998"],
+        source_provenance=["ExECT-V2 seed C0048044", "RxNorm 14851"],
     ),
     "tiagabine": ConceptEntry(
-        cui="C0068897", sctid="386849004",
+        cui="C0068897", sctid="372485004",
         label="Tiagabine",
         synonyms=["tiagabine", "Gabitril", "TGB"],
-        source_provenance=["ExECT-V2 seed C0068897", "RxNorm 39897"],
+        source_provenance=["ExECT-V2 seed C0068897", "RxNorm 31914"],
     ),
     "felbamate": ConceptEntry(
-        cui="C0060135", sctid="386866009",
+        cui="C0060135", sctid="96194006",
         label="Felbamate",
         synonyms=["felbamate", "Felbatol", "FBM"],
-        source_provenance=["ExECT-V2 seed C0060135", "RxNorm 25171"],
+        source_provenance=["ExECT-V2 seed C0060135", "RxNorm 24812"],
     ),
     "primidone": ConceptEntry(
-        cui="C0033148", sctid="387327000",
+        cui="C0033148", sctid="387256009",
         label="Primidone",
         synonyms=["primidone", "Mysoline", "PRM"],
-        source_provenance=["ExECT-V2 seed C0033148", "ExECT-V2 seed C0700016 (Mysolin)", "RxNorm 8815"],
+        source_provenance=["ExECT-V2 seed C0033148", "ExECT-V2 seed C0700016 (Mysolin)", "RxNorm 8691"],
     ),
     "stiripentol": ConceptEntry(
-        cui="C0075262", sctid=None,
+        cui="C0075262", sctid="428221002",
         label="Stiripentol",
         synonyms=["stiripentol", "Diacomit", "STP"],
-        source_provenance=["ExECT-V2 seed C0075262", "RxNorm 226921"],
+        source_provenance=["ExECT-V2 seed C0075262", "RxNorm 2054968"],
     ),
     "rufinamide": ConceptEntry(
-        cui="C0213404", sctid=None,
+        cui="C0213404", sctid="429835003",
         label="Rufinamide",
         synonyms=["rufinamide", "Banzel", "Inovelon", "RUF"],
-        source_provenance=["ExECT-V2 seed C0213404", "RxNorm 400732"],
+        source_provenance=["ExECT-V2 seed C0213404", "RxNorm 69036"],
     ),
 }
+
+
+def _add_generated_medications() -> None:
+    """Add RxNorm-derived ASMs (rules/asm_lexicon.py) not curated above."""
+    try:
+        from .asm_lexicon import ASM_LEXICON, RXNORM_RELEASE
+    except ImportError:
+        return
+    for key, d in ASM_LEXICON.items():
+        if d["curated"] or key in MEDICATION_ONTOLOGY:
+            continue
+        names = [d["label"], *d["salts"], *d["brands"], *d["other_names"]]
+        MEDICATION_ONTOLOGY[key] = ConceptEntry(
+            cui=None, sctid=d["sctid"],
+            label=d["label"][:1].upper() + d["label"][1:],
+            synonyms=list(dict.fromkeys(names)),
+            source_provenance=["generated:asm_lexicon", f"RxNorm {d['rxcui']}", RXNORM_RELEASE],
+        )
+
+
+_add_generated_medications()
 
 try:
     from .epilepsy_ontology_umls_overrides import apply as _apply_umls_overrides

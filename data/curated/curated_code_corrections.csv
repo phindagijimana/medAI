@@ -1,0 +1,94 @@
+group,key,field,old,new,source,note
+Awareness,aware,sctid,248220008,271591004,SNOMED CT US 2026-09-01,Old code is [term]. [term] is the closest finding for retained awareness; SNOMED has no ILAE [term] qualifier.
+Awareness,aware,cui,C0007797,from_sctid,UMLS via UTS,Old CUI is [term].
+Awareness,impaired,sctid,418072004,3006004,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+BirthHistory,preterm_birth,sctid,399261000,367494004,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+BirthHistory,term_birth,sctid,30039006,21243004,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+CausativeAntibody,anti_gad65,sctid,,259892002,SNOMED CT US 2026-09-01,Glutamic acid decarboxylase antibody (substance).
+CausativeAntibody,anti_gad65,cui,C1531509,from_sctid,UMLS via UTS,Old CUI is [term].
+CausativeAntibody,anti_hu,cui,C0201868,search:ANNA-1,UMLS via UTS,Old CUI is [term]. New CUI C3203619 is [term] (anti-neuronal nuclear antibody type 1 = anti-Hu; MedDRA atom). No SNOMED concept for the antibody itself.
+CausativeAntibody,anti_lgi1,sctid,,1382119007,SNOMED CT US 2026-09-01,Immunoglobulin G antibody to LGI1 (substance).
+CausativeAntibody,anti_lgi1,cui,C3494340,from_sctid,UMLS via UTS,Old CUI is [term].
+CausativeAntibody,anti_nmdar,sctid,,445544008,SNOMED CT US 2026-09-01,N-methyl-D-aspartate receptor antibody (substance).
+CausativeAntibody,anti_nmdar,cui,C4517211,from_sctid,UMLS via UTS,Old CUI is [term] and was shared with DocumentType.procedure_seeg.
+CausativeAntibody,anti_yo,sctid,,1373790001,SNOMED CT US 2026-09-01,Anti-Purkinje cell cytoplasmic type 1 antibody (substance).
+CausativeAntibody,anti_yo,cui,C0201865,from_sctid,UMLS via UTS,Old CUI is [term].
+Comorbidity,developmental_delay,sctid,248290001,224958001,SNOMED CT US 2026-09-01,Old code does not exist (check digit); entry label is global developmental delay.
+Comorbidity,febrile_seizures,sctid,14135000,41497008,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+Comorbidity,hemiparesis,sctid,127377007,20022000,SNOMED CT US 2026-09-01,Old code does not exist.
+Comorbidity,psychogenic_nonepileptic_seizures,sctid,17470006,191714002,SNOMED CT US 2026-09-01,Old code does not exist; [term] is SNOMED's concept for PNES (ICD-10-CM F44.5).
+DocumentType,eeg_report,sctid,164727004,54550000,SNOMED CT US 2026-09-01,Old code does not exist. SNOMED has no EEG report record artifact; the EEG procedure is used. LOINC document codes would be the right long-term home for document types.
+DocumentType,mri_report,sctid,241615005,816077007,SNOMED CT US 2026-09-01,Old code is [term]; new is [term] (procedure).
+DocumentType,procedure_neurostim,sctid,257538000,898184003,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+DocumentType,procedure_resection,sctid,107963003,53423001,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+DocumentType,procedure_seeg,sctid,,870257001,SNOMED CT US 2026-09-01,Stereoelectroencephalography (procedure).
+DocumentType,procedure_seeg,cui,C4517211,from_sctid,UMLS via UTS,Old CUI is [term] and was shared with CausativeAntibody.anti_nmdar.
+DocumentType,progress_note,cui,C0555061,from_sctid,UMLS via UTS,Old CUI is [term]; SCTID 371531000 [term] is kept.
+EegStudyType,ambulatory,sctid,426405006,252735006,SNOMED CT US 2026-09-01,Old code does not exist and was shared with video_eeg; new is [term].
+EegStudyType,prolonged,sctid,35935001,397796008,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EegStudyType,video_eeg,sctid,426405006,252738008,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EpilepsyType,focal,sctid,230381004,230381009,SNOMED CT US 2026-09-01,Old code does not exist (check digit); new is [term].
+EtiologyCategory,genetic,sctid,36803009,,SNOMED CT US 2026-09-01,"Old code is [term], a subset of the ILAE genetic etiology. SNOMED has no ILAE 2017 genetic-etiology concept, so the code is removed."
+EtiologyDetails,cavernoma,sctid,253064006,444869007,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EtiologyDetails,cavernoma,cui,C0333282,from_sctid,UMLS via UTS,Old CUI is [term].
+EtiologyDetails,cerebral_abscess,sctid,18365005,60404007,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EtiologyDetails,herpes_encephalitis,sctid,45170000,427796004,SNOMED CT US 2026-09-01,Old code is generic [term]; new is [term].
+EtiologyDetails,hippocampal_sclerosis,sctid,230368004,448705004,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EtiologyDetails,meningioma,sctid,20366004,302820008,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+EtiologyDetails,neurocysticercosis,sctid,,187148002,SNOMED CT US 2026-09-01,Cysticercosis of central nervous system (disorder).
+EtiologyDetails,neurocysticercosis,cui,C0270851,from_sctid,UMLS via UTS,Old CUI is [term].
+EtiologyDetails,tuberous_sclerosis,sctid,63177008,7199000,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+FocalMotorOnset,atonic,sctid,42365007,1269366008,SNOMED CT US 2026-09-01,Old code retired with no replacement; new is [term] (ILAE-aligned).
+FocalMotorOnset,automatisms,sctid,193004006,1264275009,SNOMED CT US 2026-09-01,Old code retired; SNOMED[term]Focal onset automatism epileptic seizure' is used.
+FocalMotorOnset,epileptic_spasms,sctid,28055006,1269359007,SNOMED CT US 2026-09-01,Old code is [term] (retired); new is [term].
+FocalMotorOnset,myoclonic,sctid,37356005,1259197000,SNOMED CT US 2026-09-01,Old code retired; new is [term].
+FocalNonmotorOnset,cognitive,sctid,246536003,33941008,SNOMED CT US 2026-09-01,Old code is the [term] subtype; new is [term].
+Laterality,diffuse,sctid,49755003,19648000,SNOMED CT US 2026-09-01,Old code is [term]; new is [term] (qualifier).
+Laterality,midline,sctid,255561001,399488007,SNOMED CT US 2026-09-01,Old code is [term]; new is [term] (qualifier).
+LobarLocalization,cingulate,sctid,83251001,25221002,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+LobarLocalization,frontal,sctid,102299003,83251001,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+LobarLocalization,insular,sctid,90351000,36169008,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+LobarLocalization,insular,cui,C0228281,from_sctid,UMLS via UTS,Old CUI is [term].
+LocalizationSource,eeg_confirmed,sctid,164727004,54550000,SNOMED CT US 2026-09-01,"Old code does not exist; the EEG procedure is the localising modality (mirrors mri_confirmed, which uses the MRI procedure)."
+MedicationStatus,current,sctid,182840001,,SNOMED CT US 2026-09-01,"Old code is [term], the opposite meaning. No SNOMED concept fits; status is rule-derived, so the code is removed."
+MedicationStatus,current,cui,C1720988,none,UMLS via UTS,Old CUI is [term].
+MedicationStatus,prior,sctid,410534003,,SNOMED CT US 2026-09-01,Old code is [term]. No SNOMED concept fits; code removed.
+MriFinding,encephalomalacia,sctid,230752002,58762006,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+MriFinding,encephalomalacia,cui,C0270819,from_sctid,UMLS via UTS,Old CUI is [term].
+MriFinding,focal_cortical_dysplasia,sctid,253175007,253153000,SNOMED CT US 2026-09-01,"Old code does not exist. SNOMED has only subtyped FCD concepts (type I, II...), so the parent [term] is used for the unspecified entry."
+MriFinding,focal_cortical_dysplasia,cui,C0431384,from_sctid,UMLS via UTS,Old CUI is [term].
+MriFinding,heterotopia,sctid,,253150002,SNOMED CT US 2026-09-01,Neuronal heterotopia (disorder).
+MriFinding,heterotopia,cui,C0221355,from_sctid,UMLS via UTS,Old CUI is [term].
+MriFinding,hippocampal_sclerosis,sctid,230368004,448705004,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+MriFinding,mri_negative,sctid,169082008,,SNOMED CT US 2026-09-01,Shared with [term]. SNOMED has no non-lesional MRI concept; code removed so the two entries stay distinct.
+MriFinding,normal,sctid,169082008,416318006,SNOMED CT US 2026-09-01,Generic [term] replaced by [term].
+MriFinding,tuberous_sclerosis,sctid,63177008,7199000,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+MriFinding,tumor,sctid,126906006,126952004,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+MriFinding,vascular_malformation,sctid,80078006,253193002,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+MriFinding,vascular_malformation,cui,C0339277,from_sctid,UMLS via UTS,Old CUI is [term].
+NonDrugTherapyType,acth,sctid,,40789008,SNOMED CT US 2026-09-01,Adrenocorticotropic hormone (substance); matches the rituximab entry's use of a substance code.
+NonDrugTherapyType,acth,cui,C0001529,from_sctid,UMLS via UTS,Old CUI is [term].
+NonDrugTherapyType,ivig,sctid,333684004,698802001,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+NonDrugTherapyType,ketogenic_diet,sctid,437931000124103,765060000,SNOMED CT US 2026-09-01,Old code does not exist; new is [term] (regime/therapy).
+NonDrugTherapyType,plasmapheresis,sctid,14130001000004108,225067007,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+NonDrugTherapyType,plasmapheresis,cui,C0032202,from_sctid,UMLS via UTS,Old CUI is [term].
+NonDrugTherapyType,steroids,sctid,59058001,1290388005,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+SeizureType,focal_impaired_awareness,sctid,230456007,407675009,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+SeizureType,generalized_absence_typical,sctid,79631006,1173024006,SNOMED CT US 2026-09-01,Generic [term] replaced by [term].
+SeizureType,generalized_atonic,sctid,42365007,192981006,SNOMED CT US 2026-09-01,Old code retired; new is [term].
+SeizureType,generalized_clonic,sctid,6208003,1208970009,SNOMED CT US 2026-09-01,Old code retired; new is [term].
+SeizureType,generalized_epileptic_spasms,sctid,28055006,1217008005,SNOMED CT US 2026-09-01,"Old code is [term] (retired). The entry also covers infantile spasms of any onset, so the onset-agnostic [term] is used."
+SeizureType,generalized_myoclonic,sctid,37356005,1208972001,SNOMED CT US 2026-09-01,Old code retired; new is [term].
+SeizureType,generalized_tonic,sctid,51887003,1208969008,SNOMED CT US 2026-09-01,Old code retired; new is [term].
+SeizureType,generalized_tonic_clonic,sctid,86181006,1217209006,SNOMED CT US 2026-09-01,Old code is [term]; new is [term].
+SurgeryType,callosotomy,sctid,230861005,304848009,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+SurgeryType,hemispherectomy,sctid,70536001,14247003,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+SurgeryType,hemispherectomy,cui,C0195035,from_sctid,UMLS via UTS,Old CUI is [term].
+SurgeryType,neurostimulation_vns,sctid,384719000,445319001,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+SurgeryType,neurostimulation_vns,cui,C0949961,from_sctid,UMLS via UTS,Old CUI is [term].
+SurgeryType,resection,sctid,107963003,53423001,SNOMED CT US 2026-09-01,Old code does not exist; new is [term].
+IedType,spike,sctid,79745007,,SNOMED CT US 2026-09-01,79745007 is not a SNOMED concept. The release has [term] but no generic interictal-spike concept; the code is removed.
+IedType,spike,cui,C0234533,none,UMLS via UTS,"C0234533 is [term], not a spike. UMLS has only narrower concepts (Focal spikes C0429318; HPO [term]), so the CUI is removed."
+EtiologyCategory,genetic,cui,C0270850,none,UMLS via UTS,"C0270850 is [term], a syndrome group, not the ILAE 2017 genetic etiology (Scheffer et al. 2017). UMLS has no genetic-etiology concept; the CUI is removed so its IGE synonyms and SCTID are no longer pulled in."
+IedType,spike_and_wave,cui,,search:EEG with spike-wave complexes,HPO 2026-09-01 via UTS,HP:0010850 [term] (UMLS C4023683).
+IedType,polyspike_and_wave,cui,,search:EEG with polyspike wave complexes,HPO 2026-09-01 via UTS,HP:0002392 [term] (UMLS C4021757).

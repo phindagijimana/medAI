@@ -11,12 +11,9 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
     "Awareness": {
         "aware": {
             "add_synonyms": [
-                "Structure of cerebral vein",
-                "Cerebral Veins",
-                "Cerebral vein",
-                "Vein, Cerebral",
-                "Veins, Cerebral",
-                "Structure of cerebral vein (body structure)",
+                "Fully conscious",
+                "Consciousness clear",
+                "Fully conscious (finding)",
             ],
         },
     },
@@ -55,42 +52,37 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
     "CausativeAntibody": {
         "anti_gad65": {
             "add_synonyms": [
-                "American Society of Anesthesiologists physical status class 6",
-                "American Society of Anesthesiologists physical status class 6 (finding)",
-                "ASA physical status class 6",
+                "GAD - Glutamic acid decarboxylase antibody",
+                "GADab - Glutamic acid decarboxylase antibody",
+                "Glutamic acid decarboxylase antibody (substance)",
             ],
-            "set_sctid": "413500003",
-        },
-        "anti_hu": {
-            "add_synonyms": [
-                "Alpha-mannosidase measurement, leukocytes",
-                "Alpha-mannosidase measurement, leucocytes",
-                "Alpha-mannosidase measurement, leukocytes (procedure)",
-            ],
-            "set_sctid": "33944000",
         },
         "anti_lgi1": {
             "add_synonyms": [
-                "Sodium Channel Protein Type 11 Subunit alpha",
-                "SCN11A Sodium Channel alpha Subunit",
-                "Voltage-Gated Sodium Channel Type 11 Subunit alpha",
-                "Voltage Gated Sodium Channel Type 11 Subunit alpha",
+                "Leucine-rich glioma-inactivated protein 1 IgG",
+                "Immunoglobulin G antibody to leucine-rich glioma-inactivated protein 1",
+                "Immunoglobulin G antibody to leucine-rich glioma-inactivated protein 1 (substance)",
+                "Anti-leucine-rich glioma-inactivated protein 1 IgG",
             ],
         },
         "anti_nmdar": {
             "add_synonyms": [
-                "History of left shoulder arthroplasty",
-                "History of left shoulder arthroplasty (situation)",
+                "N-methyl-D-aspartate receptor antibody (substance)",
             ],
-            "set_sctid": "1078431000119100",
         },
         "anti_yo": {
             "add_synonyms": [
-                "alpha-L-Iduronidase measurement, leukocytes",
-                "alpha-L-Iduronidase measurement, leucocytes",
-                "alpha-L-Iduronidase measurement, leukocytes (procedure)",
+                "Anti-Yo antibody",
+                "anti-Yo antibodies",
+                "Anti-Purkinje cell cytoplasmic antibody 1",
+                "Anti-Purkinje cell cytoplasmic autoantibody 1",
+                "Purkinje cell cytoplasmic autoantibodies",
+                "anti-Yo autoantibodies",
+                "anti-Yo autoantibody",
+                "Anti-Purkinje cell cytoplasmic type 1 antibody (substance)",
+                "Anti-Purkinje cell cytoplasmic type 1 antibody",
+                "PCA-1 - Purkinje cell cytoplasmic antibody type 1",
             ],
-            "set_sctid": "49753005",
         },
     },
     "Comorbidity": {
@@ -98,7 +90,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
             "add_synonyms": [
                 "Mixed anxiety and depressive disorder",
                 "Mixed depressive and anxiety disorder",
-                "Anxiety depression",
                 "MDAD - mixed depressive and anxiety disorder",
                 "Mixed anxiety and depressive disorder (disorder)",
             ],
@@ -294,16 +285,16 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "procedure_seeg": {
             "add_synonyms": [
-                "History of left shoulder arthroplasty",
-                "History of left shoulder arthroplasty (situation)",
+                "Stereoelectroencephalography",
+                "SEEG - stereoelectroencephalography",
+                "Stereoelectroencephalography (procedure)",
             ],
-            "set_sctid": "1078431000119100",
         },
         "progress_note": {
             "add_synonyms": [
-                "Virgin",
-                "Never had sex",
-                "Virgin (finding)",
+                "Encounter report",
+                "Report of clinical encounter (record artifact)",
+                "Report of clinical encounter",
             ],
         },
     },
@@ -410,18 +401,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
     },
     "EtiologyCategory": {
-        "genetic": {
-            "add_synonyms": [
-                "Idiopathic generalised epilepsy",
-                "Epilepsy, Idiopathic Generalized",
-                "Generalized idiopathic epilepsy and epileptic syndromes",
-                "Generalized idiopathic epilepsy and epileptic syndromes NOS",
-                "IGE - idiopathic generalized epilepsy",
-                "IGE - idiopathic generalised epilepsy",
-                "Idiopathic generalized epilepsy (disorder)",
-            ],
-            "set_sctid": "36803009",
-        },
         "immune": {
             "add_synonyms": [
                 "Epilepsy due to immune disorder",
@@ -440,10 +419,40 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
     "EtiologyDetails": {
         "cavernoma": {
             "add_synonyms": [
-                "Occult hemorrhage",
-                "Occult haemorrhage",
-                "Occult bleeding",
-                "Occult hemorrhage (morphologic abnormality)",
+                "Cavernous Hemangioma of Brain",
+                "Cavernous haemangioma of brain",
+                "Brain Cavernous Hemangiomas",
+                "Brain Cavernous Hemangioma",
+                "Familial Cavernous Malformation",
+                "Cavernous Malformation, Familial",
+                "Cavernous Malformations, Familial",
+                "Familial Cavernous Malformations",
+                "Malformation, Familial Cavernous",
+                "Malformations, Familial Cavernous",
+                "Cavernous Angiomatous Malformations",
+                "Angiomatous Malformation, Cavernous",
+                "Angiomatous Malformations, Cavernous",
+                "Cavernous Angiomatous Malformation",
+                "Malformation, Cavernous Angiomatous",
+                "Malformations, Cavernous Angiomatous",
+                "Cerebral Capillary Malformations",
+                "Capillary Malformation, Cerebral",
+                "Capillary Malformations, Cerebral",
+                "Cerebral Capillary Malformation",
+                "Malformation, Cerebral Capillary",
+                "Malformations, Cerebral Capillary",
+                "Cerebral Cavernous Malformations",
+                "Cavernous Malformations, Cerebral",
+                "Malformation, Cerebral Cavernous",
+                "Malformations, Cerebral Cavernous",
+                "Cavernous Malformation, Cerebral",
+                "Cavernous Angioma, Familial",
+                "Angioma, Familial Cavernous",
+                "Angiomas, Familial Cavernous",
+                "Cavernous Angiomas, Familial",
+                "Familial Cavernous Angiomas",
+                "Familial Cavernous Angioma",
+                "Cavernous hemangioma of brain (disorder)",
             ],
         },
         "cerebral_abscess": {
@@ -534,18 +543,15 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "neurocysticercosis": {
             "add_synonyms": [
-                "Benign Neonatal Epilepsies",
-                "Benign Neonatal Epilepsy",
-                "Epilepsies, Benign Neonatal",
-                "Epilepsy, Benign Neonatal",
-                "Neonatal Epilepsies, Benign",
-                "Neonatal Epilepsy, Benign",
-                "Neonatal Convulsions, Benign",
-                "Benign Neonatal Convulsion",
-                "Benign Neonatal Convulsions",
-                "Convulsion, Benign Neonatal",
-                "Convulsions, Benign Neonatal",
-                "Neonatal Convulsion, Benign",
+                "Central Nervous System Cysticercosis",
+                "Cysticercosis of central nervous system",
+                "Cysticercosis, Central Nervous System",
+                "CNS Cysticercosis",
+                "CNS Cysticercoses",
+                "Cysticercosis, CNS",
+                "Cysticercosis, Brain",
+                "Brain Cysticercosis",
+                "Cysticercosis of central nervous system (disorder)",
             ],
         },
         "perinatal_insult": {
@@ -764,26 +770,15 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
     },
     "IedType": {
-        "spike": {
+        "polyspike_and_wave": {
             "add_synonyms": [
-                "Generalized seizures",
-                "Generalised seizure",
-                "Generalized seizure",
-                "Seizure, Generalized",
-                "Seizures, Generalized",
-                "Generalised seizures",
-                "Generalized onset seizure",
-                "Generalized-onset seizure",
-                "Generalised onset seizure",
-                "Generalised-onset seizure",
-                "Generalized-onset seizures",
-                "Primary generalized seizure",
-                "Primary generalised seizure",
-                "Generalized onset epileptic seizure",
-                "Generalised onset epileptic seizure",
-                "Generalised-onset epileptic seizure",
-                "Generalized-onset epileptic seizure",
-                "Generalized onset epileptic seizure (finding)",
+                "EEG with polyspike wave complexes",
+                "EEG: spike and multispike waves, 3-4 hz",
+            ],
+        },
+        "spike_and_wave": {
+            "add_synonyms": [
+                "EEG with spike-wave complexes",
             ],
         },
     },
@@ -843,9 +838,20 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "insular": {
             "add_synonyms": [
-                "Structure of septal area of paraterminal body of rhinencephalon",
-                "Septal area of paraterminal body of rhinencephalon",
-                "Structure of septal area of paraterminal body of rhinencephalon (body structure)",
+                "Insula of Reil",
+                "Insular Gyrus",
+                "Gyrus, Insular",
+                "Central Lobe",
+                "Central Lobes",
+                "Lobe, Central",
+                "Cortex, Insular",
+                "Insular Cortices",
+                "Insular Region",
+                "Insular Regions",
+                "Region, Insular",
+                "Lobus Insularis",
+                "Insular structure (body structure)",
+                "Insular structure",
             ],
         },
         "occipital": {
@@ -971,7 +977,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "N benzyl AcMeOPrNH2",
                 "Lacosamide (substance)",
             ],
-            "set_sctid": "441532003",
         },
         "lamotrigine": {
             "add_synonyms": [
@@ -1058,7 +1063,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "Pregabalin-containing product",
                 "Pregabalin (substance)",
             ],
-            "set_sctid": "415159003",
         },
         "primidone": {
             "add_synonyms": [
@@ -1077,7 +1081,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "Product containing rufinamide (medicinal product)",
                 "Rufinamide (substance)",
             ],
-            "set_sctid": "429802008",
         },
         "sodium_valproate": {
             "add_synonyms": [
@@ -1095,7 +1098,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "Stiripentol-containing product",
                 "Stiripentol (substance)",
             ],
-            "set_sctid": "427946009",
         },
         "tiagabine": {
             "add_synonyms": [
@@ -1137,33 +1139,27 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
             ],
         },
     },
-    "MedicationStatus": {
-        "current": {
-            "add_synonyms": [
-                "NOD Leucine-Rich Repeat Proteins",
-                "NOD Leucine Rich Repeat Proteins",
-                "NOD-LRR Signaling Adaptor Proteins",
-                "NOD LRR Signaling Adaptor Proteins",
-            ],
-        },
-    },
     "MriFinding": {
         "encephalomalacia": {
             "add_synonyms": [
-                "Reflex Epilepsy, Cursive (Running)",
-                "Reflex Epilepsies, Cursive (Running)",
-                "Cursive Reflex Epilepsies (Running)",
-                "Cursive Reflex Epilepsy (Running)",
-                "Epilepsy, Cursive Reflex (Running)",
-                "Cursive Epilepsy",
-                "Epilepsies, Cursive",
-                "Epilepsy, Cursive",
+                "Encephalomalacias",
+                "Cerebromalacia",
+                "Cerebromalacias",
+                "Encephalomalacia (disorder)",
+                "Cerebral softening",
             ],
         },
         "focal_cortical_dysplasia": {
             "add_synonyms": [
-                "Colpocephaly",
-                "Colpocephaly (disorder)",
+                "Cortical Dysplasias",
+                "Dysplasia, Cortical",
+                "Neocortical dysplasia",
+                "Dysplasia of cerebral cortex",
+                "Cortical dysplasia (disorder)",
+                "Cerebral Cortical Dysplasia",
+                "Cerebral Cortical Dysplasias",
+                "Cortical Dysplasia, Cerebral",
+                "Dysplasia, Cerebral Cortical",
             ],
         },
         "gliosis": {
@@ -1180,21 +1176,13 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "heterotopia": {
             "add_synonyms": [
-                "Macrocephaly",
-                "Macrocephalies",
-                "Large head",
-                "Megalencephaly",
-                "Large skull",
-                "Skull enlargement",
-                "Macrencephaly",
-                "Megalencephalies",
-                "Megalocephalies",
-                "Megacephalies",
-                "Large head (disorder)",
-                "Megalocephaly",
-                "Megacephaly",
+                "Neuronal heterotopia",
+                "Neuronal heterotopia (disorder)",
+                "Cortical heterotopia",
+                "Grey matter heterotopias",
+                "Gray matter heterotopias",
+                "Neuronal heterotopia (morphologic abnormality)",
             ],
-            "set_sctid": "12138000",
         },
         "hippocampal_sclerosis": {
             "add_synonyms": [
@@ -1220,7 +1208,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "Nuclear magnetic resonance normal (finding)",
                 "Magnetic resonance imaging scan normal",
             ],
-            "set_sctid": "169082008",
         },
         "normal": {
             "add_synonyms": [
@@ -1229,7 +1216,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "Nuclear magnetic resonance normal (finding)",
                 "Magnetic resonance imaging scan normal",
             ],
-            "set_sctid": "169082008",
         },
         "other_lesion": {
             "add_synonyms": [
@@ -1253,7 +1239,6 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
                 "More grooves in brain",
                 "Polymicrogyrias",
             ],
-            "set_sctid": "4945003",
         },
         "tuberous_sclerosis": {
             "add_synonyms": [
@@ -1314,64 +1299,36 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "vascular_malformation": {
             "add_synonyms": [
-                "Corneal Dystrophy, Juvenile Epithelial of Meesmann",
-                "Juvenile epithelial corneal dystrophy",
-                "Epithelial (juvenile) corneal dystrophy",
-                "Meesmann Corneal Epithelial Dystrophy",
-                "Meesman's epithelial corneal dystrophy",
-                "Corneal Dystrophy, Meesmann Epithelial",
-                "Meesmann Epithelial Corneal Dystrophy",
-                "Juvenile Hereditary Epithelial Dystrophy",
-                "Juvenile epithelial corneal dystrophy (disorder)",
-                "Corneal Dystrophy, Meesmann",
-                "Corneal Dystrophies, Meesmann",
-                "Dystrophies, Meesmann Corneal",
-                "Meesmann Corneal Dystrophies",
-                "Meesman's corneal dystrophy",
-                "Meesmann Corneal Dystrophy",
+                "Central Nervous System Vascular Malformations",
+                "Vascular Malformations, Central Nervous System",
+                "Vascular malformation of the nervous system",
+                "Central Nervous System Vascular Anomalies",
+                "Vascular Anomalies, Central Nervous System",
+                "Vascular malformation of the nervous system (disorder)",
+                "CNS Vascular Malformations",
+                "Malformation, CNS Vascular",
+                "Malformations, CNS Vascular",
+                "Vascular Malformation, CNS",
+                "Vascular Malformations, CNS",
+                "CNS Vascular Malformation",
             ],
         },
     },
     "NonDrugTherapyType": {
         "acth": {
             "add_synonyms": [
-                "Adiposis Dolorosa",
-                "Dercum's Disease",
-                "Dercum Disease",
-                "Dercums Disease",
-                "Disease, Dercum",
-                "Disease, Dercum's",
-                "Lipomatosis Dolorosa",
-                "Dolorosa, Lipomatosis",
-                "Dolorosas, Lipomatosis",
-                "Lipomatosis Dolorosas",
-                "Neurolipomatosis",
-                "Morbus Dercum",
-                "Dercum, Morbus",
-                "Dercums, Morbus",
-                "Morbus Dercums",
-                "Adiposalgia",
-                "Adipose Tissue Rheumatism",
-                "Adipose Tissue Rheumatisms",
-                "Rheumatism, Adipose Tissue",
-                "Rheumatisms, Adipose Tissue",
-                "Tissue Rheumatism, Adipose",
-                "Tissue Rheumatisms, Adipose",
-                "Decum-Vitaut Syndrome",
-                "Decum Vitaut Syndrome",
-                "Syndrome, Decum-Vitaut",
-                "Adiposalgias",
-                "Lipomatosis dolorosa (disorder)",
-                "Lipomatosis (Check) dolorosa [Dercum]",
-                "Anders Syndrome",
-                "Ander Syndrome",
-                "Ander's Syndrome",
-                "Anders Syndromes",
-                "Syndrome, Ander's",
-                "Syndrome, Anders",
-                "Syndromes, Anders",
+                "Corticotrophin",
+                "ACTH (1-39)",
+                "1-39 ACTH",
+                "Adrenocorticotrophic Hormone",
+                "Hormone, Adrenocorticotrophic",
+                "Hormone, Adrenocorticotropic",
+                "Adrenocorticotropin",
+                "Corticotropin (1-39)",
+                "Corticotrophin (1-39)",
+                "ACTH - Adrenocorticotrophic hormone",
+                "Adrenocorticotropic hormone (substance)",
             ],
-            "set_sctid": "71404003",
         },
         "ivig": {
             "add_synonyms": [
@@ -1398,18 +1355,13 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "plasmapheresis": {
             "add_synonyms": [
-                "Blood Plateletpheresis",
-                "Blood Plateletphereses",
-                "Plateletphereses, Blood",
-                "Plateletpheresis, Blood",
-                "Plateletpheresis",
-                "Plateletphereses",
-                "Thrombocytapheresis",
-                "Thrombocytaphereses",
-                "Thrombocytophereses",
-                "Thrombocytopheresis",
-                "Platelet apheresis",
-                "Plateletpheresis (procedure)",
+                "Exchange, Plasma",
+                "Exchanges, Plasma",
+                "Plasma Exchanges",
+                "Therapeutic plasmapheresis",
+                "Therapeutic plasmapheresis using plasma as major replacement fluid (procedure)",
+                "Therapeutic plasma exchange (procedure)",
+                "Therapeutic plasmapheresis using plasma as major replacement fluid",
             ],
         },
         "rituximab": {
@@ -1629,8 +1581,10 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
     "SurgeryType": {
         "hemispherectomy": {
             "add_synonyms": [
-                "Manipulation of vas deferens",
-                "Manipulation of vas deferens (procedure)",
+                "Cerebral hemispherectomy",
+                "Excision of brain hemisphere",
+                "Resection of brain hemisphere",
+                "Cerebral hemispherectomy (procedure)",
             ],
         },
         "neurostimulation_dbs": {
@@ -1661,7 +1615,9 @@ UMLS_OVERRIDES: dict[str, dict[str, dict]] = {
         },
         "neurostimulation_vns": {
             "add_synonyms": [
-                "Passiflora alata",
+                "Insertion of vagal nerve stimulator",
+                "Insertion of vagal nerve stimulator (procedure)",
+                "Insertion of vagus nerve stimulator",
             ],
         },
     },

@@ -34,7 +34,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-DEFAULT_OWL = REPO_ROOT / ".cache" / "epio" / "epio.owl"
+try:
+    from services.ontology_releases import release_path
+    DEFAULT_OWL = release_path("epio")
+except Exception:
+    DEFAULT_OWL = REPO_ROOT / ".cache" / "epio" / "epio.owl"
 DEFAULT_OUT = REPO_ROOT / ".cache" / "epio" / "epio_enrichment_report.json"
 
 # Namespaces used in the EPIO OWL file.
