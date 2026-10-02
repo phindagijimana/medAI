@@ -149,3 +149,6 @@ data/run_manifests_*mtsamples*/
 # Regenerable MetaCAT silver set (34 MB) and training logs
 data/metacat_training/silver.json
 logs/metacat_train_*
+
+# Credentialed / restricted-access data (MIMIC etc.): never commit, never send to external services
+data/restricted/
