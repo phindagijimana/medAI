@@ -125,7 +125,7 @@ Caveat: chunking was measured on long synthetic documents only (section 11), not
 | 40 held-out F-S letters (UK style, synthetic) | 40 letters | 0.70 | 0.66 | 0.66 | 0.68 |
 | 30 synthetic US-style patients | 30 patients | 0.99 | 0.97 | 1.00 | 0.97 |
 
-Micro-F1 over seven fields. What this does and does not show:
+Micro-F1 over seven fields. "LEO reviewed" is the output before a person has looked at the flagged values, so it is not the end product, and the figures say little about the audit trail, triage and safe-failure roles; how to read them: the project's `INTERPRETING_RESULTS.md`. What this does and does not show:
 
 - Every test note is synthetic. Nothing here measures performance on real clinical notes.
 - On the F-S letters, LEO's reviewed output (0.68) does not beat the model alone (0.70; paired difference -0.02, 95% CI -0.06 to +0.02). It beats the rules alone only narrowly (+0.02, CI -0.01 to +0.06). With a fine-tuned model (Arm H2, not offered by the app yet) the model alone scored 0.74 and LEO reviewed 0.69 (difference -0.05, CI -0.10 to -0.01). The fusion's value shown so far is the audit trail (quotes, sources, review flags), not higher accuracy.

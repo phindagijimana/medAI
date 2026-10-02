@@ -1,5 +1,7 @@
 # LEO evaluation protocol (frozen 2026-10-01)
 
+How to read the results (what the headline numbers measure, what they say about the data, what they do not cover): `INTERPRETING_RESULTS.md`.
+
 **Status:** v1.0, written before the LEO and Arm H results exist. Anything that changes after the first
 scored run goes in the deviations log (§9), with a date and the reason. Shape A is part of the LEO
 paper (decision 2026-10-01), so this document governs one study: the Med42-8B prompting/fine-tuning
