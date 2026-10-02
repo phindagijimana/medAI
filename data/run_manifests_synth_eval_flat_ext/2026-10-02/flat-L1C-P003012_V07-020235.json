@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003012_V07-020235",
+  "started_at": "2026-10-02T02:02:35.190467+00:00",
+  "finished_at": "2026-10-02T02:02:49.082207+00:00",
+  "duration_s": 13.89,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003012_V07",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5193,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"focal epilepsy due to structural etiology, without specified lateralization; historically drug resistant, currently seizure-free\"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"focal aware seizures\"}, \"age_at_onset_years\": {\"value\": 22, \"quote\": \"onset at age 22\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"0 per month\"}, \"current_asms\": [{\"name\": \"levetiracetam\", \"dose\": \"1500 mg twice daily\", \"quote\": \"Keppra (levetiracetam) 1500 mg twice daily\"}, {\"name\": \"perampanel\", \"dose\": \"8 mg nightly\", \"quote\": \"Fycompa (perampanel) 8 mg nightly\"}, {\"name\": \"topiramate\", \"dose\": \"200 mg twice daily\", \"quote\": \"Topamax (topiramate) 200 mg twice daily\"}]}",
+  "raw_response_tokens": 251,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 7,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

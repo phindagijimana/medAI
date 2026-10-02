@@ -1,0 +1,564 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004037_V03",
+    "doc_type": "eeg_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004037_V03",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal epilepsy",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 115,
+      "char_end": 129
+    },
+    "predominant_seizure_type": {
+      "value": "focal_aware",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal aware seizures",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 776,
+      "char_end": 796
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": "aware",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "aware",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 141,
+      "char_end": 146
+    },
+    "semiology_text": {
+      "value": "Indication: H/o genetic focal epilepsy with focal aware seizures beginning at age 10; r/o interictal epileptiform activity.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "Indication: H/o genetic focal epilepsy with focal aware seizures beginning at age 10; r/o interictal epileptiform activity.",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 91,
+      "char_end": 214
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure-free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 225,
+      "char_end": 237
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "genetic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "genetic etiology",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3657,
+      "char_end": 3673
+    },
+    "etiology_details_text": {
+      "value": "genetic etiology",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "genetic etiology",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3657,
+      "char_end": 3673
+    },
+    "etiology_specifics": {
+      "value": {
+        "causative_gene": "DEPDC5",
+        "causative_variant": "c.4396C>T",
+        "causative_antibody": null,
+        "associated_tumor_text": null,
+        "causative_pathogen_text": null,
+        "causative_metabolic_text": null
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "DEPDC5",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 710,
+      "char_end": 716
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 241,
+        "char_end": 251
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 912,
+        "char_end": 925
+      },
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 3790,
+        "char_end": 3800
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "Previously trialed levetiracetam, discontinued due to sedation",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Previously trialed levetiracetam, discontinued due to sedation",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 892,
+      "char_end": 955
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "drug-resistant",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1068,
+      "char_end": 1082
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Interictal Findings: Rare, moderate-amplitude sharp waves were observed independently over the left anterior temporal region, maximal at F7 with a field to T7 and FP1",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2434,
+      "char_end": 2442
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "routine",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "rmal routine EEG due",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2880,
+      "char_end": 2891
+    },
+    "background": {
+      "value": "diffuse_slowing",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "diffuse slowing",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2131,
+      "char_end": 2146
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ctal epileptiform activity. Currently seizure-free on pe",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 192,
+      "char_end": 213
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "other",
+          "localization": null,
+          "laterality": null,
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "ctal epileptiform activity. Currently seizure-free on pe",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 192,
+        "char_end": 213
+      },
+      {
+        "value": {
+          "ied_type": "sharp_wave",
+          "localization": "temporal",
+          "laterality": "left",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "tude sharp waves were observed independently o",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2371,
+        "char_end": 2382
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": "temporal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ized spike-and-wave discharges, LPDs, GP",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2611,
+        "char_end": 2616
+      },
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": "temporal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ized spike-and-wave discharges, LPDs, GPDs, or TI",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2611,
+        "char_end": 2625
+      }
+    ],
+    "seizures_captured": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "No seizures were recorded",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3161,
+      "char_end": 3186
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "mesial temporal sclerosis",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3320,
+      "char_end": 3345
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "mesial temporal sclerosis",
+        "source_doc_id": "P004037_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 3320,
+        "char_end": 3345
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "mesial temporal sclerosis",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3320,
+      "char_end": 3345
+    },
+    "lesion_laterality": {
+      "value": "left",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "mesial temporal sclerosis",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3320,
+      "char_end": 3345
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "mesial temporal sclerosis",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3320,
+      "char_end": 3345
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Awake State: Occasional brief runs of irregular 4-6 Hz theta slowing were present over the left temporal region, maximal at F7/T7, without sustained rhythmic evolution",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1786,
+      "char_end": 1794
+    },
+    "eeg_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Interictal Findings: Rare, moderate-amplitude sharp waves were observed independently over the left anterior temporal region, maximal at F7 with a field to T7 and FP1",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2434,
+      "char_end": 2442
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/left; eeg_localization=temporal/left",
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004037_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

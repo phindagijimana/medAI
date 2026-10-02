@@ -1,0 +1,47 @@
+{
+  "run_id": "5fbe2b0904be",
+  "started_at": "2026-09-29T04:39:04+00:00",
+  "finished_at": "2026-09-29T04:39:09+00:00",
+  "duration_s": 5.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0190",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1501,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"temporal\",\n      \"laterality\": \"right\",\n      \"source\": \"confirmed\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"resolved\",\n    \"evidence_text\": \"right hippocampal sclerosis, right hippocampectomy 2018\",\n    \"source_doc_id\": \"PAT-001\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": []\n}",
+  "raw_response_tokens": 122,
+  "raw_valid": false,
+  "parse_error_raw": "2 validation errors for ClinicalLocalizationModule\nprimary_claim.value.source\n  Input should be 'clinician_hypothesis', 'eeg_confirmed', 'mri_confirmed', 'seeg_confirmed' or 'surgical_confirmed' [type=enum, input_value='confirmed', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprimary_claim.temporal_status\n  Input should be 'current', 'historical', 'planned', 'hypothetical' or 'unspecified' [type=enum, input_value='resolved', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "2 validation errors for ClinicalLocalizationModule\nprimary_claim.value.source\n  Input should be 'clinician_hypothesis', 'eeg_confirmed', 'mri_confirmed', 'seeg_confirmed' or 'surgical_confirmed' [type=enum, input_value='confirmed', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprimary_claim.temporal_status\n  Input should be 'current', 'historical', 'planned', 'hypothetical' or 'unspecified' [type=enum, input_value='resolved', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M2"
+}

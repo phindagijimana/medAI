@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P002291_eeg_report-053152",
+  "started_at": "2026-10-02T05:31:52.933175+00:00",
+  "finished_at": "2026-10-02T05:32:05.130260+00:00",
+  "duration_s": 12.2,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P002291_eeg_report",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 891,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"combined_focal_generalized\", \"quote\": \"focal seizures with focal-to-bilateral tonic-clonic seizures\"}, \"predominant_seizure_type\": {\"value\": \"focal_to_bilateral_tonic_clonic\", \"quote\": \"focal-to-bilateral tonic-clonic seizures\"}, \"age_at_onset_years\": {\"value\": 74, \"quote\": \"onset at age 74 years\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"currently seizure-free, with 0 seizures per month\"}, \"current_asms\": [{\"name\": \"valproate\", \"dose\": null, \"quote\": \"valproate and zonisamide\"}]}",
+  "raw_response_tokens": 183,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

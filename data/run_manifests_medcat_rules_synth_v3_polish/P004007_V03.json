@@ -1,0 +1,525 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004007_V03",
+    "doc_type": "eeg_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004007_V03",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal epilepsy",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 123,
+      "char_end": 137
+    },
+    "predominant_seizure_type": {
+      "value": "focal_impaired_awareness",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal impaired-awareness seizures",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 143,
+      "char_end": 176
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": "impaired",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "impaired awareness",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 625,
+      "char_end": 643
+    },
+    "semiology_text": {
+      "value": "Indication:  Hx of structural focal epilepsy with focal impaired-awareness seizures beginning at age 11 and MRI evidence of hippocampal sclerosis. Currently seizure-free on levetiracetam and perampanel.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "Indication:  Hx of structural focal epilepsy with focal impaired-awareness seizures beginning at age 11 and MRI evidence of hippocampal sclerosis. Currently seizure-free on levetiracetam and perampanel.",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 93,
+      "char_end": 295
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure-free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 250,
+      "char_end": 262
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "idence of hippocampal sclerosis. Currently seizure-free on le",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 238
+    },
+    "etiology_details_text": {
+      "value": "idence of hippocampal sclerosis. Currently seizure-free on le",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "idence of hippocampal sclerosis. Currently seizure-free on le",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 238
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 266,
+        "char_end": 279
+      },
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 284,
+        "char_end": 294
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "brivaracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Brivaracetam",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 856,
+        "char_end": 868
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "Brivaracetam was previously trialed and discontinued because of cognitive side effects",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Brivaracetam was previously trialed and discontinued because of cognitive side effects",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 855,
+      "char_end": 942
+    },
+    "drug_resistance_status": {
+      "value": "drug_responsive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 250,
+      "char_end": 262
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Indication:  Hx of structural focal epilepsy with focal impaired-awareness seizures beginning at age 11 and MRI evidence of hippocampal sclerosis",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 228
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "video_eeg",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "nged video-EEG moni",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3333,
+      "char_end": 3342
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ctal epileptiform activity and r/o subclinical seizures.",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 334,
+      "char_end": 355
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "other",
+          "localization": null,
+          "laterality": null,
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ctal epileptiform activity and r/o subclinical seizures.",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 334,
+        "char_end": 355
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": null,
+          "laterality": null,
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "kes, spike-and-wave discharges, TIRDA, L",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2427,
+        "char_end": 2432
+      }
+    ],
+    "seizures_captured": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "No electrographic seizures were recorded",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2556,
+      "char_end": 2596
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 238
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "hippocampal sclerosis",
+        "source_doc_id": "P004007_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 217,
+        "char_end": 238
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 238
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 238
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Additional anterior temporal electrodes were included",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1100,
+      "char_end": 1108
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Indication:  Hx of structural focal epilepsy with focal impaired-awareness seizures beginning at age 11 and MRI evidence of hippocampal sclerosis",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 217,
+      "char_end": 228
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/unknown; mri_localization=temporal/unknown",
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004007_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

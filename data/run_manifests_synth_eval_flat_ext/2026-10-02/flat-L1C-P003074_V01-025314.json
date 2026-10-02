@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003074_V01-025314",
+  "started_at": "2026-10-02T02:53:14.134506+00:00",
+  "finished_at": "2026-10-02T02:53:25.267541+00:00",
+  "duration_s": 11.13,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003074_V01",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 7623,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"generalized genetic epilepsy and typical absence seizures\"}, \"predominant_seizure_type\": {\"value\": null, \"quote\": null}, \"age_at_onset_years\": {\"value\": 33, \"quote\": \"seizures began at 33 years of age\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"seizure-free, with a seizure frequency of 0 per month\"}, \"current_asms\": [{\"name\": \"valproate\", \"dose\": null, \"quote\": \"valproate and zonisamide\"}, {\"name\": \"zonisamide\", \"dose\": null, \"quote\": \"valproate and zonisamide\"}]}",
+  "raw_response_tokens": 190,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

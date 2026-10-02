@@ -1,0 +1,502 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004010_V01",
+    "doc_type": "emu_admission",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004010_V01",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized epilepsy",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 159,
+      "char_end": 179
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_absence_typical",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "absence seizures",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 193,
+      "char_end": 209
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": ", or immediate recovery. There is no documented focal impaired awareness semiology, focal to bilateral tonic-clonic evolution, or generalized tonic-clonic semiology in the records available for this admission. The underlying etiology remains unknown.",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": ", or immediate recovery. There is no documented focal impaired awareness semiology, focal to bilateral tonic-clonic evolution, or generalized tonic-clonic semiology in the records available for this admission. The underlying etiology remains unknown.",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 1035,
+      "char_end": 1285
+    },
+    "age_at_onset_years": {
+      "value": 30.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "onset at approximately age 30",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 5544,
+      "char_end": 5573
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure free",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 1965,
+      "char_end": 1977
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Etiology unknown",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 5575,
+      "char_end": 5591
+    },
+    "etiology_details_text": {
+      "value": "Etiology unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Etiology unknown",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 5575,
+      "char_end": 5591
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "automatisms",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "automatisms",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 1024,
+      "char_end": 1035
+    },
+    "focal_nonmotor_onset": {
+      "value": "behavior_arrest",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "behavioral arrest",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 982,
+      "char_end": 999
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "brivaracetam",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Briviact",
+        "source_doc_id": "P004010_V01",
+        "source_doc_type": "emu_admission",
+        "source_date": "2020-01-01",
+        "char_start": 1365,
+        "char_end": 1373
+      },
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Fycompa",
+        "source_doc_id": "P004010_V01",
+        "source_doc_type": "emu_admission",
+        "source_date": "2020-01-01",
+        "char_start": 1393,
+        "char_end": 1400
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Keppra",
+        "source_doc_id": "P004010_V01",
+        "source_doc_type": "emu_admission",
+        "source_date": "2020-01-01",
+        "char_start": 1665,
+        "char_end": 1671
+      },
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P004010_V01",
+        "source_doc_type": "emu_admission",
+        "source_date": "2020-01-01",
+        "char_start": 6174,
+        "char_end": 6187
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "He previously completed a trial of Keppra (levetiracetam), which was discontinued because of cognitive side effects",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "He previously completed a trial of Keppra (levetiracetam), which was discontinued because of cognitive side effects",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 1629,
+      "char_end": 1745
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Drug-resistant",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 144,
+      "char_end": 158
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "video_eeg",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "term video EEG moni",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 418,
+      "char_end": 427
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ized SWD, focal IEDs, electrographic a",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": 6445,
+      "char_end": 6448
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "ized SWD, focal IEDs, electrographic a",
+        "source_doc_id": "P004010_V01",
+        "source_doc_type": "emu_admission",
+        "source_date": "2020-01-01",
+        "char_start": 6445,
+        "char_end": 6448
+      }
+    ],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "findings": [],
+    "lesion_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "not_assessed",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "0 modality/modalities documented (need \u22652)",
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004010_V01",
+      "source_doc_type": "emu_admission",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

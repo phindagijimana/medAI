@@ -1,0 +1,93 @@
+{
+  "run_id": "5d16a9c30262",
+  "started_at": "2026-10-01T06:46:44+00:00",
+  "finished_at": "2026-10-01T06:47:56+00:00",
+  "duration_s": 72.0,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_polish",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0168",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 631,
+  "raw_response": "{\n  \"schema_version\": \"v4.0.0\",\n  \"document\": {\n    \"doc_id\": \"EA0168\",\n    \"doc_type\": \"progress_note\",\n    \"doc_date\": \"2026-09-25\",\n    \"patient_id\": \"EA0168\",\n    \"icd10cm_codes\": [],\n    \"snomed_ct_codes\": []\n  },\n  \"clinical_seizure\": {\n    \"epilepsy_type\": {\n      \"value\": \"juvenile_myoclonic\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"juvenile_myoclonic\",\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"predominant_seizure_type\": {\n      \"value\": \"generalized_tonic_clonic\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"generalized_tonic_clonic\",\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"other_seizure_types\": [],\n    \"awareness\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"semiology_text\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"age_at_onset_years\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"seizure_frequency\": {\n      \"value\": {\n        \"raw_text\": \"seizure free\",\n        \"period\": \"unspecified\",\n        \"count_min\": 0.0,\n        \"count_max\": 0.0,\n        \"seizure_free\": true,\n        \"duration_text\": null,\n        \"applies_to_type\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"seizure free\",\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"other_seizure_frequencies\": [],\n    \"status_epilepticus_history\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_category\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_details_text\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_specifics\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"focal_motor_onset\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"focal_nonmotor_onset\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0168\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    }\n  },\n  \"medication\": {\n    \"current_asms\": [\n      {\n        \"value\": {\n          \"generic_name\": \"valproate\",\n          \"status\": \"current\",\n          \"dose_text\": \"400 mg twice a day\",\n          \"reason_discontinued\": null,\n          \"rxnorm_cui\": null\n        },\n        \"certainty\": \"definite\",\n        \"temporal_status\": \"current\",\n        \"evidence_text\": \"valproate 400 mg twice a day\",\n        \"source_doc_id\": \"EA0168\",\n        \"source_doc_type\": \"progress_note\",\n        \"source_date\": \"2026-09-25\",\n        \"char_start\": null,\n        \"char_end\": null\n      }\n    ],\n    \"prior_asms\": [],\n    \"failed_asms\": [],\n    \"discontinued_asms\": []\n  },\n  \"progress_note\": {\n    \"value\": {\n      \"patient_id\": \"EA0168\",\n      \"icd10cm_codes\": [],\n      \"snomed_ct_codes\": []\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"EA0168\",\n    \"source_doc_id\": \"EA0168\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"social_history\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0168\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"family_history\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0168\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"lab_results\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0168\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"imaging_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0168\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"imaging_files\": [],\n  \"document\": {\n    \"doc_id\": \"EA0168\",\n    \"doc_type\": \"progress_note\",\n    \"doc_date\": \"2026-09-25\",\n    \"patient_id\": \"EA0168\",\n    \"icd10cm_codes\": [],\n    \"snomed_ct_codes\": []\n  }\n}",
+  "raw_response_tokens": 2040,
+  "raw_valid": false,
+  "parse_error_raw": "13 validation errors for MedicationModule\nschema_version\n  Extra inputs are not permitted [type=extra_forbidden, input_value='v4.0.0', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndocument\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'doc_id': 'EA0168', 'doc..., 'snomed_ct_codes': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nclinical_seizure\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'epilepsy_type': {'value...None, 'char_end': None}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedication\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'current_asms': [{'value...'discontinued_asms': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprogress_note\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': {'patient_id': ... None, 'char_end': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsocial_history\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': None, 'certaint... None, 'char_end': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfamily_history\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': None, 'certaint... None, 'char_end': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nlab_results\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': None, 'certaint... None, 'char_end': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nimaging_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': None, 'certa",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "valproate",
+          "status": "current",
+          "dose_text": "400 mg twice a day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "valproate 400 mg twice a day",
+        "source_doc_id": "EA0168",
+        "source_doc_type": "progress_note",
+        "source_date": "2026-09-25",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0168",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0168",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M1"
+}

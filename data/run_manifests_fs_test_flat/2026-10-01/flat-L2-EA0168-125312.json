@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2-EA0168-125312",
+  "started_at": "2026-10-01T12:53:12.533416+00:00",
+  "finished_at": "2026-10-01T12:53:33.907023+00:00",
+  "duration_s": 21.37,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0168",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 611,
+  "raw_response": "{\"epilepsy_type\": null, \"predominant_seizure_type\": \"generalized_tonic_clonic\", \"age_at_onset_years\": null, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": true, \"quote\": \"remains seizure free which is good news. His last seizure was Novemebr 2015.\"}, \"current_asms\": [{\"name\": \"Epilpim chrono\", \"dose\": \"400mg\", \"quote\": \"Sodium valproate 400mg twice a day\"}]}\n\nExample note:\n\"\"\"\nDiagnosis: Juvenile Myoclonic Epilepsy (JME)\n\u00a0\nMedications: Sodium valproate 1000mg twice a day\n\u00a0\nPatient is seizure free since 2012. She has been compliant with her medication and has no side effects. She is currently on the pill for contraception.\n\u00a0\nPatient is currently on sick leave due to stress and anxiety.\n\u00a0\nPatient is happy with her current treatment.\n\u00a0\nPatient is aware of the DVLA regulations.\n\u00a0\nPatient is aware of the risks of epilepsy.\n\u00a0\nPatient is aware of the importance of medication compliance.\n\u00a0\nPatient is aware of the importance of regular follow up.\n\u00a0\nPatient is aware of the importance of driving regulations.\n\u00a0\nPatient is aware of the importance of alcohol and smoking.\n\u00a0\nPatient is aware of the importance of contraception.\n\u00a0\nPatient is aware of the importance of stress management.\n\u00a0\nPatient is aware of the importance of sleep hygiene.\n\u00a0\nPatient is aware of the importance of avoiding triggers.\n\u00a0\nPatient is aware of the importance of regular exercise.\n\u00a0\nPatient is aware of the importance of diet.\n\u00a0\nPatient is aware of the importance of avoiding alcohol.\n\u00a0\nPatient is aware of the importance of avoiding smoking.\n\u00a0\nPatient is aware of the importance of avoiding illicit drugs.\n\u00a0\nPatient is aware of the importance of avoiding recreational drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when tired.\n\u00a0\nPatient is aware of the importance of avoiding driving when stressed.\n\u00a0\nPatient is aware of the importance of avoiding driving when fatigued.\n\u00a0\nPatient is aware of the importance of avoiding driving when sleepy.\n\u00a0\nPatient is aware of the importance of avoiding driving when drowsy.\n\u00a0\nPatient is aware of the importance of avoiding driving when unwell.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of alcohol.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of medication.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of recreational drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of illicit drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of prescription drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of over the counter drugs.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of herbal remedies.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of homeopathic remedies.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of complementary therapies.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of alternative therapies.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of traditional medicine.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of Ayurvedic medicine.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of Unani medicine.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence of Siddha medicine.\n\u00a0\nPatient is aware of the importance of avoiding driving when under the influence",
+  "raw_response_tokens": 768,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 2,
+    "values_dropped": 0
+  },
+  "arm": "L2"
+}

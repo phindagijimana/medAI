@@ -1,0 +1,47 @@
+{
+  "run_id": "8c772c2c30ec",
+  "started_at": "2026-09-29T05:05:37+00:00",
+  "finished_at": "2026-09-29T05:05:46+00:00",
+  "duration_s": 9.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0198",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1210,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"diagnosis\": \"Probable non-epileptic psychogenic seizures\",\n      \"medication\": \"Sodium valproate 1000mg twice a day\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"probable\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Diagnosis: Probable non-epileptic psychogenic seizures\",\n    \"source_doc_id\": \"CLIN-01\",\n    \"source_doc_type\": \"initial_consult\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"diagnosis\": \"Complex partial seizures with secondary generalized seizures\",\n        \"medication\": \"Sodium valproate 1000mg twice a day\",\n        \"source\": \"clinician_hypothesis\"\n      },\n      \"certainty\": \"probable\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Diagnosis: Complex partial seizures with secondary generalized seizures\",\n      \"source_doc_id\": \"CLIN-01\",\n      \"source_doc_type\": \"initial_consult\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}",
+  "raw_response_tokens": 276,
+  "raw_valid": false,
+  "parse_error_raw": "8 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Probable non-epileptic psychogenic seizures', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Sodium valproate 1000mg twice a day', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Probable n... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Probable n... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nalternative_claims.0.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Complex partial seizures...ry generalized seizures', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Sodium valproate 1000mg twice a day', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Complex pa... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nalternative_claims.0.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Complex pa... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "8 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Probable non-epileptic psychogenic seizures', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Sodium valproate 1000mg twice a day', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Probable n... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Probable n... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nalternative_claims.0.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Complex partial seizures...ry generalized seizures', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Sodium valproate 1000mg twice a day', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Complex pa... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nalternative_claims.0.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Complex pa... 'clinician_hypothesis'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "parsed_value": null,
+  "arm": "M2"
+}

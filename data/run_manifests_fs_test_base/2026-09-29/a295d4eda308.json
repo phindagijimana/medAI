@@ -1,0 +1,168 @@
+{
+  "run_id": "a295d4eda308",
+  "started_at": "2026-09-29T04:38:37+00:00",
+  "finished_at": "2026-09-29T04:39:04+00:00",
+  "duration_s": 27.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0190",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1501,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"lamotrigine\",\n        \"status\": \"current\",\n        \"dose_text\": \"200mg bd\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lamotrigine 200mg bd\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"discontinued\",\n        \"dose_text\": null,\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"probable\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"carbamazepine\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"discontinued\",\n        \"dose_text\": null,\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"probable\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"levetiracetam\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"zonisamide\",\n        \"status\": \"discontinued\",\n        \"dose_text\": null,\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"probable\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"zonisamide\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": \"no side effects\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"no side effects\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": \"drug_resistant\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"historical\",\n    \"evidence_text\": \"seizures several times a week despite having tried many medications\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [\n    {\n      \"value\": {\n        \"surgery_type\": \"resection\",\n        \"target\": \"right hippocampus\",\n        \"laterality\": \"right\",\n        \"year\": 2018,\n        \"outcome_text\": \"seizure free\",\n        \"engel_class\": null,\n        \"ilae_outcome\": null,\n        \"device_model_text\": null,\n        \"stimulation_parameters_text\": null,\n        \"pathology_notes_text\": \"right hippocampal sclerosis\"\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"historical\",\n      \"evidence_text\": \"right hippocampal sclerosis, right hippocampectomy 2018\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"non_drug_therapies\": []\n}",
+  "raw_response_tokens": 917,
+  "raw_valid": false,
+  "parse_error_raw": "3 validation errors for MedicationModule\nprior_asms.0.value.status\n  Input should be 'current', 'prior', 'failed', 'discontinued_adverse_effect' or 'planned' [type=enum, input_value='discontinued', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprior_asms.1.value.status\n  Input should be 'current', 'prior', 'failed', 'discontinued_adverse_effect' or 'planned' [type=enum, input_value='discontinued', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nprior_asms.2.value.status\n  Input should be 'current', 'prior', 'failed', 'discontinued_adverse_effect' or 'planned' [type=enum, input_value='discontinued', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "current",
+          "dose_text": "200mg bd",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "lamotrigine 200mg bd",
+        "source_doc_id": "SYN-CLIN-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "carbamazepine",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "probable",
+        "temporal_status": "historical",
+        "evidence_text": "carbamazepine",
+        "source_doc_id": "SYN-CLIN-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "probable",
+        "temporal_status": "historical",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "SYN-CLIN-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "probable",
+        "temporal_status": "historical",
+        "evidence_text": "zonisamide",
+        "source_doc_id": "SYN-CLIN-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "no side effects",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "no side effects",
+      "source_doc_id": "SYN-CLIN-01",
+      "source_doc_type": "progress_note",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "seizures several times a week despite having tried many medications",
+      "source_doc_id": "SYN-CLIN-01",
+      "source_doc_type": "progress_note",
+      "source_date": "2025-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [
+      {
+        "value": {
+          "surgery_type": "resection",
+          "target": "right hippocampus",
+          "laterality": "right",
+          "year": 2018,
+          "outcome_text": "drug_responsive",
+          "engel_class": null,
+          "ilae_outcome": null,
+          "device_model_text": null,
+          "stimulation_parameters_text": null,
+          "pathology_notes_text": "right hippocampal sclerosis"
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "right hippocampal sclerosis, right hippocampectomy 2018",
+        "source_doc_id": "SYN-CLIN-01",
+        "source_doc_type": "progress_note",
+        "source_date": "2025-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "non_drug_therapies": []
+  },
+  "arm": "M1"
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P004007_V02-154145",
+  "started_at": "2026-10-01T15:41:45.439400+00:00",
+  "finished_at": "2026-10-01T15:41:59.366477+00:00",
+  "duration_s": 13.93,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork03.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.46.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004007_V02",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 4955,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"structural focal epilepsy\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_impaired_awareness\",\n    \"quote\": \"focal impaired-awareness seizures\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 11,\n    \"quote\": \"onset at age 11\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 0,\n    \"count_max\": 0,\n    \"period\": \"month\",\n    \"seizure_free\": true,\n    \"quote\": \"seizure-free by current report, with a seizure frequency of 0/month\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"levetiracetam\",\n      \"dose\": \"Keppra (levetiracetam) at the current [T\" ,\n      \"quote\": \"Keppra (levetiracetam), current ASM\"\n    },\n    {\n      \"name\": \"perampanel\",\n      \"dose\": \"Fycompa (perampanel) at the current [T\" ,\n      \"quote\": \"Fycompa (perampanel), current ASM\"\n    }\n  ]\n}",
+  "raw_response_tokens": 281,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

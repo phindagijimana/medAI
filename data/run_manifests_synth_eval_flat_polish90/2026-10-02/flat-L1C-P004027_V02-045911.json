@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P004027_V02-045911",
+  "started_at": "2026-10-02T04:59:11.748286+00:00",
+  "finished_at": "2026-10-02T04:59:23.544056+00:00",
+  "duration_s": 11.8,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork04.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004027_V02",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 4732,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"focal epilepsy with focal impaired-awareness seizures\"}, \"predominant_seizure_type\": {\"value\": \"focal_impaired_awareness\", \"quote\": \"focal impaired-awareness seizures\"}, \"age_at_onset_years\": {\"value\": 11, \"quote\": \"onset age 11\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": null, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"no recurrent focal impaired-awareness seizures\"}, \"current_asms\": [{\"name\": \"Keppra\", \"dose\": \"1500 mg BID\", \"quote\": \"Keppra (levetiracetam) 1500 mg BID\"}, {\"name\": \"Fycompa\", \"dose\": \"6 mg nightly\", \"quote\": \"Fycompa (perampanel) 6 mg nightly\"}]}",
+  "raw_response_tokens": 214,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

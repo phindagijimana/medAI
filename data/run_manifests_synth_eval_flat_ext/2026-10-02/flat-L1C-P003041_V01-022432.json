@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003041_V01-022432",
+  "started_at": "2026-10-02T02:24:32.606661+00:00",
+  "finished_at": "2026-10-02T02:24:43.648708+00:00",
+  "duration_s": 11.04,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003041_V01",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 7759,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"drug-resistant focal epilepsy with focal to bilateral tonic-clonic seizures\"}, \"predominant_seizure_type\": {\"value\": \"focal_to_bilateral_tonic_clonic\", \"quote\": \"focal to bilateral tonic-clonic seizures\"}, \"age_at_onset_years\": {\"value\": 8, \"quote\": \"seizures began at 8 years of age\"}, \"seizure_frequency\": {\"count_min\": 6, \"count_max\": 6, \"period\": \"week\", \"seizure_free\": false, \"quote\": \"approximately six seizures per week\"}, \"current_asms\": [{\"name\": \"valproate\", \"dose\": null, \"quote\": \"valproate\"}, {\"name\": \"levetiracetam\", \"dose\": null, \"quote\": \"levetiracetam\"}]}",
+  "raw_response_tokens": 199,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

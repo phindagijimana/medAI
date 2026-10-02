@@ -1,0 +1,47 @@
+{
+  "run_id": "d9c692924dc2",
+  "started_at": "2026-09-29T04:42:01+00:00",
+  "finished_at": "2026-09-29T04:42:23+00:00",
+  "duration_s": 22.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0191",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 947,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"levetiracetam\",\n        \"status\": \"current\",\n        \"dose_text\": \"1500 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Levetiracetam 1500mg twice daily\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"clinic_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"zonisamide\",\n        \"status\": \"current\",\n        \"dose_text\": \"100 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Zonisamide: 100mg bd\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"clinic_note\",\n      \"source_date\": \"2025-01-01\"\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"current\",\n        \"dose_text\": \"400 mg BID\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Carbamazepine 400mg bd\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"clinic_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_note\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"surgery_history\": [\n    {\n      \"value\": {\n        \"surgery_type\": null,\n        \"target\": null,\n        \"laterality\": null,\n        \"year\": null,\n        \"outcome_text\": \"No events since surgery\",\n        \"engel_class\": null,\n        \"ilae_outcome\": null,\n        \"device_model_text\": null,\n        \"stimulation_parameters_text\": null,\n        \"pathology_notes_text\": null\n      },\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"No events since surgery\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"clinic_note\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"non_drug_therapies\": []\n}",
+  "raw_response_tokens": 765,
+  "raw_valid": false,
+  "parse_error_raw": "7 validation errors for MedicationModule\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.2.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information v",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "7 validation errors for MedicationModule\ncurrent_asms.0.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.1.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ncurrent_asms.2.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nadverse_effects_text.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\ndrug_resistance_status.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_note', input_type=str]\n    For further information v",
+  "parsed_value": null,
+  "arm": "M1"
+}

@@ -1,0 +1,60 @@
+{
+  "run_id": "dfd84a3d6a8d",
+  "started_at": "2026-09-29T03:39:17+00:00",
+  "finished_at": "2026-09-29T03:39:29+00:00",
+  "duration_s": 12.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0173",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 575,
+  "raw_response": "{\n  \"patient\": {\n    \"full_name\": \"Rachel Johannes\",\n    \"date_of_birth\": \"1990-07-13\",\n    \"diagnosis\": [\n      {\n        \"value\": \"Unclassified Epilepsy\",\n        \"certainty\": \"confirmed\",\n        \"evidence_text\": \"Diagnosis \u2013 Unclassified Epilepsy\",\n        \"source_doc_id\": \"PAT-01\",\n        \"source_doc_type\": \"patient_record\",\n        \"source_date\": \"2025-01-01\"\n      }\n    ],\n    \"treatment\": [\n      {\n        \"value\": \"Unsure of exact medications\",\n        \"certainty\": \"not_specified\",\n        \"evidence_text\": \"Treatment \u2013 Unsure of exact medications\",\n        \"source_doc_id\": \"PAT-01\",\n        \"source_doc_type\": \"patient_record\",\n        \"source_date\": \"2025-01-01\"\n      }\n    ]\n  },\n  \"encounter\": {\n    \"date\": \"2025-01-01\",\n    \"notes\": [\n      {\n        \"text\": \"I met with Rachel and her partner in clinic recently. Rachel said that her last seizure was on the 15th April in her home. Rachel showed me her seizure chart. We discussed safety issues and Rachel takes showers not baths.\",\n        \"certainty\": \"confirmed\",\n        \"source_doc_id\": \"ENC-01\",\n        \"source_doc_type\": \"visit_note\",\n        \"source_date\": \"2025-01-01\"\n      },\n      {\n        \"text\": \"We also discussed contraception. Previously she has tried the pill but this seemed to make her seizures worse. The depo injection seems to cause weight gain. We agreed that Rachel will make an appointment with yourself to discuss contraception\",\n        \"certainty\": \"confirmed\",\n        \"source_doc_id\": \"ENC-01\",\n        \"source_doc_type\": \"visit_note\",\n        \"source_date\": \"2025-01-01\"\n      }\n    ]\n  }\n}",
+  "raw_response_tokens": 416,
+  "raw_valid": false,
+  "parse_error_raw": "3 validation errors for ClinicalLocalizationModule\npatient\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'full_name': 'Rachel Joh...e_date': '2025-01-01'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nencounter\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'date': '2025-01-01', 'n...e_date': '2025-01-01'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'patient': {'full_name':..._date': '2025-01-01'}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0173",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

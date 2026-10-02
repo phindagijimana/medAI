@@ -1,0 +1,457 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P000537_eeg_report",
+    "doc_type": "eeg_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P000537",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "genetic generalized epilepsy",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 33,
+      "char_end": 61
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized tonic-clonic seizures",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 67,
+      "char_end": 100
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "History of genetic generalized epilepsy with generalized tonic-clonic seizures beginning at age 40, attributed to a pathogenic DEPDC5 variant (c.4396C>T).",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "History of genetic generalized epilepsy with generalized tonic-clonic seizures beginning at age 40, attributed to a pathogenic DEPDC5 variant (c.4396C>T).",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 22,
+      "char_end": 176
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure free",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 257,
+      "char_end": 269
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "genetic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "athogenic DEPDC5 variant (c.4396C>T). The epil",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 149,
+      "char_end": 155
+    },
+    "etiology_details_text": {
+      "value": "athogenic DEPDC5 variant (c.4396C>T). The epil",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "athogenic DEPDC5 variant (c.4396C>T). The epil",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 149,
+      "char_end": 155
+    },
+    "etiology_specifics": {
+      "value": {
+        "causative_gene": "DEPDC5",
+        "causative_variant": "c.4396C>T",
+        "causative_antibody": null,
+        "associated_tumor_text": null,
+        "causative_pathogen_text": null,
+        "causative_metabolic_text": null
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "DEPDC5",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 149,
+      "char_end": 155
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": "114477"
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P000537_eeg_report",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 308,
+        "char_end": 321
+      },
+      {
+        "value": {
+          "generic_name": "brivaracetam",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": "1739745"
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "brivaracetam",
+        "source_doc_id": "P000537_eeg_report",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 326,
+        "char_end": 338
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_responsive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "seizure free",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 257,
+      "char_end": 269
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "findings": [],
+    "lesion_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "not_assessed",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "0 modality/modalities documented (need \u22652)",
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P000537_eeg_report",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

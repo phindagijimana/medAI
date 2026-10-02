@@ -1,0 +1,108 @@
+{
+  "run_id": "785fef57b017",
+  "started_at": "2026-09-29T03:42:15+00:00",
+  "finished_at": "2026-09-29T03:42:22+00:00",
+  "duration_s": 7.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0174",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 886,
+  "raw_response": "{\n  \"patient_id\": \"Mr Huw Heffnington\",\n  \"dob\": \"02/07/1988\",\n  \"diagnosis\": \"Epilepsy unclassified\",\n  \"current_asms\": [\n    {\n      \"generic_name\": \"Zonisamide\",\n      \"status\": \"current\",\n      \"dose_text\": \"100 bd\",\n      \"rxnorm_cui\": null,\n      \"reason_discontinued\": null\n    },\n    {\n      \"generic_name\": \"Levetiracetam\",\n      \"status\": \"current\",\n      \"dose_text\": \"1500 b.d.\",\n      \"rxnorm_cui\": null,\n      \"reason_discontinued\": null\n    }\n  ],\n  \"prior_asms\": null,\n  \"failed_asms\": null,\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}",
+  "raw_response_tokens": 204,
+  "raw_valid": false,
+  "parse_error_raw": "25 validation errors for MedicationModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Mr Huw Heffnington', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndob\n  Extra inputs are not permitted [type=extra_forbidden, input_value='02/07/1988', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndiagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Epilepsy unclassified', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.generic_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Zonisamide', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='current', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value='100 bd', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.rxnorm_cui\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.reason_discontinued\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncurrent_asms.0.source_doc_id\n  Field required [type=missing, input_value={'generic_name': 'Zonisam...son_discontinued': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncurrent_asms.0.source_doc_type\n  Field required [type=missing, input_value={'generic_name': 'Zonisam...son",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "Zonisamide",
+          "status": "current",
+          "dose_text": "100 bd",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "possible",
+        "temporal_status": "unspecified",
+        "evidence_text": "{\"generic_name\": \"Zonisamide\", \"status\": \"current\", \"dose_text\": \"100 bd\", \"rxnorm_cui\": null, \"reas",
+        "source_doc_id": "fs-test-EA0174",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": null,
+        "char_end": null
+      },
+      {
+        "value": {
+          "generic_name": "Levetiracetam",
+          "status": "current",
+          "dose_text": "1500 b.d.",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "possible",
+        "temporal_status": "unspecified",
+        "evidence_text": "{\"generic_name\": \"Levetiracetam\", \"status\": \"current\", \"dose_text\": \"1500 b.d.\", \"rxnorm_cui\": null,",
+        "source_doc_id": "fs-test-EA0174",
+        "source_doc_type": "progress_note",
+        "source_date": "2019-01-01",
+        "char_start": null,
+        "char_end": null
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

@@ -1,0 +1,474 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P003044_V02",
+    "doc_type": "progress_note",
+    "doc_date": "2020-01-01",
+    "patient_id": "P003044_V02",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "combined_focal_generalized",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "combined generalized and focal epilepsy",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 67,
+      "char_end": 106
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "clonic seizures",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1209,
+      "char_end": 1224
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "includes generalized tonic-clonic seizures. Current frequency remains approximately one seizure per month.",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "includes generalized tonic-clonic seizures. Current frequency remains approximately one seizure per month.",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 3747,
+      "char_end": 3853
+    },
+    "age_at_onset_years": {
+      "value": 68.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "onset at age 68",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 239,
+      "char_end": 254
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "one seizure per month",
+        "period": "month",
+        "count_min": 1.0,
+        "count_max": 1.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "one seizure per month",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 749,
+      "char_end": 770
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "genetic",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "Genetic epilepsy",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1771,
+      "char_end": 1787
+    },
+    "etiology_details_text": {
+      "value": "Genetic epilepsy",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "Genetic epilepsy",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1771,
+      "char_end": 1787
+    },
+    "etiology_specifics": {
+      "value": {
+        "causative_gene": "KCNQ2",
+        "causative_variant": "c.881C>T",
+        "causative_antibody": null,
+        "associated_tumor_text": null,
+        "causative_pathogen_text": null,
+        "causative_metabolic_text": null
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "KCNQ2",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 372,
+      "char_end": 377
+    },
+    "focal_motor_onset": {
+      "value": "clonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clonic",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 316,
+      "char_end": 322
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "topiramate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Topamax",
+        "source_doc_id": "P003044_V02",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 522,
+        "char_end": 529
+      },
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Zonegran",
+        "source_doc_id": "P003044_V02",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 544,
+        "char_end": 552
+      },
+      {
+        "value": {
+          "generic_name": "oxcarbazepine",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Trileptal",
+        "source_doc_id": "P003044_V02",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 571,
+        "char_end": 580
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "- Allergy information not documented in the available record",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "- Allergy information not documented in the available record",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 2311,
+      "char_end": 2371
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "drug-resistant",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 52,
+      "char_end": 66
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": "diffuse",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "psy, with seizure onset at age 68. His documented seizure phenotype includes generalized tonic-clonic seiz",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 231,
+      "char_end": 247
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "findings": [],
+    "lesion_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "not_assessed",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "0 modality/modalities documented (need \u22652)",
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003044_V02",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

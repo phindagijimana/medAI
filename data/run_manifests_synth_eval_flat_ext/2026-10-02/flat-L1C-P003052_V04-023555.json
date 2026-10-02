@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003052_V04-023555",
+  "started_at": "2026-10-02T02:35:55.657204+00:00",
+  "finished_at": "2026-10-02T02:36:07.799294+00:00",
+  "duration_s": 12.14,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003052_V04",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 9917,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"drug-resistant focal epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"focal_impaired_awareness\", \"quote\": \"focal impaired awareness seizures\"}, \"age_at_onset_years\": {\"value\": 9, \"quote\": \"seizure onset at age 9\"}, \"seizure_frequency\": {\"count_min\": 1, \"count_max\": 1, \"period\": \"month\", \"seizure_free\": false, \"quote\": \"approximately one event per month\"}, \"current_asms\": [{\"name\": \"Depakote\", \"dose\": null, \"quote\": \"valproate\"}, {\"name\": \"Zonegran\", \"dose\": null, \"quote\": \"zonisamide\"}, {\"name\": \"Keppra\", \"dose\": null, \"quote\": \"levetiracetam\"}, {\"name\": \"Vimpat\", \"dose\": null, \"quote\": \"lacosamide\"}]}",
+  "raw_response_tokens": 219,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 8,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

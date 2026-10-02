@@ -1,0 +1,502 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004019_V04",
+    "doc_type": "progress_note",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004019_V04",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "combined_focal_generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "combined generalized and focal epilepsy",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 459,
+      "char_end": 498
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_absence_typical",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "absence",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 4161,
+      "char_end": 4168
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "is generalized tonic-clonic, occurring at an average frequency of approximately two per month. Etiology is considered structural. Brain MRI demonstrated hippocampal sclerosis;",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "is generalized tonic-clonic, occurring at an average frequency of approximately two per month. Etiology is considered structural. Brain MRI demonstrated hippocampal sclerosis;",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 556,
+      "char_end": 731
+    },
+    "age_at_onset_years": {
+      "value": 10.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "onset at age 10",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 512,
+      "char_end": 527
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "two per month",
+        "period": "month",
+        "count_min": 2.0,
+        "count_max": 2.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "two per month",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 637,
+      "char_end": 650
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "structural epilepsy",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 7153,
+      "char_end": 7172
+    },
+    "etiology_details_text": {
+      "value": "structural epilepsy",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "structural epilepsy",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 7153,
+      "char_end": 7172
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "clonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clonic",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 578,
+      "char_end": 584
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "topiramate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "topiramate",
+        "source_doc_id": "P004019_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1021,
+        "char_end": 1031
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P004019_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1064,
+        "char_end": 1077
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "The patient previously trialed levetiracetam, which was discontinued due to mood side effects",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "The patient previously trialed levetiracetam, which was discontinued due to mood side effects",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1032,
+      "char_end": 1126
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [
+      {
+        "value": {
+          "surgery_type": "neurostimulation_rns",
+          "target": null,
+          "laterality": null,
+          "year": null,
+          "outcome_text": null,
+          "engel_class": null,
+          "ilae_outcome": null,
+          "device_model_text": null,
+          "stimulation_parameters_text": null,
+          "pathology_notes_text": null
+        },
+        "certainty": "probable",
+        "temporal_status": "historical",
+        "evidence_text": "ch as the NeuroPace RNS System may be reviewed by the multi",
+        "source_doc_id": "P004019_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 8690,
+        "char_end": 8699
+      }
+    ],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "The modest verbal-versus-visual memory difference may suggest relatively greater dominant temporal-system vulnerability, but this cannot be established without the laterality of the MRI lesion, EEG fi",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 7356,
+      "char_end": 7364
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "prolonged",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ogy, prolonged EEG data",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 7987,
+      "char_end": 8000
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": "diffuse",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "epsy with seizure onset at age 10. The documented seizure type is generalized tonic-clonic, occurring at a",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 504,
+      "char_end": 520
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 710,
+      "char_end": 731
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "hippocampal sclerosis",
+        "source_doc_id": "P004019_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 710,
+        "char_end": 731
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 710,
+      "char_end": 731
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 710,
+      "char_end": 731
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "The mild weakness in rapid lexical retrieval could reflect temporal-system inefficiency, medication effects, or reduced processing speed",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 4075,
+      "char_end": 4083
+    },
+    "eeg_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "The modest verbal-versus-visual memory difference may suggest relatively greater dominant temporal-system vulnerability, but this cannot be established without the laterality of the MRI lesion, EEG fi",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 7356,
+      "char_end": 7364
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Brain MRI demonstrated hippocampal sclerosis",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 710,
+      "char_end": 721
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/unknown; eeg_localization=temporal/unknown; mri_localization=temporal/unknown",
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

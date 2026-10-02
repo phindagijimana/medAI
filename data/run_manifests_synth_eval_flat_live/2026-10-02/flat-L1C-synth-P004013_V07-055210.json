@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-synth-P004013_V07-055210",
+  "started_at": "2026-10-02T05:52:10.823325+00:00",
+  "finished_at": "2026-10-02T05:52:21.357309+00:00",
+  "duration_s": 10.53,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.11.13",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.14.0+cu130",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "13.0"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004013_V07",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5302,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"combined_focal_generalized\", \"quote\": \"combined generalized and focal epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"focal_impaired_awareness\", \"quote\": \"focal impaired-awareness seizures\"}, \"age_at_onset_years\": {\"value\": 10, \"quote\": \"onset at age 10\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"zero seizures per month\"}, \"current_asms\": [{\"name\": \"Topamax\", \"dose\": \"current reconciled dose\", \"quote\": \"Topamax (topiramate) at the current reconciled dose and schedule\"}, {\"name\": \"Depakote\", \"dose\": \"current reconciled dose\", \"quote\": \"Depakote (valproate) at the current reconciled dose and schedule\"}]}",
+  "raw_response_tokens": 208,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

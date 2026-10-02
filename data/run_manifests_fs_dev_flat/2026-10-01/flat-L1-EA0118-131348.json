@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1-EA0118-131348",
+  "started_at": "2026-10-01T13:13:48.320576+00:00",
+  "finished_at": "2026-10-01T13:13:51.829172+00:00",
+  "duration_s": 3.51,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0118",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1499,
+  "raw_response": "{\"epilepsy_type\": \"generalized\", \"predominant_seizure_type\": \"generalized_tonic_clonic\", \"age_at_onset_years\": 24, \"seizure_frequency\": {\"count_min\": 1, \"count_max\": 1, \"period\": \"event\", \"seizure_free\": true, \"quote\": \"has not had any further episodes since\"}, \"current_asms\": [], \"quote\": \"This gentleman has had an event suggestive of a single generalised tonic clonic seizure, possibly triggered by Benzodiazepine withdrawal and sleep deprivation.\"}",
+  "raw_response_tokens": 125,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 1,
+    "values_dropped": 1
+  },
+  "arm": "L1"
+}

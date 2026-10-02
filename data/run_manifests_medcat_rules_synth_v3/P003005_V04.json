@@ -1,0 +1,481 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P003005_V04",
+    "doc_type": "progress_note",
+    "doc_date": "2020-01-01",
+    "patient_id": "P003005_V04",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized epilepsy",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 788,
+      "char_end": 808
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized tonic-clonic seizures",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 814,
+      "char_end": 847
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "beyond generalized tonic-clonic seizures were not available. Accordingly, the relationship between the structural lesion and the generalized epilepsy classification cannot be evaluated in this report.",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "beyond generalized tonic-clonic seizures were not available. Accordingly, the relationship between the structural lesion and the generalized epilepsy classification cannot be evaluated in this report.",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1711,
+      "char_end": 1911
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure-free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 972,
+      "char_end": 984
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrated focal cortical dysplasia. The location, extent, and la",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1516,
+      "char_end": 1540
+    },
+    "etiology_details_text": {
+      "value": "onstrated focal cortical dysplasia. The location, extent, and la",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrated focal cortical dysplasia. The location, extent, and la",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1516,
+      "char_end": 1540
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "clonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clonic",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 832,
+      "char_end": 838
+    },
+    "focal_nonmotor_onset": {
+      "value": "cognitive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "cognitive",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 6732,
+      "char_end": 6741
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "topiramate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "topiramate",
+        "source_doc_id": "P003005_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1064,
+        "char_end": 1074
+      },
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "zonisamide",
+        "source_doc_id": "P003005_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1079,
+        "char_end": 1089
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "Medication doses, duration of treatment, prior medication trials, and adverse effects were not provided",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Medication doses, duration of treatment, prior medication trials, and adverse effects were not provided",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1090,
+      "char_end": 1194
+    },
+    "drug_resistance_status": {
+      "value": "drug_responsive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 972,
+      "char_end": 984
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "There is insufficient information to comment on dominant-hemisphere temporal functioning or language lateralization",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 4591,
+      "char_end": 4599
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "video_eeg",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "nged video-EEG find",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 6682,
+      "char_end": 6691
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal cortical dysplasia",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1516,
+      "char_end": 1540
+    },
+    "findings": [
+      {
+        "value": "focal_cortical_dysplasia",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal cortical dysplasia",
+        "source_doc_id": "P003005_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1516,
+        "char_end": 1540
+      },
+      {
+        "value": "other_lesion",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "MRI abnormality",
+        "source_doc_id": "P003005_V04",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 6619,
+        "char_end": 6634
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "temporal",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 4591,
+      "char_end": 4599
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal cortical dysplasia",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1516,
+      "char_end": 1540
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "There is insufficient information to comment on dominant-hemisphere temporal functioning or language lateralization",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 4591,
+      "char_end": 4599
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "not_assessed",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "1 modality/modalities documented (need \u22652)",
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003005_V04",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

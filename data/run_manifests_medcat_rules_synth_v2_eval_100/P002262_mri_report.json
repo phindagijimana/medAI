@@ -1,0 +1,453 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P002262_mri_report",
+    "doc_type": "mri_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P002262_mri_report",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "Generalized epilepsy",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 33,
+      "char_end": 53
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized tonic-clonic seizures",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 59,
+      "char_end": 92
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "**Clinical history:** Generalized epilepsy with generalized tonic-clonic seizures beginning at age 33, occurring approximately twice per year. Structural etiology.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "**Clinical history:** Generalized epilepsy with generalized tonic-clonic seizures beginning at age 33, occurring approximately twice per year. Structural etiology.",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 11,
+      "char_end": 174
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "twice per year",
+        "period": "year",
+        "count_min": 2.0,
+        "count_max": 2.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": "generalized_clonic"
+      },
+      "certainty": "probable",
+      "temporal_status": "historical",
+      "evidence_text": "twice per year",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 138,
+      "char_end": 152
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Structural etiology",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 154,
+      "char_end": 173
+    },
+    "etiology_details_text": {
+      "value": "Structural etiology",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Structural etiology",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 154,
+      "char_end": 173
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P002262_mri_report",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 202,
+        "char_end": 212
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "**Findings:** Hippocampal sclerosis is identified",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 308,
+      "char_end": 319
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Hippocampal sclerosis",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 308,
+      "char_end": 329
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "Hippocampal sclerosis",
+        "source_doc_id": "P002262_mri_report",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 308,
+        "char_end": 329
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Hippocampal sclerosis",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 308,
+      "char_end": 329
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Hippocampal sclerosis",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 308,
+      "char_end": 329
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "**Findings:** Hippocampal sclerosis is identified",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 308,
+      "char_end": 319
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "mri_localization=temporal/unknown; clinical_localization=temporal/unknown",
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P002262_mri_report",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0192-131411",
+  "started_at": "2026-10-01T13:14:11.047011+00:00",
+  "finished_at": "2026-10-01T13:14:21.312970+00:00",
+  "duration_s": 10.27,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0192",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 675,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Complex partial seizures\"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": null}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": 1, \"count_max\": null, \"period\": null, \"seizure_free\": true, \"quote\": \"He has only had 1 seizure since I increased his carbamazepine dose three months ago.\"}, \"current_asms\": [{\"name\": \"carbamazepine\", \"dose\": \"400 mg\", \"quote\": \"Carbamazepine 400mg twice per day\"}]}",
+  "raw_response_tokens": 164,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 3,
+    "values_dropped": 1
+  },
+  "arm": "L2C"
+}

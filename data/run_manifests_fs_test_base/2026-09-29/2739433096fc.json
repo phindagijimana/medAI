@@ -1,0 +1,47 @@
+{
+  "run_id": "2739433096fc",
+  "started_at": "2026-09-29T04:06:14+00:00",
+  "finished_at": "2026-09-29T04:06:24+00:00",
+  "duration_s": 10.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0181",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1112,
+  "raw_response": "{\n  \"patient_id\": \"Ms_Haana_Habley\",\n  \"age\": 41,\n  \"sex\": \"female\",\n  \"diagnosis\": \"symptomatic epilepsy due to neurocysticercosis\",\n  \"seizure_type\": \"focal dyscognitive seizures\",\n  \"seizure_frequency\": \"clusters\",\n  \"seizure_count\": 10-15,\n  \"seizure_duration\": 2 days,\n  \"provoking_factors\": \"none\",\n  \"imaging\": {\n    \"ct\": {\n      \"date\": 2000,\n      \"findings\": \"calcifications consistent with neurocysticercosis\"\n    },\n    \"mri\": {\n      \"date\": 2011,\n      \"findings\": \"normal\"\n    }\n  },\n  \"medications\": {\n    \"current\": \"lamotrigine 150mg bd\",\n    \"previous\": \"levetiracetam\",\n    \"reason_for_change\": \"mood disturbance\"\n  },\n  \"treatment_plan\": {\n    \"action\": \"increase lamotrigine by 25mg every fortnight until 200mg bd\",\n    \"alternative\": \"introduce zonisamide 25mg od, increasing by 25mg every fortnight to a target dose of 75mg bd\",\n    \"risks\": \"weight loss, increased risk of kidney stones\"\n  },\n  \"patient_preferences\": \"no further children\",\n  \"source_doc_id\": \"EP-01\",\n  \"source_doc_type\": \"electroencephalography\",\n  \"source_date\": \"2023-01-01\"\n}",
+  "raw_response_tokens": 343,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected `,` or `}` at line 8 column 22 [type=json_invalid, input_value='{\\n  \"patient_id\": \"Ms_H..._date\": \"2023-01-01\"\\n}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "1 validation error for ClinicalLocalizationModule\n  Invalid JSON: expected `,` or `}` at line 8 column 22 [type=json_invalid, input_value='{\\n  \"patient_id\": \"Ms_H..._date\": \"2023-01-01\"\\n}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "parsed_value": null,
+  "arm": "M1"
+}

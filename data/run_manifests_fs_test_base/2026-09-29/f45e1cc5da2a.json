@@ -1,0 +1,60 @@
+{
+  "run_id": "f45e1cc5da2a",
+  "started_at": "2026-09-29T04:12:50+00:00",
+  "finished_at": "2026-09-29T04:13:20+00:00",
+  "duration_s": 30.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0183",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1463,
+  "raw_response": "{\n  \"patient_id\": \"0000000000\",\n  \"patient_name\": \"John Jones\",\n  \"date_of_birth\": \"1996-06-01\",\n  \"diagnosis\": [\n    {\n      \"value\": \"Complex partial seizures\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Diagnosis: Complex partial seizures with secondary generalised tonic clonic seizures\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    },\n    {\n      \"value\": \"Secondary generalised tonic clonic seizures\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Diagnosis: Complex partial seizures with secondary generalised tonic clonic seizures\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ],\n  \"medications\": [\n    {\n      \"name\": \"Sodium Valproate\",\n      \"dose\": \"700mg\",\n      \"frequency\": \"morning\",\n      \"certainty\": \"current\",\n      \"evidence_text\": \"Medication: Sodium Valproate 700mg in the morning and 800mg nocte\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    },\n    {\n      \"name\": \"Sodium Valproate\",\n      \"dose\": \"800mg\",\n      \"frequency\": \"nocte\",\n      \"certainty\": \"current\",\n      \"evidence_text\": \"Medication: Sodium Valproate 700mg in the morning and 800mg nocte\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ],\n  \"seizure_history\": [\n    {\n      \"type\": \"Complex partial\",\n      \"frequency\": \"4 to 5 times a year\",\n      \"duration\": \"no longer than 3 minutes\",\n      \"symptoms\": [\n        \"dizziness\",\n        \"slight headache\",\n        \"nausea\",\n        \"unresponsiveness\",\n        \"slight hand shaking\"\n      ],\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"He says he feels dizzy at the start, followed by a slight headache and nausea. He has been told that during the episodes he is unresponsive and that his hands may shake slightly. The episodes last no longer than 3 minutes and occur 4 to 5 times a year.\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    },\n    {\n      \"type\": \"Secondary generalised tonic clonic\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Diagnosis: Complex partial seizures with secondary generalised tonic clonic seizures\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ],\n  \"imaging\": [\n    {\n      \"type\": \"MRI\",\n      \"result\": \"normal\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"His MRI is normal.\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ],\n  \"electrophysiology\": [\n    {\n      \"type\": \"EEG\",\n      \"result\": \"abnormal\",\n      \"location\": \"left anterior region\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"His EEG in 2010 was abnormal, with sharp wave activity in the left anterior region.\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ],\n  \"developmental\": {\n    \"birth\": \"normal\",\n    \"febrile_seizures\": \"no\",\n    \"head_injury\": \"no\",\n    \"brain_infections\": \"no\",\n    \"family_history_epilepsy\": \"no\"\n  },\n  \"treatment_plan\": [\n    {\n      \"medication\": \"Sodium Valproate\",\n      \"dose\": \"800mg bd\",\n      \"certainty\": \"proposed\",\n      \"evidence_text\": \"I suggest that the dose should be increased by 100mg so that he is on Sodium Valproate 800mg bd.\",\n      \"source_doc_id\": \"EP-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2013-05-21\"\n    }\n  ]\n}",
+  "raw_response_tokens": 1039,
+  "raw_valid": false,
+  "parse_error_raw": "11 validation errors for ClinicalLocalizationModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='0000000000', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\npatient_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='John Jones', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndate_of_birth\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1996-06-01', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndiagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'value': 'Complex parti...ce_date': '2013-05-21'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'name': 'Sodium Valproa...ce_date': '2013-05-21'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_history\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'type': 'Complex partia...ce_date': '2013-05-21'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nimaging\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'type': 'MRI', 'result'...ce_date': '2013-05-21'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nelectrophysiology\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'type': 'EEG', 'result'...ce_date': '2013-05-21'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndevelopmental\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'birth': 'normal', 'febr...history_epilepsy': 'no'}, input_type=dict]\n    For further informat",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0183",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

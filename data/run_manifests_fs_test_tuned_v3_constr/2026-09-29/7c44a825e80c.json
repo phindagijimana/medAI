@@ -1,0 +1,120 @@
+{
+  "run_id": "7c44a825e80c",
+  "started_at": "2026-09-29T10:12:35+00:00",
+  "finished_at": "2026-09-29T10:13:07+00:00",
+  "duration_s": 32.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_fssplit",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "fs-test-EA0184",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 530,
+  "raw_response": "{\n        \"current_asms\": [],\n        \"failed_asms\": [],\n        \"prior_asms\": [],\n        \"adverse_effects_text\": {\n          \"value\": null,\n          \"certainty\": \"not_documented\",\n          \"temporal_status\": \"unspecified\",\n          \"evidence_text\": null,\n          \"source_doc_id\": \"doc_id_123\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": null,\n          \"char_end\": null\n        },\n        \"drug_resistance_status\": {\n          \"value\": \"drug_resistant\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"drug resistant\",\n          \"source_doc_id\": \"doc_id_123\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 123,\n          \"char_end\": 135\n        },\n        \"surgery_history\": [\n          {\n           \"value\": {\n           \"surgery_type\": \"resection\",\n           \"target\": \"focal\",\n           \"laterality\": \"right\",\n           \"year\": 2024,\n           \"outcome_text\": \"failed\",\n           \"engel_class\": \"IIA\",\n           \"ilae_outcome\": \"2\",\n           \"device_model_text\": null,\n           \"stimulation_parameters_text\": null,\n           \"pathology_notes_text\": null\n          },\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"surgery\",\n          \"source_doc_id\": \"doc_id_123\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 456,\n          \"char_end\": 462\n        },\n        {\n          \"value\": {\n           \"surgery_type\": \"resection\",\n           \"target\": \"focal\",\n           \"laterality\": \"left\",\n           \"year\": 2023,\n           \"outcome_text\": \"failed\",\n           \"engel_class\": \"IIA\",\n           \"ilae_outcome\": \"2\",\n           \"device_model_text\": null,\n           \"stimulation_parameters_text\": null,\n           \"pathology_notes_text\": null\n          },\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"surgery\",\n          \"source_doc_id\": \"doc_id_123\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 456,\n          \"char_end\": 462\n        }\n      ],\n        \"non_drug_therapies\": []\n      }",
+  "raw_response_tokens": 594,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "doc_id_123",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "drug resistant",
+      "source_doc_id": "doc_id_123",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "surgery_history": [
+      {
+        "value": {
+          "surgery_type": "resection",
+          "target": "focal",
+          "laterality": "right",
+          "year": 2024,
+          "outcome_text": "failed",
+          "engel_class": "IIA",
+          "ilae_outcome": "2",
+          "device_model_text": null,
+          "stimulation_parameters_text": null,
+          "pathology_notes_text": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "surgery",
+        "source_doc_id": "doc_id_123",
+        "source_doc_type": "progress_note",
+        "source_date": "2026-09-25",
+        "char_start": 456,
+        "char_end": 462
+      },
+      {
+        "value": {
+          "surgery_type": "resection",
+          "target": "focal",
+          "laterality": "left",
+          "year": 2023,
+          "outcome_text": "failed",
+          "engel_class": "IIA",
+          "ilae_outcome": "2",
+          "device_model_text": null,
+          "stimulation_parameters_text": null,
+          "pathology_notes_text": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "surgery",
+        "source_doc_id": "doc_id_123",
+        "source_doc_type": "progress_note",
+        "source_date": "2026-09-25",
+        "char_start": 456,
+        "char_end": 462
+      }
+    ],
+    "non_drug_therapies": []
+  },
+  "arm": "M2"
+}

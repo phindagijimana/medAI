@@ -1,0 +1,487 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P003027_V05",
+    "doc_type": "progress_note",
+    "doc_date": "2020-01-01",
+    "patient_id": "P003027_V05",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal epilepsy",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1052,
+      "char_end": 1066
+    },
+    "predominant_seizure_type": {
+      "value": "focal_aware",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal aware seizures",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 208,
+      "char_end": 228
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": "aware",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "aware",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 214,
+      "char_end": 219
+    },
+    "semiology_text": {
+      "value": "A seizure count for the past 24 hours was not provided. The patient has focal aware seizures with a baseline frequency of approximately two per year.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "A seizure count for the past 24 hours was not provided. The patient has focal aware seizures with a baseline frequency of approximately two per year.",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 135,
+      "char_end": 284
+    },
+    "age_at_onset_years": {
+      "value": 66.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "onset at age 66",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1111,
+      "char_end": 1126
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "two per year",
+        "period": "year",
+        "count_min": 2.0,
+        "count_max": 2.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": "focal_aware"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "two per year",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 272,
+      "char_end": 284
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrates hippocampal sclerosis.\n\nAssessment:  \n68-year-old m",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 999
+    },
+    "etiology_details_text": {
+      "value": "onstrates hippocampal sclerosis.\n\nAssessment:  \n68-year-old m",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrates hippocampal sclerosis.\n\nAssessment:  \n68-year-old m",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 999
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": "sensory",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "sensory",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1816,
+      "char_end": 1823
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "lamotrigine",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "lamotrigine",
+        "source_doc_id": "P003027_V05",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1328,
+        "char_end": 1339
+      },
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P003027_V05",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1341,
+        "char_end": 1354
+      },
+      {
+        "value": {
+          "generic_name": "oxcarbazepine",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "oxcarbazepine",
+        "source_doc_id": "P003027_V05",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 1360,
+        "char_end": 1373
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_resistant",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "drug-resistant",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1037,
+      "char_end": 1051
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Prior MRI demonstrates hippocampal sclerosis",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 989
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 999
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "hippocampal sclerosis",
+        "source_doc_id": "P003027_V05",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 978,
+        "char_end": 999
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 999
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 999
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Prior MRI demonstrates hippocampal sclerosis",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 978,
+      "char_end": 989
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "mri_localization=temporal/unknown; clinical_localization=temporal/unknown",
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P003027_V05",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

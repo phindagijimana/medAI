@@ -1,0 +1,220 @@
+{
+  "run_id": "94fd36773e59",
+  "started_at": "2026-09-29T09:19:48+00:00",
+  "finished_at": "2026-09-29T09:20:52+00:00",
+  "duration_s": 64.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_fssplit",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "fs-test-EA0174",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 906,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"Epilepsy unclassified\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 45,\n    \"char_end\": 61\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"unknown_onset_tonic_clonic\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"seizures\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 395,\n    \"char_end\": 403\n  },\n  \"other_seizure_types\": [\n    {\n      \"value\": \"unknown_onset_tonic_clonic\",\n      \"certainty\": \"definite\",\n      \"evidence_text\": \"seizures\",\n      \"source_doc_id\": \"EA0174\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"1988-01-01\",\n      \"char_start\": 395,\n      \"char_end\": 403\n    }\n  ],\n  \"awareness\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"awareness\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 433,\n    \"char_end\": 441\n  },\n  \"semiology_text\": {\n    \"value\": \"seizures\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"seizures\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 395,\n    \"char_end\": 403\n  },\n  \"age_at_onset_years\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"seizure_frequency\": {\n    \"value\": {\n      \"raw_text\": \"seizure\",\n      \"period\": \"unspecified\",\n      \"count_min\": null,\n      \"count_max\": null,\n      \"seizure_free\": false,\n      \"duration_text\": null,\n      \"applies_to_type\": null\n    },\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"seizure\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 395,\n    \"char_end\": 402\n  },\n  \"other_seizure_frequencies\": [\n    {\n      \"value\": {\n        \"raw_text\": \"seizure\",\n        \"period\": \"unspecified\",\n        \"count_min\": null,\n        \"count_max\": null,\n        \"seizure_free\": false,\n        \"duration_text\": null,\n        \"applies_to_type\": null\n      },\n      \"certainty\": \"definite\",\n      \"evidence_text\": \"seizure\",\n      \"source_doc_id\": \"EA0174\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"1988-01-01\",\n      \"char_start\": 395,\n      \"char_end\": 402\n    }\n  ],\n  \"status_epilepticus_history\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"etiology_category\": {\n    \"value\": \"unknown\",\n    \"certainty\": \"definite\",\n    \"evidence_text\": \"unknown\",\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": 62,\n    \"char_end\": 70\n  },\n  \"etiology_details_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"etiology_specifics\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"focal_motor_onset\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"focal_nonmotor_onset\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0174\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"1988-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  }\n}",
+  "raw_response_tokens": 1334,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "epilepsy_type": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "Epilepsy unclassified",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 45,
+      "char_end": 61
+    },
+    "predominant_seizure_type": {
+      "value": "unknown_onset_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "seizures",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 395,
+      "char_end": 403
+    },
+    "other_seizure_types": [
+      {
+        "value": "unknown_onset_tonic_clonic",
+        "certainty": "definite",
+        "temporal_status": "unspecified",
+        "evidence_text": "seizures",
+        "source_doc_id": "EA0174",
+        "source_doc_type": "progress_note",
+        "source_date": "1988-01-01",
+        "char_start": 395,
+        "char_end": 403
+      }
+    ],
+    "awareness": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "awareness",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 433,
+      "char_end": 441
+    },
+    "semiology_text": {
+      "value": "seizures",
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "seizures",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 395,
+      "char_end": 403
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "seizure",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 395,
+      "char_end": 402
+    },
+    "other_seizure_frequencies": [
+      {
+        "value": {
+          "raw_text": "seizure",
+          "period": "unspecified",
+          "count_min": null,
+          "count_max": null,
+          "seizure_free": false,
+          "duration_text": null,
+          "applies_to_type": null
+        },
+        "certainty": "definite",
+        "temporal_status": "unspecified",
+        "evidence_text": "seizure",
+        "source_doc_id": "EA0174",
+        "source_doc_type": "progress_note",
+        "source_date": "1988-01-01",
+        "char_start": 395,
+        "char_end": 402
+      }
+    ],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "unspecified",
+      "evidence_text": "unknown",
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": 62,
+      "char_end": 70
+    },
+    "etiology_details_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0174",
+      "source_doc_type": "progress_note",
+      "source_date": "1988-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M0"
+}

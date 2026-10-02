@@ -1,0 +1,47 @@
+{
+  "run_id": "751fdd4aa44d",
+  "started_at": "2026-09-28T18:57:46+00:00",
+  "finished_at": "2026-09-28T18:58:15+00:00",
+  "duration_s": 29.0,
+  "code_sha": "442fbaa",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-C0-C0-P006",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 61,
+  "raw_response": "{\n  \"patient_id\": {\n    \"value\": \"P006\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"P006\",\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"overall_normal\": {\n    \"value\": false,\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Abnormal\",\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"study_type\": {\n    \"value\": \"synthetic\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Synthetic eeg report\",\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"background\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ied_present\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ied_findings\": [\n    {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"SYN-EEG-01\",\n      \"source_doc_type\": \"eeg_report\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ],\n  \"seizures_captured\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizures_captured_count\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ictal_onset_lobe\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"ictal_onset_laterality\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-EEG-01\",\n    \"source_doc_type\": \"eeg_report\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 840,
+  "raw_valid": false,
+  "parse_error_raw": "3 validation errors for EegModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'P006', 'certai...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\noverall_normal\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': False, 'certain...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstudy_type.value\n  Input should be 'routine', 'prolonged', 'ambulatory', 'video_eeg', 'emu', 'intraoperative', 'seeg' or 'ecog' [type=enum, input_value='synthetic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "3 validation errors for EegModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'P006', 'certai...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\noverall_normal\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': False, 'certain...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nstudy_type.value\n  Input should be 'routine', 'prolonged', 'ambulatory', 'video_eeg', 'emu', 'intraoperative', 'seeg' or 'ecog' [type=enum, input_value='synthetic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M1"
+}

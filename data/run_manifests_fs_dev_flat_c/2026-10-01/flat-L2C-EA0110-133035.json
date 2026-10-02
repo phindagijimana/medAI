@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0110-133035",
+  "started_at": "2026-10-01T13:30:35.372946+00:00",
+  "finished_at": "2026-10-01T13:30:48.540894+00:00",
+  "duration_s": 13.17,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0110",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2365,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"generalised tonic clonic seizures probably with a focal onset.\"}, \"predominant_seizure_type\": {\"value\": null, \"quote\": null}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": \"month\", \"seizure_free\": false, \"quote\": \"Current frequency of the seizures is once or twice a month, but last month there was a cluster of 3 in a single day and she was taken to A&E.\"}, \"current_asms\": [{\"name\": \"sodium valproate\", \"dose\": \"400mg bd\", \"quote\": \"Sodium Valproate following her seizure cluster and is now on 400mg bd.\"}, {\"name\": \"levetiracetam\", \"dose\": \"250mg od\", \"quote\": \"Levetiracetam 250mg od increasing by 250mg increments weekly until she reaches 500mg bd.\"}]}",
+  "raw_response_tokens": 234,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

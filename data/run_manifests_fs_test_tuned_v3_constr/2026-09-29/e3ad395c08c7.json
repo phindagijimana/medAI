@@ -1,0 +1,108 @@
+{
+  "run_id": "e3ad395c08c7",
+  "started_at": "2026-09-29T10:09:22+00:00",
+  "finished_at": "2026-09-29T10:09:49+00:00",
+  "duration_s": 27.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_fssplit",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "fs-test-EA0184",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 530,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"carbamazepine\",\n        \"status\": \"current\",\n        \"dose_text\": \"300 mg \u00d7 2/day\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"evidence_text\": \"carbamazepine 300 mg BD\",\n      \"source_doc_id\": \"EA0184\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2024-01-01\",\n      \"char_start\": 143,\n      \"char_end\": 166\n    },\n    {\n      \"value\": {\n        \"generic_name\": \"gabapentin\",\n        \"status\": \"current\",\n        \"dose_text\": \"300 mg \u00d7 3/day\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"evidence_text\": \"gabapentin 300 mg tds\",\n      \"source_doc_id\": \"EA0184\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2024-01-01\",\n      \"char_start\": 173,\n      \"char_end\": 191\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0184\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2024-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"drug_resistance_status\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0184\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2024-01-01\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": []\n}",
+  "raw_response_tokens": 481,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "carbamazepine",
+          "status": "current",
+          "dose_text": "300 mg \u00d7 2/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "unspecified",
+        "evidence_text": "carbamazepine 300 mg BD",
+        "source_doc_id": "EA0184",
+        "source_doc_type": "progress_note",
+        "source_date": "2024-01-01",
+        "char_start": 143,
+        "char_end": 166
+      },
+      {
+        "value": {
+          "generic_name": "gabapentin",
+          "status": "current",
+          "dose_text": "300 mg \u00d7 3/day",
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "unspecified",
+        "evidence_text": "gabapentin 300 mg tds",
+        "source_doc_id": "EA0184",
+        "source_doc_type": "progress_note",
+        "source_date": "2024-01-01",
+        "char_start": 173,
+        "char_end": 191
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0184",
+      "source_doc_type": "progress_note",
+      "source_date": "2024-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0184",
+      "source_doc_type": "progress_note",
+      "source_date": "2024-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

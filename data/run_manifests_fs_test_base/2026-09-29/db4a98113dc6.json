@@ -1,0 +1,47 @@
+{
+  "run_id": "db4a98113dc6",
+  "started_at": "2026-09-29T03:39:29+00:00",
+  "finished_at": "2026-09-29T03:39:58+00:00",
+  "duration_s": 29.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0173",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 575,
+  "raw_response": "{\n  \"patient_id\": \"Rachel Johannes\",\n  \"patient_dob\": \"1990-07-13\",\n  \"epilepsy_type\": {\n    \"value\": \"unclassified\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Unclassified Epilepsy\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"medications\": {\n    \"value\": \"unspecified\",\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Unsure of exact medications\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizure_last_occurrence\": {\n    \"value\": \"2025-04-15\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"last seizure was on the 15th April\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"seizure_chart\": {\n    \"value\": \"present\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Rachel showed me her seizure chart\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"safety_issues\": {\n    \"value\": \"discussed\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"We discssued safety issues\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"bathing_practice\": {\n    \"value\": \"showers\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Rachel takes showers not baths\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"contraception\": {\n    \"value\": \"discussed\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"We also discussed contraception\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"contraception_attempts\": {\n    \"value\": \"pill\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"past\",\n    \"evidence_text\": \"Previously she has tried the pill\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"contraception_outcomes\": {\n    \"value\": \"seizure_worsening\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"past\",\n    \"evidence_text\": \"but this seemed to make her seizures worse\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"contraception_plans\": {\n    \"value\": \"depo_injection\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"future\",\n    \"evidence_text\": \"The depo injection seems to cause wright gain\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"contraception_followup\": {\n    \"value\": \"appointment\",\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"future\",\n    \"evidence_text\": \"Rachel will make an appointment with yourself to discussed contraception\",\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 1012,
+  "raw_valid": false,
+  "parse_error_raw": "25 validation errors for ClinicalSeizureModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Rachel Johannes', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\npatient_dob\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1990-07-13', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'unspecified', ...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_last_occurrence\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': '2025-04-15', '...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_chart\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'present', 'cer...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsafety_issues\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'discussed', 'c...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nbathing_practice\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'showers', 'cer...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'discussed', 'c...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception_attempts\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'pill', 'certai...r",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "25 validation errors for ClinicalSeizureModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Rachel Johannes', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\npatient_dob\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1990-07-13', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'unspecified', ...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_last_occurrence\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': '2025-04-15', '...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_chart\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'present', 'cer...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsafety_issues\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'discussed', 'c...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nbathing_practice\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'showers', 'cer...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'discussed', 'c...rce_date': '2025-01-01'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception_attempts\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': 'pill', 'certai...r",
+  "parsed_value": null,
+  "arm": "M1"
+}

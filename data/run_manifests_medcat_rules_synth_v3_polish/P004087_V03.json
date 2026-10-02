@@ -1,0 +1,569 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004087_V03",
+    "doc_type": "eeg_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004087_V03",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "generalized epilepsy",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 107,
+      "char_end": 127
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_myoclonic",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "myoclonic seizures",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 133,
+      "char_end": 151
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "Indication: H/o generalized epilepsy with myoclonic seizures beginning at age 9, currently occurring approximately once per month. Etiology categorized as structural in the setting of MRI-demonstrated focal cortical dysplasia.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "Indication: H/o generalized epilepsy with myoclonic seizures beginning at age 9, currently occurring approximately once per month. Etiology categorized as structural in the setting of MRI-demonstrated focal cortical dysplasia.",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 91,
+      "char_end": 317
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "once per month",
+        "period": "month",
+        "count_min": 1.0,
+        "count_max": 1.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": "generalized_myoclonic"
+      },
+      "certainty": "probable",
+      "temporal_status": "historical",
+      "evidence_text": "once per month",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 206,
+      "char_end": 220
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrated focal cortical dysplasia. Study obtained to r/o interi",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 292,
+      "char_end": 316
+    },
+    "etiology_details_text": {
+      "value": "onstrated focal cortical dysplasia. Study obtained to r/o interi",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "onstrated focal cortical dysplasia. Study obtained to r/o interi",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 292,
+      "char_end": 316
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "myoclonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "myoclonic",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 133,
+      "char_end": 142
+    },
+    "focal_nonmotor_onset": {
+      "value": "cognitive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "cognitive",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 647,
+      "char_end": 656
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "sodiumvalproate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "valproate",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 537,
+        "char_end": 546
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 573,
+        "char_end": 583
+      },
+      {
+        "value": {
+          "generic_name": "zonisamide",
+          "status": "discontinued_adverse_effect",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "zonisamide",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 615,
+        "char_end": 625
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "Patient is s/p trials of perampanel, discontinued due to rash, and zonisamide, discontinued due to cognitive side effects",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Patient is s/p trials of perampanel, discontinued due to rash, and zonisamide, discontinued due to cognitive side effects",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 547,
+      "char_end": 669
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Technique: A 32-minute digital EEG was performed using the international 10-20 system with 21 scalp electrodes, including temporal leads, with simultaneous single-lead ECG and video recording",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 933,
+      "char_end": 941
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": "routine",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "rmal routine EEG due",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 2887,
+      "char_end": 2898
+    },
+    "background": {
+      "value": "asymmetric",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "asymmetry",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1607,
+      "char_end": 1616
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ctal epileptiform activity and assess for electrographic",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 351,
+      "char_end": 372
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "other",
+          "localization": null,
+          "laterality": null,
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ctal epileptiform activity and assess for electrographic",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 351,
+        "char_end": 372
+      },
+      {
+        "value": {
+          "ied_type": "polyspike",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.5
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "5 Hz polyspike-and-wave and spike-and-wave a",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1736,
+        "char_end": 1745
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.5
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "and spike-and-wave activity. These disc",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1759,
+        "char_end": 1764
+      },
+      {
+        "value": {
+          "ied_type": "polyspike_and_wave",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "nant polyspike-and-wave and spike-and-wave discharges",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2960,
+        "char_end": 2978
+      },
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "and spike-and-wave discharges, mildly activated",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2983,
+        "char_end": 2997
+      }
+    ],
+    "seizures_captured": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "No electrographic seizures were recorded",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3235,
+      "char_end": 3275
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal cortical dysplasia",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 292,
+      "char_end": 316
+    },
+    "findings": [
+      {
+        "value": "focal_cortical_dysplasia",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "focal cortical dysplasia",
+        "source_doc_id": "P004087_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 292,
+        "char_end": 316
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "temporal",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 933,
+      "char_end": 941
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal cortical dysplasia",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 292,
+      "char_end": 316
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Technique: A 32-minute digital EEG was performed using the international 10-20 system with 21 scalp electrodes, including temporal leads, with simultaneous single-lead ECG and video recording",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 933,
+      "char_end": 941
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "eeg_localization=temporal/unknown; clinical_localization=temporal/unknown",
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004087_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

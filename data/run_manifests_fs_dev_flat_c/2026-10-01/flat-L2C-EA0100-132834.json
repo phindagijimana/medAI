@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0100-132834",
+  "started_at": "2026-10-01T13:28:34.844395+00:00",
+  "finished_at": "2026-10-01T13:28:44.184348+00:00",
+  "duration_s": 9.34,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0100",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1973,
+  "raw_response": "{\"epilepsy_type\": {\"value\": null, \"quote\": null}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"Transient loss of consciousness\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": 1, \"count_max\": 1, \"period\": \"day\", \"seizure_free\": true, \"quote\": \"On 23/10/2020 he had a transient loss of consciousness.\"}, \"current_asms\": [{\"name\": \"ramipril\", \"dose\": null, \"quote\": \"He takes ramipril for hypertension\"}]}",
+  "raw_response_tokens": 155,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 3,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0102-132856",
+  "started_at": "2026-10-01T13:28:56.317210+00:00",
+  "finished_at": "2026-10-01T13:29:05.804997+00:00",
+  "duration_s": 9.49,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0102",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1015,
+  "raw_response": "{\"epilepsy_type\": {\"value\": null, \"quote\": \"non-epileptic psychogenic seizures\"}, \"predominant_seizure_type\": {\"value\": null, \"quote\": null}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": true, \"quote\": \"She has been seizure free for more than five years.\"}, \"current_asms\": [{\"name\": \"sodiumvalproate\", \"dose\": \"200 mg\", \"quote\": \"sodium valproate 200 milligrammes twice a day\"}]}",
+  "raw_response_tokens": 155,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 2,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

@@ -1,0 +1,182 @@
+{
+  "run_id": "cf69a508c4db",
+  "started_at": "2026-09-28T21:33:01+00:00",
+  "finished_at": "2026-09-28T21:35:24+00:00",
+  "duration_s": 143.0,
+  "code_sha": "dc5a612",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1570,
+  "raw_response": "\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[FocalMotorOnset]\",\n      \"type\": \"object\"\n    },\n    \"Evidence_FocalNonmotorOnset_\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/FocalNonmotorOnset\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[FocalNonmotorOnset]\",\n      \"type\": \"object\"\n    },\n    \"OtherSeizureTypes_\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/other_seizure_type\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"OtherSeizureTypes\",\n      \"type\": \"object\"\n    },\n    \"PredominantSeizureType_\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/predominant_seizure_type\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"PredominantSeizureType\",\n      \"type\": \"object\"\n    },\n    \"SeizureFrequency_\": {\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/seizure_frequency\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"applies_to_type\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/seizure_type\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"duration_text\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/seizure_duration\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"seizure_free\": {\n          \"anyOf\": [\n            {\n              \"type\": \"boolean\",\n              \"default\": false\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"period\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/seizure_period\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"count_min\": {\n          \"anyOf\": [\n            {\n              \"type\": \"integer\",\n              \"minimum\": 0\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"count_max\": {\n          \"anyOf\": [\n            {\n              \"type\": \"integer\",\n              \"minimum\": 0\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"other_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"causative_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"seizure_type\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/schema_v0_2_1/seizure_type\",\n              \"minLength\": 1,\n              \"maxLength\": 100\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"awareness\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/Awareness\",\n              \"default\": null\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"semiology_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"age_at_onset_years\": {\n          \"anyOf\": [\n            {\n              \"type\": \"number\",\n              \"minimum\": 0\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"status_epilepticus_history\": {\n          \"anyOf\": [\n            {\n              \"type\": \"boolean\",\n              \"default\": false\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"etiology_category\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/EtiologyCategory\",\n              \"default\": null\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"etiology_details_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        },\n        \"etiology_specifics\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/EtiologySpecifics\",\n              \"default\": null\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null\n        }\n      },\n      \"required\": [\n        \"value\",\n        \"applies_to_type\",\n        \"period\",\n        \"count_min\",\n        \"count_max\",\n        \"seizure_free\",\n        \"age_at_onset_years\",\n        \"status_epilepticus_history\",\n        \"etiology_category\",\n        \"etiology_details_text\",\n        \"etiology_specifics\"\n      ],\n      \"title\": \"SeizureFrequency\",\n      \"type\": \"object\"\n    },\n    \"TemporalStatus\": {\n      \"enum\": [\n        \"current\",\n        \"historical\",\n        \"unspecified\",\n        \"unknown\",\n        \"not_documented\"\n      ],\n      \"title\": \"TemporalStatus\",\n      \"type\": \"string\"\n    },\n    \"awareness\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/Awareness\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Awareness\",\n      \"type\": \"object\"\n    },\n    \"causative_antibody\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/CausativeAntibody\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Causative Antibody\",\n      \"type\": \"object\"\n    },\n    \"causative_pathogen\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/CausativePathogen\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Causative Pathogen\",\n      \"type\": \"object\"\n    },\n    \"causative_tumor\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/CausativeTumor\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Causative Tumor\",\n      \"type\": \"object\"\n    },\n    \"causative_metabolic\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/CausativeMetabolic\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Causative Metabolic\",\n      \"type\": \"object\"\n    },\n    \"epilepsy_type\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/EpilepsyType\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Epilepsy Type\",\n      \"type\": \"object\"\n    },\n    \"etiology_category\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/EtiologyCategory\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Etiology Category\",\n      \"type\": \"object\"\n    },\n    \"etiology_details_text\": {\n      \"anyOf\": [\n        {\n          \"type\": \"string\"\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Etiology Details Text\",\n      \"type\": \"object\"\n    },\n    \"etiology_specifics\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/EtiologySpecifics\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Etiology Specifics\",\n      \"type\": \"object\"\n    },\n    \"focal_motor_onset\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/FocalMotorOnset\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Focal Motor Onset\",\n      \"type\": \"object\"\n    },\n    \"focal_nonmotor_onset\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/$defs/FocalNonmotorOnset\",\n          \"default\": null\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Focal Nonmotor Onset\",\n      \"type\": \"object\"\n    },\n    \"other_seizure_types\": {\n      \"anyOf\": [\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/schema_v0_2_1/other_seizure_type\",\n            \"minLength\": 1,\n            \"maxLength\": 100\n          },\n          \"additionalProperties\": false\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Other Seizure Types\",\n      \"type\": \"object\"\n    },\n    \"predominant_seizure_type\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/schema_v0_2_1/predominant_seizure_type\",\n          \"minLength\": 1,\n          \"maxLength\": 100\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Predominant Seizure Type\",\n      \"type\": \"object\"\n    },\n    \"seizure_free\": {\n      \"anyOf\": [\n        {\n          \"type\": \"boolean\",\n          \"default\": false\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Seizure Free\",\n      \"type\": \"object\"\n    },\n    \"seizure_frequency\": {\n      \"anyOf\": [\n        {\n          \"$ref\": \"#/schema_v0_2_1/seizure_frequency\",\n          \"minLength\": 1,\n          \"maxLength\": 100\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Seizure Frequency\",\n      \"type\": \"object\"\n    },\n    \"status_epilepticus_history\": {\n      \"anyOf\": [\n        {\n          \"type\": \"boolean\",\n          \"default\": false\n        },\n        {\n          \"type\": \"null\"\n        }\n      ],\n      \"default\": null,\n      \"title\": \"Status Epilepticus History\",\n      \"type\": \"object\"\n    }\n  ],\n  \"required\": [\n    \"schema_version\",\n    \"document\": {\n      \"required\": [\n        \"",
+  "raw_response_tokens": 4096,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for ClinicalSeizureModule\n  Invalid JSON: control character (\\u0000-\\u001F) found while parsing a string at line 2 column 0 [type=json_invalid, input_value='\"\\n            }\\n      ...required\": [\\n        \"', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "epilepsy_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "predominant_seizure_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_details_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P004",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M2"
+}

@@ -1,0 +1,715 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004019_V03",
+    "doc_type": "eeg_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004019_V03",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "combined_focal_generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "combined generalized and focal epilepsy",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 107,
+      "char_end": 146
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized tonic-clonic seizures",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 152,
+      "char_end": 185
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "Indication: H/o combined generalized and focal epilepsy with generalized tonic-clonic seizures beginning at age 10 years. Current seizure frequency approximately 2/month despite improvement on topiramate.",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "Indication: H/o combined generalized and focal epilepsy with generalized tonic-clonic seizures beginning at age 10 years. Current seizure frequency approximately 2/month despite improvement on topiramate.",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 91,
+      "char_end": 295
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "active seizures documented",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "structural etiology",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 349,
+      "char_end": 368
+    },
+    "etiology_details_text": {
+      "value": "structural etiology",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "structural etiology",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 349,
+      "char_end": 368
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "clonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clonic",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 170,
+      "char_end": 176
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "topiramate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "topiramate",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 284,
+        "char_end": 294
+      }
+    ],
+    "prior_asms": [
+      {
+        "value": {
+          "generic_name": "levetiracetam",
+          "status": "prior",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "levetiracetam",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 966,
+        "char_end": 979
+      }
+    ],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "Previously trialed levetiracetam, discontinued due to mood side effects",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Previously trialed levetiracetam, discontinued due to mood side effects",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 946,
+      "char_end": 1018
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "In addition, rare sharp waves were present independently over the left anterior-to-mid temporal region, maximal at F7/T7, with a field extending to FT9 and P7",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1762,
+      "char_end": 1770
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "temporal",
+          "laterality": "unknown",
+          "source": "mri_confirmed"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "MRI demonstrates hippocampal sclerosis, supporting a structural etiology",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 313,
+        "char_end": 324
+      },
+      {
+        "value": {
+          "lobe": "frontal",
+          "laterality": "diffuse",
+          "source": "eeg_confirmed"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Occasional generalized 3\u20134 Hz spike-and-wave/polyspike-and-wave discharges with frontal predominance",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2526,
+        "char_end": 2533
+      }
+    ]
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": "asymmetric",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "asymmetry",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1451,
+      "char_end": 1460
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ctal epileptiform activity and r/o ongoing subclinical s",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 410,
+      "char_end": 431
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "other",
+          "localization": null,
+          "laterality": null,
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ctal epileptiform activity and r/o ongoing subclinical s",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 410,
+        "char_end": 431
+      },
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "4 Hz spike-and-wave and polyspike-and-wave activi",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1578,
+        "char_end": 1592
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "4 Hz spike-and-wave and polyspike-and-wa",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1578,
+        "char_end": 1583
+      },
+      {
+        "value": {
+          "ied_type": "polyspike_and_wave",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "and polyspike-and-wave activity lasting 0.5\u20132 second",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1597,
+        "char_end": 1615
+      },
+      {
+        "value": {
+          "ied_type": "polyspike",
+          "localization": null,
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "and polyspike-and-wave activity lasting 0.5",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1597,
+        "char_end": 1606
+      },
+      {
+        "value": {
+          "ied_type": "sharp_wave",
+          "localization": "temporal",
+          "laterality": "left",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "rare sharp waves were present independently ov",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 1693,
+        "char_end": 1704
+      },
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": "frontal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "4 Hz spike-and-wave/polyspike-and-wave discharges",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2476,
+        "char_end": 2490
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": "frontal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "4 Hz spike-and-wave/polyspike-and-wave d",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2476,
+        "char_end": 2481
+      },
+      {
+        "value": {
+          "ied_type": "polyspike_and_wave",
+          "localization": "frontal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "wave/polyspike-and-wave discharges with frontal predo",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2491,
+        "char_end": 2509
+      },
+      {
+        "value": {
+          "ied_type": "polyspike",
+          "localization": "frontal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": 4.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "wave/polyspike-and-wave discharges with fron",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2491,
+        "char_end": 2500
+      },
+      {
+        "value": {
+          "ied_type": "spike_and_wave",
+          "localization": "temporal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ized spike-and-wave/polyspike-and-wave discharges",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2884,
+        "char_end": 2898
+      },
+      {
+        "value": {
+          "ied_type": "polyspike_and_wave",
+          "localization": "temporal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "wave/polyspike-and-wave discharges and rare independe",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2899,
+        "char_end": 2917
+      },
+      {
+        "value": {
+          "ied_type": "polyspike",
+          "localization": "temporal",
+          "laterality": "diffuse",
+          "dominant_frequency_hz": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "wave/polyspike-and-wave discharges and rare",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 2899,
+        "char_end": 2908
+      }
+    ],
+    "seizures_captured": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "No electrographic seizures were recorded",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 3327,
+      "char_end": 3367
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 313,
+      "char_end": 334
+    },
+    "findings": [
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "hippocampal sclerosis",
+        "source_doc_id": "P004019_V03",
+        "source_doc_type": "eeg_report",
+        "source_date": "2020-01-01",
+        "char_start": 313,
+        "char_end": 334
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 313,
+      "char_end": 334
+    },
+    "lesion_laterality": {
+      "value": "left",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "temporal",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1762,
+      "char_end": 1770
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "hippocampal sclerosis",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 313,
+      "char_end": 334
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "eeg_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "left",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "In addition, rare sharp waves were present independently over the left anterior-to-mid temporal region, maximal at F7/T7, with a field extending to FT9 and P7",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 1762,
+      "char_end": 1770
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "MRI demonstrates hippocampal sclerosis, supporting a structural etiology",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": 313,
+      "char_end": 324
+    },
+    "concordance": {
+      "value": "partially_concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "eeg_localization=temporal/left; mri_localization=temporal/unknown; clinical_localization=temporal/left",
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004019_V03",
+      "source_doc_type": "eeg_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

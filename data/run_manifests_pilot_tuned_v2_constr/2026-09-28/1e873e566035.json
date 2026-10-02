@@ -1,0 +1,159 @@
+{
+  "run_id": "1e873e566035",
+  "started_at": "2026-09-28T22:59:32+00:00",
+  "finished_at": "2026-09-28T23:00:17+00:00",
+  "duration_s": 45.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "pilot-gpt-5.6-luna-C1-P006",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 688,
+  "raw_response": "{\n           \"seizures_captured_count\": {\n           \"source_doc_id\": \"doc_id\",\n           \"source_doc_type\": \"progress_note\",\n           \"source_date\": \"2024-01-01\",\n           \"char_start\": 123,\n           \"char_end\": 135,\n           \"value\": 5,\n           \"certainty\": \"definite\",\n           \"evidence_text\": \"seizures\",\n           \"temporal_status\": \"current\"\n          }\n       ,\"seizures_captured\": {\n           \"source_doc_id\": \"doc_id\",\n           \"source_doc_type\": \"progress_note\",\n           \"source_date\": \"2024-01-01\",\n           \"char_start\": 123,\n           \"char_end\": 135,\n           \"value\": true,\n           \"certainty\": \"definite\",\n           \"evidence_text\": \"seizures\",\n           \"temporal_status\": \"current\"\n          }\n       ,\"ictal_onset_lobe\": {\n           \"source_doc_id\": \"doc_id\",\n           \"source_doc_type\": \"eeg_report\",\n           \"source_date\": \"2024-01-01\",\n           \"char_start\": 123,\n           \"char_end\": 135,\n           \"value\": \"frontal\",\n           \"certainty\": \"definite\",\n           \"evidence_text\": \"ictal onset\",\n           \"temporal_status\": \"current\"\n          }\n       ,\"ictal_onset_laterality\": {\n           \"source_doc_id\": \"doc_id\",\n           \"source_doc_type\": \"eeg_report\",\n           \"source_date\": \"2024-01-01\",\n           \"char_start\": 123,\n           \"char_end\": 135,\n           \"value\": \"right\",\n           \"certainty\": \"definite\",\n           \"evidence_text\": \"ictal onset\",\n           \"temporal_status\": \"current\"\n          }\n       ,\"ied_findings\": [\n          {\n           \"source_doc_id\": \"doc_id\",\n           \"source_doc_type\": \"eeg_report\",\n           \"source_date\": \"2024-01-01\",\n           \"char_start\": 123,\n           \"char_end\": 135,\n           \"value\": {\n           \"ied_type\": \"spike\",\n           \"localization\": \"frontal\",\n           \"laterality\": \"right\",\n           \"dominant_frequency_hz\": 10.0\n          },\n          \"certainty\": \"definite\",\n          \"evidence_text\": \"spike\",\n          \"temporal_status\": \"current\"\n        },\n        {\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"eeg_report\",\n          \"source_date\": \"2024-01-01\",\n          \"char_start\": 123,\n          \"char_end\": 135,\n          \"value\": {\n           \"ied_type\": \"spike\",\n           \"localization\": \"frontal\",\n           \"laterality\": \"right\",\n           \"dominant_frequency_hz\": 10.0\n          },\n          \"certainty\": \"definite\",\n          \"evidence_text\": \"spike\",\n          \"temporal_status\": \"current\"\n        }\n      ],\n      \"study_type\": {\n        \"source_doc_id\": \"doc_id\",\n        \"source_doc_type\": \"eeg_report\",\n        \"source_date\": \"2024-01-01\",\n        \"char_start\": 123,\n        \"char_end\": 135,\n        \"value\": \"video_eeg\",\n        \"certainty\": \"definite\",\n        \"evidence_text\": \"eeg\",\n        \"temporal_status\": \"current\"\n      },\n      \"background\": {\n        \"source_doc_id\": \"doc_id\",\n        \"source_doc_type\": \"eeg_report\",\n        \"source_date\": \"2024-01-01\",\n        \"char_start\": 123,\n        \"char_end\": 135,\n        \"value\": \"normal\",\n        \"certainty\": \"definite\",\n        \"evidence_text\": \"eeg\",\n        \"temporal_status\": \"current\"\n      }\n   ,\"ied_present\": {\n        \"source_doc_id\": \"doc_id\",\n        \"source_doc_type\": \"eeg_report\",\n        \"source_date\": \"2024-01-01\",\n        \"char_start\": 123,\n        \"char_end\": 135,\n        \"value\": true,\n        \"certainty\": \"definite\",\n        \"evidence_text\": \"spike\",\n        \"temporal_status\": \"current\"\n      }\n    }",
+  "raw_response_tokens": 1000,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "study_type": {
+      "value": "video_eeg",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "eeg",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "eeg_report",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "background": {
+      "value": "normal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "eeg",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "eeg_report",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "ied_present": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "spike",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "eeg_report",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "ied_findings": [
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": "frontal",
+          "laterality": "right",
+          "dominant_frequency_hz": 10.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "spike",
+        "source_doc_id": "doc_id",
+        "source_doc_type": "eeg_report",
+        "source_date": "2024-01-01",
+        "char_start": 123,
+        "char_end": 135
+      },
+      {
+        "value": {
+          "ied_type": "spike",
+          "localization": "frontal",
+          "laterality": "right",
+          "dominant_frequency_hz": 10.0
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "spike",
+        "source_doc_id": "doc_id",
+        "source_doc_type": "eeg_report",
+        "source_date": "2024-01-01",
+        "char_start": 123,
+        "char_end": 135
+      }
+    ],
+    "seizures_captured": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizures",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "seizures_captured_count": {
+      "value": 5,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizures",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "ictal_onset_lobe": {
+      "value": "frontal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ictal onset",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "eeg_report",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    },
+    "ictal_onset_laterality": {
+      "value": "right",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "ictal onset",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "eeg_report",
+      "source_date": "2024-01-01",
+      "char_start": 123,
+      "char_end": 135
+    }
+  },
+  "arm": "M2"
+}

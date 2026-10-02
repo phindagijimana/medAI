@@ -1,0 +1,190 @@
+{
+  "run_id": "cb32dfeb5427",
+  "started_at": "2026-09-29T08:48:54+00:00",
+  "finished_at": "2026-09-29T08:49:56+00:00",
+  "duration_s": 62.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_seizure.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_seizure.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_fssplit",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "fs-test-EA0167",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1366,
+  "raw_response": "{\"status_epilepticus_history\": {\n          \"value\": null,\n          \"certainty\": \"not_documented\",\n          \"temporal_status\": \"unspecified\",\n          \"evidence_text\": null,\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 435\n        },\n        \"predominant_seizure_type\": {\n          \"value\": \"focal_unknown_awareness\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"focal seizures\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 433\n        },\n        \"other_seizure_types\": [],\n        \"awareness\": {\n          \"value\": \"aware\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"aware\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 423\n        },\n        \"semiology_text\": {\n          \"value\": \"seizures\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"seizures\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 428\n        },\n        \"age_at_onset_years\": {\n          \"value\": 2.5,\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"age at onset 2.5\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 439\n        },\n        \"seizure_frequency\": {\n          \"value\": {\n           \"duration_text\": \"seizure\",\n           \"applies_to_type\": \"focal_unknown_awareness\",\n           \"count_min\": 2.0,\n           \"count_max\": 3.0,\n           \"seizure_free\": false,\n           \"period\": \"day\",\n           \"raw_text\": \"seizure 2.0-3.0 per day\"\n          },\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"seizure 2.0-3.0 per day\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 450\n        },\n        \"focal_motor_onset\": {\n          \"value\": null,\n          \"certainty\": \"not_documented\",\n          \"temporal_status\": \"unspecified\",\n          \"evidence_text\": null,\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 435\n        },\n        \"focal_nonmotor_onset\": {\n          \"value\": null,\n          \"certainty\": \"not_documented\",\n          \"temporal_status\": \"unspecified\",\n          \"evidence_text\": null,\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 435\n        }\n     ,\n        \"epilepsy_type\": {\n          \"value\": \"focal\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"focal\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 426\n        },\n        \"other_seizure_frequencies\": []\n     ,\n        \"etiology_category\": {\n          \"value\": \"unknown\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"unknown\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 430\n        },\n        \"etiology_details_text\": {\n          \"value\": \"unknown\",\n          \"certainty\": \"definite\",\n          \"temporal_status\": \"current\",\n          \"evidence_text\": \"unknown\",\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 430\n        },\n        \"etiology_specifics\": {\n          \"value\": null,\n          \"certainty\": \"not_documented\",\n          \"temporal_status\": \"unspecified\",\n          \"evidence_text\": null,\n          \"source_doc_id\": \"doc_id\",\n          \"source_doc_type\": \"progress_note\",\n          \"source_date\": \"2026-09-25\",\n          \"char_start\": 420,\n          \"char_end\": 435\n        }\n      }",
+  "raw_response_tokens": 1271,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 426
+    },
+    "predominant_seizure_type": {
+      "value": "focal_unknown_awareness",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "focal seizures",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 433
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": "aware",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "aware",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 423
+    },
+    "semiology_text": {
+      "value": "seizures",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizures",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 428
+    },
+    "age_at_onset_years": {
+      "value": 2.5,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "age at onset 2.5",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 439
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure 2.0-3.0 per day",
+        "period": "day",
+        "count_min": 2.0,
+        "count_max": 3.0,
+        "seizure_free": false,
+        "duration_text": "seizure",
+        "applies_to_type": "focal_unknown_awareness"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure 2.0-3.0 per day",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 450
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 435
+    },
+    "etiology_category": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "unknown",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 430
+    },
+    "etiology_details_text": {
+      "value": "unknown",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "unknown",
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 430
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 435
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 435
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "doc_id",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": 420,
+      "char_end": 435
+    }
+  },
+  "arm": "M2"
+}

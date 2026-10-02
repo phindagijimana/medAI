@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0082-132448",
+  "started_at": "2026-10-01T13:24:48.710290+00:00",
+  "finished_at": "2026-10-01T13:25:00.752332+00:00",
+  "duration_s": 12.04,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0082",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1158,
+  "raw_response": "{\"epilepsy_type\": {\"value\": null, \"quote\": null}, \"predominant_seizure_type\": {\"value\": \"generalized_absence_typical\", \"quote\": \"Juvenile absence epilepsy\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": 2, \"count_max\": 3, \"period\": \"day\", \"seizure_free\": false, \"quote\": \"absences continue fairly frequent, he probably gets 2-3 per day.\"}, \"current_asms\": [{\"name\": \"sodium valproate\", \"dose\": \"500mg\", \"quote\": \"Sodium valproate 500mg bd\"}, {\"name\": \"clobazam\", \"dose\": \"10mg\", \"quote\": \"Clobazam 10mg od\"}, {\"name\": \"zonisamide\", \"dose\": \"50mg\", \"quote\": \"Zonisamide 50mg bd\"}]}",
+  "raw_response_tokens": 219,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

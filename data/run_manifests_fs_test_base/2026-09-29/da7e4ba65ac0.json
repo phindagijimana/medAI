@@ -1,0 +1,73 @@
+{
+  "run_id": "da7e4ba65ac0",
+  "started_at": "2026-09-29T04:33:38+00:00",
+  "finished_at": "2026-09-29T04:33:41+00:00",
+  "duration_s": 3.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0189",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1659,
+  "raw_response": "{\n  \"current_asms\": null,\n  \"prior_asms\": null,\n  \"failed_asms\": null,\n  \"adverse_effects_text\": null,\n  \"drug_resistance_status\": null,\n  \"surgery_history\": null,\n  \"non_drug_therapies\": null\n}",
+  "raw_response_tokens": 65,
+  "raw_valid": false,
+  "parse_error_raw": "7 validation errors for MedicationModule\ncurrent_asms\n  Input should be a valid array [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nprior_asms\n  Input should be a valid array [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nfailed_asms\n  Input should be a valid array [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nadverse_effects_text\n  Input should be an object [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type\ndrug_resistance_status\n  Input should be an object [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type\nsurgery_history\n  Input should be a valid array [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type\nnon_drug_therapies\n  Input should be a valid array [type=list_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/list_type",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "current_asms": [],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0189",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0189",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "arm": "M0"
+}

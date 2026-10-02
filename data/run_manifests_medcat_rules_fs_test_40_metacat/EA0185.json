@@ -1,0 +1,445 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "EA0185",
+    "doc_type": "progress_note",
+    "doc_date": "2020-01-01",
+    "patient_id": "EA0185",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "TLE",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 169,
+      "char_end": 172
+    },
+    "predominant_seizure_type": {
+      "value": "focal_unknown_awareness",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "Focal seizures",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 143,
+      "char_end": 157
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": "aware",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "fully aware",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 473,
+      "char_end": 484
+    },
+    "semiology_text": {
+      "value": "episodes which are associated with nausea and an odd taste in his mouth. The episodes are short, lasting less than a minute, and he is fully aware throughout. Present frequency is 4 to 5 episodes a month.",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "episodes which are associated with nausea and an odd taste in his mouth. The episodes are short, lasting less than a minute, and he is fully aware throughout. Present frequency is 4 to 5 episodes a month.",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 337,
+      "char_end": 541
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "4 to 5 episodes a month",
+        "period": "month",
+        "count_min": 4.0,
+        "count_max": 5.0,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "4 to 5 episodes a month",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 518,
+      "char_end": 541
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "tions, or head injury. There is no family history o",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 629,
+      "char_end": 640
+    },
+    "etiology_details_text": {
+      "value": "tions, or head injury. There is no family history o",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "tions, or head injury. There is no family history o",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 629,
+      "char_end": 640
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": "cognitive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "d\u00e9j\u00e0 vu",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 330,
+      "char_end": 337
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "carbamazepine",
+          "status": "current",
+          "dose_text": "200mg twice a day",
+          "reason_discontinued": null,
+          "rxnorm_cui": "2002"
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "Carbamazepine 200mg twice a day",
+        "source_doc_id": "EA0185",
+        "source_doc_type": "progress_note",
+        "source_date": "2020-01-01",
+        "char_start": 185,
+        "char_end": 198
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": "For the last 10 months he has been having d\u00e9j\u00e0 vu episodes which are associated with nausea and an odd taste in his mouth",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "For the last 10 months he has been having d\u00e9j\u00e0 vu episodes which are associated with nausea and an odd taste in his mouth",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 287,
+      "char_end": 409
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "His EEG which was done last November is reported as mildly abnormal,  containing bi-temporal irregular slow activity",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 853,
+      "char_end": 861
+    },
+    "alternative_claims": []
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "findings": [],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "temporal",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1016,
+      "char_end": 1024
+    },
+    "lesion_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "hippocampal_sclerosis": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "The episodes are suggestive of temporal lobe epilepsy",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 1016,
+      "char_end": 1024
+    },
+    "eeg_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "eeg_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "His EEG which was done last November is reported as mildly abnormal,  containing bi-temporal irregular slow activity",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": 853,
+      "char_end": 861
+    },
+    "mri_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/unknown; eeg_localization=temporal/unknown",
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "EA0185",
+      "source_doc_type": "progress_note",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

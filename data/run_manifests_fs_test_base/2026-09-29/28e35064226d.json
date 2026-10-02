@@ -1,0 +1,58 @@
+{
+  "run_id": "28e35064226d",
+  "started_at": "2026-09-29T03:39:01+00:00",
+  "finished_at": "2026-09-29T03:39:06+00:00",
+  "duration_s": 5.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0173",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 575,
+  "raw_response": "{\n  \"patient_id\": \"Rachel Johannes\",\n  \"date_of_birth\": \"13-Jul-1990\",\n  \"diagnosis\": \"Unclassified Epilepsy\",\n  \"treatment\": \"Unsure of exact medications\",\n  \"last_seizure_date\": \"15-Apr\",\n  \"seizure_location\": null,\n  \"seizure_lateralization\": null,\n  \"seizure_type\": null,\n  \"contraception\": \"discussed, considering alternatives due to medication interactions\",\n  \"contraception_attempts\": \"tried pill, depo injection (caused weight gain)\",\n  \"bathing_hygiene\": \"takes showers, not baths\"\n}",
+  "raw_response_tokens": 144,
+  "raw_valid": false,
+  "parse_error_raw": "12 validation errors for ClinicalLocalizationModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Rachel Johannes', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndate_of_birth\n  Extra inputs are not permitted [type=extra_forbidden, input_value='13-Jul-1990', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndiagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Unclassified Epilepsy', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ntreatment\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Unsure of exact medications', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nlast_seizure_date\n  Extra inputs are not permitted [type=extra_forbidden, input_value='15-Apr', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_location\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_lateralization\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception\n  Extra inputs are not permitted [type=extra_forbidden, input_value='discussed, considering a...medication interactions', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncontraception_attempts\n  Extra inputs are not permitted [type=extra_forbidden, input_value='tried pill, depo i",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0173",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M0"
+}

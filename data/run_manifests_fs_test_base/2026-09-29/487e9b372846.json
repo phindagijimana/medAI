@@ -1,0 +1,60 @@
+{
+  "run_id": "487e9b372846",
+  "started_at": "2026-09-29T03:56:50+00:00",
+  "finished_at": "2026-09-29T03:56:59+00:00",
+  "duration_s": 9.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0178",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 921,
+  "raw_response": "{\n  \"primary_claim\": null,\n  \"alternative_claims\": null,\n  \"certainty\": \"not_documented\",\n  \"temporal_status\": \"unspecified\",\n  \"evidence_text\": null,\n  \"source_doc_id\": \"TEL-CLIN-01\",\n  \"source_doc_type\": \"telephone_clinic\",\n  \"source_date\": \"2025-01-01\",\n  \"medications\": [\n    {\n      \"name\": \"Levetiracetam\",\n      \"dose\": \"1000mg\",\n      \"frequency\": \"twice a day\"\n    },\n    {\n      \"name\": \"Tegretol\",\n      \"dose\": \"200mg\",\n      \"time\": \"morning\",\n      \"comment\": \"to increase to 300mg bd\"\n    }\n  ],\n  \"seizure_frequency\": \"2 in the last five months\",\n  \"seizure_characteristics\": \"unresponsive before losing consciousness, feels very tired after\",\n  \"safety_discussion\": \"shower vs bath, basic first aid measures, no driving\",\n  \"followup\": \"clinic in four months\"\n}",
+  "raw_response_tokens": 238,
+  "raw_valid": false,
+  "parse_error_raw": "13 validation errors for ClinicalLocalizationModule\ncertainty\n  Extra inputs are not permitted [type=extra_forbidden, input_value='not_documented', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ntemporal_status\n  Extra inputs are not permitted [type=extra_forbidden, input_value='unspecified', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nevidence_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsource_doc_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='TEL-CLIN-01', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsource_doc_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value='telephone_clinic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsource_date\n  Extra inputs are not permitted [type=extra_forbidden, input_value='2025-01-01', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'name': 'Levetiracetam'... increase to 300mg bd'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_frequency\n  Extra inputs are not permitted [type=extra_forbidden, input_value='2 in the last five months', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_characteristics\n  Extra inputs are not permitted [type=extra_forbidden, input_value='unresponsive before losi... feels very tired after', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nsafety_discussion\n  Extra inputs are not permitted [type=ext",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0178",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M2"
+}

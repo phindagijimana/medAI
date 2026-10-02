@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P004033_V01-052355",
+  "started_at": "2026-10-02T05:23:55.760116+00:00",
+  "finished_at": "2026-10-02T05:24:08.297019+00:00",
+  "duration_s": 12.54,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork04.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004033_V01",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 6755,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"combined_focal_generalized\", \"quote\": \"combined generalized and focal epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"focal_impaired_awareness\", \"quote\": \"focal impaired awareness seizures\"}, \"age_at_onset_years\": {\"value\": 10, \"quote\": \"seizure onset at age 10\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"no ongoing seizures, with a current frequency of 0 seizures per month\"}, \"current_asms\": [{\"name\": \"topiramate\", \"dose\": null, \"quote\": \"Topamax (topiramate)\"}, {\"name\": \"valproate\", \"dose\": null, \"quote\": \"Depakote (valproate)\"}]}",
+  "raw_response_tokens": 196,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

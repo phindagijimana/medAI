@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-synth-P003000_V04-055752",
+  "started_at": "2026-10-02T05:57:52.769243+00:00",
+  "finished_at": "2026-10-02T05:58:04.481207+00:00",
+  "duration_s": 11.71,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.11.13",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.14.0+cu130",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "13.0"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003000_V04",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 9909,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"drug-resistant structural focal epilepsy\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_impaired_awareness\",\n    \"quote\": \"focal impaired awareness seizures\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 33,\n    \"quote\": \"onset at age 33\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 2,\n    \"count_max\": 2,\n    \"period\": \"year\",\n    \"seizure_free\": false,\n    \"quote\": \"approximately two seizures per year\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"Topamax\",\n      \"dose\": null,\n      \"quote\": \"Topamax (topiramate), dose and frequency pending pharmacy medication reconciliation\"\n    },\n    {\n      \"name\": \"Briviact\",\n      \"dose\": null,\n      \"quote\": \"Briviact (brivaracetam), dose and frequency pending pharmacy medication reconciliation\"\n    }\n  ]\n}",
+  "raw_response_tokens": 242,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

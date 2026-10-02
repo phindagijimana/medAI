@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P004088_V02-053326",
+  "started_at": "2026-10-02T05:33:26.069546+00:00",
+  "finished_at": "2026-10-02T05:33:39.969036+00:00",
+  "duration_s": 13.9,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004088_V02",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 6758,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"Drug-resistant focal epilepsy\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_to_bilateral_tonic_clonic\",\n    \"quote\": \"focal to bilateral tonic-clonic seizures\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 10,\n    \"quote\": \"age 10\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 3,\n    \"count_max\": 3,\n    \"period\": \"month\",\n    \"seizure_free\": false,\n    \"quote\": \"approximately three per month\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"valproate\",\n      \"dose\": \"PO at established home dose\",\n      \"quote\": \"valproate, PO at established home dose\"\n    },\n    {\n      \"name\": \"brivaracetam\",\n      \"dose\": \"PO at established home dose\",\n      \"quote\": \"brivaracetam, PO at established home dose\"\n    },\n    {\n      \"name\": \"zonisamide\",\n      \"dose\": \"PO at established home dose\",\n      \"quote\": \"zonisamide, PO at established home dose\"\n    }\n  ]\n}",
+  "raw_response_tokens": 283,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 7,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

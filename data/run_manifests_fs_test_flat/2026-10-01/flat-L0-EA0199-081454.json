@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0-EA0199-081454",
+  "started_at": "2026-10-01T08:14:54.570560+00:00",
+  "finished_at": "2026-10-01T08:15:00.516227+00:00",
+  "duration_s": 5.95,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0199",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 782,
+  "raw_response": "{\n  \"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"Mr Rees\u2019 epilepsy\"},\n  \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"2 seizures per month\"},\n  \"age_at_onset_years\": null,\n  \"seizure_frequency\": {\"count_min\": 2, \"count_max\": 2, \"period\": \"month\", \"seizure_free\": false, \"quote\": \"2 seizures per month\"},\n  \"current_asms\": [\n    {\"name\": \"phenobarbitone\", \"dose\": \"100mg twice a day\", \"quote\": \"phenobarbitone 100mg twice a day\"},\n    {\"name\": \"Epilim\", \"dose\": \"300mg twice a day\", \"quote\": \"Epilim 300mg twice a day\"},\n    {\"name\": \"lamotrigine\", \"dose\": \"25mg once a day\", \"quote\": \"lamotrigine 25mg once a day\"}\n  ]\n}",
+  "raw_response_tokens": 224,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L0"
+}

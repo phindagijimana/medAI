@@ -1,0 +1,521 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004040_V02",
+    "doc_type": "mri_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004040_V02",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "generalized",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "generalized epilepsy",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 101,
+      "char_end": 121
+    },
+    "predominant_seizure_type": {
+      "value": "generalized_tonic_clonic",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "generalized tonic-clonic seizures",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 127,
+      "char_end": 160
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": "MRI Brain \u2014 Epilepsy Protocol\n\nExam Date: xx/xx/20xx",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "MRI Brain \u2014 Epilepsy Protocol\n\nExam Date: xx/xx/20xx",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 0,
+      "char_end": 52
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": false,
+        "duration_text": null,
+        "applies_to_type": null
+      },
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "active seizures documented",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "structural",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Structural etiology",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 267,
+      "char_end": 286
+    },
+    "etiology_details_text": {
+      "value": "Structural etiology",
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Structural etiology",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 267,
+      "char_end": 286
+    },
+    "etiology_specifics": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_motor_onset": {
+      "value": "clonic",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clonic",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 145,
+      "char_end": 151
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "carbamazepine",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "historical",
+        "evidence_text": "carbamazepine",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 252,
+        "char_end": 265
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "undefined",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "0 failed / 1 current ASM(s), insufficient trial history for ILAE-2010 verdict",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Sequences included sagittal T1, axial and coronal T2, axial and coronal FLAIR with thin coronal imaging through the mesial temporal structures, double inversion recovery, axial DWI/ADC, axial SWI, and",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 660,
+      "char_end": 675
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "frontal",
+          "laterality": "right",
+          "source": "mri_confirmed"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Supratentorial: Small region of chronic encephalomalacia and surrounding gliosis in the right frontal lobe, with mild focal volume loss",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1026,
+        "char_end": 1033
+      },
+      {
+        "value": {
+          "lobe": "temporal",
+          "laterality": "bilateral",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Mesial Temporal Structures: Bilateral hippocampi symmetric in size and signal, with preserved internal architecture",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1277,
+        "char_end": 1292
+      }
+    ]
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "chronic encephalomalacia",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 964,
+      "char_end": 988
+    },
+    "findings": [
+      {
+        "value": "encephalomalacia",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "chronic encephalomalacia",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 964,
+        "char_end": 988
+      },
+      {
+        "value": "gliosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "gliosis",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1005,
+        "char_end": 1012
+      },
+      {
+        "value": "other_lesion",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "signal abnormality",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1232,
+        "char_end": 1250
+      },
+      {
+        "value": "heterotopia",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "ign, heterotopia, or other malformation of cor",
+        "source_doc_id": "P004040_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1734,
+        "char_end": 1745
+      }
+    ],
+    "lesion_lobe": {
+      "value": "frontal",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "chronic encephalomalacia",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 964,
+      "char_end": 988
+    },
+    "lesion_laterality": {
+      "value": "right",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "chronic encephalomalacia",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 964,
+      "char_end": 988
+    },
+    "hippocampal_sclerosis": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "No mesial temporal sclerosis",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 1458,
+      "char_end": 1486
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": 3.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "3T",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 512,
+      "char_end": 514
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "bilateral",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Mesial Temporal Structures: Bilateral hippocampi symmetric in size and signal, with preserved internal architecture",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 1277,
+      "char_end": 1292
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Sequences included sagittal T1, axial and coronal T2, axial and coronal FLAIR with thin coronal imaging through the mesial temporal structures, double inversion recovery, axial DWI/ADC, axial SWI, and",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 660,
+      "char_end": 675
+    },
+    "concordance": {
+      "value": "partially_concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/bilateral; mri_localization=temporal/unknown",
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004040_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

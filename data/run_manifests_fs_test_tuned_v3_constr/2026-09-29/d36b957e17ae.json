@@ -1,0 +1,78 @@
+{
+  "run_id": "d36b957e17ae",
+  "started_at": "2026-09-29T09:00:14+00:00",
+  "finished_at": "2026-09-29T09:00:34+00:00",
+  "duration_s": 20.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_fssplit",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": true
+  },
+  "source_doc_id": "fs-test-EA0170",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 903,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"lobe\": \"cingulate\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Recurrant right hemisphere intracerebral haemorrhage\",\n    \"char_start\": 90,\n    \"char_end\": 125\n ,\r\n  \"source_doc_id\": \"EA0170\",\n  \"source_doc_type\": \"progress_note\",\n  \"source_date\": \"1976-01-01T00:00:00.000Z\"\n} \n\n  \n\n\n\n\n\n , \"alternative_claims\": [\n  \n  {\n    \"value\": {\n      \"lobe\": \"unknown\",\n      \"laterality\": \"unknown\",\n      \"source\": \"clinician_hypothesis\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"cerebrovascular events\",\n    \"char_start\": 166,\n    \"char_end\": 186\n \n  \n ,\n  \n  \"source_doc_id\": \"EA0170\",\n  \"source_doc_type\": \"progress_note\",\n  \"source_date\": \"1976-01-01T00:00:00.000Z\"\n  }\n  \n  ]\n  \n  }",
+  "raw_response_tokens": 313,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": null,
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": {
+        "lobe": "cingulate",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "Recurrant right hemisphere intracerebral haemorrhage",
+      "source_doc_id": "EA0170",
+      "source_doc_type": "progress_note",
+      "source_date": "1976-01-01",
+      "char_start": 90,
+      "char_end": 125
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "unknown",
+          "laterality": "unknown",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "cerebrovascular events",
+        "source_doc_id": "EA0170",
+        "source_doc_type": "progress_note",
+        "source_date": "1976-01-01",
+        "char_start": 166,
+        "char_end": 186
+      }
+    ]
+  },
+  "arm": "M0"
+}

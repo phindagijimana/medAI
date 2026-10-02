@@ -1,0 +1,47 @@
+{
+  "run_id": "e07b489f8bd7",
+  "started_at": "2026-09-29T03:32:57+00:00",
+  "finished_at": "2026-09-29T03:33:13+00:00",
+  "duration_s": 16.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "medication.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "medication.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0171",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1825,
+  "raw_response": "{\n  \"current_asms\": [\n    {\n      \"value\": {\n        \"generic_name\": \"lamotrigine\",\n        \"status\": \"current\",\n        \"dose_text\": \"50 mg bd\",\n        \"reason_discontinued\": null,\n        \"rxnorm_cui\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"Lamotrigine 50mg bd\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2019-04-10\"\n    }\n  ],\n  \"prior_asms\": [],\n  \"failed_asms\": [],\n  \"adverse_effects_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2019-04-10\"\n  },\n  \"drug_resistance_status\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"SYN-CLIN-01\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2019-04-10\"\n  },\n  \"surgery_history\": [],\n  \"non_drug_therapies\": [\n    {\n      \"value\": {\n        \"name\": \"lansoprazole\",\n        \"dose_text\": null,\n        \"reason_stopped\": null,\n        \"reason_started\": \"reflux\"\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"lansoprazole\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2019-04-10\"\n    },\n    {\n      \"value\": {\n        \"name\": \"citalopram\",\n        \"dose_text\": null,\n        \"reason_stopped\": null,\n        \"reason_started\": \"low mood\"\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"citalopram\",\n      \"source_doc_id\": \"SYN-CLIN-01\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2019-04-10\"\n    }\n  ]\n}",
+  "raw_response_tokens": 568,
+  "raw_valid": false,
+  "parse_error_raw": "12 validation errors for MedicationModule\nnon_drug_therapies.0.value.name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='lansoprazole', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.reason_stopped\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.reason_started\n  Extra inputs are not permitted [type=extra_forbidden, input_value='reflux', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.therapy_type\n  Field required [type=missing, input_value={'name': 'lansoprazole', ...ason_started': 'reflux'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nnon_drug_therapies.0.value.status\n  Field required [type=missing, input_value={'name': 'lansoprazole', ...ason_started': 'reflux'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nnon_drug_therapies.1.value.name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='citalopram', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.1.value.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.1.value.reason_stopped\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydan",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "12 validation errors for MedicationModule\nnon_drug_therapies.0.value.name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='lansoprazole', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.reason_stopped\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.reason_started\n  Extra inputs are not permitted [type=extra_forbidden, input_value='reflux', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.0.value.therapy_type\n  Field required [type=missing, input_value={'name': 'lansoprazole', ...ason_started': 'reflux'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nnon_drug_therapies.0.value.status\n  Field required [type=missing, input_value={'name': 'lansoprazole', ...ason_started': 'reflux'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nnon_drug_therapies.1.value.name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='citalopram', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.1.value.dose_text\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nnon_drug_therapies.1.value.reason_stopped\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydan",
+  "parsed_value": null,
+  "arm": "M1"
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2-EA0089-131717",
+  "started_at": "2026-10-01T13:17:17.178887+00:00",
+  "finished_at": "2026-10-01T13:17:38.997821+00:00",
+  "duration_s": 21.82,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0089",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1581,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Focal epilepsy \"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"head turning to the left and his left side becoming stiff.\"}, \"age_at_onset_years\": {\"value\": 10, \"quote\": \"He is currently in Year 7.\"}, \"seizure_frequency\": {\"count_min\": 2, \"count_max\": null, \"period\": null, \"seizure_free\": false, \"quote\": \"He has had a second seizure at the beginning of December.\"}, \"current_asms\": [{\"name\": null, \"dose\": null, \"quote\": \"Nil\"}]}\n\nNote:\n\"\"\"\nClinic date: 21st January 2014\nTyped: 21st January 2014\n\nDear Dr Pooled\n\nRe: \tMr Nathan Bloodlock\tD.O.B: 10/10/2003 NHS 123 587 6542\n\nDiagnosis: Focal epilepsy \n\nMedication: Nil\n\nFollow: Teenage epilepsy clinic\n\nI reviewed this young man in the clinic today.  He came with both his parents.  He is currently in Year 7.  He has had a second seizure at the beginning of December.  It occurred at approximately midnight.  He remembers his head turning to the left and his left side becoming stiff.  He was able to alert his family but can then remember nothing until he found the ambulance crew looking after him.  He had a bit of a headache and felt sick.  \n\nHis mother came up and found him shaking all over with his eyes open.  They think that this lasted 5 \u2013 7 minutes.  He had bitten his lip.  Afterwards, he had a headache and felt sick but was back to normal the next day.  They both occurred when he was tired but otherwise there were no obvious precipitants.\n\nThe semiology of this seizure was not like that of Benign Rolandic Epilepsy and his EEG would not support this.  His MRI is normal.  \n\nI have told them that he has a greater than 50% chance of having a further seizure, but this could be next week or in several years\u2019 time.  We discussed whether he would benefit from treatment, but they were very wary of side effects.  I have given them some information about both Carbamazepine and Lamotrigine and the address of the Epilepsy Action website.  They will go and have a look at this and decide whether they would like him to be treated or not.\nYours sincerely\n\n\n\n\n\n\n\"\"\"\nJSON:\n{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Focal epilepsy \"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"head turning to the left and his left side becoming stiff.\"}, \"age_at_onset_years\": {\"value\": 10, \"quote\": \"He is currently in Year 7.\"}, \"seizure_frequency\": {\"count_min\": 2, \"count_max\": null, \"period\": null, \"seizure_free\": false, \"quote\": \"He has had a second seizure at the beginning of December.\"}, \"current_asms\": [{\"name\": null, \"dose\": null, \"quote\": \"Nil\"}]}\n\nNote:\n\"\"\"\nClinic date: 21st January 2014\nTyped: 21st January 2014\n\nDear Dr Pooled\n\nRe: \tMr Nathan Bloodlock\tD.O.B: 10/10/2003 NHS 123 587 6542\n\nDiagnosis: Focal epilepsy",
+  "raw_response_tokens": 768,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 1
+  },
+  "arm": "L2"
+}

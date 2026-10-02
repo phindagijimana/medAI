@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0099-132821",
+  "started_at": "2026-10-01T13:28:21.325672+00:00",
+  "finished_at": "2026-10-01T13:28:33.435629+00:00",
+  "duration_s": 12.11,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0099",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1208,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Focal onset epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"Focal onset convulsive seizure\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": true, \"quote\": \"Seizure type and frequency: \\tFocal onset convulsive seizure, last event April 2019\"}, \"current_asms\": [{\"name\": \"levetiracetam\", \"dose\": \"750 mg\", \"quote\": \"Levetiracetam 750mg bd (To change to lamotrigine as detailed below)\"}]}",
+  "raw_response_tokens": 182,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

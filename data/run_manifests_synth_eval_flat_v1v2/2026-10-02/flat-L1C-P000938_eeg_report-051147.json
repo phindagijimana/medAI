@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P000938_eeg_report-051147",
+  "started_at": "2026-10-02T05:11:47.597260+00:00",
+  "finished_at": "2026-10-02T05:11:58.054167+00:00",
+  "duration_s": 10.46,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P000938_eeg_report",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 652,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"generalized epilepsy with typical absence seizures\"}, \"predominant_seizure_type\": {\"value\": \"generalized_absence_typical\", \"quote\": \"typical absence seizures\"}, \"age_at_onset_years\": {\"value\": 9, \"quote\": \"beginning at age 9\"}, \"seizure_frequency\": {\"count_min\": 0, \"count_max\": 0, \"period\": \"month\", \"seizure_free\": true, \"quote\": \"seizure freedom (0 seizures per month)\"}, \"current_asms\": [{\"name\": \"levetiracetam\", \"quote\": \"levetiracetam\"}]}",
+  "raw_response_tokens": 160,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

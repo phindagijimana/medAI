@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003098_V05-031312",
+  "started_at": "2026-10-02T03:13:12.379714+00:00",
+  "finished_at": "2026-10-02T03:13:23.124045+00:00",
+  "duration_s": 10.74,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003098_V05",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5648,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"generalized epilepsy with typical absence seizures\"}, \"predominant_seizure_type\": {\"value\": \"generalized_absence_typical\", \"quote\": \"typical absence seizures\"}, \"age_at_onset_years\": {\"value\": 63, \"quote\": \"seizure onset at age 63\"}, \"seizure_frequency\": {\"count_min\": 2, \"count_max\": 2, \"period\": \"year\", \"seizure_free\": false, \"quote\": \"approximately two per year\"}, \"current_asms\": [{\"name\": \"Tegretol\", \"dose\": null, \"quote\": \"Tegretol (carbamazepine)\"}, {\"name\": \"Keppra\", \"dose\": null, \"quote\": \"Keppra (levetiracetam)\"}]}",
+  "raw_response_tokens": 190,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 6,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

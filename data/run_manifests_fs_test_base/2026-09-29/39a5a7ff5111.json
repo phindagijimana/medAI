@@ -1,0 +1,47 @@
+{
+  "run_id": "39a5a7ff5111",
+  "started_at": "2026-09-29T03:43:33+00:00",
+  "finished_at": "2026-09-29T03:43:45+00:00",
+  "duration_s": 12.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0174",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 886,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"diagnosis\": \"epilepsy unclassified\",\n      \"medication\": [\n        {\n          \"name\": \"Zonisamide\",\n          \"dose\": \"100 bd\",\n          \"change\": \"recently increased\"\n        },\n        {\n          \"name\": \"Levetiracetam\",\n          \"dose\": \"1500 b.d.\",\n          \"change\": \"no recent change\"\n        }\n      ]\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Huw has had more frequent and different seizures. These consist of prolonged bilateral episodes of limb shaking with retained awareness. Sometimes these have lasted 1-2 hours. These have coincided with increases in stress and I wonder if these could be non epileptic rather than epileptic seizures given their prolonged duration. Having said this I have no doubt that Huw also has epileptic seizures\",\n    \"source_doc_id\": \"CLIN-01\",\n    \"source_doc_type\": \"clinic_visit\",\n    \"source_date\": \"2025-01-01\"\n  },\n  \"alternative_claims\": [\n    {\n      \"value\": {\n        \"seizure_type\": \"non-epileptic\",\n        \"seizure_characteristics\": \"prolonged bilateral episodes of limb shaking with retained awareness\"\n      },\n      \"certainty\": \"possible\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"I wonder if these could be non epileptic rather than epileptic seizures given their prolonged duration\",\n      \"source_doc_id\": \"CLIN-01\",\n      \"source_doc_type\": \"clinic_visit\",\n      \"source_date\": \"2025-01-01\"\n    }\n  ]\n}",
+  "raw_response_tokens": 374,
+  "raw_valid": false,
+  "parse_error_raw": "12 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='epilepsy unclassified', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'name': 'Zonisamide', '...e': 'no recent change'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.source\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_visit', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nalternative_claims.0.value.seizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value='non-epileptic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.seizure_characteristics\n  Extra inputs are not permitted [type=extra_forbidden, input_value='prolonged bilateral epis...with retained awareness', input_type=st",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "12 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='epilepsy unclassified', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'name': 'Zonisamide', '...e': 'no recent change'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.source\n  Field required [type=missing, input_value={'diagnosis': 'epilepsy u...': 'no recent change'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='clinic_visit', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nalternative_claims.0.value.seizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value='non-epileptic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nalternative_claims.0.value.seizure_characteristics\n  Extra inputs are not permitted [type=extra_forbidden, input_value='prolonged bilateral epis...with retained awareness', input_type=st",
+  "parsed_value": null,
+  "arm": "M2"
+}

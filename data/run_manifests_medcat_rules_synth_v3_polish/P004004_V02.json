@@ -1,0 +1,508 @@
+{
+  "schema_version": "v0.2.1",
+  "document": {
+    "doc_id": "P004004_V02",
+    "doc_type": "mri_report",
+    "doc_date": "2020-01-01",
+    "patient_id": "P004004_V02",
+    "icd10cm_codes": [],
+    "snomed_ct_codes": []
+  },
+  "clinical_seizure": {
+    "epilepsy_type": {
+      "value": "focal",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal epilepsy",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 117,
+      "char_end": 131
+    },
+    "predominant_seizure_type": {
+      "value": "focal_impaired_awareness",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "focal impaired-awareness seizures",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 137,
+      "char_end": 170
+    },
+    "other_seizure_types": [],
+    "awareness": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "semiology_text": {
+      "value": ". Evaluate for structural seizure focus; r/o mesial temporal sclerosis.",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": ". Evaluate for structural seizure focus; r/o mesial temporal sclerosis.",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 347,
+      "char_end": 418
+    },
+    "age_at_onset_years": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizure_frequency": {
+      "value": {
+        "raw_text": "seizure-free",
+        "period": "unspecified",
+        "count_min": null,
+        "count_max": null,
+        "seizure_free": true,
+        "duration_text": null,
+        "applies_to_type": "unclassified"
+      },
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 267,
+      "char_end": 279
+    },
+    "other_seizure_frequencies": [],
+    "status_epilepticus_history": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "etiology_category": {
+      "value": "immune",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "autoimmune encephalitis",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 232,
+      "char_end": 255
+    },
+    "etiology_details_text": {
+      "value": "autoimmune encephalitis",
+      "certainty": "definite",
+      "temporal_status": "historical",
+      "evidence_text": "autoimmune encephalitis",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 232,
+      "char_end": 255
+    },
+    "etiology_specifics": {
+      "value": {
+        "causative_gene": null,
+        "causative_variant": null,
+        "causative_antibody": "anti_lgi1",
+        "associated_tumor_text": null,
+        "causative_pathogen_text": null,
+        "causative_metabolic_text": null
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "LGI1 antibody",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 209,
+      "char_end": 222
+    },
+    "focal_motor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "focal_nonmotor_onset": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "medication": {
+    "current_asms": [
+      {
+        "value": {
+          "generic_name": "perampanel",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "perampanel",
+        "source_doc_id": "P004004_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 293,
+        "char_end": 303
+      },
+      {
+        "value": {
+          "generic_name": "sodiumvalproate",
+          "status": "current",
+          "dose_text": null,
+          "reason_discontinued": null,
+          "rxnorm_cui": null
+        },
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "valproate",
+        "source_doc_id": "P004004_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 308,
+        "char_end": 317
+      }
+    ],
+    "prior_asms": [],
+    "failed_asms": [],
+    "adverse_effects_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "drug_resistance_status": {
+      "value": "drug_responsive",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "seizure-free",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 267,
+      "char_end": 279
+    },
+    "surgery_history": [],
+    "non_drug_therapies": []
+  },
+  "clinical_localization": {
+    "primary_claim": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Sequences included sagittal T1, axial and coronal T2, axial and coronal FLAIR with thin coronal imaging through the temporal lobes, double inversion recovery, axial DWI/ADC, axial SWI, and 3D T1 MPRAG",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 666,
+      "char_end": 674
+    },
+    "alternative_claims": [
+      {
+        "value": {
+          "lobe": "temporal",
+          "laterality": "bilateral",
+          "source": "clinician_hypothesis"
+        },
+        "certainty": "possible",
+        "temporal_status": "current",
+        "evidence_text": "Mesial Temporal Structures: Bilateral hippocampi symmetric in size and signal, with preserved internal architecture and digitations",
+        "source_doc_id": "P004004_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1279,
+        "char_end": 1294
+      }
+    ]
+  },
+  "eeg": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "mri": {
+    "overall_normal": {
+      "value": false,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "heterotopia",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 1644,
+      "char_end": 1655
+    },
+    "findings": [
+      {
+        "value": "heterotopia",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "heterotopia",
+        "source_doc_id": "P004004_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 1644,
+        "char_end": 1655
+      },
+      {
+        "value": "hippocampal_sclerosis",
+        "certainty": "definite",
+        "temporal_status": "current",
+        "evidence_text": "r/o mesial temporal sclerosis.\n\nComparison: None.\n\nTechniqu",
+        "source_doc_id": "P004004_V02",
+        "source_doc_type": "mri_report",
+        "source_date": "2020-01-01",
+        "char_start": 392,
+        "char_end": 417
+      }
+    ],
+    "lesion_lobe": {
+      "value": "temporal",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "mesial temporal",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 392,
+      "char_end": 407
+    },
+    "lesion_laterality": {
+      "value": "bilateral",
+      "certainty": "possible",
+      "temporal_status": "current",
+      "evidence_text": "Mesial Temporal",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 1279,
+      "char_end": 1294
+    },
+    "hippocampal_sclerosis": {
+      "value": true,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "r/o mesial temporal sclerosis.\n\nComparison: None.\n\nTechniqu",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 392,
+      "char_end": 417
+    },
+    "focal_cortical_dysplasia": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_negative_for_epilepsy": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "field_strength_tesla": {
+      "value": 3.0,
+      "certainty": "definite",
+      "temporal_status": "current",
+      "evidence_text": "3T",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 509,
+      "char_end": 511
+    }
+  },
+  "integrated": {
+    "clinical_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "clinician_hypothesis"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "r/o mesial temporal sclerosis",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 392,
+      "char_end": 407
+    },
+    "eeg_localization": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "mri_localization": {
+      "value": {
+        "lobe": "temporal",
+        "laterality": "unknown",
+        "source": "mri_confirmed"
+      },
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "Sequences included sagittal T1, axial and coronal T2, axial and coronal FLAIR with thin coronal imaging through the temporal lobes, double inversion recovery, axial DWI/ADC, axial SWI, and 3D T1 MPRAG",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": 666,
+      "char_end": 674
+    },
+    "concordance": {
+      "value": "concordant",
+      "certainty": "probable",
+      "temporal_status": "current",
+      "evidence_text": "clinical_localization=temporal/unknown; mri_localization=temporal/unknown",
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "concordance_notes_text": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "P004004_V02",
+      "source_doc_type": "mri_report",
+      "source_date": "2020-01-01",
+      "char_start": null,
+      "char_end": null
+    }
+  }
+}

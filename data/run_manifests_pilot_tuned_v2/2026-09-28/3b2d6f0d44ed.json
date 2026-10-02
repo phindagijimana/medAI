@@ -1,0 +1,126 @@
+{
+  "run_id": "3b2d6f0d44ed",
+  "started_at": "2026-09-28T18:55:10+00:00",
+  "finished_at": "2026-09-28T18:57:31+00:00",
+  "duration_s": 141.0,
+  "code_sha": "442fbaa",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "eeg.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "eeg.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-C0-C0-P005",
+  "source_doc_type": "eeg_report",
+  "source_length_chars": 59,
+  "raw_response": "\"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\"\n      ],\n      \"title\": \"Evidence[int]\",\n      \"type\": \"object\"\n    },\n    \"IedFinding\": {\n      \"description\": \"Individual epileptiform discharge\",\n      \"properties\": {\n        \"type\": {\n          \"$ref\": \"#/$defs/IedType\",\n          \"title\": \"Type\",\n          \"type\": \"string\"\n        },\n        \"localization\": {\n          \"$ref\": \"#/$defs/Localization\",\n          \"title\": \"Localization\",\n          \"type\": \"object\"\n        },\n        \"laterality\": {\n          \"$ref\": \"#/$defs/Laterality\",\n          \"title\": \"Laterality\",\n          \"type\": \"string\"\n        },\n        \"dominant_frequency_hz\": {\n          \"type\": \"number\",\n          \"title\": \"Dominant Frequency (Hz)\",\n          \"default\": null\n        },\n        \"other_frequency_hz\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"value\": {\n                \"type\": \"number\",\n                \"title\": \"Frequency (Hz)\",\n                \"default\": null\n              },\n              \"certainty\": {\n                \"$ref\": \"#/$defs/Certainty\",\n                \"default\": \"not_documented\"\n              },\n              \"temporal_status\": {\n                \"$ref\": \"#/$defs/TemporalStatus\",\n                \"default\": \"unspecified\"\n              },\n              \"evidence_text\": {\n                \"type\": \"string\",\n                \"title\": \"Evidence Text\",\n                \"default\": null\n              },\n              \"source_doc_id\": {\n                \"type\": \"string\",\n                \"title\": \"Source Doc Id\",\n                \"default\": null\n              },\n              \"source_doc_type\": {\n                \"$ref\": \"#/$defs/DocumentType\",\n                \"default\": null\n              },\n              \"source_date\": {\n                \"format\": \"date\",\n                \"type\": \"string\",\n                \"title\": \"Source Date\",\n                \"default\": null\n              },\n              \"char_start\": {\n                \"type\": \"integer\",\n                \"minimum\": 0,\n                \"title\": \"Char Start\",\n                \"default\": null\n              },\n              \"char_end\": {\n                \"type\": \"integer\",\n                \"minimum\": 0,\n                \"title\": \"Char End\",\n                \"default\": null\n              }\n            },\n            \"additionalProperties\": false,\n            \"required\": [\n              \"value\",\n              \"certainty\",\n              \"temporal_status\",\n              \"evidence_text\",\n              \"source_doc_id\",\n              \"source_doc_type\",\n              \"source_date\",\n              \"char_start\",\n              \"char_end\"\n            ]\n          },\n          \"title\": \"Other Frequencies (Hz)\",\n          \"default\": []\n        },\n        \"amplitude\": {\n          \"type\": \"number\",\n          \"title\": \"Amplitude (uV)\",\n          \"default\": null\n        },\n        \"duration_ms\": {\n          \"type\": \"number\",\n          \"title\": \"Duration (ms)\",\n          \"default\": null\n        },\n        \"seizure_association\": {\n          \"$ref\": \"#/$defs/SeizureAssociation\",\n          \"title\": \"Seizure Association\",\n          \"type\": \"object\"\n        }\n      },\n      \"required\": [\n        \"type\",\n        \"localization\",\n        \"laterality\"\n      ],\n      \"title\": \"IedFinding\",\n      \"type\": \"object\"\n    },\n    \"IedType\": {\n      \"description\": \"Type of epileptiform discharge\",\n      \"enum\": [\n        \"sharp_wave\",\n        \"sweep\",\n        \"spike\",\n        \"poly_rhythmic\",\n        \"periodic\",\n        \"other\"\n      ],\n      \"title\": \"IedType\",\n      \"type\": \"string\"\n    },\n    \"Localization\": {\n      \"description\": \"Epileptiform discharge localization\",\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs/LobarLocalization\",\n              \"title\": \"Lobar\",\n              \"description\": \"Lobar localization\",\n              \"required\": [\n                \"lobe\",\n                \"side\",\n                \"specifics\"\n              ]\n            },\n            {\n              \"$ref\": \"#/$defs/SubcorticalLocalization\",\n              \"title\": \"Subcortical\",\n              \"description\": \"Subcortical localization\",\n              \"required\": [\n                \"structure\",\n                \"side\",\n                \"specifics\"\n              ]\n            },\n            {\n              \"type\": \"string\",\n              \"title\": \"Other\",\n              \"description\": \"Other localization\",\n              \"pattern\": \"other\",\n              \"default\": null\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"value\",\n        \"certainty\",\n        \"temporal_status\",\n        \"evidence_text\",\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\",\n        \"char_start\",\n        \"char_end\"\n      ],\n      \"title\": \"Localization\",\n      \"type\": \"object\"\n    },\n    \"LobarLocalization\": {\n      \"description\": \"Lobar localization\",\n      \"properties\": {\n        \"lobe\": {\n          \"$ref\": \"#/$defs/Lobe\",\n          \"title\": \"Lobe\",\n          \"type\": \"string\"\n        },\n        \"side\": {\n          \"$ref\": \"#/$defs/Side\",\n          \"title\": \"Side\",\n          \"type\": \"string\"\n        },\n        \"specifics\": {\n          \"type\": \"string\",\n          \"title\": \"Specifics\",\n          \"default\": null\n        }\n      },\n      \"required\": [\n        \"lobe\",\n        \"side\"\n      ],\n      \"title\": \"LobarLocalization\",\n      \"type\": \"object\"\n    },\n    \"Lobe\": {\n      \"description\": \"Cerebral lobe\",\n      \"enum\": [\n        \"frontal\",\n        \"parietal\",\n        \"temporal\",\n        \"occipital\",\n        \"insular\",\n        \"cingulate\",\n        \"other\"\n      ],\n      \"title\": \"Lobe\",\n      \"type\": \"string\"\n    },\n    \"Laterality\": {\n      \"description\": \"Epileptiform discharge laterality\",\n      \"enum\": [\n        \"unknown\",\n        \"unspecified\",\n        \"bilateral\",\n        \"left\",\n        \"right\",\n        \"focal\",\n        \"nonfocal\",\n        \"central\",\n        \"asymmetric\",\n        \"other\"\n      ],\n      \"title\": \"Laterality\",\n      \"type\": \"string\"\n    },\n    \"SeizureAssociation\": {\n      \"description\": \"Association of epileptiform discharge with seizure\",\n      \"properties\": {\n        \"value\": {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/$defs.SeizureType\",\n              \"title\": \"Seizure Type\",\n              \"description\": \"Type of seizure\",\n              \"required\": [\n                \"epilepsy_type\",\n                \"predominant_seizure_type\",\n                \"other_seizure_types\"\n              ]\n            },\n            {\n              \"type\": \"string\",\n              \"title\": \"Other\",\n              \"description\": \"Other seizure association\",\n              \"pattern\": \"other\",\n              \"default\": null\n            }\n          ],\n          \"default\": null\n        },\n        \"certainty\": {\n          \"$ref\": \"#/$defs/Certainty\",\n          \"default\": \"not_documented\"\n        },\n        \"temporal_status\": {\n          \"$ref\": \"#/$defs/TemporalStatus\",\n          \"default\": \"unspecified\"\n        },\n        \"evidence_text\": {\n          \"anyOf\": [\n            {\n              \"type\": \"string\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Evidence Text\"\n        },\n        \"source_doc_id\": {\n          \"title\": \"Source Doc Id\",\n          \"type\": \"string\"\n        },\n        \"source_doc_type\": {\n          \"$ref\": \"#/$defs/DocumentType\"\n        },\n        \"source_date\": {\n          \"format\": \"date\",\n          \"title\": \"Source Date\",\n          \"type\": \"string\"\n        },\n        \"char_start\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char Start\"\n        },\n        \"char_end\": {\n          \"anyOf\": [\n            {\n              \"minimum\": 0,\n              \"type\": \"integer\"\n            },\n            {\n              \"type\": \"null\"\n            }\n          ],\n          \"default\": null,\n          \"title\": \"Char End\"\n        }\n      },\n      \"required\": [\n        \"value\",\n        \"certainty\",\n        \"temporal_status\",\n        \"evidence_text\",\n        \"source_doc_id\",\n        \"source_doc_type\",\n        \"source_date\",\n        \"char_start\",\n        \"char_end\"\n      ],\n      \"title\": \"SeizureAssociation\",\n      \"type\": \"object\"\n    },\n    \"Side\": {\n      \"description\": \"Cerebral hemisphere\",\n      \"enum\": [\n        \"unknown\",\n        \"unspecified\",\n        \"left\",\n        \"right\",\n        \"focal\",\n        \"nonfocal\",\n        \"central\",\n        \"asymmetric\",\n        \"other\"\n      ],\n      \"title\": \"Side\",\n      \"type\": \"string\"\n    },\n    \"SubcorticalLocalization\": {\n      \"description\": \"Subcortical localization\",\n      \"properties\": {\n        \"structure\": {\n          \"$ref\": \"#/$defs/SubcorticalStructure\",\n          \"title\": \"Structure\",\n          \"type\": \"string\"\n        },\n        \"side\": {\n          \"$ref\": \"#/$defs/Side\",\n          \"title\": \"Side\",\n          \"type\": \"string\"\n        },\n        \"specifics\": {\n          \"type\": \"string\",\n          \"title\": \"Specifics\",\n          \"default\": null\n        }\n      },\n      \"required\": [\n        \"structure\",\n        \"side\"\n      ],\n      \"title\": \"SubcorticalLocalization\",\n      \"type\": \"object\"\n    },\n    \"SubcorticalStructure\": {\n      \"description\": \"Subcortical structure\",\n      \"enum\": [\n        \"thalamus\",\n        \"basal_ganglia\",\n        \"brainstem\",\n        \"cerebellum\",\n        \"other\"\n      ],\n      \"title\": \"SubcorticalStructure\",\n      \"type\": \"string\"\n    },\n    \"TemporalStatus\": {\n      \"description\": \"Temporal status of the documented finding\",\n      \"enum\": [\n        \"current\",\n        \"historical\",\n        \"unspecified\",\n        \"focal\",\n        \"global\",\n        \"unknown\",\n        \"prior\",\n        \"definite\",\n        \"possible\",\n        \"probable\",\n        \"negated\",\n        \"unconfirmed\",\n        \"unverifiable\",\n        \"unrecorded\",\n        \"not_documented\",\n        \"historic\",\n        \"unspecified_current\",\n        \"unspecified_historical\"\n      ],\n      \"title\": \"TemporalStatus\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"document\",\n    \"clinical_seizure\",\n    \"eeg\",\n    \"mri\",\n    \"clinical_localization\",\n    \"eeg_background\",\n    \"eeg_study_type\",\n    \"clinical_seizure_type\",\n    \"eeg_findings\",\n    \"mri_findings\",\n    \"clinical_awareness\",\n    \"eeg_reviewed\",\n    \"mri_reviewed\",\n    \"clinical_trends\",\n    \"eeg_trends\",\n    \"mri_trends\",\n    \"clinical_recommendations\",\n    \"eeg_recommendations\",\n    \"mri_recommendations\",\n    \"clinical_history\",\n    \"eeg_history\",\n    \"mri_history\",\n    \"clinical_finding\",\n    \"eeg_finding\",\n    \"mri_finding\",\n    \"clinical_category\",\n    \"eeg_category\",\n    \"mri_category\",\n    \"clinical_seizure_frequency\",\n    \"eeg_seizure_frequency\",\n    \"mri_seizure_frequency\",\n    \"clinical_seizure_age_at_onset\",\n    \"eeg_seizure_age_at_onset\",\n    \"mri_seizure_age_at_onset\",\n    \"clinical_seizure_type_specifics\",\n    \"eeg_seizure_type_specifics\",\n    \"mri_seizure_type_specifics\",\n    \"clinical_awareness_specifics\",\n    \"eeg_awareness_specifics\",\n    \"mri_awareness_specifics\",\n    \"clinical_trend\",\n    \"eeg_trend\",\n    \"mri_trend\",\n    \"clinical_recommendation\",\n    \"eeg_recommendation\",\n    \"mri_recommendation\",\n    \"clinical_localization_specifics\",\n    \"eeg_localization_specifics\",\n    \"mri_localization_specifics\",\n    \"clinical_category_specifics\",\n    \"eeg_category_specifics\",\n    \"mri_category_specifics\",\n    \"clinical_seizure_free\",\n    \"eeg_seizure_free\",\n    \"mri_seizure_free\",\n    \"clinical_seizure_other_types\",\n    \"eeg_seizure_other_types\",\n    \"mri_seizure_other_types\",\n    \"clinical_seizure_other_ages_at_onset\",\n    \"eeg_seizure_other_ages_at_onset\",\n    \"mri_seizure_other_ages_at_onset\",\n    \"clinical_seizure_other_frequencies\",\n    \"eeg_seizure_other_frequencies\",\n    \"mri_seizure_other_frequencies\",\n    \"clinical_seizure_other_specifics\",\n    \"eeg_seizure_other_specifics\",\n    \"mri_seizure_other_specifics\",\n    \"clinical_localization_other\",\n    \"eeg_localization_other\",\n    \"mri_localization_other\",\n    \"clinical_category_other\",\n    \"eeg_category_other\",\n    \"mri_category_other\",\n    \"clinical_trends_other\",\n    \"eeg_trends_other\",\n    \"mri_trends_other\",\n    \"clinical_recommendations_other\",\n    \"eeg_recommendations_other\",\n    \"mri_recommendations_other\",\n    \"clinical_history_other\",\n    \"eeg_history_other\",\n    \"mri_history_other\",\n    \"clinical_finding_other\",\n    \"eeg_finding_other\",\n    \"mri_finding_other\",\n    \"clinical_category_other_specifics\",\n    \"eeg_category_other_specifics\",\n    \"mri_category_other_specifics\",\n    \"clinical_seizure_free_specifics\",\n    \"eeg_seizure_free_specifics\",\n    \"mri_seizure_free_specifics\",\n    \"clinical_seizure_other_free\",\n    \"eeg_seizure_other_free\",\n    \"mri_seizure_other_free\",\n    \"clinical_seizure_other_specifics_other\",\n    \"eeg_seizure_other_specifics_other\",\n    \"mri_seizure_other_specifics_other\",\n    \"clinical_localization_other_specifics\",\n    \"eeg_localization_other_specifics\",\n    \"mri_localization_other_specifics\",\n    \"clinical_category_other_specifics_other\",\n    \"eeg_category_other_specifics_other\",\n    \"mri_category_other_specifics_other\",\n    \"clinical_trends_other_specifics\",\n    \"eeg_trends_other_specifics\",\n    \"mri_trends_other_specifics\",\n    \"clinical_recommendations_other_specifics\",\n    \"eeg_recommendations_other_specifics\",\n    \"mri_recommendations_other_specifics\",\n    \"clinical_history_other_specifics\",\n    \"eeg_history_other_specifics\",\n    \"mri_history_other_specifics\",\n    \"clinical_finding_other_specifics\",\n    \"eeg_finding_other_specifics\",\n    \"mri_finding_other_specifics\",\n    \"clinical_seizure_type_specifics_other\",\n    \"eeg_seizure_type_specifics_other\",\n    \"mri_seizure_type_specifics_other\",\n    \"clinical_awareness_specifics_other\",\n    \"eeg_awareness_specifics_other\",\n    \"mri_awareness_specifics_other\",\n    \"clinical_seizure_free_specifics_other\",\n    \"eeg_seizure_free_specifics_other\",\n    \"mri_seizure_free_specifics_other\",\n    \"clinical_seizure_other_free_specifics\",\n    \"eeg_seizure_other_free_specifics\",\n    \"mri_seizure_other_free_specifics\",\n    \"clinical_seizure_other_seizure_frequencies\",\n    \"eeg_seizure_other_seizure_frequencies\",\n    \"mri_seizure_other_seizure_frequencies\",\n    \"clinical_seizure_other_se",
+  "raw_response_tokens": 4096,
+  "raw_valid": false,
+  "parse_error_raw": "1 validation error for EegModule\n  Invalid JSON: trailing characters at line 1 column 25 [type=json_invalid, input_value='\"#/$defs/TemporalStatus\"...inical_seizure_other_se', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "study_type": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "background": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_present": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ied_findings": [],
+    "seizures_captured": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "seizures_captured_count": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_lobe": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "ictal_onset_laterality": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-C0-C0-P005",
+      "source_doc_type": "eeg_report",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "arm": "M2"
+}

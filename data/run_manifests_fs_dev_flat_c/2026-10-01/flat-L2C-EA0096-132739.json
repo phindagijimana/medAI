@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0096-132739",
+  "started_at": "2026-10-01T13:27:39.075059+00:00",
+  "finished_at": "2026-10-01T13:27:53.717548+00:00",
+  "duration_s": 14.64,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0096",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1410,
+  "raw_response": "{\"epilepsy_type\": {\"value\": null, \"quote\": null}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"generalised tonic clonic seizures in the night and frequent drops and absences throughout the day.\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": null, \"quote\": \"His control had deteriorated prior to increasing the valproate but had then improved to the odd stare only.\"}, \"current_asms\": [{\"name\": \"sodiumvalproate\", \"dose\": \"440 mg\", \"quote\": \"Sodium Valproate 440mg bd (30mg/kg/day)\"}, {\"name\": \"topiramate\", \"dose\": \"60 mg\", \"quote\": \"Topiramate 60mg am, 75mg pm (5mg/kg/day)\"}, {\"name\": \"phenytoin\", \"dose\": \"120 mg\", \"quote\": \"Phenytoin 120mg bd (10mg/kg/day)\"}]}",
+  "raw_response_tokens": 260,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

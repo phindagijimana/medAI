@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003099_V05-031433",
+  "started_at": "2026-10-02T03:14:33.822297+00:00",
+  "finished_at": "2026-10-02T03:14:44.621089+00:00",
+  "duration_s": 10.8,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003099_V05",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5521,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"generalized\",\n    \"quote\": \"generalized epilepsy\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"generalized_absence_typical\",\n    \"quote\": \"typical absence seizures\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 71,\n    \"quote\": \"seizure onset at age 71\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 4,\n    \"count_max\": 4,\n    \"period\": \"month\",\n    \"seizure_free\": false,\n    \"quote\": \"approximately four seizures per month\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"lacosamide\",\n      \"dose\": null,\n      \"quote\": \"Vimpat (lacosamide), current antiseizure medication\"\n    }\n  ]\n}",
+  "raw_response_tokens": 199,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

@@ -1,0 +1,60 @@
+{
+  "run_id": "f71f1f7ce352",
+  "started_at": "2026-09-29T05:00:59+00:00",
+  "finished_at": "2026-09-29T05:01:17+00:00",
+  "duration_s": 18.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0197",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1245,
+  "raw_response": "{\n  \"patient_id\": \"John\",\n  \"diagnoses\": [\n    {\n      \"condition\": \"Epilepsy\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"baseline has been around one or two seizures per year, now having one or two seizures per month, no warning before seizures, previously had unusual deja-vu sensation\"\n    },\n    {\n      \"condition\": \"Insulin dependent diabetes\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"not specified in the document\"\n    }\n  ],\n  \"medications\": [\n    {\n      \"drug\": \"Lamotrigine\",\n      \"dose\": \"100mg b.d.\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Medication\"\n    },\n    {\n      \"drug\": \"Levetiracetam\",\n      \"dose\": \"250mg once a day, increasing by 250mg every fortnight to an initial target dose of 500mg twice a day\",\n      \"certainty\": \"prescribed\",\n      \"evidence_text\": \"start Levetiracetam\"\n    },\n    {\n      \"drug\": \"Insulin\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Medication\"\n    },\n    {\n      \"drug\": \"Atorvastatin\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Medication\"\n    },\n    {\n      \"drug\": \"Ramipril\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"Medication\"\n    }\n  ],\n  \"imaging\": [\n    {\n      \"modality\": \"MRI\",\n      \"date\": \"2014\",\n      \"results\": \"normal apart from a few scattered tiny hyperintensities\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"MRI scan\"\n    }\n  ],\n  \"electroencephalography\": [\n    {\n      \"date\": \"last year\",\n      \"results\": \"some non-specific slowing in both frontal regions\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"EEG\"\n    }\n  ],\n  \"instructions\": [\n    {\n      \"text\": \"keep a careful eye on his blood sugars to make sure that he is not having hypoglycaemic events\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"As you know he had a MRI scan in 2014 which was normal apart from a few scattered tiny hyperintensities. An EEG last year showed some non-specific slowing in both frontal regions.\"\n    },\n    {\n      \"text\": \"request an up to date EEG and review him with the results\",\n      \"certainty\": \"confirmed\",\n      \"evidence_text\": \"As you know he had a MRI scan in 2014 which was normal apart from a few scattered tiny hyperintensities. An EEG last year showed some non-specific slowing in both frontal regions.\"\n    }\n  ]\n}",
+  "raw_response_tokens": 623,
+  "raw_valid": false,
+  "parse_error_raw": "7 validation errors for ClinicalLocalizationModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='John', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndiagnoses\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'condition': 'Epilepsy'...ified in the document'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'drug': 'Lamotrigine', ...ce_text': 'Medication'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nimaging\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'modality': 'MRI', 'dat...ence_text': 'MRI scan'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nelectroencephalography\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'date': 'last year', 'r...'evidence_text': 'EEG'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ninstructions\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'text': 'keep a careful...both frontal regions.'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'patient_id': 'John', 'd...oth frontal regions.'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0197",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

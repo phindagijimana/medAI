@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-fs-test-EA0171-053945",
+  "started_at": "2026-10-02T05:39:45.297893+00:00",
+  "finished_at": "2026-10-02T05:39:54.132702+00:00",
+  "duration_s": 8.83,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.11.13",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.14.0+cu130",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "13.0"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0171",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1825,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"probable focal onset\"}, \"predominant_seizure_type\": {\"value\": null, \"quote\": null}, \"age_at_onset_years\": {\"value\": 17, \"quote\": \"since the age of 17\"}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": true, \"quote\": \"Since you have started him on the lamotrigine he has not had any further episodes.\"}, \"current_asms\": [{\"name\": \"lamotrigine\", \"dose\": \"50mg bd\", \"quote\": \"Lamotrigine 50mg bd\"}]}",
+  "raw_response_tokens": 164,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

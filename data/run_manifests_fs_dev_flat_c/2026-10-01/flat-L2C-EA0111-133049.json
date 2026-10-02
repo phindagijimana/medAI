@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0111-133049",
+  "started_at": "2026-10-01T13:30:49.919420+00:00",
+  "finished_at": "2026-10-01T13:31:00.643665+00:00",
+  "duration_s": 10.72,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0111",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1309,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"Refractory focal epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"Nocturnal generalised tonic clonic seizures\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": \"week\", \"seizure_free\": false, \"quote\": \"She is currently having seizures on a weekly basis.\"}, \"current_asms\": [{\"name\": \"brivaracetam\", \"dose\": \"100 mg\", \"quote\": \"Brivaracetam 100mgs bd to increase to 100mgs am, 150mgs pm\"}]}",
+  "raw_response_tokens": 178,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}

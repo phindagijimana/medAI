@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P004035_V06-052359",
+  "started_at": "2026-10-02T05:23:59.513674+00:00",
+  "finished_at": "2026-10-02T05:24:13.013154+00:00",
+  "duration_s": 13.5,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P004035_V06",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5086,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"drug-resistant generalized epilepsy with generalized tonic-clonic seizures\"}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"generalized tonic-clonic seizures\"}, \"age_at_onset_years\": {\"value\": 15, \"quote\": \"onset at age 15\"}, \"seizure_frequency\": {\"count_min\": 7, \"count_max\": null, \"period\": \"week\", \"seizure_free\": false, \"quote\": \"approximately 7 seizures/week\"}, \"current_asms\": [{\"name\": \"lamotrigine\", \"dose\": \"200 mg twice daily\", \"quote\": \"Lamictal (lamotrigine) 200 mg PO BID\"}, {\"name\": \"carbamazepine\", \"dose\": \"400 mg twice daily\", \"quote\": \"Tegretol (carbamazepine) 400 mg PO BID\"}, {\"name\": \"lacosamide\", \"dose\": \"200 mg twice daily\", \"quote\": \"Vimpat (lacosamide) 200 mg PO BID\"}]}",
+  "raw_response_tokens": 253,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 7,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

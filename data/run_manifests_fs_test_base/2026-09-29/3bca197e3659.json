@@ -1,0 +1,47 @@
+{
+  "run_id": "3bca197e3659",
+  "started_at": "2026-09-29T03:16:37+00:00",
+  "finished_at": "2026-09-29T03:16:43+00:00",
+  "duration_s": 6.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0166",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 977,
+  "raw_response": "{\n  \"primary_claim\": {\n    \"value\": {\n      \"diagnosis\": \"Juvenile Myoclonic Epilepsy\",\n      \"medication\": \"Lamotrigine\",\n      \"dose\": \"125mg twice daily\",\n      \"action\": \"increase to 150mg twice daily\"\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"Diagnosis: Juvenile Myoclonic Epilepsy. Medication: Lamotrigine 125mg twice daily (please increase with immediate effect in 25mg, 2 weekly increments to 150mg twice daily)\",\n    \"source_doc_id\": \"PRE-SCR-01\",\n    \"source_doc_type\": \"prescription\",\n    \"source_date\": \"2025-01-01\"\n  }\n}",
+  "raw_response_tokens": 178,
+  "raw_valid": false,
+  "parse_error_raw": "8 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Juvenile Myoclonic Epilepsy', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Lamotrigine', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.dose\n  Extra inputs are not permitted [type=extra_forbidden, input_value='125mg twice daily', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.action\n  Extra inputs are not permitted [type=extra_forbidden, input_value='increase to 150mg twice daily', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.source\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='prescription', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "repair_attempts": 1,
+  "repair_method": "failed",
+  "final_valid": false,
+  "parse_error_final": "8 validation errors for ClinicalLocalizationModule\nprimary_claim.value.diagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Juvenile Myoclonic Epilepsy', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.medication\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Lamotrigine', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.dose\n  Extra inputs are not permitted [type=extra_forbidden, input_value='125mg twice daily', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.action\n  Extra inputs are not permitted [type=extra_forbidden, input_value='increase to 150mg twice daily', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim.value.lobe\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.laterality\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.value.source\n  Field required [type=missing, input_value={'diagnosis': 'Juvenile M...e to 150mg twice daily'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprimary_claim.source_doc_type\n  Input should be 'mri_report', 'eeg_report', 'progress_note', 'initial_consult', 'presurgical_evaluation', 'emu_admission', 'emu_discharge', 'surgery_conference', 'procedure_seeg', 'procedure_resection', 'procedure_neurostim' or 'other' [type=enum, input_value='prescription', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+  "parsed_value": null,
+  "arm": "M2"
+}

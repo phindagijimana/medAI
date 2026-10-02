@@ -1,0 +1,60 @@
+{
+  "run_id": "cd76d4a64744",
+  "started_at": "2026-09-28T21:23:35+00:00",
+  "finished_at": "2026-09-28T21:23:50+00:00",
+  "duration_s": 15.0,
+  "code_sha": "fd4f949",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v2",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "pilot-gpt-5.6-sol-C1-P003",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1582,
+  "raw_response": "{\n  \"clinical_seizure_type\": {\n    \"value\": {\n      \"combined_focal_generalized\": {\n        \"epilepsy_type\": \"combined_focal_generalized\",\n        \"predominant_seizure_type\": null,\n        \"other_seizure_types\": [],\n        \"awareness\": null,\n        \"semiology_text\": null,\n        \"age_at_onset_years\": null,\n        \"seizure_frequency\": null,\n        \"other_seizure_frequencies\": [],\n        \"status_epilepticus_history\": null,\n        \"etiology_category\": null,\n        \"etiology_details_text\": null,\n        \"etiology_specifics\": null,\n        \"focal_motor_onset\": null,\n        \"focal_nonmotor_onset\": null\n      }\n    },\n    \"certainty\": \"definite\",\n    \"temporal_status\": \"current\",\n    \"evidence_text\": \"combined generalized and focal epilepsy\",\n    \"source_doc_id\": \"P003\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2025-01-01\",\n    \"char_start\": 166,\n    \"char_end\": 202\n  },\n  \"medication\": {\n    \"current_asms\": [],\n    \"prior_asms\": [],\n    \"failed_asms\": [],\n    \"adverse_effects_text\": null,\n    \"drug_resistance_status\": null,\n    \"surgery_history\": [],\n    \"non_drug_therapies\": []\n  },\n  \"clinical_localization\": null,\n  \"eeg\": null,\n  \"mri\": null,\n  \"integrated\": null\n}",
+  "raw_response_tokens": 343,
+  "raw_valid": false,
+  "parse_error_raw": "7 validation errors for ClinicalLocalizationModule\nclinical_seizure_type\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'value': {'combined_foca...': 166, 'char_end': 202}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedication\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'current_asms': [], 'pri...non_drug_therapies': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nclinical_localization\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\neeg\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmri\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nintegrated\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'clinical_seizure_type':...one, 'integrated': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "pilot-gpt-5.6-sol-C1-P003",
+      "source_doc_type": "progress_note",
+      "source_date": "2026-09-25",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M2"
+}

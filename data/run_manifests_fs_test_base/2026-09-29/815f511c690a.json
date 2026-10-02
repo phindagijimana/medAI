@@ -1,0 +1,60 @@
+{
+  "run_id": "815f511c690a",
+  "started_at": "2026-09-29T02:59:32+00:00",
+  "finished_at": "2026-09-29T02:59:44+00:00",
+  "duration_s": 12.0,
+  "code_sha": "6523e8e",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "clinical_localization.M1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [
+    "clinical_localization.fewshot.synthetic-01.v1"
+  ],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0161",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1258,
+  "raw_response": "{\n  \"patient_id\": \"Rachel Smith\",\n  \"diagnosis\": \"Generalised epilepsy with absences and GTCS\",\n  \"medications\": [\n    {\n      \"name\": \"Lamotrigine\",\n      \"dose\": \"100 mg\",\n      \"frequency\": \"morning\",\n      \"certainty\": \"documented\",\n      \"evidence_text\": \"Lamotrigine 100 mg in the morning\"\n    },\n    {\n      \"name\": \"Levetiracetam\",\n      \"dose\": \"250mg\",\n      \"frequency\": \"twice a day\",\n      \"increase_plan\": \"increase by 250mg every fortnight to 500mg twice a day\",\n      \"certainty\": \"documented\",\n      \"evidence_text\": \"Levetiracetam 250mg twice a day\"\n    }\n  ],\n  \"seizure_history\": {\n    \"absence_seizures\": {\n      \"onset_age\": 8,\n      \"frequency\": \"every week\",\n      \"relation_to_sleep\": \"more common after sleep deprivation\"\n    },\n    \"tonic_clonic_seizures\": {\n      \"onset_age\": 12,\n      \"frequency\": \"every two months\",\n      \"relation_to_sleep\": \"coincide with sleep deprivation\"\n    }\n  },\n  \"imaging\": {\n    \"mri\": \"normal\",\n    \"certainty\": \"documented\",\n    \"evidence_text\": \"normal MRI of her brain last year\"\n  },\n  \"eeg\": {\n    \"last_performed\": \"last year\",\n    \"findings\": \"generalised spike and wave without any photosensitivity or focal features\",\n    \"certainty\": \"documented\",\n    \"evidence_text\": \"EEG last year did show some generalised spike and wave\"\n  },\n  \"follow_up\": \"continue to review in this clinic before she moves to the adult clinic\"\n}",
+  "raw_response_tokens": 402,
+  "raw_valid": false,
+  "parse_error_raw": "8 validation errors for ClinicalLocalizationModule\npatient_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Rachel Smith', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ndiagnosis\n  Extra inputs are not permitted [type=extra_forbidden, input_value='Generalised epilepsy with absences and GTCS', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nmedications\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'name': 'Lamotrigine', ...tam 250mg twice a day'}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nseizure_history\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'absence_seizures': {'on...ith sleep deprivation'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nimaging\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'mri': 'normal', 'certai...of her brain last year'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\neeg\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'last_performed': 'last ...ralised spike and wave'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nfollow_up\n  Extra inputs are not permitted [type=extra_forbidden, input_value='continue to review in th...ves to the adult clinic', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\nprimary_claim\n  Field required [type=missing, input_value={'patient_id': 'Rachel Sm...es to the adult clinic'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "repair_attempts": 2,
+  "repair_method": "smart_repair_wrap_and_normalize",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "primary_claim": {
+      "value": null,
+      "certainty": "not_documented",
+      "temporal_status": "unspecified",
+      "evidence_text": null,
+      "source_doc_id": "fs-test-EA0161",
+      "source_doc_type": "progress_note",
+      "source_date": "2019-01-01",
+      "char_start": null,
+      "char_end": null
+    },
+    "alternative_claims": []
+  },
+  "arm": "M1"
+}

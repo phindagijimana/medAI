@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1C-P003046_V04-023005",
+  "started_at": "2026-10-02T02:30:05.397570+00:00",
+  "finished_at": "2026-10-02T02:30:18.295771+00:00",
+  "duration_s": 12.9,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "synth-P003046_V04",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 5502,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"drug-resistant generalized epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"generalized_absence_typical\", \"quote\": \"typical absence seizures\"}, \"age_at_onset_years\": {\"value\": 35, \"quote\": \"beginning at age 35\"}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": false, \"quote\": \"otherwise been seizure-free, averaging 0 seizures/month recently\"}, \"current_asms\": [{\"name\": \"topiramate\", \"dose\": null, \"quote\": \"Topamax (topiramate)\"}, {\"name\": \"valproate\", \"dose\": null, \"quote\": \"Depakote (valproate)\"}, {\"name\": \"lacosamide\", \"dose\": null, \"quote\": \"Vimpat (lacosamide)\"}, {\"name\": \"brivaracetam\", \"dose\": null, \"quote\": \"Briviact (brivaracetam)\"}]}",
+  "raw_response_tokens": 241,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 7,
+    "values_dropped": 0
+  },
+  "arm": "L1C"
+}

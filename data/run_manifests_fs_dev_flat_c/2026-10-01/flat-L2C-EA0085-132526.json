@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2C-EA0085-132526",
+  "started_at": "2026-10-01T13:25:26.223122+00:00",
+  "finished_at": "2026-10-01T13:25:38.545547+00:00",
+  "duration_s": 12.32,
+  "code_sha": "394fbe7",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2C.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0085",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2206,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"generalized\", \"quote\": \"Juvenile myoclonic epilepsy \"}, \"predominant_seizure_type\": {\"value\": \"generalized_tonic_clonic\", \"quote\": \"generalised stiffening and shaking, stertorous breathing and cyanosis.\"}, \"age_at_onset_years\": {\"value\": 12, \"quote\": \"He is a 21-year-old gentleman who had his first seizure at the age of 12.\"}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": false, \"quote\": \"He has had on average one seizure a year since the age of 17 but a total of 3 in 2020.\"}, \"current_asms\": [{\"name\": \"sodium valproate\", \"dose\": \"300 mg\", \"quote\": \"Sodium Valproate (Epilim Chrono) 300mgs once a day\"}]}",
+  "raw_response_tokens": 219,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 0
+  },
+  "arm": "L2C"
+}
