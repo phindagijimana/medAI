@@ -1,0 +1,554 @@
+{
+  "environment": {
+    "python": "3.11.13",
+    "host": "smdodwork01.urmc-sh.rochester.edu",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cuda_available": true,
+    "transformers": "4.57.6",
+    "gpu": "NVIDIA L40S-24Q"
+  },
+  "unchunked_max_chars": 20000,
+  "n_done": 30,
+  "n_patients": 30,
+  "all_patients_chunked": {
+    "chunked": {
+      "llm": {
+        "p": 0.987,
+        "r": 0.996,
+        "f1": 0.991,
+        "n_patients": 30
+      },
+      "specialist": {
+        "p": 0.918,
+        "r": 0.947,
+        "f1": 0.932,
+        "n_patients": 30
+      },
+      "leo_auto": {
+        "p": 1.0,
+        "r": 0.942,
+        "f1": 0.97,
+        "n_patients": 30
+      },
+      "leo_review": {
+        "p": 0.911,
+        "r": 0.947,
+        "f1": 0.928,
+        "n_patients": 30
+      }
+    }
+  },
+  "subset_up_to_20000_chars": {
+    "chunked": {
+      "llm": {
+        "p": 1.0,
+        "r": 1.0,
+        "f1": 1.0,
+        "n_patients": 11
+      },
+      "specialist": {
+        "p": 0.962,
+        "r": 0.974,
+        "f1": 0.968,
+        "n_patients": 11
+      },
+      "leo_auto": {
+        "p": 1.0,
+        "r": 0.974,
+        "f1": 0.987,
+        "n_patients": 11
+      },
+      "leo_review": {
+        "p": 0.962,
+        "r": 0.974,
+        "f1": 0.968,
+        "n_patients": 11
+      }
+    },
+    "unchunked": {
+      "llm": {
+        "p": 1.0,
+        "r": 0.974,
+        "f1": 0.987,
+        "n_patients": 11
+      },
+      "specialist": {
+        "p": 0.962,
+        "r": 0.974,
+        "f1": 0.968,
+        "n_patients": 11
+      },
+      "leo_auto": {
+        "p": 0.974,
+        "r": 0.974,
+        "f1": 0.974,
+        "n_patients": 11
+      },
+      "leo_review": {
+        "p": 0.962,
+        "r": 0.974,
+        "f1": 0.968,
+        "n_patients": 11
+      }
+    }
+  },
+  "per_field_chunked_leo_review": {
+    "current_asms": {
+      "n": 30,
+      "tp": 61,
+      "fp": 10,
+      "fn": 0,
+      "p": 0.8591549295774648,
+      "r": 1.0,
+      "f1": 0.9242424242424242
+    },
+    "seizure_frequency.period": {
+      "n": 19,
+      "tp": 18,
+      "fp": 0,
+      "fn": 1,
+      "p": 1.0,
+      "r": 0.9473684210526315,
+      "f1": 0.972972972972973
+    },
+    "seizure_frequency.count_min": {
+      "n": 30,
+      "tp": 29,
+      "fp": 1,
+      "fn": 1,
+      "p": 0.9666666666666667,
+      "r": 0.9666666666666667,
+      "f1": 0.9666666666666667
+    },
+    "seizure_frequency.count_max": {
+      "n": 30,
+      "tp": 29,
+      "fp": 1,
+      "fn": 1,
+      "p": 0.9666666666666667,
+      "r": 0.9666666666666667,
+      "f1": 0.9666666666666667
+    },
+    "epilepsy_type": {
+      "n": 30,
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "p": 1.0,
+      "r": 1.0,
+      "f1": 1.0
+    },
+    "predominant_seizure_type": {
+      "n": 26,
+      "tp": 17,
+      "fp": 9,
+      "fn": 9,
+      "p": 0.6538461538461539,
+      "r": 0.6538461538461539,
+      "f1": 0.6538461538461539
+    },
+    "age_at_onset_years": {
+      "n": 30,
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "p": 1.0,
+      "r": 1.0,
+      "f1": 1.0
+    },
+    "epilepsy_type|typed": {
+      "n": 29,
+      "tp": 29,
+      "fp": 0,
+      "fn": 0,
+      "p": 1.0,
+      "r": 1.0,
+      "f1": 1.0
+    },
+    "epilepsy_type|abstain": {
+      "n": 30,
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "p": 1.0,
+      "r": 1.0,
+      "f1": 1.0
+    }
+  },
+  "reference_per_note_aggregate_L1C": {
+    "llm": {
+      "f1": 0.993
+    },
+    "specialist": {
+      "f1": 0.971
+    },
+    "leo_auto": {
+      "f1": 0.998
+    },
+    "leo_review": {
+      "f1": 0.969
+    }
+  },
+  "rows": [
+    {
+      "patient": "P003000",
+      "n_notes": 5,
+      "chars": 26059,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 68.8,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003005",
+      "n_notes": 7,
+      "chars": 40778,
+      "chunked": {
+        "n_chunks": 7,
+        "seconds": 89.1,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003010",
+      "n_notes": 6,
+      "chars": 27583,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 64.1,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003015",
+      "n_notes": 4,
+      "chars": 18510,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 43.0,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 12.3,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003020",
+      "n_notes": 3,
+      "chars": 16002,
+      "chunked": {
+        "n_chunks": 3,
+        "seconds": 33.6,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 13.5,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003025",
+      "n_notes": 4,
+      "chars": 19872,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 51.6,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 13.6,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003030",
+      "n_notes": 3,
+      "chars": 13814,
+      "chunked": {
+        "n_chunks": 3,
+        "seconds": 33.5,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 11.8,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003035",
+      "n_notes": 5,
+      "chars": 26648,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 70.7,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003040",
+      "n_notes": 7,
+      "chars": 32757,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 64.0,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003045",
+      "n_notes": 4,
+      "chars": 23759,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 51.0,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003050",
+      "n_notes": 3,
+      "chars": 15223,
+      "chunked": {
+        "n_chunks": 2,
+        "seconds": 23.1,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 12.8,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003055",
+      "n_notes": 4,
+      "chars": 21116,
+      "chunked": {
+        "n_chunks": 3,
+        "seconds": 34.0,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003060",
+      "n_notes": 8,
+      "chars": 39269,
+      "chunked": {
+        "n_chunks": 7,
+        "seconds": 82.3,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003065",
+      "n_notes": 7,
+      "chars": 33809,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 69.1,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003070",
+      "n_notes": 4,
+      "chars": 25483,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 53.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003075",
+      "n_notes": 2,
+      "chars": 9623,
+      "chunked": {
+        "n_chunks": 2,
+        "seconds": 24.1,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 11.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003080",
+      "n_notes": 3,
+      "chars": 13792,
+      "chunked": {
+        "n_chunks": 3,
+        "seconds": 35.5,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 13.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003085",
+      "n_notes": 6,
+      "chars": 28102,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 60.3,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003090",
+      "n_notes": 5,
+      "chars": 29477,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 64.6,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P003095",
+      "n_notes": 4,
+      "chars": 19147,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 46.2,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 13.0,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004001",
+      "n_notes": 4,
+      "chars": 23566,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 47.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004007",
+      "n_notes": 3,
+      "chars": 16162,
+      "chunked": {
+        "n_chunks": 3,
+        "seconds": 37.6,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 13.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004008",
+      "n_notes": 6,
+      "chars": 33872,
+      "chunked": {
+        "n_chunks": 6,
+        "seconds": 74.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004011",
+      "n_notes": 5,
+      "chars": 23915,
+      "chunked": {
+        "n_chunks": 4,
+        "seconds": 51.2,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004013",
+      "n_notes": 7,
+      "chars": 39211,
+      "chunked": {
+        "n_chunks": 6,
+        "seconds": 76.1,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004023",
+      "n_notes": 7,
+      "chars": 33864,
+      "chunked": {
+        "n_chunks": 6,
+        "seconds": 73.5,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004048",
+      "n_notes": 2,
+      "chars": 9910,
+      "chunked": {
+        "n_chunks": 2,
+        "seconds": 25.2,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 14.9,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004054",
+      "n_notes": 2,
+      "chars": 12669,
+      "chunked": {
+        "n_chunks": 2,
+        "seconds": 20.1,
+        "llm_answered": true
+      },
+      "unchunked": {
+        "n_chunks": 1,
+        "seconds": 11.3,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004091",
+      "n_notes": 6,
+      "chars": 36149,
+      "chunked": {
+        "n_chunks": 6,
+        "seconds": 66.9,
+        "llm_answered": true
+      }
+    },
+    {
+      "patient": "P004094",
+      "n_notes": 7,
+      "chars": 33111,
+      "chunked": {
+        "n_chunks": 5,
+        "seconds": 70.3,
+        "llm_answered": true
+      }
+    }
+  ],
+  "seconds_total": 1802,
+  "note": "Each document is one patient's notes joined; the reference is the patient-level record.",
+  "stage": "long",
+  "written_utc": "2026-10-02T06:06:31+00:00"
+}

@@ -1,0 +1,56 @@
+{
+  "environment": {
+    "python": "3.11.13",
+    "host": "smdodwork02.urmc-sh.rochester.edu",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cuda_available": true,
+    "transformers": "4.57.6",
+    "gpu": "NVIDIA L40S-24Q"
+  },
+  "load_seconds": 6.1,
+  "llm_used": true,
+  "error": "",
+  "seconds": 31.17,
+  "row": {
+    "epilepsy_type": "focal",
+    "epilepsy_type_status": "accepted",
+    "epilepsy_type_why": "",
+    "seizure_type": "",
+    "seizure_type_status": "not_found",
+    "seizure_type_why": "",
+    "age_at_onset": "11",
+    "age_at_onset_status": "accepted",
+    "age_at_onset_why": "",
+    "seizure_frequency": "2 per month",
+    "seizure_frequency_status": "accepted",
+    "seizure_frequency_why": "",
+    "seizure_frequency_count_min": 2.0,
+    "seizure_frequency_count_max": 2.0,
+    "seizure_frequency_period": "month",
+    "seizure_frequency_seizure_free": false,
+    "current_asms": "lamotrigine; lacosamide",
+    "current_asms_status": "accepted",
+    "current_asms_why": "",
+    "current_asms_detail": "lamotrigine (200 mg twice daily); lacosamide (100 mg twice daily)"
+  },
+  "n_claims": 7,
+  "n_accepted": 6,
+  "n_review": 1,
+  "asks": [
+    {
+      "spec_id": "aura",
+      "question": "Does the patient report an aura before seizures?",
+      "answer": "not_documented",
+      "quote": "",
+      "status": "not_documented",
+      "reason": "",
+      "char_start": null,
+      "char_end": null,
+      "n_chunks": 1
+    }
+  ],
+  "ok": true,
+  "stage": "smoke",
+  "written_utc": "2026-10-02T05:37:01+00:00"
+}

@@ -1,0 +1,2224 @@
+{
+  "environment": {
+    "python": "3.11.13",
+    "host": "smdodwork04.urmc-sh.rochester.edu",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cuda_available": true,
+    "transformers": "4.57.6",
+    "gpu": "NVIDIA L40S-24Q"
+  },
+  "n_done": 30,
+  "n_patients": 30,
+  "summary": {
+    "epilepsy_type": {
+      "n": 30,
+      "status_needs_review": 27,
+      "quote_found": 27,
+      "answerable": 30,
+      "correct": 30,
+      "status_rejected": 3,
+      "quote_not_found": 3,
+      "accuracy": 1.0
+    },
+    "age_at_onset": {
+      "n": 30,
+      "status_needs_review": 30,
+      "quote_found": 30,
+      "answerable": 30,
+      "correct": 30,
+      "accuracy": 1.0
+    },
+    "hippocampal_sclerosis_yes_no": {
+      "n": 17,
+      "status_needs_review": 11,
+      "quote_found": 11,
+      "answerable": 17,
+      "correct": 11,
+      "status_not_documented": 5,
+      "status_rejected": 1,
+      "quote_not_found": 1,
+      "accuracy": 0.647
+    },
+    "unanswerable": {
+      "n": 90,
+      "status_not_documented": 88,
+      "unanswerable": 90,
+      "status_needs_review": 1,
+      "quote_found": 1,
+      "invented_answer": 2,
+      "status_rejected": 1,
+      "quote_not_found": 1,
+      "invented_answer_rate": 0.022
+    },
+    "current_drug_yes_no": {
+      "n": 114,
+      "status_needs_review": 100,
+      "quote_found": 100,
+      "answerable": 114,
+      "correct": 91,
+      "status_rejected": 11,
+      "quote_not_found": 11,
+      "status_not_documented": 3,
+      "accuracy": 0.798,
+      "tp": 52,
+      "fp": 18,
+      "fn": 2,
+      "precision_yes": 0.743,
+      "recall_yes": 0.963
+    }
+  },
+  "seconds_total": 4955,
+  "rows": [
+    {
+      "patient": "P003000",
+      "chars": 26059,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 33.0,
+          "answer": "33",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003005",
+      "chars": 40778,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 7.0,
+          "answer": "7",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003010",
+      "chars": 27583,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 36.0,
+          "answer": "36",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003015",
+      "chars": 18510,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 57.0,
+          "answer": "57",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003020",
+      "chars": 16002,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 13.0,
+          "answer": "13",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003025",
+      "chars": 19872,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 28.0,
+          "answer": "28",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003030",
+      "chars": 13814,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 36.0,
+          "answer": "36",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003035",
+      "chars": 26648,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 26.0,
+          "answer": "26",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003040",
+      "chars": 32757,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "unknown",
+          "answer": "unknown",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 54.0,
+          "answer": "54",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003045",
+      "chars": 23759,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 70.0,
+          "answer": "70",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003050",
+      "chars": 15223,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 56.0,
+          "answer": "56",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003055",
+      "chars": 21116,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 37.0,
+          "answer": "37",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003060",
+      "chars": 39269,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 38.0,
+          "answer": "38",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003065",
+      "chars": 33809,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "combined_focal_generalized",
+          "answer": "combined_focal_generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 23.0,
+          "answer": "23",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003070",
+      "chars": 25483,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 38.0,
+          "answer": "38",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003075",
+      "chars": 9623,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 64.0,
+          "answer": "64",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003080",
+      "chars": 13792,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 11.0,
+          "answer": "11",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "0 seizures/month",
+          "status": "needs_review",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "no",
+          "status": "rejected",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003085",
+      "chars": 28102,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 10.0,
+          "answer": "10",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003090",
+      "chars": 29477,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 24.0,
+          "answer": "24",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P003095",
+      "chars": 19147,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 21.0,
+          "answer": "21",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004001",
+      "chars": 23566,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 8.0,
+          "answer": "8",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "rejected",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004007",
+      "chars": 16162,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 11.0,
+          "answer": "11",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004008",
+      "chars": 33872,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 55.0,
+          "answer": "55",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004011",
+      "chars": 23915,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 21.0,
+          "answer": "21",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_valproate",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004013",
+      "chars": 39211,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "combined_focal_generalized",
+          "answer": "combined_focal_generalized",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 10.0,
+          "answer": "10",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_topiramate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_zonisamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004023",
+      "chars": 33864,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 75.0,
+          "answer": "75",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004048",
+      "chars": 9910,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 7.0,
+          "answer": "7",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_perampanel",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004054",
+      "chars": 12669,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 7.0,
+          "answer": "7",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_sodiumvalproate",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_carbamazepine",
+          "expected": "no",
+          "answer": "no",
+          "status": "rejected",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004091",
+      "chars": 36149,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "generalized",
+          "answer": "generalized",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 6.0,
+          "answer": "6",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_levetiracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_lamotrigine",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_lacosamide",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_hs",
+          "expected": "no",
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": false
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    },
+    {
+      "patient": "P004094",
+      "chars": 33111,
+      "q": [
+        {
+          "kind": "epilepsy_type",
+          "expected": "focal",
+          "answer": "focal",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "age_at_onset",
+          "expected": 63.0,
+          "answer": "63",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_oxcarbazepine",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_brivaracetam",
+          "expected": "yes",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "yes_no_drug_clobazam",
+          "expected": "no",
+          "answer": "yes",
+          "status": "needs_review",
+          "ok": false
+        },
+        {
+          "kind": "yes_no_drug_phenytoin",
+          "expected": "no",
+          "answer": "no",
+          "status": "needs_review",
+          "ok": true
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        },
+        {
+          "kind": "unanswerable",
+          "expected": null,
+          "answer": "not_documented",
+          "status": "not_documented",
+          "ok": null
+        }
+      ]
+    }
+  ],
+  "note": "Answers are LEO's: a quote must be found in the note (status needs_review) or the answer is rejected. 'accuracy' counts only answers equal to the reference. Documents are a patient's notes joined.",
+  "stage": "ask",
+  "written_utc": "2026-10-02T07:00:04+00:00"
+}

@@ -1,0 +1,202 @@
+{
+  "n_patients": 80,
+  "document": "one patient's notes joined",
+  "system": "EpExtra specialist, no LLM",
+  "scalars": {
+    "etiology_category": {
+      "n": 80,
+      "found": 80,
+      "correct": 77,
+      "accuracy": 0.963,
+      "accuracy_when_answered": 0.963,
+      "confusion": {
+        "genetic -> genetic": 11,
+        "structural -> structural": 25,
+        "unknown -> unknown": 22,
+        "infectious -> infectious": 7,
+        "immune -> immune": 7,
+        "metabolic -> metabolic": 5,
+        "unknown -> structural": 3
+      },
+      "wrong": [
+        {
+          "patient": "P003013",
+          "reference": "unknown",
+          "rules": "structural"
+        },
+        {
+          "patient": "P003034",
+          "reference": "unknown",
+          "rules": "structural"
+        },
+        {
+          "patient": "P003067",
+          "reference": "unknown",
+          "rules": "structural"
+        }
+      ]
+    },
+    "drug_resistance": {
+      "n": 80,
+      "found": 80,
+      "correct": 76,
+      "accuracy": 0.95,
+      "accuracy_when_answered": 0.95,
+      "confusion": {
+        "drug_responsive -> drug_responsive": 45,
+        "drug_resistant -> drug_resistant": 31,
+        "drug_responsive -> drug_resistant": 4
+      },
+      "wrong": [
+        {
+          "patient": "P003024",
+          "reference": "drug_responsive",
+          "rules": "drug_resistant"
+        },
+        {
+          "patient": "P003038",
+          "reference": "drug_responsive",
+          "rules": "drug_resistant"
+        },
+        {
+          "patient": "P003059",
+          "reference": "drug_responsive",
+          "rules": "drug_resistant"
+        },
+        {
+          "patient": "P003067",
+          "reference": "drug_responsive",
+          "rules": "drug_resistant"
+        }
+      ]
+    }
+  },
+  "bools": {
+    "mri_normal": {
+      "n": 30,
+      "found": 29,
+      "hedged_only": 0,
+      "correct": 29,
+      "ref_true": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 0.967,
+      "accuracy_when_answered": 1.0,
+      "precision_true": null,
+      "recall_true": null,
+      "wrong": []
+    },
+    "hippocampal_sclerosis": {
+      "n": 30,
+      "found": 19,
+      "hedged_only": 0,
+      "correct": 18,
+      "ref_true": 9,
+      "tp": 9,
+      "fp": 1,
+      "fn": 0,
+      "accuracy": 0.6,
+      "accuracy_when_answered": 0.947,
+      "precision_true": 0.9,
+      "recall_true": 1.0,
+      "wrong": [
+        {
+          "patient": "P003036",
+          "reference": false,
+          "rules": true
+        }
+      ]
+    },
+    "focal_cortical_dysplasia": {
+      "n": 30,
+      "found": 14,
+      "hedged_only": 0,
+      "correct": 11,
+      "ref_true": 8,
+      "tp": 8,
+      "fp": 3,
+      "fn": 0,
+      "accuracy": 0.367,
+      "accuracy_when_answered": 0.786,
+      "precision_true": 0.727,
+      "recall_true": 1.0,
+      "wrong": [
+        {
+          "patient": "P003027",
+          "reference": false,
+          "rules": true
+        },
+        {
+          "patient": "P003029",
+          "reference": false,
+          "rules": true
+        },
+        {
+          "patient": "P003057",
+          "reference": false,
+          "rules": true
+        }
+      ]
+    }
+  },
+  "mri_findings": {
+    "tp": 28,
+    "fp": 28,
+    "fn": 2,
+    "precision": 0.5,
+    "recall": 0.933,
+    "f1": 0.651
+  },
+  "surgery_history": {
+    "patients_with_no_reference_surgery": 80,
+    "patients_where_rules_report_surgery": 5,
+    "examples": [
+      {
+        "patient": "P003018",
+        "n_claims": 1,
+        "evidence": [
+          "epilepsy surgery"
+        ]
+      },
+      {
+        "patient": "P003028",
+        "n_claims": 1,
+        "evidence": [
+          "epilepsy surgery"
+        ]
+      },
+      {
+        "patient": "P003041",
+        "n_claims": 1,
+        "evidence": [
+          "epilepsy surgery"
+        ]
+      },
+      {
+        "patient": "P003054",
+        "n_claims": 1,
+        "evidence": [
+          "epilepsy surgery"
+        ]
+      },
+      {
+        "patient": "P003096",
+        "n_claims": 3,
+        "evidence": [
+          "VNS",
+          "RNS",
+          "DBS "
+        ]
+      }
+    ]
+  },
+  "not_scoreable": [
+    "EEG study type, background, ictal onset",
+    "seizure semiology",
+    "focal motor / non-motor onset",
+    "failed, prior and rescue drugs",
+    "surgery history (reference lists none)",
+    "etiology details"
+  ]
+}

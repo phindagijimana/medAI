@@ -1,0 +1,334 @@
+{
+  "environment": {
+    "python": "3.11.13",
+    "host": "smdodwork02.urmc-sh.rochester.edu",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "cuda_available": true,
+    "transformers": "4.57.6",
+    "gpu": "NVIDIA L40S-24Q"
+  },
+  "n_docs": 40,
+  "n_done": 40,
+  "n_with_reference": 40,
+  "same_raw": 30,
+  "same_parsed": 32,
+  "app_code_path_matches_script": "5/5",
+  "rows": [
+    {
+      "doc": "fs-test-EA0161",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.3
+    },
+    {
+      "doc": "fs-test-EA0162",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.4
+    },
+    {
+      "doc": "fs-test-EA0163",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 7.7
+    },
+    {
+      "doc": "fs-test-EA0164",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.2
+    },
+    {
+      "doc": "fs-test-EA0165",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 12.9
+    },
+    {
+      "doc": "fs-test-EA0166",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.5
+    },
+    {
+      "doc": "fs-test-EA0167",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.7
+    },
+    {
+      "doc": "fs-test-EA0168",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.0
+    },
+    {
+      "doc": "fs-test-EA0169",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.4
+    },
+    {
+      "doc": "fs-test-EA0170",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.9
+    },
+    {
+      "doc": "fs-test-EA0171",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.8
+    },
+    {
+      "doc": "fs-test-EA0172",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": true,
+      "seconds": 10.4
+    },
+    {
+      "doc": "fs-test-EA0173",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 7.9
+    },
+    {
+      "doc": "fs-test-EA0174",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.6
+    },
+    {
+      "doc": "fs-test-EA0175",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.1
+    },
+    {
+      "doc": "fs-test-EA0176",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.2
+    },
+    {
+      "doc": "fs-test-EA0177",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.2
+    },
+    {
+      "doc": "fs-test-EA0178",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 12.2
+    },
+    {
+      "doc": "fs-test-EA0179",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.6
+    },
+    {
+      "doc": "fs-test-EA0180",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 10.4,
+      "differs_in": [
+        "medication.current_asms"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0181",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.6
+    },
+    {
+      "doc": "fs-test-EA0182",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.9
+    },
+    {
+      "doc": "fs-test-EA0183",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 9.7,
+      "differs_in": [
+        "clinical_seizure.seizure_frequency",
+        "medication.current_asms"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0184",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.3
+    },
+    {
+      "doc": "fs-test-EA0185",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.3
+    },
+    {
+      "doc": "fs-test-EA0186",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.6
+    },
+    {
+      "doc": "fs-test-EA0187",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.8
+    },
+    {
+      "doc": "fs-test-EA0188",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 12.2,
+      "differs_in": [
+        "clinical_seizure.age_at_onset_years"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0189",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 8.1
+    },
+    {
+      "doc": "fs-test-EA0190",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 9.2,
+      "differs_in": [
+        "clinical_seizure.predominant_seizure_type"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0191",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.9
+    },
+    {
+      "doc": "fs-test-EA0192",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.5
+    },
+    {
+      "doc": "fs-test-EA0193",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 10.3
+    },
+    {
+      "doc": "fs-test-EA0194",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 10.6,
+      "differs_in": [
+        "clinical_seizure.predominant_seizure_type",
+        "clinical_seizure.seizure_frequency"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0195",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": true,
+      "seconds": 10.3
+    },
+    {
+      "doc": "fs-test-EA0196",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.4
+    },
+    {
+      "doc": "fs-test-EA0197",
+      "has_reference": true,
+      "same_raw": true,
+      "same_parsed": true,
+      "seconds": 9.2
+    },
+    {
+      "doc": "fs-test-EA0198",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 9.8,
+      "differs_in": [
+        "clinical_seizure.age_at_onset_years",
+        "clinical_seizure.predominant_seizure_type"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0199",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 9.2,
+      "differs_in": [
+        "clinical_seizure.seizure_frequency"
+      ]
+    },
+    {
+      "doc": "fs-test-EA0200",
+      "has_reference": true,
+      "same_raw": false,
+      "same_parsed": false,
+      "seconds": 9.2,
+      "differs_in": [
+        "clinical_seizure.predominant_seizure_type",
+        "clinical_seizure.seizure_frequency"
+      ]
+    }
+  ],
+  "reference_manifests": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_flat_c",
+  "live_manifests": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_flat_c_live",
+  "seconds_total": 497,
+  "stage": "parity_fs",
+  "written_utc": "2026-10-02T05:46:10+00:00",
+  "rescore_returncode": 0,
+  "rescore_output_tail": "\n=== L1C: L1C from /mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_flat_c_live  covers 40/40 letters ===\nsystem        microP  microR  microF1   95% CI\nllm            0.746   0.680    0.712   [0.652, 0.772]\nspecialist     0.695   0.619    0.655   [0.582, 0.723]\nleo_auto       0.862   0.551    0.672   [0.596, 0.739]\nleo_review     0.673   0.687    0.680   [0.617, 0.745]\n  \u0394 micro-F1 leo_auto-llm           -0.041  CI [-0.088, +0.004]\n  \u0394 micro-F1 leo_review-llm         -0.032  CI [-0.079, +0.018]\n  \u0394 micro-F1 leo_review-specialist  +0.026  CI [-0.003, +0.058]\n  \u0394 micro-F1 leo_auto-specialist    +0.017  CI [-0.019, +0.052]\n  claim precision by category: {'agree': (0.837, 86), 'disagree': (0.294, 17), 'llm_only': (0.476, 21), 'specialist_only': (0.222, 18)}\n  safety: {'claims': 412, 'accept_rate': 0.415, 'review_rate': 0.556, 'reject_rate': 0.029, 'ontology_grounded_rate': 0.284, 'llm_proposed_unmatched': 39, 'llm_unsupported_quote': 5, 'llm_unsupported_rate_of_unmatched': 0.128}\n  cross llm[L1C]-specialist                      +0.058  CI [-0.000, +0.115]\n\nwrote /mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/eval/results/leo_vs_fs_gold_v05_live.json and /mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/eval/results/leo_vs_fs_gold_v05_live.md\n"
+}

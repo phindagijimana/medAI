@@ -1,0 +1,122 @@
+{
+  "n_patients": 30,
+  "document": "one patient's notes joined",
+  "system": "EpExtra specialist, no LLM",
+  "scalars": {
+    "etiology_category": {
+      "n": 30,
+      "found": 30,
+      "correct": 28,
+      "accuracy": 0.933,
+      "accuracy_when_answered": 0.933,
+      "confusion": {
+        "structural -> structural": 14,
+        "unknown -> unknown": 7,
+        "infectious -> infectious": 2,
+        "unknown -> structural": 2,
+        "metabolic -> metabolic": 1,
+        "genetic -> genetic": 3,
+        "immune -> immune": 1
+      },
+      "wrong": [
+        {
+          "patient": "P003060",
+          "reference": "unknown",
+          "rules": "structural"
+        },
+        {
+          "patient": "P004048",
+          "reference": "unknown",
+          "rules": "structural"
+        }
+      ]
+    },
+    "drug_resistance": {
+      "n": 30,
+      "found": 30,
+      "correct": 29,
+      "accuracy": 0.967,
+      "accuracy_when_answered": 0.967,
+      "confusion": {
+        "drug_resistant -> drug_resistant": 10,
+        "drug_responsive -> drug_responsive": 19,
+        "drug_responsive -> drug_resistant": 1
+      },
+      "wrong": [
+        {
+          "patient": "P004091",
+          "reference": "drug_responsive",
+          "rules": "drug_resistant"
+        }
+      ]
+    }
+  },
+  "bools": {
+    "mri_normal": {
+      "n": 17,
+      "found": 16,
+      "hedged_only": 0,
+      "correct": 16,
+      "ref_true": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 0.941,
+      "accuracy_when_answered": 1.0,
+      "precision_true": 1.0,
+      "recall_true": 1.0,
+      "wrong": []
+    },
+    "hippocampal_sclerosis": {
+      "n": 17,
+      "found": 10,
+      "hedged_only": 1,
+      "correct": 10,
+      "ref_true": 6,
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 0.588,
+      "accuracy_when_answered": 1.0,
+      "precision_true": 1.0,
+      "recall_true": 1.0,
+      "wrong": []
+    },
+    "focal_cortical_dysplasia": {
+      "n": 17,
+      "found": 7,
+      "hedged_only": 0,
+      "correct": 7,
+      "ref_true": 5,
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 0.412,
+      "accuracy_when_answered": 1.0,
+      "precision_true": 1.0,
+      "recall_true": 1.0,
+      "wrong": []
+    }
+  },
+  "mri_findings": {
+    "tp": 15,
+    "fp": 14,
+    "fn": 2,
+    "precision": 0.517,
+    "recall": 0.882,
+    "f1": 0.652
+  },
+  "surgery_history": {
+    "patients_with_no_reference_surgery": 30,
+    "patients_where_rules_report_surgery": 0,
+    "examples": []
+  },
+  "not_scoreable": [
+    "EEG study type, background, ictal onset",
+    "seizure semiology",
+    "focal motor / non-motor onset",
+    "failed, prior and rescue drugs",
+    "surgery history (reference lists none)",
+    "etiology details"
+  ]
+}
