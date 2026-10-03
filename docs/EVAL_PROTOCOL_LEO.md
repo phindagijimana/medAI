@@ -676,23 +676,24 @@ Not a LEO result: LEO (with the model) was not run on these. These are the speci
 
 ### 10.18 Stress test of the model table on 160 more F-S letters (2026-10-02; Slurm jobs 165774-165778)
 
-Question: do the 40-letter results (L0 0.68, L1 0.70, L2 0.74, first adapter 0.75, second adapter 0.74) hold on more letters? None of these models was trained on F-S letters, so EA0001-EA0160 are unseen by them (L2 retrieves from the F-S bank with the letter itself excluded; letters EA0081-EA0120 were used earlier to choose the fusion policy, not to tune the models). Same prompts, same old python 3.9 / torch 2.7 stack as the 40-letter table; scorer `scripts/score_leo_vs_fs_gold.py --pids EA0001..EA0160`, results `eval/results/stress_fs160_partial.{json,md}`. The first adapter (arm H) was still running (57 of 160 letters) and is not included; it will be added when it finishes.
+Question: do the 40-letter results (L0 0.68, L1 0.70, L2 0.74, first adapter 0.75, second adapter 0.74) hold on more letters? None of these models was trained on F-S letters, so EA0001-EA0160 are unseen by them (L2 retrieves from the F-S bank with the letter itself excluded; letters EA0081-EA0120 were used earlier to choose the fusion policy, not to tune the models). Same prompts, same old python 3.9 / torch 2.7 stack as the 40-letter table; scorer `scripts/score_leo_vs_fs_gold.py --pids EA0001..EA0160`, results `eval/results/stress_fs160.{json,md}` (four-arm file `stress_fs160_partial.*` is superseded). The first adapter (arm H, training prompt, free decoding) finished later (job 165777, 3 h 45 min) and is included.
 
 | Model alone (micro-F1, 160 letters, 95% CI) | 160 letters | same arm on the 40 held-out letters |
 |---|---|---|
 | L0 base, zero-shot | 0.656 [0.617, 0.693] | 0.679 |
 | L1 base, two examples | 0.688 [0.652, 0.722] | 0.700 |
 | L2 base, retrieved examples | 0.662 [0.621, 0.699] | 0.736 |
+| H first adapter, free decoding | 0.716 [0.683, 0.748] | 0.752 |
 | H2 second adapter, constrained | 0.707 [0.669, 0.741] | 0.743 |
 | EpExtra rules alone | 0.652 [0.615, 0.685] | 0.655 |
 
-Paired differences (resampling letters): H2 - L0 +0.051 [+0.022, +0.081]; H2 - L1 +0.018 [-0.004, +0.042]; H2 - L2 +0.045 [+0.009, +0.081]; L1 - L0 +0.032 [+0.001, +0.063]; L2 - L0 +0.007 [-0.035, +0.049]; H2 - rules +0.054 [+0.017, +0.090]; L0 - rules +0.004 [-0.040, +0.036].
+Paired differences (resampling letters): H - L0 +0.060 [+0.023, +0.096]; H - L1 +0.028 [-0.002, +0.057]; H - L2 +0.054 [+0.016, +0.093]; H - H2 +0.009 [-0.024, +0.043]; H - rules +0.064 [+0.024, +0.104]; H2 - L0 +0.051 [+0.022, +0.081]; H2 - L1 +0.018 [-0.004, +0.042]; H2 - L2 +0.045 [+0.009, +0.081]; L1 - L0 +0.032 [+0.001, +0.063]; L2 - L0 +0.007 [-0.035, +0.049]; H2 - rules +0.054 [+0.017, +0.090]; L0 - rules +0.004 [-0.040, +0.036].
 
-LEO on the same letters (default policy, rules' value shown on a disagreement), reviewed micro-F1: with L0 0.661, L1 0.672, L2 0.673, H2 0.675 (rules alone 0.652). LEO reviewed minus the model alone: L0 +0.005 [-0.028, +0.039]; L1 -0.016 [-0.043, +0.011]; L2 +0.010 [-0.028, +0.049]; H2 -0.032 [-0.061, -0.002]. Auto-accepted precision 0.82-0.84 against 0.74-0.86 for the model alone, at lower recall. Claim precision when model and rules agree 0.80-0.89; when they disagree 0.27-0.35.
+LEO on the same letters (default policy, rules' value shown on a disagreement), reviewed micro-F1: with L0 0.661, L1 0.672, L2 0.673, H 0.664, H2 0.675 (rules alone 0.652). LEO reviewed minus the model alone: L0 +0.005 [-0.028, +0.039]; L1 -0.016 [-0.043, +0.011]; L2 +0.010 [-0.028, +0.049]; H -0.052 [-0.087, -0.019]; H2 -0.032 [-0.061, -0.002]. Arm H also has the problem noted in 10.2: 139 of its claims fail the quote check (reject rate 0.096, against 0.02-0.03 for the others), so part of its drop inside LEO is rejected claims. Auto-accepted precision 0.82-0.84 against 0.74-0.86 for the model alone, at lower recall. Claim precision when model and rules agree 0.80-0.89; when they disagree 0.27-0.35.
 
 Reading:
 - On 40 letters L2 looked best among the base arms (0.736); on 160 it is no better than zero-shot (0.662 vs 0.656). The 40-letter ordering was partly chance.
-- Fine-tuning (H2) is ahead of zero-shot by about 0.05 and of retrieved examples by 0.045, but only 0.018 ahead of two fixed examples, an interval that includes zero.
+- Fine-tuning (H, H2) is ahead of zero-shot by 0.05-0.06 and of retrieved examples by 0.045-0.054, with intervals that exclude zero, but only 0.019-0.028 ahead of two fixed examples, intervals that include zero. The two adapters do not differ (+0.009 [-0.024, +0.043]).
 - The base model alone is no more accurate than the rules alone (0.656 vs 0.652) on these seven fields.
 - LEO's reviewed score is nearly the same whichever model feeds it (0.661-0.675); fine-tuning raises the model alone, not LEO.
 - All figures use the F-S reference conventions (for example "unknown" epilepsy type when no type is named), so they bound agreement with F-S annotators, not clinical truth.

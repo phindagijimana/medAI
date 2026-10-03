@@ -142,6 +142,52 @@ Agree minus other category: agree-disagree +0.54 [+0.35, +0.71]; agree-llm_only 
 
 Safety: accept 0.444, review 0.535, reject 0.020; ontology-grounded 0.321; LLM claims without a specialist match 64 of which 2 had a quote not in the note.
 
+## H  (arm FT, 160 letters, 157 with a schema-valid LLM phenotype, 157 with at least one populated field)
+
+| system | micro P | micro R | micro F1 | 95% CI |
+|---|---:|---:|---:|---|
+| llm | 0.839 | 0.624 | 0.716 | [0.683, 0.748] |
+| specialist | 0.683 | 0.624 | 0.652 | [0.615, 0.685] |
+| leo_auto | 0.823 | 0.563 | 0.669 | [0.631, 0.703] |
+| leo_review | 0.674 | 0.655 | 0.664 | [0.632, 0.694] |
+
+Paired difference in micro-F1 (letters resampled):
+
+| contrast | mean | 95% CI |
+|---|---:|---|
+| leo_auto-llm | -0.047 | [-0.081, -0.015] |
+| leo_review-llm | -0.052 | [-0.087, -0.019] |
+| leo_review-specialist | +0.012 | [-0.001, +0.028] |
+| leo_auto-specialist | +0.017 | [-0.004, +0.037] |
+
+Per-field F1:
+
+| field | n | llm | specialist | leo_auto | leo_review |
+|---|---:|---:|---:|---:|---:|
+| `current_asms` | 129 | 0.860 | 0.824 | 0.884 | 0.811 |
+| `seizure_frequency.period` | 73 | 0.692 | 0.514 | 0.465 | 0.582 |
+| `seizure_frequency.count_min` | 18 | 0.778 | 0.667 | 0.621 | 0.788 |
+| `seizure_frequency.count_max` | 18 | 0.778 | 0.733 | 0.690 | 0.848 |
+| `epilepsy_type` | 132 | 0.535 | 0.419 | 0.462 | 0.422 |
+| `predominant_seizure_type` | 92 | 0.459 | 0.562 | 0.490 | 0.562 |
+| `age_at_onset_years` | 11 | 0.900 | 0.667 | 0.706 | 0.800 |
+| `epilepsy_type|typed` (extra view, not in micro) | 54 | 0.839 | 0.972 | 0.971 | 0.981 |
+| `epilepsy_type|abstain` (extra view, not in micro) | 132 | 0.705 | 0.508 | 0.689 | 0.500 |
+
+Claim precision by detector agreement (claims with a gold reference):
+
+| category | scored | precision |
+|---|---:|---:|
+| agree | 309 / 405 | 0.883 |
+| disagree | 25 / 44 | 0.200 |
+| llm_only | 51 / 192 | 0.490 |
+| specialist_only | 185 / 1121 | 0.357 |
+
+Letter-level bootstrap, claim precision 95% CI: agree [0.85, 0.92]; disagree [0.05, 0.35]; llm_only [0.34, 0.64]; specialist_only [0.28, 0.43].
+Agree minus other category: agree-disagree +0.68 [+0.54, +0.83]; agree-llm_only +0.39 [+0.23, +0.55]; agree-specialist_only +0.53 [+0.44, +0.61].
+
+Safety: accept 0.428, review 0.475, reject 0.096; ontology-grounded 0.301; LLM claims without a specialist match 192 of which 139 had a quote not in the note.
+
 ## H2  (arm L0C, 160 letters, 160 with a schema-valid LLM phenotype, 160 with at least one populated field)
 
 | system | micro P | micro R | micro F1 | 95% CI |
@@ -195,11 +241,16 @@ Safety: accept 0.446, review 0.527, reject 0.027; ontology-grounded 0.318; LLM c
 | llm[L0]-specialist | 160 | +0.004 | [-0.036, +0.040] |
 | llm[L1]-specialist | 160 | +0.035 | [+0.003, +0.066] |
 | llm[L2]-specialist | 160 | +0.010 | [-0.032, +0.051] |
+| llm[H]-specialist | 160 | +0.064 | [+0.024, +0.104] |
 | llm[H2]-specialist | 160 | +0.054 | [+0.017, +0.090] |
-| llm[L0]-llm[L1] | 160 | -0.032 | [-0.063, -0.001] |
-| llm[L0]-llm[L2] | 160 | -0.007 | [-0.049, +0.035] |
-| llm[L0]-llm[H2] | 160 | -0.051 | [-0.081, -0.022] |
-| llm[L1]-llm[L2] | 160 | +0.026 | [-0.009, +0.061] |
-| llm[L1]-llm[H2] | 160 | -0.018 | [-0.042, +0.004] |
-| llm[L2]-llm[H2] | 160 | -0.045 | [-0.081, -0.009] |
+| llm[L0]-llm[L1] | 160 | -0.032 | [-0.065, +0.000] |
+| llm[L0]-llm[L2] | 160 | -0.006 | [-0.051, +0.038] |
+| llm[L0]-llm[H] | 160 | -0.060 | [-0.096, -0.023] |
+| llm[L0]-llm[H2] | 160 | -0.050 | [-0.081, -0.021] |
+| llm[L1]-llm[L2] | 160 | +0.025 | [-0.008, +0.061] |
+| llm[L1]-llm[H] | 160 | -0.028 | [-0.057, +0.002] |
+| llm[L1]-llm[H2] | 160 | -0.019 | [-0.041, +0.003] |
+| llm[L2]-llm[H] | 160 | -0.054 | [-0.093, -0.016] |
+| llm[L2]-llm[H2] | 160 | -0.045 | [-0.082, -0.010] |
+| llm[H]-llm[H2] | 160 | +0.009 | [-0.024, +0.043] |
 
