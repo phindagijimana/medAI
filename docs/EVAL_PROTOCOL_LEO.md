@@ -645,3 +645,31 @@ Reason on drugs both found: intolerance is called intolerance for 84 of 93 drugs
 Rescue: of the 6 false alarms, one is a naming mismatch (reference "buccalmidazolam", rules "midazolam": really a hit), two (EA0069, EA0087) are the letter suggesting the family might consider buccal midazolam (a proposal, not an existing rescue drug), and the others were not examined. Adjusted for the naming case the figures are 7 / 5 / 2, still only 9 reference prescriptions. EEG: when the rules give a result it is nearly always right (37 of 38), but they give none for 29 of 67 letters (recall 0.57), so EEG is a partial detector. Cause: recall is good, precision low; F-S annotates a cause only when the letter states one, and the rules also report etiology terms the annotators did not mark, so precision here mixes real errors with annotation convention (not yet separated by reading the letters).
 
 Not a LEO result: LEO (with the model) was not run on these. These are the specialist's numbers; the model's behaviour on them is untested.
+
+### 10.17 Extended synthetic set: EEG findings, semiology, focal onset, rescue, surgery (specialist only, no LLM), 2026-10-02
+
+**Set.** `scripts/synth_extended_plan.py` adds five plan fields (EEG_STUDY, SEMIOLOGY, FOCAL_ONSET, RESCUE_MEDS, SURGERY_HISTORY) to ordinary sampled patients (P005000-P005039; plans in `data/episynth_corpus/v4_ext/`), and `scripts/generate_synth_v3_corpus.py` adds a directive that makes the generator state them. Notes by `gpt-5.6-sol`. The run stopped when the OpenAI account ran out of credit: **113 notes for 37 of the 40 patients** (P005037-P005039 not generated). Values are drawn to agree with epilepsy type, seizure type and MRI; the mix is a coverage fixture, not prevalence (rescue drugs for 24 of 40 patients, surgery for 13). Scorer `scripts/score_extended_phenotypes.py` -> `eval/results/leo_extended_phenotypes.{json,md}`: the specialist's claims over a patient's notes joined, against the plan.
+
+**Exposure.** I read examples from every failure category while building the scorer, so these 37 patients are not a clean test for any rule written from here on. A rule fix needs a new batch of patients (a few dollars of generation).
+
+| Item | Result (37 patients) |
+|---|---|
+| EEG background, normal vs slowing | 37 of 37 |
+| EEG study type | 13 of 37 (all answered) |
+| Interictal discharges found | 17 of 27 patients that have them; where found, lobe right 8 of 8 and side 8 of 10 |
+| Ictal onset (lobe, side) | 4 of 5 each; reported for 20 patients where the plan has none |
+| Focal motor onset | 7 of 12 |
+| Focal non-motor onset | 8 of 15 |
+| Semiology (lenient key words) | 19 of 34 motor features and 3 of 13 auras found, among those the notes mention |
+| Rescue drugs | 21 tp, 6 fp, 1 fn (precision 0.78, recall 0.95) |
+| Surgery | 11 tp, 1 fp, 0 fn (precision 0.92, recall 1.0) |
+
+**What the failures are (checked by reading sentences).**
+- *Study type, real rule error.* The rules read "inpatient video-EEG monitoring may be considered" in a plan, and "stored electrocorticography not available" in a device note, as the patient's EEG study. The context filters that fixed surgery (options, hedged, negated) are not applied to EEG.
+- *Ictal onset, real rule error.* "No ictal onset was captured" is read as an onset, taking the lobe of the discharges; an unrelated "seizure onset at age 28" can also trigger it. Negation is not handled.
+- *Interictal discharges missed.* Cases such as "bilateral generalized interictal epileptiform discharges" and "right occipital interictal epileptiform discharges were reported" were not detected; 10 of 27 missed.
+- *Rescue false positives: 6 of 6 are not clear errors.* Three are hospital orders ("lorazepam IV PRN per EMU protocol"), a home rescue rule gap; three are "should she have a cluster, use nasal midazolam", a rescue instruction that came from the plan's hypothetical triggers, not its RESCUE_MEDS field. Whether that is a rescue medication is a clinical convention to settle (D-item), and the plan contradicts itself here.
+- *Focal onset "false alarms" are mostly my reference.* In 16 (motor) and 5 (non-motor) cases the plan leaves the onset field empty but lists the same feature as semiology or aura; the scorer now counts these separately. Only 4 non-motor values had no support in the plan.
+- *Onset right-or-wrong:* 5 of 12 motor and 7 of 15 non-motor onsets differ from the plan; the sentences were not read, and the plan itself may be ambiguous between onset and semiology.
+
+**Not shown.** The model (second reader) was not run; LEO's combined result on these fields is unknown. The notes are LLM-written from the plan, so they are tidier and more explicit than real letters.

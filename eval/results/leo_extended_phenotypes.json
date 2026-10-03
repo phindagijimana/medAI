@@ -1,0 +1,494 @@
+{
+  "patients": 37,
+  "notes": 113,
+  "accuracy": {
+    "eeg_background_normal_vs_slowing": {
+      "all": {
+        "n": 37,
+        "answered": 37,
+        "right": 37,
+        "accuracy": 1.0,
+        "accuracy_when_answered": 1.0
+      },
+      "in_text": {
+        "n": 37,
+        "answered": 37,
+        "right": 37,
+        "accuracy": 1.0,
+        "accuracy_when_answered": 1.0
+      }
+    },
+    "eeg_ictal_lobe": {
+      "all": {
+        "n": 5,
+        "answered": 4,
+        "right": 4,
+        "accuracy": 0.8,
+        "accuracy_when_answered": 1.0
+      },
+      "in_text": {
+        "n": 5,
+        "answered": 4,
+        "right": 4,
+        "accuracy": 0.8,
+        "accuracy_when_answered": 1.0
+      }
+    },
+    "eeg_ictal_side": {
+      "all": {
+        "n": 5,
+        "answered": 4,
+        "right": 4,
+        "accuracy": 0.8,
+        "accuracy_when_answered": 1.0
+      },
+      "in_text": {
+        "n": 5,
+        "answered": 4,
+        "right": 4,
+        "accuracy": 0.8,
+        "accuracy_when_answered": 1.0
+      }
+    },
+    "eeg_ied_found": {
+      "all": {
+        "n": 27,
+        "answered": 27,
+        "right": 17,
+        "accuracy": 0.63,
+        "accuracy_when_answered": 0.63
+      },
+      "in_text": {
+        "n": 27,
+        "answered": 27,
+        "right": 17,
+        "accuracy": 0.63,
+        "accuracy_when_answered": 0.63
+      }
+    },
+    "eeg_ied_lobe": {
+      "all": {
+        "n": 12,
+        "answered": 8,
+        "right": 8,
+        "accuracy": 0.667,
+        "accuracy_when_answered": 1.0
+      },
+      "in_text": {
+        "n": 12,
+        "answered": 8,
+        "right": 8,
+        "accuracy": 0.667,
+        "accuracy_when_answered": 1.0
+      }
+    },
+    "eeg_ied_side": {
+      "all": {
+        "n": 12,
+        "answered": 10,
+        "right": 8,
+        "accuracy": 0.667,
+        "accuracy_when_answered": 0.8
+      },
+      "in_text": {
+        "n": 12,
+        "answered": 10,
+        "right": 8,
+        "accuracy": 0.667,
+        "accuracy_when_answered": 0.8
+      }
+    },
+    "eeg_study_type": {
+      "all": {
+        "n": 37,
+        "answered": 37,
+        "right": 13,
+        "accuracy": 0.351,
+        "accuracy_when_answered": 0.351
+      },
+      "in_text": {
+        "n": 37,
+        "answered": 37,
+        "right": 13,
+        "accuracy": 0.351,
+        "accuracy_when_answered": 0.351
+      }
+    },
+    "focal_motor_onset": {
+      "all": {
+        "n": 12,
+        "answered": 12,
+        "right": 7,
+        "accuracy": 0.583,
+        "accuracy_when_answered": 0.583
+      },
+      "in_text": {
+        "n": 12,
+        "answered": 12,
+        "right": 7,
+        "accuracy": 0.583,
+        "accuracy_when_answered": 0.583
+      }
+    },
+    "focal_nonmotor_onset": {
+      "all": {
+        "n": 15,
+        "answered": 15,
+        "right": 8,
+        "accuracy": 0.533,
+        "accuracy_when_answered": 0.533
+      },
+      "in_text": {
+        "n": 15,
+        "answered": 15,
+        "right": 8,
+        "accuracy": 0.533,
+        "accuracy_when_answered": 0.533
+      }
+    }
+  },
+  "false_alarms": {
+    "focal_nonmotor_reported_but_unsupported": 4,
+    "ictal_onset_reported_but_none": 20,
+    "focal_motor_in_semiology_not_onset": 16,
+    "focal_nonmotor_in_semiology_not_onset": 5,
+    "ied_reported_but_none": 4
+  },
+  "semiology_motor_recall": {
+    "all": 34,
+    "in_text": 34,
+    "found": 19
+  },
+  "semiology_aura_recall": {
+    "all": 13,
+    "in_text": 13,
+    "found": 3
+  },
+  "rescue": {
+    "all": {
+      "tp": 21,
+      "fp": 6,
+      "fn": 1,
+      "precision": 0.778,
+      "recall": 0.955,
+      "f1": 0.857
+    },
+    "in_text": {
+      "tp": 21,
+      "fp": 6,
+      "fn": 1,
+      "precision": 0.778,
+      "recall": 0.955,
+      "f1": 0.857
+    }
+  },
+  "rescue_false_alarm_patients": {
+    "patients_without_reference": 15,
+    "with_rescue_reported": 2
+  },
+  "rescue_false_positive_context": {
+    "inpatient_or_protocol_order": 3,
+    "hypothetical_instruction": 3
+  },
+  "surgery": {
+    "all": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.917,
+      "recall": 1.0,
+      "f1": 0.957
+    },
+    "in_text": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.917,
+      "recall": 1.0,
+      "f1": 0.957
+    }
+  },
+  "surgery_false_alarm_patients": {
+    "patients_without_reference": 26,
+    "with_surgery_reported": 2
+  },
+  "examples": {
+    "focal_nonmotor_false_alarm": [
+      [
+        "P005000",
+        "sensory"
+      ],
+      [
+        "P005017",
+        "cognitive"
+      ],
+      [
+        "P005023",
+        "autonomic"
+      ],
+      [
+        "P005029",
+        "sensory"
+      ]
+    ],
+    "study_type": [
+      [
+        "P005001",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005002",
+        "ambulatory_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005003",
+        "routine_eeg",
+        "ecog"
+      ],
+      [
+        "P005004",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005006",
+        "routine_eeg",
+        "ecog"
+      ],
+      [
+        "P005008",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005009",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005010",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005013",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005014",
+        "prolonged_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005016",
+        "routine_eeg",
+        "video_eeg"
+      ],
+      [
+        "P005017",
+        "routine_eeg",
+        "video_eeg"
+      ]
+    ],
+    "ictal_false_alarm": [
+      [
+        "P005001",
+        "routine_eeg",
+        [
+          "temporal"
+        ]
+      ],
+      [
+        "P005002",
+        "ambulatory_eeg",
+        []
+      ],
+      [
+        "P005003",
+        "routine_eeg",
+        []
+      ],
+      [
+        "P005004",
+        "routine_eeg",
+        [
+          "occipital"
+        ]
+      ],
+      [
+        "P005007",
+        "routine_eeg",
+        []
+      ],
+      [
+        "P005008",
+        "routine_eeg",
+        []
+      ],
+      [
+        "P005010",
+        "routine_eeg",
+        []
+      ],
+      [
+        "P005012",
+        "video_eeg_monitoring",
+        [
+          "temporal"
+        ]
+      ],
+      [
+        "P005015",
+        "video_eeg_monitoring",
+        []
+      ],
+      [
+        "P005017",
+        "routine_eeg",
+        [
+          "temporal"
+        ]
+      ],
+      [
+        "P005021",
+        "prolonged_eeg",
+        []
+      ],
+      [
+        "P005025",
+        "ambulatory_eeg",
+        [
+          "temporal"
+        ]
+      ]
+    ],
+    "focal_nonmotor": [
+      [
+        "P005001",
+        "sensory",
+        "emotional"
+      ],
+      [
+        "P005004",
+        "autonomic",
+        "emotional"
+      ],
+      [
+        "P005019",
+        "emotional",
+        "cognitive"
+      ],
+      [
+        "P005020",
+        "emotional",
+        "autonomic"
+      ],
+      [
+        "P005022",
+        "autonomic",
+        "sensory"
+      ],
+      [
+        "P005030",
+        "emotional",
+        "cognitive"
+      ],
+      [
+        "P005031",
+        "emotional",
+        "cognitive"
+      ]
+    ],
+    "rescue_fp": [
+      [
+        "P005002",
+        "lorazepam",
+        [],
+        "inpatient_or_protocol_order"
+      ],
+      [
+        "P005003",
+        "lorazepam",
+        [
+          "diazepam"
+        ],
+        "inpatient_or_protocol_order"
+      ],
+      [
+        "P005005",
+        "midazolam",
+        [
+          "lorazepam"
+        ],
+        "hypothetical_instruction"
+      ],
+      [
+        "P005020",
+        "midazolam",
+        [
+          "diazepam"
+        ],
+        "hypothetical_instruction"
+      ],
+      [
+        "P005027",
+        "midazolam",
+        [],
+        "hypothetical_instruction"
+      ],
+      [
+        "P005032",
+        "lorazepam",
+        [
+          "midazolam"
+        ],
+        "inpatient_or_protocol_order"
+      ]
+    ],
+    "surgery_fp": [
+      [
+        "P005002",
+        "lesionectomy",
+        [
+          "vagus nerve stimulator implantation"
+        ]
+      ]
+    ],
+    "ied_false_alarm": [
+      "P005006",
+      "P005019",
+      "P005020",
+      "P005030"
+    ],
+    "focal_motor": [
+      [
+        "P005007",
+        "versive head turning",
+        "clonic"
+      ],
+      [
+        "P005023",
+        "versive head turning",
+        "clonic"
+      ],
+      [
+        "P005025",
+        "clonic jerking",
+        "automatisms"
+      ],
+      [
+        "P005032",
+        "versive head turning",
+        "tonic"
+      ],
+      [
+        "P005034",
+        "epileptic spasms",
+        "clonic"
+      ]
+    ]
+  }
+}

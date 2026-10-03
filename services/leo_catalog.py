@@ -56,6 +56,8 @@ _NOTE_ACUTE = ("No accuracy of its own was measured. The rule moved no drug in 4
 _R = "rules_only"
 _SYN = ("Synthetic notes, each patient's notes joined, rules only (no LLM). Held-out figures are 80 patients the rules "
         "were not adjusted on (leo_extra_phenotypes_ext). ")
+_EXT = ("Synthetic LLM-written notes from an extended plan (v4_ext, 37 patients), rules only, no LLM; the examples "
+        "were read after scoring, so these notes are no longer a clean test. ")
 _NOTE_PRIOR = ("Specialist alone on synthetic polish notes (the rules were developed on them): recall 0.89 on 90 patients "
                "and 0.80 on 10 held out; precision 0.54 and 0.42 but a lower bound. A stopped drug was listed as current "
                "for 25 of 90 patients (10.16).")
@@ -109,21 +111,30 @@ EXTRACT: tuple[Phenotype, ...] = (
               "annotators marked none (precision 0.32; part annotation convention, not separated). Synthetic gene, "
               "variant and antibody values were right for all 27 patients that have one (10.16)."),
     Phenotype("semiology", "Seizure semiology (text)", ("clinical_seizure.semiology_text",), "scalar",
-              "How the seizure looks, as written in the note.", "none", ("seizure",)),
+              "How the seizure looks, as written in the note.", _R, ("seizure",), (),
+              _EXT + "Lenient key-word check: of the plan's motor features that the notes mention, 19 of 34 were in the "
+              "semiology text, and 3 of 13 auras (10.17)."),
     Phenotype("focal_motor_onset", "Focal motor onset", ("clinical_seizure.focal_motor_onset",), "scalar",
-              "Motor feature at focal onset (ILAE 2017 seizure classification).", "none", ("seizure",), ("ilae2017_seizure",)),
+              "Motor feature at focal onset (ILAE 2017 seizure classification).", _R, ("seizure",), ("ilae2017_seizure",),
+              _EXT + "Right for 7 of 12 patients that have one (all answered). It also reports a motor feature when the note "
+              "gives it as semiology only, which is hard to separate from onset (10.17)."),
     Phenotype("focal_nonmotor_onset", "Focal non-motor onset", ("clinical_seizure.focal_nonmotor_onset",),
-              "scalar", "Non-motor feature at focal onset (ILAE 2017 seizure classification).", "none", ("seizure",),
-              ("ilae2017_seizure",)),
+              "scalar", "Non-motor feature at focal onset (ILAE 2017 seizure classification).", _R, ("seizure",),
+              ("ilae2017_seizure",), _EXT + "Right for 8 of 15 patients that have one (10.17)."),
     Phenotype("eeg_study_type", "EEG study type", ("eeg.study_type",), "scalar",
-              "Routine, prolonged, ambulatory, video-EEG, EMU and so on.", "none", ("eeg",)),
+              "Routine, prolonged, ambulatory, video-EEG, EMU and so on.", _R, ("eeg",), (),
+              _EXT + "Weak: right for 13 of 37 patients. The rules read a recommendation (\"video-EEG monitoring may be "
+              "considered\") or a device mention (stored electrocorticography not available) as the patient's EEG study "
+              "(10.17)."),
     Phenotype("eeg_background", "EEG background", ("eeg.background",), "scalar",
               "Background activity or slowing.", _R, ("eeg",), (),
               "Only the coarse normal/abnormal call was scored (F-S letters, 67 with an EEG result): when the rules "
               "gave a result it was right 37 of 38 times, but they gave none for 29 of 67 (10.16). Study type and "
               "ictal onset are untested."),
     Phenotype("eeg_ictal_onset", "EEG ictal onset", ("eeg.ictal_onset_lobe", "eeg.ictal_onset_laterality"),
-              "scalar", "Lobe and side of seizure onset on EEG.", "none", ("eeg",)),
+              "scalar", "Lobe and side of seizure onset on EEG.", _R, ("eeg",), (),
+              _EXT + "Right for 4 of 5 recorded onsets, but reported for 20 patients where the plan has none. In the 3 I "
+              "read it was a note saying no onset was captured (negation not handled) or an unrelated use of \"onset\" (10.17)."),
     Phenotype("mri_findings", "MRI findings", ("mri.findings",), "list",
               "Lesions or findings reported on MRI.", _R, ("mri",), (),
               _SYN + "Held-out, 30 patients with an MRI report: precision 0.50, recall 0.93 (the rules add generic lesion labels)."),
@@ -140,7 +151,8 @@ EXTRACT: tuple[Phenotype, ...] = (
               ("medication.surgery_history",), "list", "Resection, ablation, VNS, RNS, DBS and so on.",
               _R, ("surgery",), (),
               _SYN + "The reference lists no surgery for any patient; held-out, the rules still reported a procedure for 5 of 80 "
-              "(an 'epilepsy surgery' phrase or a VNS/RNS/DBS list read as history). Options, plans and 'no surgery documented' are skipped"),
+              "(an 'epilepsy surgery' phrase or a VNS/RNS/DBS list read as history). Options, plans and 'no surgery documented' are skipped. "
+              "On the extended set (v4_ext, 37 patients) all 11 planned procedures were found and 1 extra was reported (10.17)."),
 )
 
 PANELS: dict[str, tuple[str, str]] = {

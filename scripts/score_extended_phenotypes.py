@@ -113,6 +113,7 @@ def main() -> int:
     acc = Acc()
     rescue = {"all": Counter(), "in_text": Counter()}
     rescue_fa = Counter()
+    rescue_fp_kind = Counter()
     surg = {"all": Counter(), "in_text": Counter()}
     surg_fa = Counter()
     sem_motor, sem_aura = Counter(), Counter()
@@ -183,8 +184,15 @@ def main() -> int:
                 if g and lab != fo[kind]:
                     ex[f"focal_{kind}"].append((pid, fo[kind], g[0]))
             elif g:
-                false_alarm[f"focal_{kind}_reported_but_none"] += 1
-                ex[f"focal_{kind}_false_alarm"].append((pid, g[0]))
+                # the plan leaves the onset field empty but may still describe the feature as semiology
+                sem0 = ref.get("SEMIOLOGY") or {}
+                support = " ".join([str(m) for m in sem0.get("motor_features", [])] + [str(sem0.get("aura") or "")])
+                lab = canon(g[0], table)
+                if lab and has(support, table[lab]) or (kind == "nonmotor" and lab == "emotional" and has(support, "fear")):
+                    false_alarm[f"focal_{kind}_in_semiology_not_onset"] += 1
+                else:
+                    false_alarm[f"focal_{kind}_reported_but_unsupported"] += 1
+                    ex[f"focal_{kind}_false_alarm"].append((pid, g[0]))
 
         # ---- semiology (lenient: reference feature mentioned in the semiology text) ------------
         sem = ref.get("SEMIOLOGY") or {}
@@ -215,7 +223,13 @@ def main() -> int:
         for g in gr - set(rr):
             rescue["all"]["fp"] += 1
             rescue["in_text"]["fp"] += 1
-            ex["rescue_fp"].append((pid, g, rr))
+            sents = [m.group(0) for m in re.finditer(r"[^.\n]*(?:%s)[^.\n]*" % RESCUE_STEM.get(g, re.escape(g)), text, re.I)]
+            hyp = [bool(re.search(r"\bshould\b|\bif\b|\bin case\b|\bwhen\b.*cluster", t, re.I)) for t in sents]
+            inp = [bool(re.search(r"EMU|inpatient|IV\b|protocol|admission|hospital", t, re.I)) for t in sents]
+            kind = "hypothetical_instruction" if sents and all(hyp) else \
+                   "inpatient_or_protocol_order" if sents and all(i or h for i, h in zip(inp, hyp)) else "other"
+            rescue_fp_kind[kind] += 1
+            ex["rescue_fp"].append((pid, g, rr, kind))
         if not rr:
             rescue_fa["patients_without_reference"] += 1
             rescue_fa["with_rescue_reported"] += int(bool(gr))
@@ -247,6 +261,7 @@ def main() -> int:
            "semiology_motor_recall": dict(sem_motor), "semiology_aura_recall": dict(sem_aura),
            "rescue": {s: prf(rescue[s]["tp"], rescue[s]["fp"], rescue[s]["fn"]) for s in rescue},
            "rescue_false_alarm_patients": dict(rescue_fa),
+           "rescue_false_positive_context": dict(rescue_fp_kind),
            "surgery": {s: prf(surg[s]["tp"], surg[s]["fp"], surg[s]["fn"]) for s in surg},
            "surgery_false_alarm_patients": dict(surg_fa),
            "examples": {k: v[:12] for k, v in ex.items()}}
@@ -272,6 +287,9 @@ def main() -> int:
     for name in ("rescue", "surgery"):
         for s, v in res[name].items():
             md.append(f"| {name} | {s} | {v['tp']} / {v['fp']} / {v['fn']} | {v['precision']} | {v['recall']} | {v['f1']} |")
+    md += ["", f"Rescue false positives by what the sentence says: {dict(rescue_fp_kind)} (hypothetical_instruction = "
+           "\"should he have a cluster, use nasal midazolam\", written from the plan's hypothetical triggers; "
+           "inpatient_or_protocol_order = an EMU / hospital PRN order)."]
     md += ["", f"Patients with no reference rescue drug: {dict(rescue_fa)}; no reference surgery: {dict(surg_fa)}."]
     (REPO / f"{args.out}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     print("\n".join(md))

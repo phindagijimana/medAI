@@ -71,7 +71,8 @@ def test_evidence_levels_match_what_was_measured():
     assert {p.id for p in EXTRACT if p.evidence == "rules_only"} == {
         "etiology_category", "drug_resistance", "mri_findings", "mri_normal", "hippocampal_sclerosis",
         "focal_cortical_dysplasia", "surgery_history", "rescue_medication", "prior_asms", "failed_asms",
-        "etiology_details", "eeg_background"}
+        "etiology_details", "eeg_background", "semiology", "focal_motor_onset", "focal_nonmotor_onset",
+        "eeg_study_type", "eeg_ictal_onset"}
     assert all(r in REFERENCES for p in EXTRACT for r in p.refs)
     assert next(p for p in EXTRACT if p.id == "drug_resistance").derived
 

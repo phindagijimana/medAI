@@ -169,7 +169,7 @@ Scored with the rules alone, on 80 synthetic patients the rules were not develop
 | Focal cortical dysplasia | 11 of 14 answered right (answered for 14 of 30) |
 | Surgery history | the rules wrongly reported a procedure for 5 of 80 patients whose reference lists none |
 
-Rule fixes made on 2026-10-02 (surgery options no longer count as history, negated MRI findings are not reported, drug-resistance statements read per sentence) raised drug resistance from 15 to 29 of 30 and cut surgery false alarms from 19 of 30 to 0 on the patients that showed the problems; the 80-patient figures above are the ones to rely on. Read drug resistance and surgery history as drafts to review. Not scoreable because no reference has an entry: semiology, focal onset features, detailed EEG findings (study type, ictal onset), surgery history. Prior, failed and rescue drugs, etiology details and coarse EEG are covered in the next table. Free-text questions are covered in section 11.
+Rule fixes made on 2026-10-02 (surgery options no longer count as history, negated MRI findings are not reported, drug-resistance statements read per sentence) raised drug resistance from 15 to 29 of 30 and cut surgery false alarms from 19 of 30 to 0 on the patients that showed the problems; the 80-patient figures above are the ones to rely on. Read drug resistance and surgery history as drafts to review. Semiology, focal onset, EEG study type and ictal onset, and surgery are scored only on a synthetic extended set (table below); no real-note reference exists for them. Prior, failed and rescue drugs, etiology details and coarse EEG are covered in the next table. Free-text questions are covered in section 11.
 
 ### Drugs stopped, failed and rescue; etiology details; EEG (rules only)
 
@@ -185,6 +185,20 @@ Scored with the rules alone (no model) from the generation plans (synthetic poli
 | Etiology cause stated, F-S letters | found 24 of 28; 51 extra where annotators marked no cause (part annotation convention) |
 
 LEO's second reader (the model) was not run on these, so they say nothing about the combined result. Treat these columns as drafts to review.
+
+**EEG findings, semiology, focal onset, rescue and surgery (extended synthetic set, 37 patients, rules only).** The notes were written by an LLM from a plan that lists these items. See `docs/EVAL_PROTOCOL_LEO.md` section 10.17.
+
+| Item | Result |
+|---|---|
+| EEG background, normal vs slowing | 37 of 37 |
+| EEG study type | weak: 13 of 37. A recommendation ("video-EEG may be considered") is read as the study done |
+| Interictal discharges found | 17 of 27 patients; location right when found |
+| Ictal onset | reported for 20 patients where none was recorded ("no ictal onset was captured" is read as an onset) |
+| Focal motor / non-motor onset | 7 of 12 / 8 of 15; hard to separate from semiology |
+| Rescue drugs | 21 found, 1 missed, 6 questionable (3 hospital PRN orders, 3 "should she have a cluster, use nasal midazolam") |
+| Surgery | 11 found, 0 missed, 1 extra |
+
+These are drafts to review; EEG study type and ictal onset in particular should not be used without review. The notes are no longer a clean test set because rule fixes would be tuned on them.
 
 ### Precision of accepted values, by agreement
 
