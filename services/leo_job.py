@@ -302,6 +302,8 @@ def validate(spec: JobSpec, df: pd.DataFrame) -> list[str]:
     """Problems that must be fixed before running (empty list = ready)."""
     out: list[str] = []
     cols = set(df.columns)
+    if not len(df):
+        out.append("the file has a header but no notes (no data rows)")
     if spec.version != SPEC_VERSION:
         out.append(f"job version {spec.version} is not supported (expected {SPEC_VERSION})")
     for role in ("text", "id", "date", "subject"):

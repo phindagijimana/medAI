@@ -193,9 +193,9 @@ LEO's second reader (the model) was not run on these, so they say nothing about 
 | Item | Result |
 |---|---|
 | EEG background, normal vs slowing | 37 of 37 |
-| EEG study type | weak: 13 of 37. A recommendation ("video-EEG may be considered") is read as the study done |
+| EEG study type | 24 of 37 (13 before advice and "not available" sentences were skipped; the fix was written from these patients). Often "video-EEG" where the plan says routine or prolonged |
 | Interictal discharges found | 17 of 27 patients; location right when found |
-| Ictal onset | reported for 20 patients where none was recorded ("no ictal onset was captured" is read as an onset) |
+| Ictal onset | still reported for 13 patients where none was recorded (20 before negated and planned sentences were skipped) |
 | Focal motor / non-motor onset | 7 of 12 / 8 of 15; hard to separate from semiology |
 | Rescue drugs | 21 found, 1 missed, 6 questionable (3 hospital PRN orders, 3 "should she have a cluster, use nasal midazolam") |
 | Surgery | 11 found, 0 missed, 1 extra |

@@ -50,6 +50,12 @@ Each job writes a small record (`job.json`) in its folder. After a restart:
 - a job that was **running** when the app stopped is shown as failed, with the message "The app restarted while this job was running. Start it again." It is not resumed;
 - waiting-to-confirm jobs ("Describe a job") stay confirmable.
 
+## 5a. One job at a time, odd files
+
+- Jobs run **one at a time** (`MEDAI_LEO_CONCURRENT_JOBS=1`), because two jobs on one GPU can run it out of memory. A job that is waiting shows the state `queued` and can be cancelled; a cancelled waiting job produces no result.
+- Empty files, files with only a header, files without a recognisable note column, and files over the size limit (`MAX_CONTENT_LENGTH`, 50 MB by default) are refused with a message.
+- **Very long notes are slow.** Ordinary discharge summaries (about 11,000 characters) took about 0.75 s each with the rules alone. One 100 KB note took about a minute on this machine when it was idle, and more than two and a half minutes when it was busy, so time grows faster than the length. Notes of megabytes are not tested. The model path splits notes into parts of 8,000 characters; the rules-only path reads the whole note at once.
+
 ## 6. Install
 
 Packages are listed in `requirements-leo.txt` (versions the tests ran with) and, for the exact set in `venv-medcat`, `requirements-leo.lock.txt`. `bin/leo install --check-only` lists what is missing. The model (Med42-8B, about 16 GB in half precision) must be downloaded first, and a GPU with roughly 20 GB or more of memory is expected for the language model. The development cluster uses an L40S 24 GB. Docker files exist (`Dockerfile`, `Dockerfile.gpu`) and use the same gunicorn settings; they were not tested for LEO.
@@ -58,7 +64,7 @@ Packages are listed in `requirements-leo.txt` (versions the tests ran with) and,
 
 Tested (automated, `tests/test_leo_app.py`): login required everywhere, wrong passwords, redirects that cannot leave the site, Basic auth, cross-site refusal, lockout after five failures, users' jobs hidden from each other, jobs restored after a restart, a job that was running at restart marked failed, audit log without note text, file permissions of the users file and log. Also by hand: `bin/leo start --local --cpu` under gunicorn with login on (sign-in, API call, audit lines).
 
-**Not tested:** a clean-machine install; the GPU model loading under gunicorn (the smoke test was rules-only); load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
+**Not tested:** a clean-machine install; the GPU model loading under gunicorn (an attempt on 2026-10-03 never ran because the GPU job stayed pending in the Slurm queue for over 20 minutes; the smoke test was rules-only); the job queue with the model running; GPU memory and time per note on a long run; load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
 
 ## 8. What this is not
 

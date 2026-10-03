@@ -123,9 +123,9 @@ EXTRACT: tuple[Phenotype, ...] = (
               ("ilae2017_seizure",), _EXT + "Right for 8 of 15 patients that have one (10.17)."),
     Phenotype("eeg_study_type", "EEG study type", ("eeg.study_type",), "scalar",
               "Routine, prolonged, ambulatory, video-EEG, EMU and so on.", _R, ("eeg",), (),
-              _EXT + "Weak: right for 13 of 37 patients. The rules read a recommendation (\"video-EEG monitoring may be "
-              "considered\") or a device mention (stored electrocorticography not available) as the patient's EEG study "
-              "(10.17)."),
+              _EXT + "Right for 24 of 37 patients after the rules stopped reading advice (\"video-EEG may be considered\") "
+              "and \"not available\" as a study done (13 of 37 before; the fix was written from these patients, so it is "
+              "not a held-out figure; 10.17, 10.20). Still often \"video-EEG\" where the plan says routine or prolonged."),
     Phenotype("eeg_background", "EEG background", ("eeg.background",), "scalar",
               "Background activity or slowing.", _R, ("eeg",), (),
               "Only the coarse normal/abnormal call was scored (F-S letters, 67 with an EEG result): when the rules "
@@ -133,8 +133,8 @@ EXTRACT: tuple[Phenotype, ...] = (
               "ictal onset are untested."),
     Phenotype("eeg_ictal_onset", "EEG ictal onset", ("eeg.ictal_onset_lobe", "eeg.ictal_onset_laterality"),
               "scalar", "Lobe and side of seizure onset on EEG.", _R, ("eeg",), (),
-              _EXT + "Right for 4 of 5 recorded onsets, but reported for 20 patients where the plan has none. In the 3 I "
-              "read it was a note saying no onset was captured (negation not handled) or an unrelated use of \"onset\" (10.17)."),
+              _EXT + "Right for 4 of 5 recorded onsets, but still reported for 13 patients where the plan has none (20 "
+              "before negated and planned sentences were skipped; the fix was written from these patients; 10.17, 10.20)."),
     Phenotype("mri_findings", "MRI findings", ("mri.findings",), "list",
               "Lesions or findings reported on MRI.", _R, ("mri",), (),
               _SYN + "Held-out, 30 patients with an MRI report: precision 0.50, recall 0.93 (the rules add generic lesion labels)."),

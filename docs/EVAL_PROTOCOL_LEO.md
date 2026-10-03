@@ -718,3 +718,18 @@ Reading and limits:
 - Part of the gain is the oracle dropping flagged values that the F-S reference does not list. A real reviewer would keep some of these if they are true but unannotated, so the F-S figure overstates the gain to an unknown degree.
 - Candidates are the readers' own predictions; a model value that fusion rejected for an unfound quote can still be picked, so the bound is slightly generous. Values neither reader produced stay missing (reviewer-added values are deferred).
 - Accepted errors remain. The review tier is where the benefit comes from, so the claim that LEO gains accuracy rests on reviewers actually resolving the flagged values; that needs the blind adjudication in `docs/DISAGREEMENT_ADJUDICATION.md`.
+
+### 10.20 EEG rule fixes: advised or absent studies, negated and planned ictal onset (specialist only, 2026-10-03)
+
+**Change** (`rules/fields/eeg_extra.py`): an EEG study type is no longer taken from a sentence that advises, plans or awaits it (recommend, refer, consider, would, may, if ...), says it was not available, performed or declined, or has "no/not/without" just before it; an "ictal onset" phrase is no longer taken from a sentence with a negation, a plan or a purpose ("could not be localised", "to localise the seizure onset"). A study that is done and a later sentence that advises another one are kept apart (unit tests in `tests/test_rules_p2.py`).
+
+**Result on the same 37 synthetic patients as 10.17** (`eval/results/leo_extended_phenotypes.{json,md}`, regenerated):
+
+| Item | Before | After |
+|---|---|---|
+| EEG study type right | 13 of 37 | 24 of 37 |
+| Ictal onset reported where the plan has none | 20 patients | 13 patients |
+| Ictal lobe / side right (of 5) | 4 / 4 | 4 / 4 |
+| EEG background, interictal discharges, focal onset, semiology, rescue, surgery | unchanged | unchanged |
+
+**Limits.** I read examples from these 37 patients when I found the errors (10.17), so the improvement is on data the fix was written from; it is not a held-out result. A fresh batch of patients is needed for that. 13 study types are still wrong (most often "video-EEG" where the plan says routine or prolonged), and 13 patients still get an onset that the plan does not have. The fixes drop true statements that share a sentence with a negation or plan word; the cost in recall is not measured on real letters. Nothing here applies to real notes.

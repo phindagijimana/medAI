@@ -43,6 +43,10 @@ leo_bp = Blueprint("leo", __name__, url_prefix="/leo")
 
 _RUNTIMES: dict[str, Any] = {}
 _RT_LOCK = threading.Lock()
+# One job at a time on this machine by default: two jobs sharing one GPU can run it out of memory. Jobs that are
+# waiting show state "queued". MEDAI_LEO_CONCURRENT_JOBS raises the limit (e.g. for rules-only use).
+_SLOT = threading.Semaphore(max(1, int(os.environ.get("MEDAI_LEO_CONCURRENT_JOBS", "1"))))
+_EMPTY_SUMMARY = {"rows_processed": 0, "rows_error": 0, "rows_with_llm": 0, "mode": ""}
 _JOBS: dict[str, dict] = {}
 
 
@@ -190,9 +194,17 @@ def _run_job(job_id: str) -> None:
     from services import leo_batch as lb
     job = _JOBS[job_id]
     jd = _jobs_root() / job_id
+    held = False
     try:
+        _SLOT.acquire()
+        held = True
+        if job.get("cancel"):                               # cancelled while waiting its turn
+            job["state"], job["summary"] = "cancelled", dict(_EMPTY_SUMMARY)
+            return
         job["state"] = "running"
         df = lb.read_table(job["input"], sheet=job.get("sheet") or None)
+        if not len(df):
+            raise ValueError("the file has a header but no notes (no data rows)")
         cols = lb.detect_columns(df, job.get("text_col", ""), job.get("id_col", ""), job.get("date_col", ""))
         rt = _runtime(job["use_llm"])
         job["total"] = min(len(df), job["limit"]) if job["limit"] else len(df)
@@ -218,6 +230,8 @@ def _run_job(job_id: str) -> None:
         logger.exception("LEO batch job failed")
         job["state"], job["error"] = "error", f"{type(e).__name__}: {e}"
     finally:
+        if held:
+            _SLOT.release()
         _persist(job_id)
 
 
@@ -350,7 +364,13 @@ def _run_spec_job(job_id: str) -> None:
     job = _JOBS[job_id]
     jd = _jobs_root() / job_id
     spec = job["spec"]
+    held = False
     try:
+        _SLOT.acquire()
+        held = True
+        if job.get("cancel"):
+            job["state"], job["summary"] = "cancelled", dict(_EMPTY_SUMMARY)
+            return
         job["state"] = "running"
         df = _plan_df(job)
         rt = _runtime(job["use_llm"])
@@ -377,6 +397,8 @@ def _run_spec_job(job_id: str) -> None:
         logger.exception("LEO job-description run failed")
         job["state"], job["error"] = "error", f"{type(e).__name__}: {e}"
     finally:
+        if held:
+            _SLOT.release()
         job.pop("_df", None)
         _persist(job_id)
 

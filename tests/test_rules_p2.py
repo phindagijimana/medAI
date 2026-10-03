@@ -339,6 +339,35 @@ def test_p3b_eeg_ictal_onset_left_frontal(run_p2):
     assert lat_ev.value == _Lat.LEFT
 
 
+@pytest.mark.parametrize("text", [
+    "Video-EEG captured no seizures, so the ictal onset could not be localised to the left temporal lobe.",
+    "No ictal onset zone was identified; interictal spikes arose from the right frontal region.",
+    "Admission to the EMU is recommended to localise the ictal onset in the left temporal lobe.",
+    "She was referred for video-EEG to define the seizure onset in the right frontal lobe.",
+])
+def test_eeg_ictal_onset_not_reported_when_not_found_or_only_planned(run_p2, text):
+    pheno = run_p2("EEG report. " + text)
+    assert pheno.eeg.ictal_onset_lobe.value is None
+    assert pheno.eeg.ictal_onset_laterality.value is None
+
+
+@pytest.mark.parametrize("text", [
+    "Video-EEG is recommended to characterise her events.",
+    "She was referred for an EMU admission.",
+    "Stored ECoG was not available for review.",
+    "No video-EEG has been performed.",
+    "If seizures persist we would consider ambulatory EEG.",
+])
+def test_eeg_study_type_not_reported_for_advice_plans_or_absent_studies(run_p2, text):
+    pheno = run_p2(text)
+    assert pheno.eeg.study_type.value is None
+
+
+def test_eeg_study_type_still_found_when_done_even_with_a_later_negation(run_p2):
+    pheno = run_p2("Routine EEG was performed. No seizures were captured. Video-EEG is recommended next.")
+    assert pheno.eeg.study_type.value == _EegST.ROUTINE
+
+
 # ===========================================================================
 # 8. Surgery history
 # ===========================================================================

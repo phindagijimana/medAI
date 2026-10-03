@@ -124,6 +124,47 @@ _EEG_CTX_RE = re.compile(
 )
 
 
+# Sentences that talk about an EEG without reporting one that was done, or an onset that was found: advice and plans,
+# purposes ("to localise the onset"), and negations ("onset could not be localised").  Precision first: a true
+# statement that shares a sentence with such a word is dropped rather than risk a false one.
+_PLAN_RE = re.compile(
+    r"\b(?:recommend\w*|refer(?:red|ral)?|consider\w*|plan(?:ned)?|propos\w*|advis\w*|suggest\w*|request\w*|"
+    r"await\w*|arrang\w*|offer\w*|would|could|may|might|will|if|whether)\b", re.IGNORECASE)
+_PURPOSE_RE = re.compile(
+    r"\bto\s+(?:localis|localiz|identif|defin|determin|captur|record|confirm|characteris|characteriz|clarif)\w*|"
+    r"\bin\s+order\s+to\b|\baim(?:s|ed)?\s+to\b|\bpurpose\b", re.IGNORECASE)
+_NOT_DONE_RE = re.compile(
+    r"\b(?:no|not|without|unable|failed|unavailable|never|declined|cannot)\b|n't\b", re.IGNORECASE)
+_BEFORE_NEG_RE = re.compile(r"\b(?:no|not|without|nor|never)\s+(?:\w+\s+){0,2}$", re.IGNORECASE)
+
+
+def _sentence(text: str, start: int, end: int) -> str:
+    cuts = [text.rfind(c, 0, start) for c in (".", "\n", ";")]
+    left = max(cuts) + 1
+    rights = [i for i in (text.find(c, end) for c in (".", "\n", ";")) if i != -1]
+    right = min(rights) if rights else len(text)
+    return text[left:right]
+
+
+def _study_type_asserted(text: str, m: "re.Match[str]") -> bool:
+    """A study that was done, not one that is advised, awaited, unavailable or denied."""
+    if _BEFORE_NEG_RE.search(text[max(0, m.start() - 30):m.start()]):
+        return False
+    sent = _sentence(text, m.start(), m.end())
+    return not (_PLAN_RE.search(sent) or re.search(
+        r"\b(?:not|un)\s*(?:available|performed|done|undertaken)\b|\bunavailable\b|\bdeclined\b", sent, re.IGNORECASE))
+
+
+def _onset_asserted(text: str):
+    """First 'ictal onset' phrase in a sentence that reports an onset, or None."""
+    for m in _ICTAL_ONSET_RE.finditer(text):
+        sent = _sentence(text, m.start(), m.end())
+        if _NOT_DONE_RE.search(sent) or _PLAN_RE.search(sent) or _PURPOSE_RE.search(sent):
+            continue
+        return m
+    return None
+
+
 def _nearest(text: str, start: int, end: int, word_map: dict,
              window: int = 120):
     ctx_start = max(0, start - window)
@@ -158,7 +199,7 @@ class EegStudyTypeRule(BaseFieldRule):
     ) -> Optional[Evidence]:
         text = getattr(doc, "text", "") or ""
         for pat, val in _STUDY_TYPE_PATTERNS:
-            m = pat.search(text)
+            m = next((x for x in pat.finditer(text) if _study_type_asserted(text, x)), None)
             if m:
                 quote = text[max(0, m.start() - 5):min(len(text), m.end() + 5)].strip()
                 return Evidence[EegStudyType](
@@ -268,7 +309,7 @@ class EegIctalOnsetLobeRule(BaseFieldRule):
         text = getattr(doc, "text", "") or ""
         if not _EEG_CTX_RE.search(text):
             return None
-        m = _ICTAL_ONSET_RE.search(text)
+        m = _onset_asserted(text)
         if not m:
             return None
         lobe = _nearest(text, m.start(), m.end(), _LOBE_MAP, window=150)
@@ -303,7 +344,7 @@ class EegIctalOnsetLateralityRule(BaseFieldRule):
         text = getattr(doc, "text", "") or ""
         if not _EEG_CTX_RE.search(text):
             return None
-        m = _ICTAL_ONSET_RE.search(text)
+        m = _onset_asserted(text)
         if not m:
             return None
         lat = _nearest(text, m.start(), m.end(), _LATERALITY_MAP, window=150)

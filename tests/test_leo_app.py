@@ -811,3 +811,69 @@ def test_required_login_with_no_users_locks_everyone_out(client, monkeypatch):
     monkeypatch.setenv("MEDAI_LEO_REQUIRE_LOGIN", "1")
     assert c.get("/leo/phenotypes").status_code == 401
     assert c.post("/leo/login", data={"username": "x", "password": "yyyyyyyyyyyy"}).status_code == 401
+
+
+# ---- one job at a time; odd files -------------------------------------------------------
+
+def _wait_state(c, jid, want, secs=60):
+    for _ in range(int(secs * 4)):
+        st = c.get(f"/leo/jobs/{jid}").get_json()
+        if st["state"] in want:
+            return st
+        time.sleep(0.25)
+    return st
+
+
+def test_jobs_wait_for_their_turn_and_a_waiting_job_can_be_cancelled(client, monkeypatch):
+    import threading
+    c, leo = client
+    slot = threading.Semaphore(1)
+    monkeypatch.setattr(leo, "_SLOT", slot)
+    csv = "note_id,text\nn1," + json.dumps(NOTE) + "\n"
+    slot.acquire()                                               # pretend another job is running
+    try:
+        j1 = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "off"}).get_json()["job_id"]
+        j2 = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "b.csv"), "llm": "off"}).get_json()["job_id"]
+        time.sleep(1.0)
+        assert c.get(f"/leo/jobs/{j1}").get_json()["state"] == "queued"
+        assert c.get(f"/leo/jobs/{j2}").get_json()["state"] == "queued"
+        assert c.post(f"/leo/jobs/{j2}/cancel").status_code == 200
+    finally:
+        slot.release()
+    assert _wait_state(c, j1, ("done", "error"))["state"] == "done"
+    st2 = _wait_state(c, j2, ("cancelled", "done", "error"))
+    assert st2["state"] == "cancelled" and st2["summary"]["rows_processed"] == 0
+    assert c.get(f"/leo/jobs/{j2}/download").status_code == 409     # nothing to download, said plainly
+
+
+def test_odd_files_give_a_clear_message_not_a_crash(client):
+    c, leo = client
+    def post(data, name="x.csv", **kw):
+        return c.post("/leo/batch", data={"file": (io.BytesIO(data), name), "llm": "off", **kw})
+    def outcome(r):
+        if r.status_code != 202:
+            return r.status_code, r.get_json()["error"]
+        st = _wait_state(c, r.get_json()["job_id"], ("done", "error"), secs=150)
+        return st["state"], st["error"]
+    # empty file, header only, no text column
+    for data in (b"", b"text\n", b"a,b\n1,2\n"):
+        state, msg = outcome(post(data))
+        assert state in (400, "error") and msg, (data, state, msg)
+    # text with a BOM, Windows line endings, latin-1 accents and a blank note still run
+    bom = ("\ufefftext\r\n" + json.dumps(NOTE) + "\r\n\r\n").encode("utf-8")
+    state, _ = outcome(post(bom))
+    assert state == "done"
+    latin = ("text\n" + json.dumps(NOTE.replace("seizures", "crises é")) + "\n").encode("latin-1", "replace")
+    assert outcome(post(latin))[0] in ("done", 400, "error")        # must not hang or 500
+    # one very long note (about 30 KB; a 100 KB note takes minutes when the machine is busy) is processed or
+    # refused, never a crash or a hang
+    big = ("text\n" + json.dumps(NOTE * 180) + "\n").encode()
+    state, msg = outcome(post(big))
+    assert state in ("done", 400, "error"), (state, msg)
+    # a file over the size limit is refused with a message
+    c.application.config["MAX_CONTENT_LENGTH"] = 1024
+    try:
+        r = post(b"text\n" + b"x" * 5000 + b"\n")
+        assert r.status_code == 413
+    finally:
+        c.application.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
