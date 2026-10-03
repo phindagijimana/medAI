@@ -82,6 +82,7 @@
   <div class="brand">LEO<small>Epilepsy phenotype extraction</small></div>
   <nav role="tablist">
     <button role="tab" id="tab-extract" aria-selected="true">Extract</button>
+    <button role="tab" id="tab-job" aria-selected="false">Describe a job</button>
     <button role="tab" id="tab-review" aria-selected="false">Review</button>
     <a href="/leo/guide" target="_blank" rel="noopener">User guide</a>
     <a href="/extract/ui">MedAI-EPI</a>
@@ -162,6 +163,68 @@
 
 </div>
 
+
+<!-- ============ DESCRIBE A JOB ============ -->
+<div id="view-job" hidden>
+<section class="card">
+  <h2><span class="step">1</span>Spreadsheet and request</h2>
+  <p class="hint">Upload the notes, then say in words what you want, for example <em>give seizure types for the first 100 subjects</em>. Nothing runs yet: LEO shows what it understood and you can change it.</p>
+  <input type="file" id="jfile" accept=".csv,.tsv,.xlsx,.xlsm,.jsonl">
+  <label style="margin-left:10px">Sheet <input type="text" id="jsheet" size="10" placeholder="first"></label>
+  <textarea id="jreq" rows="3" style="margin-top:10px" placeholder="e.g. Seizure type and current medications for the first 100 subjects, as Excel"></textarea>
+  <div class="small">You can name things such as seizure type, medications, EEG, MRI, etiology, surgery; limit rows with “first N subjects”, “first N notes”, “where clinic is Neurology”, “after 2022-01-01”; and put your own questions in quotes.</div>
+  <div class="row" style="margin-top:12px"><button id="jplan">Show what LEO understood</button><span class="msg" id="jmsg" role="status"></span></div>
+</section>
+
+<section class="card" id="jplanbox" hidden>
+  <h2><span class="step">2</span>Check and edit the job</h2>
+  <pre id="jdesc" style="white-space:pre-wrap;margin:6px 0;font:inherit;border:1px solid var(--navy);padding:10px 12px"></pre>
+  <ul class="plain" id="jwarn"></ul>
+  <h3>Rows</h3>
+  <div class="row">
+    <label>Cover <select id="jmode"><option value="all">all notes</option><option value="first_subjects">the first N subjects (all their notes)</option><option value="first_notes">the first N notes</option></select></label>
+    <label>N <input type="text" id="jn" size="6"></label>
+  </div>
+  <div id="jwhere" style="margin-top:8px"></div>
+  <button type="button" class="ghost" id="jaddw">Add a condition</button>
+  <h3>Columns in your file</h3>
+  <div class="row">
+    <label>Note text <select id="jc-text"></select></label>
+    <label>Subject <select id="jc-subject"></select></label>
+    <label>Note ID <select id="jc-id"></select></label>
+    <label>Date <select id="jc-date"></select></label>
+  </div>
+  <h3>What to add</h3>
+  <div id="jgroups"></div>
+  <details><summary>Ready-made questions</summary><div id="jasks" class="grid"></div></details>
+  <details open><summary>Your own questions</summary><div><div id="jcustom"></div><button type="button" class="ghost" id="jaddq">Add a question</button></div></details>
+  <h3>Output</h3>
+  <div class="row">
+    <label>Reader <select id="jllm">
+      <option value="auto">Model and rules (when the model is ready)</option>
+      <option value="on">Model and rules (start the model)</option>
+      <option value="off">Rules only</option></select></label>
+    <label>File <select id="jfmt"><option value="csv">CSV</option><option value="xlsx">Excel</option></select></label>
+    <label><input type="checkbox" id="jrev" checked> Include values that need review</label>
+  </div>
+  <div class="row" style="margin-top:14px">
+    <button class="ghost" id="jcheck">Update summary</button>
+    <button id="jrun">Run this job</button>
+    <button class="ghost" id="jcancel" disabled>Cancel</button>
+    <span class="msg" id="jmsg2" role="status"></span>
+  </div>
+  <div class="small" style="margin-top:6px">The job description is saved with the results, so the run can be repeated or audited.</div>
+  <div class="progress" id="jprogress" hidden><div id="jbar"></div></div>
+</section>
+
+<section class="card" id="jout" hidden>
+  <h2>Result</h2>
+  <div id="jsummary"></div>
+  <div id="jlinks" class="row" style="margin:10px 0"></div>
+  <div class="row"><button id="jgoReview" hidden></button></div>
+</section>
+</div>
+
 <div id="view-review" hidden>
 <section class="card" id="review">
   <h2>Review</h2>
@@ -201,9 +264,11 @@ let CAT = null, job = null, timer = null;
 
 /* ---------- tabs ---------- */
 function show(which) {
-  $('#view-extract').hidden = which !== 'extract'; $('#view-review').hidden = which !== 'review';
+  $('#view-extract').hidden = which !== 'extract'; $('#view-review').hidden = which !== 'review'; $('#view-job').hidden = which !== 'job';
   $('#tab-extract').setAttribute('aria-selected', which === 'extract'); $('#tab-review').setAttribute('aria-selected', which === 'review');
+  $('#tab-job').setAttribute('aria-selected', which === 'job');
 }
+$('#tab-job').onclick = () => { show('job'); jInit(); };
 $('#tab-extract').onclick = () => show('extract');
 $('#tab-review').onclick = () => { show('review'); if (!RJ && sessionStorage.getItem('leo_job')) openReview(sessionStorage.getItem('leo_job')); };
 $('#goReview').onclick = () => show('review');
@@ -454,7 +519,129 @@ async function download(url) {
 }
 $('#rmerge').onclick = () => download('/leo/jobs/' + RJ + '/review/export?kind=merged&unreviewed=' + $('#runrev').value);
 $('#rdec').onclick = () => download('/leo/jobs/' + RJ + '/review/export?kind=reviewed');
-init();
+/* ---------- describe a job ---------- */
+let JID = null, JSPEC = null, JCOLS = [], jTimer = null, jInited = false;
+const jsay = (t, err, id) => { const m = $(id || '#jmsg'); m.textContent = t || ''; m.className = 'msg' + (err ? ' err' : ''); };
+function jInit() {
+  if (jInited || !CAT) return; jInited = true;
+  GROUPS.forEach(([tag, label]) => {
+    const members = CAT.extract.filter(p => p.tags.includes(tag) && !$('#jgroups').querySelector('[value="' + p.id + '"]'));
+    if (!members.length) return;
+    const d = el('details'); d.append(el('summary', {text: label}));
+    const g = el('div', {class: 'grid'});
+    members.forEach(p => g.append(el('label', {class: 'item', title: tip(p)}, [el('input', {type: 'checkbox', value: p.id, class: 'jph'}), el('span', {}, [p.label, ...pill(p)])])));
+    d.append(el('div', {}, g)); $('#jgroups').append(d);
+  });
+  CAT.ask_templates.forEach(a => $('#jasks').append(el('label', {class: 'item', title: a.question}, [el('input', {type: 'checkbox', value: a.id, class: 'jask'}), el('span', {text: a.label})])));
+}
+function colSelect(id, val, optional) {
+  const s = $(id); s.replaceChildren();
+  if (optional) s.append(el('option', {value: '', text: '(none)'}));
+  JCOLS.forEach(c => s.append(el('option', {value: c, text: c})));
+  s.value = val || '';
+}
+function addWhere(c) {
+  const col = el('select', {'aria-label': 'Column'}, JCOLS.map(x => el('option', {value: x, text: x})));
+  const op = el('select', {'aria-label': 'Test'}, [['eq', 'is'], ['neq', 'is not'], ['contains', 'contains'], ['gte', 'on or after / at least'], ['lte', 'on or before / at most']].map(([v, l]) => el('option', {value: v, text: l})));
+  const val = el('input', {type: 'text', 'aria-label': 'Value'});
+  const b = el('button', {type: 'button', class: 'ghost', text: 'Remove'});
+  const d = el('div', {class: 'q'}, [col, op, val, b]);
+  if (c) { col.value = c.column; op.value = c.op; val.value = c.value; }
+  b.onclick = () => d.remove(); $('#jwhere').append(d);
+}
+function jAddQuestion(q) {
+  const i = el('input', {type: 'text', placeholder: 'Your question', 'aria-label': 'Question'});
+  const t = el('select', {'aria-label': 'Answer type'}, [['text', 'Text'], ['yes_no', 'Yes / no'], ['number', 'Number']].map(([v, l]) => el('option', {value: v, text: l})));
+  const b = el('button', {type: 'button', class: 'ghost', text: 'Remove'});
+  const d = el('div', {class: 'q'}, [i, t, b]);
+  if (q) { i.value = q.question; t.value = q.answer_type || 'text'; }
+  b.onclick = () => d.remove(); $('#jcustom').append(d);
+}
+$('#jaddw').onclick = () => addWhere(null);
+$('#jaddq').onclick = () => jAddQuestion(null);
+function fillPlan(v) {
+  JSPEC = v.spec; JCOLS = v.columns; const sp = v.spec;
+  $('#jdesc').textContent = v.description;
+  $('#jwarn').replaceChildren(...v.warnings.map(w => el('li', {text: 'Note: ' + w})), ...v.problems.map(w => el('li', {class: 'msg err', text: 'To fix: ' + w})));
+  $('#jmode').value = sp.rows.mode; $('#jn').value = sp.rows.n || '';
+  $('#jwhere').replaceChildren(); sp.rows.where.forEach(addWhere);
+  colSelect('#jc-text', sp.columns.text); colSelect('#jc-subject', sp.columns.subject, true);
+  colSelect('#jc-id', sp.columns.id, true); colSelect('#jc-date', sp.columns.date, true);
+  document.querySelectorAll('.jph').forEach(c => c.checked = sp.phenotypes.includes(c.value));
+  document.querySelectorAll('.jask').forEach(c => c.checked = sp.ask_templates.includes(c.value));
+  document.querySelectorAll('#jgroups details').forEach(d => { d.open = !!d.querySelector('.jph:checked'); });
+  $('#jcustom').replaceChildren(); sp.questions.forEach(jAddQuestion);
+  $('#jfmt').value = sp.output_format; $('#jrev').checked = sp.include_review;
+  $('#jrun').disabled = v.problems.length > 0;
+  $('#jplanbox').hidden = false;
+}
+function jSpec() {
+  const sp = JSON.parse(JSON.stringify(JSPEC));
+  sp.rows = {mode: $('#jmode').value, n: parseInt($('#jn').value, 10) || 0, where: [...document.querySelectorAll('#jwhere .q')].map(d => {
+    const s = d.querySelectorAll('select'); return {column: s[0].value, op: s[1].value, value: d.querySelector('input').value.trim()}; }).filter(c => c.value !== '')};
+  sp.columns = {text: $('#jc-text').value, subject: $('#jc-subject').value, id: $('#jc-id').value, date: $('#jc-date').value};
+  sp.phenotypes = [...document.querySelectorAll('.jph:checked')].map(c => c.value);
+  sp.ask_templates = [...document.querySelectorAll('.jask:checked')].map(c => c.value);
+  sp.questions = [...document.querySelectorAll('#jcustom .q')].map(d => ({question: d.querySelector('input').value.trim(), answer_type: d.querySelector('select').value})).filter(q => q.question);
+  sp.output_format = $('#jfmt').value; sp.include_review = $('#jrev').checked;
+  sp.understood = []; sp.warnings = [];
+  return sp;
+}
+$('#jplan').onclick = async () => {
+  const f = $('#jfile').files[0];
+  if (!f) { jsay('Choose a file first.', true); return; }
+  if (!$('#jreq').value.trim()) { jsay('Say what you want done.', true); return; }
+  jsay('Reading the file…'); $('#jout').hidden = true;
+  const fd = new FormData(); fd.append('file', f); fd.append('request', $('#jreq').value); fd.append('sheet', $('#jsheet').value);
+  const r = await fetch('/leo/job/plan', {method: 'POST', body: fd}); const j = await r.json();
+  if (!r.ok) { jsay(j.error, true); return; }
+  JID = j.job_id; jsay(''); fillPlan(j);
+};
+async function jPost(path, body) {
+  const r = await fetch('/leo/job/' + JID + path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+  return [r, await r.json()];
+}
+$('#jcheck').onclick = async () => {
+  jsay('', false, '#jmsg2');
+  const [r, j] = await jPost('/describe', {spec: jSpec()});
+  if (!r.ok) { jsay(j.error, true, '#jmsg2'); return; }
+  fillPlan(j);
+};
+$('#jrun').onclick = async () => {
+  $('#jrun').disabled = true; jsay('', false, '#jmsg2');
+  const [r, j] = await jPost('/run', {spec: jSpec(), llm: $('#jllm').value});
+  if (!r.ok) { jsay(j.error, true, '#jmsg2'); $('#jrun').disabled = false; return; }
+  job = JID; $('#jcancel').disabled = false; $('#jprogress').hidden = false; jsay('Running…', false, '#jmsg2'); jPoll();
+};
+$('#jcancel').onclick = () => fetch('/leo/jobs/' + JID + '/cancel', {method: 'POST'});
+async function jPoll() {
+  const j = await (await fetch('/leo/jobs/' + JID)).json();
+  $('#jbar').style.width = (j.total ? Math.round(100 * j.done / j.total) : 0) + '%';
+  jsay(j.state + ' ' + j.done + ' of ' + j.total, false, '#jmsg2');
+  if (j.state === 'done' || j.state === 'cancelled') {
+    const s = j.summary || {}; $('#jout').hidden = false; $('#jcancel').disabled = true;
+    $('#jsummary').replaceChildren(el('div', {class: 'stat'}, [
+      el('div', {}, [el('b', {text: s.rows_processed}), el('span', {text: 'notes processed'})]),
+      el('div', {}, [el('b', {text: s.rows_error}), el('span', {text: 'with errors'})]),
+      el('div', {}, [el('b', {text: s.mode === 'llm+specialist' ? 'Model and rules' : 'Rules only'}), el('span', {text: 'reader'})])]));
+    const id = JID;
+    const del = el('button', {class: 'ghost', type: 'button', text: 'Delete from server'});
+    del.onclick = async () => { await fetch('/leo/jobs/' + id, {method: 'DELETE'}); $('#jlinks').replaceChildren(el('span', {class: 'msg', text: 'Deleted.'})); };
+    $('#jlinks').replaceChildren(el('a', {href: '/leo/jobs/' + id + '/download', text: 'Download result (' + (j.format === 'xlsx' ? 'Excel' : 'zip of CSV files') + ', with the job description)'}), del);
+    jsay('', false, '#jmsg2');
+    if (await openReview(id)) {
+      const c = (await rget('&offset=0&limit=1')).counts;
+      $('#jgoReview').textContent = c.total ? 'Review ' + c.total + ' value' + (c.total === 1 ? '' : 's') : 'Open review';
+      $('#jgoReview').hidden = false;
+    }
+    return;
+  }
+  if (j.state === 'error') { jsay('Error: ' + j.error, true, '#jmsg2'); $('#jrun').disabled = false; return; }
+  jTimer = setTimeout(jPoll, 1500);
+}
+$('#jgoReview').onclick = () => show('review');
+
+init().then(jInit);
 </script>
 </body>
 </html>

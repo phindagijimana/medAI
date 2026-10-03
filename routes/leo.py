@@ -257,6 +257,151 @@ def batch():
     return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
 
 
+# ---- job description: upload + words -> editable plan -> confirmed run ---------------------------------------
+
+def _plan_view(job: dict, spec, df) -> dict:
+    from services import leo_job as lj
+    problems = lj.validate(spec, df)
+    view = {"spec": spec.to_dict(), "problems": problems, "warnings": spec.warnings,
+            "description": lj.describe(spec, df), "columns": [str(c) for c in df.columns],
+            "needs_llm": lj.needs_llm(spec), "n_rows": int(len(df))}
+    if not problems:
+        _, view["selection"] = lj.select_rows(df, spec)
+    return view
+
+
+def _plan_df(job: dict):
+    from services import leo_batch as lb
+    if "_df" not in job:
+        job["_df"] = lb.read_table(job["input"], sheet=job.get("sheet") or None)
+    return job["_df"]
+
+
+@leo_bp.route("/job/plan", methods=["POST"])
+def job_plan():
+    """Upload a file and describe the task in words.  Nothing is run: returns the understood job for editing."""
+    from services import leo_batch as lb
+    from services import leo_job as lj
+    f = request.files.get("file")
+    if f is None or not f.filename:
+        return _bad("upload a file in the `file` field (csv, tsv, xlsx, jsonl)")
+    name = secure_filename(f.filename)
+    if Path(name).suffix.lower() not in lb.INPUT_SUFFIXES:
+        return _bad(f"unsupported file type; use one of {', '.join(lb.INPUT_SUFFIXES)}")
+    req = (request.form.get("request") or "").strip()
+    _purge_old_jobs()
+    job_id = uuid.uuid4().hex
+    jd = _jobs_root() / job_id
+    jd.mkdir(parents=True, mode=0o700)
+    path = jd / name
+    f.save(path)
+    job = {"state": "planned", "done": 0, "total": 0, "files": [], "error": "", "input": str(path), "filename": name,
+           "sheet": request.form.get("sheet", "")}
+    try:
+        df = _plan_df(job)
+        spec = lj.parse_request(req, df, text_col=request.form.get("text_col", ""), id_col=request.form.get("id_col", ""),
+                                date_col=request.form.get("date_col", ""),
+                                default_format="xlsx" if path.suffix.lower() in (".xlsx", ".xlsm") else "csv")
+    except Exception as e:                                  # unreadable file: say so, keep nothing
+        shutil.rmtree(jd, ignore_errors=True)
+        return _bad(f"could not read the file: {e}")
+    _JOBS[job_id] = job
+    resp = jsonify({"job_id": job_id, **_plan_view(job, spec, df)})
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
+
+
+def _spec_from_request(job: dict):
+    from services import leo_job as lj
+    p = request.get_json(silent=True) or {}
+    try:
+        return lj.spec_from_dict(p.get("spec") or {}), p, None
+    except (ValueError, TypeError, KeyError) as e:
+        return None, p, _bad(f"job description rejected: {e}")
+
+
+@leo_bp.route("/job/<job_id>/describe", methods=["POST"])
+def job_describe(job_id: str):
+    """Re-check an edited job description; returns the plain-words summary, counts and problems."""
+    job, err = _job_or_404(job_id)
+    if err:
+        return err
+    if job.get("state") != "planned":
+        return _bad("this job has already been started", 409)
+    spec, _, err = _spec_from_request(job)
+    if err:
+        return err
+    return jsonify(_plan_view(job, spec, _plan_df(job)))
+
+
+def _run_spec_job(job_id: str) -> None:
+    from services import leo_batch as lb
+    from services import leo_job as lj
+    job = _JOBS[job_id]
+    jd = _jobs_root() / job_id
+    spec = job["spec"]
+    try:
+        job["state"] = "running"
+        df = _plan_df(job)
+        rt = _runtime(job["use_llm"])
+        sub, _ = lj.select_rows(df, spec)
+        job["total"] = len(sub)
+
+        def progress(i: int, n: int, doc: str) -> None:
+            job["done"] = i
+
+        table, claims, prov = lj.run_spec(spec, df, rt, progress=progress, cancel=lambda: job.get("cancel", False))
+        prov["input_sha256"] = lb.input_hash(job["input"])
+        prov["input_file"] = job["filename"]
+        out = jd / f"{Path(job['filename']).stem}_leo.{spec.output_format}"
+        files = lb.write_outputs(table, claims, prov, out, spec.output_format, job["phen"])
+        spec_file = out.with_suffix(".job.json")             # the job description travels with the results
+        spec_file.write_text(spec.to_json())
+        job["files"] = [f.name for f in files] + [spec_file.name]
+        job["prov"] = prov
+        job["state"] = "cancelled" if job.get("cancel") else "done"
+        job["summary"] = {k: prov[k] for k in ("rows_processed", "rows_error", "rows_with_llm", "mode")}
+    except _NotReady as e:
+        job["state"], job["error"] = "error", str(e)
+    except Exception as e:
+        logger.exception("LEO job-description run failed")
+        job["state"], job["error"] = "error", f"{type(e).__name__}: {e}"
+    finally:
+        job.pop("_df", None)
+
+
+@leo_bp.route("/job/<job_id>/run", methods=["POST"])
+def job_run(job_id: str):
+    """Start the confirmed job.  The spec sent here (not the one first proposed) is what runs."""
+    from services import leo_job as lj
+    job, err = _job_or_404(job_id)
+    if err:
+        return err
+    if job.get("state") != "planned":
+        return _bad("this job has already been started", 409)
+    spec, p, err = _spec_from_request(job)
+    if err:
+        return err
+    df = _plan_df(job)
+    problems = lj.validate(spec, df)
+    if problems:
+        return _bad("job is not ready: " + "; ".join(problems), 422)
+    if not len(lj.select_rows(df, spec)[0]):
+        return _bad("the selection matches no notes", 422)
+    use_llm = _use_llm(p.get("llm", "auto"))
+    if lj.needs_llm(spec) and not use_llm:
+        return _bad("questions need the LLM; set llm=on (or remove the questions)", 422)
+    if use_llm:
+        try:
+            _runtime(True)
+        except _NotReady as e:
+            return _bad(str(e), 503)
+    phen, asks = lj.selection(spec)
+    job.update(spec=spec, phen=phen, asks=asks, use_llm=use_llm, state="queued")
+    threading.Thread(target=_run_spec_job, args=(job_id,), daemon=True, name=f"leo-spec-{job_id[:6]}").start()
+    return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
+
+
 def _job_or_404(job_id: str):
     job = _JOBS.get(job_id)
     if job is None:

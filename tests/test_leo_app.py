@@ -580,3 +580,140 @@ def test_disagreement_scoring_maps_blind_answers_back_to_the_readers():
     with pytest.raises(ValueError):
         ld.score_cases(sheet, "rules")
     assert 0 <= ld.wilson(2, 3)[0] < ld.wilson(2, 3)[1] <= 1
+
+
+# ─── job description (services.leo_job) ──────────────────────────────────────
+
+def _job_df():
+    import pandas as pd
+    rows = []
+    for s in range(1, 6):
+        for n in range(1, 4):
+            rows.append({"patient_id": f"P{s}", "note_id": f"P{s}_N{n}", "note_date": f"202{n}-0{s}-15",
+                         "clinic": "Neurology" if s % 2 else "ED", "text": "He has focal seizures. Lamotrigine 100 mg."})
+    return pd.DataFrame(rows)
+
+
+def test_job_parses_the_example_request_and_selects_subjects_not_rows():
+    from services import leo_job as j
+    df = _job_df()
+    spec = j.parse_request("give seizure types for the first 2 subjects", df)
+    assert spec.phenotypes == ["seizure_type"] and spec.rows.mode == "first_subjects" and spec.rows.n == 2
+    assert spec.columns["subject"] == "patient_id" and spec.columns["text"] == "text"
+    assert j.validate(spec, df) == []
+    sub, info = j.select_rows(df, spec)
+    assert info["notes_selected"] == 6 and info["subjects_selected"] == 2           # all notes of the first 2 subjects
+    assert set(sub["patient_id"]) == {"P1", "P2"} and len(df) == 15                  # input is not changed
+    assert "6 notes from 2 subjects" in j.describe(spec, df)
+
+
+def test_job_parser_handles_conditions_questions_and_output_and_reports_what_it_cannot_do():
+    from services import leo_job as j
+    df = _job_df()
+    spec = j.parse_request('prior and failed medications and eeg for all patients after 2022 where clinic is Neurology, '
+                           'as excel: "Does the patient drive?"', df)
+    assert {"prior_asms", "failed_asms"} <= set(spec.phenotypes) and "eeg_study_type" in spec.phenotypes
+    assert spec.output_format == "xlsx" and spec.questions[0]["answer_type"] == "yes_no"
+    cols = {(c.column, c.op) for c in spec.rows.where}
+    assert ("clinic", "eq") in cols and ("note_date", "gte") in cols
+    sub, info = j.select_rows(df, spec)
+    assert set(sub["clinic"]) == {"Neurology"} and set(sub["note_date"].str[:4]) <= {"2022", "2023"}
+    # a request LEO cannot do is reported, not guessed
+    none = j.parse_request("predict surgical outcome", df)
+    assert none.phenotypes == [] and any("nothing" in p for p in j.validate(none, df))
+    # an unknown column in a condition is dropped with a warning
+    bad = j.parse_request("seizure type where payer is Medicaid", df)
+    assert bad.rows.where == [] and any("payer" in w for w in bad.warnings)
+
+
+def test_job_validation_and_json_round_trip_reject_bad_edits():
+    import pytest
+    from services import leo_job as j
+    df = _job_df()
+    spec = j.parse_request("seizure type for the first 3 subjects", df)
+    again = j.spec_from_dict(json.loads(spec.to_json()))
+    assert again.to_dict() == spec.to_dict()
+    again.columns["subject"] = "nope"
+    again.phenotypes.append("not_a_phenotype")
+    again.rows.n = 0
+    problems = " | ".join(j.validate(again, df))
+    assert "nope" in problems and "not_a_phenotype" in problems and "at least 1" in problems
+    with pytest.raises(ValueError):
+        j.spec_from_dict({"rows": {"mode": "all", "shell": "rm -rf"}})
+    with pytest.raises(ValueError):
+        j.spec_from_dict({"run_this": "x"})
+    no_subj = j.parse_request("seizure type for the first 3 subjects", df.drop(columns=["patient_id"]))
+    assert any("subject column" in p for p in j.validate(no_subj, df.drop(columns=["patient_id"])))
+
+
+def test_job_run_adds_columns_to_every_selected_note():
+    from services import leo_job as j
+    from services.leo_runtime import LeoRuntime
+    df = _job_df()
+    spec = j.parse_request("seizure type for the first 2 subjects", df)
+    table, claims, prov = j.run_spec(spec, df, LeoRuntime(backend=None, use_llm=False))
+    assert len(table) == 6 and "seizure_type" in " ".join(table.columns) and "clinic" in table.columns
+    assert prov["job_spec"]["rows"]["n"] == 2 and prov["row_selection"]["notes_selected"] == 6
+
+
+def test_routes_job_description_plan_edit_run_and_results_keep_the_job_file(client):
+    c, leo = client
+    rows = ["patient_id,note_id,text"] + [f"P{s},P{s}_{n},{json.dumps(NOTE)}" for s in range(1, 5) for n in (1, 2)]
+    data = "\n".join(rows).encode()
+    r = c.post("/leo/job/plan", data={"file": (io.BytesIO(data), "notes.csv"),
+                                      "request": "give seizure types for the first 2 subjects"})
+    plan = r.get_json()
+    assert r.status_code == 200 and plan["spec"]["phenotypes"] == ["seizure_type"] and plan["problems"] == []
+    assert plan["selection"]["notes_selected"] == 4 and "text" in plan["columns"]
+    jid = plan["job_id"]
+    # the user edits the plan: 3 subjects and one more field; the edited spec is what runs
+    spec = plan["spec"]
+    spec["rows"]["n"] = 3
+    spec["phenotypes"].append("epilepsy_type")
+    d = c.post(f"/leo/job/{jid}/describe", json={"spec": spec}).get_json()
+    assert d["selection"]["notes_selected"] == 6 and "Epilepsy type" in d["description"]
+    # bad edits are refused, not guessed
+    bad = dict(spec, phenotypes=["nope"])
+    assert c.post(f"/leo/job/{jid}/run", json={"spec": bad, "llm": "off"}).status_code == 422
+    assert c.post(f"/leo/job/{jid}/run", json={"spec": dict(spec, shell="rm -rf /"), "llm": "off"}).status_code == 400
+    assert c.post(f"/leo/job/{jid}/run", json={"spec": dict(spec, questions=[{"question": "Q?", "answer_type": "text"}]),
+                                              "llm": "off"}).status_code == 422          # questions need the model
+    r = c.post(f"/leo/job/{jid}/run", json={"spec": spec, "llm": "off"})
+    assert r.status_code == 202
+    for _ in range(120):
+        st = c.get(f"/leo/jobs/{jid}").get_json()
+        if st["state"] in ("done", "error"):
+            break
+        time.sleep(0.5)
+    assert st["state"] == "done", st
+    z = zipfile.ZipFile(io.BytesIO(c.get(f"/leo/jobs/{jid}/download").data))
+    assert "notes_leo.job.json" in z.namelist()
+    assert json.loads(z.read("notes_leo.job.json"))["rows"]["n"] == 3
+    res = pd.read_csv(z.open("notes_leo.csv"), dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    assert len(res) == 6 and "epilepsy_type" in res.columns and "patient_id" in res.columns
+    assert c.post(f"/leo/job/{jid}/describe", json={"spec": spec}).status_code == 409   # already started
+    assert c.get(f"/leo/jobs/{jid}/review?scope=all").status_code == 200                   # review still works
+    assert c.post("/leo/job/plan", data={"file": (io.BytesIO(b"x"), "evil.exe")}).status_code == 400
+    unknown = c.post("/leo/job/plan", data={"file": (io.BytesIO(data), "n2.csv"), "request": "predict outcome"}).get_json()
+    assert unknown["problems"] and unknown["spec"]["phenotypes"] == []
+
+
+def test_cli_run_writes_a_job_file_and_refuses_to_guess(tmp_path):
+    import subprocess
+    inp = tmp_path / "n.csv"
+    inp.write_text("patient_id,note_id,text\n" + "\n".join(f"P{i},N{i},{json.dumps(NOTE)}" for i in range(3)) + "\n")
+    py = sys.executable
+    cli = str(Path(__file__).resolve().parents[1] / "scripts" / "leo_cli.py")
+    r = subprocess.run([py, cli, "run", "seizure types for the first 2 subjects", "--input", str(inp), "--plan-only"],
+                       capture_output=True, text=True, cwd=str(tmp_path))
+    assert r.returncode == 0 and "This run: 2 notes from 2 subjects" in r.stdout
+    spec = json.loads((tmp_path / "n_leo.job.json").read_text())
+    assert spec["phenotypes"] == ["seizure_type"] and spec["rows"] == {"mode": "first_subjects", "n": 2, "where": []}
+    # no terminal and no --yes: nothing starts
+    r = subprocess.run([py, cli, "run", "seizure types", "--input", str(inp), "--local", "--cpu"],
+                       capture_output=True, text=True, stdin=subprocess.DEVNULL, cwd=str(tmp_path))
+    assert r.returncode == 2 and not (tmp_path / "n_leo.csv").exists()
+    # an unrecognised request is a problem, not a silent default
+    r = subprocess.run([py, cli, "run", "predict outcome", "--input", str(inp), "--yes", "--local", "--cpu"],
+                       capture_output=True, text=True, cwd=str(tmp_path))
+    assert r.returncode == 2 and "PROBLEM" in r.stdout

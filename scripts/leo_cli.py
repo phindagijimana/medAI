@@ -242,6 +242,88 @@ def cmd_batch(args) -> int:
     return 1 if prov["rows_error"] == prov["rows_processed"] and prov["rows_processed"] else 0
 
 
+def cmd_run(args) -> int:
+    """Plain-words job: parse the request into a job description, show it, confirm, run it.
+
+    leo run "give seizure types for the first 100 subjects" --input notes.xlsx
+    leo run --spec notes_leo.job.json --input notes.xlsx          (re-run, or run after editing the spec)
+    """
+    from services import leo_batch as lb
+    from services import leo_job as lj
+    inp = Path(args.input).expanduser()
+    if not inp.exists():
+        raise SystemExit(f"input not found: {inp}")
+    df = lb.read_table(inp, sheet=args.sheet or None)
+    fmt0 = (args.format or (Path(args.output).suffix.lstrip(".") if args.output else "") or "").lower()
+    if args.spec and Path(args.spec).exists() and not args.request:
+        try:
+            spec = lj.spec_from_dict(json.loads(Path(args.spec).read_text()))
+        except (ValueError, json.JSONDecodeError) as e:
+            raise SystemExit(f"cannot read job file {args.spec}: {e}")
+    elif args.request:
+        spec = lj.parse_request(args.request, df, text_col=args.text_col, id_col=args.id_col, date_col=args.date_col,
+                                default_format=fmt0 or ("xlsx" if inp.suffix.lower() in (".xlsx", ".xlsm") else "csv"))
+    else:
+        raise SystemExit('give a request in quotes, or --spec job.json')
+    if args.format:
+        spec.output_format = args.format
+    if args.accepted_only:
+        spec.include_review = False
+    out = Path(args.output) if args.output else lb.default_output(inp, spec.output_format)
+    if args.output is None and not os.access(out.parent, os.W_OK):
+        out = Path.cwd() / out.name
+    spec_path = Path(args.spec) if args.spec else out.with_suffix(".job.json")
+    problems = lj.validate(spec, df)
+    print(lj.describe(spec, df))
+    for w in spec.warnings:
+        print(f"  note: {w}")
+    for p in problems:
+        print(f"  PROBLEM: {p}")
+    if problems:
+        spec_path.write_text(spec.to_json())
+        print(f"\n[leo] job not ready. Edit {spec_path} and run: leo run --spec {spec_path} --input {inp}")
+        return 2
+    spec_path.write_text(spec.to_json())
+    print(f"\n[leo] job description saved: {spec_path}   (edit it, then: leo run --spec {spec_path} --input {inp})")
+    if args.plan_only:
+        return 0
+    if not args.yes:
+        if not sys.stdin.isatty():
+            print("[leo] not confirmed (no terminal). Re-run with --yes to start, or --plan-only to just save the job file.")
+            return 2
+        if input("Run this? [y/N] ").strip().lower() not in ("y", "yes"):
+            print("[leo] not started. Nothing was run.")
+            return 0
+    if lj.needs_llm(spec) and args.cpu:
+        raise SystemExit("questions need the LLM (GPU). Remove them from the job or run without --cpu.")
+    if not args.local:
+        argv = ["run", "--input", str(inp.resolve()), "--spec", str(spec_path.resolve()), "-o", str(out.resolve()),
+                "--yes", "--local", "--mode", "cpu" if args.cpu else "gpu", "--chunk-chars", str(args.chunk_chars)]
+        for flag, val in (("--sheet", args.sheet), ("--adapter", args.adapter), ("--arm", args.arm)):
+            if val:
+                argv += [flag, val]
+        jid = _submit("run", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
+        if args.wait:
+            _wait(jid)
+        return 0
+    rt = _runtime(args)
+
+    def prog(i, n, doc):
+        if i == 1 or i % 10 == 0 or i == n:
+            print(f"[leo] {i}/{n} {doc}", file=sys.stderr, flush=True)
+
+    table, claims, prov = lj.run_spec(spec, df, rt, progress=prog)
+    prov["input_sha256"] = lb.input_hash(inp)
+    prov["input_file"] = inp.name
+    phen, _ = lj.selection(spec)
+    paths = lb.write_outputs(table, claims, prov, out, spec.output_format, phen)
+    print(f"[leo] mode={rt.mode} rows={prov['rows_processed']} errors={prov['rows_error']} llm_rows={prov['rows_with_llm']}")
+    for p in paths:
+        print(f"[leo] wrote {p}")
+    print(f"[leo] job description: {spec_path}")
+    return 1 if prov["rows_error"] == prov["rows_processed"] and prov["rows_processed"] else 0
+
+
 def cmd_review(args) -> int:
     """Write a reviewed.csv to fill in (Excel works), listing the values that need review."""
     from services import leo_review as lr
@@ -570,6 +652,27 @@ def main(argv=None) -> int:
     sp.add_argument("--hours", type=int, default=4)
     _common(sp)
     sp.set_defaults(fn=cmd_batch)
+
+    sp = sub.add_parser("run", help='describe the job in words: leo run "seizure types for the first 100 subjects" --input notes.xlsx')
+    sp.add_argument("request", nargs="?", default="", help="what to do, in plain words (or use --spec)")
+    sp.add_argument("--input", required=True, help=".csv .tsv .xlsx .jsonl")
+    sp.add_argument("--spec", default="", help="job file to write (default <output>.job.json); if it exists and no request is given it is run")
+    sp.add_argument("-o", "--output", default=None)
+    sp.add_argument("--format", choices=("csv", "xlsx"), default=None)
+    sp.add_argument("--text-col", default="")
+    sp.add_argument("--id-col", default="")
+    sp.add_argument("--date-col", default="")
+    sp.add_argument("--sheet", default="")
+    sp.add_argument("--accepted-only", action="store_true")
+    sp.add_argument("--plan-only", action="store_true", help="write the job file and stop")
+    sp.add_argument("--yes", action="store_true", help="start without asking")
+    sp.add_argument("--cpu", action="store_true")
+    sp.add_argument("--local", action="store_true")
+    sp.add_argument("--wait", action="store_true")
+    sp.add_argument("--partition", default="")
+    sp.add_argument("--hours", type=int, default=4)
+    _common(sp)
+    sp.set_defaults(fn=cmd_run)
 
     sp = sub.add_parser("review", help="make a reviewed.csv to fill in from a result table")
     sp.add_argument("table", help="a LEO result (.csv or .xlsx)")

@@ -12,6 +12,7 @@ bin/leo check                         # login-node check (CPU, specialist only)
 bin/leo check --slurm                 # the same plus the model on a GPU node; output in logs/leo_jobs/
 bin/leo phenotypes                    # what can be extracted
 bin/leo batch notes.xlsx              # submits a Slurm GPU job; writes notes_leo.xlsx next to the input
+bin/leo run "seizure types for the first 100 subjects" --input notes.xlsx   # describe the job in words (see "Describing a job in words", section 8)
 bin/leo start                         # web app as a Slurm GPU job; then `bin/leo status`
 bin/leo review notes_leo.csv         # list the values to review in notes_leo.reviewed.csv (fill in `decision`)
 bin/leo merge notes_leo.csv notes_leo.reviewed.csv   # add the reviewed values as new columns
@@ -215,6 +216,26 @@ Definitions follow Fisher et al. 2017 and Scheffer et al. 2017 (ILAE) and Kwan e
 
 `bin/leo start` queues the server; `bin/leo status` prints the node, port and an SSH tunnel command; the page is `/leo/ui` (also linked from the extract page). Pick a panel or individual phenotypes (each item is marked "rules tested", "partly tested" or "not tested"), add predefined or typed questions, paste a note or upload a file, choose csv or xlsx, watch progress, download (csv comes as a zip) and delete the job. Jobs live in `data/leo_jobs/` for 24 hours (`MEDAI_LEO_JOB_TTL_H`). `bin/leo stop` cancels the Slurm job. The page links to this guide (`/leo/guide`, which redirects to the copy on GitHub; set `LEO_GUIDE_URL` to point elsewhere).
 
+### Describing a job in words
+
+For a spreadsheet of many subjects and notes you can say what you want instead of ticking boxes. Example: *give seizure types for the first 100 subjects*, with a file that has a note column and a subject column.
+
+1. LEO turns the request into a **job description** and shows it in plain words, with the counts it will cover ("This run: 214 notes from 100 subjects"). **Nothing runs yet.**
+2. You can change anything in it (rows, conditions, columns, what to add, questions, output format) and press *Update summary*. What you confirm is what runs.
+3. The job description is saved with the results (`<result>.job.json`, and in the About sheet), so the run can be repeated or audited.
+
+What the wording can express: the phenotypes and panels in the catalogue (seizure type, medications, EEG, MRI, etiology, surgery, ...), predefined questions, your own questions in quotes, `first N subjects` (all their notes, in file order), `first N notes`, `all`, `where <column> is|contains|= <value>`, `after|since|before|until <date>`, `as excel|csv`, `accepted only`. Anything it does not recognise is listed as a note; a request with nothing recognisable is refused ("nothing to extract") rather than guessed. The job description holds data only (it cannot run code), unknown keys are rejected, and the input file is never changed: the output keeps every input column and adds the new ones.
+
+Web: the **Describe a job** tab. Command line:
+
+```bash
+bin/leo run "seizure types and current medications for the first 100 subjects, as excel" --input notes.xlsx
+#  prints the summary, saves notes_leo.job.json, asks "Run this? [y/N]", then submits a Slurm job
+bin/leo run --spec notes_leo.job.json --input notes.xlsx     # run an edited or saved job (--plan-only to just write it)
+```
+
+Without a terminal, or in scripts, add `--yes` to start without asking. Questions need the model (GPU). Limits: the request is read by fixed rules, not by a language model, so unusual wording may be missed (it will say so); "first N" means first in file order, not by date or any ranking.
+
 ### Reviewing values
 
 After a file run finishes, the **Review** tab (also linked from the result as "Review N values") lists the values that need review, one at a time: LEO's value, why it was flagged, the quote, and a **Show in note** button that highlights the quote in the note. For each value choose **Right**, **Correct it** (type the right value) or **Wrong** (the final value is left blank). **Undo** withdraws a decision. Enter a reviewer name or ID first (initials or a pseudonym, never a patient name). Decisions are saved as you click. Switch the view to "All values found" to spot-check values LEO accepted on its own.
@@ -237,7 +258,7 @@ Without the web app: `bin/leo review RESULT.csv` writes a `RESULT.reviewed.csv` 
 
 What review does not do yet: a reviewer cannot add a value LEO missed (`not_found`), so misses do not appear in these files, and nothing learns from the decisions automatically. The decisions are the raw material for measuring accuracy on real notes and, later, for recalibrating the routing rules or retraining (needs IRB approval and secure compute; see the project's future-work notes). Corrections made on synthetic notes say nothing about real notes. Review is for file runs; a single pasted note has no review step.
 
-API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/status`, `POST /leo/extract`, `POST /leo/batch`, `GET /leo/jobs/<id>[/download]`, `GET|POST /leo/jobs/<id>/review`, `GET /leo/jobs/<id>/note/<row>`, `GET /leo/jobs/<id>/review/export?kind=reviewed|merged&unreviewed=blank|proposal`, `POST /leo/jobs/<id>/cancel`, `DELETE /leo/jobs/<id>`. `llm=auto|on|off` per request.
+API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/status`, `POST /leo/extract`, `POST /leo/batch`, `POST /leo/job/plan`, `POST /leo/job/<id>/describe`, `POST /leo/job/<id>/run`, `GET /leo/jobs/<id>[/download]`, `GET|POST /leo/jobs/<id>/review`, `GET /leo/jobs/<id>/note/<row>`, `GET /leo/jobs/<id>/review/export?kind=reviewed|merged&unreviewed=blank|proposal`, `POST /leo/jobs/<id>/cancel`, `DELETE /leo/jobs/<id>`. `llm=auto|on|off` per request.
 
 ## 9. Data protection
 
