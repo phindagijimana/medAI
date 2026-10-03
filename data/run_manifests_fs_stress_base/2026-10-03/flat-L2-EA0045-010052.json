@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2-EA0045-010052",
+  "started_at": "2026-10-03T01:00:52.656390+00:00",
+  "finished_at": "2026-10-03T01:01:23.302334+00:00",
+  "duration_s": 30.64,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0045",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2692,
+  "raw_response": "{\"epilepsy_type\": {\"value\": \"focal\", \"quote\": \"focal epilepsy\"}, \"predominant_seizure_type\": {\"value\": \"focal_aware\", \"quote\": \"focal seizures with altered awareness\"}, \"age_at_onset_years\": {\"value\": null, \"quote\": null}, \"seizure_frequency\": {\"count_min\": null, \"count_max\": null, \"period\": null, \"seizure_free\": null, \"quote\": null}, \"current_asms\": [{\"name\": \"lamotrigine\", \"dose\": \"25 mg\", \"quote\": \"lamotrigine starting at 25mg once a day\"}]}\n\nExample note:\n\"\"\"\nClinic Date 12/10/2018\n\nDear Dr,\n\nRe: \tMr John Williams. DOB 12/12/1951\n\nDiagnosis:\tProbable focal epilepsy\n\nSeizure type and frequency:\tEpisode of altered awareness, several per month\n\nInvestigations:\tMRI 10/09/2018 normal\n\t\tEEG 24/09/2018 left sided temporal slow waves with spikes\n\nMedication:\tTo start lamotrigine as detailed below\n\nI spoke to this 67 year old gentleman by telephone consultation today. His episodes started on 13th June 2018. He was moving his car and seemed to go into a \u2018day dream\u2019. He  has very little memory of the event. He did not have any warning that this was happening. He has had several episodes where he seemed to go into a day dream. His wife said that he looks vacant when they were happening. He was still and didnt move but didnt look himself at all.\n \nHe\u2019s had three episodes whilst asleep where he's shook his arms and made unusual choking noises. These have lasted about a minute. He's felt ok afterwards afterwards. His wife was worried about his airway. His last episode was on 31st August 2018.\n \nHe has no significant medical problems. He's never had any episodes like this in the past and doesnt take any regular medication. There were no problems when he was born and he hasnt had any febrile seizures, significant cerebral infections or significant head injuries. He has retired now for 5 years, previously he worked as a manufacturing engineer. He doesnt smoke and drinks around 16 units of alcohol per week. He lives with his wife and drives. He doesnt have any family history of epilepsy\n \nAn MRI brain from September 2018 has been normal.\n \nImpression\n \nI think that this is focal onset epilepsy. The smaller episodes are focal seizures with altered awareness and the episodes during sleep are focal to bilateral convulsive seizures\n \nComments:       \n \nI explained the diagnosis of epilepsy\nEpilepsy is relatively common, affecting around 30,000 people in Wales. Epilepsy causes seizures which can be thought of as electrical disturbances in the brain. Although most seizures are uneventful sometimes seizures can cause injury and very rarely seizures can cause serious injury or even death (Sudden Death in Epilepsy \u2013 SUDEP).\nI would be grateful if you could prescribe lamotrigine. I have enclosed an information leaflet on lamotrigine with this letter. Please prescribe lamotrigine starting at 25mg once a day and increase by 25mg every fortnight to a dose of 75mg twice a day.\nLamotrigine is generally well tolerated but occasionally can cause a rash. If this should happen he should seek medical attention.\nIn terms of driving, I explained the current DVLA rules on driving with epilepsy. He needs to stop driving and inform the DVLA of the diagnosis. He is not able to drive until",
+  "raw_response_tokens": 768,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 3,
+    "values_dropped": 0
+  },
+  "arm": "L2"
+}

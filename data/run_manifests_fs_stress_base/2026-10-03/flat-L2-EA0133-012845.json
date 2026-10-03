@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2-EA0133-012845",
+  "started_at": "2026-10-03T01:28:45.813846+00:00",
+  "finished_at": "2026-10-03T01:28:49.680595+00:00",
+  "duration_s": 3.86,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0133",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 2042,
+  "raw_response": "{\"epilepsy_type\": \"symptomatic\", \"quote\": \"Symptomatic structural epilepsy\", \"predominant_seizure_type\": \"focal_motor\", \"quote\": \"Focal motor seizures, (left arm jerks)\", \"age_at_onset_years\": null, \"seizure_frequency\": \"month\", \"quote\": \"2-3 per month\", \"seizure_free\": false, \"quote\": null, \"current_asms\": [{\"name\": \"carbamazepine\", \"dose\": \"400mg\", \"quote\": \"Carbamazepine 400mg bd\"}]}",
+  "raw_response_tokens": 130,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 1,
+    "values_dropped": 0
+  },
+  "arm": "L2"
+}

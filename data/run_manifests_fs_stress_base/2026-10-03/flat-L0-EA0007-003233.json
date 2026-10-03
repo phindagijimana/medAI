@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0-EA0007-003233",
+  "started_at": "2026-10-03T00:32:33.121286+00:00",
+  "finished_at": "2026-10-03T00:32:40.189415+00:00",
+  "duration_s": 7.07,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0007",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1170,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": null,\n    \"quote\": \"epilepsy \u2013 unclassified\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"seizures every 3 to 4 weeks, possibly focal onset\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 13,\n    \"quote\": \"has had seizures since the age of 13\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 3,\n    \"count_max\": 4,\n    \"period\": \"week\",\n    \"seizure_free\": null,\n    \"quote\": \"seizures every 3 to 4 weeks\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"levetiracetam\",\n      \"dose\": \"750mg mane, 500 mg nocte\",\n      \"quote\": \"levetiracetam 750mg mane, 500 mg nocte\"\n    },\n    {\n      \"name\": \"Phenytoin\",\n      \"dose\": \"75mg tds\",\n      \"quote\": \"Phenytoin 75mg tds\"\n    }\n  ]\n}",
+  "raw_response_tokens": 264,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 1
+  },
+  "arm": "L0"
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L0-EA0119-004739",
+  "started_at": "2026-10-03T00:47:39.411293+00:00",
+  "finished_at": "2026-10-03T00:47:46.565860+00:00",
+  "duration_s": 7.15,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L0.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0119",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1236,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"Diagnosis: focal epilepsy\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_seizures_with_altered_awareness\",\n    \"quote\": \"Seizure type and frequency: 1 seizure per week to 1 seizure every month Focal seizures with altered awareness\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": null,\n    \"quote\": \"\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 1,\n    \"count_max\": 1,\n    \"period\": \"week\",\n    \"seizure_free\": false,\n    \"quote\": \"1 seizure per week to 1 seizure every month\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"levetiracetam\",\n      \"dose\": \"1500 milligrammes BD\",\n      \"quote\": \"Levetiracetam 1500 milligrammes BD\"\n    },\n    {\n      \"name\": \"lamotrigine\",\n      \"dose\": \"75MG BD\",\n      \"quote\": \"Lamotrigine 75MG BD\"\n    }\n  ]\n}",
+  "raw_response_tokens": 266,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 4,
+    "values_dropped": 1
+  },
+  "arm": "L0"
+}

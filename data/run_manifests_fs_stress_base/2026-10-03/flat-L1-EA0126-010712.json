@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L1-EA0126-010712",
+  "started_at": "2026-10-03T01:07:12.784000+00:00",
+  "finished_at": "2026-10-03T01:07:19.757687+00:00",
+  "duration_s": 6.97,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork02.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L1.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0126",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1803,
+  "raw_response": "{\n  \"epilepsy_type\": {\n    \"value\": \"focal\",\n    \"quote\": \"Focal epilepsy secondary to Tuberous sclerosis\"\n  },\n  \"predominant_seizure_type\": {\n    \"value\": \"focal_frontal_lobe\",\n    \"quote\": \"Focal frontal lobe seizures\"\n  },\n  \"age_at_onset_years\": {\n    \"value\": 6,\n    \"quote\": \"epilepsy was first diagnosed at the age of 6\"\n  },\n  \"seizure_frequency\": {\n    \"count_min\": 4,\n    \"count_max\": 5,\n    \"period\": \"month\",\n    \"seizure_free\": false,\n    \"quote\": \"These currently occur around 4-5 times a month\"\n  },\n  \"current_asms\": [\n    {\n      \"name\": \"sodium valproate\",\n      \"dose\": \"500mg bd\",\n      \"quote\": \"Sodium valproate 500mg bd\"\n    },\n    {\n      \"name\": \"eslicarbazepine\",\n      \"dose\": \"800mg od\",\n      \"quote\": \"Eslicarbazepine 800mg od\"\n    }\n  ]\n}",
+  "raw_response_tokens": 259,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 5,
+    "values_dropped": 1
+  },
+  "arm": "L1"
+}

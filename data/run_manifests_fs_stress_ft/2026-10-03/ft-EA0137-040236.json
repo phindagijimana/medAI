@@ -1,0 +1,48 @@
+{
+  "run_id": "ft-EA0137-040236",
+  "started_at": "2026-10-03T04:02:36.744034+00:00",
+  "finished_at": "2026-10-03T04:04:08.415356+00:00",
+  "duration_s": 91.67,
+  "code_sha": "d0a02e44",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork01.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.20.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "epilepsy_phenotype.FT.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B+lora:llama3-med42-8b_lora_epi_v3_polish",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 4096,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0137",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1235,
+  "raw_response": "{\n  \"schema_version\": \"v0.2.1\",\n  \"document\": {\n    \"doc_id\": \"EA0137\",\n    \"doc_type\": \"progress_note\",\n    \"doc_date\": \"2026-09-25\",\n    \"patient_id\": \"EA0137\",\n    \"icd10cm_codes\": [],\n    \"snomed_ct_codes\": []\n  },\n  \"clinical_seizure\": {\n    \"epilepsy_type\": {\n      \"value\": \"generalized\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"generalized\",\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"predominant_seizure_type\": {\n      \"value\": \"generalized_tonic_clonic\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"generalized_tonic_clonic\",\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"other_seizure_types\": [],\n    \"awareness\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"semiology_text\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"age_at_onset_years\": {\n      \"value\": 4.0,\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"age at onset 4\",\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"seizure_frequency\": {\n      \"value\": {\n        \"raw_text\": \"2.0 per year\",\n        \"period\": \"year\",\n        \"count_min\": 2.0,\n        \"count_max\": 2.0,\n        \"seizure_free\": false,\n        \"duration_text\": null,\n        \"applies_to_type\": null\n      },\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"2.0 per year\",\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"other_seizure_frequencies\": [],\n    \"status_epilepticus_history\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_category\": {\n      \"value\": \"structural\",\n      \"certainty\": \"definite\",\n      \"temporal_status\": \"current\",\n      \"evidence_text\": \"structural\",\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_details_text\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"etiology_specifics\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"focal_motor_onset\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    },\n    \"focal_nonmotor_onset\": {\n      \"value\": null,\n      \"certainty\": \"not_documented\",\n      \"temporal_status\": \"unspecified\",\n      \"evidence_text\": null,\n      \"source_doc_id\": \"EA0137\",\n      \"source_doc_type\": \"progress_note\",\n      \"source_date\": \"2026-09-25\",\n      \"char_start\": null,\n      \"char_end\": null\n    }\n  },\n  \"medication\": {\n    \"current_asms\": [\n      {\n        \"value\": {\n          \"generic_name\": \"valproate\",\n          \"status\": \"current\",\n          \"dose_text\": \"1.0 g twice daily\",\n          \"reason_discontinued\": null,\n          \"rxnorm_cui\": null\n        },\n        \"certainty\": \"definite\",\n        \"temporal_status\": \"current\",\n        \"evidence_text\": \"valproate 1.0 g twice daily\",\n        \"source_doc_id\": \"EA0137\",\n        \"source_doc_type\": \"progress_note\",\n        \"source_date\": \"2026-09-25\",\n        \"char_start\": null,\n        \"char_end\": null\n      },\n      {\n        \"value\": {\n          \"generic_name\": \"lamotrigine\",\n          \"status\": \"current\",\n          \"dose_text\": \"50.0 mg twice daily\",\n          \"reason_discontinued\": null,\n          \"rxnorm_cui\": null\n        },\n        \"certainty\": \"definite\",\n        \"temporal_status\": \"current\",\n        \"evidence_text\": \"lamotrigine 50.0 mg twice daily\",\n        \"source_doc_id\": \"EA0137\",\n        \"source_doc_type\": \"progress_note\",\n        \"source_date\": \"2026-09-25\",\n        \"char_start\": null,\n        \"char_end\": null\n      }\n    ],\n    \"discontinued_asms\": [],\n    \"allergies\": [],\n    \"sensitivities\": []\n  },\n  \"progress_note\": {\n    \"patient_id\": \"EA0137\",\n    \"icd10cm_codes\": [],\n    \"snomed_ct_codes\": []\n  },\n  \"medication_order\": {\n    \"current_asms\": [],\n    \"discontinued_asms\": [],\n    \"reason_discontinued_text\": null,\n    \"rxnorm_cui_list\": []\n  },\n  \"clinical_seizure_free\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0137\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"focal_motor_onset_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0137\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"focal_nonmotor_onset_text\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0137\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"causative_gene\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0137\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  },\n  \"causative_variant\": {\n    \"value\": null,\n    \"certainty\": \"not_documented\",\n    \"temporal_status\": \"unspecified\",\n    \"evidence_text\": null,\n    \"source_doc_id\": \"EA0137\",\n    \"source_doc_type\": \"progress_note\",\n    \"source_date\": \"2026-09-25\",\n    \"char_start\": null,\n    \"char_end\": null\n  }\n}",
+  "raw_response_tokens": 2177,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "per_module_smart_repair",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "clinical_seizure": true,
+    "medication": true
+  },
+  "arm": "FT"
+}

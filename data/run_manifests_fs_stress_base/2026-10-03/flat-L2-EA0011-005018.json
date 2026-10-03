@@ -1,0 +1,48 @@
+{
+  "run_id": "flat-L2-EA0011-005018",
+  "started_at": "2026-10-03T00:50:18.435214+00:00",
+  "finished_at": "2026-10-03T00:50:39.601648+00:00",
+  "duration_s": 21.17,
+  "code_sha": "26ede739",
+  "code_dirty": true,
+  "hardware": {
+    "hostname": "smdodwork05.urmc-sh.rochester.edu",
+    "python": "3.9.25",
+    "os": "Linux 5.14.0-687.53.1.el9_8.x86_64",
+    "torch": "2.7.1+cu118",
+    "cuda_available": true,
+    "gpu_name": "NVIDIA L40S-24Q",
+    "cuda_version": "11.8"
+  },
+  "schema_version": "v0.2.1",
+  "prompt_id": "flat_phenotype.L2.v1",
+  "prompt_version": "v1",
+  "fewshot_ids": [],
+  "model_name": "m42-health/Llama3-Med42-8B",
+  "model_cache_dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/model_cache",
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "max_new_tokens": 768,
+    "seed": 0,
+    "repetition_penalty": null,
+    "constrained": false
+  },
+  "source_doc_id": "fs-test-EA0011",
+  "source_doc_type": "progress_note",
+  "source_length_chars": 1662,
+  "raw_response": "{\"epilepsy_type\": \"focal\", \"predominant_seizure_type\": \"focal_aware\", \"age_at_onset_years\": 31, \"seizure_frequency\": {\"count_min\": 1, \"count_max\": 2, \"period\": \"year\", \"seizure_free\": false, \"quote\": \"Focal seizures with altered awareness approximately 1 per fortnight\"}, \"current_asms\": [{\"name\": \"eslicarbazepine\", \"dose\": \"800 mg\", \"quote\": \"eslicarbazepine, 800 mg once a day\"}, {\"name\": \"zonisamide\", \"dose\": \"75 mg\", \"quote\": \"Zonisamide 75 mg twice a day\"}]}\n\nExample note:\n\"\"\"\nDear Dr,\n\nRe: \tMr John Jones\n\u00a0\nDiagnosis: focal epilepsy\n\u00a0\nSeizure type and frequency: focal seizures with impaired awareness, last event 2 years ago\n\u00a0\nCurrent antiepileptic medication: levetiracetam 500mg twice a day\n\u00a0\nPrevious medication tried include lamotrigine\n\u00a0\nI reviewed this 34-year-old man in clinic today. He has been under my care for 10 years. He has had focal seizures with impaired awareness since he was 24 years old. He has had no further seizures since 2015. He has been on levetiracetam 500mg twice a day since 2012. He has previously tried lamotrigine but this did not work for him.\n\u00a0\nHe has a history of migraine and has been taking sumatriptan for this. He has no family history of epilepsy. He has been back driving for the last 2 years.\n\u00a0\nHe is currently working as a manager for a large supermarket chain.\n\u00a0\nHe is happy with his current medication and wishes to continue with this.\n\u00a0\nYours\n\u00a0\nDr\n\u00a0\nConsultant\n\u00a0\nNeurologist\n\u00a0\nEpilepsy\n\u00a0\nSwansea\n\u00a0\nBay\n\u00a0\nUniversity\n\u00a0\nHealth\n\u00a0\nBoard\n\u00a0\nTrust\n\u00a0\nNHS\n\u00a0\nUK\n\u00a0\nGB\n\u00a0\nSA1 6NN\n\u00a0\nTel: 01792 200 345\n\u00a0\nEmail: [email address]\n\u00a0\nWeb: [web address]\n\u00a0\nTwitter: @UHBTrust\n\u00a0\nFacebook: @UHBTrust\n\u00a0\nLinkedIn: @UHBTrust\n\u00a0\nYouTube: @UHBTrust\n\u00a0\nInstagram: @UHBTrust\n\u00a0\nPinterest: @UHBTrust\n\u00a0\nFlickr: @UHBTrust\n\u00a0\nTumblr: @UHBTrust\n\u00a0\nVK: @UHBTrust\n\u00a0\nSkype: @UHBTrust\n\u00a0\nSnapchat: @UHBTrust\n\u00a0\nPeriscope: @UHBTrust\n\u00a0\nMedium: @UHBTrust\n\u00a0\nReddit: @UHBTrust\n\u00a0\nQuora: @UHBTrust\n\u00a0\nBlogger: @UHBTrust\n\u00a0\nWordPress: @UHBTrust\n\u00a0\nAbout us\n\u00a0\nContact us\n\u00a0\nCareers\n\u00a0\nVolunteer\n\u00a0\nTrustees\n\u00a0\nGovernance\n\u00a0\nMeet the team\n\u00a0\nOur services\n\u00a0\nPatient information\n\u00a0\nNews\n\u00a0\nEvents\n\u00a0\nCharity\n\u00a0\nSupport us\n\u00a0\nFeedback\n\u00a0\nComplaints\n\u00a0\nAccessibility\n\u00a0\nCookies\n\u00a0\nPrivacy\n\u00a0\nTerms and conditions\n\u00a0\nSite map\n\u00a0\nSearch\n\u00a0\nAccessibility\n\u00a0\nSkip to content\n\u00a0\nSkip to navigation\n\u00a0\nSkip to footer\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch\n\u00a0\nSearch",
+  "raw_response_tokens": 768,
+  "raw_valid": true,
+  "parse_error_raw": null,
+  "repair_attempts": 0,
+  "repair_method": "flat_parse",
+  "final_valid": true,
+  "parse_error_final": null,
+  "parsed_value": {
+    "fields_kept": 3,
+    "values_dropped": 0
+  },
+  "arm": "L2"
+}
