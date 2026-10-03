@@ -697,3 +697,24 @@ Reading:
 - The base model alone is no more accurate than the rules alone (0.656 vs 0.652) on these seven fields.
 - LEO's reviewed score is nearly the same whichever model feeds it (0.661-0.675); fine-tuning raises the model alone, not LEO.
 - All figures use the F-S reference conventions (for example "unknown" epilepsy type when no type is named), so they bound agreement with F-S annotators, not clinical truth.
+
+### 10.19 Perfect-reviewer upper bound and review workload, 160 F-S letters (2026-10-03)
+
+`scripts/score_leo_oracle_review.py` -> `eval/results/leo_oracle_review_fs160.{json,md}`; same 160 letters and manifests as 10.18, specialist plus each model, default fusion policy, no GPU. **No human reviewed anything.** `leo_review` in the other tables is the *draft* a reviewer would be shown. `oracle_pick` is what a *perfect* reviewer would leave if she could only choose among what the readers produced: accepted values stay (so accepted errors stay); for a scalar field with a flagged value and no accepted one she picks the correct one among LEO's shown value, the model's and the rules' (else leaves it empty); each flagged drug is kept only if the reference lists it; values neither reader produced stay missing.
+
+| Model feeding LEO | model alone | leo_auto | leo_review (draft) | oracle_pick | oracle minus model alone |
+|---|---|---|---|---|---|
+| L0 base zero-shot | 0.656 | 0.648 | 0.661 | 0.769 | +0.114 [+0.088, +0.142] |
+| L1 base two examples | 0.688 | 0.669 | 0.672 | 0.767 | +0.079 [+0.058, +0.101] |
+| L2 base retrieved | 0.662 | 0.644 | 0.673 | 0.766 | +0.103 [+0.071, +0.137] |
+| H first adapter | 0.716 | 0.669 | 0.664 | 0.768 | +0.051 [+0.025, +0.079] |
+| H2 second adapter | 0.707 | 0.677 | 0.675 | 0.789 | +0.083 [+0.062, +0.104] |
+
+Workload (default policy): 5.2-5.9 flagged claims per letter on average (median 5, 90th percentile 9-10). Of the items a reviewer has to decide (fields with a flagged value and no accepted one, plus flagged drugs; 252-353 across the 160 letters) only 17-24% are already right as shown.
+
+Reading and limits:
+- Once a perfect reviewer is in the loop, LEO ends above the model alone (+0.05 to +0.11) and above the draft (about +0.10). The reason is precision: oracle precision is 0.85-0.87 against 0.74-0.86 for the model alone, with recall at least as high (0.69-0.72). The two readers together hold more correct values than either, and a reviewer can pick them.
+- This is an upper bound, not a result. Real reviewers make errors and disagree with each other. The reviewer-time cost is not measured.
+- Part of the gain is the oracle dropping flagged values that the F-S reference does not list. A real reviewer would keep some of these if they are true but unannotated, so the F-S figure overstates the gain to an unknown degree.
+- Candidates are the readers' own predictions; a model value that fusion rejected for an unfound quote can still be picked, so the bound is slightly generous. Values neither reader produced stay missing (reviewer-added values are deferred).
+- Accepted errors remain. The review tier is where the benefit comes from, so the claim that LEO gains accuracy rests on reviewers actually resolving the flagged values; that needs the blind adjudication in `docs/DISAGREEMENT_ADJUDICATION.md`.
