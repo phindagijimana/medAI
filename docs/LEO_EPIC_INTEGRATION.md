@@ -86,10 +86,10 @@ These are gaps in the current code, not options.
 
 | Gap | Today | Needed |
 |---|---|---|
-| Login | The web app has **no login**; anyone who can reach the port can use it | Institutional login (single sign-on) or access only through an SSH tunnel to a node nobody else uses |
-| Who did what | Reviewer name is typed free text | Authenticated user in every review decision and job |
-| Audit log | Job folders and a review log exist | Log of who ran which job on which input file and who downloaded what; no note text in logs |
-| Job isolation | Any user of the server can see any job by its ID | Jobs tied to the user who started them |
+| Login | **Added 2026-10-03** (local users, hashed passwords; `LEO_LOCAL_DEPLOYMENT.md`). Off until the first user is added | Institutional single sign-on if the site requires it; HTTPS in front |
+| Who did what | With login on, the signed-in user is recorded on every review decision | Same, tied to institutional identities |
+| Audit log | **Added 2026-10-03** (`data/leo_audit.jsonl`, no note text). A plain file the app's account can edit | Tamper-resistant storage if compliance asks for it |
+| Job isolation | **Added 2026-10-03**: with login on, a job is visible only to the user who started it | Review by the site's security office |
 | Encryption | Relies on the host | Encrypted disk; HTTPS if the app is ever reachable over a network |
 | Note-type and department filter | Job description can filter on any column the file has | Fine for Stage A; Stage B needs the same filter applied while pulling |
 | Epic note formats | Preprocessor written, never measured | Measure on real notes: copied-forward text, smart phrases, templates, medication lists inside notes |

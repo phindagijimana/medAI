@@ -23,6 +23,7 @@ import io
 import json
 import logging
 import os
+import re
 import shutil
 import threading
 import time
@@ -34,6 +35,7 @@ from typing import Any
 from flask import Blueprint, Response, current_app, jsonify, redirect, request, send_file
 from werkzeug.utils import secure_filename
 
+from services import leo_auth as auth
 from services import leo_catalog as cat
 
 logger = logging.getLogger(__name__)
@@ -147,7 +149,8 @@ def evidence():
 @leo_bp.route("/status", methods=["GET"])
 def status():
     from services.leo_runtime import LeoRuntime
-    return jsonify({"llm_status": getattr(current_app, "med42_backend_status", "unknown"),
+    return jsonify({"user": auth.current_user() if auth.enabled() else "",
+                    "llm_status": getattr(current_app, "med42_backend_status", "unknown"),
                     "llm_ready": getattr(current_app, "med42_backend", None) is not None,
                     "versions": LeoRuntime(backend=None, use_llm=False).versions()})
 
@@ -168,6 +171,7 @@ def extract_one():
         rt = _runtime(use_llm)
     except _NotReady as e:
         return _bad(str(e), 503)
+    auth.audit("extract_note", chars=len(text), llm=use_llm)
     res = rt.extract_note(text, doc_id=p.get("document_id") or f"note-{uuid.uuid4().hex[:8]}",
                           doc_date=p.get("doc_date") or "", phenotypes=phen, asks=asks,
                           include_review=bool(p.get("include_review", True)))
@@ -213,6 +217,8 @@ def _run_job(job_id: str) -> None:
     except Exception as e:                                  # surfaced to the user, not swallowed
         logger.exception("LEO batch job failed")
         job["state"], job["error"] = "error", f"{type(e).__name__}: {e}"
+    finally:
+        _persist(job_id)
 
 
 @leo_bp.route("/batch", methods=["POST"])
@@ -252,7 +258,9 @@ def batch():
                      "include_review": form.get("include_review", "1") not in ("0", "false"),
                      "limit": int(form.get("limit") or 0), "sheet": form.get("sheet", ""),
                      "text_col": form.get("text_col", ""), "id_col": form.get("id_col", ""),
-                     "date_col": form.get("date_col", "")}
+                     "date_col": form.get("date_col", ""), "owner": auth.current_user(), "created": time.time()}
+    _persist(job_id)
+    auth.audit("job_start", job=job_id, file=name, phenotypes=[p.id for p in phen], questions=len(asks), llm=use_llm)
     threading.Thread(target=_run_job, args=(job_id,), daemon=True, name=f"leo-job-{job_id[:6]}").start()
     return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
 
@@ -296,7 +304,7 @@ def job_plan():
     path = jd / name
     f.save(path)
     job = {"state": "planned", "done": 0, "total": 0, "files": [], "error": "", "input": str(path), "filename": name,
-           "sheet": request.form.get("sheet", "")}
+           "sheet": request.form.get("sheet", ""), "owner": auth.current_user(), "created": time.time()}
     try:
         df = _plan_df(job)
         spec = lj.parse_request(req, df, text_col=request.form.get("text_col", ""), id_col=request.form.get("id_col", ""),
@@ -306,6 +314,8 @@ def job_plan():
         shutil.rmtree(jd, ignore_errors=True)
         return _bad(f"could not read the file: {e}")
     _JOBS[job_id] = job
+    _persist(job_id)
+    auth.audit("job_plan", job=job_id, file=name, rows=int(len(df)))
     resp = jsonify({"job_id": job_id, **_plan_view(job, spec, df)})
     resp.headers["Cache-Control"] = "no-store"
     return resp
@@ -368,6 +378,7 @@ def _run_spec_job(job_id: str) -> None:
         job["state"], job["error"] = "error", f"{type(e).__name__}: {e}"
     finally:
         job.pop("_df", None)
+        _persist(job_id)
 
 
 @leo_bp.route("/job/<job_id>/run", methods=["POST"])
@@ -397,14 +408,66 @@ def job_run(job_id: str):
         except _NotReady as e:
             return _bad(str(e), 503)
     phen, asks = lj.selection(spec)
-    job.update(spec=spec, phen=phen, asks=asks, use_llm=use_llm, state="queued")
+    job.update(spec=spec, phen=phen, asks=asks, use_llm=use_llm, state="queued", format=spec.output_format)
+    _persist(job_id)
+    auth.audit("job_start", job=job_id, file=job["filename"], phenotypes=spec.phenotypes, questions=len(asks),
+               rows=spec.rows.mode, n=spec.rows.n, llm=use_llm)
     threading.Thread(target=_run_spec_job, args=(job_id,), daemon=True, name=f"leo-spec-{job_id[:6]}").start()
     return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
 
 
-def _job_or_404(job_id: str):
+# ---- job records survive a restart (job.json in the job folder) --------------------------------------------
+
+_JOB_ID = re.compile(r"^[0-9a-f]{32}$")
+_META = "job.json"
+
+
+def _persist(job_id: str) -> None:
+    """Write what is needed to show, download and review a job after the app restarts.  Never raises."""
     job = _JOBS.get(job_id)
     if job is None:
+        return
+    try:
+        meta = {k: job.get(k) for k in ("state", "filename", "format", "owner", "sheet", "files", "error", "summary",
+                                         "prov", "total", "use_llm", "created")}
+        meta["done"] = job.get("done", 0)
+        meta["input"] = Path(job["input"]).name
+        meta["phen"] = [p.id for p in job.get("phen") or []]
+        meta["asks"] = [{"id": a.id, "question": a.question, "answer_type": a.answer_type, "choices": list(a.choices),
+                         "predefined": a.predefined} for a in job.get("asks") or []]
+        jd = _jobs_root() / job_id
+        tmp = jd / (_META + ".tmp")
+        tmp.write_text(json.dumps(meta, default=str))
+        tmp.replace(jd / _META)
+    except Exception:
+        logger.exception("could not save the job record")
+
+
+def _load_job(job_id: str):
+    """A job from an earlier run of the app, or None.  Only a well-formed id ever touches the disk."""
+    if not _JOB_ID.match(job_id or ""):
+        return None
+    jd = _jobs_root() / job_id
+    try:
+        meta = json.loads((jd / _META).read_text())
+        job = dict(meta)
+        job["input"] = str(jd / meta["input"])
+        job["phen"] = [cat.get(i) for i in meta.get("phen", [])]
+        job["asks"] = [cat.ask_template(a["id"]) if a.get("predefined") else
+                       cat.AskSpec(a["id"], a["question"], a["answer_type"], tuple(a.get("choices") or ()), "", False)
+                       for a in meta.get("asks", [])]
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    job.setdefault("files", [])
+    if job.get("state") in ("queued", "running"):
+        job["state"], job["error"] = "error", "The app restarted while this job was running. Start it again."
+    _JOBS[job_id] = job
+    return job
+
+
+def _job_or_404(job_id: str):
+    job = _JOBS.get(job_id) or _load_job(job_id)
+    if job is None or (auth.enabled() and job.get("owner") != auth.current_user()):
         return None, _bad("unknown job (it may have expired)", 404)
     return job, None
 
@@ -426,6 +489,7 @@ def job_download(job_id: str):
         return _bad("job has no result yet", 409)
     jd = (_jobs_root() / job_id).resolve()
     paths = [jd / n for n in job["files"]]
+    auth.audit("download", job=job_id, file=job.get("filename", ""))
     if any(not str(p.resolve()).startswith(str(jd)) for p in paths):
         return _bad("bad path", 400)
     if len(paths) == 1:
@@ -445,6 +509,7 @@ def job_cancel(job_id: str):
     if err:
         return err
     job["cancel"] = True
+    auth.audit("job_cancel", job=job_id)
     return jsonify({"ok": True})
 
 
@@ -455,6 +520,7 @@ def job_delete(job_id: str):
         return err
     shutil.rmtree(_jobs_root() / job_id, ignore_errors=True)
     _JOBS.pop(job_id, None)
+    auth.audit("job_delete", job=job_id)
     return jsonify({"ok": True})
 
 
@@ -521,11 +587,13 @@ def review_save(job_id: str):
             prop = lr.proposal(table, f, row)
             if prop["status"] in lr.NOT_REVIEWABLE:
                 raise ValueError(f"{f.label} in row {row} has nothing to review ({prop['status'] or 'empty'})")
-            events.append(lr.make_event(prop, d.get("decision", ""), d.get("value", ""), p.get("reviewer", ""),
+            events.append(lr.make_event(prop, d.get("decision", ""), d.get("value", ""),
+                                        auth.current_user() if auth.enabled() else p.get("reviewer", ""),   # the login, not a typed name
                                         d.get("comment", ""), str(job["prov"].get("pipeline", ""))))
     except (ValueError, TypeError, AttributeError) as e:
         return _bad(str(e))
     latest = store.add(events)
+    auth.audit("review_save", job=job_id, decisions=len(events))
     return jsonify({"saved": len(events), "counts": lr.counts(lr.items(table, fields, latest, "flagged")),
                     "reviewed_total": len(latest)})
 
@@ -561,6 +629,7 @@ def review_export(job_id: str):
         return _bad("nothing has been reviewed yet", 409)
     jd = _jobs_root() / job_id
     kind = request.args.get("kind", "merged")
+    auth.audit("review_export", job=job_id, kind=kind[:20])
     if kind == "reviewed":
         store._write_csv(latest)
         return send_file(store.csv, as_attachment=True, download_name=store.csv.name)

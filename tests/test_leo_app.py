@@ -717,3 +717,97 @@ def test_cli_run_writes_a_job_file_and_refuses_to_guess(tmp_path):
     r = subprocess.run([py, cli, "run", "predict outcome", "--input", str(inp), "--yes", "--local", "--cpu"],
                        capture_output=True, text=True, cwd=str(tmp_path))
     assert r.returncode == 2 and "PROBLEM" in r.stdout
+
+
+# ---- local hosting: login, audit log, per-user jobs, jobs that survive a restart ----------------
+
+def test_login_audit_isolation_and_restart(client, tmp_path):
+    import base64
+    from services import leo_auth as la
+    c, leo = client
+    la._FAILS.clear()
+    assert c.get("/leo/phenotypes").status_code == 200                    # no users: login is off
+    la.add_user("alice", "correct horse battery")
+    la.add_user("bob", "another long passphrase")
+    with pytest.raises(ValueError):
+        la.add_user("eve", "short")                                       # too short
+    mode = oct(la.users_path().stat().st_mode & 0o777)
+    assert mode == "0o600" and "correct horse" not in la.users_path().read_text()   # hashed, owner-only
+    # everything but /health and the login page needs a login
+    assert c.get("/leo/phenotypes").status_code == 401
+    assert c.post("/leo/extract", json={"source_text": NOTE}).status_code == 401
+    assert c.get("/health").status_code in (200, 503)
+    r = c.get("/leo/ui", headers={"Accept": "text/html"})
+    assert r.status_code == 302 and "/leo/login" in r.headers["Location"]
+    assert c.get("/leo/login").status_code == 200
+    # wrong password; and a login cannot send the browser to another site
+    assert c.post("/leo/login", data={"username": "alice", "password": "nope-nope-nope"}).status_code == 401
+    r = c.post("/leo/login", data={"username": "alice", "password": "correct horse battery", "next": "//evil.example/x"})
+    assert r.status_code == 302 and r.headers["Location"] == "/leo/ui"
+    assert c.get("/leo/phenotypes").status_code == 200
+    assert c.get("/leo/status").get_json()["user"] == "alice"
+    # scripts can use HTTP Basic
+    auth = {"Authorization": "Basic " + base64.b64encode(b"bob:another long passphrase").decode()}
+    assert c.application.test_client().get("/leo/phenotypes", headers=auth).status_code == 200
+    bad = {"Authorization": "Basic " + base64.b64encode(b"bob:wrong wrong wrong").decode()}
+    assert c.application.test_client().get("/leo/phenotypes", headers=bad).status_code == 401
+    # a page on another site cannot act with alice's cookie
+    assert c.post("/leo/extract", json={"source_text": NOTE, "llm": "off"},
+                  headers={"Origin": "http://evil.example"}).status_code == 403
+    # alice runs a job
+    csv = "note_id,text\nn1," + json.dumps(NOTE) + "\n"
+    r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "notes.csv"), "llm": "off", "format": "csv"})
+    assert r.status_code == 202
+    jid = r.get_json()["job_id"]
+    for _ in range(120):
+        st = c.get(f"/leo/jobs/{jid}").get_json()
+        if st["state"] in ("done", "error"):
+            break
+        time.sleep(0.5)
+    assert st["state"] == "done", st
+    bob = c.application.test_client()
+    bob.post("/leo/login", data={"username": "bob", "password": "another long passphrase"})
+    assert bob.get("/leo/jobs/" + jid).status_code == 404                  # not bob's job
+    assert bob.get(f"/leo/jobs/{jid}/download").status_code == 404
+    assert bob.delete("/leo/jobs/" + jid).status_code == 404
+    # the app restarts: the job is still there for alice, still hidden from bob
+    leo._JOBS.clear()
+    assert c.get(f"/leo/jobs/{jid}").get_json()["state"] == "done"
+    assert zipfile.ZipFile(io.BytesIO(c.get(f"/leo/jobs/{jid}/download").data)).namelist()
+    assert c.get(f"/leo/jobs/{jid}/review?scope=all").status_code == 200   # review works on a restored job
+    leo._JOBS.clear()
+    assert bob.get("/leo/jobs/" + jid).status_code == 404
+    # a job that was running when the app stopped says so instead of hanging
+    meta_path = Path(os.environ["APP_HOME"]) / "data" / "leo_jobs" / jid / "job.json"
+    meta = json.loads(meta_path.read_text())
+    meta["state"] = "running"
+    meta_path.write_text(json.dumps(meta))
+    leo._JOBS.clear()
+    st = c.get(f"/leo/jobs/{jid}").get_json()
+    assert st["state"] == "error" and "restarted" in st["error"]
+    assert leo._load_job("../../etc") is None and leo._load_job("A" * 32) is None
+    # audit log: who did what, no note text
+    log = la.audit_path().read_text()
+    events = [json.loads(l) for l in log.splitlines()]
+    assert {"login", "login_failed", "job_start", "download"} <= {e["event"] for e in events}
+    assert all(e["user"] in ("alice", "bob", "(no login)") for e in events)
+    assert NOTE[:40] not in log and "correct horse" not in log
+    assert oct(la.audit_path().stat().st_mode & 0o777) == "0o600"
+    # five wrong passwords lock that user and address for a while, even for the right password
+    other = c.application.test_client()
+    for _ in range(5):
+        other.post("/leo/login", data={"username": "bob", "password": "wrong wrong wrong"})
+    assert other.post("/leo/login", data={"username": "bob", "password": "another long passphrase"}).status_code == 429
+    la._FAILS.clear()
+    # sign out
+    assert c.post("/leo/logout").status_code == 302 and c.get("/leo/phenotypes").status_code == 401
+    # removing the last users turns login off again
+    la.remove_user("alice"); la.remove_user("bob")
+    assert c.get("/leo/phenotypes").status_code == 200
+
+
+def test_required_login_with_no_users_locks_everyone_out(client, monkeypatch):
+    c, _ = client
+    monkeypatch.setenv("MEDAI_LEO_REQUIRE_LOGIN", "1")
+    assert c.get("/leo/phenotypes").status_code == 401
+    assert c.post("/leo/login", data={"username": "x", "password": "yyyyyyyyyyyy"}).status_code == 401

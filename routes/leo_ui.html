@@ -260,7 +260,7 @@ function el(tag, attrs = {}, kids = []) {
   return e;
 }
 const LEVEL = {rules_only: 'rules tested', indirect: 'partly tested', none: 'not tested'};
-let CAT = null, job = null, timer = null;
+let CAT = null, job = null, timer = null; let USER = '';
 
 /* ---------- tabs ---------- */
 function show(which) {
@@ -312,6 +312,11 @@ async function init() {
   $('#panel').value = 'core'; applyPanel(); addQuestion();
   try {
     const st = await (await fetch('/leo/status')).json();
+    USER = st.user || '';
+    if (USER) {
+      const f = el('form', {method: 'post', action: '/leo/logout', style: 'display:inline'}, [el('button', {type: 'submit', class: 'ghost', text: 'Sign out ' + USER, style: 'padding:4px 12px;font-size:13px;margin-left:8px'})]);
+      document.querySelector('nav').append(f);
+    }
     $('#engine').textContent = (st.llm_ready ? 'Language model ready.' : 'Language model not loaded (' + st.llm_status + ').') +
       ' Pipeline ' + st.versions.pipeline + '.';
   } catch (e) { $('#engine').textContent = ''; }
@@ -430,7 +435,7 @@ function showCounts(c) {
   $('#rcount').textContent = c.reviewed + ' of ' + c.total + ' reviewed (' + c.accept + ' right, ' + c.correct + ' corrected, ' + c.reject + ' wrong)';
 }
 async function openReview(jobId) {
-  RJ = jobId; sessionStorage.setItem('leo_job', jobId); $('#reviewer').value = sessionStorage.getItem('leo_reviewer') || '';
+  RJ = jobId; sessionStorage.setItem('leo_job', jobId); $('#reviewer').value = USER || sessionStorage.getItem('leo_reviewer') || ''; $('#reviewer').readOnly = !!USER;
   const j = await rget('&offset=0&limit=1');
   if (j.error) { RJ = null; sessionStorage.removeItem('leo_job'); $('#rbody').hidden = true; $('#rnone').hidden = false;
     $('#rnone').textContent = 'That result is no longer on the server (results are deleted after 24 hours). Run the file again.'; return false; }

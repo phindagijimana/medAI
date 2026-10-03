@@ -451,8 +451,20 @@ def cmd_start(args) -> int:
             env["MEDAI_LEO_ARM"] = args.arm
         STATE.write_text(json.dumps({"node": os.uname().nodename, "port": args.port, "mode": mode,
                                      "job": os.environ.get("SLURM_JOB_ID", ""), "started": datetime.now().isoformat()}))
+        host = env["SERVICE_HOST"]
         print(f"[leo] starting LEO web app on {os.uname().nodename}:{port} ({mode}); UI at /leo/ui")
         os.chdir(REPO)
+        from services import leo_auth
+        if host not in ("127.0.0.1", "localhost", "::1") and not leo_auth.enabled():
+            print(f"[leo] WARNING: listening on {host} with NO LOGIN. Anyone who can reach this port (on a cluster: other "
+                  "users) can read results and notes. Add a user first:  bin/leo user add NAME", file=sys.stderr)
+        gunicorn_ok = subprocess.run([str(PY), "-c", "import gunicorn"], capture_output=True).returncode == 0
+        if gunicorn_ok and not getattr(args, "dev", False):
+            # one worker (one model in memory), several threads; settings in gunicorn_config.py
+            env.update(GUNICORN_BIND=f"{host}:{port}", MEDAI_EAGER_LOAD="1")
+            os.execve(str(PY), [str(PY), "-m", "gunicorn", "-c", "gunicorn_config.py", "app:app"], env)
+        print("[leo] gunicorn not installed in this environment (or --dev): using Flask's development server.",
+              file=sys.stderr)
         os.execve(str(PY), [str(PY), "app.py"], env)
     argv = ["start", "--local", "--port", str(args.port), "--mode", "cpu" if args.cpu else "gpu"]
     if args.adapter:
@@ -488,6 +500,40 @@ def cmd_stop(args) -> int:
     else:
         print("[leo] no Slurm job recorded; stop a local server with Ctrl-C")
     STATE.unlink(missing_ok=True)
+    return 0
+
+
+def cmd_user(args) -> int:
+    """Manage logins for the web app (login turns on when the first user is added) and read the audit log."""
+    import getpass
+    from services import leo_auth as la
+    if args.action == "list":
+        users = la.load_users()
+        print(f"login: {'REQUIRED' if la.enabled() else 'off (no users)'}   users file: {la.users_path()}")
+        for n, rec in sorted(users.items()):
+            print(f"  {n:<24} password set {rec.get('changed', '?')}")
+        return 0
+    if args.action == "audit":
+        p = la.audit_path()
+        if not p.exists():
+            print("no audit log yet")
+            return 0
+        for line in p.read_text(encoding="utf-8").splitlines()[-args.n:]:
+            print(line)
+        return 0
+    if not args.name:
+        raise SystemExit(f"leo user {args.action} NAME")
+    if args.action == "remove":
+        print("removed" if la.remove_user(args.name) else f"no such user {args.name!r}")
+        return 0
+    pw = os.environ.get("LEO_NEW_PASSWORD") or getpass.getpass(f"password for {args.name}: ")
+    if not os.environ.get("LEO_NEW_PASSWORD") and getpass.getpass("again: ") != pw:
+        raise SystemExit("passwords differ")
+    try:
+        la.add_user(args.name, pw)
+    except ValueError as e:
+        raise SystemExit(str(e))
+    print(f"[leo] user {args.name} saved in {la.users_path()}. Login is now required; restart a running server to apply.")
     return 0
 
 
@@ -624,12 +670,19 @@ def main(argv=None) -> int:
     sp.add_argument("--local", action="store_true", help="run on this node")
     sp.add_argument("--mode", choices=("auto", "gpu", "cpu"), default="auto")
     sp.add_argument("--port", type=int, default=8085)
-    sp.add_argument("--host", default="", help="address to listen on (default: this machine only; the app has no login)")
+    sp.add_argument("--host", default="", help="address to listen on (default: this machine only; on Slurm the node's address)")
+    sp.add_argument("--dev", action="store_true", help="Flask development server instead of gunicorn")
     sp.add_argument("--adapter", default="")
     sp.add_argument("--arm", default="")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=24)
     sp.set_defaults(fn=cmd_start)
+
+    sp = sub.add_parser("user", help="logins for the web app: add | remove | list | audit")
+    sp.add_argument("action", choices=("add", "remove", "list", "audit"))
+    sp.add_argument("name", nargs="?", default="")
+    sp.add_argument("-n", type=int, default=50, help="audit: last N lines")
+    sp.set_defaults(fn=cmd_user)
 
     for name, fn in (("status", cmd_status), ("stop", cmd_stop), ("ui", cmd_ui)):
         sp = sub.add_parser(name)

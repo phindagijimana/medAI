@@ -13,6 +13,7 @@ bin/leo check --slurm                 # the same plus the model on a GPU node; o
 bin/leo phenotypes                    # what can be extracted
 bin/leo batch notes.xlsx              # submits a Slurm GPU job; writes notes_leo.xlsx next to the input
 bin/leo run "seizure types for the first 100 subjects" --input notes.xlsx   # describe the job in words (see "Describing a job in words", section 8)
+bin/leo user add NAME                 # login for the web app (turns login on); `bin/leo user audit` shows who did what
 bin/leo start                         # web app as a Slurm GPU job; then `bin/leo status`
 bin/leo review notes_leo.csv         # list the values to review in notes_leo.reviewed.csv (fill in `decision`)
 bin/leo merge notes_leo.csv notes_leo.reviewed.csv   # add the reviewed values as new columns
@@ -214,6 +215,8 @@ Definitions follow Fisher et al. 2017 and Scheffer et al. 2017 (ILAE) and Kwan e
 
 ## 8. Web app
 
+**Running it on a machine you control** (logins, audit log, restarts, gunicorn): see `LEO_LOCAL_DEPLOYMENT.md`. Add a login with `bin/leo user add NAME` before anyone else can reach the port.
+
 `bin/leo start` queues the server; `bin/leo status` prints the node, port and an SSH tunnel command; the page is `/leo/ui` (also linked from the extract page). Pick a panel or individual phenotypes (each item is marked "rules tested", "partly tested" or "not tested"), add predefined or typed questions, paste a note or upload a file, choose csv or xlsx, watch progress, download (csv comes as a zip) and delete the job. Jobs live in `data/leo_jobs/` for 24 hours (`MEDAI_LEO_JOB_TTL_H`). `bin/leo stop` cancels the Slurm job. The page links to this guide (`/leo/guide`, which redirects to the copy on GitHub; set `LEO_GUIDE_URL` to point elsewhere).
 
 ### Describing a job in words
@@ -262,7 +265,7 @@ API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/sta
 
 ## 9. Data protection
 
-- Notes, outputs and job files can contain PHI. Run real notes only on approved secure compute with IRB approval. The server has no login. Started with `--local` it listens on this machine only (`127.0.0.1`); on a Slurm node it listens on the node so an SSH tunnel can reach it, and `--host` overrides either. Job folders are readable by the owner only and deleted after 24 hours; results are not encrypted on disk.
+- Notes, outputs and job files can contain PHI. Run real notes only on approved secure compute with IRB approval. The server has no login until you add a user (`bin/leo user add NAME`; see `LEO_LOCAL_DEPLOYMENT.md`). Started with `--local` it listens on this machine only (`127.0.0.1`); on a Slurm node it listens on the node so an SSH tunnel can reach it, and `--host` overrides either. Job folders are readable by the owner only and deleted after 24 hours; results are not encrypted on disk.
 - The audit ledger is off by default (it would store note text).
 - RxNorm and SNOMED CT are UMLS-licensed. They are not in git (`data/ontologies/*` is ignored except the manifest) and must not be redistributed.
 - The UMLS key lives only in `.env` and is never printed.
@@ -285,4 +288,4 @@ Three things are deliberately not built or done yet. The full record is in the p
 
 - **Reviewers adding a value LEO missed.** The Review tab covers only values LEO found, so review files measure precision, not recall. Do not quote them as recall.
 - **Learning from review decisions.** Decisions are stored but nothing learns from them. This needs real review data; any change (recalibrated acceptance, a per-field disagreement policy, a retrained adapter) will ship as a new pipeline version with the evaluation re-run.
-- **Real clinical notes.** This needs IRB approval and secure compute. **Until then, no result in this guide says anything about real notes.** Do not run patient data through LEO on a machine that is not approved for it: the app has no login, and job files are not encrypted on disk.
+- **Real clinical notes.** This needs IRB approval and secure compute. **Until then, no result in this guide says anything about real notes.** Do not run patient data through LEO on a machine that is not approved for it: login is off until you add a user, and job files are not encrypted on disk.

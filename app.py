@@ -180,6 +180,12 @@ try:
 except Exception as e:
     logger.warning(f"⚠️ /leo routes not registered: {e}")
 
+# Optional login + audit log (off until `bin/leo user add NAME` or MEDAI_LEO_REQUIRE_LOGIN=1). Not wrapped in
+# try/except on purpose: if login is configured it must not silently fail to protect the routes.
+from services import leo_auth
+leo_auth.init_app(app)
+logger.info("Login %s (users file: %s)", "REQUIRED" if leo_auth.enabled() else "off", leo_auth.users_path())
+
 # Initialize database
 try:
     from core.database import init_db
@@ -252,6 +258,12 @@ def ensure_med42_loaded():
 
 # Expose the loader on the app so blueprints can call it
 app.ensure_med42_loaded = ensure_med42_loaded
+
+# Under gunicorn (`bin/leo start --local`) the model is loaded when the server starts, as `python app.py` does,
+# instead of at the first LLM request. Off unless MEDAI_EAGER_LOAD=1.
+if (os.environ.get("MEDAI_EAGER_LOAD") == "1" and os.environ.get("MEDAI_LOAD_MED42", "1") == "1"
+        and __name__ != "__main__"):
+    ensure_med42_loaded()
 
 ALLOWED_EXT = {"txt", "pdf", "docx", "xlsx", "csv", "json"}
 
@@ -1623,6 +1635,9 @@ if __name__ == "__main__":
     else:
         logger.info("MEDAI_LOAD_MED42=0: not loading Med42 (LEO runs specialist-only).")
     
+    if host not in ("127.0.0.1", "localhost", "::1") and not leo_auth.enabled():
+        logger.warning("Listening on %s with NO LOGIN: anyone who can reach this port can read results. "
+                       "Add a user (`bin/leo user add NAME`) or bind to 127.0.0.1 / use an SSH tunnel.", host)
     logger.info("Starting MedAI-EPI server on {}:{}".format(host, port))
     logger.info("Access URLs:")
     logger.info("  Research UI: http://localhost:{}/extract/ui".format(port))
