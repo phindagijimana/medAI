@@ -35,6 +35,7 @@ sys.path.insert(0, str(REPO))
 PY = REPO / "venv-medcat" / "bin" / "python"
 STATE = REPO / ".leo_server.json"
 JOBDIR = REPO / "logs" / "leo_jobs"
+H2_ADAPTER = REPO / "checkpoints" / "llama3-med42-8b_lora_epi_h2"
 NEEDED = {"flask": "flask", "flask_cors": "flask-cors", "dotenv": "python-dotenv", "lmformatenforcer": "lm-format-enforcer",
           "openpyxl": "openpyxl", "pandas": "pandas", "pydantic": "pydantic", "medcat": "medcat", "medspacy": "medspacy",
           "torch": "torch", "transformers": "transformers", "peft": "peft", "gunicorn": "gunicorn",
@@ -73,15 +74,54 @@ def _mode(requested: str) -> str:
     return "cpu"
 
 
+def _adapter_dir(args) -> str:
+    raw = (getattr(args, "adapter", "") or "").strip()
+    if raw:
+        return str(Path(raw).expanduser().resolve())
+    if getattr(args, "h2", False):
+        if not (H2_ADAPTER / "adapter_config.json").exists():
+            raise SystemExit(f"--h2: adapter not found at {H2_ADAPTER}")
+        return str(H2_ADAPTER.resolve())
+    return ""
+
+
+def _ext_reader_arg(args):
+    if getattr(args, "no_ext_reader", False):
+        return False
+    if getattr(args, "ext_reader", False):
+        return True
+    return None
+
+
+def _model_argv(args) -> list[str]:
+    argv: list[str] = []
+    adapter = _adapter_dir(args)
+    if adapter:
+        argv += ["--adapter", adapter]
+    if getattr(args, "arm", ""):
+        argv += ["--arm", args.arm]
+    if getattr(args, "no_ext_reader", False):
+        argv.append("--no-ext-reader")
+    elif getattr(args, "ext_reader", False):
+        argv.append("--ext-reader")
+    if getattr(args, "no_ontology_select", False):
+        argv.append("--no-ontology-select")
+    elif getattr(args, "ontology_select", False):
+        argv.append("--ontology-select")
+    return argv
+
+
 def _runtime(args):
     from services.leo_runtime import LeoRuntime, parse_disagree_llm
     mode = _mode(getattr(args, "mode", "auto"))
-    arm = getattr(args, "arm", "") or ("L0C" if getattr(args, "adapter", "") else "L1C")
-    return LeoRuntime.load(mode=mode, arm=arm, adapter_dir=getattr(args, "adapter", "") or "",
+    adapter = _adapter_dir(args)
+    arm = getattr(args, "arm", "") or ("L0C" if adapter else "L1C")
+    return LeoRuntime.load(mode=mode, arm=arm, adapter_dir=adapter,
                            chunk_max_chars=getattr(args, "chunk_chars", 8000),
                            disagree_llm=parse_disagree_llm(getattr(args, "disagree_llm", None)),
-                           ext_reader=False if getattr(args, "no_ext_reader", False) else None,
-                           ontology_select=False if getattr(args, "no_ontology_select", False) else None)
+                           ext_reader=_ext_reader_arg(args),
+                           ontology_select=(False if getattr(args, "no_ontology_select", False)
+                                            else True if getattr(args, "ontology_select", False) else None))
 
 
 def _submit(name: str, argv: list[str], *, gpu: bool, partition: str, hours: int, extra_env: dict | None = None) -> str:
@@ -201,10 +241,11 @@ def cmd_batch(args) -> int:
         argv = ["batch", str(inp.resolve()), "--local", "--mode", "cpu" if args.cpu else "gpu"]
         for flag, val in (("-o", args.output), ("--format", args.format), ("--phenotypes", args.phenotypes),
                           ("--text-col", args.text_col), ("--id-col", args.id_col), ("--date-col", args.date_col),
-                          ("--sheet", args.sheet), ("--adapter", args.adapter), ("--arm", args.arm),
+                          ("--sheet", args.sheet),
                           ("--limit", str(args.limit) if args.limit else ""), ("--chunk-chars", str(args.chunk_chars))):
             if val:
                 argv += [flag, str(Path(val).resolve()) if flag == "-o" else val]
+        argv += _model_argv(args)
         for t in args.ask_template or []:
             argv += ["--ask-template", t]
         for i, q in enumerate(args.question or []):
@@ -213,10 +254,6 @@ def cmd_batch(args) -> int:
                 argv += ["--question-type", args.question_type[i]]
         if args.accepted_only:
             argv.append("--accepted-only")
-        if getattr(args, "no_ext_reader", False):
-            argv.append("--no-ext-reader")
-        if getattr(args, "no_ontology_select", False):
-            argv.append("--no-ontology-select")
         jid = _submit("batch", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -306,13 +343,10 @@ def cmd_run(args) -> int:
     if not args.local:
         argv = ["run", "--input", str(inp.resolve()), "--spec", str(spec_path.resolve()), "-o", str(out.resolve()),
                 "--yes", "--local", "--mode", "cpu" if args.cpu else "gpu", "--chunk-chars", str(args.chunk_chars)]
-        for flag, val in (("--sheet", args.sheet), ("--adapter", args.adapter), ("--arm", args.arm)):
+        for flag, val in (("--sheet", args.sheet),):
             if val:
                 argv += [flag, val]
-        if getattr(args, "no_ext_reader", False):
-            argv.append("--no-ext-reader")
-        if getattr(args, "no_ontology_select", False):
-            argv.append("--no-ontology-select")
+        argv += _model_argv(args)
         jid = _submit("run", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -488,15 +522,23 @@ def cmd_start(args) -> int:
         mode = _mode(args.mode)
         env = dict(os.environ, SERVICE_PORT=port, SERVICE_HOST=_bind_host(args), APP_HOME=str(REPO),
                    MEDAI_LOAD_MED42="1" if mode == "gpu" else "0", MEDAI_REQUIRE_GPU="1" if mode == "gpu" else "0")
-        if args.adapter:
-            env["MEDAI_LORA_ADAPTER_DIR"] = str(Path(args.adapter).resolve())
+        adapter = _adapter_dir(args)
+        if adapter:
+            env["MEDAI_LORA_ADAPTER_DIR"] = adapter
             env["MEDAI_LEO_ARM"] = args.arm or "L0C"
         elif args.arm:
             env["MEDAI_LEO_ARM"] = args.arm
-        if getattr(args, "no_ext_reader", False):
+        ext = _ext_reader_arg(args)
+        if ext is False:
+            env["MEDAI_LEO_EXT_READER"] = "0"
+        elif ext is True:
+            env["MEDAI_LEO_EXT_READER"] = "1"
+        elif adapter:
             env["MEDAI_LEO_EXT_READER"] = "0"
         if getattr(args, "no_ontology_select", False):
             env["MEDAI_LEO_ONTOLOGY_SELECT"] = "0"
+        elif getattr(args, "ontology_select", False):
+            env["MEDAI_LEO_ONTOLOGY_SELECT"] = "1"
         STATE.write_text(json.dumps({"node": os.uname().nodename, "port": args.port, "mode": mode,
                                      "job": os.environ.get("SLURM_JOB_ID", ""), "started": datetime.now().isoformat()}))
         host = env["SERVICE_HOST"]
@@ -515,14 +557,7 @@ def cmd_start(args) -> int:
               file=sys.stderr)
         os.execve(str(PY), [str(PY), "app.py"], env)
     argv = ["start", "--local", "--port", str(args.port), "--mode", "cpu" if args.cpu else "gpu"]
-    if args.adapter:
-        argv += ["--adapter", str(Path(args.adapter).resolve())]
-    if args.arm:
-        argv += ["--arm", args.arm]
-    if getattr(args, "no_ext_reader", False):
-        argv.append("--no-ext-reader")
-    if getattr(args, "no_ontology_select", False):
-        argv.append("--no-ontology-select")
+    argv += _model_argv(args)
     _submit("server", argv, gpu=not args.cpu, partition=args.partition or "general", hours=args.hours)
     print("[leo] when it starts, `leo status` shows the URL and the SSH tunnel command.")
     return 0
@@ -619,7 +654,7 @@ def cmd_install(args) -> int:
 
 def cmd_check(args) -> int:
     if args.slurm:
-        jid = _submit("check", ["check", "--gpu"], gpu=True, partition="interactive", hours=1)
+        jid = _submit("check", ["check", "--gpu"] + _model_argv(args), gpu=True, partition="interactive", hours=1)
         if args.wait:
             _wait(jid)
             out = JOBDIR / f"leo-check_{jid}.out"
@@ -650,8 +685,8 @@ def cmd_check(args) -> int:
     rec((REPO / "data" / "ontologies" / "MANIFEST.json").exists(), "ontology manifest")
     cache = REPO / "model_cache"
     rec(any(cache.glob("models--m42-health--Llama3-Med42-8B")), "Med42-8B weights in model_cache", str(cache))
-    if args.adapter:
-        rec(Path(args.adapter, "adapter_config.json").exists(), "adapter", args.adapter)
+    if _adapter_dir(args):
+        rec(Path(_adapter_dir(args), "adapter_config.json").exists(), "adapter", _adapter_dir(args))
     rec(None, "GPU visible", "yes" if _cuda() else "no (normal on a login node)")
     from services.leo_catalog import ask_template, resolve_phenotypes
     from services.leo_runtime import LeoRuntime
@@ -668,7 +703,8 @@ def cmd_check(args) -> int:
         else:
             try:
                 t0 = time.time()
-                rt = LeoRuntime.load(mode="gpu", adapter_dir=args.adapter or "", arm="L0C" if args.adapter else "L1C")
+                rt = LeoRuntime.load(mode="gpu", adapter_dir=_adapter_dir(args),
+                                     arm="L0C" if _adapter_dir(args) else "L1C")
                 rec(True, "Med42-8B loaded", f"{time.time() - t0:.0f}s")
                 res = rt.extract_note(SAMPLE, doc_id="check", phenotypes=resolve_phenotypes(["core"]))
                 row = res.row
@@ -693,7 +729,10 @@ def _common(sp, *, model=True):
     sp.add_argument("--question-type", action="append", help="yes_no | text | number, one per --question")
     if model:
         sp.add_argument("--mode", choices=("auto", "gpu", "cpu"), default="auto", help="where the model runs (local runs)")
-        sp.add_argument("--adapter", default="", help="flat-contract LoRA adapter dir (Arm H2)")
+        sp.add_argument("--adapter", default="", help="flat-contract LoRA adapter dir (Arm H2); sets arm L0C")
+        sp.add_argument("--h2", action="store_true",
+                        help=f"use the shipped H2 adapter ({H2_ADAPTER.relative_to(REPO)}; arm L0C). "
+                             "Default stays the base model: LEO+H2 scored worse than H2 alone on F-S letters")
         sp.add_argument("--arm", default="", help="LLM prompt arm (default L1C; L0C with an adapter)")
         sp.add_argument("--chunk-chars", type=int, default=8000, help="split notes longer than this (default 8000)")
         sp.add_argument("--disagree-llm", default=None,
@@ -701,9 +740,13 @@ def _common(sp, *, model=True):
                              "(default: none, the rules' value is shown and the model's goes to the 'alternative'; "
                              "'candidate' = seizure type, not validated on real notes)")
         sp.add_argument("--no-ext-reader", action="store_true",
-                        help="do not run the second model call on EEG, onset, rescue and surgery (default: on)")
+                        help="do not run the second model call on EEG, onset, rescue and surgery (default: on, off with --h2/--adapter)")
+        sp.add_argument("--ext-reader", action="store_true",
+                        help="run X1C even with an adapter (H2 was not trained on the extended contract)")
         sp.add_argument("--no-ontology-select", action="store_true",
-                        help="do not ask the model to pick an ontology code from the retrieved list (exact hits only)")
+                        help="exact ontology hits only (this is the default: the GPU selector scored worse than lexical rank-1)")
+        sp.add_argument("--ontology-select", action="store_true",
+                        help="ask the model to pick an ontology code from the retrieved top-5 (GPU gate failed; opt-in)")
 
 
 def main(argv=None) -> int:
@@ -719,6 +762,7 @@ def main(argv=None) -> int:
     sp.add_argument("--slurm", action="store_true", help="run `check --gpu` as a Slurm GPU job")
     sp.add_argument("--wait", action="store_true")
     sp.add_argument("--adapter", default="")
+    sp.add_argument("--h2", action="store_true")
     sp.set_defaults(fn=cmd_check)
 
     sp = sub.add_parser("start", help="start the web app (default: Slurm GPU job)")
@@ -729,9 +773,14 @@ def main(argv=None) -> int:
     sp.add_argument("--host", default="", help="address to listen on (default: this machine only; on Slurm the node's address)")
     sp.add_argument("--dev", action="store_true", help="Flask development server instead of gunicorn")
     sp.add_argument("--adapter", default="")
+    sp.add_argument("--h2", action="store_true",
+                    help=f"use the shipped H2 adapter at {H2_ADAPTER.relative_to(REPO)} (arm L0C)")
     sp.add_argument("--arm", default="")
     sp.add_argument("--no-ext-reader", action="store_true")
+    sp.add_argument("--ext-reader", action="store_true",
+                    help="run X1C even with an adapter")
     sp.add_argument("--no-ontology-select", action="store_true")
+    sp.add_argument("--ontology-select", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=24)
     sp.set_defaults(fn=cmd_start)
@@ -834,6 +883,7 @@ def main(argv=None) -> int:
     sp.add_argument("--choices", nargs="*")
     sp.add_argument("--mode", choices=("auto", "gpu", "cpu"), default="auto")
     sp.add_argument("--adapter", default="")
+    sp.add_argument("--h2", action="store_true")
     sp.add_argument("--arm", default="")
     sp.add_argument("--chunk-chars", type=int, default=8000)
     sp.set_defaults(fn=cmd_ask)

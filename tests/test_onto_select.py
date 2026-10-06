@@ -67,6 +67,7 @@ def test_exact_hit_skips_the_selector():
                          candidate_service=_Cands(cands), llm_reasoner=None,
                          ontology_selector=_Sel(2))
     pipe.cfg.enable_preprocessing = False
+    pipe.cfg.ontology_select = True
     stats, claims = pipe.extract(note, document_id="D1", return_claims=True)
     c = next(c for c in claims if c.field_path == "clinical_seizure.epilepsy_type")
     assert c.ontology_match == "exact" and c.concept.id == "230381007"
@@ -81,6 +82,7 @@ def test_selector_adopts_a_listed_code_and_rejects_an_invented_index():
                          candidate_service=_Cands(cands), llm_reasoner=None,
                          ontology_selector=_Sel(2))
     pipe.cfg.enable_preprocessing = False
+    pipe.cfg.ontology_select = True
     _, claims = pipe.extract(note, document_id="D1", return_claims=True)
     c = next(c for c in claims if c.field_path == "clinical_seizure.epilepsy_type")
     assert c.ontology_match == "selected" and c.concept.id == "230381007"
@@ -88,6 +90,7 @@ def test_selector_adopts_a_listed_code_and_rejects_an_invented_index():
                           candidate_service=_Cands(cands), llm_reasoner=None,
                           ontology_selector=_Sel(9))
     pipe2.cfg.enable_preprocessing = False
+    pipe2.cfg.ontology_select = True
     _, claims2 = pipe2.extract(note, document_id="D1", return_claims=True)
     c2 = next(x for x in claims2 if x.field_path == "clinical_seizure.epilepsy_type")
     assert c2.ontology_match == "abstain" and c2.concept.system == "MEDAI-ENUM"
@@ -110,6 +113,7 @@ def test_code_accepted_only_when_value_accepted_and_code_is_real():
     pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
                          candidate_service=_Cands(cands), llm_reasoner=_R())
     pipe.cfg.enable_preprocessing = False
+    pipe.cfg.ontology_select = True
     _, claims = pipe.extract(note, document_id="D1", return_claims=True)
     c = next(x for x in claims if x.field_path == "clinical_seizure.epilepsy_type")
     assert c.validator_verdict == ValidatorVerdict.ACCEPT
@@ -124,3 +128,13 @@ def test_code_accepted_only_when_value_accepted_and_code_is_real():
     hs = next(x for x in claims2 if "hippocampal" in x.field_path)
     assert hs.validator_verdict == ValidatorVerdict.REVIEW
     assert hs.code_accepted is False
+
+
+def test_runtime_ontology_select_defaults_off(monkeypatch):
+    monkeypatch.delenv("MEDAI_LEO_ONTOLOGY_SELECT", raising=False)
+    from services.leo_runtime import LeoRuntime
+    from test_leo_app import FakeBackend, FLAT_OK
+    rt = LeoRuntime(backend=FakeBackend(FLAT_OK))
+    assert rt.ontology_select is False
+    rt = LeoRuntime(backend=FakeBackend(FLAT_OK), ontology_select=True)
+    assert rt.ontology_select is True

@@ -1,0 +1,25 @@
+{
+  "n_scorable_reachable": 956,
+  "lexical_r1": {
+    "k": 531,
+    "rate": 0.555
+  },
+  "gold_in_top5_ceiling": {
+    "k": 711,
+    "rate": 0.744
+  },
+  "overlap_heuristic_r1": {
+    "k": 574,
+    "rate": 0.6
+  },
+  "selector_or_heuristic_r1": {
+    "k": 320,
+    "rate": 0.335
+  },
+  "n_exact_lexical": 501,
+  "n_fuzzy": 455,
+  "mode": "gpu",
+  "k": 5,
+  "gate": "selector_r1 > lexical_r1 (gpu) or overlap_heuristic > lexical_r1 (cpu)",
+  "gate_pass": false
+}

@@ -9,8 +9,9 @@ GPU (``--mode gpu``): the real OntologySelector on fuzzy mentions (one batched c
     venv-medcat/bin/python eval/eval_concept_selection.py --offline
     venv-medcat/bin/python eval/eval_concept_selection.py --mode gpu --offline
 
-Ship Arm E only if selected R@1 > lexical R@1 on scorable reachable mentions.  If the ceiling
-(gold in top-5) is not above R@1, ranking — not the prompt — is the problem.
+Ship Arm E in the default path only if selected R@1 > lexical R@1 on scorable reachable mentions.  If the ceiling
+(gold in top-5) is not above R@1, ranking — not the prompt — is the problem.  GPU 2026-10-06: selected 0.335 vs
+lexical 0.555 (fail); the app default is exact hits only.
 """
 from __future__ import annotations
 

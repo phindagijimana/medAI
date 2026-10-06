@@ -1,0 +1,1312 @@
+{
+ "patients": 37,
+ "notes": 113,
+ "arms": {
+  "rules_only": {
+   "stats": {
+    "mode": "specialist_only",
+    "model_load_seconds": 0.0,
+    "run_wall_seconds": 145.3,
+    "gpu_peak_mib_nvidia_smi": 0,
+    "rows_processed": 113,
+    "rows_error": 0,
+    "rows_with_llm": 0
+   },
+   "claim_stats": {
+    "all_claims_by_verdict": {
+     "review": 2800,
+     "reject": 75
+    },
+    "scored_path_claims_by_verdict": {
+     "review": 1166
+    },
+    "claim_level": {
+     "review": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 105,
+        "wrong": 5
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 24,
+        "correct": 79,
+        "unscorable": 4
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87,
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 18,
+        "unscorable": 55,
+        "wrong": 15
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 33,
+        "correct": 24,
+        "unscorable": 8
+       },
+       "medication.current_asms": {
+        "correct": 212,
+        "wrong": 35
+       },
+       "eeg.study_type": {
+        "correct": 95,
+        "wrong": 17
+       },
+       "eeg.background": {
+        "correct": 97,
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "correct": 27,
+        "wrong": 4
+       },
+       "eeg.ied_findings": {
+        "correct": 36,
+        "wrong": 24
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 12,
+        "wrong": 3
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 12,
+        "wrong": 17
+       },
+       "medication.surgery_history": {
+        "correct": 31,
+        "wrong": 10
+       },
+       "medication.rescue_medication": {
+        "wrong": 13,
+        "correct": 57
+       }
+      },
+      "correct": 892,
+      "wrong": 207,
+      "unscorable": 67,
+      "precision": 0.812,
+      "distinct_patient_path_value": {
+       "correct": 373,
+       "wrong": 142,
+       "precision": 0.724
+      }
+     },
+     "review|specialist_only": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 105,
+        "wrong": 5
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 24,
+        "correct": 79,
+        "unscorable": 4
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87,
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 18,
+        "unscorable": 55,
+        "wrong": 15
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 33,
+        "correct": 24,
+        "unscorable": 8
+       },
+       "medication.current_asms": {
+        "correct": 212,
+        "wrong": 35
+       },
+       "eeg.study_type": {
+        "correct": 95,
+        "wrong": 17
+       },
+       "eeg.background": {
+        "correct": 97,
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "correct": 27,
+        "wrong": 4
+       },
+       "eeg.ied_findings": {
+        "correct": 36,
+        "wrong": 24
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 12,
+        "wrong": 3
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 12,
+        "wrong": 17
+       },
+       "medication.surgery_history": {
+        "correct": 31,
+        "wrong": 10
+       },
+       "medication.rescue_medication": {
+        "wrong": 13,
+        "correct": 57
+       }
+      },
+      "correct": 892,
+      "wrong": 207,
+      "unscorable": 67,
+      "precision": 0.812,
+      "distinct_patient_path_value": {
+       "correct": 373,
+       "wrong": 142,
+       "precision": 0.724
+      }
+     }
+    }
+   },
+   "views": {
+    "all": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "wrong": 4,
+       "n": 34,
+       "correct": 30
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 17,
+       "n": 27,
+       "missing": 10
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 11,
+       "n": 12,
+       "wrong": 1
+      },
+      "eeg_study_type": {
+       "correct": 31,
+       "n": 37,
+       "wrong": 6
+      },
+      "focal_motor_onset": {
+       "correct": 7,
+       "n": 12,
+       "wrong": 5
+      },
+      "focal_nonmotor_onset": {
+       "wrong": 7,
+       "n": 15,
+       "correct": 8
+      },
+      "rescue_drug": {
+       "correct": 21,
+       "n": 22,
+       "missing": 1
+      },
+      "semiology_aura_in_text": {
+       "correct": 7,
+       "n": 13,
+       "missing": 6
+      },
+      "semiology_motor_feature_in_text": {
+       "correct": 26,
+       "n": 34,
+       "missing": 8
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_reported_but_unsupported": 5,
+      "eeg_ictal_onset_reported_but_none": 14,
+      "focal_motor_in_semiology_not_onset (not an error)": 16,
+      "eeg_ied_reported_but_none": 4,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 4
+     },
+     "rescue": {
+      "all": {
+       "tp": 21,
+       "fp": 8,
+       "fn": 1,
+       "precision": 0.724,
+       "recall": 0.955,
+       "f1": 0.824
+      },
+      "in_text": {
+       "tp": 21,
+       "fp": 8,
+       "fn": 1,
+       "precision": 0.724,
+       "recall": 0.955,
+       "f1": 0.824
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 17,
+      "fn": 8,
+      "precision": 0.807,
+      "recall": 0.899,
+      "f1": 0.85
+     }
+    }
+   },
+   "timing": {
+    "mean_s": 1.28,
+    "max_s": 11.18,
+    "min_s": 0.3,
+    "notes": 113,
+    "total_note_seconds": 145.2,
+    "errors": [],
+    "llm_used_notes": 0
+   }
+  },
+  "leo_llm": {
+   "stats": {
+    "mode": "llm+specialist",
+    "model_load_seconds": 5.5,
+    "run_wall_seconds": 3366.1,
+    "gpu_peak_mib_nvidia_smi": 16774,
+    "rows_processed": 113,
+    "rows_error": 0,
+    "rows_with_llm": 113,
+    "torch_max_memory_allocated_mib": 15994,
+    "torch_max_memory_reserved_mib": 16262,
+    "gpu_name": "NVIDIA L40S-24Q"
+   },
+   "claim_stats": {
+    "all_claims_by_verdict": {
+     "accept": 985,
+     "review": 1976,
+     "reject": 89
+    },
+    "scored_path_claims_by_verdict": {
+     "accept": 912,
+     "review": 385,
+     "reject": 14
+    },
+    "claim_level": {
+     "accept": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 102,
+        "wrong": 2
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 6,
+        "unscorable": 1,
+        "wrong": 2
+       },
+       "medication.current_asms": {
+        "correct": 209,
+        "wrong": 27
+       },
+       "eeg.study_type": {
+        "correct": 89
+       },
+       "eeg.background": {
+        "correct": 91,
+        "wrong": 1
+       },
+       "eeg.ied_present": {
+        "correct": 27
+       },
+       "eeg.ied_findings": {
+        "correct": 36,
+        "wrong": 22
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 12
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 12
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 78,
+        "wrong": 1,
+        "unscorable": 1
+       },
+       "medication.surgery_history": {
+        "correct": 24
+       },
+       "medication.rescue_medication": {
+        "correct": 54,
+        "wrong": 2
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 3,
+        "correct": 21,
+        "unscorable": 2
+       }
+      },
+      "correct": 848,
+      "wrong": 60,
+      "unscorable": 4,
+      "precision": 0.934,
+      "distinct_patient_path_value": {
+       "correct": 367,
+       "wrong": 44,
+       "precision": 0.893
+      }
+     },
+     "accept|both": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 100,
+        "wrong": 1
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 4,
+        "unscorable": 1,
+        "wrong": 1
+       },
+       "medication.current_asms": {
+        "correct": 209,
+        "wrong": 27
+       },
+       "eeg.study_type": {
+        "correct": 84
+       },
+       "eeg.background": {
+        "correct": 89
+       },
+       "eeg.ied_present": {
+        "correct": 27
+       },
+       "eeg.ied_findings": {
+        "correct": 15
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 12
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 12
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 72,
+        "wrong": 1
+       },
+       "medication.surgery_history": {
+        "correct": 24
+       },
+       "medication.rescue_medication": {
+        "correct": 54,
+        "wrong": 2
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "correct": 21,
+        "unscorable": 2,
+        "wrong": 1
+       }
+      },
+      "correct": 810,
+      "wrong": 33,
+      "unscorable": 3,
+      "precision": 0.961,
+      "distinct_patient_path_value": {
+       "correct": 344,
+       "wrong": 17,
+       "precision": 0.953
+      }
+     },
+     "review": {
+      "by_path": {
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 23,
+        "correct": 2,
+        "unscorable": 7
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 18,
+        "correct": 14,
+        "unscorable": 4
+       },
+       "eeg.ied_findings": {
+        "correct": 38,
+        "wrong": 4
+       },
+       "eeg.ied_present": {
+        "correct": 70,
+        "wrong": 4
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "wrong": 4,
+        "correct": 22
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "wrong": 8,
+        "correct": 6,
+        "unscorable": 26
+       },
+       "eeg.background": {
+        "correct": 14,
+        "wrong": 4
+       },
+       "medication.surgery_history": {
+        "wrong": 11,
+        "correct": 11
+       },
+       "eeg.study_type": {
+        "wrong": 17,
+        "correct": 6
+       },
+       "medication.rescue_medication": {
+        "wrong": 13,
+        "correct": 3
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 18,
+        "correct": 4
+       },
+       "medication.current_asms": {
+        "wrong": 12,
+        "correct": 5
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 4,
+        "wrong": 4
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 4,
+        "wrong": 5
+       }
+      },
+      "correct": 203,
+      "wrong": 145,
+      "unscorable": 37,
+      "precision": 0.583,
+      "distinct_patient_path_value": {
+       "correct": 126,
+       "wrong": 115,
+       "precision": 0.523
+      }
+     },
+     "review|specialist_only": {
+      "by_path": {
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 23,
+        "unscorable": 3,
+        "correct": 1
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 17,
+        "correct": 12,
+        "unscorable": 3
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "wrong": 7,
+        "correct": 5,
+        "unscorable": 25
+       },
+       "medication.surgery_history": {
+        "wrong": 10,
+        "correct": 6
+       },
+       "eeg.study_type": {
+        "wrong": 17,
+        "correct": 6
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 17
+       },
+       "medication.current_asms": {
+        "wrong": 8,
+        "correct": 3
+       },
+       "eeg.background": {
+        "correct": 6,
+        "wrong": 2
+       },
+       "medication.rescue_medication": {
+        "wrong": 6,
+        "correct": 3
+       },
+       "eeg.ied_present": {
+        "wrong": 4
+       },
+       "eeg.ied_findings": {
+        "wrong": 2
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 3
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 3,
+        "wrong": 3
+       }
+      },
+      "correct": 45,
+      "wrong": 123,
+      "unscorable": 31,
+      "precision": 0.268,
+      "distinct_patient_path_value": {
+       "correct": 38,
+       "wrong": 95,
+       "precision": 0.286
+      }
+     },
+     "review|model_only": {
+      "by_path": {
+       "eeg.ied_findings": {
+        "correct": 38,
+        "wrong": 2
+       },
+       "eeg.ied_present": {
+        "correct": 70
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 22
+       },
+       "eeg.background": {
+        "correct": 8,
+        "wrong": 2
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "unscorable": 1,
+        "wrong": 1,
+        "correct": 2
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 4,
+        "wrong": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 4,
+        "wrong": 1
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 1,
+        "wrong": 2
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 1,
+        "unscorable": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "unscorable": 1,
+        "wrong": 1,
+        "correct": 1
+       },
+       "medication.current_asms": {
+        "wrong": 4,
+        "correct": 2
+       },
+       "medication.surgery_history": {
+        "wrong": 1,
+        "correct": 4
+       },
+       "medication.rescue_medication": {
+        "wrong": 2
+       }
+      },
+      "correct": 157,
+      "wrong": 17,
+      "unscorable": 6,
+      "precision": 0.902,
+      "distinct_patient_path_value": {
+       "correct": 88,
+       "wrong": 16,
+       "precision": 0.846
+      }
+     },
+     "accept|specialist_only": {
+      "by_path": {
+       "eeg.ied_findings": {
+        "wrong": 22,
+        "correct": 21
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 2
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 2,
+        "wrong": 1
+       },
+       "eeg.study_type": {
+        "correct": 5
+       },
+       "eeg.background": {
+        "wrong": 1,
+        "correct": 2
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 6,
+        "unscorable": 1
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 2,
+        "wrong": 1
+       }
+      },
+      "correct": 38,
+      "wrong": 27,
+      "unscorable": 1,
+      "precision": 0.585,
+      "distinct_patient_path_value": {
+       "correct": 35,
+       "wrong": 27,
+       "precision": 0.565
+      }
+     },
+     "review|both": {
+      "by_path": {
+       "medication.rescue_medication": {
+        "wrong": 5
+       },
+       "medication.surgery_history": {
+        "correct": 1
+       }
+      },
+      "correct": 1,
+      "wrong": 5,
+      "unscorable": 0,
+      "precision": 0.167,
+      "distinct_patient_path_value": {
+       "correct": 1,
+       "wrong": 4,
+       "precision": 0.2
+      }
+     },
+     "reject": {
+      "by_path": {
+       "eeg.ied_present": {
+        "correct": 7
+       },
+       "eeg.background": {
+        "correct": 1
+       },
+       "medication.current_asms": {
+        "wrong": 2,
+        "correct": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 1
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 1
+       },
+       "eeg.ied_findings": {
+        "correct": 1
+       }
+      },
+      "correct": 10,
+      "wrong": 4,
+      "unscorable": 0,
+      "precision": 0.714,
+      "distinct_patient_path_value": {
+       "correct": 9,
+       "wrong": 4,
+       "precision": 0.692
+      }
+     },
+     "reject|model_only": {
+      "by_path": {
+       "eeg.ied_present": {
+        "correct": 7
+       },
+       "eeg.background": {
+        "correct": 1
+       },
+       "medication.current_asms": {
+        "wrong": 2,
+        "correct": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 1
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 1
+       },
+       "eeg.ied_findings": {
+        "correct": 1
+       }
+      },
+      "correct": 10,
+      "wrong": 4,
+      "unscorable": 0,
+      "precision": 0.714,
+      "distinct_patient_path_value": {
+       "correct": 9,
+       "wrong": 4,
+       "precision": 0.692
+      }
+     }
+    }
+   },
+   "views": {
+    "all": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "wrong": 4,
+       "n": 34,
+       "correct": 30
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 27,
+       "n": 27
+      },
+      "eeg_ied_lobe": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_ied_side": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "focal_motor_onset": {
+       "correct": 7,
+       "n": 12,
+       "wrong": 4,
+       "missing": 1
+      },
+      "focal_nonmotor_onset": {
+       "wrong": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "rescue_drug": {
+       "correct": 21,
+       "n": 22,
+       "missing": 1
+      },
+      "semiology_aura_in_text": {
+       "correct": 7,
+       "n": 13,
+       "missing": 6
+      },
+      "semiology_motor_feature_in_text": {
+       "correct": 26,
+       "n": 34,
+       "missing": 8
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_reported_but_unsupported": 5,
+      "eeg_ictal_onset_reported_but_none": 15,
+      "focal_motor_in_semiology_not_onset (not an error)": 13,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 4,
+      "eeg_ied_reported_but_none": 4
+     },
+     "rescue": {
+      "all": {
+       "tp": 21,
+       "fp": 9,
+       "fn": 1,
+       "precision": 0.7,
+       "recall": 0.955,
+       "f1": 0.808
+      },
+      "in_text": {
+       "tp": 21,
+       "fp": 9,
+       "fn": 1,
+       "precision": 0.7,
+       "recall": 0.955,
+       "f1": 0.808
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.846,
+       "recall": 1.0,
+       "f1": 0.917
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.846,
+       "recall": 1.0,
+       "f1": 0.917
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 21,
+      "fn": 8,
+      "precision": 0.772,
+      "recall": 0.899,
+      "f1": 0.83
+     }
+    },
+    "accepted": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 35,
+       "n": 37,
+       "wrong": 2
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 17,
+       "n": 27,
+       "missing": 10
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 11,
+       "n": 12,
+       "wrong": 1
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "missing": 1
+      },
+      "focal_motor_onset": {
+       "correct": 4,
+       "n": 12,
+       "missing": 6,
+       "wrong": 2
+      },
+      "focal_nonmotor_onset": {
+       "missing": 3,
+       "n": 15,
+       "wrong": 1,
+       "correct": 11
+      },
+      "rescue_drug": {
+       "correct": 21,
+       "n": 22,
+       "missing": 1
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 21,
+       "fp": 2,
+       "fn": 1,
+       "precision": 0.913,
+       "recall": 0.955,
+       "f1": 0.933
+      },
+      "in_text": {
+       "tp": 21,
+       "fp": 2,
+       "fn": 1,
+       "precision": 0.913,
+       "recall": 0.955,
+       "f1": 0.933
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 10,
+      "fn": 8,
+      "precision": 0.877,
+      "recall": 0.899,
+      "f1": 0.887
+     }
+    },
+    "crosschecked": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 34,
+       "n": 37,
+       "missing": 2,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 17,
+       "n": 27,
+       "missing": 10
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "missing": 1
+      },
+      "focal_motor_onset": {
+       "correct": 3,
+       "n": 12,
+       "missing": 8,
+       "wrong": 1
+      },
+      "focal_nonmotor_onset": {
+       "missing": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "rescue_drug": {
+       "correct": 21,
+       "n": 22,
+       "missing": 1
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 21,
+       "fp": 2,
+       "fn": 1,
+       "precision": 0.913,
+       "recall": 0.955,
+       "f1": 0.933
+      },
+      "in_text": {
+       "tp": 21,
+       "fp": 2,
+       "fn": 1,
+       "precision": 0.913,
+       "recall": 0.955,
+       "f1": 0.933
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 10,
+      "fn": 8,
+      "precision": 0.877,
+      "recall": 0.899,
+      "f1": 0.887
+     }
+    },
+    "model": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 34,
+       "n": 37,
+       "wrong": 2,
+       "missing": 1
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 27,
+       "n": 27
+      },
+      "eeg_ied_lobe": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_ied_side": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "missing": 1
+      },
+      "focal_motor_onset": {
+       "correct": 3,
+       "n": 12,
+       "missing": 7,
+       "wrong": 2
+      },
+      "focal_nonmotor_onset": {
+       "missing": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "rescue_drug": {
+       "correct": 21,
+       "n": 22,
+       "missing": 1
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 2,
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 2,
+      "eeg_ictal_onset_reported_but_none": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 21,
+       "fp": 7,
+       "fn": 1,
+       "precision": 0.75,
+       "recall": 0.955,
+       "f1": 0.84
+      },
+      "in_text": {
+       "tp": 21,
+       "fp": 7,
+       "fn": 1,
+       "precision": 0.75,
+       "recall": 0.955,
+       "f1": 0.84
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 14,
+      "fn": 8,
+      "precision": 0.835,
+      "recall": 0.899,
+      "f1": 0.866
+     }
+    }
+   },
+   "timing": {
+    "mean_s": 29.79,
+    "max_s": 60.3,
+    "min_s": 14.93,
+    "notes": 113,
+    "total_note_seconds": 3366.0,
+    "errors": [],
+    "llm_used_notes": 113
+   }
+  }
+ }
+}

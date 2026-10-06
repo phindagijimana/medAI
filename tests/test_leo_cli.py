@@ -22,7 +22,7 @@ def test_phenotypes_lists_everything(capsys):
     out = capsys.readouterr().out
     assert "current_asms" in out and "PANELS" in out and "status_epilepticus" in out
     assert leo_cli.main(["phenotypes", "--json"]) == 0
-    assert len(json.loads(capsys.readouterr().out)["extract"]) == 23
+    assert len(json.loads(capsys.readouterr().out)["extract"]) == 28
 
 
 def test_batch_local_cpu_adds_columns_and_keeps_input(tmp_path, capsys):
@@ -89,3 +89,15 @@ def test_batch_default_submits_gpu_job(tmp_path, monkeypatch):
     assert "--question" in seen["argv"] and "seizure" in seen["argv"]
     leo_cli.main(["batch", str(src), "--cpu"])
     assert seen["gpu"] is False and "cpu" == seen["argv"][seen["argv"].index("--mode") + 1]
+
+
+def test_h2_flag_resolves_shipped_adapter(tmp_path, monkeypatch):
+    assert (leo_cli.H2_ADAPTER / "adapter_config.json").exists()
+    src = tmp_path / "n.csv"
+    pd.DataFrame({"note": ["Focal epilepsy."]}).to_csv(src, index=False)
+    seen = {}
+    monkeypatch.setattr(leo_cli, "_submit", lambda name, argv, **k: seen.update(argv=argv, **k) or "1")
+    leo_cli.main(["batch", str(src), "--h2"])
+    argv = seen["argv"]
+    assert "--adapter" in argv
+    assert argv[argv.index("--adapter") + 1].endswith("llama3-med42-8b_lora_epi_h2")

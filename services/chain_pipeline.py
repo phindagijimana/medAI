@@ -105,8 +105,9 @@ class ChainPipelineConfig:
     # When both readers agree on a path a reader covers, a specialist "probable" is treated as asserted
     # (the second reader is the check).  Off for ablations that replay old arms.
     agreed_probable_is_asserted: bool = True
-    # Arm E: on a fuzzy retrieval, the model may pick from the top-k list or abstain. Off = exact hits only.
-    ontology_select: bool = True
+    # Arm E: on a fuzzy retrieval, the model may pick from the top-k list or abstain.
+    # Default off: GPU gate 2026-10-06 selected R@1 0.335 vs lexical 0.555.
+    ontology_select: bool = False
     llm_arm: str = ""   # provenance label of the LLM arm, e.g. "M3" (set by the caller)
 
 

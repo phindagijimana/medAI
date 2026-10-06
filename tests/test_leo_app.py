@@ -72,9 +72,11 @@ def test_evidence_levels_match_what_was_measured():
         "etiology_category", "drug_resistance", "mri_findings", "mri_normal", "hippocampal_sclerosis",
         "focal_cortical_dysplasia", "surgery_history", "rescue_medication", "prior_asms", "failed_asms",
         "etiology_details", "eeg_background", "semiology", "focal_motor_onset", "focal_nonmotor_onset",
-        "eeg_study_type", "eeg_ictal_onset"}
+        "eeg_study_type", "eeg_ictal_onset", "other_seizure_types", "awareness", "eeg_ied_present",
+        "eeg_ied_findings"}
     assert all(r in REFERENCES for p in EXTRACT for r in p.refs)
     assert next(p for p in EXTRACT if p.id == "drug_resistance").derived
+    assert {p.id for p in EXTRACT if p.evidence == "none"} == {"mri_lesion"}
 
 
 def test_custom_question_validation():
@@ -876,7 +878,7 @@ def test_background_jobs_with_the_model_run_inside_the_app_context(client, runti
     backend = object()
     monkeypatch.setattr(c.application, "med42_backend", backend, raising=False)
     monkeypatch.setattr(c.application, "ensure_med42_loaded", lambda: "ready")
-    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}:o{os.environ.get('MEDAI_LEO_ONTOLOGY_SELECT', '1')}", llm)
+    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}:o{os.environ.get('MEDAI_LEO_ONTOLOGY_SELECT', '0')}", llm)
     csv = "patient_id,note_id,text\nP1,n1," + json.dumps(NOTE) + "\n"
     r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "on"})
     assert r.status_code == 202 and r.get_json()["mode"] == "llm+specialist"

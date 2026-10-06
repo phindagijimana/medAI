@@ -103,3 +103,38 @@ def test_curated_only_mode_has_no_release_terms():
     assert not svc.releases_loaded
     cands = svc.get_candidates("complex partial seizures", field_type="clinical_seizure.predominant_seizure_type")
     assert all(c.system not in ("HPO", "MONDO", "EPIO", "RxNorm") for c in cands)
+
+
+# Mentions coded by dictionaries that were previously unrouted (EEG study, surgery,
+# MRI laterality, rescue drugs, etiology free text). Curated-only so this does not
+# need UMLS-licensed releases.
+@pytest.mark.parametrize("mention,field,label_substr", [
+    ("routine EEG", "eeg.study_type", "Routine EEG"),
+    ("video EEG", "eeg.study_type", "Video EEG"),
+    ("temporal lobectomy", "medication.surgery_history", "resect"),
+    ("hippocampal sclerosis", "mri.hippocampal_sclerosis", "Hippocampal sclerosis"),
+    ("temporal", "eeg.ictal_onset_lobe", "Temporal"),
+    ("left", "eeg.ictal_onset_laterality", "Left"),
+    ("lamotrigine", "medication.rescue_medication", "Lamotrigine"),
+    ("midazolam", "medication.rescue_medication", "Midazolam"),
+    ("hippocampal sclerosis", "clinical_seizure.etiology_details_text", "Hippocampal sclerosis"),
+    ("impaired awareness", "clinical_seizure.awareness", "Impaired"),
+])
+def test_extended_phenotype_fields_hit_curated_dicts(mention, field, label_substr):
+    svc = OntologyCandidateService(use_releases=False)
+    top = _top(svc, mention, field)
+    assert label_substr.lower() in top.label.lower(), (field, mention, top.label, top.system, top.id)
+    assert top.rank_score >= 0.7
+
+
+def test_extract_coded_paths_are_routed():
+    from services.leo_catalog import EXTRACT
+    from services.ontology_candidates import _FIELD_ONTOLOGY_ROUTE
+    skip = {
+        "clinical_seizure.age_at_onset_years",
+        "clinical_seizure.seizure_frequency",
+        "clinical_seizure.semiology_text",
+    }
+    missing = [fp for p in EXTRACT for fp in p.field_paths
+               if fp not in skip and fp not in _FIELD_ONTOLOGY_ROUTE]
+    assert not missing, f"EXTRACT paths with no ontology route: {missing}"

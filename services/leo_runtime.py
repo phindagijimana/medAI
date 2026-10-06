@@ -18,6 +18,7 @@ are split by section and paragraph.  Without a backend the run is specialist-onl
 from __future__ import annotations
 
 import logging
+import os
 import threading
 import time
 from dataclasses import dataclass, field
@@ -100,10 +101,17 @@ class LeoRuntime:
         self.disagree_llm = parse_disagree_llm(disagree_llm)
         self.ledger = ledger
         self.adapter_label = adapter_label
-        self.ext_reader = bool(self.use_llm and (env_flag("MEDAI_LEO_EXT_READER") if ext_reader is None else ext_reader))
+        if ext_reader is None:
+            # H2 was trained on the five-field flat contract. Do not run X1C on
+            # those weights unless the caller (or MEDAI_LEO_EXT_READER) asks.
+            if adapter_label and os.environ.get("MEDAI_LEO_EXT_READER") is None:
+                ext_reader = False
+            else:
+                ext_reader = env_flag("MEDAI_LEO_EXT_READER")
+        self.ext_reader = bool(self.use_llm and ext_reader)
         self.require_second_reader = (env_flag("MEDAI_LEO_REQUIRE_SECOND_READER")
                                       if require_second_reader is None else bool(require_second_reader))
-        self.ontology_select = bool(self.use_llm and (env_flag("MEDAI_LEO_ONTOLOGY_SELECT")
+        self.ontology_select = bool(self.use_llm and (env_flag("MEDAI_LEO_ONTOLOGY_SELECT", default=False)
                                                       if ontology_select is None else ontology_select))
         self._pipeline = None
         self._reasoner = None

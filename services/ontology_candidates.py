@@ -103,21 +103,41 @@ _FIELD_ONTOLOGY_ROUTE: dict[str, str] = {
     "clinical_seizure.other_seizure_types":      "SeizureType",
     "clinical_seizure.awareness":                "Awareness",
     "clinical_seizure.etiology_category":        "EtiologyCategory",
+    "clinical_seizure.etiology_specifics":       "EtiologyDetails",
     "clinical_seizure.focal_motor_onset":        "FocalMotorOnset",
     "clinical_seizure.focal_nonmotor_onset":     "FocalNonmotorOnset",
     "clinical_seizure.status_epilepticus_history": "SeizureType",
     "medication.drug_resistance_status":         "DrugResistanceStatus",
     "medication.surgery_history":                "SurgeryType",
     "medication.non_drug_therapies":             "NonDrugTherapyType",
+    "medication.current_asms":                   "Medication",
+    "medication.prior_asms":                     "Medication",
+    "medication.failed_asms":                    "Medication",
+    "medication.rescue_medication":              "Medication",
+    "medication.acute_administration":           "Medication",
+    "clinical_seizure.etiology_details_text":    "EtiologyDetails",
     "mri.findings":                              "MriFinding",
+    "mri.overall_normal":                        "MriFinding",
+    "mri.hippocampal_sclerosis":                  "MriFinding",
+    "mri.focal_cortical_dysplasia":               "MriFinding",
+    "mri.lesion_lobe":                           "LobarLocalization",
+    "mri.lesion_laterality":                     "Laterality",
     "eeg.background":                            "EegBackground",
+    "eeg.study_type":                            "EegStudyType",
     "eeg.ied_present":                           "IedType",
+    "eeg.ied_findings":                          "IedType",
+    "eeg.ictal_onset_lobe":                      "LobarLocalization",
+    "eeg.ictal_onset_laterality":                 "Laterality",
+    "clinical_localization.primary_claim":       "LobarLocalization",
 }
 
 # Maps a dotted schema path to the release-backed term scopes it may draw
 # from (see services.ontology_loaders).  Fields not listed get no release
 # candidates; field_type=None searches every scope.
 _SEIZURE = ["seizure", "epio"]
+_EEG = ["eeg", "epio"]
+_MRI = ["mri", "epio"]
+_MED = ["medication"]
 _FIELD_SCOPE_ROUTE: dict[str, list[str]] = {
     "clinical_seizure.epilepsy_type":             ["epilepsy", "epio"],
     "clinical_seizure.predominant_seizure_type":  _SEIZURE,
@@ -128,15 +148,26 @@ _FIELD_SCOPE_ROUTE: dict[str, list[str]] = {
     "clinical_seizure.status_epilepticus_history": _SEIZURE,
     "clinical_seizure.etiology_category":         ["epilepsy", "epio"],
     "clinical_seizure.etiology_specifics":        ["epilepsy", "epio", "mri"],
-    "medication.current_asms":                    ["medication"],
-    "medication.prior_asms":                      ["medication"],
-    "medication.failed_asms":                     ["medication"],
-    "eeg.background":                             ["eeg", "epio"],
-    "eeg.ied_present":                            ["eeg", "epio"],
-    "eeg.ied_findings":                           ["eeg", "epio"],
-    "mri.findings":                               ["mri", "epio"],
-    "mri.hippocampal_sclerosis":                  ["mri", "epio"],
-    "mri.focal_cortical_dysplasia":               ["mri", "epio"],
+    "clinical_seizure.etiology_details_text":     ["epilepsy", "epio", "mri"],
+    "clinical_localization.primary_claim":        _SEIZURE + ["mri"],
+    "medication.current_asms":                    _MED,
+    "medication.prior_asms":                      _MED,
+    "medication.failed_asms":                     _MED,
+    "medication.rescue_medication":               _MED,
+    "medication.acute_administration":            _MED,
+    "medication.surgery_history":                 ["epio", "epilepsy"],
+    "eeg.background":                             _EEG,
+    "eeg.study_type":                             _EEG,
+    "eeg.ied_present":                            _EEG,
+    "eeg.ied_findings":                           _EEG,
+    "eeg.ictal_onset_lobe":                       _EEG + _SEIZURE,
+    "eeg.ictal_onset_laterality":                  _EEG + _SEIZURE,
+    "mri.findings":                               _MRI,
+    "mri.overall_normal":                         _MRI,
+    "mri.hippocampal_sclerosis":                  _MRI,
+    "mri.focal_cortical_dysplasia":               _MRI,
+    "mri.lesion_lobe":                            _MRI,
+    "mri.lesion_laterality":                      _MRI,
 }
 
 # Tie-break among equally scored candidates: standard ontologies before
@@ -183,6 +214,7 @@ class OntologyCandidateService:
     def __init__(self, release: str = "medai-enum-v0.2.1+ilae2017", *, use_releases: bool = True):
         self._release = release
         self._enum_ontologies = self._load_enum_ontologies()
+        self._extra_ontologies = self._load_supplementary_ontologies()
         self._ilae_map = self._load_ilae_map()
         self._cui_seed = self._load_cui_seed()
         self._terms_by_scope = self._load_release_terms() if use_releases else {}
@@ -232,6 +264,12 @@ class OntologyCandidateService:
         """Load the 24 ConceptEntry dicts from rules.epilepsy_ontology."""
         from rules.epilepsy_ontology import all_enum_ontologies
         return all_enum_ontologies()
+
+    @staticmethod
+    def _load_supplementary_ontologies() -> dict[str, dict]:
+        """Drug names, etiology details, comorbidities — not schema enums."""
+        from rules.epilepsy_ontology import supplementary_ontologies
+        return supplementary_ontologies()
 
     @staticmethod
     def _load_ilae_map() -> list[dict]:
@@ -434,10 +472,11 @@ class OntologyCandidateService:
     def _route_dicts(self, field_type: Optional[str]) -> list[tuple[str, dict]]:
         """Return the (name, dict) list to search in priority order."""
         preferred = _FIELD_ONTOLOGY_ROUTE.get(field_type or "")
+        pool = {**self._enum_ontologies, **self._extra_ontologies}
         pairs = []
-        if preferred and preferred in self._enum_ontologies:
-            pairs.append((preferred, self._enum_ontologies[preferred]))
-        # Then everything else — order doesn't matter, we score independently
+        if preferred and preferred in pool:
+            pairs.append((preferred, pool[preferred]))
+        # Enum fallback only — supplementary dicts are noisy on the wrong field.
         for name, d in self._enum_ontologies.items():
             if name != preferred:
                 pairs.append((name, d))

@@ -248,6 +248,16 @@ def test_runtime_switch(monkeypatch):
     assert env_flag("MEDAI_LEO_EXT_READER") is True
 
 
+def test_h2_adapter_defaults_x1c_off(monkeypatch):
+    monkeypatch.delenv("MEDAI_LEO_EXT_READER", raising=False)
+    rt = LeoRuntime(backend=FakeBackend(FLAT_OK), adapter_label="llama3-med42-8b_lora_epi_h2")
+    assert rt.ext_reader is False
+    rt = LeoRuntime(backend=FakeBackend(FLAT_OK), adapter_label="llama3-med42-8b_lora_epi_h2", ext_reader=True)
+    assert rt.ext_reader is True
+    rt = LeoRuntime(backend=FakeBackend(FLAT_OK), adapter_label="")
+    assert rt.ext_reader is True
+
+
 def test_ied_sites_agree_without_matching_type():
     a = {"ied_type": "spike", "localization": "temporal", "laterality": "left"}
     b = {"ied_type": None, "localization": "temporal", "laterality": "left"}
