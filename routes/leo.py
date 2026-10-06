@@ -92,7 +92,7 @@ def _runtime(use_llm: bool):
             backend = getattr(current_app, "med42_backend", None)
             if backend is None:
                 raise _NotReady(f"Med42 is not loaded yet (status: {status}). Retry in a minute, or run with llm=off.")
-            key = f"llm:{id(backend)}:{arm}:{chunk}:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}"
+            key = f"llm:{id(backend)}:{arm}:{chunk}:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}:o{os.environ.get('MEDAI_LEO_ONTOLOGY_SELECT', '1')}"
             if key not in _RUNTIMES:
                 _RUNTIMES[key] = LeoRuntime(backend=backend, arm=arm, chunk_max_chars=chunk,
                                             adapter_label=Path(os.environ.get("MEDAI_LORA_ADAPTER_DIR", "")).name)

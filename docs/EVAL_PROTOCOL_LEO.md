@@ -755,3 +755,10 @@ Before (joined notes, 10.17): motor 7 of 12 right (all answered), non-motor 8 of
 
 **Not yet measured with the second reader.** A GPU re-run of the 113 v4_ext notes is the first measurement; it was not used to edit the prompt.
 
+### 10.23 Arm E: ontology selection from a retrieved list (2026-10-06)
+
+**Change.** The retriever already proposed HPO/SNOMED/RxNorm ids. Exact label/synonym hits (score ≥ 0.9) still stamp the code with no model call. Fuzzy hits now go to a batched constrained decode (`services/onto_select.py`, arm E): the model may pick a 1-based index on that mention's list or abstain. A choice outside the list is discarded. The model never writes an id of its own. A **code** is `code_accepted` only when the *value* is accepted and the match is `exact` or `selected` (not `MEDAI-ENUM`). `--accepted-only` blanks suggestion codes. Columns: `concept_*`, `ontology_match`, `code_accepted`, `ontology_candidates` in `claims.csv`; `<id>_code`, `_system`, `_code_status` in the wide table. Off: `--no-ontology-select` / `MEDAI_LEO_ONTOLOGY_SELECT=0`.
+
+**Gate.** `eval/eval_concept_selection.py` (CPU: lexical R@1 vs gold-in-top-5 ceiling vs overlap heuristic; `--mode gpu` for the real selector). Ship the selector as a *measured* win only if selected R@1 exceeds lexical R@1 on scorable reachable mentions (`docs/CONCEPT_GOLD_SET.md`). Real-note code adjudication uses `bin/leo disagreements --kind codes`.
+
+

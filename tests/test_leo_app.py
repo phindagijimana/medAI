@@ -582,6 +582,28 @@ def test_disagreement_scoring_maps_blind_answers_back_to_the_readers():
     assert 0 <= ld.wilson(2, 3)[0] < ld.wilson(2, 3)[1] <= 1
 
 
+def test_accepted_sample_and_code_sheet():
+    from services import leo_disagree as ld
+    df = pd.DataFrame({
+        "document_id": ["n1", "n2"], "row_index": ["1", "2"],
+        "field_path": ["clinical_seizure.epilepsy_type", "clinical_seizure.epilepsy_type"],
+        "value": ["focal", "focal"], "verdict": ["accept", "review"], "evidence": ["q1", "q2"],
+        "concept_system": ["SNOMED", "MEDAI-ENUM"], "concept_id": ["230381007", "focal"],
+        "concept_label": ["Focal epilepsy", "focal"], "ontology_match": ["selected", "abstain"],
+        "code_accepted": ["True", "False"],
+        "ontology_candidates": ['[{"index":1,"system":"SNOMED","id":"230381007","label":"Focal epilepsy"}]',
+                                '[{"index":1,"system":"HPO","id":"HP:0001250","label":"Seizure"}]'],
+    })
+    acc = ld.export_accepted_sample(df, n=10)
+    assert len(acc) == 1 and acc.iloc[0]["document_id"] == "n1"
+    codes = ld.export_code_cases(df)
+    assert len(codes) == 2
+    codes.loc[0, "truth"] = "correct"
+    codes.loc[1, "truth"] = "abstain_ok"
+    sc = ld.score_code_cases(codes)
+    assert sc["correct"] == 1 and sc["abstain_ok"] == 1 and sc["selector_ok"]["k"] == 2
+
+
 # ─── job description (services.leo_job) ──────────────────────────────────────
 
 def _job_df():
@@ -854,7 +876,7 @@ def test_background_jobs_with_the_model_run_inside_the_app_context(client, runti
     backend = object()
     monkeypatch.setattr(c.application, "med42_backend", backend, raising=False)
     monkeypatch.setattr(c.application, "ensure_med42_loaded", lambda: "ready")
-    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}", llm)
+    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}:o{os.environ.get('MEDAI_LEO_ONTOLOGY_SELECT', '1')}", llm)
     csv = "patient_id,note_id,text\nP1,n1," + json.dumps(NOTE) + "\n"
     r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "on"})
     assert r.status_code == 202 and r.get_json()["mode"] == "llm+specialist"

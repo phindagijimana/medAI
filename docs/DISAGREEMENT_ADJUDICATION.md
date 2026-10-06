@@ -52,3 +52,17 @@ How many cases: the standard error of a proportion near 0.8 with 100 cases is ab
 - It measures which reader is right when they disagree. It does not measure cases where both are wrong in the same way (those never reach the sheet), so it cannot replace a random-sample audit of accepted values.
 - Adjudicating from the note, not from the chart, measures extraction accuracy, not clinical truth.
 - Results from one centre's notes will not transfer unchanged to another's.
+
+## 5. Extra sheets (accepted values and codes)
+
+The same CLI writes two other adjudication files from `RESULT.claims.csv` (PHI: they contain quotes):
+
+    bin/leo disagreements --kind accepted RESULT.claims.csv   # sample of accepted values (default 50)
+    bin/leo disagreements --kind codes RESULT.claims.csv      # quote, selected id, top-5 candidates
+    bin/leo disagreements --score-codes RESULT.codes.csv      # after filling truth: correct|wrong|abstain_ok|unclear
+
+Protocol additions, same blinding rules as section 3:
+
+- **Accepted sample.** Disagreements miss cases where both readers are wrong in the same way. Adjudicate `truth` as `correct` / `wrong` / `unclear` against the note (not the chart).
+- **Codes.** For each row, the five candidates are in `candidates`. Fill `truth` (`correct` if `selected_id` is the right concept, `wrong` if it is a different concept, `abstain_ok` if leaving MEDAI-ENUM was right, `unclear` otherwise). Optional `true_system` / `true_id` when correcting.
+

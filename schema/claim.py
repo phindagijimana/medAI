@@ -101,6 +101,10 @@ class ReasonCode(str, Enum):
     RESCUE_ROLE = "rescue_role"
     # The model ran, but no reader covers this field: a single-reader claim, never auto-accepted
     NO_SECOND_READER = "no_second_reader"
+    # Ontology: the selector abstained or the retriever had no exact hit (code stays MEDAI-ENUM)
+    ONTOLOGY_ABSTAIN = "ontology_abstain"
+    # Ontology: the selector picked a retrieved candidate (informational)
+    ONTOLOGY_SELECTED = "ontology_selected"
     # Accept
     # One detector made the claim and no second source contradicted or was asked to confirm it
     ACCEPT_UNANIMOUS = "accept_unanimous"
@@ -206,6 +210,21 @@ class Claim(BaseModel):
             "LLM disagree (reason code source_disagreement). Shown to the reviewer; "
             "null when the detectors agree or only one fired."
         ),
+    )
+
+    # Ontology arm (retriever + optional Arm E selector).  extra=forbid, so these are explicit.
+    ontology_match: str = Field(
+        "none",
+        description="none | exact | selected | abstain — how the concept id was bound",
+    )
+    ontology_candidates: list[dict] = Field(
+        default_factory=list,
+        description="Top retrieved candidates shown to the selector (index, system, id, label, rank_score)",
+    )
+    code_accepted: bool = Field(
+        False,
+        description="True only when the value is accepted AND the code is an exact hit or a selector pick "
+                    "(never MEDAI-ENUM)",
     )
 
     validator_verdict: ValidatorVerdict = ValidatorVerdict.REVIEW

@@ -113,3 +113,78 @@ def load(path: Path) -> pd.DataFrame:
     if p.suffix.lower() in (".xlsx", ".xlsm"):
         return pd.read_excel(p, dtype=str)
     return pd.read_csv(p, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+
+
+ACCEPTED_COLUMNS = ["case_id", "document_id", "row_index", "field_path", "value", "evidence_shown",
+                    "truth", "true_value", "adjudicator", "comment"]
+CODE_COLUMNS = ["case_id", "document_id", "row_index", "field_path", "mention", "selected_system",
+                "selected_id", "selected_label", "ontology_match", "code_accepted", "candidates",
+                "truth", "true_system", "true_id", "adjudicator", "comment"]
+
+
+def export_accepted_sample(claims: pd.DataFrame, n: int = 50, seed: str = "leo-accepted") -> pd.DataFrame:
+    """A reproducible sample of accepted *values* (the protocol's check that disagreements miss 'both wrong')."""
+    need = {"document_id", "row_index", "field_path", "value", "verdict", "evidence"}
+    missing = need - set(claims.columns)
+    if missing:
+        raise ValueError(f"not a LEO claims table, missing columns: {sorted(missing)}")
+    df = claims.fillna("")
+    acc = df[df["verdict"].astype(str).str.lower().eq("accept")].copy()
+    if acc.empty:
+        return pd.DataFrame(columns=ACCEPTED_COLUMNS)
+    acc["_k"] = acc.apply(lambda r: int(hashlib.sha256(
+        f"{seed}|{r['document_id']}|{r['row_index']}|{r['field_path']}|{r['value']}".encode()).hexdigest(), 16), axis=1)
+    acc = acc.sort_values("_k").head(int(n))
+    rows = []
+    for _, r in acc.iterrows():
+        cid = f"{r['document_id']}|{r['row_index']}|{r['field_path']}|accepted"
+        rows.append({"case_id": cid, "document_id": r["document_id"], "row_index": r["row_index"],
+                     "field_path": r["field_path"], "value": r["value"], "evidence_shown": r["evidence"],
+                     "truth": "", "true_value": "", "adjudicator": "", "comment": ""})
+    return pd.DataFrame(rows, columns=ACCEPTED_COLUMNS)
+
+
+def export_code_cases(claims: pd.DataFrame) -> pd.DataFrame:
+    """One row per claim that has candidates: quote, selected id, list. Adjudicator marks correct/wrong/abstain-ok."""
+    need = {"document_id", "row_index", "field_path", "evidence"}
+    missing = need - set(claims.columns)
+    if missing:
+        raise ValueError(f"not a LEO claims table, missing columns: {sorted(missing)}")
+    df = claims.fillna("")
+    if "ontology_candidates" not in df.columns:
+        return pd.DataFrame(columns=CODE_COLUMNS)
+    rows = []
+    for _, r in df.iterrows():
+        cands = str(r.get("ontology_candidates") or "").strip()
+        if not cands:
+            continue
+        cid = f"{r['document_id']}|{r['row_index']}|{r['field_path']}|code"
+        rows.append({
+            "case_id": cid, "document_id": r["document_id"], "row_index": r["row_index"],
+            "field_path": r["field_path"], "mention": r["evidence"],
+            "selected_system": r.get("concept_system", ""), "selected_id": r.get("concept_id", ""),
+            "selected_label": r.get("concept_label", ""), "ontology_match": r.get("ontology_match", ""),
+            "code_accepted": r.get("code_accepted", ""), "candidates": cands,
+            "truth": "", "true_system": "", "true_id": "", "adjudicator": "", "comment": "",
+        })
+    return pd.DataFrame(rows, columns=CODE_COLUMNS)
+
+
+def score_code_cases(sheet: pd.DataFrame) -> dict:
+    """truth = correct | wrong | abstain_ok | unclear | blank."""
+    df = sheet.fillna("")
+    t = {"correct": 0, "wrong": 0, "abstain_ok": 0, "unclear": 0, "unadjudicated": 0}
+    for _, r in df.iterrows():
+        truth = str(r.get("truth") or "").strip().lower()
+        if truth == "":
+            t["unadjudicated"] += 1
+        elif truth in t:
+            t[truth] += 1
+        else:
+            raise ValueError(f"code-sheet truth must be correct, wrong, abstain_ok or unclear, got {truth!r}")
+    n = t["correct"] + t["wrong"] + t["abstain_ok"]
+    k = t["correct"] + t["abstain_ok"]
+    lo, hi = wilson(k, n)
+    return {"n_cases": int(len(df)), "n_scored": n, **t,
+            "selector_ok": {"k": k, "n": n, "rate": round(k / n, 3) if n else None,
+                            "ci95": [round(lo, 3), round(hi, 3)]}}

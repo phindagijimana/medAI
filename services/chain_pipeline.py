@@ -105,6 +105,8 @@ class ChainPipelineConfig:
     # When both readers agree on a path a reader covers, a specialist "probable" is treated as asserted
     # (the second reader is the check).  Off for ablations that replay old arms.
     agreed_probable_is_asserted: bool = True
+    # Arm E: on a fuzzy retrieval, the model may pick from the top-k list or abstain. Off = exact hits only.
+    ontology_select: bool = True
     llm_arm: str = ""   # provenance label of the LLM arm, e.g. "M3" (set by the caller)
 
 
@@ -131,6 +133,9 @@ class ExtractionStats:
     n_no_second_reader: int = 0   # specialist-only claims on fields no LLM reader covers
     n_specialist_only_covered: int = 0  # specialist-only on a field a reader covers (model found nothing)
     n_agreed_probable_asserted: int = 0  # agreed claims whose specialist certainty was raised to definite
+    n_ontology_exact: int = 0
+    n_ontology_selected: int = 0
+    n_ontology_abstain: int = 0
 
     def tally(self, verdict: ValidatorVerdict, reasons: list[ReasonCode]) -> None:
         self.n_claims_emitted += 1
@@ -164,6 +169,7 @@ class ChainPipeline:
         candidate_service: Any = None,  # services.ontology_candidates.OntologyCandidateService
         llm_backend: Any = None,         # optional Med42Backend -> wrapped in LiveLLMReasoner
         llm_reasoner: Any = None,        # optional callable(text, doc_id, doc_date) -> phenotype dict
+        ontology_selector: Any = None,   # optional OntologySelector (Arm E)
     ):
         self.cfg = config or ChainPipelineConfig()
         self._extractor = extractor
@@ -174,6 +180,7 @@ class ChainPipeline:
             from services.chain_llm import LiveLLMReasoner
             llm_reasoner = LiveLLMReasoner(llm_backend, arm=self.cfg.llm_arm or "M3")
         self._llm_reasoner = llm_reasoner
+        self._ontology_selector = ontology_selector
         self._lazy_init_done = False
 
     def _lazy_init(self) -> None:
@@ -365,6 +372,10 @@ class ChainPipeline:
             self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
             claims.append(claim)
 
+        self._apply_ontology_select(claims, text, stats)
+        for claim in claims:
+            self._set_code_accepted(claim)
+
         if return_claims:
             return stats, claims
         return stats
@@ -500,13 +511,17 @@ class ChainPipeline:
         concept_label = concept_id
         concept_release = self.cfg.ontology_release
         candidate_rank = 1
+        ontology_match = "none"
+        ontology_candidates: list[dict] = []
 
         if mention_text and self._candidate_service is not None:
+            from services.onto_select import snapshot
             cands = self._candidate_service.get_candidates(
                 mention=mention_text, field_type=field_type, k=5,
             )
+            ontology_candidates = snapshot(cands)
             # Without the LLM selection step, only an exact label/synonym hit is
-            # trusted; anything fuzzier keeps the enum ID and is left to review.
+            # trusted; anything fuzzier waits for Arm E or stays the enum ID.
             if cands and cands[0].rank_score >= self.cfg.min_candidate_score and not cands[0].is_obsolete:
                 top = cands[0]
                 concept_system = top.system
@@ -514,6 +529,7 @@ class ChainPipeline:
                 concept_label = top.label
                 concept_release = top.release or concept_release
                 candidate_rank = 1
+                ontology_match = "exact"
 
         # Map Evidence certainty / temporal_status → claim labels
         certainty = (ev.get("certainty") or "").lower()
@@ -555,7 +571,65 @@ class ChainPipeline:
         )
         claim.field_path = field_type
         claim.value = ev.get("value")
+        claim.ontology_match = ontology_match
+        claim.ontology_candidates = ontology_candidates
         return claim
+
+    def _apply_ontology_select(self, claims: list[Claim], text: str, stats: ExtractionStats) -> None:
+        """Arm E: fuzzy mentions get a pick from the retrieved list, or abstain. Never a new id."""
+        for c in claims:
+            if c.ontology_match == "exact":
+                stats.n_ontology_exact += 1
+        pending = [c for c in claims if c.ontology_match == "none" and c.ontology_candidates]
+        if not pending:
+            return
+        if not self.cfg.ontology_select or self._ontology_selector is None:
+            for c in pending:
+                c.ontology_match = "abstain"
+                stats.n_ontology_abstain += 1
+            return
+        items = [{
+            "id": c.claim_id,
+            "mention": c.mention.text,
+            "field_path": c.field_path or "",
+            "candidates": c.ontology_candidates,
+        } for c in pending]
+        try:
+            picks = self._ontology_selector(text, items)
+        except Exception:
+            logger.exception("ontology selector failed; abstaining")
+            picks = {}
+        from schema.claim import Concept
+        for c in pending:
+            r = picks.get(c.claim_id) if isinstance(picks, dict) else None
+            picked = getattr(r, "picked", None) if r is not None else None
+            if isinstance(picked, dict) and picked.get("id") and picked.get("system"):
+                allowed = {(x.get("system"), x.get("id")) for x in c.ontology_candidates}
+                if (picked.get("system"), picked.get("id")) not in allowed:
+                    c.ontology_match = "abstain"
+                    stats.n_ontology_abstain += 1
+                    continue
+                c.concept = Concept(
+                    system=picked["system"], id=str(picked["id"]),
+                    label=str(picked.get("label") or picked["id"]),
+                    ontology_release=c.concept.ontology_release,
+                )
+                c.candidate_rank = int(picked.get("index") or 1)
+                c.ontology_match = "selected"
+                stats.n_ontology_selected += 1
+            else:
+                c.ontology_match = "abstain"
+                stats.n_ontology_abstain += 1
+
+    @staticmethod
+    def _set_code_accepted(claim: Claim) -> None:
+        sys = (claim.concept.system or "")
+        claim.code_accepted = (
+            claim.validator_verdict == ValidatorVerdict.ACCEPT
+            and claim.ontology_match in ("exact", "selected")
+            and sys not in ("", "MEDAI-ENUM")
+            and bool(claim.concept.id)
+        )
 
     # ---- Verify --------------------------------------------------------
 

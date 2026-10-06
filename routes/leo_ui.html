@@ -473,6 +473,7 @@ function renderItem(it) {
   const val = el('div', {}, [el('span', {class: 'small', text: 'LEO: '}), el('span', {class: 'val', text: it.value || '(blank)'})]);
   const bits = [];
   if (it.why) bits.push(el('div', {class: 'small', text: 'Why: ' + why(it.why)}));
+  if (it.code) bits.push(el('div', {class: 'small', text: 'Code: ' + (it.code_system ? it.code_system + ' ' : '') + it.code + (it.code_status ? ' (' + it.code_status + ')' : '')}));
   if (it.evidence) bits.push(el('div', {class: 'quote', text: '“' + it.evidence.replace(/^'/, '') + '”'}));
   const note = el('div', {class: 'note', hidden: ''}); let loaded = false;
   const showNote = el('button', {type: 'button', class: 'ghost', text: 'Show in note'});

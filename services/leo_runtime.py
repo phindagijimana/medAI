@@ -92,7 +92,7 @@ class LeoRuntime:
     def __init__(self, *, backend: Any = None, arm: str = "L1C", chunk_max_chars: int = 8000,
                  use_llm: bool = True, disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None,
                  adapter_label: str = "", ext_reader: Optional[bool] = None,
-                 require_second_reader: Optional[bool] = None):
+                 require_second_reader: Optional[bool] = None, ontology_select: Optional[bool] = None):
         self.backend = backend
         self.arm = arm
         self.chunk_max_chars = chunk_max_chars
@@ -103,6 +103,8 @@ class LeoRuntime:
         self.ext_reader = bool(self.use_llm and (env_flag("MEDAI_LEO_EXT_READER") if ext_reader is None else ext_reader))
         self.require_second_reader = (env_flag("MEDAI_LEO_REQUIRE_SECOND_READER")
                                       if require_second_reader is None else bool(require_second_reader))
+        self.ontology_select = bool(self.use_llm and (env_flag("MEDAI_LEO_ONTOLOGY_SELECT")
+                                                      if ontology_select is None else ontology_select))
         self._pipeline = None
         self._reasoner = None
         self._asker: Optional[Asker] = None
@@ -114,12 +116,13 @@ class LeoRuntime:
     def load(cls, *, mode: str = "gpu", arm: str = "L1C", adapter_dir: str = "", chunk_max_chars: int = 8000,
              disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None, model_name: str = "",
              cache_dir: str = "", ext_reader: Optional[bool] = None,
-             require_second_reader: Optional[bool] = None) -> "LeoRuntime":
+             require_second_reader: Optional[bool] = None,
+             ontology_select: Optional[bool] = None) -> "LeoRuntime":
         """``mode`` = ``gpu`` (load Med42-8B; fails loudly without CUDA) or ``cpu`` (no LLM)."""
         if mode == "cpu":
             return cls(backend=None, use_llm=False, chunk_max_chars=chunk_max_chars,
                        disagree_llm=disagree_llm, ledger=ledger, ext_reader=False,
-                       require_second_reader=require_second_reader)
+                       require_second_reader=require_second_reader, ontology_select=False)
         if mode != "gpu":
             raise ValueError("mode must be 'gpu' or 'cpu'")
         import os
@@ -148,7 +151,8 @@ class LeoRuntime:
         return cls(backend=Med42Backend(svc), arm=arm, chunk_max_chars=chunk_max_chars,
                    disagree_llm=disagree_llm, ledger=ledger,
                    adapter_label=Path(adapter_dir).name if adapter_dir else "",
-                   ext_reader=ext_reader, require_second_reader=require_second_reader)
+                   ext_reader=ext_reader, require_second_reader=require_second_reader,
+                   ontology_select=ontology_select)
 
     # ---- components ------------------------------------------------------
 
@@ -157,19 +161,24 @@ class LeoRuntime:
         return "llm+specialist" if self.use_llm else "specialist_only"
 
     def _build_pipeline(self):
-        from services.chain_llm import ChunkedReasoner, CombinedReasoner, ExtendedLiveReasoner, FlatLiveReasoner
         from services.chain_pipeline import ChainPipeline, ChainPipelineConfig
         cfg = ChainPipelineConfig(llm_arm=self.arm if self.use_llm else "")
         cfg.require_second_reader_for_uncovered_fields = self.require_second_reader
+        cfg.ontology_select = self.ontology_select
         for path in self.disagree_llm:
             cfg.disagree_primary[path] = "llm"
         reasoner = None
+        selector = None
         if self.use_llm:
+            from services.chain_llm import ChunkedReasoner, CombinedReasoner, ExtendedLiveReasoner, FlatLiveReasoner
+            from services.onto_select import OntologySelector
             flat = FlatLiveReasoner(self.backend, arm=self.arm)
             inner: Any = CombinedReasoner(flat, ExtendedLiveReasoner(self.backend)) if self.ext_reader else flat
             reasoner = ChunkedReasoner(inner, max_chars=self.chunk_max_chars)
+            if self.ontology_select:
+                selector = OntologySelector(self.backend)
         self._reasoner = reasoner
-        return ChainPipeline(cfg, llm_reasoner=reasoner)
+        return ChainPipeline(cfg, llm_reasoner=reasoner, ontology_selector=selector)
 
     @property
     def pipeline(self):
@@ -192,7 +201,8 @@ class LeoRuntime:
                 "model": getattr(self.backend, "model_name", "") if self.backend is not None else "",
                 "adapter": self.adapter_label, "chunk_max_chars": self.chunk_max_chars,
                 "disagree_llm_fields": list(self.disagree_llm),
-                "require_second_reader": self.require_second_reader}
+                "require_second_reader": self.require_second_reader,
+                "ontology_select": self.ontology_select}
 
     # ---- work ------------------------------------------------------------
 

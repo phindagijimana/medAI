@@ -80,7 +80,8 @@ def _runtime(args):
     return LeoRuntime.load(mode=mode, arm=arm, adapter_dir=getattr(args, "adapter", "") or "",
                            chunk_max_chars=getattr(args, "chunk_chars", 8000),
                            disagree_llm=parse_disagree_llm(getattr(args, "disagree_llm", None)),
-                           ext_reader=False if getattr(args, "no_ext_reader", False) else None)
+                           ext_reader=False if getattr(args, "no_ext_reader", False) else None,
+                           ontology_select=False if getattr(args, "no_ontology_select", False) else None)
 
 
 def _submit(name: str, argv: list[str], *, gpu: bool, partition: str, hours: int, extra_env: dict | None = None) -> str:
@@ -214,6 +215,8 @@ def cmd_batch(args) -> int:
             argv.append("--accepted-only")
         if getattr(args, "no_ext_reader", False):
             argv.append("--no-ext-reader")
+        if getattr(args, "no_ontology_select", False):
+            argv.append("--no-ontology-select")
         jid = _submit("batch", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -308,6 +311,8 @@ def cmd_run(args) -> int:
                 argv += [flag, val]
         if getattr(args, "no_ext_reader", False):
             argv.append("--no-ext-reader")
+        if getattr(args, "no_ontology_select", False):
+            argv.append("--no-ontology-select")
         jid = _submit("run", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -383,18 +388,51 @@ def cmd_disagreements(args) -> int:
                 rate = "n/a" if x["rate"] is None else f"{x['rate']:.2f} [{x['ci95'][0]:.2f}, {x['ci95'][1]:.2f}]"
                 print(f"    {reader:<6} right {x['k']}/{x['n']}  {rate}")
         return 0
+    if getattr(args, "score_codes", None):
+        res = ld.score_code_cases(ld.load(Path(args.score_codes).expanduser()))
+        s = res["selector_ok"]
+        rate = "n/a" if s["rate"] is None else f"{s['rate']:.2f} [{s['ci95'][0]:.2f}, {s['ci95'][1]:.2f}]"
+        print(f"codes: {res['n_cases']} cases, {res['n_scored']} scored "
+              f"(correct {res['correct']}, wrong {res['wrong']}, abstain_ok {res['abstain_ok']}, "
+              f"unclear {res['unclear']}, not yet {res['unadjudicated']})")
+        print(f"    selector ok (correct+abstain_ok) {s['k']}/{s['n']}  {rate}")
+        return 0
+        res = ld.score_code_cases(ld.load(Path(args.score_codes).expanduser()))
+        s = res["selector_ok"]
+        rate = "n/a" if s["rate"] is None else f"{s['rate']:.2f} [{s['ci95'][0]:.2f}, {s['ci95'][1]:.2f}]"
+        print(f"codes: {res['n_cases']} cases, {res['n_scored']} scored "
+              f"(correct {res['correct']}, wrong {res['wrong']}, abstain_ok {res['abstain_ok']}, "
+              f"unclear {res['unclear']}, not yet {res['unadjudicated']})")
+        print(f"    selector ok (correct+abstain_ok) {s['k']}/{s['n']}  {rate}")
+        return 0
     if not args.table:
         raise SystemExit("give the claims table (RESULT.claims.csv), or --score SHEET")
     src = Path(args.table).expanduser()
     import pandas as pd
     claims = pd.read_csv(src, dtype=str, keep_default_na=False, encoding="utf-8-sig")
-    cases = ld.export_cases(claims)
-    dest = Path(args.output) if args.output else src.with_name(src.name.replace(".claims.csv", "") + ".disagreements.csv")
+    kind = getattr(args, "kind", "disagree") or "disagree"
+    if kind == "accepted":
+        cases = ld.export_accepted_sample(claims, n=args.n)
+        dest = Path(args.output) if args.output else src.with_name(src.name.replace(".claims.csv", "") + ".accepted_sample.csv")
+        label = "accepted-value sample"
+    elif kind == "codes":
+        cases = ld.export_code_cases(claims)
+        dest = Path(args.output) if args.output else src.with_name(src.name.replace(".claims.csv", "") + ".codes.csv")
+        label = "ontology-code case"
+    else:
+        cases = ld.export_cases(claims)
+        dest = Path(args.output) if args.output else src.with_name(src.name.replace(".claims.csv", "") + ".disagreements.csv")
+        label = "disagreement"
     if dest.exists() and not args.force:
         raise SystemExit(f"{dest} exists; use --force to overwrite (adjudications in it would be lost)")
     cases.to_csv(dest, index=False, encoding="utf-8-sig")
-    print(f"[leo] wrote {dest}: {len(cases)} disagreement(s). Remove the key_A_is column before giving it to an adjudicator, "
-          f"keep a copy with it; score with: leo disagreements --score <copy with key>")
+    extra = ""
+    if kind == "disagree":
+        extra = (" Remove the key_A_is column before giving it to an adjudicator, keep a copy with it; "
+                 "score with: leo disagreements --score <copy with key>")
+    elif kind == "codes":
+        extra = " Fill truth (correct|wrong|abstain_ok|unclear); score with: leo disagreements --score-codes SHEET"
+    print(f"[leo] wrote {dest}: {len(cases)} {label}(s).{extra}")
     return 0
 
 
@@ -457,6 +495,8 @@ def cmd_start(args) -> int:
             env["MEDAI_LEO_ARM"] = args.arm
         if getattr(args, "no_ext_reader", False):
             env["MEDAI_LEO_EXT_READER"] = "0"
+        if getattr(args, "no_ontology_select", False):
+            env["MEDAI_LEO_ONTOLOGY_SELECT"] = "0"
         STATE.write_text(json.dumps({"node": os.uname().nodename, "port": args.port, "mode": mode,
                                      "job": os.environ.get("SLURM_JOB_ID", ""), "started": datetime.now().isoformat()}))
         host = env["SERVICE_HOST"]
@@ -481,6 +521,8 @@ def cmd_start(args) -> int:
         argv += ["--arm", args.arm]
     if getattr(args, "no_ext_reader", False):
         argv.append("--no-ext-reader")
+    if getattr(args, "no_ontology_select", False):
+        argv.append("--no-ontology-select")
     _submit("server", argv, gpu=not args.cpu, partition=args.partition or "general", hours=args.hours)
     print("[leo] when it starts, `leo status` shows the URL and the SSH tunnel command.")
     return 0
@@ -660,6 +702,8 @@ def _common(sp, *, model=True):
                              "'candidate' = seizure type, not validated on real notes)")
         sp.add_argument("--no-ext-reader", action="store_true",
                         help="do not run the second model call on EEG, onset, rescue and surgery (default: on)")
+        sp.add_argument("--no-ontology-select", action="store_true",
+                        help="do not ask the model to pick an ontology code from the retrieved list (exact hits only)")
 
 
 def main(argv=None) -> int:
@@ -687,6 +731,7 @@ def main(argv=None) -> int:
     sp.add_argument("--adapter", default="")
     sp.add_argument("--arm", default="")
     sp.add_argument("--no-ext-reader", action="store_true")
+    sp.add_argument("--no-ontology-select", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=24)
     sp.set_defaults(fn=cmd_start)
@@ -769,6 +814,10 @@ def main(argv=None) -> int:
     sp.add_argument("--score", default=None, help="an adjudicated sheet (with key_A_is) to tally per field")
     sp.add_argument("--shown", choices=["rules", "model"], default="rules",
                     help="who produced the value LEO displayed (default policy: rules)")
+    sp.add_argument("--kind", choices=["disagree", "accepted", "codes"], default="disagree",
+                    help="disagree = model vs rules; accepted = sample of accepted values; codes = ontology picks")
+    sp.add_argument("-n", type=int, default=50, help="accepted sample size")
+    sp.add_argument("--score-codes", default=None, help="an adjudicated code sheet to tally")
     sp.set_defaults(fn=cmd_disagreements)
 
     sp = sub.add_parser("extract", help="one note")

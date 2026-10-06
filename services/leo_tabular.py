@@ -24,12 +24,14 @@ run it as a formula.
 from __future__ import annotations
 
 from typing import Any, Iterable, Optional
+import json
 
 from services.leo_catalog import Phenotype
 
 CLAIM_COLUMNS = ["document_id", "row_index", "field_path", "value", "verdict", "reason_codes", "evidence",
                  "char_start", "char_end", "section", "assertion", "experiencer", "temporality", "source",
-                 "alternative"]
+                 "alternative", "concept_system", "concept_id", "concept_label", "ontology_match",
+                 "code_accepted", "ontology_candidates"]
 _MAX_CELL = 2000
 
 
@@ -41,6 +43,15 @@ def _safe(s: Any) -> Any:
         if s[:1] in ("=", "+", "-", "@"):
             return "'" + s
     return s
+
+
+def _cands_cell(cands: Any) -> str:
+    if not cands:
+        return ""
+    try:
+        return json.dumps(cands, ensure_ascii=True)
+    except Exception:
+        return str(cands)
 
 
 def display_drug(name: str) -> str:
@@ -124,6 +135,12 @@ def claim_rows(claims: Iterable[Any], document_id: str, row_index: int, *, singl
             "evidence": _safe(c.mention.text), "char_start": c.mention.start, "char_end": c.mention.end,
             "section": c.section, "assertion": c.assertion.value, "experiencer": c.experiencer.value,
             "temporality": c.temporality.status.value, "source": _sources(c), "alternative": _safe(c.alternative or ""),
+            "concept_system": getattr(c.concept, "system", "") or "",
+            "concept_id": getattr(c.concept, "id", "") or "",
+            "concept_label": getattr(c.concept, "label", "") or "",
+            "ontology_match": getattr(c, "ontology_match", "") or "",
+            "code_accepted": bool(getattr(c, "code_accepted", False)),
+            "ontology_candidates": _safe(_cands_cell(getattr(c, "ontology_candidates", None))),
         })
     return out
 
@@ -131,7 +148,8 @@ def claim_rows(claims: Iterable[Any], document_id: str, row_index: int, *, singl
 def wide_columns(phenotypes: list[Phenotype]) -> list[str]:
     cols: list[str] = []
     for p in phenotypes:
-        cols += [p.id, f"{p.id}_status", f"{p.id}_evidence", f"{p.id}_source", f"{p.id}_why"]
+        cols += [p.id, f"{p.id}_status", f"{p.id}_evidence", f"{p.id}_source", f"{p.id}_why",
+                 f"{p.id}_code", f"{p.id}_system", f"{p.id}_code_status"]
         if p.kind == "list":
             cols.append(f"{p.id}_detail")
         if p.kind == "frequency":
@@ -155,7 +173,7 @@ def wide_row(claims: list[Any], phenotypes: list[Phenotype], *, include_review: 
         mine = [c for c in claims if c.field_path in p.field_paths and c.validator_verdict.value != "reject"]
         mine.sort(key=lambda c: 0 if ok(c) else 1)
         row.update({p.id: "", f"{p.id}_status": "not_found", f"{p.id}_evidence": "", f"{p.id}_source": "",
-                    f"{p.id}_why": ""})
+                    f"{p.id}_why": "", f"{p.id}_code": "", f"{p.id}_system": "", f"{p.id}_code_status": ""})
         if p.kind == "list":
             row[f"{p.id}_detail"] = ""
         if p.kind == "frequency":
@@ -202,7 +220,31 @@ def wide_row(claims: list[Any], phenotypes: list[Phenotype], *, include_review: 
                     row[f"{p.id}_seizure_free"] = bool(v.get("seizure_free"))
         row[f"{p.id}_status"] = "accepted" if all_ok else "needs_review"
         row[f"{p.id}_why"] = ";".join(why)
+        code_src = None
+        if p.kind == "list":
+            for c in mine:
+                if getattr(c, "code_accepted", False) or (include_review and (getattr(c.concept, "system", "") not in ("", "MEDAI-ENUM"))):
+                    code_src = c
+                    break
+        else:
+            code_src = mine[0] if mine else None
+        cid, csys, cst = _code_triple(code_src, include_review=include_review)
+        row[f"{p.id}_code"], row[f"{p.id}_system"], row[f"{p.id}_code_status"] = cid, csys, cst
     return row
+
+
+def _code_triple(c: Any, *, include_review: bool) -> tuple[str, str, str]:
+    if c is None:
+        return "", "", ""
+    sys = getattr(getattr(c, "concept", None), "system", "") or ""
+    cid = getattr(getattr(c, "concept", None), "id", "") or ""
+    if sys in ("", "MEDAI-ENUM") or not cid:
+        return "", "", ""
+    accepted = bool(getattr(c, "code_accepted", False))
+    status = "accepted" if accepted else "suggestion"
+    if not include_review and not accepted:
+        return "", "", ""
+    return str(cid), str(sys), status
 
 
 class _Generic:

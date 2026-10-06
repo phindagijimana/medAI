@@ -98,10 +98,14 @@ def reviewable(status: str, scope: str) -> bool:
 def proposal(table: pd.DataFrame, f: Field, row: int) -> dict:
     """What LEO proposed for field ``f`` in 1-based ``row``."""
     i, dc = row - 1, doc_column(table)
+    code_col, sys_col, cst_col = f"{f.id}_code", f"{f.id}_system", f"{f.id}_code_status"
     return {"row": row, "doc_id": _cell(table, i, dc) or f"row{row}", "field": f.id, "label": f.label,
             "value": _cell(table, i, f.value), "status": _cell(table, i, f.status),
             "why": _cell(table, i, f.why), "evidence": _cell(table, i, f.evidence),
-            "source": _cell(table, i, f.source)}
+            "source": _cell(table, i, f.source),
+            "code": _cell(table, i, code_col) if code_col in table.columns else "",
+            "code_system": _cell(table, i, sys_col) if sys_col in table.columns else "",
+            "code_status": _cell(table, i, cst_col) if cst_col in table.columns else ""}
 
 
 def items(table: pd.DataFrame, fields: list[Field], latest: dict, scope: str = "flagged") -> list[dict]:
