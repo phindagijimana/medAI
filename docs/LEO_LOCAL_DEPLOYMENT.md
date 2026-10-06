@@ -74,7 +74,9 @@ Tested (automated, `tests/test_leo_app.py`): login required everywhere, wrong pa
 
 **Found by running it on a GPU node (2026-10-05):** the server started under gunicorn on the GPU node. The same run found three faults, all fixed afterwards and covered by tests: model jobs started from the web page failed at once ("working outside of application context"); a missing package (`pydantic-settings`) stopped the model loading in the web app; and deleting a running job did not stop it (now refused with "cancel it first").
 
-**Not tested:** a full clean-machine install including the GPU packages (the CPU part was tried on 2026-10-05; see section 6); a model job through the web page after those two fixes (rerun pending); GPU time and memory per note under a model run; load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
+**After the fixes, on the same GPU node (L40S 24 GB, synthetic notes only):** with the model on, a 5-note and a 20-note batch, and a "Describe a job" run with a custom question (8 notes), all finished without errors (no tracebacks in the server log). Time was about 16 to 18 s per note, so 1,000 notes would take about 4.6 hours. The model used 15.9 GB after loading (4.96 s when the files were already cached on the node; 114 s the first time) and 16.7 GB at the peak. A second job submitted while the first ran stayed `queued` until the first finished. Deleting a queued or running job was refused (409). A queued job that was cancelled stayed `queued` until the job in front finished; this is changed so the cancel takes effect within about a second (covered by a test; not rerun on the GPU).
+
+**Not tested:** a full clean-machine install including the GPU packages (the CPU part was tried on 2026-10-05; see section 6); a full 200-note or longer model run (stopped at 39 notes); the accuracy of the model path on these runs (only that it ran); load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
 
 ## 8. What this is not
 

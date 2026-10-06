@@ -879,9 +879,10 @@ def test_a_running_job_cannot_be_deleted_only_cancelled_first(client, monkeypatc
         time.sleep(0.5)
         assert c.delete(f"/leo/jobs/{jid}").status_code == 409
         assert c.post(f"/leo/jobs/{jid}/cancel").status_code == 200
+        # the cancel takes effect at once, while the job in front still holds the slot
+        assert _wait_state(c, jid, ("cancelled",), secs=10)["state"] == "cancelled"
     finally:
         slot.release()
-    assert _wait_state(c, jid, ("cancelled",))["state"] == "cancelled"
     assert c.delete(f"/leo/jobs/{jid}").status_code == 200
 
 

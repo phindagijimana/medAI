@@ -190,6 +190,19 @@ def extract_one():
     return resp
 
 
+def _wait_for_slot(job: dict) -> bool:
+    """Wait for this job's turn.  Returns False if the job was cancelled while waiting (so a cancel takes effect at
+    once, not when the job in front finishes); True when it holds the slot and must release it."""
+    while True:
+        if job.get("cancel"):
+            return False
+        if _SLOT.acquire(timeout=0.5):
+            if job.get("cancel"):
+                _SLOT.release()
+                return False
+            return True
+
+
 def _in_app_context(fn):
     """Run a background job inside the Flask app context: the model runtime looks up the app (``current_app``),
     which a bare thread does not have.  Captured here, in the request thread."""
@@ -207,9 +220,8 @@ def _run_job(job_id: str) -> None:
     jd = _jobs_root() / job_id
     held = False
     try:
-        _SLOT.acquire()
-        held = True
-        if job.get("cancel"):                               # cancelled while waiting its turn
+        held = _wait_for_slot(job)
+        if not held:                                        # cancelled while waiting its turn
             job["state"], job["summary"] = "cancelled", dict(_EMPTY_SUMMARY)
             return
         job["state"] = "running"
@@ -377,9 +389,8 @@ def _run_spec_job(job_id: str) -> None:
     spec = job["spec"]
     held = False
     try:
-        _SLOT.acquire()
-        held = True
-        if job.get("cancel"):
+        held = _wait_for_slot(job)
+        if not held:
             job["state"], job["summary"] = "cancelled", dict(_EMPTY_SUMMARY)
             return
         job["state"] = "running"
