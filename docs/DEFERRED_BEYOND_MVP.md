@@ -10,20 +10,18 @@ Related: `FUTURE_WORK.md` (LEO in the app, items 5 and 6), `LEO_USER_GUIDE.md` (
 
 ## 1. Reviewers adding a value LEO missed
 
-**Deferred.** Depends on real review data.
+**Shipped 2026-10-06.** Reviewers can add a missed `not_found` value.
 
 | | |
 |---|---|
-| What exists | The Review tab and `bin/leo review` / `merge` let a reviewer accept, correct or reject a value LEO found. Decisions are stored append-only (`<out>.reviews.jsonl`) and as the latest decision per value (`<out>.reviewed.csv`). A field LEO did not find (`not_found`) is not offered for review. |
-| What is missing | A reviewer cannot say "the note states a value here that LEO missed". |
-| Consequence | Review data measures **precision** (of the values LEO produced, how many were right) but not **recall** (of the values in the note, how many LEO found). Any figure computed from review files overstates quality for that reason. The review files must not be quoted as an accuracy measurement of LEO's recall. |
-| What it would take | An "add a value" action in the Review tab: pick the field, type the value, select the supporting words in the note (stored with offsets). A new decision type (`add`) in the review log, new `_review` code `added_by_reviewer`, and `_final` filled from the reviewer's value. A rule for fields where a value was found but the reviewer adds a second one (lists such as drugs). Tests for the log, merge and CSV/Excel outputs. |
-| When it pays off | Only once reviewers work on real notes; on synthetic notes the generator already provides the full reference, so recall is measurable without it. |
-| Do not claim | Recall, sensitivity, or "no missed values" from review data without this feature. |
+| What exists | Decision type `add` in the Review tab (scope “Values LEO missed”), `bin/leo review --misses`, merge code `added_by_reviewer` on `<field>_review` with `<field>_final` from the reviewer. Supporting words go in `comment`. |
+| What is still missing | Adding a *second* value to a list field that already has one (e.g. another drug). Learning from adds (item 2). |
+| Consequence | Review files that include adds can measure recall **on the notes that were reviewed**. They still must not be quoted as recall for notes nobody looked at, or as accuracy on real notes. |
+| Do not claim | Recall, sensitivity, or "no missed values" from review data unless the reviewed notes actually used the add action, and never for real notes until item 3. |
 
 ## 2. Learning from review decisions
 
-**Deferred.** Depends on real review data (and so on item 1 and on real notes). Nothing in LEO learns from review today; the decisions are stored, not used.
+**Deferred.** Depends on real review data (and so on item 3). Nothing in LEO learns from review today; the decisions are stored, not used. Item 1 (add a missed value) is now in the tool, so once real reviews exist the recall step is no longer blocked on software.
 
 Order of work once data exists, each step shipped as a new pipeline version with the evaluation re-run, never as a live change:
 
@@ -62,4 +60,4 @@ Until then, these statements stay true and stay in the guide: LEO has been teste
 
 | date | change |
 |---|---|
-| 2026-10-02 | Page created. Items 1 to 3 deferred beyond the MVP by the project lead. |
+| 2026-10-06 | Item 1 shipped: reviewers can add a missed `not_found` value (`add` / `added_by_reviewer`). Learning from reviews and real notes stay deferred. |

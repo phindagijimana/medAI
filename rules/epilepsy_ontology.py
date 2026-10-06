@@ -2783,7 +2783,7 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
     "levetiracetam": ConceptEntry(
         cui="C0377265", sctid="387000003",
         label="Levetiracetam",
-        synonyms=["levetiracetam", "Keppra", "LEV"],
+        synonyms=["levetiracetam", "Keppra", "Kepra", "LEV"],
         source_provenance=[
             "ExECT-V2 seed C0377265", "RxNorm 114477",
             "F-S train (levetiracetam, Keppra)",
@@ -2837,6 +2837,7 @@ MEDICATION_ONTOLOGY: dict[str, ConceptEntry] = {
             "zonisamide", "Zonegran", "ZNS",
             "Zonismaide",  # F-S 40 misspelling (EA0188)
             "zonsiamide",  # F-S 40 misspelling (EA0174)
+            "zobisamide",
         ],
         source_provenance=[
             "ExECT-V2 seed C0078844", "RxNorm 39998",

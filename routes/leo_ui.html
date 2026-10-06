@@ -233,7 +233,7 @@
   <p class="hint">Check each value against its quote. Decisions are saved as you go. LEO’s own columns are never changed.</p>
   <div class="row">
     <label>Reviewer <input type="text" id="reviewer" size="14" maxlength="60" placeholder="initials or ID"></label>
-    <label>Show <select id="rscope"><option value="flagged">Values that need review</option><option value="all">All values found</option></select></label>
+    <label>Show <select id="rscope"><option value="flagged">Values that need review</option><option value="misses">Values LEO missed</option><option value="all">All values found</option></select></label>
     <span class="msg" id="rcount" role="status"></span>
   </div>
   <div class="small" style="margin-top:4px">Use initials or a pseudonym, never a patient name.</div>
@@ -432,7 +432,7 @@ async function rget(extra) {
   const r = await fetch('/leo/jobs/' + RJ + '/review?scope=' + $('#rscope').value + extra); return r.json();
 }
 function showCounts(c) {
-  $('#rcount').textContent = c.reviewed + ' of ' + c.total + ' reviewed (' + c.accept + ' right, ' + c.correct + ' corrected, ' + c.reject + ' wrong)';
+  $('#rcount').textContent = c.reviewed + ' of ' + c.total + ' reviewed (' + c.accept + ' right, ' + c.correct + ' corrected, ' + c.reject + ' wrong, ' + (c.add || 0) + ' added)';
 }
 async function openReview(jobId) {
   RJ = jobId; sessionStorage.setItem('leo_job', jobId); $('#reviewer').value = USER || sessionStorage.getItem('leo_reviewer') || ''; $('#reviewer').readOnly = !!USER;
@@ -487,32 +487,38 @@ function renderItem(it) {
   };
   const bY = el('button', {type: 'button', class: 'ghost', text: 'Right'}), bA = el('button', {type: 'button', class: 'ghost', text: 'Correct it'});
   const bB = el('button', {type: 'button', class: 'ghost', text: 'Wrong'}), undo = el('button', {type: 'button', class: 'ghost', text: 'Undo'});
-  const fix = el('input', {type: 'text', 'aria-label': 'Right value', placeholder: 'Type the right value', maxlength: '500'});
-  const saveFix = el('button', {type: 'button', text: 'Save correction'});
-  const fixRow = el('div', {hidden: '', style: 'margin-top:8px'}, [fix, ' ', saveFix]);
+  const bAdd = el('button', {type: 'button', class: 'ghost', text: 'Add missed value'});
+  const fix = el('input', {type: 'text', 'aria-label': 'Right value', placeholder: it.status === 'not_found' ? 'Type the missed value' : 'Type the right value', maxlength: '500'});
+  const quote = el('input', {type: 'text', 'aria-label': 'Quote from the note', placeholder: 'Quote from the note (optional)', maxlength: '2000'});
+  const saveFix = el('button', {type: 'button', text: it.status === 'not_found' ? 'Save missed value' : 'Save correction'});
+  const fixRow = el('div', {hidden: '', style: 'margin-top:8px'}, [fix, ' ', quote, ' ', saveFix]);
   const state = el('span', {class: 'small'});
+  const missed = it.status === 'not_found';
+  bY.hidden = bA.hidden = bB.hidden = missed; bAdd.hidden = !missed;
   function paint() {
     bY.className = 'ghost' + (it.decision === 'accept' ? ' on' : ''); bA.className = 'ghost' + (it.decision === 'correct' ? ' on' : '');
-    bB.className = 'ghost' + (it.decision === 'reject' ? ' on' : ''); undo.hidden = !it.decision;
-    state.textContent = it.decision === 'correct' ? 'Corrected to: ' + it.final : it.decision === 'reject' ? 'Marked wrong; final value blank' : it.decision === 'accept' ? 'Marked right' : '';
+    bB.className = 'ghost' + (it.decision === 'reject' ? ' on' : ''); bAdd.className = 'ghost' + (it.decision === 'add' ? ' on' : '');
+    undo.hidden = !it.decision;
+    state.textContent = it.decision === 'correct' ? 'Corrected to: ' + it.final : it.decision === 'reject' ? 'Marked wrong; final value blank' : it.decision === 'accept' ? 'Marked right' : it.decision === 'add' ? 'Added: ' + it.final : '';
   }
-  async function send(decision, value) {
+  async function send(decision, value, comment) {
     const rv = $('#reviewer').value.trim();
     if (!rv) { rmsg('Enter a reviewer name or ID first.', true); $('#reviewer').focus(); return; }
     sessionStorage.setItem('leo_reviewer', rv); rmsg('');
     const r = await fetch('/leo/jobs/' + RJ + '/review', {method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({reviewer: rv, decisions: [{row: it.row, field: it.field, decision, value: value || ''}]})});
+      body: JSON.stringify({reviewer: rv, decisions: [{row: it.row, field: it.field, decision, value: value || '', comment: comment || ''}]})});
     const j = await r.json(); if (!r.ok) { rmsg(j.error, true); return; }
     it.decision = decision === 'undo' ? '' : (decision === 'correct' && value === it.value ? 'accept' : decision);
-    it.final = it.decision === 'correct' ? value : it.decision === 'accept' ? it.value : ''; fixRow.hidden = true; paint();
+    it.final = (it.decision === 'correct' || it.decision === 'add') ? value : it.decision === 'accept' ? it.value : ''; fixRow.hidden = true; paint();
     const c = await rget('&offset=0&limit=1'); showCounts(c.counts);
   }
   bY.onclick = () => send('accept'); bB.onclick = () => send('reject'); undo.onclick = () => send('undo');
-  bA.onclick = () => { fixRow.hidden = !fixRow.hidden; if (!fixRow.hidden) { fix.value = it.decision === 'correct' ? it.final : ''; fix.focus(); } };
-  saveFix.onclick = () => send('correct', fix.value.trim());
+  bA.onclick = () => { fixRow.hidden = !fixRow.hidden; if (!fixRow.hidden) { fix.value = it.decision === 'correct' ? it.final : ''; quote.value = ''; fix.focus(); } };
+  bAdd.onclick = () => { fixRow.hidden = !fixRow.hidden; if (!fixRow.hidden) { fix.value = it.decision === 'add' ? it.final : ''; quote.value = it.comment || ''; fix.focus(); } };
+  saveFix.onclick = () => send(missed ? 'add' : 'correct', fix.value.trim(), quote.value.trim());
   fix.onkeydown = e => { if (e.key === 'Enter') saveFix.click(); };
   paint();
-  wrap.append(top, val, ...bits, el('div', {class: 'act'}, [bY, bA, bB, undo, showNote, state]), fixRow, note);
+  wrap.append(top, val, ...bits, el('div', {class: 'act'}, [bY, bA, bB, bAdd, undo, showNote, state]), fixRow, note);
   return wrap;
 }
 $('#rscope').onchange = () => loadReview(true);

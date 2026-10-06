@@ -129,6 +129,17 @@ _FIELD_ONTOLOGY_ROUTE: dict[str, str] = {
     "eeg.ictal_onset_lobe":                      "LobarLocalization",
     "eeg.ictal_onset_laterality":                 "Laterality",
     "clinical_localization.primary_claim":       "LobarLocalization",
+    "clinical_localization.alternative_claims":  "LobarLocalization",
+    "mri.mri_negative_for_epilepsy":             "MriFinding",
+    "integrated.concordance":                    "ConcordanceStatus",
+}
+
+# Extra (non-enum) dictionaries searched after the preferred dict, before the enum fallback.
+# Comorbidity / BirthHistory / CausativeAntibody were loaded but never queried on etiology fields.
+_FIELD_EXTRA_ROUTE: dict[str, tuple[str, ...]] = {
+    "clinical_seizure.etiology_details_text": ("Comorbidity", "BirthHistory", "CausativeAntibody"),
+    "clinical_seizure.etiology_specifics":    ("CausativeAntibody", "Comorbidity", "BirthHistory"),
+    "clinical_seizure.etiology_category":     ("EtiologyDetails", "Comorbidity", "BirthHistory"),
 }
 
 # Maps a dotted schema path to the release-backed term scopes it may draw
@@ -146,16 +157,21 @@ _FIELD_SCOPE_ROUTE: dict[str, list[str]] = {
     "clinical_seizure.focal_motor_onset":         _SEIZURE,
     "clinical_seizure.focal_nonmotor_onset":      _SEIZURE,
     "clinical_seizure.status_epilepticus_history": _SEIZURE,
-    "clinical_seizure.etiology_category":         ["epilepsy", "epio"],
-    "clinical_seizure.etiology_specifics":        ["epilepsy", "epio", "mri"],
-    "clinical_seizure.etiology_details_text":     ["epilepsy", "epio", "mri"],
+    "clinical_seizure.etiology_category":         ["epilepsy", "epio", "comorbidity"],
+    "clinical_seizure.etiology_specifics":        ["epilepsy", "epio", "mri", "comorbidity"],
+    "clinical_seizure.etiology_details_text":     ["epilepsy", "epio", "mri", "comorbidity"],
     "clinical_localization.primary_claim":        _SEIZURE + ["mri"],
+    "clinical_localization.alternative_claims":   _SEIZURE + ["mri"],
     "medication.current_asms":                    _MED,
     "medication.prior_asms":                      _MED,
     "medication.failed_asms":                     _MED,
     "medication.rescue_medication":               _MED,
     "medication.acute_administration":            _MED,
+    "medication.non_drug_therapies":              _MED,
     "medication.surgery_history":                 ["epio", "epilepsy"],
+    "medication.drug_resistance_status":          ["epilepsy", "epio"],
+    "integrated.concordance":                     ["epilepsy", "epio", "mri"],
+    "mri.mri_negative_for_epilepsy":              _MRI,
     "eeg.background":                             _EEG,
     "eeg.study_type":                             _EEG,
     "eeg.ied_present":                            _EEG,
@@ -187,14 +203,39 @@ _ILAE_SCTID = re.compile(r"/SNOMEDCT_US/\w+/(\d+)\]")
 # ─── Text normalization ──────────────────────────────────────────────────
 
 _WORD_RE = re.compile(r"[A-Za-z0-9]+")
+_SINGULAR = {"seizures": "seizure", "epilepsies": "epilepsy", "attacks": "attack"}
+# Fold UK medical spelling onto US so rank-1 is not split across variants.
+_SPELLING = (
+    ("generalised", "generalized"),
+    ("paediatric", "pediatric"),
+    ("aetiology", "etiology"),
+    ("haemorrhage", "hemorrhage"),
+    ("tumour", "tumor"),
+    ("oedema", "edema"),
+    ("behaviour", "behavior"),
+    ("colour", "color"),
+    ("centre", "center"),
+    ("fibre", "fiber"),
+    ("labelled", "labeled"),
+    ("ageing", "aging"),
+    ("localised", "localized"),
+)
+_GENERIC_LABELS = frozenset({
+    "seizure", "seizures", "epilepsy", "epilepsies",
+    "epileptic seizure", "epileptic seizures",
+})
+_GENERIC_TOKS = frozenset({"seizure", "epilepsy", "epileptic"})
 
 
 def _tokens(s: str) -> set[str]:
-    return {t.lower() for t in _WORD_RE.findall(s or "")}
+    return {_SINGULAR.get(t.lower(), t.lower()) for t in _WORD_RE.findall(s or "")}
 
 
 def _normalize(s: str) -> str:
-    return (s or "").strip().lower()
+    t = (s or "").strip().lower()
+    for uk, us in _SPELLING:
+        t = t.replace(uk, us)
+    return t
 
 
 def _jaccard(a: set[str], b: set[str]) -> float:
@@ -332,7 +373,7 @@ class OntologyCandidateService:
         search if too few candidates are found.
         """
         mention_norm = _normalize(mention)
-        mention_toks = _tokens(mention)
+        mention_toks = _tokens(mention_norm)
         if not mention_norm:
             return []
 
@@ -464,7 +505,17 @@ class OntologyCandidateService:
             ))
 
         priority = _MEDICATION_PRIORITY if (field_type or "").startswith("medication.") else _SYSTEM_PRIORITY
-        out.sort(key=lambda c: (-c.rank_score, priority.get(c.system, 8)))
+
+        def _overlap(c: Candidate) -> int:
+            toks = _tokens(_normalize(c.label))
+            for s in c.synonyms:
+                toks |= _tokens(_normalize(s))
+            return len(mention_toks & toks)
+
+        if out and max(c.rank_score for c in out) < 0.9:
+            out.sort(key=lambda c: (-c.rank_score, -_overlap(c), priority.get(c.system, 8)))
+        else:
+            out.sort(key=lambda c: (-c.rank_score, priority.get(c.system, 8)))
         return out[:k]
 
     # ---- helpers -------------------------------------------------------
@@ -472,11 +523,15 @@ class OntologyCandidateService:
     def _route_dicts(self, field_type: Optional[str]) -> list[tuple[str, dict]]:
         """Return the (name, dict) list to search in priority order."""
         preferred = _FIELD_ONTOLOGY_ROUTE.get(field_type or "")
+        extras = _FIELD_EXTRA_ROUTE.get(field_type or "", ())
         pool = {**self._enum_ontologies, **self._extra_ontologies}
         pairs = []
         if preferred and preferred in pool:
             pairs.append((preferred, pool[preferred]))
-        # Enum fallback only — supplementary dicts are noisy on the wrong field.
+        for extra_name in extras:
+            if extra_name != preferred and extra_name in pool:
+                pairs.append((extra_name, pool[extra_name]))
+        # Enum fallback only — other supplementary dicts are noisy on the wrong field.
         for name, d in self._enum_ontologies.items():
             if name != preferred:
                 pairs.append((name, d))
@@ -516,20 +571,20 @@ class OntologyCandidateService:
         """Deterministic lexical scoring (compendium page 6)."""
         label_norm = _normalize(label)
         if mention_norm == label_norm:
-            return (1.0, "exact_label")
+            return _specificity_penalty(mention_toks, label_norm, 1.0, "exact_label")
         syn_norms = [_normalize(s) for s in synonyms]
         if mention_norm in syn_norms:
-            return (0.9, "exact_synonym")
+            return _specificity_penalty(mention_toks, label_norm, 0.9, "exact_synonym")
         # Short strings ("L", "R", "LEV") match inside almost anything, so they
         # only count as exact matches.
         min_sub = _MIN_SUBSTRING_LEN
         if len(mention_norm) >= min_sub and label_norm and mention_norm in label_norm:
-            return (0.7, "substring_label")
+            return _specificity_penalty(mention_toks, label_norm, 0.7, "substring_label")
         if len(label_norm) >= min_sub and label_norm in mention_norm:
-            return (0.7, "substring_label_rev")
+            return _specificity_penalty(mention_toks, label_norm, 0.7, "substring_label_rev")
         for s in syn_norms:
             if len(s) >= min_sub and len(mention_norm) >= min_sub and (mention_norm in s or s in mention_norm):
-                return (0.5, "substring_synonym")
+                return _specificity_penalty(mention_toks, label_norm, 0.5, "substring_synonym")
         # Token-set overlap
         best_j = 0.0
         for s in [label_norm] + syn_norms:
@@ -537,8 +592,20 @@ class OntologyCandidateService:
             if j > best_j:
                 best_j = j
         if best_j >= 0.5:
-            return (0.3 + 0.2 * (best_j - 0.5), "jaccard")
+            return _specificity_penalty(
+                mention_toks, label_norm, 0.3 + 0.2 * (best_j - 0.5), "jaccard")
         return (0.0, "")
+
+
+def _specificity_penalty(mention_toks: set[str], label_norm: str,
+                         score: float, mtype: str) -> tuple[float, str]:
+    """Demote generic parents (HPO 'Seizure', 'epilepsy') when the mention names a child."""
+    label_toks = _tokens(label_norm)
+    generic = label_norm in _GENERIC_LABELS or (bool(label_toks) and label_toks <= _GENERIC_TOKS)
+    extra = mention_toks - _GENERIC_TOKS - {"of", "the", "a", "an", "with", "and"}
+    if generic and extra:
+        return (score * 0.55, mtype)
+    return (score, mtype)
 
 
 # Reverse map: ontology dict name → schema dotted path (best-effort).

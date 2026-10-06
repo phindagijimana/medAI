@@ -10,8 +10,9 @@ GPU (``--mode gpu``): the real OntologySelector on fuzzy mentions (one batched c
     venv-medcat/bin/python eval/eval_concept_selection.py --mode gpu --offline
 
 Ship Arm E in the default path only if selected R@1 > lexical R@1 on scorable reachable mentions.  If the ceiling
-(gold in top-5) is not above R@1, ranking — not the prompt — is the problem.  GPU 2026-10-06: selected 0.335 vs
-lexical 0.555 (fail); the app default is exact hits only.
+(gold in top-5) is not above R@1, ranking — not the prompt — is the problem.  GPU 2026-10-06 first run: selected
+0.335 vs lexical 0.555 (fail), but that run passed concatenated mentions instead of the letter text.  The GPU
+path now uses the F-S letter.  App default remains exact hits only until a fair GPU run passes the gate.
 """
 from __future__ import annotations
 
@@ -29,6 +30,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 from eval_concept_retrieval import GOLD_DIR, HELD_OUT, KS, SAB_TO_SYSTEM, crosswalk, load_gold  # noqa: E402
 from services.onto_select import SELECT_K, snapshot  # noqa: E402
 
+LETTER_DIR = REPO / "data" / "fonferko_shadrach_2024" / "zenodo_8381080" / "Gold1-200_corrected_spelling"
 OUT_DEFAULT = "eval/results/concept_selection"
 
 
@@ -99,7 +101,9 @@ def main(argv=None) -> int:
                 pending.append({"id": str(len(pending)), "mention": g["mention"],
                                 "field_path": g["field_type"] or "", "candidates": snapshot(cands)})
         if selector and pending:
-            picks = selector(" ".join(g["mention"] for g, _ in local), pending)
+            letter = LETTER_DIR / f"{pid}.txt"
+            ctx = letter.read_text(encoding="utf-8") if letter.exists() else " ".join(g["mention"] for g, _ in local)
+            picks = selector(ctx, pending)
             for i, (g, _) in enumerate(local):
                 r = picks.get(str(i))
                 if r and r.picked and is_hit(r.picked, g["cui"]):

@@ -102,7 +102,7 @@ class LeoRuntime:
         self.ledger = ledger
         self.adapter_label = adapter_label
         if ext_reader is None:
-            # H2 was trained on the five-field flat contract. Do not run X1C on
+            # H2 was trained on the five-field flat contract. Do not run X1C/P1C/F1C on
             # those weights unless the caller (or MEDAI_LEO_EXT_READER) asks.
             if adapter_label and os.environ.get("MEDAI_LEO_EXT_READER") is None:
                 ext_reader = False
@@ -178,10 +178,16 @@ class LeoRuntime:
         reasoner = None
         selector = None
         if self.use_llm:
-            from services.chain_llm import ChunkedReasoner, CombinedReasoner, ExtendedLiveReasoner, FlatLiveReasoner
+            from services.chain_llm import (
+                ChunkedReasoner, CombinedReasoner, ExtendedLiveReasoner, FlatLiveReasoner,
+                FullLiveReasoner, PhenoLiveReasoner,
+            )
             from services.onto_select import OntologySelector
             flat = FlatLiveReasoner(self.backend, arm=self.arm)
-            inner: Any = CombinedReasoner(flat, ExtendedLiveReasoner(self.backend)) if self.ext_reader else flat
+            inner: Any = (CombinedReasoner(flat, ExtendedLiveReasoner(self.backend),
+                                           PhenoLiveReasoner(self.backend),
+                                           FullLiveReasoner(self.backend))
+                          if self.ext_reader else flat)
             reasoner = ChunkedReasoner(inner, max_chars=self.chunk_max_chars)
             if self.ontology_select:
                 selector = OntologySelector(self.backend)
@@ -205,7 +211,7 @@ class LeoRuntime:
         c = ChainPipelineConfig()
         return {"pipeline": c.pipeline_version, "rules": c.rules_version, "ontology": c.ontology_release,
                 "mode": self.mode, "llm_arm": self.arm if self.use_llm else "",
-                "ext_arm": "X1C" if self.ext_reader else "",
+                "ext_arm": "X1C+P1C+F1C" if self.ext_reader else "",
                 "model": getattr(self.backend, "model_name", "") if self.backend is not None else "",
                 "adapter": self.adapter_label, "chunk_max_chars": self.chunk_max_chars,
                 "disagree_llm_fields": list(self.disagree_llm),

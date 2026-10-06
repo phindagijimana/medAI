@@ -767,4 +767,41 @@ Before (joined notes, 10.17): motor 7 of 12 right (all answered), non-motor 8 of
 
 **Change.** Candidate routing (`_FIELD_ONTOLOGY_ROUTE` / `_FIELD_SCOPE_ROUTE`) now includes every coded extract field the specialist and X1C already fill: EEG study type, IED present/site, ictal onset lobe/side, surgery, rescue and acute drugs, MRI HS/FCD/lesion site, awareness, other seizure types, etiology free text. Drug mentions search the supplementary `Medication` dictionary first (not the current/prior/failed *status* enum); etiology details search `EtiologyDetails`. ICD-10-CM and Orphanet stay out (SCOPE_DECISIONS D3/D5). Age, frequency and free-text semiology stay uncoded (quantities / narrative). The table gained the columns the other two readers already produced but the catalogue omitted: `other_seizure_types`, `awareness`, `eeg_ied_present`, `eeg_ied_findings`, `mri_lesion`.
 
+### 10.25 Full phenotype extract: P1C, catalogue, ranking (2026-10-06)
+
+**Change.** The model still cannot dump the whole schema in one JSON (F1–F3). A third constrained call (arm P1C, `services/pheno_extract.py`) reads the remaining closed-vocabulary extract fields: awareness, other seizure types, etiology category, status epilepticus, MRI (normal / HS / FCD / findings / lesion lobe and side), prior and failed ASMs, non-drug therapies, EEG seizures captured, and clinician localization. It is on with X1C (`--ext-reader`; off with H2 unless that flag is passed). Expect about three times the model time per note vs L1C alone. Free-text semiology, etiology details and derived drug resistance stay specialist-only.
+
+The extract catalogue now lists those specialist fields as columns (`status_epilepticus_history`, `non_drug_therapies`, `eeg_seizures_captured`, `clinical_localization`, `adverse_effects_text`): 33 extract phenotypes. Accuracy for the new columns is the existing rules-only checks, not a new patient-level table. P1C itself is unmeasured.
+
+Ontology ranking (no new sources; ICD-10-CM / Orphanet still out): UK/US spelling is folded before scoring; generic parents (`Seizure`, `epilepsy`) are demoted when the mention names a child; a token-overlap rerank applies when the top hit is below 0.9; etiology mentions also search the already-loaded Comorbidity, BirthHistory and CausativeAntibody dictionaries; `Kepra` and `zobisamide` are synonyms of levetiracetam and zonisamide. Arm E stays off.
+
+### 10.26 Full v0.2.1 schema: F1C + remaining extract columns (2026-10-06)
+
+**Change.** A fourth constrained call (arm F1C, `services/full_extract.py`) reads the leftover schema fields: semiology, etiology details, adverse effects, etiology specifics (gene / variant / antibody / pathogen / metabolic / tumor), drug resistance *as stated*, other seizure frequencies, EEG seizures-captured count, MRI-negative and field strength, alternative localization, and concordance (+ notes). Integrated `clinical`/`eeg`/`mri` localization copies are still filled by the rules from the primary/ictal/lesion claims. Extra readers stay on one switch (`--ext-reader`); expect about four times L1C-only model time. ICD-10-CM / Orphanet / EpSO stay out (D3–D5).
+
+The extract table is 41 phenotypes. New columns: `other_seizure_frequencies`, `etiology_specifics`, `eeg_seizures_captured_count`, `mri_negative`, `mri_field_strength`, `alternative_localization`, `concordance`, `concordance_notes`. F1C is unmeasured.
+
+Ontology routes added for MRI-negative, alternative localization, concordance, non-drug therapies and drug resistance (release scopes). Quantities and free-text notes remain uncoded.
+
+### 10.27 Effectiveness follow-up (2026-10-06)
+
+What was still hanging “effective” after 10.26, and what this pass did.
+
+**GPU score for P1C and F1C.** Submitted Slurm job **170942** (`data/leo_runs/run_gpu_p1c_f1c.sbatch`: `eval/leo_v4ext_run.py --mode gpu --out data/leo_runs/v4ext_llm_p1c_f1c`, then `eval/score_leo_v4ext_arms.py --out eval/results/v4ext_p1c_f1c`). Extra readers besides X1C were unmeasured until that job finishes. Do not quote P1C/F1C accuracy until `eval/results/v4ext_p1c_f1c.md` exists.
+
+**Ontology rank-1 after the ranking patches.** CPU remeasure (`eval/results/concept_selection_rank_2026-10-06`): lexical R@1 **0.566** (was 0.555), gold-in-top-5 ceiling 0.742, token-overlap pick 0.607 (CPU gate pass, as before). Room for Arm E is still ~0.18. The GPU Arm E gate is re-run with the F-S *letter* as selector context (the 10.23 GPU run concatenated mentions and is not a fair test of the picker). Arm E stays **off** unless that GPU selected R@1 beats lexical R@1. Job **170943**: `data/leo_runs/run_gpu_arme.sbatch`.
+
+**LEO vs model alone on the five scored fields.** Extra readers (X1C/P1C/F1C) do not cover epilepsy type, seizure type, onset age, frequency, or current ASMs. The F-S reviewed figure remains 0.68 vs model 0.70 (10.12 / 10.16). Fusion’s measured value on those fields is still the audit trail, not higher accuracy. Changing the default disagreement policy is not a scoring re-run; it waits on adjudication.
+
+**Real notes.** Still deferred (IRB + secure compute). All numbers remain synthetic.
+
+**Disagreement policy.** Default stays rules-on-disagree. Candidate `--disagree-llm candidate` is unchanged. Export pack from the existing X1C GPU claims: `data/leo_runs/v4ext_llm_x1c.disagreements.csv` (89 cases). Score after a human fills `truth` / keeps `key_A_is` off the adjudicator copy (`bin/leo disagreements --score`).
+
+**Reviewer add missed value.** Shipped: decision `add`, merge `added_by_reviewer`, Review tab scope “Values LEO missed”, `leo review --misses`. Learning from reviews stays deferred until real review data exist.
+
+**Commit.** This wave is the coverage readers, ranking patches, add-value, and the eval/job scripts above.
+
+
+
+
 

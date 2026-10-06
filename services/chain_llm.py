@@ -612,43 +612,155 @@ class ExtendedLiveReasoner:
         return out
 
 
-class CombinedReasoner:
-    """Run the core (L1C) and extended (X1C) readers on the same text and merge their modules.
+class PhenoLiveReasoner:
+    """Third call on the same note: remaining closed-vocab phenotype fields (arm P1C)."""
 
-    One reader failing does not drop the other.  ``last_covered_field_paths`` is the union of the
+    def __init__(self, backend: Any, *, max_new_tokens: int = 768):
+        self.backend = backend
+        self.max_new_tokens = max_new_tokens
+        from services.pheno_extract import PHENO_ARM, PHENO_PROMPT_VERSION
+        self.info = LLMRunInfo(model=getattr(backend, "model_name", ""),
+                               prompt=f"pheno_phenotype.{PHENO_ARM}.{PHENO_PROMPT_VERSION}")
+        self.n_calls = 0
+        self.last_ok = False
+
+    @property
+    def last_covered_field_paths(self):
+        from services.pheno_extract import PHENO_FIELD_PATHS
+        return PHENO_FIELD_PATHS if self.last_ok else frozenset()
+
+    def _one(self, text: str, document_id: str) -> Optional[dict]:
+        from services.extract import DecodingConfig
+        from services.pheno_extract import build_pheno_prompt, parse_pheno, pheno_answer_model
+        decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
+                                  max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
+        try:
+            raw, _ = self.backend.generate_constrained(build_pheno_prompt(text),
+                                                       pheno_answer_model(), decoding)
+        except Exception:
+            logger.exception("phenotype LLM generation failed; continuing without P1C")
+            return None
+        self.n_calls += 1
+        parsed = parse_pheno(raw)
+        return parsed.modules or {} if parsed.parse_ok else None
+
+    def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
+        from services.pheno_extract import PHENO_MAX_NOTE_CHARS
+        self.last_ok = False
+        if len(text) > PHENO_MAX_NOTE_CHARS:
+            from services.chunker import chunk_text
+            chunks = chunk_text(text, max_chars=PHENO_MAX_NOTE_CHARS, overlap_chars=400, pack=True)
+            parts = [self._one(c.text, f"{document_id}#p{c.chunk_index}") for c in chunks]
+            self.last_ok = any(p is not None for p in parts)
+            return merge_chunk_phenotypes(parts)
+        out = self._one(text, document_id)
+        self.last_ok = out is not None
+        return out
+
+
+class FullLiveReasoner:
+    """Fourth call: leftover schema fields (arm F1C).  See ``services.full_extract``."""
+
+    def __init__(self, backend: Any, *, max_new_tokens: int = 768):
+        self.backend = backend
+        self.max_new_tokens = max_new_tokens
+        from services.full_extract import FULL_ARM, FULL_PROMPT_VERSION
+        self.info = LLMRunInfo(model=getattr(backend, "model_name", ""),
+                               prompt=f"full_phenotype.{FULL_ARM}.{FULL_PROMPT_VERSION}")
+        self.n_calls = 0
+        self.last_ok = False
+
+    @property
+    def last_covered_field_paths(self):
+        from services.full_extract import FULL_FIELD_PATHS
+        return FULL_FIELD_PATHS if self.last_ok else frozenset()
+
+    def _one(self, text: str, document_id: str) -> Optional[dict]:
+        from services.extract import DecodingConfig
+        from services.full_extract import build_full_prompt, full_answer_model, parse_full
+        decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
+                                  max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
+        try:
+            raw, _ = self.backend.generate_constrained(build_full_prompt(text),
+                                                       full_answer_model(), decoding)
+        except Exception:
+            logger.exception("full-phenotype LLM generation failed; continuing without F1C")
+            return None
+        self.n_calls += 1
+        parsed = parse_full(raw)
+        return parsed.modules or {} if parsed.parse_ok else None
+
+    def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
+        from services.full_extract import FULL_MAX_NOTE_CHARS
+        self.last_ok = False
+        if len(text) > FULL_MAX_NOTE_CHARS:
+            from services.chunker import chunk_text
+            chunks = chunk_text(text, max_chars=FULL_MAX_NOTE_CHARS, overlap_chars=400, pack=True)
+            parts = [self._one(c.text, f"{document_id}#f{c.chunk_index}") for c in chunks]
+            self.last_ok = any(p is not None for p in parts)
+            return merge_chunk_phenotypes(parts)
+        out = self._one(text, document_id)
+        self.last_ok = out is not None
+        return out
+
+
+class CombinedReasoner:
+    """Run L1C, X1C, P1C and F1C on the same text and merge their modules.
+
+    One reader failing does not drop the others.  ``last_covered_field_paths`` is the union of the
     readers that parsed, so the pipeline can tell "the model read this field and found nothing"
     from "no model reads this field".
     """
 
-    def __init__(self, flat: Any, ext: Any):
-        self.flat, self.ext = flat, ext
-        fp = getattr(flat, "info", LLMRunInfo()).prompt
-        ep = getattr(ext, "info", LLMRunInfo()).prompt
+    def __init__(self, flat: Any, ext: Any, pheno: Any = None, full: Any = None):
+        self.flat, self.ext, self.pheno, self.full = flat, ext, pheno, full
+        prompts = [getattr(flat, "info", LLMRunInfo()).prompt,
+                   getattr(ext, "info", LLMRunInfo()).prompt]
+        if pheno is not None:
+            prompts.append(getattr(pheno, "info", LLMRunInfo()).prompt)
+        if full is not None:
+            prompts.append(getattr(full, "info", LLMRunInfo()).prompt)
         self.info = LLMRunInfo(model=getattr(flat, "info", LLMRunInfo()).model,
-                               prompt=f"{fp}+{ep}")
+                               prompt="+".join(prompts))
         self.last_ok = False
         self.last_covered_field_paths: Optional[frozenset] = frozenset()
 
     def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
         from services.ext_extract import EXT_FIELD_PATHS
         from services.flat_extract import FLAT_FIELD_PATHS
-        a = b = None
+        from services.full_extract import FULL_FIELD_PATHS
+        from services.pheno_extract import PHENO_FIELD_PATHS
+        a = b = c = d = None
         try:
             a = self.flat(text, document_id, doc_date)
         except Exception:
-            logger.exception("core LLM reader failed; continuing with the extended reader")
+            logger.exception("core LLM reader failed; continuing with the other readers")
         try:
             b = self.ext(text, document_id, doc_date)
         except Exception:
-            logger.exception("extended LLM reader failed; continuing with the core reader")
+            logger.exception("extended LLM reader failed; continuing with the other readers")
+        if self.pheno is not None:
+            try:
+                c = self.pheno(text, document_id, doc_date)
+            except Exception:
+                logger.exception("phenotype LLM reader failed; continuing with the other readers")
+        if self.full is not None:
+            try:
+                d = self.full(text, document_id, doc_date)
+            except Exception:
+                logger.exception("full-phenotype LLM reader failed; continuing with the other readers")
         cov: set[str] = set()
         if getattr(self.flat, "last_ok", False):
             cov |= set(getattr(self.flat, "last_covered_field_paths", None) or FLAT_FIELD_PATHS)
         if getattr(self.ext, "last_ok", False):
             cov |= set(getattr(self.ext, "last_covered_field_paths", None) or EXT_FIELD_PATHS)
+        if self.pheno is not None and getattr(self.pheno, "last_ok", False):
+            cov |= set(getattr(self.pheno, "last_covered_field_paths", None) or PHENO_FIELD_PATHS)
+        if self.full is not None and getattr(self.full, "last_ok", False):
+            cov |= set(getattr(self.full, "last_covered_field_paths", None) or FULL_FIELD_PATHS)
         self.last_covered_field_paths = frozenset(cov)
         self.last_ok = bool(cov)
-        parts = [p for p in (a, b) if p is not None]
+        parts = [p for p in (a, b, c, d) if p is not None]
         if not parts:
             return {} if cov else None
         return merge_chunk_phenotypes(parts)
@@ -867,7 +979,7 @@ class ManifestLLMReasoner:
 
 __all__ = [
     "freq_counts", "is_empty_frequency", "FieldItem", "Fusion", "FusedSpecialist", "LLM_DETECTOR", "LLMReasoner",
-    "FTLiveReasoner", "FlatLiveReasoner", "ExtendedLiveReasoner", "CombinedReasoner",
+    "FTLiveReasoner", "FlatLiveReasoner", "ExtendedLiveReasoner", "PhenoLiveReasoner", "FullLiveReasoner", "CombinedReasoner",
     "ChunkedReasoner", "merge_chunk_phenotypes", "LLMRunInfo", "LiveLLMReasoner", "ManifestLLMReasoner", "load_live_reasoner",
     "display_value", "flatten", "fuse", "is_nullish", "locate_quote",
     "values_agree",

@@ -22,7 +22,7 @@ def test_phenotypes_lists_everything(capsys):
     out = capsys.readouterr().out
     assert "current_asms" in out and "PANELS" in out and "status_epilepticus" in out
     assert leo_cli.main(["phenotypes", "--json"]) == 0
-    assert len(json.loads(capsys.readouterr().out)["extract"]) == 28
+    assert len(json.loads(capsys.readouterr().out)["extract"]) == 41
 
 
 def test_batch_local_cpu_adds_columns_and_keeps_input(tmp_path, capsys):

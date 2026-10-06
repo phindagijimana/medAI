@@ -19,8 +19,9 @@ rescue drugs                    ``medication.current_asms`` (see below)     gene
 epilepsy surgery / stimulator   ``medication.surgery_history``              ``SurgeryType`` (by type)
 ==============================  ==========================================  ================================
 
-Not read: ``clinical_seizure.semiology_text`` (free text, nothing to pair it with), MRI, etiology, drug
-resistance, prior and failed ASMs: those stay "needs review: no second reader".
+Not read: ``clinical_seizure.semiology_text`` (free text), MRI, etiology, prior/failed ASMs
+and the rest of the phenotype: those are the third call (arm P1C, ``services.pheno_extract``).
+Drug resistance stays specialist-only (derived).
 
 Rescue drugs are emitted under ``medication.current_asms``, the path the rules use for every drug mention, marked
 ``reader = "X1C"``.  The pipeline already separates rescue and maintenance drugs by the words around each mention

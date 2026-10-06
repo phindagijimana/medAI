@@ -73,7 +73,10 @@ def test_evidence_levels_match_what_was_measured():
         "focal_cortical_dysplasia", "surgery_history", "rescue_medication", "prior_asms", "failed_asms",
         "etiology_details", "eeg_background", "semiology", "focal_motor_onset", "focal_nonmotor_onset",
         "eeg_study_type", "eeg_ictal_onset", "other_seizure_types", "awareness", "eeg_ied_present",
-        "eeg_ied_findings"}
+        "eeg_ied_findings", "status_epilepticus_history", "non_drug_therapies", "eeg_seizures_captured",
+        "clinical_localization", "adverse_effects_text", "other_seizure_frequencies", "etiology_specifics",
+        "eeg_seizures_captured_count", "mri_negative", "mri_field_strength", "alternative_localization",
+        "concordance", "concordance_notes"}
     assert all(r in REFERENCES for p in EXTRACT for r in p.refs)
     assert next(p for p in EXTRACT if p.id == "drug_resistance").derived
     assert {p.id for p in EXTRACT if p.evidence == "none"} == {"mri_lesion"}
@@ -461,8 +464,11 @@ def test_review_routes_save_decisions_and_export_merged(client):
     assert save(row=1, field="current_asms", decision="reject", comment="was about a sibling").status_code == 200
     assert save(row=2, field="current_asms", decision="accept").status_code == 200
     assert save(row=2, field="current_asms", decision="undo").status_code == 200
+    assert save(row=1, field="epilepsy_type", decision="add", value="focal").status_code == 400
+    miss = c.get(f"/leo/jobs/{jid}/review?scope=misses").get_json()
+    assert miss["counts"]["add"] == 0 and "total" in miss["counts"]
     r = c.get(f"/leo/jobs/{jid}/review").get_json()
-    assert r["counts"] == {"total": 4, "reviewed": 3, "accept": 1, "correct": 1, "reject": 1}
+    assert r["counts"] == {"total": 4, "reviewed": 3, "accept": 1, "correct": 1, "reject": 1, "add": 0}
     jd = Path(os.environ["APP_HOME"]) / "data" / "leo_jobs" / jid
     log = [json.loads(x) for x in (jd / "notes_leo.reviews.jsonl").read_text().splitlines()]
     assert len(log) == 5 and log[0]["proposed_value"] == "focal" and log[0]["reviewer"] == "jd"        # history and the original proposal are kept
@@ -509,6 +515,25 @@ def test_cli_template_fill_and_merge_files(tmp_path):
     m = pd.read_csv(out, dtype=str, keep_default_na=False, encoding="utf-8-sig")
     assert m["epilepsy_type_final"].tolist() == ["focal", "focal", ""] and m["epilepsy_type_review"][1] == "corrected"
     assert m["age_at_onset_review"].tolist() == ["unreviewed", "unreviewed", ""]
+
+
+def test_reviewer_can_add_a_value_leo_missed():
+    from services import leo_review as lr
+    t = _tiny_table()
+    fields = lr.infer_fields(t)
+    misses = lr.items(t, fields, {}, "misses")
+    assert {(it["row"], it["field"]) for it in misses} == {(3, "epilepsy_type"), (3, "age_at_onset")}
+    assert lr.items(t, fields, {}, "flagged")  # found values only
+    assert all(it["status"] != "not_found" for it in lr.items(t, fields, {}, "flagged"))
+    ev = lr.make_event(lr.proposal(t, fields[0], 3), "add", "focal", "jd", "focal epilepsy", "leo-v0.5")
+    assert ev["decision"] == "add" and ev["final_value"] == "focal" and ev["comment"] == "focal epilepsy"
+    m = lr.merge(t, fields, {(3, "epilepsy_type"): ev})
+    assert m["epilepsy_type_review"].tolist() == ["auto_accepted", "unreviewed", "added_by_reviewer"]
+    assert m["epilepsy_type_final"].tolist()[2] == "focal"
+    with pytest.raises(ValueError, match="missed"):
+        lr.make_event(lr.proposal(t, fields[0], 1), "add", "x", "jd", "", "leo-v0.5")
+    with pytest.raises(ValueError, match="needs the value"):
+        lr.make_event(lr.proposal(t, fields[0], 3), "add", "", "jd", "", "leo-v0.5")
 
 
 def test_job_folder_is_owner_only(tmp_path, monkeypatch):

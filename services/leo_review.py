@@ -5,6 +5,8 @@ A reviewer looks at one value at a time (one phenotype or question answer in one
     accept    the value is right                      final value = LEO's value
     correct   the value is wrong, here is the right   final value = what the reviewer typed
     reject    the value is wrong or unsupported       final value = blank
+    add       LEO missed a value the note states      final value = what the reviewer typed
+              (only for ``not_found``; put the supporting words in ``comment``)
 
 Decisions are kept in two files next to the result (both contain note text, so treat them like the input):
 
@@ -17,15 +19,17 @@ after each reviewed field:
 
     <field>_final    the value to use: the reviewer's, or LEO's if nobody objected (see below)
     <field>_review   where that value came from:
-                     accepted_by_reviewer | corrected | rejected | auto_accepted | unreviewed | (blank)
+                     accepted_by_reviewer | corrected | rejected | added_by_reviewer |
+                     auto_accepted | unreviewed | (blank)
 
 ``auto_accepted`` means LEO accepted it by its own checks and nobody looked at it (not a human decision).
 ``unreviewed`` values that need review are left blank in ``_final`` by default, because LEO did not trust
 them; ``unreviewed="proposal"`` keeps LEO's value there instead (the ``_review`` column still says
 "unreviewed").
 
-Not covered: a reviewer cannot add a value LEO missed (``not_found``).  Misses therefore do not show up in
-anything computed from these files.
+A missed value (``not_found``) is offered under scope ``misses`` (Review tab: “Values LEO missed”,
+``leo review --misses``).  Review files that include adds can be used for recall on the notes that were
+reviewed; they still say nothing about notes nobody looked at.
 """
 
 from __future__ import annotations
@@ -41,7 +45,7 @@ import pandas as pd
 
 from services.leo_tabular import _safe
 
-DECISIONS = ("accept", "correct", "reject")
+DECISIONS = ("accept", "correct", "reject", "add")
 FLAGGED = ("needs_review", "rejected")                  # statuses a reviewer should look at
 NOT_REVIEWABLE = ("", "not_found", "not_documented", "error")
 REVIEWED_COLUMNS = ["row", "doc_id", "field", "label", "proposed_value", "proposed_status", "proposed_why",
@@ -92,7 +96,13 @@ def _cell(table: pd.DataFrame, i: int, col: str) -> str:
 
 
 def reviewable(status: str, scope: str) -> bool:
-    return status in FLAGGED if scope == "flagged" else status not in NOT_REVIEWABLE
+    if scope == "flagged":
+        return status in FLAGGED
+    if scope == "misses":
+        return status == "not_found"
+    if scope == "all":
+        return status not in NOT_REVIEWABLE
+    raise ValueError("scope must be flagged, misses or all")
 
 
 def proposal(table: pd.DataFrame, f: Field, row: int) -> dict:
@@ -110,8 +120,8 @@ def proposal(table: pd.DataFrame, f: Field, row: int) -> dict:
 
 def items(table: pd.DataFrame, fields: list[Field], latest: dict, scope: str = "flagged") -> list[dict]:
     """Values to review (in table order), each with the current decision if there is one."""
-    if scope not in ("flagged", "all"):
-        raise ValueError("scope must be flagged or all")
+    if scope not in ("flagged", "misses", "all"):
+        raise ValueError("scope must be flagged, misses or all")
     out = []
     lcol = next((c for c in table.columns if c.startswith("leo_status")), "")
     for i in range(len(table)):
@@ -129,11 +139,12 @@ def items(table: pd.DataFrame, fields: list[Field], latest: dict, scope: str = "
 
 
 def counts(its: list[dict]) -> dict:
-    c = {"total": len(its), "reviewed": 0, "accept": 0, "correct": 0, "reject": 0}
+    c = {"total": len(its), "reviewed": 0, "accept": 0, "correct": 0, "reject": 0, "add": 0}
     for it in its:
         if it["decision"]:
             c["reviewed"] += 1
-            c[it["decision"]] += 1
+            if it["decision"] in c:
+                c[it["decision"]] += 1
     return c
 
 
@@ -155,7 +166,12 @@ def make_event(prop: dict, decision: str, value: str, reviewer: str, comment: st
             raise ValueError("a correction needs the right value; use reject if there is none")
         if value == prop["value"]:
             decision = "accept"
-    final = {"accept": prop["value"], "correct": value, "reject": "", "undo": ""}[decision]
+    if decision == "add":
+        if not value:
+            raise ValueError("adding a missed value needs the value")
+        if (prop.get("status") or "") != "not_found":
+            raise ValueError("add is for a missed value; use correct to change one LEO found")
+    final = {"accept": prop["value"], "correct": value, "reject": "", "undo": "", "add": value}[decision]
     return {"row": prop["row"], "doc_id": prop["doc_id"], "field": prop["field"], "label": prop["label"],
             "proposed_value": prop["value"], "proposed_status": prop["status"], "proposed_why": prop["why"],
             "proposed_evidence": prop["evidence"], "proposed_source": prop["source"], "decision": decision,
@@ -229,8 +245,8 @@ def read_reviewed(path: str | Path, table: Optional[pd.DataFrame] = None) -> dic
                 raise ValueError(f"{p.name} line {n + 2}: doc_id {doc!r} does not match the table's "
                                  f"{_cell(table, row - 1, dc)!r} at row {row}; was this file made for a different result?")
         final = str(r.get("final_value", "")).strip()
-        if dec == "correct" and not final:
-            raise ValueError(f"{p.name} line {n + 2}: a correction needs final_value")
+        if dec in ("correct", "add") and not final:
+            raise ValueError(f"{p.name} line {n + 2}: a {'correction' if dec == 'correct' else 'missed value'} needs final_value")
         out[(row, str(r["field"]).strip())] = {"decision": dec, "final_value": final,
                                                 "reviewer": str(r.get("reviewer", "")), "comment": str(r.get("comment", ""))}
     return out
@@ -263,7 +279,8 @@ def merge(table: pd.DataFrame, fields: list[Field], latest: dict, unreviewed: st
             if ev:
                 d = ev["decision"]
                 finals.append(val if d == "accept" and not ev["final_value"] else _safe(ev["final_value"]))
-                revs.append({"accept": "accepted_by_reviewer", "correct": "corrected", "reject": "rejected"}[d])
+                revs.append({"accept": "accepted_by_reviewer", "correct": "corrected",
+                             "reject": "rejected", "add": "added_by_reviewer"}[d])
             elif st == "accepted":
                 finals.append(val); revs.append("auto_accepted")
             elif st in NOT_REVIEWABLE:
@@ -287,7 +304,7 @@ def reviewed_frame(latest: dict) -> pd.DataFrame:
 
 def template(table: pd.DataFrame, fields: list[Field], scope: str = "flagged") -> pd.DataFrame:
     """A reviewed.csv to fill in by hand: one row per value to review, decision left blank.
-    Fill ``decision`` (accept / correct / reject) and, for correct, ``final_value``; then ``merge_files``."""
+    Fill ``decision`` (accept / correct / reject / add) and, for correct or add, ``final_value``; then ``merge_files``."""
     rows = []
     for it in items(table, fields, {}, scope):
         rows.append({"row": it["row"], "doc_id": it["doc_id"], "field": it["field"], "label": it["label"],

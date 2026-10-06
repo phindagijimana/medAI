@@ -65,7 +65,7 @@ LEO is more than an accuracy figure. The roles below are either only partly meas
 | **Audit trail** | Every value carries its quote, character offsets, source and reason code. Not an accuracy result; its worth is the ability to check. Not tested with clinicians. |
 | **Safe failure** | Values with no supporting words are rejected; with no model, nothing is marked accepted (`no_second_reader`); questions can return "not documented" (2 of 90 invented answers in the unanswerable controls). |
 | **Workflow** | Review tab, review file and merge, per-note output, optional roll-up, local and Slurm operation. Tested as software (333 tests), not for time saved. |
-| **Breadth** | 28 extract phenotypes; the 7-field headline covers 5 of them. Twenty-one more have a rules-only figure; one (`mri_lesion`) has none. |
+| **Breadth** | 41 extract phenotypes; the 7-field headline covers 5 of them. Thirty-four more have a rules-only figure; one (`mri_lesion`) has none. |
 
 ## 5. Analyses that would measure usefulness (planned, not run)
 

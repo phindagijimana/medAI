@@ -632,8 +632,14 @@ def review_save(job_id: str):
             if f is None or not 1 <= row <= len(table):
                 raise ValueError(f"unknown value: row {d.get('row')!r}, field {d.get('field')!r}")
             prop = lr.proposal(table, f, row)
-            if prop["status"] in lr.NOT_REVIEWABLE:
+            dec = (d.get("decision") or "").strip().lower()
+            if prop["status"] == "not_found":
+                if dec not in ("add", "undo"):
+                    raise ValueError(f"{f.label} in row {row} was not found; use add to supply the missed value")
+            elif prop["status"] in lr.NOT_REVIEWABLE:
                 raise ValueError(f"{f.label} in row {row} has nothing to review ({prop['status'] or 'empty'})")
+            elif dec == "add":
+                raise ValueError(f"{f.label} in row {row} already has a value; use correct to change it")
             events.append(lr.make_event(prop, d.get("decision", ""), d.get("value", ""),
                                         auth.current_user() if auth.enabled() else p.get("reviewer", ""),   # the login, not a typed name
                                         d.get("comment", ""), str(job["prov"].get("pipeline", ""))))

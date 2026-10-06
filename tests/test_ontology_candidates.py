@@ -127,6 +127,38 @@ def test_extended_phenotype_fields_hit_curated_dicts(mention, field, label_subst
     assert top.rank_score >= 0.7
 
 
+def test_uk_spelling_matches_us_labels():
+    svc = OntologyCandidateService(use_releases=False)
+    top = _top(svc, "generalised epilepsy", "clinical_seizure.epilepsy_type")
+    assert "generalized" in top.label.lower() or "generalised" in top.label.lower()
+    assert top.rank_score >= 0.9
+
+
+def test_generic_seizure_parent_loses_to_named_type():
+    from services.ontology_candidates import OntologyCandidateService as S, _normalize, _tokens
+    mention = "focal impaired awareness seizure"
+    mn, mt = _normalize(mention), _tokens(_normalize(mention))
+    generic, _ = S._score(mn, mt, "Seizure", [])
+    specific, _ = S._score(mn, mt, "Focal impaired awareness seizure (ILAE 2017; formerly complex partial)",
+                           ["focal impaired awareness seizure"])
+    assert specific > generic
+    assert generic < 0.9
+
+
+def test_kepra_and_zobisamide_synonyms():
+    svc = OntologyCandidateService(use_releases=False)
+    kepra = _top(svc, "Kepra", "medication.current_asms")
+    assert "levetiracetam" in kepra.label.lower()
+    zobi = _top(svc, "zobisamide", "medication.current_asms")
+    assert "zonisamide" in zobi.label.lower()
+
+
+def test_etiology_searches_comorbidity_dict():
+    svc = OntologyCandidateService(use_releases=False)
+    top = _top(svc, "psychogenic non-epileptic seizures", "clinical_seizure.etiology_details_text")
+    assert "psychogenic" in top.label.lower() or "pnes" in top.label.lower()
+
+
 def test_extract_coded_paths_are_routed():
     from services.leo_catalog import EXTRACT
     from services.ontology_candidates import _FIELD_ONTOLOGY_ROUTE
@@ -134,6 +166,12 @@ def test_extract_coded_paths_are_routed():
         "clinical_seizure.age_at_onset_years",
         "clinical_seizure.seizure_frequency",
         "clinical_seizure.semiology_text",
+        "eeg.seizures_captured",
+        "eeg.seizures_captured_count",
+        "medication.adverse_effects_text",
+        "clinical_seizure.other_seizure_frequencies",
+        "mri.field_strength_tesla",
+        "integrated.concordance_notes_text",
     }
     missing = [fp for p in EXTRACT for fp in p.field_paths
                if fp not in skip and fp not in _FIELD_ONTOLOGY_ROUTE]

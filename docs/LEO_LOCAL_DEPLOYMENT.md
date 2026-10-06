@@ -54,7 +54,7 @@ Each job writes a small record (`job.json`) in its folder. After a restart:
 
 - Jobs run **one at a time** (`MEDAI_LEO_CONCURRENT_JOBS=1`), because two jobs on one GPU can run it out of memory. A job that is waiting shows the state `queued` and can be cancelled; a cancelled waiting job produces no result.
 - Empty files, files with only a header, files without a recognisable note column, and files over the size limit (`MAX_CONTENT_LENGTH`, 50 MB by default) are refused with a message.
-- **Very long notes are slow.** Ordinary discharge summaries (about 11,000 characters) took about 0.75 s each with the rules alone. One 100 KB note took about a minute on this machine when it was idle, and more than two and a half minutes when it was busy, so time grows faster than the length. Notes of megabytes are not tested. The model path splits notes into parts of 8,000 characters; the rules-only path reads the whole note at once. With the model on, a second call (arm X1C) reads EEG, onset, rescue and surgery; expect about twice the model time per note. `--no-ext-reader` or `MEDAI_LEO_EXT_READER=0` turns it off.
+- **Very long notes are slow.** Ordinary discharge summaries (about 11,000 characters) took about 0.75 s each with the rules alone. One 100 KB note took about a minute on this machine when it was idle, and more than two and a half minutes when it was busy, so time grows faster than the length. Notes of megabytes are not tested. The model path splits notes into parts of 8,000 characters; the rules-only path reads the whole note at once. With the model on, extra calls (arms X1C, P1C and F1C) read the rest of the phenotype; expect about four times the model time per note. `--no-ext-reader` or `MEDAI_LEO_EXT_READER=0` turns them off.
 
 ## 6. Install
 

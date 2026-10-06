@@ -377,13 +377,15 @@ def cmd_review(args) -> int:
     fields = lr.infer_fields(table)
     if not fields:
         raise SystemExit(f"{tp.name} does not look like a LEO result (no <field>_status columns)")
-    df = lr.template(table, fields, "all" if args.all else "flagged")
+    if getattr(args, "all", False) and getattr(args, "misses", False):
+        raise SystemExit("use --all or --misses, not both")
+    df = lr.template(table, fields, "misses" if getattr(args, "misses", False) else ("all" if args.all else "flagged"))
     out = Path(args.output) if args.output else tp.with_name(tp.stem + ".reviewed.csv")
     if out.exists() and not args.force:
         raise SystemExit(f"{out} exists; use --force to overwrite (decisions in it would be lost)")
     df.to_csv(out, index=False, encoding="utf-8-sig")
     print(f"[leo] wrote {out}: {len(df)} value(s) to review")
-    print("[leo] fill `decision` (accept | correct | reject) and, for correct, `final_value`; then run: "
+    print("[leo] fill `decision` (accept | correct | reject | add) and, for correct or add, `final_value`; then run: "
           f"leo merge {tp} {out}")
     return 0
 
@@ -423,14 +425,6 @@ def cmd_disagreements(args) -> int:
                 print(f"    {reader:<6} right {x['k']}/{x['n']}  {rate}")
         return 0
     if getattr(args, "score_codes", None):
-        res = ld.score_code_cases(ld.load(Path(args.score_codes).expanduser()))
-        s = res["selector_ok"]
-        rate = "n/a" if s["rate"] is None else f"{s['rate']:.2f} [{s['ci95'][0]:.2f}, {s['ci95'][1]:.2f}]"
-        print(f"codes: {res['n_cases']} cases, {res['n_scored']} scored "
-              f"(correct {res['correct']}, wrong {res['wrong']}, abstain_ok {res['abstain_ok']}, "
-              f"unclear {res['unclear']}, not yet {res['unadjudicated']})")
-        print(f"    selector ok (correct+abstain_ok) {s['k']}/{s['n']}  {rate}")
-        return 0
         res = ld.score_code_cases(ld.load(Path(args.score_codes).expanduser()))
         s = res["selector_ok"]
         rate = "n/a" if s["rate"] is None else f"{s['rate']:.2f} [{s['ci95'][0]:.2f}, {s['ci95'][1]:.2f}]"
@@ -740,9 +734,9 @@ def _common(sp, *, model=True):
                              "(default: none, the rules' value is shown and the model's goes to the 'alternative'; "
                              "'candidate' = seizure type, not validated on real notes)")
         sp.add_argument("--no-ext-reader", action="store_true",
-                        help="do not run the second model call on EEG, onset, rescue and surgery (default: on, off with --h2/--adapter)")
+                        help="do not run the extra model calls (X1C/P1C/F1C; default: on, off with --h2/--adapter)")
         sp.add_argument("--ext-reader", action="store_true",
-                        help="run X1C even with an adapter (H2 was not trained on the extended contract)")
+                        help="run X1C, P1C and F1C even with an adapter (H2 was not trained on those contracts)")
         sp.add_argument("--no-ontology-select", action="store_true",
                         help="exact ontology hits only (this is the default: the GPU selector scored worse than lexical rank-1)")
         sp.add_argument("--ontology-select", action="store_true",
@@ -778,7 +772,7 @@ def main(argv=None) -> int:
     sp.add_argument("--arm", default="")
     sp.add_argument("--no-ext-reader", action="store_true")
     sp.add_argument("--ext-reader", action="store_true",
-                    help="run X1C even with an adapter")
+                    help="run X1C, P1C and F1C even with an adapter")
     sp.add_argument("--no-ontology-select", action="store_true")
     sp.add_argument("--ontology-select", action="store_true")
     sp.add_argument("--partition", default="")
@@ -838,6 +832,7 @@ def main(argv=None) -> int:
     sp.add_argument("table", help="a LEO result (.csv or .xlsx)")
     sp.add_argument("-o", "--output", default=None, help="default: <table>.reviewed.csv")
     sp.add_argument("--all", action="store_true", help="list accepted values too, not only those needing review")
+    sp.add_argument("--misses", action="store_true", help="list values LEO marked not_found, to add a missed value")
     sp.add_argument("--force", action="store_true")
     sp.set_defaults(fn=cmd_review)
 

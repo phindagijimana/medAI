@@ -36,7 +36,7 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--phenotypes", default="all")
     ap.add_argument("--no-ext-reader", action="store_true",
-                    help="core L1C reader only (the previous GPU run; default is L1C+X1C)")
+                    help="core L1C reader only (the previous GPU run; default is L1C+X1C+P1C+F1C)")
     args = ap.parse_args()
 
     from services import leo_batch as lb

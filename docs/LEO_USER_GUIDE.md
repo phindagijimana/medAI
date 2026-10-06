@@ -120,7 +120,7 @@ Caveat: chunking was measured on long synthetic documents only (section 11), not
 
 `bin/leo evidence` (also `GET /leo/evidence`) prints the figures; they are read from the evaluation scorer outputs, not typed into the code, and a test checks they match. They describe the shipped configuration: `leo-v0.5`, arm L1C (base Med42-8B, two fixed examples, schema-constrained decoding), with the rules' value shown on a disagreement.
 
-When the model is on, LEO also makes a second call (arm X1C) on the same note for EEG study type, background, interictal discharges, ictal onset, focal motor and non-motor onset, rescue drugs, and surgery that was done. That roughly doubles model time per note. Turn it off with `--no-ext-reader` or `MEDAI_LEO_EXT_READER=0`. MRI, etiology, drug resistance, prior/failed ASMs and free-text semiology still have no second reader: they are marked `needs_review` (reason `no_second_reader`) rather than `accepted`. On the 113 v4_ext synthetic notes the extra call helped EEG study type (36/37 vs 31/37 for the rules) and found IEDs the rules missed (27/27 vs 17/27); focal motor onset stayed weak (docs/EVAL_PROTOCOL_LEO.md 10.22).
+When the model is on, LEO also makes three further calls on the same note (arms X1C, P1C, F1C) so every v0.2.1 phenotype field has a second reader. Together they roughly quadruple model time per note. Turn them off with `--no-ext-reader` or `MEDAI_LEO_EXT_READER=0`. On the 113 v4_ext synthetic notes the X1C call helped EEG study type (36/37 vs 31/37 for the rules) and found IEDs the rules missed (27/27 vs 17/27); focal motor onset stayed weak (docs/EVAL_PROTOCOL_LEO.md 10.22). P1C and F1C GPU scoring is in flight (`data/leo_runs/run_gpu_p1c_f1c.sbatch`; results `eval/results/v4ext_p1c_f1c.md` when the job finishes).
 
 A third, smaller call (arm E) can pick an ontology code from the retriever's top-5 list for a mention that was not an exact label match. The model cannot invent a SNOMED/HPO/RxNorm id: it only chooses an index or abstains. On 956 gold mentions the picker scored 0.335 against 0.555 for taking the retriever's first hit, so it is **off** (exact hits still get a code). Turn it on with `--ontology-select`. A code is marked accepted (`<phenotype>_code_status=accepted`, `code_accepted` in claims.csv) only if the value was already accepted and the match was exact or selected. `--accepted-only` leaves suggestion codes blank.
 
@@ -190,7 +190,7 @@ Scored with the rules alone (no model) from the generation plans (synthetic poli
 | EEG normal / abnormal, F-S letters | right 37 of 38 times when the rules gave an answer, but no answer for 29 of the 67 letters with an EEG result |
 | Etiology cause stated, F-S letters | found 24 of 28; 51 extra where annotators marked no cause (part annotation convention) |
 
-LEO's second reader (the model) was not run on these, so they say nothing about the combined result. Treat these columns as drafts to review. MRI, etiology, drug resistance, prior/failed ASMs and free-text semiology stay in this bucket even when the model is on (10.22). EEG, focal onset, rescue and surgery are now read by the second call (X1C); that accuracy is not yet measured.
+LEO's extra model readers were not run on these, so they say nothing about the combined result. Treat these columns as drafts to review. EEG, focal onset, rescue and surgery are read by X1C; MRI, etiology category, awareness, prior/failed ASMs, status epilepticus, non-drug therapies, seizures captured and clinician localization by P1C; free text, etiology specifics, drug resistance as stated, extra frequencies, MRI-negative / tesla, alternative localization and concordance by F1C. Extra-reader accuracy besides X1C is not yet measured.
 
 **EEG findings, semiology, focal onset, rescue and surgery (extended synthetic set, 37 patients, rules only).** The notes were written by an LLM from a plan that lists these items. See `docs/EVAL_PROTOCOL_LEO.md` section 10.17.
 
@@ -257,13 +257,13 @@ LEO's own columns are never changed. **Results with reviewed values** (or `bin/l
 | Column | Meaning |
 |---|---|
 | `<field>_final` | The value to use: the reviewer's, or LEO's if the value was auto-accepted. |
-| `<field>_review` | Where it came from: `accepted_by_reviewer`, `corrected`, `rejected`, `auto_accepted` (LEO's own checks passed and nobody looked; not a human decision), `unreviewed`, or blank (nothing found). |
+| `<field>_review` | Where it came from: `accepted_by_reviewer`, `corrected`, `rejected`, `added_by_reviewer` (a missed `not_found` the reviewer filled in), `auto_accepted` (LEO's own checks passed and nobody looked; not a human decision), `unreviewed`, or blank (nothing found). |
 
 A value that needed review and was not reviewed is left blank in `_final` (marked `unreviewed`), because LEO did not trust it. Choose "keep LEO's value" to fill it with LEO's value instead. For Excel output the merged workbook keeps the Claims and About sheets and adds a Reviews sheet.
 
-Without the web app: `bin/leo review RESULT.csv` writes a `RESULT.reviewed.csv` listing the values to review with `decision` empty. Fill `decision` (`accept`, `correct` or `reject`) and, for `correct`, `final_value`; then `bin/leo merge RESULT.csv RESULT.reviewed.csv` (add `--keep-unreviewed` to fill unreviewed values with LEO's). The merge refuses a reviewed file whose rows or `doc_id`s do not match the result.
+Without the web app: `bin/leo review RESULT.csv` writes a `RESULT.reviewed.csv` listing the values to review with `decision` empty. Fill `decision` (`accept`, `correct`, `reject` or `add`) and, for `correct` or `add`, `final_value`; then `bin/leo merge RESULT.csv RESULT.reviewed.csv` (add `--keep-unreviewed` to fill unreviewed values with LEO's). Use `--misses` to list values LEO marked `not_found` so a reviewer can add them. The merge refuses a reviewed file whose rows or `doc_id`s do not match the result.
 
-What review does not do yet: a reviewer cannot add a value LEO missed (`not_found`), so misses do not appear in these files, and nothing learns from the decisions automatically. The decisions are the raw material for measuring accuracy on real notes and, later, for recalibrating the routing rules or retraining (needs IRB approval and secure compute; see the project's future-work notes). Corrections made on synthetic notes say nothing about real notes. Review is for file runs; a single pasted note has no review step.
+Review does not learn from the decisions automatically. The decisions are the raw material for measuring accuracy on real notes and, later, for recalibrating the routing rules or retraining (needs IRB approval and secure compute; see the project's future-work notes). Corrections made on synthetic notes say nothing about real notes. Review is for file runs; a single pasted note has no review step.
 
 API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/status`, `POST /leo/extract`, `POST /leo/batch`, `POST /leo/job/plan`, `POST /leo/job/<id>/describe`, `POST /leo/job/<id>/run`, `GET /leo/jobs/<id>[/download]`, `GET|POST /leo/jobs/<id>/review`, `GET /leo/jobs/<id>/note/<row>`, `GET /leo/jobs/<id>/review/export?kind=reviewed|merged&unreviewed=blank|proposal`, `POST /leo/jobs/<id>/cancel`, `DELETE /leo/jobs/<id>`. `llm=auto|on|off` per request.
 
@@ -278,7 +278,7 @@ API: `GET /leo/phenotypes`, `GET /leo/evidence`, `GET /leo/guide`, `GET /leo/sta
 
 The default LLM is base Med42-8B with two examples (arm `L1C`). Arm H2 is the flat-contract LoRA at `checkpoints/llama3-med42-8b_lora_epi_h2`. Turn it on with `--h2` or `--adapter DIR` (the arm becomes `L0C`). On the F-S letters H2 alone scored 0.74 against 0.70 for the base model with examples (difference +0.04, 95% CI +0.01 to +0.08); on the synthetic notes it scored 0.996 (30 patients) and 0.992 (80 patients) against 0.993 and 0.988 for the base model, which is saturated. LEO fused with H2 scored *worse* than H2 alone (reviewed 0.69 vs 0.74), so H2 is optional, not the default. The app's displayed figures are for the base model.
 
-H2 was trained on the five core fields only. With `--h2` / `--adapter`, the extended second reader (X1C: EEG, onset, rescue, surgery) stays off unless you pass `--ext-reader` (those weights were not trained on that contract). Arm H adapters trained on the full phenotype contract are not used by this path.
+H2 was trained on the five core fields only. With `--h2` / `--adapter`, the extra readers (X1C, P1C, F1C) stay off unless you pass `--ext-reader` (those weights were not trained on that contract). Arm H adapters trained on the full phenotype contract are not used by this path.
 
 ## 11. Known limits
 
@@ -290,8 +290,7 @@ H2 was trained on the five core fields only. With `--h2` / `--adapter`, the exte
 
 ## 12. Deferred beyond the MVP
 
-Three things are deliberately not built or done yet. The full record is in the project's `DEFERRED_BEYOND_MVP.md`.
+Two things are deliberately not built or done yet. The full record is in the project's `DEFERRED_BEYOND_MVP.md`.
 
-- **Reviewers adding a value LEO missed.** The Review tab covers only values LEO found, so review files measure precision, not recall. Do not quote them as recall.
-- **Learning from review decisions.** Decisions are stored but nothing learns from them. This needs real review data; any change (recalibrated acceptance, a per-field disagreement policy, a retrained adapter) will ship as a new pipeline version with the evaluation re-run.
+- **Learning from review decisions.** Decisions (including added missed values) are stored but nothing learns from them. This needs real review data; any change (recalibrated acceptance, a per-field disagreement policy, a retrained adapter) will ship as a new pipeline version with the evaluation re-run.
 - **Real clinical notes.** This needs IRB approval and secure compute. **Until then, no result in this guide says anything about real notes.** Do not run patient data through LEO on a machine that is not approved for it: login is off until you add a user, and job files are not encrypted on disk.

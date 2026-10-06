@@ -102,7 +102,9 @@ def _value_text(ph: Phenotype, v: Any) -> str:
             return display_drug(v.get("generic_name") or "")
         # surgery and similar objects: the readable parts only
         parts = [str(x) for k, x in v.items() if x not in (None, "", False) and k in
-                 ("surgery_type", "target", "laterality", "year", "therapy_type", "lobe")]
+                 ("surgery_type", "target", "laterality", "year", "therapy_type", "lobe",
+                  "causative_gene", "causative_variant", "causative_antibody",
+                  "causative_pathogen_text", "causative_metabolic_text", "associated_tumor_text")]
         return " ".join(parts) or "; ".join(f"{k}={x}" for k, x in v.items() if x not in (None, ""))
     if isinstance(v, bool):
         return "true" if v else "false"
