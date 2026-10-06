@@ -466,3 +466,30 @@ def test_p3b_two_wave_dispatch_drug_resistance_uses_failed_asms(run_p2):
     assert n_failed >= 2, f"expected ≥ 2 failed ASMs, got {n_failed}"
     ev = pheno.medication.drug_resistance_status
     assert ev.value == _DR.DRUG_RESISTANT
+
+
+def test_onset_stated_is_reported(run_p2):
+    ph = run_p2("Focal seizures begin with clonic jerking of the right hand, then he becomes unresponsive.")
+    assert ph.clinical_seizure.focal_motor_onset.value == _FM.CLONIC
+    ph = run_p2("Focal seizures start with a sudden wave of fear, then lip smacking.")
+    assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.EMOTIONAL
+
+
+def test_later_evolution_is_not_onset(run_p2):
+    ph = run_p2("Focal seizures begin with an epigastric rising sensation, followed by clonic jerking of the arm.")
+    assert ph.clinical_seizure.focal_motor_onset.value is None
+    assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.AUTONOMIC
+
+
+def test_planned_or_negated_or_family_is_not_reported(run_p2):
+    ph = run_p2("Recommend describing whether focal seizures begin with automatisms.")
+    assert ph.clinical_seizure.focal_motor_onset.value is None
+    ph = run_p2("No focal seizures with myoclonic jerks. This is generalized epilepsy.")
+    assert ph.clinical_seizure.focal_motor_onset.value is None
+    ph = run_p2("Mother has focal seizures beginning with fear.")
+    assert ph.clinical_seizure.focal_nonmotor_onset.value is None
+
+
+def test_aura_is_nonmotor_onset(run_p2):
+    ph = run_p2("Focal aware seizures. Aura of an unusual smell, then impaired awareness.")
+    assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.SENSORY

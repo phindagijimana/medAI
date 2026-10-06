@@ -854,7 +854,7 @@ def test_background_jobs_with_the_model_run_inside_the_app_context(client, runti
     backend = object()
     monkeypatch.setattr(c.application, "med42_backend", backend, raising=False)
     monkeypatch.setattr(c.application, "ensure_med42_loaded", lambda: "ready")
-    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000", llm)
+    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}", llm)
     csv = "patient_id,note_id,text\nP1,n1," + json.dumps(NOTE) + "\n"
     r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "on"})
     assert r.status_code == 202 and r.get_json()["mode"] == "llm+specialist"

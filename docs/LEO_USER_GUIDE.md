@@ -120,6 +120,8 @@ Caveat: chunking was measured on long synthetic documents only (section 11), not
 
 `bin/leo evidence` (also `GET /leo/evidence`) prints the figures; they are read from the evaluation scorer outputs, not typed into the code, and a test checks they match. They describe the shipped configuration: `leo-v0.5`, arm L1C (base Med42-8B, two fixed examples, schema-constrained decoding), with the rules' value shown on a disagreement.
 
+When the model is on, LEO also makes a second call (arm X1C) on the same note for EEG study type, background, interictal discharges, ictal onset, focal motor and non-motor onset, rescue drugs, and surgery that was done. That roughly doubles model time per note. Turn it off with `--no-ext-reader` or `MEDAI_LEO_EXT_READER=0`. MRI, etiology, drug resistance, prior/failed ASMs and free-text semiology still have no second reader: they are marked `needs_review` (reason `no_second_reader`) rather than `accepted`. Accuracy of X1C has not yet been measured (docs/EVAL_PROTOCOL_LEO.md 10.22).
+
 **When the model and the rules disagree**, both values are kept: LEO shows the rules' value, flags the cell `needs_review` (`source_disagreement`), and stores the model's value as `alternative` in `claims.csv`. Which reader to show first, per field, is **not settled**. On synthetic notes, showing the model's value for seizure type scored better (F1 0.80 → 1.00 on 80 unused synthetic patients; 0.34 → 0.57 on the F-S letters) and for epilepsy type worse (0.975 → 0.938), with no difference for onset age and frequency. Those sets share a generator with the rules' development data and the F-S epilepsy-type reference is weak, so the default stays with the rules' value everywhere until disagreements from real notes have been adjudicated. The cost of that default is visible: on the F-S letters the reviewed micro-F1 is 0.68 instead of 0.71 with the seizure-type option (`--disagree-llm candidate`). To help settle it, `bin/leo disagreements RESULT.claims.csv` exports every disagreement for blind adjudication (the two values appear as A and B in a hidden order) and `bin/leo disagreements --score SHEET` reports per field how often each reader was right, with intervals. Protocol: `docs/DISAGREEMENT_ADJUDICATION.md`.
 
 | Test set | n | Model alone | Rules alone | LEO auto-accepted | LEO reviewed |
@@ -186,7 +188,7 @@ Scored with the rules alone (no model) from the generation plans (synthetic poli
 | EEG normal / abnormal, F-S letters | right 37 of 38 times when the rules gave an answer, but no answer for 29 of the 67 letters with an EEG result |
 | Etiology cause stated, F-S letters | found 24 of 28; 51 extra where annotators marked no cause (part annotation convention) |
 
-LEO's second reader (the model) was not run on these, so they say nothing about the combined result. Treat these columns as drafts to review.
+LEO's second reader (the model) was not run on these, so they say nothing about the combined result. Treat these columns as drafts to review. MRI, etiology, drug resistance, prior/failed ASMs and free-text semiology stay in this bucket even when the model is on (10.22). EEG, focal onset, rescue and surgery are now read by the second call (X1C); that accuracy is not yet measured.
 
 **EEG findings, semiology, focal onset, rescue and surgery (extended synthetic set, 37 patients, rules only).** The notes were written by an LLM from a plan that lists these items. See `docs/EVAL_PROTOCOL_LEO.md` section 10.17.
 

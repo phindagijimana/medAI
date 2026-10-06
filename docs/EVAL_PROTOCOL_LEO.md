@@ -733,3 +733,25 @@ Reading and limits:
 | EEG background, interictal discharges, focal onset, semiology, rescue, surgery | unchanged | unchanged |
 
 **Limits.** I read examples from these 37 patients when I found the errors (10.17), so the improvement is on data the fix was written from; it is not a held-out result. A fresh batch of patients is needed for that. 13 study types are still wrong (most often "video-EEG" where the plan says routine or prolonged), and 13 patients still get an onset that the plan does not have. The fixes drop true statements that share a sentence with a negation or plan word; the cost in recall is not measured on real letters. Nothing here applies to real notes.
+
+### 10.21 Focal motor / non-motor onset: first prominent feature (2026-10-06)
+
+**Change** (`rules/fields/focal_onset.py`): a motor or non-motor feature is reported as *onset* only when it is (a) in a sentence that names the onset type ("motor onset", "autonomic onset"), or (b) in the first part of the sentence, before "then" / "followed by" / "progresses to", and that part has an onset cue ("begins with", "starts with", "aura of") or the word "aura", or (c) a "focal/partial seizure with X" sentence with no evolution word (the previous tests). Features that appear only after an evolution cue are not onset. Planned, advised, family-history and sentence-level negated mentions are skipped. "tonic-clonic" is not read as tonic or clonic.
+
+**Split.** Development = even last digit of the patient id (P005000, P005002, …); held-out = odd. Note text of held-out patients was not read when writing the rule.
+
+| field | development (right/wrong/missing) | held-out | all |
+|---|---|---|---|
+| focal_motor_onset | 5 / 1 / 1 (n=7) | 2 / 2 / 1 (n=5) | 7 / 3 / 2 (n=12) |
+| focal_nonmotor_onset | 5 / 4 / 0 (n=9) | 6 / 0 / 0 (n=6) | 11 / 4 / 0 (n=15) |
+
+Before (joined notes, 10.17): motor 7 of 12 right (all answered), non-motor 8 of 15. Motor recall is unchanged; 2 patients are now missing instead of wrong. Non-motor improved (11 of 15), and the held-out half of that field was 6 of 6. Other scored fields in 10.17 were unchanged (EEG study type still 24 of 37). v4_ext examples were already looked at in 10.17, so even the held-out half is not a fully clean test. n is tiny.
+
+**Limits.** Tiny n; synthetic notes; the ILAE onset vs later-semiology distinction is hard in real letters too.
+
+### 10.22 Second reader for the extended fields, and "accepted" only when two readers cover the field (2026-10-06)
+
+**Change.** The model reader used by LEO (arm L1C, `services/flat_extract.py`) still reads five fields. A second, separate call (arm X1C, `services/ext_extract.py`) reads EEG study type, EEG background, interictal discharges (present and site), ictal onset lobe/side, focal motor and non-motor onset, rescue drugs, and surgery/stimulators that were done. The prompt and two worked examples were written before any evaluation of X1C; they are synthetic and were not tuned on v4_ext. Rescue drugs are emitted under `medication.current_asms` so the existing role split can pair them with the specialist; the pipeline ignores them when deciding whether the *maintenance* list was confirmed. Semiology *text*, MRI, etiology, drug resistance, prior and failed ASMs have no second reader: when the model ran, those specialist-only claims go to review with reason `no_second_reader` (switch `ChainPipelineConfig.require_second_reader_for_uncovered_fields`, env `MEDAI_LEO_REQUIRE_SECOND_READER=0` or CLI `--no-ext-reader` to reproduce earlier numbers). Numbers from 10.1–10.20 used the previous policy, under which a specialist-only claim on an unread field could be labelled accepted.
+
+**Not yet measured with the second reader.** A GPU re-run of the 113 v4_ext notes is the first measurement; it was not used to edit the prompt.
+

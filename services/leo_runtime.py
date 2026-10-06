@@ -31,6 +31,15 @@ from services.leo_tabular import claim_rows, wide_row
 logger = logging.getLogger(__name__)
 
 
+def env_flag(name: str, default: bool = True) -> bool:
+    """``MEDAI_LEO_EXT_READER=0`` (or false/no/off) turns a switch off; unset keeps ``default``."""
+    import os
+    v = os.environ.get(name)
+    if v is None or not str(v).strip():
+        return default
+    return str(v).strip().lower() not in ("0", "false", "no", "off")
+
+
 @dataclass
 class NoteResult:
     doc_id: str
@@ -82,7 +91,8 @@ def parse_disagree_llm(value) -> tuple[str, ...]:
 class LeoRuntime:
     def __init__(self, *, backend: Any = None, arm: str = "L1C", chunk_max_chars: int = 8000,
                  use_llm: bool = True, disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None,
-                 adapter_label: str = ""):
+                 adapter_label: str = "", ext_reader: Optional[bool] = None,
+                 require_second_reader: Optional[bool] = None):
         self.backend = backend
         self.arm = arm
         self.chunk_max_chars = chunk_max_chars
@@ -90,6 +100,9 @@ class LeoRuntime:
         self.disagree_llm = parse_disagree_llm(disagree_llm)
         self.ledger = ledger
         self.adapter_label = adapter_label
+        self.ext_reader = bool(self.use_llm and (env_flag("MEDAI_LEO_EXT_READER") if ext_reader is None else ext_reader))
+        self.require_second_reader = (env_flag("MEDAI_LEO_REQUIRE_SECOND_READER")
+                                      if require_second_reader is None else bool(require_second_reader))
         self._pipeline = None
         self._reasoner = None
         self._asker: Optional[Asker] = None
@@ -99,11 +112,14 @@ class LeoRuntime:
 
     @classmethod
     def load(cls, *, mode: str = "gpu", arm: str = "L1C", adapter_dir: str = "", chunk_max_chars: int = 8000,
-             disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None, model_name: str = "", cache_dir: str = "") -> "LeoRuntime":
+             disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None, model_name: str = "",
+             cache_dir: str = "", ext_reader: Optional[bool] = None,
+             require_second_reader: Optional[bool] = None) -> "LeoRuntime":
         """``mode`` = ``gpu`` (load Med42-8B; fails loudly without CUDA) or ``cpu`` (no LLM)."""
         if mode == "cpu":
             return cls(backend=None, use_llm=False, chunk_max_chars=chunk_max_chars,
-                       disagree_llm=disagree_llm, ledger=ledger)
+                       disagree_llm=disagree_llm, ledger=ledger, ext_reader=False,
+                       require_second_reader=require_second_reader)
         if mode != "gpu":
             raise ValueError("mode must be 'gpu' or 'cpu'")
         import os
@@ -131,7 +147,8 @@ class LeoRuntime:
             raise RuntimeError(f"Failed to load Med42-8B: {svc.load_error}")
         return cls(backend=Med42Backend(svc), arm=arm, chunk_max_chars=chunk_max_chars,
                    disagree_llm=disagree_llm, ledger=ledger,
-                   adapter_label=Path(adapter_dir).name if adapter_dir else "")
+                   adapter_label=Path(adapter_dir).name if adapter_dir else "",
+                   ext_reader=ext_reader, require_second_reader=require_second_reader)
 
     # ---- components ------------------------------------------------------
 
@@ -140,15 +157,17 @@ class LeoRuntime:
         return "llm+specialist" if self.use_llm else "specialist_only"
 
     def _build_pipeline(self):
-        from services.chain_llm import ChunkedReasoner, FlatLiveReasoner
+        from services.chain_llm import ChunkedReasoner, CombinedReasoner, ExtendedLiveReasoner, FlatLiveReasoner
         from services.chain_pipeline import ChainPipeline, ChainPipelineConfig
         cfg = ChainPipelineConfig(llm_arm=self.arm if self.use_llm else "")
+        cfg.require_second_reader_for_uncovered_fields = self.require_second_reader
         for path in self.disagree_llm:
             cfg.disagree_primary[path] = "llm"
         reasoner = None
         if self.use_llm:
-            reasoner = ChunkedReasoner(FlatLiveReasoner(self.backend, arm=self.arm),
-                                       max_chars=self.chunk_max_chars)
+            flat = FlatLiveReasoner(self.backend, arm=self.arm)
+            inner: Any = CombinedReasoner(flat, ExtendedLiveReasoner(self.backend)) if self.ext_reader else flat
+            reasoner = ChunkedReasoner(inner, max_chars=self.chunk_max_chars)
         self._reasoner = reasoner
         return ChainPipeline(cfg, llm_reasoner=reasoner)
 
@@ -169,9 +188,11 @@ class LeoRuntime:
         c = ChainPipelineConfig()
         return {"pipeline": c.pipeline_version, "rules": c.rules_version, "ontology": c.ontology_release,
                 "mode": self.mode, "llm_arm": self.arm if self.use_llm else "",
+                "ext_arm": "X1C" if self.ext_reader else "",
                 "model": getattr(self.backend, "model_name", "") if self.backend is not None else "",
                 "adapter": self.adapter_label, "chunk_max_chars": self.chunk_max_chars,
-                "disagree_llm_fields": list(self.disagree_llm)}
+                "disagree_llm_fields": list(self.disagree_llm),
+                "require_second_reader": self.require_second_reader}
 
     # ---- work ------------------------------------------------------------
 
@@ -215,4 +236,4 @@ class LeoRuntime:
         return res
 
 
-__all__ = ["LeoRuntime", "NoteResult"]
+__all__ = ["LeoRuntime", "NoteResult", "env_flag"]

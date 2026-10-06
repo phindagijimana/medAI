@@ -117,43 +117,278 @@
     "focal_motor_onset": {
       "all": {
         "n": 12,
-        "answered": 12,
+        "answered": 10,
         "right": 7,
         "accuracy": 0.583,
-        "accuracy_when_answered": 0.583
+        "accuracy_when_answered": 0.7
       },
       "in_text": {
         "n": 12,
-        "answered": 12,
+        "answered": 10,
         "right": 7,
         "accuracy": 0.583,
-        "accuracy_when_answered": 0.583
+        "accuracy_when_answered": 0.7
       }
     },
     "focal_nonmotor_onset": {
       "all": {
         "n": 15,
         "answered": 15,
-        "right": 8,
-        "accuracy": 0.533,
-        "accuracy_when_answered": 0.533
+        "right": 11,
+        "accuracy": 0.733,
+        "accuracy_when_answered": 0.733
       },
       "in_text": {
         "n": 15,
         "answered": 15,
-        "right": 8,
-        "accuracy": 0.533,
-        "accuracy_when_answered": 0.533
+        "right": 11,
+        "accuracy": 0.733,
+        "accuracy_when_answered": 0.733
       }
     }
   },
   "false_alarms": {
-    "focal_nonmotor_reported_but_unsupported": 4,
+    "focal_nonmotor_reported_but_unsupported": 5,
     "ictal_onset_reported_but_none": 13,
-    "focal_motor_in_semiology_not_onset": 16,
-    "focal_nonmotor_in_semiology_not_onset": 5,
-    "ied_reported_but_none": 4
+    "focal_motor_in_semiology_not_onset": 13,
+    "ied_reported_but_none": 4,
+    "focal_nonmotor_in_semiology_not_onset": 3
   },
+  "focal_onset_split": {
+    "motor_development": {
+      "n": 7,
+      "right": 5,
+      "wrong": 1,
+      "missing": 1,
+      "patients_in_half": 19
+    },
+    "motor_held_out": {
+      "n": 5,
+      "right": 2,
+      "wrong": 2,
+      "missing": 1,
+      "patients_in_half": 18
+    },
+    "motor_all": {
+      "n": 12,
+      "right": 7,
+      "wrong": 3,
+      "missing": 2,
+      "patients_in_half": 37
+    },
+    "nonmotor_development": {
+      "n": 9,
+      "right": 5,
+      "wrong": 4,
+      "missing": 0,
+      "patients_in_half": 19
+    },
+    "nonmotor_held_out": {
+      "n": 6,
+      "right": 6,
+      "wrong": 0,
+      "missing": 0,
+      "patients_in_half": 18
+    },
+    "nonmotor_all": {
+      "n": 15,
+      "right": 11,
+      "wrong": 4,
+      "missing": 0,
+      "patients_in_half": 37
+    }
+  },
+  "focal_onset_per_patient": [
+    {
+      "pid": "P005000",
+      "kind": "motor",
+      "ref": "clonic jerking",
+      "got": "clonic",
+      "status": "right"
+    },
+    {
+      "pid": "P005001",
+      "kind": "motor",
+      "ref": "hyperkinetic movements",
+      "got": "hyperkinetic",
+      "status": "right"
+    },
+    {
+      "pid": "P005001",
+      "kind": "nonmotor",
+      "ref": "sensory",
+      "got": "sensory",
+      "status": "right"
+    },
+    {
+      "pid": "P005004",
+      "kind": "nonmotor",
+      "ref": "autonomic",
+      "got": "emotional",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005005",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "emotional",
+      "status": "right"
+    },
+    {
+      "pid": "P005007",
+      "kind": "motor",
+      "ref": "versive head turning",
+      "got": "hyperkinetic",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005010",
+      "kind": "motor",
+      "ref": "tonic posturing",
+      "got": "tonic",
+      "status": "right"
+    },
+    {
+      "pid": "P005011",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "emotional",
+      "status": "right"
+    },
+    {
+      "pid": "P005012",
+      "kind": "motor",
+      "ref": "epileptic spasms",
+      "got": null,
+      "status": "missing"
+    },
+    {
+      "pid": "P005014",
+      "kind": "nonmotor",
+      "ref": "sensory",
+      "got": "sensory",
+      "status": "right"
+    },
+    {
+      "pid": "P005016",
+      "kind": "motor",
+      "ref": "epileptic spasms",
+      "got": "epileptic_spasms",
+      "status": "right"
+    },
+    {
+      "pid": "P005017",
+      "kind": "motor",
+      "ref": "automatisms",
+      "got": "automatisms",
+      "status": "right"
+    },
+    {
+      "pid": "P005019",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "emotional",
+      "status": "right"
+    },
+    {
+      "pid": "P005020",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "autonomic",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005022",
+      "kind": "nonmotor",
+      "ref": "autonomic",
+      "got": "sensory",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005023",
+      "kind": "motor",
+      "ref": "versive head turning",
+      "got": null,
+      "status": "missing"
+    },
+    {
+      "pid": "P005024",
+      "kind": "nonmotor",
+      "ref": "cognitive",
+      "got": "cognitive",
+      "status": "right"
+    },
+    {
+      "pid": "P005025",
+      "kind": "motor",
+      "ref": "clonic jerking",
+      "got": "automatisms",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005025",
+      "kind": "nonmotor",
+      "ref": "behavior arrest",
+      "got": "behavior_arrest",
+      "status": "right"
+    },
+    {
+      "pid": "P005026",
+      "kind": "motor",
+      "ref": "clonic jerking",
+      "got": "clonic",
+      "status": "right"
+    },
+    {
+      "pid": "P005026",
+      "kind": "nonmotor",
+      "ref": "autonomic",
+      "got": "sensory",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005030",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "emotional",
+      "status": "right"
+    },
+    {
+      "pid": "P005031",
+      "kind": "nonmotor",
+      "ref": "emotional",
+      "got": "emotional",
+      "status": "right"
+    },
+    {
+      "pid": "P005032",
+      "kind": "motor",
+      "ref": "versive head turning",
+      "got": "tonic",
+      "status": "wrong"
+    },
+    {
+      "pid": "P005032",
+      "kind": "nonmotor",
+      "ref": "cognitive",
+      "got": "cognitive",
+      "status": "right"
+    },
+    {
+      "pid": "P005034",
+      "kind": "motor",
+      "ref": "epileptic spasms",
+      "got": "epileptic_spasms",
+      "status": "right"
+    },
+    {
+      "pid": "P005034",
+      "kind": "nonmotor",
+      "ref": "autonomic",
+      "got": "autonomic",
+      "status": "right"
+    }
+  ],
   "semiology_motor_recall": {
     "all": 34,
     "in_text": 34,
@@ -219,8 +454,12 @@
         "sensory"
       ],
       [
+        "P005003",
+        "sensory"
+      ],
+      [
         "P005017",
-        "cognitive"
+        "sensory"
       ],
       [
         "P005023",
@@ -229,43 +468,6 @@
       [
         "P005029",
         "sensory"
-      ]
-    ],
-    "focal_nonmotor": [
-      [
-        "P005001",
-        "sensory",
-        "emotional"
-      ],
-      [
-        "P005004",
-        "autonomic",
-        "emotional"
-      ],
-      [
-        "P005019",
-        "emotional",
-        "cognitive"
-      ],
-      [
-        "P005020",
-        "emotional",
-        "autonomic"
-      ],
-      [
-        "P005022",
-        "autonomic",
-        "sensory"
-      ],
-      [
-        "P005030",
-        "emotional",
-        "cognitive"
-      ],
-      [
-        "P005031",
-        "emotional",
-        "cognitive"
       ]
     ],
     "study_type": [
@@ -449,6 +651,28 @@
         ]
       ]
     ],
+    "focal_nonmotor": [
+      [
+        "P005004",
+        "autonomic",
+        "emotional"
+      ],
+      [
+        "P005020",
+        "emotional",
+        "autonomic"
+      ],
+      [
+        "P005022",
+        "autonomic",
+        "sensory"
+      ],
+      [
+        "P005026",
+        "autonomic",
+        "sensory"
+      ]
+    ],
     "ied_false_alarm": [
       "P005006",
       "P005019",
@@ -459,12 +683,7 @@
       [
         "P005007",
         "versive head turning",
-        "clonic"
-      ],
-      [
-        "P005023",
-        "versive head turning",
-        "clonic"
+        "hyperkinetic"
       ],
       [
         "P005025",
@@ -475,11 +694,6 @@
         "P005032",
         "versive head turning",
         "tonic"
-      ],
-      [
-        "P005034",
-        "epileptic spasms",
-        "clonic"
       ]
     ]
   }

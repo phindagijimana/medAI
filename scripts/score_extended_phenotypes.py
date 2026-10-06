@@ -95,6 +95,20 @@ class Acc:
                 "accuracy_when_answered": round(r / a, 3) if a else None}
 
 
+def focal_split(pp, pids):
+    """Focal onset right / wrong / missing for the development half (even last digit of the patient id), the
+    held-out half (odd) and all patients (see docs/EVAL_PROTOCOL_LEO.md 10.21)."""
+    out = {}
+    for kind in ("motor", "nonmotor"):
+        for half, keep in (("development", lambda p: int(p[-1]) % 2 == 0), ("held_out", lambda p: int(p[-1]) % 2 == 1),
+                           ("all", lambda p: True)):
+            rows = [r for r in pp if r["kind"] == kind and keep(r["pid"])]
+            out[f"{kind}_{half}"] = {"n": len(rows), **{k: sum(r["status"] == k for r in rows)
+                                                         for k in ("right", "wrong", "missing")},
+                                     "patients_in_half": sum(keep(p) for p in pids)}
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="eval/results/leo_extended_phenotypes")
@@ -119,6 +133,7 @@ def main() -> int:
     sem_motor, sem_aura = Counter(), Counter()
     false_alarm = Counter()
     ex = defaultdict(list)
+    focal_pp = []  # per patient focal-onset outcome, for the development / held-out split
 
     for i, pid in enumerate(pids, 1):
         print(f"[{i}/{len(pids)}] {pid}", file=sys.stderr)
@@ -181,6 +196,8 @@ def main() -> int:
                 it = has(text, table[fo[kind]])
                 lab = canon(g[0], table) if g else None
                 acc.add(f"focal_{kind}_onset", it, bool(g), lab == fo[kind])
+                focal_pp.append({"pid": pid, "kind": kind, "ref": fo[kind], "got": str(g[0]) if g else None,
+                                 "status": "right" if lab == fo[kind] else ("wrong" if g else "missing")})
                 if g and lab != fo[kind]:
                     ex[f"focal_{kind}"].append((pid, fo[kind], g[0]))
             elif g:
@@ -258,6 +275,8 @@ def main() -> int:
     res = {"patients": len(pids), "notes": sum(len(notes[p]) for p in pids),
            "accuracy": {k: {"all": acc.row(k, "all"), "in_text": acc.row(k, "in_text")} for k in keys},
            "false_alarms": dict(false_alarm),
+           "focal_onset_split": focal_split(focal_pp, pids),
+           "focal_onset_per_patient": focal_pp,
            "semiology_motor_recall": dict(sem_motor), "semiology_aura_recall": dict(sem_aura),
            "rescue": {s: prf(rescue[s]["tp"], rescue[s]["fp"], rescue[s]["fn"]) for s in rescue},
            "rescue_false_alarm_patients": dict(rescue_fa),
@@ -279,6 +298,12 @@ def main() -> int:
         a, t = res["accuracy"][k]["all"], res["accuracy"][k]["in_text"]
         md.append(f"| {k} | {a['n']} | {a['answered']} | {a['right']} | {a['accuracy']} | {a['accuracy_when_answered']} | "
                   f"{t['n']} | {t['right']} | {t['accuracy']} |")
+    sp = res["focal_onset_split"]
+    md += ["", "Focal onset, development half (even patient number) / held-out half (odd) / all, as right / wrong / missing:",
+           "", "| field | development | held-out | all |", "|---|---|---|---|"]
+    for kind in ("motor", "nonmotor"):
+        cell = lambda h: "{right} / {wrong} / {missing}  (n={n})".format(**sp[f"{kind}_{h}"])
+        md.append(f"| focal_{kind}_onset | {cell('development')} | {cell('held_out')} | {cell('all')} |")
     md += ["", f"Rules gave a value where the plan has none: {res['false_alarms']}", "",
            f"Semiology motor features found in the semiology text: {sem_motor['found']} of {sem_motor['in_text']} in text "
            f"({sem_motor['all']} in plan); aura: {sem_aura['found']} of {sem_aura['in_text']} in text "

@@ -100,6 +100,11 @@ class ChainPipelineConfig:
     # (rules/fields/seizure_frequency.py).  That is an approximate quantity, not an uncertain
     # assertion, so it is read as asserted; otherwise no approximate frequency can auto-accept.
     approx_frequency_is_asserted: bool = True
+    # When the model ran but no reader covers this field, specialist-only claims go to review.
+    require_second_reader_for_uncovered_fields: bool = True
+    # When both readers agree on a path a reader covers, a specialist "probable" is treated as asserted
+    # (the second reader is the check).  Off for ablations that replay old arms.
+    agreed_probable_is_asserted: bool = True
     llm_arm: str = ""   # provenance label of the LLM arm, e.g. "M3" (set by the caller)
 
 
@@ -123,6 +128,9 @@ class ExtractionStats:
     n_rescue_routed: int = 0      # as-needed rescue drugs kept out of current_asms
     n_llm_grounded: int = 0       # subset of n_llm_only whose span was found by value grounding, not by the model's quote
     n_llm_unsupported: int = 0    # LLM claim whose quote is not in the note
+    n_no_second_reader: int = 0   # specialist-only claims on fields no LLM reader covers
+    n_specialist_only_covered: int = 0  # specialist-only on a field a reader covers (model found nothing)
+    n_agreed_probable_asserted: int = 0  # agreed claims whose specialist certainty was raised to definite
 
     def tally(self, verdict: ValidatorVerdict, reasons: list[ReasonCode]) -> None:
         self.n_claims_emitted += 1
@@ -237,7 +245,9 @@ class ChainPipeline:
             spec_items = [it for it in spec_items if keep(it)]
             llm_items = [it for it in llm_items if keep(it)]
             stats.n_empty_frequency_dropped = n1 - len(spec_items) - len(llm_items)
-        llm_has_meds = any(it.field_path == "medication.current_asms" for it in llm_items)
+        llm_has_meds = any(it.field_path == "medication.current_asms"
+                           and it.ev.get("reader") != "X1C" for it in llm_items)
+        covered = getattr(self._llm_reasoner, "last_covered_field_paths", None) if llm_pheno is not None else None
         if llm_pheno is not None:
             fusion = fuse(spec_items, llm_items)
             fused_spec = fusion.specialist
@@ -268,12 +278,26 @@ class ChainPipeline:
                 if fs.status == "agree":
                     detectors.append("llm")
                     stats.n_llm_agree += 1
+                    if (self.cfg.agreed_probable_is_asserted
+                            and isinstance(covered, (set, frozenset))
+                            and it.field_path in covered
+                            and (it.ev.get("certainty") or "").lower() == "probable"):
+                        it = type(it)(field_path=it.field_path, module=it.module,
+                                      ev={**it.ev, "certainty": "definite"}, multi=it.multi)
+                        stats.n_agreed_probable_asserted += 1
                 elif fs.status == "disagree":
                     initial.append(ReasonCode.SOURCE_DISAGREEMENT)
                     alternative = spec_display if swapped else fs.alternative
                     stats.n_llm_disagree += 1
                 else:
                     stats.n_specialist_only += 1
+                    if (self.cfg.require_second_reader_for_uncovered_fields
+                            and isinstance(covered, (set, frozenset))
+                            and it.field_path not in covered):
+                        initial.append(ReasonCode.NO_SECOND_READER)
+                        stats.n_no_second_reader += 1
+                    elif isinstance(covered, (set, frozenset)) and it.field_path in covered:
+                        stats.n_specialist_only_covered += 1
             role, _rule = self._drug_role(it.field_path, it.ev, text)
             acute = role == "acute"
             rescue = role == "rescue"
@@ -561,6 +585,12 @@ class ChainPipeline:
         if expected != claim.mention.sha256:
             reasons.append(ReasonCode.QUOTE_MISMATCH)
             claim.validator_verdict = ValidatorVerdict.REJECT
+            claim.reason_codes = reasons
+            return
+
+        # Policy: the model ran, but no reader covers this field
+        if ReasonCode.NO_SECOND_READER in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
             claim.reason_codes = reasons
             return
 

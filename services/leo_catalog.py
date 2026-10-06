@@ -116,11 +116,13 @@ EXTRACT: tuple[Phenotype, ...] = (
               "semiology text, and 3 of 13 auras (10.17)."),
     Phenotype("focal_motor_onset", "Focal motor onset", ("clinical_seizure.focal_motor_onset",), "scalar",
               "Motor feature at focal onset (ILAE 2017 seizure classification).", _R, ("seizure",), ("ilae2017_seizure",),
-              _EXT + "Right for 7 of 12 patients that have one (all answered). It also reports a motor feature when the note "
-              "gives it as semiology only, which is hard to separate from onset (10.17)."),
+              _EXT + "Right for 7 of 12 patients that have one (3 wrong, 2 missing; 10.21). "
+              "Held-out half (odd patient numbers, 5 patients): 2 right, 2 wrong, 1 missing. "
+              "The rule now needs an onset cue or a 'focal seizure with X' phrasing, so later evolution is less often called onset."),
     Phenotype("focal_nonmotor_onset", "Focal non-motor onset", ("clinical_seizure.focal_nonmotor_onset",),
               "scalar", "Non-motor feature at focal onset (ILAE 2017 seizure classification).", _R, ("seizure",),
-              ("ilae2017_seizure",), _EXT + "Right for 8 of 15 patients that have one (10.17)."),
+              ("ilae2017_seizure",), _EXT + "Right for 11 of 15 patients that have one (4 wrong; 8 of 15 before the onset-cue "
+              "rule, 10.21). Held-out half (6 patients): all 6 right."),
     Phenotype("eeg_study_type", "EEG study type", ("eeg.study_type",), "scalar",
               "Routine, prolonged, ambulatory, video-EEG, EMU and so on.", _R, ("eeg",), (),
               _EXT + "Right for 24 of 37 patients after the rules stopped reading advice (\"video-EEG may be considered\") "

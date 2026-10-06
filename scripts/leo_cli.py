@@ -79,7 +79,8 @@ def _runtime(args):
     arm = getattr(args, "arm", "") or ("L0C" if getattr(args, "adapter", "") else "L1C")
     return LeoRuntime.load(mode=mode, arm=arm, adapter_dir=getattr(args, "adapter", "") or "",
                            chunk_max_chars=getattr(args, "chunk_chars", 8000),
-                           disagree_llm=parse_disagree_llm(getattr(args, "disagree_llm", None)))
+                           disagree_llm=parse_disagree_llm(getattr(args, "disagree_llm", None)),
+                           ext_reader=False if getattr(args, "no_ext_reader", False) else None)
 
 
 def _submit(name: str, argv: list[str], *, gpu: bool, partition: str, hours: int, extra_env: dict | None = None) -> str:
@@ -211,6 +212,8 @@ def cmd_batch(args) -> int:
                 argv += ["--question-type", args.question_type[i]]
         if args.accepted_only:
             argv.append("--accepted-only")
+        if getattr(args, "no_ext_reader", False):
+            argv.append("--no-ext-reader")
         jid = _submit("batch", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -303,6 +306,8 @@ def cmd_run(args) -> int:
         for flag, val in (("--sheet", args.sheet), ("--adapter", args.adapter), ("--arm", args.arm)):
             if val:
                 argv += [flag, val]
+        if getattr(args, "no_ext_reader", False):
+            argv.append("--no-ext-reader")
         jid = _submit("run", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
         if args.wait:
             _wait(jid)
@@ -450,6 +455,8 @@ def cmd_start(args) -> int:
             env["MEDAI_LEO_ARM"] = args.arm or "L0C"
         elif args.arm:
             env["MEDAI_LEO_ARM"] = args.arm
+        if getattr(args, "no_ext_reader", False):
+            env["MEDAI_LEO_EXT_READER"] = "0"
         STATE.write_text(json.dumps({"node": os.uname().nodename, "port": args.port, "mode": mode,
                                      "job": os.environ.get("SLURM_JOB_ID", ""), "started": datetime.now().isoformat()}))
         host = env["SERVICE_HOST"]
@@ -472,6 +479,8 @@ def cmd_start(args) -> int:
         argv += ["--adapter", str(Path(args.adapter).resolve())]
     if args.arm:
         argv += ["--arm", args.arm]
+    if getattr(args, "no_ext_reader", False):
+        argv.append("--no-ext-reader")
     _submit("server", argv, gpu=not args.cpu, partition=args.partition or "general", hours=args.hours)
     print("[leo] when it starts, `leo status` shows the URL and the SSH tunnel command.")
     return 0
@@ -649,6 +658,8 @@ def _common(sp, *, model=True):
                         help="fields where the model's value is shown when model and rules disagree "
                              "(default: none, the rules' value is shown and the model's goes to the 'alternative'; "
                              "'candidate' = seizure type, not validated on real notes)")
+        sp.add_argument("--no-ext-reader", action="store_true",
+                        help="do not run the second model call on EEG, onset, rescue and surgery (default: on)")
 
 
 def main(argv=None) -> int:
@@ -675,6 +686,7 @@ def main(argv=None) -> int:
     sp.add_argument("--dev", action="store_true", help="Flask development server instead of gunicorn")
     sp.add_argument("--adapter", default="")
     sp.add_argument("--arm", default="")
+    sp.add_argument("--no-ext-reader", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=24)
     sp.set_defaults(fn=cmd_start)

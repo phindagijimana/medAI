@@ -84,7 +84,7 @@ _FOCAL_MOTOR_FALLBACK: list[tuple[re.Pattern[str], FocalMotorOnset]] = [
 
 _FOCAL_NONMOTOR_FALLBACK: list[tuple[re.Pattern[str], FocalNonmotorOnset]] = [
     (re.compile(r"\bautonomic\b|piloerection|pallor|flushing|"
-                r"heart\s+rate\s+change|epigastric\s+rising",
+                r"heart\s+rate\s+change|epigastric\s+rising|rising\s+epigastric",
                 re.IGNORECASE), FocalNonmotorOnset.AUTONOMIC),
     (re.compile(r"behavio(?:u)?r\s+arrest|behavioral\s+arrest|"
                 r"staring\s+spells?|blank\s+stare",
@@ -155,9 +155,122 @@ _NEG_PRE = re.compile(
     re.IGNORECASE,
 )
 
+# ILAE 2017: onset is the first prominent feature, not later evolution.
+_EVOLUTION_RE = re.compile(
+    r"\b(?:then|followed\s+by|progress(?:es|ed|ing)?\s+to|evolves?\s+(?:to|into)|"
+    r"secondarily(?:\s+generaliz(?:es|ed|ing)?)?|later(?:\s+in\s+the\s+seizure)?)\b",
+    re.IGNORECASE,
+)
+_ONSET_CUE_RE = re.compile(
+    r"\b(?:begins?\s+with|starts?\s+with|onset\s+with|first\s+(?:sign|symptom)|"
+    r"initially|at\s+onset|aura\s+of)\b",
+    re.IGNORECASE,
+)
+_AURA_WORD_RE = re.compile(r"\baura\b", re.IGNORECASE)
+_PLAN_RE = re.compile(
+    r"\b(?:recommend(?:ed|ing)?|consider(?:ed|ing)?|advise[ds]?|will\s+discuss|"
+    r"plan(?:ned)?\s+to|option\s+of)\b",
+    re.IGNORECASE,
+)
+_FAMILY_RE = re.compile(r"\b(?:mother|father|sister|brother|parent|family|maternal|paternal)\b",
+                        re.IGNORECASE)
+_SENT_START_NEG = re.compile(r"^\s*(?:no|denies|never|without)\b", re.IGNORECASE)
+_FOCAL_WITH_RE = re.compile(r"\b(?:focal|partial)(?:[- ]\w+)*\s+seizures?\s+with\b", re.IGNORECASE)
+_MOTOR_ONSET_LABEL = re.compile(r"\b(?:focal\s+)?motor\s+onset\b", re.IGNORECASE)
+_NONMOTOR_ONSET_LABEL = re.compile(
+    r"\b(?:non[- ]?motor|autonomic|sensory|cognitive|emotional|behavior(?:al)?\s+arrest)\s+onset\b",
+    re.IGNORECASE,
+)
+_TC_NEAR = re.compile(r"tonic\s*[- ]?clonic|clonic\s*[- ]?tonic", re.IGNORECASE)
+
 
 def _preceded_by_neg(text: str, start: int, back: int = 30) -> bool:
     return bool(_NEG_PRE.search(text[max(0, start - back):start]))
+
+
+def _sentences(text: str) -> list[tuple[int, int, str]]:
+    out, start = [], 0
+    for m in re.finditer(r"[.!?;\n]+", text):
+        out.append((start, m.start(), text[start:m.start()]))
+        start = m.end()
+    if start < len(text):
+        out.append((start, len(text), text[start:]))
+    return [(a, b, s) for a, b, s in out if s.strip()]
+
+
+def _sentence_of(text: str, pos: int) -> tuple[int, int, str]:
+    for a, b, s in _sentences(text):
+        if a <= pos < b:
+            return a, b, s
+    return 0, len(text), text
+
+
+def _skip_sentence(sent: str) -> bool:
+    if _SENT_START_NEG.search(sent) or _PLAN_RE.search(sent) or _FAMILY_RE.search(sent):
+        return True
+    return False
+
+
+def _in_tonic_clonic(text: str, start: int, end: int) -> bool:
+    window = text[max(0, start - 12):min(len(text), end + 12)]
+    return bool(_TC_NEAR.search(window))
+
+
+def _onset_tier(sent: str, feat_local: int, *, motor: bool) -> Optional[int]:
+    """0 = explicit onset label, 1 = onset-cue / aura segment, 2 = 'focal seizure with X'. None = not onset."""
+    if _skip_sentence(sent):
+        return None
+    evo = [m.start() for m in _EVOLUTION_RE.finditer(sent)]
+    first_evo = evo[0] if evo else len(sent)
+    if motor and _MOTOR_ONSET_LABEL.search(sent):
+        return 0
+    if (not motor) and _NONMOTOR_ONSET_LABEL.search(sent):
+        return 0
+    seg0 = sent[:first_evo]
+    if feat_local < first_evo and (_ONSET_CUE_RE.search(seg0) or _AURA_WORD_RE.search(seg0)):
+        return 1
+    if not evo and _FOCAL_WITH_RE.search(sent):
+        return 2
+    return None
+
+
+def _pick_onset(text: str, entities: list, enum_cls, fallback, *, motor: bool, make_ent, make_rx, meta):
+    """Highest-tier onset feature in the note, then earliest. Entities and regex share the same test."""
+    cands = []
+    for e in entities:
+        try:
+            value = enum_cls(e.enum_value)
+        except (ValueError, TypeError):
+            continue
+        a, b, sent = _sentence_of(text, e.char_start)
+        if _preceded_by_neg(text, e.char_start) or _skip_sentence(sent):
+            continue
+        if motor and _in_tonic_clonic(text, e.char_start, e.char_end):
+            continue
+        tier = _onset_tier(sent, e.char_start - a, motor=motor)
+        if tier is None:
+            continue
+        cands.append((tier, e.char_start, make_ent(value, e)))
+    for pat, value in fallback:
+        for m in pat.finditer(text):
+            if _preceded_by_neg(text, m.start()):
+                continue
+            if motor and value.value in ("tonic", "clonic") and _in_tonic_clonic(text, m.start(), m.end()):
+                continue
+            a, b, sent = _sentence_of(text, m.start())
+            if _skip_sentence(sent):
+                continue
+            window = text[max(0, m.start() - 150):min(len(text), m.end() + 150)]
+            if not _SEIZURE_CTX_RE.search(window):
+                continue
+            tier = _onset_tier(sent, m.start() - a, motor=motor)
+            if tier is None:
+                continue
+            cands.append((tier, m.start(), make_rx(value, m)))
+    if not cands:
+        return None
+    cands.sort(key=lambda x: (x[0], x[1]))  # lowest tier number = strongest, then earliest
+    return cands[0][2]
 
 
 def _next_n_sentences(text: str, start: int, n: int = 3, cap: int = 400) -> str:
@@ -209,38 +322,17 @@ class FocalMotorOnsetRule(BaseFieldRule):
         text = getattr(doc, "text", "") or ""
         if not _has_focal_context(text, doc):
             return None
-
-        # 1. Direct LinkedEntity match.
         cands = self.relevant_entities(entities, include_hypothetical=True)
-        cands.sort(key=lambda e: e.char_start)
-        for e in cands:
-            try:
-                value = FocalMotorOnset(e.enum_value)
-            except (ValueError, TypeError):
-                continue
-            return self._make_evidence(value, e, meta)
-
-        # 2. Fallback regex — only when the surface form sits in a
-        # sentence that ALSO mentions a seizure/aura/episode word.
-        for pat, value in _FOCAL_MOTOR_FALLBACK:
-            for m in pat.finditer(text):
-                if _preceded_by_neg(text, m.start()):
-                    continue
-                window = text[max(0, m.start() - 150):min(len(text), m.end() + 150)]
-                if not _SEIZURE_CTX_RE.search(window):
-                    continue
-                return Evidence[FocalMotorOnset](
-                    value=value,
-                    certainty=Certainty.PROBABLE,
-                    temporal_status=TemporalStatus.CURRENT,
-                    evidence_text=m.group(0),
-                    source_doc_id=meta["doc_id"],
-                    source_doc_type=meta["doc_type"],
-                    source_date=meta["doc_date"],
-                    char_start=m.start(),
-                    char_end=m.end(),
-                )
-        return None
+        return _pick_onset(
+            text, cands, FocalMotorOnset, _FOCAL_MOTOR_FALLBACK, motor=True,
+            make_ent=lambda value, e: self._make_evidence(value, e, meta),
+            make_rx=lambda value, m: Evidence[FocalMotorOnset](
+                value=value, certainty=Certainty.PROBABLE, temporal_status=TemporalStatus.CURRENT,
+                evidence_text=m.group(0), source_doc_id=meta["doc_id"], source_doc_type=meta["doc_type"],
+                source_date=meta["doc_date"], char_start=m.start(), char_end=m.end(),
+            ),
+            meta=meta,
+        )
 
 
 class FocalNonmotorOnsetRule(BaseFieldRule):
@@ -263,35 +355,17 @@ class FocalNonmotorOnsetRule(BaseFieldRule):
         text = getattr(doc, "text", "") or ""
         if not _has_focal_context(text, doc):
             return None
-
         cands = self.relevant_entities(entities, include_hypothetical=True)
-        cands.sort(key=lambda e: e.char_start)
-        for e in cands:
-            try:
-                value = FocalNonmotorOnset(e.enum_value)
-            except (ValueError, TypeError):
-                continue
-            return self._make_evidence(value, e, meta)
-
-        for pat, value in _FOCAL_NONMOTOR_FALLBACK:
-            for m in pat.finditer(text):
-                if _preceded_by_neg(text, m.start()):
-                    continue
-                window = text[max(0, m.start() - 150):min(len(text), m.end() + 150)]
-                if not _SEIZURE_CTX_RE.search(window):
-                    continue
-                return Evidence[FocalNonmotorOnset](
-                    value=value,
-                    certainty=Certainty.PROBABLE,
-                    temporal_status=TemporalStatus.CURRENT,
-                    evidence_text=m.group(0),
-                    source_doc_id=meta["doc_id"],
-                    source_doc_type=meta["doc_type"],
-                    source_date=meta["doc_date"],
-                    char_start=m.start(),
-                    char_end=m.end(),
-                )
-        return None
+        return _pick_onset(
+            text, cands, FocalNonmotorOnset, _FOCAL_NONMOTOR_FALLBACK, motor=False,
+            make_ent=lambda value, e: self._make_evidence(value, e, meta),
+            make_rx=lambda value, m: Evidence[FocalNonmotorOnset](
+                value=value, certainty=Certainty.PROBABLE, temporal_status=TemporalStatus.CURRENT,
+                evidence_text=m.group(0), source_doc_id=meta["doc_id"], source_doc_type=meta["doc_type"],
+                source_date=meta["doc_date"], char_start=m.start(), char_end=m.end(),
+            ),
+            meta=meta,
+        )
 
 
 class SemiologyTextRule(BaseFieldRule):

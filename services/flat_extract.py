@@ -46,6 +46,17 @@ SEIZURE_TYPES = (
 )
 PERIODS = ("day", "week", "month", "year")
 
+# Specialist field paths this reader can corroborate: exactly the (module, field) pairs ``parse_flat`` emits.
+# ``services.chain_pipeline`` uses it to tell "the model read this field and found nothing" from "no model reads
+# this field" (tests/test_leo_ext_reader.py checks it against ``parse_flat`` so it cannot drift).
+FLAT_FIELD_PATHS = frozenset({
+    "clinical_seizure.epilepsy_type",
+    "clinical_seizure.predominant_seizure_type",
+    "clinical_seizure.age_at_onset_years",
+    "clinical_seizure.seizure_frequency",
+    "medication.current_asms",
+})
+
 _INSTRUCTIONS = f"""You extract facts about one patient's epilepsy from a clinic note.
 Reply with ONE JSON object and nothing else. Use null for anything the note does not state.
 Every non-null value needs "quote": the exact words copied from the note that support it.
@@ -311,4 +322,4 @@ def parse_flat(raw: str) -> FlatParse:
 
 
 __all__ = ["flat_answer_model", "FLAT_ARMS", "FLAT_PROMPT_VERSION", "FlatParse", "build_flat_prompt", "parse_flat",
-           "EPILEPSY_TYPES", "SEIZURE_TYPES", "PERIODS"]
+           "EPILEPSY_TYPES", "SEIZURE_TYPES", "PERIODS", "FLAT_FIELD_PATHS"]

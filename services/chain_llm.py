@@ -65,7 +65,12 @@ NUMERIC_TOLERANCE = 1.0
 
 # Keys that identify an item inside a structured Evidence value.
 _IDENTITY_KEYS = ("generic_name", "procedure", "therapy", "name", "type",
-                  "finding", "diagnosis")
+                  "finding", "diagnosis", "surgery_type")
+
+# List fields where one LLM item may corroborate several specialist items.  The rules emit one interictal-discharge
+# finding per (discharge type, side, lobe); the model reads one entry per site, so the same entry vouches for every
+# specialist finding at that site.
+REUSABLE_LLM_PATHS = frozenset({"eeg.ied_findings"})
 
 _WS = re.compile(r"\s+")
 
@@ -149,6 +154,8 @@ def values_agree(a: Any, b: Any) -> bool:
             return _canon_drug(a.get("generic_name") or "") == _canon_drug(b.get("generic_name") or "")
         if "period" in a or "period" in b or "count_min" in a or "count_min" in b:
             return _freq_agree(a, b)
+        if "ied_type" in a or "ied_type" in b:
+            return _ied_agree(a, b)
         for k in _IDENTITY_KEYS:
             if a.get(k) and b.get(k):
                 return _norm_str(a[k]) == _norm_str(b[k])
@@ -185,6 +192,20 @@ def is_empty_frequency(value: Any) -> bool:
         return False
     lo, hi = freq_counts(value)
     return lo is None and hi is None and _freq_period(value) is None
+
+
+def _ied_agree(a: dict, b: dict) -> bool:
+    """Same interictal-discharge site: lobe and side must match wherever both sides state one, and at least one
+    of them must be stated by both.  The discharge type is not compared (the model reader does not read it)."""
+    compared = 0
+    for k in ("localization", "laterality"):
+        va, vb = a.get(k), b.get(k)
+        if va in (None, "", "unknown") or vb in (None, "", "unknown"):
+            continue
+        if _norm_str(va) != _norm_str(vb):
+            return False
+        compared += 1
+    return compared > 0
 
 
 def _freq_agree(a: dict, b: dict) -> bool:
@@ -241,19 +262,23 @@ def fuse(specialist: Iterable[FieldItem], llm: Iterable[FieldItem]) -> Fusion:
 
     spec_list = list(specialist)
     fused: list[FusedSpecialist] = []
-    used: set[int] = set()   # id() of consumed LLM items
+    used: set[int] = set()        # id() of items that matched at least once (kept out of llm_only)
+    used_pool: set[int] = set()   # id() of items removed from the matching pool (reusable paths stay)
 
     for sp in spec_list:
-        pool = [c for c in llm_by_path.get(sp.field_path, []) if id(c) not in used]
+        pool = [c for c in llm_by_path.get(sp.field_path, []) if id(c) not in used_pool]
         match = next((c for c in pool if values_agree(sp.ev.get("value"), c.ev.get("value"))), None)
         if match is not None:
             used.add(id(match))
+            if match.field_path not in REUSABLE_LLM_PATHS:
+                used_pool.add(id(match))
             fused.append(FusedSpecialist(sp, "agree", llm_item=match))
             continue
         if not sp.multi and pool:
             # Scalar field, LLM committed to a different value.
             other = pool[0]
             used.add(id(other))
+            used_pool.add(id(other))
             fused.append(FusedSpecialist(
                 sp, "disagree",
                 alternative=display_value(other.ev.get("value")),
@@ -511,10 +536,17 @@ class FlatLiveReasoner:
         self.info = LLMRunInfo(model=getattr(backend, "model_name", ""),
                                prompt=f"flat_phenotype.{arm}.{FLAT_PROMPT_VERSION}")
         self.n_calls = 0
+        self.last_ok = False
+
+    @property
+    def last_covered_field_paths(self):
+        from services.flat_extract import FLAT_FIELD_PATHS
+        return FLAT_FIELD_PATHS if self.last_ok else frozenset()
 
     def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
         from services.extract import DecodingConfig
         from services.flat_extract import build_flat_prompt, flat_answer_model, parse_flat
+        self.last_ok = False
         decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
                                   max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
         prompt = build_flat_prompt(text, self.arm)
@@ -527,7 +559,99 @@ class FlatLiveReasoner:
             logger.exception("flat LLM generation failed; continuing specialist-only")
             return None
         self.n_calls += 1
-        return parse_flat(raw).modules or None
+        parsed = parse_flat(raw)
+        if not parsed.parse_ok:
+            return None
+        self.last_ok = True
+        return parsed.modules or {}
+
+
+class ExtendedLiveReasoner:
+    """Second call on the same note: the extended fields (arm X1C).  See ``services.ext_extract``."""
+
+    def __init__(self, backend: Any, *, max_new_tokens: int = 768):
+        self.backend = backend
+        self.max_new_tokens = max_new_tokens
+        from services.ext_extract import EXT_ARM, EXT_PROMPT_VERSION
+        self.info = LLMRunInfo(model=getattr(backend, "model_name", ""),
+                               prompt=f"ext_phenotype.{EXT_ARM}.{EXT_PROMPT_VERSION}")
+        self.n_calls = 0
+        self.last_ok = False
+
+    @property
+    def last_covered_field_paths(self):
+        from services.ext_extract import EXT_FIELD_PATHS
+        return EXT_FIELD_PATHS if self.last_ok else frozenset()
+
+    def _one(self, text: str, document_id: str) -> Optional[dict]:
+        from services.extract import DecodingConfig
+        from services.ext_extract import build_ext_prompt, ext_answer_model, parse_ext
+        decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
+                                  max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
+        try:
+            raw, _ = self.backend.generate_constrained(build_ext_prompt(text),
+                                                       ext_answer_model(), decoding)
+        except Exception:
+            logger.exception("extended LLM generation failed; continuing without X1C")
+            return None
+        self.n_calls += 1
+        parsed = parse_ext(raw)
+        return parsed.modules or {} if parsed.parse_ok else None
+
+    def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
+        from services.ext_extract import EXT_MAX_NOTE_CHARS
+        self.last_ok = False
+        if len(text) > EXT_MAX_NOTE_CHARS:
+            from services.chunker import chunk_text
+            chunks = chunk_text(text, max_chars=EXT_MAX_NOTE_CHARS, overlap_chars=400, pack=True)
+            parts = [self._one(c.text, f"{document_id}#x{c.chunk_index}") for c in chunks]
+            self.last_ok = any(p is not None for p in parts)
+            return merge_chunk_phenotypes(parts)
+        out = self._one(text, document_id)
+        self.last_ok = out is not None
+        return out
+
+
+class CombinedReasoner:
+    """Run the core (L1C) and extended (X1C) readers on the same text and merge their modules.
+
+    One reader failing does not drop the other.  ``last_covered_field_paths`` is the union of the
+    readers that parsed, so the pipeline can tell "the model read this field and found nothing"
+    from "no model reads this field".
+    """
+
+    def __init__(self, flat: Any, ext: Any):
+        self.flat, self.ext = flat, ext
+        fp = getattr(flat, "info", LLMRunInfo()).prompt
+        ep = getattr(ext, "info", LLMRunInfo()).prompt
+        self.info = LLMRunInfo(model=getattr(flat, "info", LLMRunInfo()).model,
+                               prompt=f"{fp}+{ep}")
+        self.last_ok = False
+        self.last_covered_field_paths: Optional[frozenset] = frozenset()
+
+    def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
+        from services.ext_extract import EXT_FIELD_PATHS
+        from services.flat_extract import FLAT_FIELD_PATHS
+        a = b = None
+        try:
+            a = self.flat(text, document_id, doc_date)
+        except Exception:
+            logger.exception("core LLM reader failed; continuing with the extended reader")
+        try:
+            b = self.ext(text, document_id, doc_date)
+        except Exception:
+            logger.exception("extended LLM reader failed; continuing with the core reader")
+        cov: set[str] = set()
+        if getattr(self.flat, "last_ok", False):
+            cov |= set(getattr(self.flat, "last_covered_field_paths", None) or FLAT_FIELD_PATHS)
+        if getattr(self.ext, "last_ok", False):
+            cov |= set(getattr(self.ext, "last_covered_field_paths", None) or EXT_FIELD_PATHS)
+        self.last_covered_field_paths = frozenset(cov)
+        self.last_ok = bool(cov)
+        parts = [p for p in (a, b) if p is not None]
+        if not parts:
+            return {} if cov else None
+        return merge_chunk_phenotypes(parts)
 
 
 def _merge_key(value: Any) -> str:
@@ -537,16 +661,28 @@ def _merge_key(value: Any) -> str:
     return _norm_str(value)
 
 
+def _list_key(ev: dict) -> str:
+    v = ev.get("value")
+    if isinstance(v, dict):
+        if v.get("generic_name"):
+            return "drug:" + _canon_drug(v["generic_name"])
+        return json.dumps(v, sort_keys=True, default=str)
+    return _canon_drug(str(v or ""))
+
+
 def merge_chunk_phenotypes(parts: list[Optional[dict]]) -> Optional[dict]:
     """Merge per-chunk LLM phenotypes (``{module: {field: Evidence | [Evidence]}}``) into one.
 
     Scalar fields: the value found in most chunks wins; a tie goes to the earliest chunk.  List
-    fields (drugs): union, one entry per canonical drug name, first quote kept.  Quotes are verbatim
-    in the chunk and so in the note; offsets are located later in the full text by the pipeline.
+    fields: union, one entry per identity (drug name, or the whole structured value), first quote
+    kept.  Quotes are verbatim in the chunk and so in the note; offsets are located later in the
+    full text by the pipeline.  A single non-empty part is returned unchanged.
     """
-    parts = [p for p in parts if p]
+    parts = [p for p in parts if p is not None]
     if not parts:
         return None
+    if len(parts) == 1:
+        return parts[0]
     merged: dict = {}
     modules = {m for p in parts for m in p}
     for module in modules:
@@ -561,9 +697,7 @@ def merge_chunk_phenotypes(parts: list[Optional[dict]]) -> Optional[dict]:
                 seen: dict[str, Any] = {}
                 for lst in cands:
                     for ev in lst:
-                        v = ev.get("value")
-                        name = v.get("generic_name") if isinstance(v, dict) else v
-                        seen.setdefault(_canon_drug(str(name or "")), ev)
+                        seen.setdefault(_list_key(ev), ev)
                 out[fld] = list(seen.values())
             else:
                 counts: dict[str, list] = {}
@@ -591,6 +725,7 @@ class ChunkedReasoner:
         self.overlap_chars = overlap_chars
         self.info = getattr(inner, "info", LLMRunInfo())
         self.last_n_chunks = 1
+        self.last_covered_field_paths: Optional[frozenset] = None
 
     def has(self, document_id: str) -> bool:
         return getattr(self.inner, "has", lambda _d: True)(document_id)
@@ -598,12 +733,23 @@ class ChunkedReasoner:
     def __call__(self, text: str, document_id: str, doc_date: str) -> Optional[dict]:
         if len(text) <= self.max_chars:
             self.last_n_chunks = 1
-            return self.inner(text, document_id, doc_date)
+            out = self.inner(text, document_id, doc_date)
+            self.last_covered_field_paths = getattr(self.inner, "last_covered_field_paths", None)
+            return out
         from services.chunker import chunk_text
         chunks = chunk_text(text, max_chars=self.max_chars, overlap_chars=self.overlap_chars, pack=True)
         self.last_n_chunks = max(1, len(chunks))
-        return merge_chunk_phenotypes(
-            [self.inner(c.text, f"{document_id}#c{c.chunk_index}", doc_date) for c in chunks])
+        parts, covered = [], []
+        for c in chunks:
+            parts.append(self.inner(c.text, f"{document_id}#c{c.chunk_index}", doc_date))
+            covered.append(getattr(self.inner, "last_covered_field_paths", None))
+        if any(c is None for c in covered):
+            self.last_covered_field_paths = None
+        elif covered:
+            self.last_covered_field_paths = frozenset.intersection(*[frozenset(c) for c in covered])
+        else:
+            self.last_covered_field_paths = frozenset()
+        return merge_chunk_phenotypes(parts)
 
 
 
@@ -721,7 +867,8 @@ class ManifestLLMReasoner:
 
 __all__ = [
     "freq_counts", "is_empty_frequency", "FieldItem", "Fusion", "FusedSpecialist", "LLM_DETECTOR", "LLMReasoner",
-    "FTLiveReasoner", "FlatLiveReasoner", "ChunkedReasoner", "merge_chunk_phenotypes", "LLMRunInfo", "LiveLLMReasoner", "ManifestLLMReasoner", "load_live_reasoner",
+    "FTLiveReasoner", "FlatLiveReasoner", "ExtendedLiveReasoner", "CombinedReasoner",
+    "ChunkedReasoner", "merge_chunk_phenotypes", "LLMRunInfo", "LiveLLMReasoner", "ManifestLLMReasoner", "load_live_reasoner",
     "display_value", "flatten", "fuse", "is_nullish", "locate_quote",
     "values_agree",
 ]

@@ -99,6 +99,8 @@ class ReasonCode(str, Enum):
     ACUTE_ADMINISTRATION = "acute_administration"
     # As-needed seizure-emergency drug (rescue); informational, the claim is judged like any other
     RESCUE_ROLE = "rescue_role"
+    # The model ran, but no reader covers this field: a single-reader claim, never auto-accepted
+    NO_SECOND_READER = "no_second_reader"
     # Accept
     # One detector made the claim and no second source contradicted or was asked to confirm it
     ACCEPT_UNANIMOUS = "accept_unanimous"
