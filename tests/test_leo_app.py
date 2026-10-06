@@ -846,6 +846,45 @@ def test_jobs_wait_for_their_turn_and_a_waiting_job_can_be_cancelled(client, mon
     assert c.get(f"/leo/jobs/{j2}/download").status_code == 409     # nothing to download, said plainly
 
 
+def test_background_jobs_with_the_model_run_inside_the_app_context(client, runtimes, monkeypatch):
+    """A job thread has no request: the model runtime looks up the app, so the thread must carry the app context.
+    (This failed on a real GPU run while the fake-free CPU tests passed.)  Both job kinds, model on."""
+    c, leo = client
+    llm, _ = runtimes
+    backend = object()
+    monkeypatch.setattr(c.application, "med42_backend", backend, raising=False)
+    monkeypatch.setattr(c.application, "ensure_med42_loaded", lambda: "ready")
+    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000", llm)
+    csv = "patient_id,note_id,text\nP1,n1," + json.dumps(NOTE) + "\n"
+    r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "on"})
+    assert r.status_code == 202 and r.get_json()["mode"] == "llm+specialist"
+    st = _wait_state(c, r.get_json()["job_id"], ("done", "error"))
+    assert st["state"] == "done" and st["summary"]["rows_with_llm"] == 1, st
+    plan = c.post("/leo/job/plan", data={"file": (io.BytesIO(csv.encode()), "b.csv"),
+                                         "request": "seizure types for the first 1 subjects"}).get_json()
+    r = c.post(f"/leo/job/{plan['job_id']}/run", json={"spec": plan["spec"], "llm": "on"})
+    assert r.status_code == 202
+    st = _wait_state(c, plan["job_id"], ("done", "error"))
+    assert st["state"] == "done" and st["summary"]["rows_with_llm"] == 1, st
+
+
+def test_a_running_job_cannot_be_deleted_only_cancelled_first(client, monkeypatch):
+    import threading
+    c, leo = client
+    slot = threading.Semaphore(1)
+    monkeypatch.setattr(leo, "_SLOT", slot)
+    slot.acquire()
+    try:
+        jid = c.post("/leo/batch", data={"file": (io.BytesIO(b"text\nx\n"), "a.csv"), "llm": "off"}).get_json()["job_id"]
+        time.sleep(0.5)
+        assert c.delete(f"/leo/jobs/{jid}").status_code == 409
+        assert c.post(f"/leo/jobs/{jid}/cancel").status_code == 200
+    finally:
+        slot.release()
+    assert _wait_state(c, jid, ("cancelled",))["state"] == "cancelled"
+    assert c.delete(f"/leo/jobs/{jid}").status_code == 200
+
+
 def test_odd_files_give_a_clear_message_not_a_crash(client):
     c, leo = client
     def post(data, name="x.csv", **kw):

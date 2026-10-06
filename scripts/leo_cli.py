@@ -37,7 +37,8 @@ STATE = REPO / ".leo_server.json"
 JOBDIR = REPO / "logs" / "leo_jobs"
 NEEDED = {"flask": "flask", "flask_cors": "flask-cors", "dotenv": "python-dotenv", "lmformatenforcer": "lm-format-enforcer",
           "openpyxl": "openpyxl", "pandas": "pandas", "pydantic": "pydantic", "medcat": "medcat", "medspacy": "medspacy",
-          "torch": "torch", "transformers": "transformers", "peft": "peft"}
+          "torch": "torch", "transformers": "transformers", "peft": "peft", "gunicorn": "gunicorn",
+          "pydantic_settings": "pydantic-settings==2.11.0"}       # the model loader in the web app imports it
 SAMPLE = ("Dear Dr Smith,\n\nHistory of Present Illness\n\nThe patient has focal epilepsy with seizures beginning at age 11. "
           "Current seizure frequency is about two seizures per month.\n\nMedications\n\nThe patient takes lamotrigine "
           "200 mg twice daily and lacosamide 100 mg twice daily. In the past valproate was stopped because of tremor.\n\n"

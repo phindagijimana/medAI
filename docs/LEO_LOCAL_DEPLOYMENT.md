@@ -58,13 +58,23 @@ Each job writes a small record (`job.json`) in its folder. After a restart:
 
 ## 6. Install
 
+Steps for a new machine (a test in a clean environment on 2026-10-05 found each of these):
+
+1. Python 3.11. Make the environment **inside the repo as `venv-medcat`**: `python3.11 -m venv venv-medcat`. The scripts always use `venv-medcat/bin/python`, whatever environment you are in, and `bin/leo install` installs into it. Put it on a disk that allows running programs (a `noexec` `/tmp` breaks compiled packages).
+2. `venv-medcat/bin/python -m pip install -r requirements-leo.txt` (use `python -m pip`, not a bare `pip`, which may belong to another Python). This includes `numpy==1.26.4`; newer numpy breaks spaCy/medspacy. `pip check` will warn that medcat wants numpy 2 or later; that warning is known.
+3. `venv-medcat/bin/python -m spacy download en_core_web_sm` (needed even for rules-only runs; version 3.7.1 is in the lock file).
+4. Download the model into `model_cache` (about 16 GB). There is no CPU-only install: `bin/leo check` fails without torch, transformers and peft (several GB).
+5. `bin/leo check`, then `bin/leo start --local`.
+
 Packages are listed in `requirements-leo.txt` (versions the tests ran with) and, for the exact set in `venv-medcat`, `requirements-leo.lock.txt`. `bin/leo install --check-only` lists what is missing. The model (Med42-8B, about 16 GB in half precision) must be downloaded first, and a GPU with roughly 20 GB or more of memory is expected for the language model. The development cluster uses an L40S 24 GB. Docker files exist (`Dockerfile`, `Dockerfile.gpu`) and use the same gunicorn settings; they were not tested for LEO.
 
 ## 7. What was tested, and what was not
 
 Tested (automated, `tests/test_leo_app.py`): login required everywhere, wrong passwords, redirects that cannot leave the site, Basic auth, cross-site refusal, lockout after five failures, users' jobs hidden from each other, jobs restored after a restart, a job that was running at restart marked failed, audit log without note text, file permissions of the users file and log. Also by hand: `bin/leo start --local --cpu` under gunicorn with login on (sign-in, API call, audit lines).
 
-**Not tested:** a clean-machine install; the GPU model loading under gunicorn (an attempt on 2026-10-03 never ran because the GPU job stayed pending in the Slurm queue for over 20 minutes; the smoke test was rules-only); the job queue with the model running; GPU memory and time per note on a long run; load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
+**Found by running it on a GPU node (2026-10-05):** the server started under gunicorn on the GPU node. The same run found three faults, all fixed afterwards and covered by tests: model jobs started from the web page failed at once ("working outside of application context"); a missing package (`pydantic-settings`) stopped the model loading in the web app; and deleting a running job did not stop it (now refused with "cancel it first").
+
+**Not tested:** a full clean-machine install including the GPU packages (the CPU part was tried on 2026-10-05; see section 6); a model job through the web page after those two fixes (rerun pending); GPU time and memory per note under a model run; load from several users at once; HTTPS; recovery after a full disk or a killed GPU job.
 
 ## 8. What this is not
 

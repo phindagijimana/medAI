@@ -190,6 +190,17 @@ def extract_one():
     return resp
 
 
+def _in_app_context(fn):
+    """Run a background job inside the Flask app context: the model runtime looks up the app (``current_app``),
+    which a bare thread does not have.  Captured here, in the request thread."""
+    app = current_app._get_current_object()
+
+    def run(*args):
+        with app.app_context():
+            fn(*args)
+    return run
+
+
 def _run_job(job_id: str) -> None:
     from services import leo_batch as lb
     job = _JOBS[job_id]
@@ -275,7 +286,7 @@ def batch():
                      "date_col": form.get("date_col", ""), "owner": auth.current_user(), "created": time.time()}
     _persist(job_id)
     auth.audit("job_start", job=job_id, file=name, phenotypes=[p.id for p in phen], questions=len(asks), llm=use_llm)
-    threading.Thread(target=_run_job, args=(job_id,), daemon=True, name=f"leo-job-{job_id[:6]}").start()
+    threading.Thread(target=_in_app_context(_run_job), args=(job_id,), daemon=True, name=f"leo-job-{job_id[:6]}").start()
     return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
 
 
@@ -434,7 +445,8 @@ def job_run(job_id: str):
     _persist(job_id)
     auth.audit("job_start", job=job_id, file=job["filename"], phenotypes=spec.phenotypes, questions=len(asks),
                rows=spec.rows.mode, n=spec.rows.n, llm=use_llm)
-    threading.Thread(target=_run_spec_job, args=(job_id,), daemon=True, name=f"leo-spec-{job_id[:6]}").start()
+    threading.Thread(target=_in_app_context(_run_spec_job), args=(job_id,), daemon=True,
+                     name=f"leo-spec-{job_id[:6]}").start()
     return jsonify({"job_id": job_id, "mode": "llm+specialist" if use_llm else "specialist_only"}), 202
 
 
@@ -540,6 +552,8 @@ def job_delete(job_id: str):
     job, err = _job_or_404(job_id)
     if err:
         return err
+    if job.get("state") in ("queued", "running"):
+        return _bad("this job is still waiting or running; cancel it first, then delete it", 409)
     shutil.rmtree(_jobs_root() / job_id, ignore_errors=True)
     _JOBS.pop(job_id, None)
     auth.audit("job_delete", job=job_id)
