@@ -1,0 +1,280 @@
+{
+  "arm": "L1C",
+  "dir": "data/run_manifests_fs_test_flat_c",
+  "n_letters": 40,
+  "quote_entail_off": {
+    "llm": {
+      "micro_p": 0.7368421052631579,
+      "micro_r": 0.6666666666666666,
+      "micro_f1": 0.7
+    },
+    "specialist": {
+      "micro_p": 0.7941176470588235,
+      "micro_r": 0.7346938775510204,
+      "micro_f1": 0.7632508833922261
+    },
+    "leo_auto": {
+      "micro_p": 0.87,
+      "micro_r": 0.5918367346938775,
+      "micro_f1": 0.7044534412955464
+    },
+    "leo_review": {
+      "micro_p": 0.7702702702702703,
+      "micro_r": 0.7755102040816326,
+      "micro_f1": 0.7728813559322034
+    },
+    "research_extract": {
+      "scored": 84,
+      "correct": 74,
+      "miss": 10,
+      "precision": 0.8809523809523809
+    },
+    "routing": {
+      "accept": 209,
+      "review": 256,
+      "quote_not_entailed": 0,
+      "correct_cells_demoted": 0
+    }
+  },
+  "quote_entail_on": {
+    "llm": {
+      "micro_p": 0.7368421052631579,
+      "micro_r": 0.6666666666666666,
+      "micro_f1": 0.7
+    },
+    "specialist": {
+      "micro_p": 0.7941176470588235,
+      "micro_r": 0.7346938775510204,
+      "micro_f1": 0.7632508833922261
+    },
+    "leo_auto": {
+      "micro_p": 0.9102564102564102,
+      "micro_r": 0.48299319727891155,
+      "micro_f1": 0.6311111111111111
+    },
+    "leo_review": {
+      "micro_p": 0.7702702702702703,
+      "micro_r": 0.7755102040816326,
+      "micro_f1": 0.7728813559322034
+    },
+    "research_extract": {
+      "scored": 69,
+      "correct": 62,
+      "miss": 7,
+      "precision": 0.8985507246376812
+    },
+    "routing": {
+      "accept": 181,
+      "review": 284,
+      "quote_not_entailed": 28,
+      "correct_cells_demoted": 16
+    }
+  },
+  "research_extract_misses_default": [
+    {
+      "pid": "EA0166",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "quote": "Juvenile Myoclonic Epilepsy",
+      "quote_entails": false,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0167",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "temporal lobe epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0168",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "quote": "Juvenile Myoclonic Epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0169",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "symptomatic epilepsy",
+      "quote_entails": false,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0180",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "quote": "Juvenile Myoclonic Epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0181",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "symptomatic epilepsy",
+      "quote_entails": false,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0182",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "TLE",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0186",
+      "field": "clinical_seizure.predominant_seizure_type",
+      "pred": "focal_to_bilateral_tonic_clonic",
+      "gold": "focal_unknown_awareness",
+      "quote": " focal to bilateral convulsive seizur",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "Focal epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.seizure_frequency",
+      "pred": {
+        "period": "day",
+        "count_min": 1.0,
+        "count_max": 1.0
+      },
+      "gold": {
+        "seizure_period": "month"
+      },
+      "quote": "1 seizure per day",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    }
+  ],
+  "research_extract_misses_entail_on": [
+    {
+      "pid": "EA0167",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "temporal lobe epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0168",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "quote": "Juvenile Myoclonic Epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0180",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "quote": "Juvenile Myoclonic Epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0182",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "TLE",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0186",
+      "field": "clinical_seizure.predominant_seizure_type",
+      "pred": "focal_to_bilateral_tonic_clonic",
+      "gold": "focal_unknown_awareness",
+      "quote": " focal to bilateral convulsive seizur",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "quote": "Focal epilepsy",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.seizure_frequency",
+      "pred": {
+        "period": "day",
+        "count_min": 1.0,
+        "count_max": 1.0
+      },
+      "gold": {
+        "seizure_period": "month"
+      },
+      "quote": "1 seizure per day",
+      "quote_entails": true,
+      "reasons": [
+        "accept_specialist_llm_agree"
+      ]
+    }
+  ],
+  "n_misses_default": 10,
+  "n_misses_caught_by_entail_check": 3,
+  "decision": "Precision rose; still keep default off until a letter-bootstrap CI excludes 0 (this script does not flip D22).",
+  "flip_default": false
+}

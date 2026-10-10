@@ -1,8 +1,10 @@
 # How to read the LEO results
 
-Status: 2026-10-02. Read this before quoting any figure from `EVAL_PROTOCOL_LEO.md` or `LEO_USER_GUIDE.md`.
+Status: 2026-10-10. Read this before quoting any figure from `EVAL_PROTOCOL_LEO.md`. Operator steps: `LEO_USER_GUIDE.md`. Design: `IMPLEMENTATION.md`.
 
 Every figure comes from synthetic notes. Until real notes have been run under IRB approval on secure compute (`DEFERRED_BEYOND_MVP.md`), no result here says anything about real notes.
+
+LEO’s job is not to beat the model on F1. It is to keep the cells where two readers agree (the **research extract**), **evaluate that table’s accuracy against gold**, flag clashes, and attach the note’s own words. On the 40 letters that accuracy is concordant PPV 71/82 = 0.866 (same band as C2 0.835; Alwakeel / Khan). That is not a trust study and not a claim that accepted cells are safe (auto-accept precision 0.85; pre-v0.9 leak 19/49, v0.9 rematch 20/49 — do not write rules from the hold-out list). Fusion exists so disagreement is a flag, not a silent guess. Judge LEO as that review instrument. The headline 0.68 vs 0.70 is the display policy (rules shown on a clash), not a broken extractor.
 
 ## 1. What the headline numbers measure
 
@@ -59,26 +61,51 @@ LEO is more than an accuracy figure. The roles below are either only partly meas
 
 | Role | Evidence now |
 |---|---|
-| **Triage: separating reliable from unreliable values** | Measured in part. Precision where the readers agree: 0.835 (F-S), 0.999 (synthetic); where they disagree: 0.31 and 0.12. Auto-accepted values have precision 0.85 against 0.74 for the model alone on F-S, at the price of coverage (recall 0.54). This gain is real but does not appear in the headline F1. |
-| **Error capture: of the model's errors, how many does LEO flag?** | Not computed. Can be computed from existing outputs (section 5). |
+| **Triage: separating accept-band from review-band values** | Measured in part. Precision where the readers agree: 0.835 (F-S), 0.999 (synthetic); where they disagree: 0.31 and 0.12. Auto-accepted values have precision 0.85 against 0.74 for the model alone on F-S, at the price of coverage (recall 0.54). About one in six to seven accepted cells is still wrong versus gold. This gain is real but does not appear in the headline F1. |
+| **Error capture: of the model's errors, how many does LEO flag?** | Computed on F-S 40 (no new GPU): `eval/results/leo_error_capture_fs40.md`, `scripts/score_leo_error_capture.py`. Oracle reviewer bound on 160 letters: `leo_oracle_review_fs160.md`. |
 | **Reviewer workload** | Not computed. The share of claims routed is known per run (F-S, 414 claims: accept 0.41, review 0.56, reject 0.03; synthetic 30 patients, 2,796 claims: accept 0.62, review 0.36, reject 0.02); accuracy after review has not been scored. |
-| **Audit trail** | Every value carries its quote, character offsets, source and reason code. Not an accuracy result; its worth is the ability to check. Not tested with clinicians. |
-| **Safe failure** | Values with no supporting words are rejected; with no model, nothing is marked accepted (`no_second_reader`); questions can return "not documented" (2 of 90 invented answers in the unanswerable controls). |
+| **Audit trail** | Every value carries its quote, character offsets, source and reason code. Quote-in-note is presence, not support (`--quote-entail` off by default). Not an accuracy result; not a clinician or auditor study. |
+| **Safe failure** | Values with no supporting words are rejected; with no model, nothing is marked accepted (`no_second_reader`); questions can return "not documented" (2 of 90 invented answers in the unanswerable controls). Opt-in extra detectors (`--ext-detector`, D18–D20) never auto-accept (`sidecar_only`), cannot un-accept E, and are **not** in the headline figures. `--ask-rag` / `--export-codes` / `--context-engine` (D21) likewise stay out of headline F-S / v4_ext files. |
 | **Workflow** | Review tab, review file and merge, per-note output, optional roll-up, local and Slurm operation. Tested as software (333 tests), not for time saved. |
 | **Breadth** | 41 extract phenotypes; the 7-field headline covers 5 of them. Thirty-four more have a rules-only figure; one (`mri_lesion`) has none. |
 
-## 5. Analyses that would measure usefulness (planned, not run)
+## 5. Analyses that measure usefulness (review instrument)
 
-No new model runs are needed for the first two; they use the claim tables and manifests already in `data/` and `eval/results/`.
+No new GPU runs are needed for the first two; they use the claim tables and manifests already in `data/` and `eval/results/`.
 
-1. **Error capture.** Over the F-S letters and the synthetic sets: of the values where the model alone is wrong against the reference, the fraction LEO routes to review or rejects, against the fraction it accepts; and the fraction of values LEO flags that were in fact right (false alarms). Report per field with intervals.
-2. **Workload and post-review accuracy.** The share of values needing review, and the accuracy of the output if every flagged value were replaced by the reference value (an upper bound that assumes a perfect reviewer) and by a noisy reviewer (a stated error rate). Compare with the model alone at the same effort.
+1. **Error capture.** Of the values where the model alone is wrong against the reference, the fraction LEO routes to review or rejects, against the fraction it accepts; and the fraction of values LEO flags that were in fact right (false alarms). **F-S 40 held-out, L1C, pre-v0.9:** 49 model-wrong of 124; 30/49 (0.61) not auto-accepted; **19/49** (0.39) accepted anyway; 16/41 flags already right. **v0.9 rematch:** 29/49 captured; **20/49** leak; 15/43 flags already right. Letter table: `eval/results/leo_error_capture_fs40.md`. Eight leaks are typed epilepsy vs gold `unknown`. Do not write rules from that hold-out list. No bootstrap. Synthetic-set capture is not run.
+2. **Workload and post-review accuracy.** Share of values needing review, and F1 if a perfect reviewer may only pick among values the two readers already produced (cannot add missed facts). **Same 40 held-out letters as the headline:** oracle F1 0.796 [0.738, 0.849], +0.095 [0.056, 0.138] vs the model (`leo_paper_extras_fs40.md`). **160 F-S letters (L1):** +0.079 (`leo_oracle_review_fs160.md`). **Noisy-reviewer curve** (CPU, same pick constraint, *p* ∈ {0, 0.10, 0.25, 0.50, 1}): F1 0.858 → 0.846 → 0.834 → 0.746 → 0.605 (`leo_noisy_review_fs40.md`). *p* = 0 on this rematch is not a replacement for frozen 0.796. Not reviewer minutes. The 40-letter headline still scores `leo_review` as the uncorrected draft. Paired precision/recall CIs for C1/C3 are in the extras file.
 3. **Reviewer time and agreement on real notes** (needs real notes and IRB): minutes per note against unaided abstraction; agreement between two reviewers (`DEFERRED_BEYOND_MVP.md`, `DISAGREEMENT_ADJUDICATION.md`).
 
 Each result goes into `EVAL_PROTOCOL_LEO.md` as a dated section, with the question and the decision rule written before the run.
+
+## 6. Analyses the phenotype table can support (not yet on real notes)
+
+Section 5 measures whether LEO is a useful *review instrument*. This section is the other question: once cells pass the research-extract filter (`accepted` **and** `specialist+llm`; `LEO_USER_GUIDE.md`), what *epidemiology* the columns can feed. Those tables have not been shown to match a chart review. Do not treat this as clinical decision support. Design: `docs/IMPLEMENTATION.md`.
+
+The extract is a rectangular table (per note, or per patient via `bin/leo rollup`) of ILAE phenotypes, drugs, EEG/MRI and surgery.
+
+| Family | What you can count or join | Bound |
+|---|---|---|
+| Clinic description | ILAE 2017 epilepsy/seizure type, onset age, frequency / seizure-free | Core five fields only have measured F1, and only on synthetic notes. |
+| Medication / DRE | Current ASM lists, polytherapy, an ILAE 2010-style resistance label | Resistance is inferred; it is not a trial-adequacy audit (Kwan et al. 2010). |
+| Imaging–EEG | MRI normal/HS/FCD, IEDs, ictal onset, derived concordance | Mostly rules-only synthetic scores; concordance inherits three localizations. |
+| Surgery / devices | Resection, VNS, RNS, DBS as listed | Over-calls plans as history. |
+| Longitudinal | Per-note rows: drug and frequency change across visits | Roll-up hides change; its accuracy is unmeasured. `visit_summary` is under 50 words from that row’s cells, not a second extract. |
+| Linkage | Etiology specifics; NINDS CDE correspondence | Needs IRB. Mapping: `docs/NINDS_CDE_MAPPING.md` (not an exporter). |
+
+A worked check that **field error moves a cohort number**: `scripts/cohort_demo.py` (onset-age median/IQR, polytherapy ≥2 ASMs, temporal-lobe mention on the F-S letters; gold vs extract). That is utility of the *table*, not a leaderboard.
+
+Do not compute incidence, survival, trial eligibility or surgical decisions from unreviewed cells.
 
 ## Change log
 
 | date | change |
 |---|---|
+| 2026-10-09 | Unsupported claims (C5, F1 win, trust, real notes, “safe”, O raises C1) tabulated in `writing/contributions.md` §3.1. |
+| 2026-10-10 | Manuscript + TRIPOD-LLM + `writing/supplement_leo_accept_errors.md` updated from the rematch. D17 / quote-entail default / train-unknown / Loop A/B apply stay No. Frozen extras 0.796 / 71/82 untouched. |
+| 2026-10-10 | v0.9 rematch (10.50): leak list 20 cells; noisy curve run. D17 / quote-entail default / train-unknown / Loop A/B apply stay No. Frozen extras 0.796 / 71/82 untouched. |
+| 2026-10-09 | Quote-entail scored (10.49): default stays off. Research-extract misses listed (10 on current chain; 8 are gold `unknown`). Frozen extras remain 71/82. |
+| 2026-10-09 | Aligned wording with `writing/contributions.md`: accept signal vs gold, not “trusted cells”; 0.85 ≠ safe. |
+| 2026-10-07 | Stated the mission: LEO is a review instrument (quote, source, review flag, ontology id, both readers on a clash). Added §6: analyses the phenotype table can support. §5 error-capture and oracle-review paths filled. |
 | 2026-10-02 | Page created from the review of the long-document and F-S results. |

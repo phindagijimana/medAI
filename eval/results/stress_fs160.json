@@ -165,7 +165,7 @@
   "sources": {
     "L0": {
       "arm": "L0",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_stress_base",
+      "dir": "data/run_manifests_fs_stress_base",
       "n_letters": 160,
       "n_llm_phenotype_valid": 150,
       "n_llm_phenotype_populated": 150,
@@ -749,7 +749,7 @@
     },
     "L1": {
       "arm": "L1",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_stress_base",
+      "dir": "data/run_manifests_fs_stress_base",
       "n_letters": 160,
       "n_llm_phenotype_valid": 153,
       "n_llm_phenotype_populated": 153,
@@ -1333,7 +1333,7 @@
     },
     "L2": {
       "arm": "L2",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_stress_base",
+      "dir": "data/run_manifests_fs_stress_base",
       "n_letters": 160,
       "n_llm_phenotype_valid": 144,
       "n_llm_phenotype_populated": 144,
@@ -1917,7 +1917,7 @@
     },
     "H": {
       "arm": "FT",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_stress_ft",
+      "dir": "data/run_manifests_fs_stress_ft",
       "n_letters": 160,
       "n_llm_phenotype_valid": 157,
       "n_llm_phenotype_populated": 157,
@@ -2508,7 +2508,7 @@
     },
     "H2": {
       "arm": "L0C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_stress_h2",
+      "dir": "data/run_manifests_fs_stress_h2",
       "n_letters": 160,
       "n_llm_phenotype_valid": 160,
       "n_llm_phenotype_populated": 160,

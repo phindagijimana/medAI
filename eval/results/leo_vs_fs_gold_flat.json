@@ -44,7 +44,7 @@
   "sources": {
     "L0": {
       "arm": "L0",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_flat",
+      "dir": "data/run_manifests_fs_test_flat",
       "n_letters": 40,
       "n_llm_phenotype_valid": 38,
       "n_llm_phenotype_populated": 38,
@@ -430,7 +430,7 @@
     },
     "L1": {
       "arm": "L1",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_flat",
+      "dir": "data/run_manifests_fs_test_flat",
       "n_letters": 40,
       "n_llm_phenotype_valid": 39,
       "n_llm_phenotype_populated": 39,

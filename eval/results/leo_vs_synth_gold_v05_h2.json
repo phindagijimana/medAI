@@ -39,7 +39,7 @@
   "sources": {
     "L1C": {
       "arm": "L1C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_flat",
+      "dir": "data/run_manifests_synth_eval_flat",
       "n_letters": 30,
       "n_notes": 143,
       "n_llm_phenotype_valid": 143,
@@ -562,7 +562,7 @@
     },
     "L1C [polish_val]": {
       "arm": "L1C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_flat",
+      "dir": "data/run_manifests_synth_eval_flat",
       "n_letters": 10,
       "n_notes": 49,
       "n_llm_phenotype_valid": 143,
@@ -1085,7 +1085,7 @@
     },
     "L1C [synth_v3]": {
       "arm": "L1C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_flat",
+      "dir": "data/run_manifests_synth_eval_flat",
       "n_letters": 20,
       "n_notes": 94,
       "n_llm_phenotype_valid": 143,
@@ -1608,7 +1608,7 @@
     },
     "H2": {
       "arm": "L0C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_h2",
+      "dir": "data/run_manifests_synth_eval_h2",
       "n_letters": 30,
       "n_notes": 143,
       "n_llm_phenotype_valid": 143,
@@ -2131,7 +2131,7 @@
     },
     "H2 [polish_val]": {
       "arm": "L0C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_h2",
+      "dir": "data/run_manifests_synth_eval_h2",
       "n_letters": 10,
       "n_notes": 49,
       "n_llm_phenotype_valid": 143,
@@ -2654,7 +2654,7 @@
     },
     "H2 [synth_v3]": {
       "arm": "L0C",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_synth_eval_h2",
+      "dir": "data/run_manifests_synth_eval_h2",
       "n_letters": 20,
       "n_notes": 94,
       "n_llm_phenotype_valid": 143,

@@ -1,6 +1,6 @@
 # LEO evaluation protocol (frozen 2026-10-01)
 
-How to read the results (what the headline numbers measure, what they say about the data, what they do not cover): `INTERPRETING_RESULTS.md`.
+How to read the results (what the headline numbers measure, what they say about the data, what they do not cover): `INTERPRETING_RESULTS.md`. Analyses the phenotype table can support: `INTERPRETING_RESULTS.md` §6. Operator: `LEO_USER_GUIDE.md`. Design: `IMPLEMENTATION.md`.
 
 **Status:** v1.0, written before the LEO and Arm H results exist. Anything that changes after the first
 scored run goes in the deviations log (§9), with a date and the reason. Shape A is part of the LEO
@@ -45,6 +45,21 @@ Claims the paper may make if, and only if, the pre-registered result supports th
 | C5 | Fine-tuning helps the LLM channel. | Arm H (in contract) vs L0/L1 on `llm` micro-F1, paired CI excludes 0. |
 
 A claim whose condition is not met is reported as not supported. None is dropped.
+
+**How the paper now states this (2026-10-09).** The frozen question asked for more *correct* and more *auditable*. Headline F1 did not support “more correct.” The submission leads with C1/C2: the **research extract** is cells both readers accept; **its accuracy versus gold is concordant PPV** (71/82 = 0.866 on the 40 letters; agree 0.835). Agreement is an accept signal (higher than clash on this gold, not “clinically reliable”); auto-accept is more precise at reduced recall; reviewed-as-final is the wrong title row; C4 is quote presence, not support. C2’s word “reliable” in the table above is the pre-registered label; talks and the manuscript use “usable accept signal” / concordant PPV.
+
+**Unsupported claims — how they are handled (none dropped).** Detail: `WEAKNESSES.md`.
+
+| No | Handling |
+|---|---|
+| **C5** fine-tune helps | Not supported vs strongest base (H − L2C CI includes 0). H2 raised the model, lowered fused LEO. Default **L1C**; LoRA off fusion. Row stays in §3.3. |
+| **Headline F1 win** | Reviewed−model −0.022, CI includes 0. Title states we do not beat Med42. Print the F1 row; do not title on it. |
+| **Trust study** | Concordant PPV vs gold on synthetic letters. Not clinician trust, not an auditor study. |
+| **Real notes / US EHR** | Not claimed. Confirmatory US notes still required (this §3). |
+| **Accepted cells “safe”** | 0.85–0.87 PPV; 19/49 model-wrong cells still auto-accepted. Filter, not a chart. |
+| **Ontology raises C1/C2** | O pins codes. Hygiene. Not shown to raise precision. |
+
+Do not rewrite C1–C5.
 
 ---
 
@@ -102,6 +117,22 @@ that the framework "covers" them.
 
 Arm count: 9 spec arms (A–I), of which 7 will have a result (A, B, C, D, F, H, I); E and G are
 explicitly out of scope for the first submission.
+
+**US clinical-NLP systems vs E (2026-10-07).** cTAKES, CLAMP, MetaMap, i2b2/n2c2 med/ADE
+systems, and published EEG-report extractors are optional *external B-arms*, scored only on
+fields they emit, on the same notes and gold as E. They are not synonym lists for E and a
+B-arm run has **not** been scored. Vocabularies (SCORE, EpSO, Orphanet, ICD-10-CM, NINDS CDEs) and a second ConText
+are not rival extractors. Policy: `docs/E_EXTERNAL_BASELINES.md`.
+
+**Extra field-specialist detector (2026-10-07, D18 / 10.33).** Distinct from a B-arm: `--ext-detector ctakes`
+is an opt-in *sidecar* in fusion on overlapping medication columns. Default LEO (flag off) is unchanged.
+Not a scored accuracy arm. Contract: `docs/FIELD_SPECIALIST_DETECTORS.md`.
+
+**Role placements (2026-10-07, D21 / 10.36).** RAG, SCORE/EpSO/ICD/Orphanet, and a second ConText
+are useful in their own jobs, not inside the phenotype filler. `--ask-rag` is ask_/audit only;
+`--export-codes` attaches O maps after extract; `--context-engine` ablates ConText inside E.
+70B / chain-of-thought / self-consistency are not shipped. Default extract and D17 unchanged.
+Contract: `docs/ROLE_PLACEMENTS.md`.
 
 ---
 
@@ -206,6 +237,22 @@ Tests: `venv-medcat/bin/python -m pytest tests/ -q`.
 | D15 | 2026-10-02 | Per-field policy for model-rules disagreements, decided on the unused sets named in D14. On a disagreement both values still go to review; the policy only chooses the one shown. **Seizure type: the model's value. Epilepsy type, onset age, seizure frequency: the rules' value.** Recorded as the *candidate policy* (`--disagree-llm candidate`). It was first made the default and then withdrawn as the default the same day (D17). | The check fixed in D14 was run: `--disagree-llm` on the four scalar fields (epilepsy type, seizure type, onset age, frequency period) against the default, on `ext` (80 patients) and `v1v2` (101 patients), arm L1C. Seizure type: reviewed F1 0.803 to 1.000 on `ext`, 1.000 to 1.000 on `v1v2`, 0.34 to 0.57 on the F-S letters (where it was chosen). Epilepsy type: 0.975 to 0.938 on `ext` (the rules were right more often), unchanged on `v1v2`. Onset age and frequency: no difference. | The rule was chosen on F-S development letters, confirmed on one synthetic set (`ext`) and tied on another (`v1v2`); the synthetic sets share a generator with the rules' development data, so the confirmation is weaker than it looks. `v1v2` has too few disagreements (8 to 18 claims) to say anything about precision. Epilepsy type was judged on synthetic notes only. The headline numbers were re-scored under this policy (10.13) and then the default was reverted (D17), so the app shows the no-override figures. |
 | D16 | 2026-10-02 | Unit of output = the note. Several notes per patient give several rows, each with its own answer; no patient-level value is computed unless asked (`bin/leo rollup`, `services/leo_rollup.py`: the latest note that states a value per field, never mixed across notes, with source row and date). | Each visit is independent in the use case of the project's users; mixing notes would hide changes over time (a drug stopped, a new seizure type). | The patient-level scorers (synthetic gold) join each patient's notes, which is a different task from the per-note rows the app produces; long joined documents (10.12) are therefore a stress test, not the supported mode. |
 | D17 | 2026-10-02 | The shipped default is **no override**: on a disagreement LEO shows the rules' value for every field and keeps the model's value as the claim's `alternative`. The D15 policy stays available as `--disagree-llm candidate`. A tool exports disagreements for blind adjudication and scores them (`bin/leo disagreements`, `services/leo_disagree.py`); protocol and decision rule in `DISAGREEMENT_ADJUDICATION.md`. The app's displayed figures are again the no-override files (`leo_vs_fs_gold_v05_default`, `leo_vs_synth_gold_v05_maint`). | A review of D15: its support is synthetic notes that share a generator with the rules' development data, 18 F-S letters with a seizure-type reference, and an F-S epilepsy-type reference that cannot separate model errors from unadjudicated inferences. A per-field policy should rest on adjudicated disagreements from real notes, and a displayed value that has not been tested should not anchor the reviewers who produce that data. | The default costs accuracy where the candidate helped: F-S reviewed micro-F1 0.678 against 0.705 (L1C), 0.690 against 0.724 (H2); seizure-type F1 0.34 against 0.57 (L1C). That cost is accepted for the pilot. No threshold was tuned on these sets to reach D17. |
+| D18 | 2026-10-07 | Opt-in extra detector `--ext-detector ctakes` (`MEDAI_LEO_EXT_DETECTOR`). Savova-style ASM dictionary + Chapman NegEx + Uzuner 2010 status on overlapping med paths. Detector name `ctakes`. Agree → append detector; status mismatch → `sidecar_alternative` / `*_sidecar`; sidecar-only → REVIEW `sidecar_only`. **Never auto-accepts, never demotes an E+L accept, not a majority vote.** Flag off = previous LEO. B1 and trained frequency/type/HS heads not registered (need new training). Java cTAKES binary not required. | Literature field specialists that emit existing LEO cells, without dumping lexicons into E or flipping D17. | Headline F-S / v4_ext files not re-run (sidecar off by default). Unit tests: `tests/test_ext_detectors.py`. See 10.33. |
+| D19 | 2026-10-07 | Same `--ext-detector` slot, still off by default: `freq` (current stated rate + seizure-free), `stated-type` (explicit ILAE / epilepsy-type phrases only), `hs` (HS/FCD mention + NegEx; never `false` if MRI unmentioned). Not copies of E (no MedCAT, no CPS map, no ExECT JAPE). Same fusion as D18. `--ext-detector b1` / `xie` / `decker` still raise. | Xie/Decker/HS *tasks* without Penn/Decker weights or BioClinicalBERT training. | Headline files not re-run. Tests: `tests/test_ext_detectors.py`. See 10.34. |
+| D20 | 2026-10-07 | Guideline stated-only sidecars on leftover weak cells: `fail-reason`, `rescue-if`, `ictal`, `eeg-done`, `dre`, `first-feature` (`services/ext_detectors/guideline.py`). High precision when the note states the fact; not a published clinic-letter F1. Silence cannot demote an E+L accept. `--ext-detector engel` raises (no catalogue column). `acute_administration` stays on `ctakes`. Strings not dumped into E. | ILAE/ACNS/NINDS/Kwan/Pina-Garza language as third readers without training. | Headline files not re-run. Tests: `tests/test_ext_detectors.py`. See 10.35. Literature map: `docs/FIELD_SPECIALIST_DETECTORS.md` §9. |
+| D21 | 2026-10-07 | Place RAG, SCORE/EpSO/ICD/Orphanet, and a second ConText in their jobs without touching the extract table. `--ask-rag` retrieves Fisher/Scheffer/Kwan/ACNS paraphrases for guideline *questions* only (not L1C). `--export-codes` maps already-extracted values to G40.x / Orphanet / SCORE / EpSO after fusion (never gazetteers in E; ICD intractable not used for ILAE DRE). `--context-engine {medspacy,sentence,negex}` ablates the preprocessor inside E. 70B, chain-of-thought, and self-consistency are **not** wired (greedy seed-0 contract stays). Flags off = previous LEO. | Each tool solves a different job than “fill seizure_type.” Dumping them into E causes guideline-echo, code collisions, and ConText-vs-phenotype confusion. | Headline files not re-run. Tests: `tests/test_role_placements.py`. See 10.36. `docs/ROLE_PLACEMENTS.md`. |
+| D22 | 2026-10-07 | Measured-failure techniques, not gazetteers or exam-QA. E: “was stopped”, PLAN/PMH status, later stop/fail wins, “that drug” deixis. Fusion opt-in `--quote-entail` (REVIEW `quote_not_entailed`). Routing: `--disagree-llm policy:FILE` from `--emit-policy` (min 100 scored cases); D17 unchanged. LoRA stays off fusion (`docs/LORA_FLAT_CONTRACT.md`). Constrained L1C kept. BIO NER field heads blocked until trained. Active learning **plan only**. | Headline F1 did not move from extra strings; remaining holes are status, quote support, and which reader to show. | Tests: `tests/test_measured_failures.py`. See 10.37. `docs/MEASURED_FAILURE_TECHNIQUES.md`, `docs/ACTIVE_LEARNING_PLAN.md`. |
+| D23 | 2026-10-07 | Per-note `visit_summary` column: under 50 words from this visit’s already-extracted key items. Review cells marked `[?]`. Drug lists capped at three names. Rebuilt on `leo rollup` from the rolled-up cells (latest stated per field), not a bag of visit prose. Not a new reader; not scored; D17 unchanged. | Users asked for a glance column; a second LLM summary would be exam-QA, not phenotyping. | Tests: `tests/test_leo_app.py`. See 10.38. |
+| D24 | 2026-10-07 | `bin/leo learn` scores Loop A (routing from `reader_preferred`) and Loop B (Accept/Correct/Deny + 10% accepted audit) from `reviewed.csv` / `data/leo_training/`. Policy JSON only if the ≥100/field CI gate passes. `--apply` / `--lora` / `--few-shot` / `--bio` refused. Extract and D17 unchanged. Loop C paused. | Validator clicks were stored but unused; learning must be a versioned command, not a live adapter. | Tests: `tests/test_leo_learn.py`. See 10.39. `docs/ACTIVE_LEARNING_PLAN.md`. |
+| D25 | 2026-10-07 | Full v4_ext rematch with all 10 shipped `--ext-detector` names into **new** prefixes (`v4ext_rules_sidecar`, `v4ext_llm_sidecar`). Sidecar-only never ACCEPT. Default extract / D17 / Arm E unchanged. Headline, `_ecues`, and `_fix` files not overwritten. | Sidecars were unit-tested and 3-note plugged; the 113-note all-claims view was unscored. | CPU + GPU 113/113 scored (10.40). Sidecars stay opt-in. |
+| D26 | 2026-10-08 | `leo-v0.6`, three field-level changes. (1) Seizure type agrees at two levels: the onset class (focal / generalized / unknown onset) is fused as its own field `clinical_seizure.seizure_onset_class`, so the class can be ACCEPT while the subtype stays REVIEW; scorers add a `predominant_seizure_type|class` view. (2) EpExtra current ASMs: one per-drug "current at this visit" decision from clause-level stop / plan / ongoing cues (replaces D22's sentence-status edits, which drifted: a drug listed as taken was dropped when another sentence said "previously tried"); standard abbreviations (LEV, LTG, ...) and misspellings within 1-2 letters (`rules/asm_surface.py`). (3) "Unknown" epilepsy type with one definition (`schema.enums.UNKNOWN_EPILEPSY_TYPE_DEFINITION`): EpExtra emits it when the note says epilepsy without a type, and stops inferring a type from seizure types; fusion keeps an LLM "unknown" for this field; flat prompt v2 (`MEDAI_FLAT_PROMPT_VERSION=v2`) offers it to the model, v1 stays the default and is byte-identical. Evidence panel reads the v06 files. | Borrowed from the UK field-level methods (Fang et al. 2025 coarse seizure-type scoring; ExECT medication temporality and spelling tolerance; ExECT "unknown" epilepsy type). The F-S gold is "unknown" for 25 of 38 letters, and the model could not say it. | Rules were written while looking at the 40 held-out letters (and two v4_ext notes for the bare-after-stop rule); the 160 F-S stress letters confirm the direction. Tests: `tests/test_seizure_class.py`, `tests/test_medication_current.py`, `tests/test_unknown_epilepsy_type.py`. See 10.41. |
+| D27 | 2026-10-08 | EpExtra EEG location: scalp electrode names (10-20 / 10-10) fill a lobe or side that no location word gave, for interictal discharges and ictal onset (`rules/eeg_electrodes.py`). Odd left, even right, z midline; T3-T6 and P7-P10 temporal; central electrodes give no lobe; mixed lobes give no lobe. A lone electrode needs an EEG cue ("maximal at", "phase reversal at", "electrode", "over"). Electrodes never add a lobe to a generalized discharge. | Borrowed from PEEP (Cui et al. 2014, `docs/REFERENCES.md`), which normalised electrodes to anatomy through EpSO. US EEG reports often give the location only as electrodes. | v4_ext rules-only rerun identical to 10.41 (no score change). Tests: `tests/test_eeg_electrodes.py`. See 10.42. |
+| D28 | 2026-10-08 | `leo-v0.7`, two seizure-outcome fields (`services/seizure_free.py`). (1) `clinical_seizure.seizure_free` (yes/no) is read off each reader's current seizure frequency (seizure free or zero counts = yes; a positive count = no; a positive count among other seizure types turns yes into no) and fused on its own, like the onset class. (2) `clinical_seizure.date_of_last_seizure`: rules only, explicit dates only ("last event July 2016", "no seizures since Christmas 2015"), latest date in the note; durations give no date; all-numeric dates keep only unambiguous parts. No model reads it, so it is reviewed when the model ran. Both scored as extra views (not in the micro-F1). Default output panel (`core`) unchanged. | Borrowed from the Penn outcome work (Xie et al. Epilepsia 2023; Ojemann et al. J Healthc Inform Res 2025; `writing/further_LEO.md` U1-U2): seizure freedom and date of last seizure are separate, extractable outcomes. | Date rule written from development letters EA0001-EA0160 only; held-out letters read only when scoring. Headline numbers unchanged. Tests: `tests/test_seizure_free.py`. See 10.43. |
+| D29 | 2026-10-09 | Medication context in n2c2 2022 CMED terms (`rules/med_context.py`): each drug mention gets disposition, action (Start / Stop / Increase / Decrease / UniqueDose / OtherChange), negation, temporality, certainty and actor, built from EpExtra's existing clause cues; `casi_status` maps the per-drug "current at visit" decision to CASI's active / discontinued / neither. Nothing EpExtra emits changes. External scorer `scripts/score_casi_medication_status.py` (gold drug names given; context only). | `writing/further_LEO.md` M1-M2: context, not drug names, is the hard part of medication extraction, and CASI is a small public US test of it. | **External score not run**: the CASI set is gated on Hugging Face (terms + login) and no token is configured; CMED needs an n2c2 data-use agreement. Tests: `tests/test_med_context.py` (sentences written for the test). See 10.44. |
+| D30 | 2026-10-09 | `leo-v0.8`, PNES flag (`rules/pnes.py`): `clinical_seizure.pnes_status` = pnes_only / pnes_and_epilepsy / pnes_possible, rules only. New reason `pnes_documented` (REVIEW): with PNES only, seizure frequency, other frequencies, seizure free, date of last seizure, seizure type, onset class and epilepsy type cells are not auto-accepted; with dual diagnosis only the four count/outcome cells; possible PNES changes no routing. Switch `pnes_check`. | Hamid et al. (Epilepsy Behav 2013; `writing/further_LEO.md` U6): PNES letters contaminate epilepsy cohorts, and a seizure count in a dual-diagnosis letter may include non-epileptic events. | Rule written from development letters (16 of EA0001-EA0160 mention PNES). The two held-out PNES letters (EA0174, EA0198) had been read during exploration before the rule was written, so they are not a blind test. F-S gold has no PNES label; no accuracy is claimed. Headline unchanged. Tests: `tests/test_pnes.py`. See 10.45. |
+| D31 | 2026-10-09 | IED attributes and EEG-report sections. `IedFinding` gains optional `frequency_band`, `recurrence` and `dispersal` (`rules/eeg_attributes.py`; SACAR). On TUH-style EEG reports (DESCRIPTION OF THE RECORD, or INTRODUCTION + IMPRESSION headers), IED / background / ictal-onset / seizures-captured findings come from description and impression only, not history or the introduction (`rules/eeg_sections.py`). Clinic letters have no those headers and are unchanged. Pipeline stays `leo-v0.8`. External scorer `scripts/score_tuh_eeg_attributes.py`. | Maldonado and Harabagiu, J Biomed Inform 2019 and LREC 2020 (`writing/further_LEO.md` G1–G2): LEO's IED fields covered only type, lobe and side, and history mentions of a prior EEG should not count as this study's findings. | F-S letters are not EEG reports, so the headline score does not move. **TUH score not run**: needs a Temple data-use agreement. Tests: `tests/test_eeg_attributes.py`. See 10.46. |
+| D32 | 2026-10-09 | Author-type classifier (`services.note_author`) from the signature block only, and a silent-prospective plan (10.47). Weak-label wrappers for four EpExtra fields (`rules/weak_labels.py`, `scripts/emit_weak_labels.py`) so a Trove label model can be trained later. No classifier is trained; extract and fusion unchanged. | Ojemann et al. 2025 (author type); Wissel et al. 2019 (prospective drop); Fries et al. 2021 Trove (`writing/further_LEO.md` U1, U4, M3). | F-S letters are almost all unsigned, so no author-stratified F1 is reported. Tests: `tests/test_note_author.py`, `tests/test_weak_labels.py`. See 10.47–10.48. |
+| D33 | 2026-10-10 | `leo-v0.9` (CPU). (1) Error-capture lists accepted model-wrong cells (pre-v0.9 19/49; rematch **20/49**); do not write rules from that hold-out list. (2) EpExtra current ASMs: cluster-if / “not prescribed yet” / “can also use” / “may be considered” are planned, written from EA0001–160 examples; a prescribed cluster rescue the patient already takes stays current; sidecars stay opt-in. (3) Fusion: one reader `unknown` (epilepsy type / onset class) and the other silent → REVIEW `unknown_silent` (default on; switch `unknown_silent_review`). Both-unknown still agrees. Not chosen by looking at EA0161–200. (4) Noisy-reviewer curve on stored claims (`leo_noisy_review_fs40`). **Not done:** D17 flip, quote-entail default, Loop A/B apply, real notes, train `unknown`. Headline extras file not overwritten. | Extract quality is leak rate and concordant PPV, not headline F1. Unknown from one reader is abstention. Leak did not fall. | Tests: `tests/test_medication_current.py`, `tests/test_chain_llm.py`. See 10.50. |
 
 Amendments below this line, newest last.
 
@@ -531,7 +578,7 @@ The synthetic figures in 10.7 (`leo_vs_synth_gold_v05_maint`, arm L1C) already u
 | leo_auto | 0.664 [0.584, 0.734] | 0.664 [0.584, 0.734] |
 | leo_review | 0.705 [0.644, 0.767] | 0.678 [0.613, 0.743] |
 
-Paired difference, leo_review minus llm: +0.005 [-0.029, +0.045] with the policy, -0.022 [-0.062, +0.022] shipped. Seizure-type F1 of leo_review: 0.571 with the policy, 0.343 shipped (llm alone 0.563). Claim precision by agreement, shipped: agree 0.835 (85 scored), disagree 0.312 (16), llm_only 0.455 (22), specialist_only 0.250 (20).
+Paired difference, leo_review minus llm: +0.005 [-0.029, +0.045] with the policy, -0.022 [-0.062, +0.022] shipped. Seizure-type F1 of leo_review: 0.571 with the policy, 0.343 shipped (llm alone 0.563). Claim precision by agreement, shipped: agree 0.835 (85 scored) **[0.75, 0.91]**, disagree 0.312 (16) **[0.11, 0.53]**, llm_only 0.455 (22) **[0.25, 0.65]**, specialist_only 0.250 (20) **[0.07, 0.46]**. Agree minus disagree +0.52 [+0.31, +0.73]; minus llm_only +0.38 [+0.16, +0.60]; minus specialist_only +0.58 [+0.36, +0.78] (`leo_vs_fs_gold_v05_default.md`). **C2 is supported on these CIs** for the shipped configuration (the earlier “CIs pending” notes in §10.1–10.2 refer to unconstrained L0/L1).
 
 Reading. With the shipped default, LEO's reviewed output does not beat the model alone on the F-S letters, and it is worse than the model on seizure type, where the specialist's value survives a disagreement. The audit trail (quote, source, review flag) is the contribution shown so far, not higher accuracy. The policy that lets the model win seizure-type disagreements removes most of the gap, but it was chosen on F-S development letters; the unused-set check in 10.8 decides whether to ship it.
 
@@ -787,7 +834,7 @@ Ontology routes added for MRI-negative, alternative localization, concordance, n
 
 What was still hanging “effective” after 10.26, and what this pass did.
 
-**GPU score for P1C and F1C.** Submitted Slurm job **170942** (`data/leo_runs/run_gpu_p1c_f1c.sbatch`: `eval/leo_v4ext_run.py --mode gpu --out data/leo_runs/v4ext_llm_p1c_f1c`, then `eval/score_leo_v4ext_arms.py --out eval/results/v4ext_p1c_f1c`). Extra readers besides X1C were unmeasured until that job finishes. Do not quote P1C/F1C accuracy until `eval/results/v4ext_p1c_f1c.md` exists.
+**GPU score for P1C and F1C.** Job **170942** finished (113/113 notes, 0 errors, mean 70.6 s/note). Extra-column scores are in 10.29 (`eval/results/v4ext_p1c_f1c.tables.md`). Extra readers do not change the five-field F-S headline.
 
 **Ontology rank-1 after the ranking patches.** CPU remeasure (`eval/results/concept_selection_rank_2026-10-06`): lexical R@1 **0.566** (was 0.555), gold-in-top-5 ceiling 0.742, token-overlap pick 0.607 (CPU gate pass, as before). Room for Arm E is still ~0.18. The GPU Arm E gate is re-run with the F-S *letter* as selector context (the 10.23 GPU run concatenated mentions and is not a fair test of the picker). Arm E stays **off** unless that GPU selected R@1 beats lexical R@1. Job **170943**: `data/leo_runs/run_gpu_arme.sbatch`.
 
@@ -801,7 +848,442 @@ What was still hanging “effective” after 10.26, and what this pass did.
 
 **Commit.** This wave is the coverage readers, ranking patches, add-value, and the eval/job scripts above.
 
+### 10.28 Rank-1 misses, plan-adjudicated disagreements, focal motor (2026-10-06)
 
+**Rank-1 miss dump** (`eval/results/concept_selection_rank_2026-10-06.misses.csv`): 415 lexical misses (168 gold in top-5, 247 not). Biggest not-in-top-5 piles: “generalised tonic clonic seizures” ranked under *Clonic seizure*; “sodium valproate” lost to a shorter RxNorm valproate; “JME” returned nothing. Bare “mri”/“eeg” (129) already have gold in the top-5; those need letter context (Arm E), not a synonym. Fixes: hyphen folding; short-parent substring penalty; high Jaccard as 0.88; overlap as a sort key even on 0.9 hits; JME → `C0270853` via EtiologyDetails.
 
+**Disagreements vs the v4_ext plan** (not a clinician; does not change D17): 89 cases, `eval/adjudicate_v4ext_disagreements.py`. Where they disagree, the model matched the plan more often than the rules on seizure type (22/24 vs 1/24), EEG study type (14/20 vs 3/20), focal non-motor (9/10 vs 1/10) and onset age (4/4 vs 0/4). EEG background favoured the rules (4/6 vs 2/6). Blind copy: `data/leo_runs/v4ext_llm_x1c.disagreements.blind.csv`.
 
+**Focal motor.** 14 plan-positive patients on the X1C run. Versive head turning is not an enum value; ILAE groups it under tonic. Rules+prompt now map versive / forced head turning → `tonic`, and the v4_ext scorer accepts tonic for a versive plan. Evolution after “followed by” is still not onset (P005012 spasms after a sensory aura stay missing, which is ILAE-correct). X1C prompt version `v1.1`. The P1C+F1C GPU re-score (10.29) left motor at 7 / 4 / 1 in the reviewer view.
 
+### 10.29 Mission display, P1C/F1C plan scores (2026-10-07)
+
+LEO’s job, as written: read a note, fill a phenotype table, and attach the note’s own words, which reader said it (model, rules, or both), whether a person should look, and an ontology id the model is not allowed to invent. Fusion is there so disagreement becomes a flag, not a silent guess.
+
+**Display.** The wide table now has `<id>_alternative` after `<id>_why`. On a clash the recorded value stays the rules’ (D17). The model’s value is visible in the table, the extract UI (“Other reader”), the Review tab, and the About sheet. Default disagreement policy is unchanged. Arm E stays off.
+
+**P1C/F1C scored from the existing GPU run** (`data/leo_runs/v4ext_llm_p1c_f1c`, no new extract). Plan on the 37 scored patients: etiology 18 structural / 9 unknown / 4 genetic / 3 immune / 2 infectious / 1 metabolic; DRE 22 responsive / 15 resistant; MRI finding present for 23 (9 HS, 5 FCD, 4 white-matter, plus encephalomalacia / vascular / incidental / normal). Reviewer view (all non-rejected claims) vs rules-only:
+
+| item | n | rules-only | LEO reviewer view | model only |
+|---|---|---|---|---|
+| etiology category | 37 | 35 / 1 / 1 | 35 / 1 / 1 | 28 / 0 / 9 |
+| drug resistance | 37 | 37 / 0 / 0 | 37 / 0 / 0 | 37 / 0 / 0 |
+| MRI finding | 23 | 18 / 3 / 2 | 18 / 5 / 0 | 18 / 5 / 0 |
+| MRI hippocampal sclerosis | 23 | 11 / 5 / 0 (+7 not in text) | 17 / 4 / 0 | 17 / 0 / 4 |
+| MRI focal cortical dysplasia | 23 | 8 / 0 / 0 (+15 not in text) | 17 / 0 / 0 | 17 / 0 / 0 |
+| MRI normal | 23 | 21 / 0 / 1 | 23 / 0 / 0 | 21 / 0 / 2 |
+
+Cells are correct / wrong / missing. Etiology and DRE were already strong for the rules; the extra readers do not lift them and the model-only etiology column misses 9. MRI bools are where P1C earns its keep: the model fills HS and FCD the rules left blank, without a new false alarm on FCD. MRI finding label is not better (two extra wrongs, no misses). Five-field F-S remains 0.68 reviewed vs 0.70 model (10.12). These columns exist so a person can see both readers and the quote, not so the headline F1 moves.
+
+Full table: `eval/results/v4ext_p1c_f1c.tables.md`.
+
+### 10.30 Leftover E cues rematch + two fixes (2026-10-07)
+
+Rematch on the same 113 v4_ext notes after leftover US strings (ACNS / RxNorm / i2b2 / Fisher / ExECT). Jobs **172426** (CPU, 113/113, 86 s) and **172425** (GPU L1C+extra readers, 113/113, 2 h 12 min). Outputs: `data/leo_runs/v4ext_rules_ecues.*`, `data/leo_runs/v4ext_llm_ecues.*`. Did not overwrite `v4ext_rules` / `v4ext_llm_p1c_f1c`. Plan scores: `eval/results/v4ext_ecues.tables.md`.
+
+**Headline did not move.** Epilepsy type, seizure type, current ASMs, EEG study type value counts are identical to 10.29. GPU accept share 52.5% (was 52.7%). Both-readers accepted precision 0.969 (was 0.968). No more gazetteers on this set.
+
+**What the rematch found**
+
+- `LTM` in these notes is mostly planned; E still does not call that a completed study (good). Eight `prolonged` study types were already captured without the new `LTM` token in the evidence column.
+- `LPDs` matched **negated** lists (“No … LPDs, GPDs”). False IED-other findings. Fixed: sentence-level negation for IED fallback (`rules/fields/eeg.py`).
+- One GPU note still treated `escalate to LTM` as a rescue drug (model). E did not. Fixed: `is_eeg_study_token` drops LTM / VEEG / EMU / cEEG / ECoG / sEEG on medication claims, including LLM-only (`rules/fields/medication.py`, `services/chain_pipeline.py`).
+- First-feature leftover words blanked 41 CPU motor-onset cells; plan wrongs 5→3, misses +2. GPU reviewer view unchanged. Left as-is.
+
+**Measured option, not the default (D17 unchanged).** `--disagree-llm ied-silent` accepts an LLM-only `eeg.ied_present` when the rules were silent. On this plan, IED-found is 18/27 for accepted (follows E) vs 27/27 in the reviewer view / model-only column. Shipping that as the default would auto-accept model-only IEDs; it stays opt-in. Seizure-type display remains `--disagree-llm candidate` (not default).
+
+**Research extract.** Use GPU cells with `*_status=accepted` and `*_source=specialist+llm` (both readers). `--accepted-only` blanks review cells. CPU-only runs accept nothing. Not real-note evidence.
+
+### 10.31 Post-fix rematch (LPD negation + EEG-acronym not-a-drug) (2026-10-07)
+
+Same 113 v4_ext notes. New prefixes so 10.30 files stay: `data/leo_runs/v4ext_rules_fix.*` (CPU job **173227**, interactive, 113/113, 84 s) and `data/leo_runs/v4ext_llm_fix.*` (GPU job **173225**, interactive L40S 24G, running). CPU tables: `eval/results/v4ext_fix.tables.md` (rules-only until GPU finishes). D17 default unchanged.
+
+**CPU (LPD).** Four notes had `LPDs` in IED cells under 10.30 (`P005006_V03`, `P005008_V03`, `P005020_V03`, `P005030_V03`). After sentence-level negation: **zero**. IED-found plan score stayed 18 / 0 / 9 (the two notes that lost `ied_present` were false positives). Spurious `eeg_ied_reported_but_none` 4→2. IED side 11 / 1 → 12 / 0. Headline epilepsy type / seizure type / ASMs / study type unchanged. CPU rescue never listed `ltm`.
+
+**GPU (LTM-as-drug).** Job **173225** finished: 113/113 notes, 0 errors, wall 8004 s (~2 h 13 min). Tables: `eval/results/v4ext_fix.tables.md` (now includes the model columns). `P005020_V04` rescue is `diazepam` (accept) and `midazolam` (review, specialist-only); **no `ltm`**. GPU accept share 52.4% (10.30 was 52.5%). Both-readers accepted precision 0.969 (unchanged). Rescue accepted 21 / 2 / 1 (0.913, 0.955). EEG study type reviewer view 36 / 1 vs rules 31 / 6. IED-found accepted still 18 / 27 (D17; model-only view 27 / 27). Headline files not overwritten. D17 unchanged.
+
+### 10.32 Paper materials (2026-10-07)
+
+Canonical manuscript `writing/MedAI_EPI_Manuscript_LEO.md`; index `writing/PAPER_MATERIALS.md`. C2 letter-level bootstrap CIs from the shipped F-S file are now copied into §10.9 (they were already in `leo_vs_fs_gold_v05_default.md`). Error capture: `scripts/score_leo_error_capture.py` → `eval/results/leo_error_capture_fs40.*`. **C1/C3 paired P/R CIs, oracle on the same 40 letters, LEO polytherapy/onset, research extract:** `scripts/score_leo_paper_extras.py` → `eval/results/leo_paper_extras_fs40.*` (no new GPU; L1C manifests). C1 **supported** on precision (auto−llm ΔP +0.114 [0.051, 0.181]; auto−specialist +0.156 [0.106, 0.210]); auto F1 still does not beat the model. C3 **supported** on recall (reviewed−specialist ΔR +0.068 [0.034, 0.104]). Oracle F1 0.796 vs model +0.095 [0.056, 0.138]. Efficiency from stored manifests: `leo_efficiency_fs40.md` (mean 10.7 s generate() on L40S). The 160-letter oracle file remains a supplement. TRIPOD and journal plan updated. D17 unchanged. The v05_default F1 file was **not** overwritten.
+
+### 10.33 Extra field-specialist detector (opt-in sidecar, 2026-10-07)
+
+**Change (D18).** Default LEO is still L1C + optional X1C/P1C/F1C, EpExtra, D17 rules-shown, Arm E off. An extra literature detector may be turned on with `--ext-detector ctakes` (`MEDAI_LEO_EXT_DETECTOR=ctakes`). It is independent of `--ext-reader`. Flag off: previous fusion.
+
+This is **not** a B-arm vs E (`docs/E_EXTERNAL_BASELINES.md` still unscored) and **not** a dump into E. It is a named sidecar on overlapping medication columns. Contract: `docs/FIELD_SPECIALIST_DETECTORS.md`. Routing: `docs/LEO_ROUTING_RULES.md` §1 extra detectors, `_verify` step 8 `sidecar_only`.
+
+**What was implemented (no new training)**
+
+| Id | Method | Code | Overlapping paths |
+|---|---|---|---|
+| S1 | Savova 2010-style dictionary NER of ASM names (RxNorm lexicon already in the repo) + Chapman 2001 NegEx in the sentence before the mention | `services/ext_detectors/ctakes_meds.py` | mention spans |
+| S2 | Uzuner 2010 medication status on those spans: current / discontinued / failed; planned dropped; PRN → `rescue_medication`; one-off → `acute_administration` (same `drug_role` as LEO) | same module | `medication.current_asms`, `prior_asms`, `failed_asms`, `rescue_medication`, `acute_administration` |
+
+Detector name on claims: `ctakes`. Fusion attach: `services/ext_detectors/attach.py` (`SidecarIndex`). Pipeline flag: `ChainPipelineConfig.ext_detectors`. CLI: `scripts/leo_cli.py --ext-detector`. Provenance: `LeoRuntime.versions()["ext_detectors"]`. Claim field: `sidecar_alternative` (`schema/claim.py`); wide column `*_sidecar`; claims.csv `sidecar_alternative`. Reason code: `sidecar_only`.
+
+**Fusion (does not change default verdicts)**
+
+- E/L agree and sidecar agrees → append `ctakes` to `detectors`; ACCEPT stays ACCEPT.
+- Same drug, different role → `sidecar_alternative`; verdict unchanged.
+- Sidecar only → REVIEW `sidecar_only`; never ACCEPT.
+- Research extract remains `accepted` ∧ `specialist+llm` (`_sources` still maps to specialist/llm only).
+
+**What was not implemented (need training or a new column)**
+
+- S3 B1 BioClinicalBERT (`--ext-detector b1` raises). Xie frequency, Decker type, AutoHS-style HS, Adelson Engel (schema has Engel; not an extract catalogue column). Java cTAKES / CLAMP binaries. Majority vote.
+
+**Tests (no GPU).** `tests/test_ext_detectors.py`: flag off has no `ctakes` detector; agree keeps ACCEPT; sidecar-only is REVIEW; i2b2 `d/c'd` → prior vs current; planned dropped; NegEx skips denied drugs. Existing `tests/test_chain_llm.py` / `tests/test_leo_app.py` unchanged with the flag off.
+
+**Not scored as headline.** v4_ext with this flag (and the later shipped names) is 10.40, new prefixes, not a default-LEO delta.
+
+### 10.34 No-train frequency / stated-type / HS sidecars (2026-10-07)
+
+**Change (D19).** Same opt-in slot as 10.33. Three dictionary+NegEx detectors cover the Xie / Decker / HS *jobs* without fine-tuning BioClinicalBERT or loading unpublished weights. Default LEO (flag off) is unchanged. D17 unchanged. B1 still not registered.
+
+| Flag | Code | Overlapping paths | Independence from E |
+|---|---|---|---|
+| `freq` | `services/ext_detectors/freq.py` | `clinical_seizure.seizure_frequency` | Current stated rate only (skip historical / hypothetical). Seizure-free vs counts. Not the ExECT JAPE port |
+| `stated-type` | `services/ext_detectors/stated_type.py` | `epilepsy_type`, `predominant_seizure_type` | Explicit ILAE 2017 phrases only. No seizure→epilepsy inference. No CPS / grand mal / secondarily-generalized map |
+| `hs` | `services/ext_detectors/hs.py` | `mri.hippocampal_sclerosis`, `mri.focal_cortical_dysplasia` | Mention + Chapman NegEx in MRI context. Silent (not `false`) when the note never talks about MRI |
+
+Shared sentence window: `services/ext_detectors/span.py`. Same-path value mismatch on these scalar fields → `sidecar_alternative` (medication list items still use the D18 same-drug / different-role rule). Repeatable: `--ext-detector freq --ext-detector stated-type --ext-detector hs`.
+
+**Not implemented.** Trained B1 / Xie / Decker / AutoHS heads. Extra Med42 call. Majority vote. Strings dumped into E.
+
+**Tests.** Current “about 2 per month”; seizure-free beats old rate; hypothetical/historical skipped; CPS silent; GTCS does not infer epilepsy type; HS true on MTS; HS false only with MRI; sidecar-only REVIEW. Flag off: previous tests unchanged.
+
+### 10.35 Guideline stated-only sidecars for remaining holes (2026-10-07)
+
+**Change (D20).** Same opt-in slot. No published no-train clinic-letter F1 exists for these cells; the detectors copy **guideline phrases**, not Penn/Mayo/West Virginia University weights. Default LEO frozen. D17 frozen.
+
+| Flag | Source | Paths | Behaviour |
+|---|---|---|---|
+| `fail-reason` | NINDS CDE discontinuation reason; Kwan 2010 | `failed_asms` / `prior_asms` | Efficacy or ADE → failed; wean while seizure-free → prior; silent if no reason |
+| `rescue-if` | Pina-Garza 2024; Epilepsy Foundation; NINDS workshop | `rescue_medication` | Home PRN only. Instructional if-clause and inpatient PRN skipped |
+| `ictal` | ACNS Hirsch 2013/2021 | `seizures_captured`, `ictal_onset_lobe` / `_laterality` | Lobe only if captured; “no ictal onset” → `seizures_captured=false` |
+| `eeg-done` | ACNS + ExECT skip as sidecar | `eeg.study_type` | Emit only if performed/obtained, not recommended |
+| `dre` | Kwan 2010 (our task; Xie 2022/2023 do not extract DRE) | `drug_resistance_status` | Explicit “drug-resistant / intractable / refractory epilepsy” only; no two-drug inference |
+| `first-feature` | Fisher 2017 instruction manual | `focal_motor_onset`, `focal_nonmotor_onset` | Requires “begins with / onset with” in the same sentence |
+
+**Not registered.** `engel` (Wieser/Adelson): schema has Engel/ILAE class; not a LEO phenotype. `acute_administration`: already on `ctakes` (Uzuner one-off); extra LLM prompts unchanged.
+
+**Cannot claim.** Biswal/Westover and Frontiers 2025 EEG-report keyword F1 (wrong document type); Xie/Decker count F1 (need training); Wissel surgery *candidacy*; Zhang 2025 ChatGPT semiology; Liu DDC-reason AUC (no weights).
+
+**Tests.** Efficacy vs wean vs silent drug; home PRN vs if-cluster instruction; no-ictal-onset → false not a lobe; recommended video-EEG silent; DRE phrase vs two-failed-ASM silent; first-feature needs onset cue; sidecar-only REVIEW. Flag off unchanged.
+
+### 10.36 Role placements: RAG, O export codes, ConText ablation (2026-10-07)
+
+**Change (D21).** Default extract frozen. D17 frozen. Three opt-in tools, each in its own job, none inside the phenotype filler. 70B / CoT / self-consistency not shipped.
+
+| Flag | Job | Not a job |
+|---|---|---|
+| `--ask-rag` | Open-book QA on Kwan DRE, Fisher first-feature, ACNS LTM-vs-drug (`dre_kwan`, `first_feature`, `ltm_sense`) | Filling `seizure_type` from a span already in the note |
+| `--export-codes` | After E/L emit a value, attach ICD-10-CM G40.x / Orphanet / SCORE / EpSO on `Claim.export_codes` | Gazetteers in E; ICD intractable as ILAE DRE; inventing LPDs from SCORE |
+| `--context-engine sentence\|negex` | Ablation of negation/experiencer/historical inside E vs default medspaCy ConText | A third phenotype arm scored as “ConText F1 vs EpExtra F1” |
+
+Quote for ask still must sit in the note (guideline echo → `offsets_unresolved`). Export codes do not change verdicts. `medspacy` is the default engine (`docs/METACAT_EVAL.md`). Corpus: `data/guidelines/ilae_ask.json`. Maps: `services/o_code_maps.py`. Ablation: `services/context_engine.py`. Tests: `tests/test_role_placements.py`. Contract: `docs/ROLE_PLACEMENTS.md`.
+
+### 10.37 Measured-failure techniques (2026-10-07)
+
+**Change (D22).** No new ILAE synonyms. Constrained L1C kept. H2 still not fused by default. `--quote-entail` and `--disagree-llm policy:FILE` are opt-in; D17 frozen. Span/BIO NER names raise until trained. Active learning is documented, not coded (`docs/ACTIVE_LEARNING_PLAN.md`).
+
+E status/time (on): `was stopped` → prior; PLAN hypothetical / PMH historical on current mentions; later stop/fail of the same drug drops current; “stopped that drug” binds the last ASM. Roll-up remains latest-note, not a bag of visits.
+
+Tests: `tests/test_measured_failures.py`. Map: `docs/MEASURED_FAILURE_TECHNIQUES.md`.
+
+### 10.38 Visit glance column (2026-10-07)
+
+**Change (D23).** `visit_summary` is a display column on each per-note row: under 50 words from cells already on that row, with field keywords (epilepsy, seizure, onset, frequency, ASM, EEG, HS, MRI, surgery). `[?]` marks `needs_review`. Lists are capped at three names. Fusion, ACCEPT/REVIEW, and D17 are unchanged. On `bin/leo rollup` the column is rebuilt from the latest-stated-per-field cells. Not scored.
+
+### 10.39 Learning from validator files (2026-10-07)
+
+**Change (D24).** `bin/leo learn FILE.reviewed.csv` (or `--archive`) runs Loop A and Loop B on Validator labels. It does not change extract. A routing JSON is written only with `--emit-policy` when a field meets the disagreement CI gate (`DISAGREEMENT_ADJUDICATION.md` §3.7). Apply that file later with `--disagree-llm policy:FILE` on a new `leo-v0.x`. `leo learn --apply` and Loop C flags are refused. Headline F-S / v4_ext files not re-run.
+
+Tests: `tests/test_leo_learn.py`. Plan: `docs/ACTIVE_LEARNING_PLAN.md`.
+
+### 10.40 Opt-in sidecar rematch on v4_ext (2026-10-07)
+
+**Change (D25).** Same 113 notes / 37 patients. Driver `eval/leo_v4ext_run.py --ext-detector` (repeatable; all 10 shipped names). New prefixes so 10.30 / 10.31 files stay: `data/leo_runs/v4ext_rules_sidecar.*` (CPU, this node, 113/113, 91.3 s, 0 errors) and `data/leo_runs/v4ext_llm_sidecar.*` (GPU job **173255**, interactive L40S 24G, 113/113, 0 errors, wall 7873 s / 2 h 11 min). Score: `eval/results/v4ext_sidecar.tables.md`. Default LEO still has sidecars **off**. D17 unchanged. Do not quote as a headline delta.
+
+**CPU, all claims (reviewer view; every cell needs_review).** Sidecar-only claims: **408**, ACCEPT **0**. `sidecar_alternative` on **145** overlapping cells. Extra claims vs `v4ext_rules_fix`: +395 (2820 → 3215). Detector hits: ctakes 531, stated-type 172, fail-reason 140, rescue-if 112, dre 110, ictal 104, eeg-done 90, freq 69, hs 68, first-feature 45.
+
+Headline fields **did not move** vs 10.31 rules-only: epilepsy type 36/1, seizure type 30/4, onset age 37/0, EEG study type 31/6, IED-found 18/0/9, HS 11/5/0/7, DRE 37/0, surgery 11/0.
+
+What moved (all-claims only — sidecar-only stays REVIEW, so it cannot enter a research extract):
+
+| item | 10.31 rules-only | sidecar on |
+|---|---|---|
+| focal motor onset | 7 / 3 / 2 | 8 / 4 / 0 |
+| rescue drug (item) | 21 / 0 / 1 | 22 / 0 / 0 |
+| rescue list P / R | 0.724 / 0.955 (FP 8) | 0.579 / 1.0 (FP 16) |
+| current ASMs P / R | 0.807 / 0.899 (FP 17) | 0.689 / 0.899 (FP 32) |
+| scored-path claim P | 0.838 | 0.829 |
+
+Sidecars fill some misses and add false list items into the reviewer queue. That is the contract: never auto-accept, never demote an E+L accept.
+
+**GPU (173255).** Sidecar-only **251**, ACCEPT **0**. `sidecar_alternative` 160. Accept share 51.2% (10.31 fix was 52.4%). Both-readers accepted precision 0.968 (was 0.969). Core scalars match 10.31 GPU (epilepsy type, seizure type, onset, EEG study type 36/1, IED-found accepted 18/27, DRE 37/0). Rescue both-readers 22 / 3 / 0 (0.88, 1.0) vs fix 21 / 2 / 1 (0.913, 0.955): miss filled, one extra FP. Current ASMs both-readers 72 / 16 / 7 (0.818) vs 71 / 10 / 8 (0.877). Reviewer-view lists are noisier (ASM P 0.581). **Keep opt-in.** Headline / `_ecues` / `_fix` files not overwritten.
+
+**Validator + `leo learn` (synthetic clicks, not training).** CPU: flagged 2233, misses 2400, accepted_audit **0**. GPU: flagged 1435, accepted_audit **140** (`eval/results/v4ext_sidecar.gpu.accepted_audit.csv`). Four pipeline-test clicks in `eval/results/v4ext_sidecar_synth.reviewed.csv` (do **not** `--archive`). `bin/leo learn` → policy `{}`, `applied=False`. `--apply` and `--lora` exit 1 as designed.
+
+### 10.41 leo-v0.6: onset class, current-at-visit ASMs, "unknown" epilepsy type (2026-10-08)
+
+**Change (D26).** Rules in `LEO_ROUTING_RULES.md` 3.5-3.7. No new model run is needed for (1) and (2):
+the stored LLM manifests are re-fused. (3) uses stored v1 manifests (no "unknown" from the model); the
+v2 prompt run is below.
+
+**40 held-out letters (EA0161-EA0200), L1C, micro-F1.** Files: `eval/results/leo_vs_fs_gold_v06.*`;
+per-step files `_v06_onset`, `_v06_meds`, `_v06_etype` (intermediate, before the bare-after-stop rule;
+same numbers on these 40 letters).
+
+| step | llm | specialist | leo_auto | leo_review |
+|---|---:|---:|---:|---:|
+| shipped leo-v0.5 (`_v05_default`) | 0.700 | 0.655 | 0.664 | 0.678 |
+| current code + onset class | 0.700 | 0.626 | 0.641 | 0.669 |
+| + current-at-visit ASMs | 0.700 | 0.689 | 0.683 | 0.694 |
+| + "unknown" epilepsy type = leo-v0.6 | 0.700 | 0.763 | 0.704 | 0.773 |
+
+The second row is lower than the shipped row because of drift, not the onset class: the D22 medication
+status edits (made after the shipped run, never rescored) dropped current drugs that another sentence
+called "previously tried". The class is not in the micro score. The current-at-visit rule replaces those
+edits. Paired, leo-v0.6: leo_review − llm
++0.073 [+0.013, +0.135] (was −0.022 [−0.062, +0.022]); leo_auto − specialist −0.059 [−0.103, −0.019].
+Per field: current ASMs specialist 0.915, leo_auto 0.909, leo_review 0.887; epilepsy type specialist and
+leo_review 0.737, leo_auto 0.492 (the v1 model cannot say "unknown", so the gold's 25 "unknown" letters
+cannot agree); typed-only view 0.96 for specialist and leo_review (13 letters). Onset class (18 letters
+with a gold seizure type): llm 0.813, specialist 0.857, leo_auto 0.882, leo_review 0.857; the subtype
+itself stays low (leo_auto 0.308). Claims: accept 0.462, review 0.513, reject 0.025.
+
+**160 stress letters (EA0001-EA0160), micro-F1.** File `eval/results/stress_fs160_v06.*`
+(leo-v0.5: specialist 0.652, leo_review 0.661-0.675).
+
+| arm | llm | specialist | leo_auto | leo_review | onset class leo_review (n=92) |
+|---|---:|---:|---:|---:|---:|
+| L0 | 0.656 | 0.702 | 0.668 | 0.713 | 0.894 |
+| L1 | 0.688 | 0.702 | 0.696 | 0.720 | 0.900 |
+| L2 | 0.662 | 0.702 | 0.688 | 0.722 | 0.900 |
+| H | 0.716 | 0.702 | 0.703 | 0.713 | 0.888 |
+| H2 | 0.707 | 0.702 | 0.689 | 0.724 | 0.906 |
+
+Specialist current ASMs 0.842 (0.819 before the bare-after-stop rule), epilepsy type 0.621. Epilepsy-type
+variants on these letters: leo-v0.5 0.419; "unknown" with type inference from seizure types 0.508;
+"unknown" without inference (shipped) 0.621. The typed-only view did not move (about 0.97), so the gain is
+the letters that name no type.
+
+**v4_ext (113 US-style notes).** `eval/results/v4ext_v06.tables.md` against `v4ext_fix`. Only the
+rules-only column is re-run (the LEO+model columns reuse the stored v0.5 GPU claims). Rules-only current
+ASMs 71 / 15 / 8 (P 0.826) vs 71 / 17 / 8 (0.807); rescue list FP 8 → 4; scored-path claim precision
+0.838 → 0.843. Every core and extended item is unchanged. The first v0.6 run had two new current-ASM
+false positives (P005036, P005022: a drug mentioned without a cue after it was stopped); the
+bare-after-stop rule removed them.
+
+**Synthetic (US-style, maintenance view).** `eval/results/leo_vs_synth_gold_v06_maint.*`.
+L1C, 30 patients: specialist 0.971 → 0.978, leo_review 0.969 → 0.976, leo_auto 0.998 (unchanged), llm
+0.993; leo_review − llm −0.024 [−0.053, −0.004] → −0.017 [−0.045, +0.000]. Accept share 0.618 → 0.688.
+Onset class (26 patients): llm 1.000, specialist / leo_auto / leo_review 0.962. Same pattern for armH and
+L0C. Nothing got worse on the notes EpExtra was developed on.
+
+**Flat prompt v2 (model may say "unknown").** GPU job 179541 (`scripts/slurm_med42_flat_v2.sh`, L1C,
+40 held-out letters, `data/run_manifests_fs_test_flat_c_v2`). Completed 2026-10-08 (13 min, exit 0).
+Scored with
+`venv-medcat/bin/python scripts/score_leo_vs_fs_gold.py --llm L1C=data/run_manifests_fs_test_flat_c:L1C --llm L1Cv2=data/run_manifests_fs_test_flat_c_v2:L1C --out eval/results/leo_vs_fs_gold_v06_v2`.
+
+| | v1 (L1C) | v2 (L1Cv2) |
+|---|---|---|
+| llm micro-F1 | 0.700 | 0.714 (paired diff 0.014, CI [−0.026, +0.057]) |
+| leo_auto micro-F1 | 0.704 | 0.699 |
+| leo_review micro-F1 | 0.773 | 0.770 |
+| leo_review − llm | +0.073 [0.013, 0.135] | +0.056 [−0.003, +0.113] |
+| `epilepsy_type` llm / leo_auto | 0.333 / 0.492 | 0.427 / 0.516 |
+| `epilepsy_type|typed` llm / leo_auto (13 letters) | 0.923 / 0.917 | 0.769 / 0.818 |
+| `epilepsy_type|abstain` leo_auto | 0.737 | 0.684 |
+| accept share | 0.462 | 0.467 |
+
+v2 helps the model on letters with no stated type (it can now say "unknown"), but it hurts on the 13
+letters that do state a type: the model says "unknown" where the letter names the type. LEO's reviewed
+output is unchanged and auto-accept barely moves. **Decision: v1 stays the default.** v2 remains
+available via `MEDAI_FLAT_PROMPT_VERSION=v2`.
+
+**Caveat.** The medication and epilepsy-type rules were written while reading errors on the 40
+held-out letters, so those 40 are no longer a clean test of them. The 160 stress letters and v4_ext are
+the check. The onset-class gold is a mapping of the F-S seizure-type keyword gold, not an annotation.
+
+Tests: `tests/test_seizure_class.py`, `tests/test_medication_current.py`,
+`tests/test_unknown_epilepsy_type.py`; `tests/test_leo_app.py` reads the v06 evidence files.
+
+### 10.42 EEG electrode names as locations (2026-10-08)
+
+**Change (D27).** `rules/eeg_electrodes.py`, used by `rules/fields/eeg.py` (interictal discharges) and
+`rules/fields/eeg_extra.py` (ictal onset lobe and side). Location words still win; electrodes only fill
+an empty lobe or side. Source: PEEP (Cui et al., J Biomed Inform 2014), which read electrode names
+through EpSO.
+
+**v4_ext rules-only rerun.** `data/leo_runs/v4ext_rules_v06e.*`, scored in `eval/results/v4ext_v06e.*`.
+The first version added 6 claims, all scored wrong: generalized spike-and-wave "with bifrontal
+predominance at Fp1/Fp2 and F3/F4" got lobe frontal. For a generalized discharge the electrodes give its
+predominance, not a focus, so electrodes no longer add a lobe when the side is diffuse/generalized. After
+that the claims file and every table are identical to `v4ext_rules_v06` / `v4ext_v06`. In these 113 notes
+every finding near an electrode name also has a lobe or side word, so the rule has nothing to fill. It is
+kept for EEG reports that give the location only as electrodes ("sharp waves maximal at T8"); no scored
+set measures that yet. The F-S letters have no gold for EEG location.
+
+### 10.43 leo-v0.7: seizure freedom and date of last seizure (2026-10-08)
+
+**Gold.** From the F-S `SeizureFrequency` entities (non-negated). A letter is seizure free when every entity
+has `NumberOfSeizures` 0, and not seizure free when any has a positive or present-but-uncounted frequency
+(`scripts/score_leo_vs_fs_gold.fs_seizure_free_gold`): 29 of 40 held-out letters have a value (11 yes, 18 no).
+Last-seizure dates are the `YearDate`(-`MonthDate`) of "0 seizures since <date>" entities, one per seizure type;
+a predicted date is right if it matches any of them at the gold's precision. 18 of 200 letters have one (4
+held out).
+
+**40 held-out letters, L1C** (`eval/results/leo_vs_fs_gold_v07.*`). The headline micro-F1 and every per-field
+number are identical to v0.6 (llm 0.700, specialist 0.763, auto 0.704, review 0.773; review − llm +0.073
+[0.013, 0.135]). Claim precision by category is unchanged (the new fields are not in it). The new claims add 40
+claims over 40 letters: 17 agree, 1 disagree, 16 model-only, 6 rules-only; accept share 0.462 → 0.438.
+
+| view (extra, not in micro) | n | llm | specialist | leo_auto | leo_review |
+|---|---:|---:|---:|---:|---:|
+| `seizure_free` | 29 | 0.852 | 0.667 | 0.343 | 0.830 |
+| `date_of_last_seizure` | 4 | — (not read) | 0.750 | 0.000 (always review) | 0.750 |
+
+The model reads seizure freedom better than the rules. Auto-accept is low because the rules often give no
+frequency, so the model's value is model-only and goes to review.
+
+**Date rule, rules only, 200 letters** (`scripts/score_last_seizure_fs.py`, `eval/results/leo_last_seizure_fs200.*`):
+development 14 of 14 right; held-out 3 of 4. The held-out miss is a misspelt month ("Novemebr 2015" read as 2015
+only); left unfixed because it was seen on a held-out letter. The rule also gave dates in 4 letters with no gold
+date (for example "last episode was on 31st August 2018"); the gold marks dates only on zero-seizure entities, so
+these are not counted.
+
+**Synthetic (maintenance view).** `eval/results/leo_vs_synth_gold_v07_maint.*`: micro-F1 identical to v0.6 for
+armH, L0C and L1C. The synthetic gold has no seizure-free or last-seizure column, so the new fields are not
+scored there.
+
+**Not done.** The model is not asked for the date, and the visit date is not in the prompt (Ojemann et al. found
+"dates in context" the best prompt). That needs a prompt v3 and a GPU run; durations ("seizure free for 7
+months") would then become dates relative to the visit.
+
+### 10.44 Medication context in CMED terms; CASI external test pending (2026-10-09)
+
+`rules/med_context.cmed_context(text, start, end)` re-expresses EpExtra's clause-level medication cues in the
+five CMED dimensions (Mahajan et al., J Biomed Inform 2023) plus disposition. It reads, it does not decide:
+EpExtra's current / prior lists are unchanged, so no score in 10.43 moves.
+
+| EpExtra mention class | CMED action | CMED temporality |
+|---|---|---|
+| stop | Stop | Past |
+| planned | Start | Future |
+| past | (none) | Past |
+| current, with an increase / reduce / switch / one-off cue | Increase / Decrease / OtherChange / UniqueDose | Present (Future if "will", "plan") |
+| current or bare, no change cue | (none; NoDisposition) | Present |
+
+Negation ("declined", "not started", "never took"), certainty (Conditional for "if / unless / should seizures";
+Hypothetical for "consider / may / option / discuss") and actor (Patient for "she stopped", "ran out",
+"self-discontinued"; Physician for "I recommend", "we will", "please") are separate cue lists.
+
+**External test.** `scripts/score_casi_medication_status.py` scores `casi_status` on the CASI medication-status
+test set (Agrawal et al., EMNLP 2022; 100 snippets; active / discontinued / neither; macro F1 as in the paper).
+The gold drug names are given, because most CASI drugs are not ASMs and EpExtra's linker is epilepsy-only; a
+name not found verbatim counts as wrong. **Not run**: the dataset is gated (`mitclinicalml/clinical-ie`;
+accept the terms, then `huggingface-cli login` or `HF_TOKEN`), and no token is configured here. Once the CSV
+is in `data/external/casi_medication_status/`, run the script; no rule may be changed after seeing it.
+
+### 10.45 leo-v0.8: PNES flag (2026-10-09)
+
+**Development letters (EA0001-EA0160).** 16 letters mention PNES. The flag matches a manual reading of all 16:
+3 PNES only (EA0076 "more likely to be dissociative seizures" after "I do not think that these are epileptic
+seizures", probable; EA0102; EA0120), 12 dual diagnosis (epilepsy, or a named epileptic seizure type such as
+"complex partial seizures" in the diagnosis list, EA0038), 1 possible (EA0129 "keep in mind the possibility").
+Three fixes during development, all from development letters: letterheads ("The epilepsy service") are not a
+diagnosis; "does not need epilim for epilepsy as she has non epileptic seizures" is not an epilepsy statement;
+named epileptic seizure types count as epilepsy.
+
+**Held-out letters (EA0161-EA0200).** EA0174 ("I wonder if these could be non epileptic rather than epileptic
+seizures") is flagged possible; EA0198 ("Probable non-epileptic psychogenic seizures" with complex partial
+seizures) is flagged dual diagnosis, probable. Both read during exploration, so not blind.
+
+**Effect on the F-S score** (`eval/results/leo_vs_fs_gold_v08.*`, arm L1C): micro-F1 identical to v0.7
+(llm 0.700, specialist 0.763, leo_auto 0.704, leo_review 0.773; leo_review - llm +0.073 [0.013, 0.135]).
+One new claim (the EA0198 flag, REVIEW); EA0198's frequency cells were already in review, so no accepted claim
+moved (accept share 0.438 -> 0.436 from the larger denominator). The flag is a safety rule for real clinic
+letters; this corpus has no PNES gold and cannot measure its benefit.
+
+### 10.46 IED attributes and EEG-report sections (2026-10-09)
+
+`rules/eeg_attributes.py` fills optional `IedFinding` fields from a ±80 character window: frequency band
+(delta / theta / alpha / beta / gamma, from a band word or from Hz), recurrence (rare … continuous),
+dispersal (focal / regional / multifocal / hemispheric / generalized). Dispersal is not inferred from lobe
+alone. `rules/eeg_sections.py` treats a note as an EEG report only when it has `DESCRIPTION OF THE RECORD`,
+or both `INTRODUCTION` and `IMPRESSION` as labeled headers. On those reports, IED, background, ictal onset
+and seizures-captured findings are taken from description / impression / findings / clinical correlation,
+not from history, medications or the introduction. A clinic letter with a lone `Impression:` is not an EEG
+report, so F-S and synthetic letters are unchanged.
+
+**External test.** `scripts/score_tuh_eeg_attributes.py` scores a JSONL conversion of the TUH / SACAR
+annotations (Maldonado and Harabagiu, LREC 2020). **Not run**: Temple registration and a data-use agreement
+are required; do not change the rules after seeing that file.
+
+### 10.47 Author-type stratification and silent prospective plan (2026-10-09)
+
+`services.note_author.note_author` reads the signature block (from `Yours`, or short trailing lines that are
+not a plan). Body mentions ("I will ask the epilepsy nurse") do not set the author.
+
+**F-S letters** (`scripts/classify_fs_authors.py`, `eval/results/fs_author_types.*`): 159 of 160 development
+letters and all 40 held-out letters are unsigned. One development letter signs as a consultant neurologist.
+LEO cannot report Ojemann-style epileptologist vs general-neurologist F1 on this corpus. When a US clinic
+corpus with signed notes is available, add the author label as a stratum to `score_leo_vs_fs_gold.py` and
+report micro-F1 by stratum before changing any rule.
+
+**Silent prospective plan** (Wissel et al., Epilepsia 2019; not started). Pre-register the fields (core
+panel plus seizure free), the accept/review split, and the analysis (letter-clustered PPV and NPV with 95%
+CIs). Run LEO on upcoming clinic letters without showing the output in the record. A clinician reviews every
+auto-accepted cell in a 10% audit and every review cell that would have entered a research extract. Do not
+change care. Stop after a fixed calendar window or N letters, whichever comes first. Expect the
+retrospective F1 to fall (Wissel: AUC 0.90 → 0.79). Record the drop as a dated deviation; do not retune on
+the prospective notes.
+
+### 10.48 Weak labels from EpExtra (2026-10-09)
+
+`rules/weak_labels.py` wraps four existing rules as labeling functions (epilepsy type, seizure free, PNES
+status, IED present). `scripts/emit_weak_labels.py` writes JSONL for a Trove label model (Fries et al. 2021).
+No model is trained. Add further fields only after their rules are frozen. This is the deferred Loop C in
+`docs/ACTIVE_LEARNING_PLAN.md`, not a live third reader.
+
+### 10.49 Quote-entail rematch and research-extract misses (2026-10-09)
+
+`scripts/score_leo_quote_entail_fs.py` on stored L1C (`data/run_manifests_fs_test_flat_c`), current
+pipeline, 40 held-out letters. No GPU. Headline v05/v08 files not overwritten. Default
+`quote_entail` stays **off** (D22).
+
+| setting | auto P | auto R | auto F1 | reviewed F1 | research extract |
+|---|---:|---:|---:|---:|---|
+| default (off) | 0.870 | 0.592 | 0.704 | 0.773 | 74/84 = 0.881 |
+| `--quote-entail` | 0.910 | 0.483 | 0.631 | 0.773 | 62/69 = 0.899 |
+
+28 claims demoted `quote_not_entailed`; **16 were gold-correct**. Of 10 default research-extract
+misses, 3 fail the lexical entail check; 2 of those 3 are “Juvenile Myoclonic Epilepsy” (lexicon
+wants `JME`) and “symptomatic epilepsy” — not Windisch unsupported quotes. 8 of 10 misses are
+typed epilepsy vs gold `unknown` (diagnosis-line convention). List:
+`eval/results/leo_research_extract_misses_fs40.md`. Frozen paper extras remain 71/82 = 0.866
+(`leo_paper_extras_fs40.md`, earlier pipeline). Do not retune the entail lexicon on these letters.
+Do not flip the default: precision rose by dumping recall and correct cells.
+
+### 10.50 leo-v0.9 leak list, ASM status, unknown-silent, noisy reviewer (2026-10-10)
+
+CPU only. Headline extras / v05 files not overwritten. D17 and `--quote-entail` default unchanged. Loop A/B not applied. Do not train `unknown`.
+
+- **Leak list.** `scripts/score_leo_error_capture.py` on stored L1C. Pre-v0.9: **19/49** (`leo_error_capture_fs40_pre_v09.md`). v0.9 rematch: **20/49** accepted anyway (0.41); 29/49 captured; 15/43 flags already right. Table: `leo_error_capture_fs40.md`. How to read the 20 rows: `writing/supplement_leo_accept_errors.md`. Eight epilepsy-type rows are still typed vs gold `unknown`. ASM accepted-anyway 6→7. **Do not write E/fusion from the hold-out table.** Leak did not fall; that is expected (development-letter rules, F-S rescue-as-current, gold multiplicity). Manuscript §3.4 updated.
+- **Current ASMs.** Cluster-if / “not prescribed yet” / “can also use” / “may be considered” are planned (EA0001–160). A rescue the patient already takes stays current. Sidecars stay opt-in. Tests: `tests/test_medication_current.py`.
+- **Unknown + silent.** Default REVIEW `unknown_silent`. Switch `unknown_silent_review`. Not chosen on EA0161–200. Epilepsy-type flags 15→19 (more gold-`unknown` now reviewable). Tests: `tests/test_chain_llm.py`.
+- **Noisy reviewer.** `scripts/score_leo_noisy_review.py` → `eval/results/leo_noisy_review_fs40.*`. Same 40 letters, seed 0:
+
+| p(error) | P | R | F1 |
+|---:|---:|---:|---:|
+| 0.00 | 0.896 | 0.823 | 0.858 |
+| 0.10 | 0.894 | 0.803 | 0.846 |
+| 0.25 | 0.868 | 0.803 | 0.834 |
+| 0.50 | 0.788 | 0.707 | 0.746 |
+| 1.00 | 0.634 | 0.578 | 0.605 |
+
+*p* = 0 is not a replacement for frozen extras oracle **0.796**. The rise is mostly `unknown_silent` putting gold-`unknown` into the review set. Not minutes.
+
+**Not done:** D17 flip; `--quote-entail` default; entail lexicon on hold-out; train `unknown`; Loop A/B apply; real notes; agent. Headline F1 unchanged.

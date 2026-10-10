@@ -39,7 +39,7 @@
  "gpu_run": {
   "slurm_job": 169142,
   "partition": "interactive",
-  "node": "smdodwork05",
+  "node": "gpu-node",
   "gpu": "NVIDIA L40S-24Q",
   "model_load_s": 140.3,
   "run_wall_s": 1312.9,

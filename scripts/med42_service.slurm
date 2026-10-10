@@ -35,8 +35,8 @@ if [[ -f "$_ENV_FILE" ]]; then
   set -a; . "$_ENV_FILE"; set +a
 fi
 
-# Correct OOD hostname for your site
-export OOD_HOSTNAME="${OOD_HOSTNAME:-ood.urmc-sh.rochester.edu}"
+# Open OnDemand hostname for your site (optional; used only to print a clickable URL)
+export OOD_HOSTNAME="${OOD_HOSTNAME:-}"
 
 # Paths
 export APP_HOME="$HOME/med42_service"

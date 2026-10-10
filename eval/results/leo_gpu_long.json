@@ -1,7 +1,7 @@
 {
   "environment": {
     "python": "3.11.13",
-    "host": "smdodwork01.urmc-sh.rochester.edu",
+    "host": "gpu-node",
     "torch": "2.14.0+cu130",
     "cuda": "13.0",
     "cuda_available": true,

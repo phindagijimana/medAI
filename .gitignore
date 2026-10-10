@@ -30,6 +30,8 @@ env/
 # IDE
 .vscode/
 .idea/
+.claude/
+!.claude/settings.json
 *.swp
 *.swo
 *~
@@ -56,14 +58,20 @@ data/rag_cache/
 # Documentation - Keep only README and DEPLOYMENT + versioned schema docs
 *.md
 !README.md
+!AGENTS.md
+!CLAUDE.md
 !DEPLOYMENT.md
 !SELF_HOSTING.md
 !RELEASE_NOTES.md
 !docs/*.md
-!paper_doc/*.md
 !eval/results/*.md
-!writing/*.md
 !rules/*.md
+
+# Paper drafts and submission packet — stay on disk, not GitHub
+writing/
+paper_doc/
+docs/TRIPOD_LLM_CHECKLIST.md
+docs/REVIEWER_PACKET.md
 
 # Environment (never commit — may contain API keys / secrets)
 .env
@@ -96,9 +104,12 @@ logs/medai_*.out
 logs/medai_*.err
 logs/vecta_*.out
 logs/vecta_*.err
+logs/ACCESS_URLS.txt
 
-# Extraction pipeline runtime output — commit specific locked-run manifests intentionally
+# Extraction pipeline runtime output — do not commit. Trees already in history
+# contain NFS home paths; they stay on disk for local rescoring.
 data/run_manifests/
+data/run_manifests*/
 data/run_manifests_maxtok4096/
 
 # Raw downloads of external corpora — extracted content is committed instead
@@ -135,6 +146,9 @@ slurm-*.out
 
 # LEO: uploads, results and logs contain note text (protected health information)
 data/leo_jobs/
+data/leo_training/
+data/leo_runs/*.out
+data/leo_runs/*.err
 leo_out/
 *_leo.csv
 *_leo.xlsx

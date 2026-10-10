@@ -1,0 +1,12 @@
+#!/bin/sh
+# Strip agent attribution so Cursor/Claude never become GitHub contributors.
+# Cursor may inject Co-authored-by before hooks; this still removes it.
+msg="$1"
+[ -n "$msg" ] && [ -f "$msg" ] || exit 0
+tmp="${msg}.strip"
+sed -E \
+  -e '/^[[:space:]]*[Cc]o-[Aa]uthored-[Bb]y:.*([Cc]ursor|[Cc]laude|[Cc]opilot|cursoragent@|noreply@anthropic\.com)/d' \
+  -e '/^[[:space:]]*[Mm]ade-[Ww]ith:.*([Cc]ursor|[Cc]laude|[Cc]opilot)/d' \
+  -e '/^[[:space:]]*[Gg]enerated [Bb]y:.*([Cc]ursor|[Cc]laude|[Cc]opilot)/d' \
+  "$msg" > "$tmp" && mv "$tmp" "$msg"
+exit 0

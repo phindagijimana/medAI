@@ -44,7 +44,7 @@
   "sources": {
     "base_M2": {
       "arm": "M2",
-      "dir": "/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_fs_test_base",
+      "dir": "data/run_manifests_fs_test_base",
       "n_letters": 40,
       "n_llm_phenotype_valid": 13,
       "systems": {

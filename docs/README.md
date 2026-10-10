@@ -1,6 +1,6 @@
 # Documentation
 
-Local documentation files (not tracked in GitHub, see root for public docs).
+Operator and protocol docs. These **are** tracked (`!docs/*.md`). Manuscript drafts in `writing/` and `paper_doc/` stay local (gitignored). Secrets and note-text outputs stay out of git (`.gitignore`).
 
 ## Files
 
@@ -21,10 +21,18 @@ Local documentation files (not tracked in GitHub, see root for public docs).
   - Port forwarding
   - Troubleshooting
 
-- **`LEO_USER_GUIDE.md`**: how to run LEO (`bin/leo`, Slurm GPU/CPU, web app), input and output formats, phenotype panels, questions, long notes, data protection
+- **`LEO_USER_GUIDE.md`**: operator guide (commands, Validator, learn, PHI)
+- **`IMPLEMENTATION.md`**: A–Z walkthrough, decisions, contributions, weaknesses
+- **`WEAKNESSES.md`**: each hole, what accounts for it today, what to improve next
 - **`LEO_ROUTING_RULES.md`**: how LEO fuses the specialist (EpExtra) and the LLM and decides ACCEPT, REVIEW or REJECT
-  - Fusion table, verification order, reason codes, the leo-v0.4 and v0.5 rules (acute, rescue, frequency) and their switches
-- **`EVAL_PROTOCOL_LEO.md`**: frozen evaluation protocol, deviations log (D1 to D11), append-only results log
+  - Fusion table, verification order, reason codes, the leo-v0.4 and v0.5 rules (acute, rescue, frequency) and their switches; opt-in sidecars (`sidecar_only`, D18–D20)
+- **`EVAL_PROTOCOL_LEO.md`**: frozen evaluation protocol, deviations log (D1–D24), append-only results log (through 10.39)
+- **`FIELD_SPECIALIST_DETECTORS.md`**: extra literature detectors as fusion sidecars (not E gazetteers); shipped `--ext-detector` names and §9 remaining-hole literature map
+- **`ROLE_PLACEMENTS.md`**: RAG for ask_/audit, O export codes, ConText ablation inside E; 70B/CoT/SC not shipped
+- **`MEASURED_FAILURE_TECHNIQUES.md`**: status/time, quote entailment, routing policy, LoRA-off-fusion, BIO NER blocked
+- **`ACTIVE_LEARNING_PLAN.md`**: `leo learn` Loop A/B from validator files; extract unchanged; Loop C paused
+- **`LORA_FLAT_CONTRACT.md`**: why fused H2 lost and how a future adapter must agree with E
+- **`E_EXTERNAL_BASELINES.md`**: how to score cTAKES/CLAMP/i2b2 *against E* (B-arm; still unscored)
 - **`SCOPE_DECISIONS.md`**: deferred scope items (ILAE 2025, NINDS CDE, ICD-10-CM, EpSO, ORDO, definition of current ASM)
 - **`CHAIN_OF_THREE_ALIGNMENT.md`**: mapping of the Chain-of-Three design to the code, with change log
 

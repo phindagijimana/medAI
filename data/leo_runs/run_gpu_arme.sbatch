@@ -7,10 +7,10 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=02:00:00
-#SBATCH --output=/mnt/nfs/home/urmc-sh.rochester.edu/pndagiji/Documents/med42_service/data/leo_runs/gpu_%x_%j.out
-#SBATCH --error=/mnt/nfs/home/urmc-sh.rochester.edu/pndagiji/Documents/med42_service/data/leo_runs/gpu_%x_%j.err
+#SBATCH --output=data/leo_runs/gpu_%x_%j.out
+#SBATCH --error=data/leo_runs/gpu_%x_%j.err
 set -euo pipefail
-cd /mnt/nfs/home/urmc-sh.rochester.edu/pndagiji/Documents/med42_service
+cd "$(dirname "${BASH_SOURCE[0]}")/../.."
 if [ -f .env ]; then set -a; . ./.env; set +a; fi
 export APP_HOME=$PWD PYTHONNOUSERSITE=1 OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 module load cuda 2>/dev/null || true
