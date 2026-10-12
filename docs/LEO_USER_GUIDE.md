@@ -21,6 +21,7 @@ bin/leo review notes_leo.csv          # cells to review → notes_leo.reviewed.c
 bin/leo review notes_leo.reviewed.csv --summarize
 bin/leo merge notes_leo.csv notes_leo.reviewed.csv
 bin/leo learn notes_leo.reviewed.csv   # Loop A/B; does not change extract
+bin/leo disagreements notes_leo.claims.csv   # model-vs-rules for blind adjudication
 bin/leo rollup notes_leo.csv --patient-col patient_id [--date-col visit_date]
 ```
 
