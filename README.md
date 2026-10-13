@@ -6,7 +6,7 @@
 
 Operator: [`docs/LEO_USER_GUIDE.md`](docs/LEO_USER_GUIDE.md). Hosting: [`docs/LEO_HOSTING.md`](docs/LEO_HOSTING.md). Design: [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md). How to quote numbers: [`docs/INTERPRETING_RESULTS.md`](docs/INTERPRETING_RESULTS.md).
 
-HTML docs (Read the Docs, same pattern as [QSIPrep](https://qsiprep.readthedocs.io)): `mkdocs.yml` + `.readthedocs.yaml`. Import [phindagijimana/medAI](https://github.com/phindagijimana/medAI) at [readthedocs.org](https://readthedocs.org) — the slug you choose becomes `https://<slug>.readthedocs.io`. Preview locally: `pip install -r docs_site/requirements.txt && mkdocs serve`.
+HTML docs: [medai.readthedocs.io](https://medai.readthedocs.io) (Read the Docs, same host as [QSIPrep](https://qsiprep.readthedocs.io)). Preview: `pip install -r docs_site/requirements.txt && mkdocs serve`.
 
 ## Crucial commands
 

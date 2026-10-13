@@ -1,33 +1,30 @@
 site_name: LEO
 site_description: Research phenotyping for epilepsy notes (MedAI-EPI)
+site_url: https://medai.readthedocs.io/
 docs_dir: docs_site
 repo_url: https://github.com/phindagijimana/medAI
-repo_name: phindagijimana/medAI
+repo_name: GitHub
 edit_uri: blob/main/docs/
+copyright: Research use only. Synthetic notes unless IRB and approved compute.
 
+# Same family as QSIPrep / Sphinx RTD (left sidebar + page TOC)
 theme:
-  name: material
-  features:
-    - navigation.sections
-    - navigation.top
-    - content.code.copy
-    - search.highlight
-  palette:
-    - scheme: default
-      primary: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Dark mode
-    - scheme: slate
-      primary: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Light mode
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - bash
+    - python
+  collapse_navigation: false
+  navigation_depth: 3
+  titles_only: false
+  include_homepage_in_sidebar: true
+  prev_next_buttons_location: bottom
 
 nav:
   - Home: index.md
-  - User guide: LEO_USER_GUIDE.md
-  - Hosting: LEO_HOSTING.md
+  - Installation: LEO_HOSTING.md
+  - Quick start: QUICKSTART.md
+  - Usage: LEO_USER_GUIDE.md
   - Interpreting results: INTERPRETING_RESULTS.md
   - Routing rules: LEO_ROUTING_RULES.md
   - Design: IMPLEMENTATION.md
@@ -36,13 +33,9 @@ nav:
 
 markdown_extensions:
   - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - tables
   - toc:
       permalink: true
-
-plugins:
-  - search
+  - tables
+  - fenced_code
 
 strict: true
