@@ -27,6 +27,8 @@ Code: [github.com/phindagijimana/medAI](https://github.com/phindagijimana/medAI)
 | [Installation](LEO_HOSTING.md) | Workstation, Slurm, weights, UMLS |
 | [Quick start](QUICKSTART.md) | `bin/leo check` and a first batch |
 | [Usage](LEO_USER_GUIDE.md) | Commands, input/output, Validator |
+| [Theory and Science](THEORY.md) | Why L, E, and O — and why they are not voted |
+| [Literature](LITERATURE.md) | Papers LEO cites |
 | [Interpreting results](INTERPRETING_RESULTS.md) | How to quote numbers |
 | [Routing rules](LEO_ROUTING_RULES.md) | ACCEPT / REVIEW / REJECT |
 | [Design](IMPLEMENTATION.md) | Why each step exists |

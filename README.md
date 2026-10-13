@@ -67,6 +67,8 @@ Research extract = `accepted` **and** `specialist+llm`. LEO does not beat the mo
 | File | Use |
 |---|---|
 | `docs/index.md` | Public HTML landing (Read the Docs) |
+| `docs/THEORY.md` | Why L, E, and O |
+| `docs/LITERATURE.md` | Papers cited on the docs site |
 | `docs/LEO_USER_GUIDE.md` | Run the tool |
 | `docs/LEO_HOSTING.md` | Workstation vs Slurm (`--gres`, `--cpu`, `--local`) |
 | `docs/IMPLEMENTATION.md` | A–Z design, decisions, strengths, weaknesses |
