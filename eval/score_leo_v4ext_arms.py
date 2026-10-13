@@ -32,6 +32,42 @@ PLAN_DIR = S.PLAN_DIR
 CORPUS = S.CORPUS
 EP_MAP = {"combined_generalized_and_focal": "combined_focal_generalized"}
 SZ_MAP = {"absence_typical": "generalized_absence_typical", "myoclonic": "generalized_myoclonic"}
+DRE_MAP = {"drug_resistant": "drug_resistant", "drug_responsive": "drug_responsive", "indeterminate": "undefined"}
+MRI_FINDING_MAP = {"nonspecific_white_matter_changes": "other_lesion", "incidental_lesion": "other_lesion"}
+MRI_STEM = {
+    "hippocampal_sclerosis": "hippocampal sclerosis|mesial temporal sclerosis|\\bmts\\b",
+    "focal_cortical_dysplasia": "cortical dysplasia|\\bfcd\\b",
+    "tumor": "tumor|tumour|glioma",
+    "encephalomalacia": "encephalomalacia",
+    "vascular_malformation": "vascular malformation|cavernoma|avm",
+    "normal": "mri.{0,40}normal|normal.{0,40}mri|unremarkable",
+    "nonspecific_white_matter_changes": "white matter",
+    "incidental_lesion": "incidental",
+}
+
+
+def _finding(v):
+    if isinstance(v, dict):
+        return str(v.get("value") or v.get("finding") or "")
+    return str(v or "")
+
+
+def _map_mri(plan_v):
+    s = str(plan_v or "")
+    if s.startswith("fcd"):
+        return "focal_cortical_dysplasia"
+    return MRI_FINDING_MAP.get(s, s)
+
+
+def _as_bool(v):
+    if isinstance(v, bool):
+        return v
+    s = str(v).strip().lower()
+    if s == "true":
+        return True
+    if s == "false":
+        return False
+    return None
 
 
 def load_arm(prefix: str, force_single_reader: bool):
@@ -107,6 +143,9 @@ def claim_correct(path, v, plan):
         kind, table = ("motor", S.MOTOR_STEM) if "nonmotor" not in path else ("nonmotor", S.NONMOTOR_STEM)
         lab = S.canon(v, table)
         if fo and fo.get(kind):
+            if (kind == "motor" and fo[kind] == "versive head turning"
+                    and (lab == "tonic posturing" or str(v).lower() == "tonic")):
+                return True  # ILAE 2017 groups versive under tonic; schema has no versive value
             return lab == fo[kind]
         support = " ".join([str(m) for m in sem.get("motor_features", [])] + [str(sem.get("aura") or "")])
         if lab and (S.has(support, table[lab]) or (kind == "nonmotor" and lab == "emotional" and S.has(support, "fear"))):
@@ -132,6 +171,22 @@ def claim_correct(path, v, plan):
     if path == "medication.current_asms":
         name = (v.get("generic_name") if isinstance(v, dict) else str(v)).lower()
         return name in {d["generic_name"].lower() for d in ref.get("CURRENT_ASMS", [])}
+    if path == "clinical_seizure.etiology_category":
+        return str(v) == str(ref.get("ETIOLOGY_CATEGORY"))
+    if path == "medication.drug_resistance_status":
+        return str(v) == DRE_MAP.get(ref.get("DRE_STATUS"), ref.get("DRE_STATUS"))
+    if path == "mri.findings":
+        want = _map_mri(ref.get("MRI_FINDING"))
+        return bool(want) and _map_mri(_finding(v)) == want
+    if path == "mri.hippocampal_sclerosis":
+        b = _as_bool(v)
+        return None if b is None else b == (ref.get("MRI_FINDING") == "hippocampal_sclerosis")
+    if path == "mri.focal_cortical_dysplasia":
+        b = _as_bool(v)
+        return None if b is None else b == (_map_mri(ref.get("MRI_FINDING")) == "focal_cortical_dysplasia")
+    if path == "mri.overall_normal":
+        b = _as_bool(v)
+        return None if b is None else b == (ref.get("MRI_FINDING") == "normal")
     return None
 
 
@@ -139,7 +194,8 @@ SCORED_PATHS = ["eeg.study_type", "eeg.background", "eeg.ied_present", "eeg.ied_
                 "eeg.ictal_onset_laterality", "clinical_seizure.focal_motor_onset", "clinical_seizure.focal_nonmotor_onset",
                 "medication.rescue_medication", "medication.surgery_history", "clinical_seizure.epilepsy_type",
                 "clinical_seizure.predominant_seizure_type", "clinical_seizure.age_at_onset_years",
-                "medication.current_asms"]
+                "medication.current_asms", "clinical_seizure.etiology_category", "medication.drug_resistance_status",
+                "mri.findings", "mri.hippocampal_sclerosis", "mri.focal_cortical_dysplasia", "mri.overall_normal"]
 
 
 def score_view(claims, plans, view):
@@ -274,6 +330,33 @@ def score_view(claims, plans, view):
         asm["tp"] += len(ref_asm & got_asm)
         asm["fp"] += len(got_asm - ref_asm)
         asm["fn"] += len(ref_asm - got_asm)
+        # P1C / F1C columns (etiology, DRE, MRI): scored against the plan, not the specialist-only extra script
+        et = [str(x) for x in val("clinical_seizure.etiology_category")]
+        if ref.get("ETIOLOGY_CATEGORY"):
+            O.add("etiology_category", True, bool(et), vote(et) == ref["ETIOLOGY_CATEGORY"])
+        dre_ref = DRE_MAP.get(ref.get("DRE_STATUS"), ref.get("DRE_STATUS"))
+        dre = [str(x) for x in val("medication.drug_resistance_status")]
+        if dre_ref:
+            O.add("drug_resistance", True, bool(dre), vote(dre) == dre_ref)
+        mri_ref = ref.get("MRI_FINDING")
+        if mri_ref:
+            want = _map_mri(mri_ref)
+            stem = MRI_STEM.get(mri_ref, mri_ref.replace("_", " "))
+            labs = [_map_mri(_finding(x)) for x in val("mri.findings")]
+            labs = [x for x in labs if x]
+            O.add("mri_finding", S.has(text, stem), bool(labs), vote(labs) == want if labs else False)
+            hs = [_as_bool(x) for x in val("mri.hippocampal_sclerosis")]
+            hs = [x for x in hs if x is not None]
+            O.add("mri_hippocampal_sclerosis", S.has(text, MRI_STEM["hippocampal_sclerosis"]),
+                  bool(hs), vote(hs) == (mri_ref == "hippocampal_sclerosis") if hs else False)
+            fcd = [_as_bool(x) for x in val("mri.focal_cortical_dysplasia")]
+            fcd = [x for x in fcd if x is not None]
+            O.add("mri_focal_cortical_dysplasia", S.has(text, MRI_STEM["focal_cortical_dysplasia"]),
+                  bool(fcd), vote(fcd) == (want == "focal_cortical_dysplasia") if fcd else False)
+            nor = [_as_bool(x) for x in val("mri.overall_normal")]
+            nor = [x for x in nor if x is not None]
+            O.add("mri_normal", S.has(text, MRI_STEM["normal"]),
+                  bool(nor), vote(nor) == (mri_ref == "normal") if nor else False)
     res = {"outcomes": {k: dict(v) for k, v in sorted(O.n.items())}, "spurious": dict(O.spurious),
            "rescue": {s: S.prf(rescue[s]["tp"], rescue[s]["fp"], rescue[s]["fn"]) for s in rescue},
            "surgery": {s: S.prf(surg[s]["tp"], surg[s]["fp"], surg[s]["fn"]) for s in surg},
@@ -323,7 +406,10 @@ ITEMS = [("core_epilepsy_type", "epilepsy type (core)"), ("core_seizure_type", "
          ("focal_motor_onset", "focal motor onset"), ("focal_nonmotor_onset", "focal non-motor onset"),
          ("semiology_motor_feature_in_text", "semiology: motor feature (lenient)"),
          ("semiology_aura_in_text", "semiology: aura (lenient)"),
-         ("rescue_drug", "rescue drug"), ("surgery_procedure", "surgery procedure")]
+         ("rescue_drug", "rescue drug"), ("surgery_procedure", "surgery procedure"),
+         ("etiology_category", "etiology category (P1C)"), ("drug_resistance", "drug resistance (F1C)"),
+         ("mri_finding", "MRI finding (P1C)"), ("mri_hippocampal_sclerosis", "MRI hippocampal sclerosis"),
+         ("mri_focal_cortical_dysplasia", "MRI focal cortical dysplasia"), ("mri_normal", "MRI normal")]
 
 
 def cell(o):
@@ -340,11 +426,13 @@ def tables(res):
              ("LEO+model, accepted claims only", "leo_llm", "accepted"),
              ("LEO+model, accepted AND both readers", "leo_llm", "crosschecked"),
              ("model's own claims only", "leo_llm", "model")]
+    views = [v for v in views if v[1] in A and v[2] in A[v[1]]["views"]]
+    n_arm = "rules_only" if "rules_only" in A else next(iter(A))
     md = ["Per item: correct / wrong / missing / not_reported (n = plan items). Plan items scored as in "
           "scripts/score_extended_phenotypes.py; core items added.\n",
           "| item | n | " + " | ".join(v[0] for v in views) + " |", "|---|---|" + "---|" * len(views)]
     for key, label in ITEMS:
-        n = A["rules_only"]["views"]["all"]["outcomes"].get(key, {}).get("n", "-")
+        n = A[n_arm]["views"][next(iter(A[n_arm]["views"]))]["outcomes"].get(key, {}).get("n", "-")
         md.append(f"| {label} | {n} | " + " | ".join(cell(A[a]["views"][v]["outcomes"].get(key)) for _, a, v in views) + " |")
     md += ["", "Where the plan has no value but a value was reported (patients; ideal 0):", "",
            "| item | " + " | ".join(v[0] for v in views) + " |", "|---|" + "---|" * len(views)]
@@ -362,6 +450,8 @@ def tables(res):
            "| arm | verdict / source | correct | wrong | not scorable | precision | distinct (patient, field, value) precision |",
            "|---|---|---|---|---|---|---|"]
     for a in ("rules_only", "leo_llm"):
+        if a not in A:
+            continue
         cl = A[a]["claim_stats"]["claim_level"]
         for k in sorted(cl):
             x = cl[k]
@@ -370,6 +460,8 @@ def tables(res):
                       f"{x['distinct_patient_path_value']['correct'] + x['distinct_patient_path_value']['wrong']}) |")
     md += ["", "Verdict shares (all claims, all field paths; reject = dropped):", ""]
     for a in ("rules_only", "leo_llm"):
+        if a not in A:
+            continue
         c = A[a]["claim_stats"]["all_claims_by_verdict"]
         t = sum(v for k, v in c.items() if k != "reject")
         md.append(f"- {a}: " + ", ".join(f"{k} {v}" for k, v in sorted(c.items())) +

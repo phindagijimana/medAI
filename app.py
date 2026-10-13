@@ -135,13 +135,11 @@ app.config.update({
     "MAX_CONCURRENT_REQUESTS": int(os.environ.get("MAX_CONCURRENT_USERS", "10"))
 })
 
-# Root path → the MedAI-EPI research UI. This deployment is scoped to
-# epilepsy phenotype extraction only (manuscript §Positioning). The
-# pre-pivot general "medical analysis" endpoints have been removed.
+# Root path → LEO. The paper-track M0/M1/M2 UI stays at /extract/ui (not linked from LEO).
 @app.route("/", methods=["GET"])
 def index():
     from flask import redirect
-    return redirect("/extract/ui", code=302)
+    return redirect("/leo/ui", code=302)
 
 # Paper-track: /extract endpoint for structured phenotype extraction
 try:
@@ -1541,14 +1539,14 @@ def _no_cache_response(resp):
     return resp
 
 
-# MedAI-EPI research-phenotyping surface is under /extract/*; see routes/extract.py
-# and routes/extract_ui.py. The root path redirects to /extract/ui above.
+# Paper-track M0/M1/M2 UI is under /extract/*; LEO is /leo/ui. Root redirects to LEO.
 
 
 @app.route("/health", methods=["GET"])
 def health():
     try:
-        if not svc.model_loaded and not svc.load_error:
+        _load_med42 = os.environ.get("MEDAI_LOAD_MED42", "1") == "1"
+        if _load_med42 and not svc.model_loaded and not svc.load_error:
             # Do not block: first load can take many minutes (HF download + weights)
             svc.ensure_model_load_started()
         
@@ -1556,8 +1554,9 @@ def health():
         _cuda = bool(torch and torch.cuda.is_available())
         _rag_ready = rag_system is not None and getattr(rag_system, "available", False)
         _req_gpu = inference_require_gpu()
+        _ok = bool(svc.model_loaded) or not _load_med42
         return _no_cache_response(jsonify({
-            "status": "healthy" if svc.model_loaded else "loading",
+            "status": "healthy" if _ok else "loading",
             "model_loaded": svc.model_loaded,
             "load_error": svc.load_error,
             "device": svc.device,
@@ -1638,9 +1637,10 @@ if __name__ == "__main__":
     if host not in ("127.0.0.1", "localhost", "::1") and not leo_auth.enabled():
         logger.warning("Listening on %s with NO LOGIN: anyone who can reach this port can read results. "
                        "Add a user (`bin/leo user add NAME`) or bind to 127.0.0.1 / use an SSH tunnel.", host)
-    logger.info("Starting MedAI-EPI server on {}:{}".format(host, port))
+    logger.info("Starting LEO server on {}:{}".format(host, port))
     logger.info("Access URLs:")
-    logger.info("  Research UI: http://localhost:{}/extract/ui".format(port))
+    logger.info("  LEO UI:      http://localhost:{}/leo/ui".format(port))
+    logger.info("  Paper UI:    http://localhost:{}/extract/ui".format(port))
     logger.info("  Health:      http://localhost:{}/health".format(port))
 
     try:

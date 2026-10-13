@@ -93,9 +93,12 @@ class PhenotypeAssembler:
         load_default_rules: bool = True,
         apply_uk_to_us: bool = True,
         detect_us_sections: bool = True,
+        context_engine: str = "medspacy",
     ) -> None:
         self.extractor = extractor
         self.nlp = nlp if nlp is not None else build_medspacy_pipeline()
+        from services.context_engine import parse_context_engine
+        self.context_engine = parse_context_engine(context_engine)
         # Phase 4: US adaptation switches.
         # ``apply_uk_to_us`` — pre-tokenisation spelling + drug-name rewrite.
         # ``detect_us_sections`` — SOAP/section detector; attaches
@@ -183,7 +186,8 @@ class PhenotypeAssembler:
                       "continuing without section tags.")
                 sections = []
 
-        entities, doc = self.extractor.extract_with_context(text, self.nlp)
+        entities, doc = self.extractor.extract_with_context(
+            text, self.nlp, engine=self.context_engine)
         # Attach section_type onto each LinkedEntity + section-scope context
         # overrides.  Order matters: this must run AFTER medspaCy so it can
         # promote (never demote) sentence-scope flags.

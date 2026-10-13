@@ -9,7 +9,7 @@ Track requests to authors + registrations for annotated corpora that would fill 
 | 1 | Zhang et al. 2025 — 852 public semiology-EZ pairs | data-request | Feng Liu, Stevens IT | pending | ☐ | — | fill placeholders and send |
 | 2 | TUH EEG Corpus (Temple University) | registration | Ivan Selesnick / NEDC | pending | ☐ | — | submit registration form + PI signature |
 | 3 | Xie 2022 / 2023 seizure-outcome corpora (Penn Epilepsy NLP) | collaboration | Colin Ellis / Kathryn Davis, U Penn | pending | ☐ | — | send collaboration inquiry |
-| 4 | Adelson 2026 Engel + ILAE outcome corpus (Vanderbilt) | collaboration | Peter Adelson, Vanderbilt | pending | ☐ | — | send collaboration inquiry |
+| 4 | Adelson 2026 Engel + ILAE outcome corpus (West Virginia University) | collaboration | P. David Adelson, West Virginia University | pending | ☐ | — | send collaboration inquiry |
 
 **Fill in these blanks before sending:**
 - Your name, title, institution, email — search-replace `<YOUR_NAME>`, `<YOUR_TITLE>`, `<YOUR_INSTITUTION>`, `<YOUR_EMAIL>`
@@ -148,11 +148,11 @@ Log responses under each request block below (date received, terms offered, next
 
 ---
 
-## 4. Adelson (Vanderbilt) — Engel / ILAE outcome corpus
+## 4. Adelson (West Virginia University) — Engel / ILAE outcome corpus
 
-**Paper:** Adelson PD, Delaney H, D'Haese PF. (2026). Bridging the outcome documentation gap in epilepsy surgery: validating large language model agents for automated Engel and ILAE scoring from clinical notes. *Epilepsia*. doi:10.1002/epi.70341.
-**Corresponding contact:** P. David Adelson, MD (Chief of Neurosurgery / Epilepsy Surgery Program, Vanderbilt).
-**What we want:** their post-operative follow-up notes labeled with Engel and ILAE outcome classes. Would strengthen MedAI-EPI's `SurgeryHistoryItem.engel_class` / `.ilae_outcome` fields dramatically since our own institution likely has small surgical volume compared with Vanderbilt.
+**Paper:** Adelson PD, Delaney H, D'Haese PF. (2026). Bridging the outcome documentation gap in epilepsy surgery: validating large language model agents for automated Engel and ILAE scoring from clinical notes. *Epilepsia* 2026;67(9):4483–4492. doi:10.1002/epi.70341.
+**Corresponding contact:** P. David Adelson, MD, West Virginia University (affiliation per PubMed, checked 2026-10-08; confirm the current title and corresponding author on the paper before sending).
+**What we want:** their post-operative follow-up notes labeled with Engel and ILAE outcome classes. Would strengthen MedAI-EPI's `SurgeryHistoryItem.engel_class` / `.ilae_outcome` fields dramatically since our own institution likely has small surgical volume compared with theirs.
 
 ### Draft email
 
@@ -164,9 +164,9 @@ Log responses under each request block below (date received, terms offered, next
 >
 > Your recent Epilepsia paper *Bridging the outcome documentation gap in epilepsy surgery: validating large language model agents for automated Engel and ILAE scoring* is directly upstream of one part of our schema. Our `SurgeryHistoryItem` module already includes structured slots for `engel_class` (IA–IVC) and `ilae_outcome` (1–6) with per-field evidence-span grounding, but our institutional cohort has modest surgical volume, which limits our ability to evaluate those specific fields with statistical power.
 >
-> I am writing to explore whether Vanderbilt might be open to a collaborative arrangement:
+> I am writing to explore whether your team at West Virginia University might be open to a collaborative arrangement:
 >
-> 1. **Cross-institutional validation** — running our locally deployed extraction system (Med42-8B, deterministic decoding, evidence-grounded) on a subset of your post-operative follow-up notes as a validation slice for the Engel/ILAE fields. Outputs would remain governed by Vanderbilt's DUA; Vanderbilt would be co-authored on any resulting publication.
+> 1. **Cross-institutional validation** — running our locally deployed extraction system (Med42-8B, deterministic decoding, evidence-grounded) on a subset of your post-operative follow-up notes as a validation slice for the Engel/ILAE fields. Outputs would remain governed by your institution's DUA; your team would be co-authors on any resulting publication.
 > 2. **Sharing of prompt / annotation methodology** — even without shared data, we would benefit greatly from your team's operational experience on Engel/ILAE label validation.
 >
 > Your paper's LLM-agent approach and our schema-constrained baseline are methodologically complementary (agent orchestration vs. per-field validate-and-repair). A joint benchmark on Engel/ILAE extraction, if feasible, could inform the field beyond either study individually.

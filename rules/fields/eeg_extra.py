@@ -27,7 +27,8 @@ Semantics captured
    variants); False on "no seizures captured". Extract N as
    seizures_captured_count.
 3. **ictal_onset_lobe** / **_laterality** — nearest lobar / laterality
-   word to an "ictal onset" / "seizure onset from" phrase.
+   word to an "ictal onset" / "seizure onset from" phrase; scalp electrode
+   names fill a missing lobe or side (``rules/eeg_electrodes.py``).
 4. Negation-aware throughout.
 
 Cite: ACNS Standardized EEG Terminology (Hirsch et al. 2013);
@@ -40,6 +41,8 @@ import re
 from typing import Any, Optional
 
 from rules.base_rule import BaseFieldRule
+from rules.eeg_electrodes import electrode_location
+from rules.eeg_sections import in_finding_section
 from schema.enums import (
     Certainty,
     EegStudyType,
@@ -68,10 +71,13 @@ _STUDY_TYPE_PATTERNS: list[tuple[re.Pattern[str], EegStudyType]] = [
         re.IGNORECASE), EegStudyType.EMU),
     (re.compile(r"ambulatory\s+EEG|\d+[- ]?hour\s+ambulatory",
                 re.IGNORECASE), EegStudyType.AMBULATORY),
-    (re.compile(r"prolonged\s+EEG|long[- ]?term\s+(?:EEG\s+)?monitoring",
-                re.IGNORECASE), EegStudyType.PROLONGED),
-    (re.compile(r"routine\s+EEG|standard\s+EEG|30[- ]?minute\s+EEG",
-                re.IGNORECASE), EegStudyType.ROUTINE),
+    (re.compile(
+        r"prolonged\s+EEG|long[- ]?term\s+(?:EEG\s+)?monitoring|\bLTM\b|"
+        r"continuous\s+EEG|\bcEEG\b|ICU\s+EEG",
+        re.IGNORECASE), EegStudyType.PROLONGED),
+    (re.compile(
+        r"routine\s+EEG|standard\s+EEG|outpatient\s+EEG|30[- ]?minute\s+EEG",
+        re.IGNORECASE), EegStudyType.ROUTINE),
     (re.compile(r"intra[- ]?operative", re.IGNORECASE),
      EegStudyType.INTRAOPERATIVE),
 ]
@@ -129,7 +135,7 @@ _EEG_CTX_RE = re.compile(
 # statement that shares a sentence with such a word is dropped rather than risk a false one.
 _PLAN_RE = re.compile(
     r"\b(?:recommend\w*|refer(?:red|ral)?|consider\w*|plan(?:ned)?|propos\w*|advis\w*|suggest\w*|request\w*|"
-    r"await\w*|arrang\w*|offer\w*|would|could|may|might|will|if|whether)\b", re.IGNORECASE)
+    r"await\w*|arrang\w*|offer\w*|pending|would|could|may|might|will|if|whether)\b", re.IGNORECASE)
 _PURPOSE_RE = re.compile(
     r"\bto\s+(?:localis|localiz|identif|defin|determin|captur|record|confirm|characteris|characteriz|clarif)\w*|"
     r"\bin\s+order\s+to\b|\baim(?:s|ed)?\s+to\b|\bpurpose\b", re.IGNORECASE)
@@ -152,7 +158,9 @@ def _study_type_asserted(text: str, m: "re.Match[str]") -> bool:
         return False
     sent = _sentence(text, m.start(), m.end())
     return not (_PLAN_RE.search(sent) or re.search(
-        r"\b(?:not|un)\s*(?:available|performed|done|undertaken)\b|\bunavailable\b|\bdeclined\b", sent, re.IGNORECASE))
+        r"\b(?:not|un)\s*(?:available|performed|done|undertaken)\b|\bunavailable\b|\bdeclined\b|"
+        r"\bnot\s+yet\s+(?:been\s+)?(?:obtained|performed|done|completed)\b|"
+        r"\bto\s+be\s+(?:scheduled|arranged|obtained|ordered)\b", sent, re.IGNORECASE))
 
 
 def _onset_asserted(text: str):
@@ -230,7 +238,7 @@ class EegSeizuresCapturedRule(BaseFieldRule):
     ) -> Optional[Evidence]:
         text = getattr(doc, "text", "") or ""
         m = _SEIZURES_CAPTURED_RE.search(text)
-        if m:
+        if m and in_finding_section(text, m.start(), m.end()):
             return Evidence[bool](
                 value=True,
                 certainty=Certainty.DEFINITE,
@@ -243,7 +251,7 @@ class EegSeizuresCapturedRule(BaseFieldRule):
                 char_end=m.end(),
             )
         m = _SEIZURES_FREE_RE.search(text)
-        if m:
+        if m and in_finding_section(text, m.start(), m.end()):
             return Evidence[bool](
                 value=False,
                 certainty=Certainty.DEFINITE,
@@ -272,7 +280,7 @@ class EegSeizuresCapturedCountRule(BaseFieldRule):
     ) -> Optional[Evidence]:
         text = getattr(doc, "text", "") or ""
         m = _SEIZURES_CAPTURED_RE.search(text)
-        if not m:
+        if not m or not in_finding_section(text, m.start(), m.end()):
             return None
         num = m.group(1) or m.group(2)
         try:
@@ -310,9 +318,12 @@ class EegIctalOnsetLobeRule(BaseFieldRule):
         if not _EEG_CTX_RE.search(text):
             return None
         m = _onset_asserted(text)
-        if not m:
+        if not m or not in_finding_section(text, m.start(), m.end()):
             return None
         lobe = _nearest(text, m.start(), m.end(), _LOBE_MAP, window=150)
+        if lobe is None and _nearest(text, m.start(), m.end(), _LATERALITY_MAP,
+                                     window=150) != Laterality.DIFFUSE:
+            lobe = electrode_location(text, m.start(), m.end(), window=150)[1]
         if lobe is None:
             return None
         quote = text[max(0, m.start() - 10):min(len(text), m.end() + 80)].strip()
@@ -345,9 +356,10 @@ class EegIctalOnsetLateralityRule(BaseFieldRule):
         if not _EEG_CTX_RE.search(text):
             return None
         m = _onset_asserted(text)
-        if not m:
+        if not m or not in_finding_section(text, m.start(), m.end()):
             return None
-        lat = _nearest(text, m.start(), m.end(), _LATERALITY_MAP, window=150)
+        lat = (_nearest(text, m.start(), m.end(), _LATERALITY_MAP, window=150)
+               or electrode_location(text, m.start(), m.end(), window=150)[0])
         if lat is None:
             return None
         quote = text[max(0, m.start() - 10):min(len(text), m.end() + 80)].strip()

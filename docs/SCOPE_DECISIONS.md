@@ -142,3 +142,4 @@ D1 first (blocks US annotation), D2 any time after D1, D3 after the US pilot, D4
 | 2026-10-01 | Added D6 (definition of current ASM; acute vs rescue) after the leo-v0.4 error diagnostic. |
 | 2026-10-01 | D6: rescue role and two scoring views built (leo-v0.5); headline view still to be confirmed by a clinician. |
 | 2026-10-02 | Deferred beyond the MVP by the project lead: reviewers adding missed values, learning from review decisions, real clinical notes (IRB and secure compute). See `DEFERRED_BEYOND_MVP.md`. |
+| 2026-10-07 | D3–D5 *retrieval* still deferred (R@1 rule in §1 unchanged). Opt-in `--export-codes` attaches ICD-10-CM G40.x / Orphanet / SCORE / EpSO after extract (`docs/ROLE_PLACEMENTS.md`). Not loaded as retriever sources or E gazetteers. ICD intractable is not used for ILAE DRE. |

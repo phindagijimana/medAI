@@ -15,7 +15,8 @@ Gold conventions kept identical to ``scripts/score_llm_arms_vs_fs_gold.py``
 frequency, every non-negated prescription).  One deliberate difference: a gold
 epilepsy type of "unknown" (the regex found no type words in the diagnosis
 text, e.g. plain "epilepsy") is shown to the model as ``null``, because
-"not stated" is the correct answer to give.
+"not stated" is the correct answer to give.  Prompt v2 has an "unknown"
+value and shows it as ``"unknown"`` with the diagnosis quote.
 """
 
 from __future__ import annotations
@@ -104,8 +105,12 @@ def _span(text: str, ent: dict) -> str:
     return text[s:e].strip()
 
 
-def build_answer(pid: str) -> Optional[dict]:
-    """Flat-JSON answer (with verbatim quotes) for one annotated letter."""
+def build_answer(pid: str, unknown_epilepsy: bool = False) -> Optional[dict]:
+    """Flat-JSON answer (with verbatim quotes) for one annotated letter.
+
+    ``unknown_epilepsy`` (flat prompt v2): an epilepsy diagnosis with no type
+    words is shown as "unknown" with its quote instead of null.
+    """
     gf, tf = FS_GOLD_DIR / f"{pid}.json", FS_TEXT_DIR / f"{pid}.txt"
     if not gf.exists() or not tf.exists():
         return None
@@ -139,10 +144,12 @@ def build_answer(pid: str) -> Optional[dict]:
             ans["current_asms"].append({"name": drug, "dose": dose or None, "quote": quote.strip()})
         elif kind == "Diagnosis":
             cat = (a.get("DiagCategory") or "").lower()
-            if cat == "epilepsy" and ans["epilepsy_type"]["value"] is None:
+            if cat == "epilepsy" and ans["epilepsy_type"]["value"] in (None, "unknown"):
                 v = _first(_EPI, low)
                 if v:
                     ans["epilepsy_type"] = {"value": v, "quote": q}
+                elif unknown_epilepsy and ans["epilepsy_type"]["value"] is None:
+                    ans["epilepsy_type"] = {"value": "unknown", "quote": q}
             elif cat in ("multipleseizures", "singleseizure") and ans["predominant_seizure_type"]["value"] is None:
                 v = _first(_SZ, low)
                 if v:
@@ -198,12 +205,12 @@ class Exemplar:
 
 
 class ExemplarBank:
-    def __init__(self, ids: list[str] = BANK_IDS):
+    def __init__(self, ids: list[str] = BANK_IDS, unknown_epilepsy: bool = False):
         self.items: list[Exemplar] = []
         for pid in ids:
             if pid in HELD_OUT_IDS:
                 raise ValueError(f"{pid} is a held-out letter; it must never be in the bank")
-            ans = build_answer(pid)
+            ans = build_answer(pid, unknown_epilepsy=unknown_epilepsy)
             if ans is None:
                 continue
             text = (FS_TEXT_DIR / f"{pid}.txt").read_text(encoding="utf-8")
@@ -239,8 +246,9 @@ class ExemplarBank:
 
 
 def _filled(ans: dict) -> int:
+    # "unknown" does not count, so prompt v1 and v2 select the same examples.
     n = sum(1 for k in ("epilepsy_type", "predominant_seizure_type", "age_at_onset_years")
-            if ans[k]["value"] is not None)
+            if ans[k]["value"] not in (None, "unknown"))
     n += 1 if ans["seizure_frequency"]["quote"] else 0
     n += 1 if ans["current_asms"] else 0
     return n

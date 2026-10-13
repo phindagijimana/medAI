@@ -160,7 +160,7 @@ def _parity(args, stage: str, docs: list[tuple[str, str]], old_dir: Path, live_d
         t0 = time.time()
         raw, n_tok = backend.generate_constrained(build_flat_prompt(text, "L1C"), flat_answer_model(), decoding)
         dur = time.time() - t0
-        fp = parse_flat(raw)
+        fp = parse_flat(raw, FLAT_PROMPT_VERSION)
         RunManifest(
             run_id=f"flat-L1C-{doc}-{started.strftime('%H%M%S')}", started_at=started.isoformat(),
             finished_at=datetime.now(timezone.utc).isoformat(), duration_s=round(dur, 2), code_sha=_git_sha_short(),

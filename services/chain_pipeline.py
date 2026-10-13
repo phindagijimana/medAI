@@ -23,6 +23,9 @@ boundary.  This module wires the components together:
     Verify        → schema + hard + policy checks → ValidatorVerdict
     Publish       → services.ledger.EvidenceLedger
 
+Validator clicks (`leo learn`) are not read here. A routing policy is only
+applied when the caller passes ``disagree_llm`` / ``--disagree-llm policy:FILE``.
+
 v0 goal (user directive: *"usable model in an app"*): the pipeline must
 be callable end-to-end from one function:
 
@@ -66,12 +69,35 @@ ACUTE_FIELD_PATH = "medication.acute_administration"
 RESCUE_FIELD_PATH = "medication.rescue_medication"
 _PLACEHOLDER_VALUES = {"undefined", "not_assessed", "not assessed", "not_applicable"}
 
+# Derived fields with no ontology concept of their own: the quote names the subtype, so a lookup would attach the
+# subtype's code to the class.
+_ENUM_ONLY_PATHS = frozenset({"clinical_seizure.seizure_onset_class", "clinical_seizure.seizure_free",
+                              "clinical_seizure.date_of_last_seizure", "clinical_seizure.pnes_status"})
+_PNES_COUNT_PATHS = frozenset({"clinical_seizure.seizure_frequency", "clinical_seizure.other_seizure_frequencies",
+                               "clinical_seizure.seizure_free", "clinical_seizure.date_of_last_seizure"})
+_PNES_ONLY_PATHS = _PNES_COUNT_PATHS | {"clinical_seizure.predominant_seizure_type",
+                                       "clinical_seizure.seizure_onset_class", "clinical_seizure.epilepsy_type"}
+
+
+def _onset_class_items(items: list) -> list:
+    """One ``seizure_onset_class`` item per predominant-seizure-type item, same evidence span."""
+    from services.chain_llm import FieldItem
+    from services.seizure_class import ONSET_CLASS_PATH, SEIZURE_TYPE_PATH, onset_class
+    out = []
+    for it in items:
+        if it.field_path != SEIZURE_TYPE_PATH or it.multi:
+            continue
+        cls = onset_class(it.ev.get("value"))
+        if cls is not None:
+            out.append(FieldItem(ONSET_CLASS_PATH, it.module, {**it.ev, "value": cls}, False))
+    return out
+
 
 @dataclass
 class ChainPipelineConfig:
     """Knobs for the pipeline. Freeze these in run manifests."""
     rules_version: str = "medai-epi-rules-v0.2.1"
-    pipeline_version: str = "leo-v0.5"
+    pipeline_version: str = "leo-v0.9"
     ontology_release: str = "medai-enum-v0.2.1+ilae2017"
     min_confidence_for_accept: float = 0.0   # unused in v0 (no calibrated conf)
     min_candidate_score: float = 0.9         # exact label (1.0) or exact synonym (0.9)
@@ -102,6 +128,9 @@ class ChainPipelineConfig:
     approx_frequency_is_asserted: bool = True
     # When the model ran but no reader covers this field, specialist-only claims go to review.
     require_second_reader_for_uncovered_fields: bool = True
+    # Opt-in (not D17): accept an LLM-only value when the specialist was silent.
+    # Default empty. `--disagree-llm ied-silent` sets eeg.ied_present.
+    llm_if_silent_accept: tuple[str, ...] = ()
     # When both readers agree on a path a reader covers, a specialist "probable" is treated as asserted
     # (the second reader is the check).  Off for ablations that replay old arms.
     agreed_probable_is_asserted: bool = True
@@ -109,6 +138,27 @@ class ChainPipelineConfig:
     # Default off: GPU gate 2026-10-06 selected R@1 0.335 vs lexical 0.555.
     ontology_select: bool = False
     llm_arm: str = ""   # provenance label of the LLM arm, e.g. "M3" (set by the caller)
+    # Opt-in literature sidecars (e.g. ("ctakes",)). Empty = default LEO. Never auto-accept.
+    ext_detectors: tuple[str, ...] = ()
+    # Post-extract ICD/Orphanet/SCORE/EpSO maps. Off = previous claims (no extra ids).
+    export_codes: bool = False
+    # In-E ConText ablation. Default medspacy ≡ previous E. Not a third arm.
+    context_engine: str = "medspacy"
+    # Quote–value entailment (opt-in). Default off: a quote in the note still suffices.
+    quote_entail: bool = False
+    # One reader "unknown" + the other silent → REVIEW. Not tuned on EA0161–200.
+    unknown_silent_review: bool = True
+    # Fuse the broad onset class of the predominant seizure type (focal / generalized / unknown onset) as its
+    # own field, so agreement on the class can be accepted while a subtype disagreement stays in review.
+    seizure_onset_class: bool = True
+    # Fuse "seizure free" (read off each reader's current frequency) as its own field, and add the rules' explicit
+    # date of the last seizure (no model reads it, so it goes to review when the model ran).
+    seizure_free_field: bool = True
+    last_seizure_field: bool = True
+    # Flag notes that document PNES (rules.pnes). PNES only: seizure type, onset class, epilepsy type, frequency and
+    # seizure-free cells go to review. PNES with epilepsy: frequency and seizure-free cells go to review (the count
+    # may include the non-epileptic events). Possible PNES: flag only.
+    pnes_check: bool = True
 
 
 @dataclass
@@ -129,6 +179,7 @@ class ExtractionStats:
     n_specialist_only_unconfirmed: int = 0  # specialist-only drugs sent to review: LLM listed others
     n_acute_rerouted: int = 0     # one-off drug administrations kept out of current_asms
     n_rescue_routed: int = 0      # as-needed rescue drugs kept out of current_asms
+    n_pnes_routed: int = 0        # seizure cells sent to review because the note documents PNES
     n_llm_grounded: int = 0       # subset of n_llm_only whose span was found by value grounding, not by the model's quote
     n_llm_unsupported: int = 0    # LLM claim whose quote is not in the note
     n_no_second_reader: int = 0   # specialist-only claims on fields no LLM reader covers
@@ -137,6 +188,10 @@ class ExtractionStats:
     n_ontology_exact: int = 0
     n_ontology_selected: int = 0
     n_ontology_abstain: int = 0
+    n_unknown_silent: int = 0     # unknown from one reader, the other silent
+    n_sidecar_agree: int = 0      # extra detector matched the shown E/L value
+    n_sidecar_mismatch: int = 0   # extra detector named a different med role
+    n_sidecar_only: int = 0       # extra detector only; always review
 
     def tally(self, verdict: ValidatorVerdict, reasons: list[ReasonCode]) -> None:
         self.n_claims_emitted += 1
@@ -195,7 +250,8 @@ class ChainPipeline:
             cdb = Path(__file__).resolve().parent.parent / "data" / "medcat_cdb_epilepsy" / "cdb"
             if self._extractor is None:
                 self._extractor = MedCATExtractor(str(cdb), verbose=False)
-            self._assembler = PhenotypeAssembler(self._extractor)
+            self._assembler = PhenotypeAssembler(
+                self._extractor, context_engine=self.cfg.context_engine)
         if self._candidate_service is None:
             from services.ontology_candidates import OntologyCandidateService
             self._candidate_service = OntologyCandidateService(release=self.cfg.ontology_release)
@@ -224,6 +280,7 @@ class ChainPipeline:
 
         # ── Prepare ──
         text = self._prepare(note_text)
+        self._source_text = text
 
         # ── Reason A: specialist (B1' MedCAT+Rules) ──
         pheno = self._reason_specialist(text, document_id=document_id, doc_date=doc_date)
@@ -256,6 +313,34 @@ class ChainPipeline:
         llm_has_meds = any(it.field_path == "medication.current_asms"
                            and it.ev.get("reader") != "X1C" for it in llm_items)
         covered = getattr(self._llm_reasoner, "last_covered_field_paths", None) if llm_pheno is not None else None
+        if self.cfg.seizure_onset_class:
+            from services.seizure_class import ONSET_CLASS_PATH, SEIZURE_TYPE_PATH
+            spec_items = spec_items + _onset_class_items(spec_items)
+            llm_items = llm_items + _onset_class_items(llm_items)
+            if isinstance(covered, (set, frozenset)) and SEIZURE_TYPE_PATH in covered:
+                covered = frozenset(covered) | {ONSET_CLASS_PATH}
+        if self.cfg.seizure_free_field:
+            from services.seizure_free import FREQUENCY_PATH, SEIZURE_FREE_PATH, seizure_free_items
+            spec_items = spec_items + seizure_free_items(spec_items)
+            llm_items = llm_items + seizure_free_items(llm_items)
+            if isinstance(covered, (set, frozenset)) and FREQUENCY_PATH in covered:
+                covered = frozenset(covered) | {SEIZURE_FREE_PATH}
+        if self.cfg.last_seizure_field:
+            from services.seizure_free import last_seizure_items
+            spec_items = spec_items + last_seizure_items(text)
+        pnes_paths: frozenset = frozenset()
+        if self.cfg.pnes_check:
+            from rules.pnes import pnes_items
+            p_items = pnes_items(text)
+            spec_items = spec_items + p_items
+            pnes_value = p_items[0].ev["value"] if p_items else None
+            pnes_paths = {"pnes_only": _PNES_ONLY_PATHS,
+                          "pnes_and_epilepsy": _PNES_COUNT_PATHS}.get(pnes_value, frozenset())
+        sidecar_index = None
+        if self.cfg.ext_detectors:
+            from services.ext_detectors import extract_ext_detectors
+            from services.ext_detectors.attach import SidecarIndex
+            sidecar_index = SidecarIndex(extract_ext_detectors(self.cfg.ext_detectors, text))
         if llm_pheno is not None:
             fusion = fuse(spec_items, llm_items)
             fused_spec = fusion.specialist
@@ -265,9 +350,19 @@ class ChainPipeline:
             fused_spec = [FusedSpecialist(it, "specialist_only") for it in spec_items]
             llm_only = []
 
+        def _ev_drug_name(ev: dict) -> str:
+            v = (ev or {}).get("value")
+            if isinstance(v, dict):
+                return str(v.get("generic_name") or "")
+            return str(v or "")
+
+        from rules.fields.medication import is_eeg_study_token
+
         # ── Reason C + Verify + Publish, specialist claims ──
         for fs in fused_spec:
             it = fs.item
+            if it.field_path.startswith("medication.") and is_eeg_study_token(_ev_drug_name(it.ev)):
+                continue
             detectors = [SPECIALIST_DETECTOR]
             initial: list[ReasonCode] = []
             alternative = None
@@ -315,10 +410,18 @@ class ChainPipeline:
             elif rescue:
                 initial.append(ReasonCode.RESCUE_ROLE)
                 stats.n_rescue_routed += 1
+            if it.field_path in pnes_paths:
+                initial.append(ReasonCode.PNES_DOCUMENTED)
+                stats.n_pnes_routed += 1
             if (not acute and self.cfg.specialist_only_drug_review and fs.status == "specialist_only"
                     and it.field_path == "medication.current_asms" and llm_has_meds):
                 initial.append(ReasonCode.SPECIALIST_ONLY_UNCONFIRMED)
                 stats.n_specialist_only_unconfirmed += 1
+            if (self.cfg.unknown_silent_review and fs.status == "specialist_only"):
+                from services.chain_llm import is_unknown_value
+                if is_unknown_value(it.field_path, it.ev.get("value")):
+                    initial.append(ReasonCode.UNKNOWN_SILENT)
+                    stats.n_unknown_silent += 1
             claim = self._evidence_to_claim(
                 ev=it.ev, source_text=text, document_id=document_id,
                 section=_section_hint(it.module), field_type=it.field_path,
@@ -329,12 +432,16 @@ class ChainPipeline:
                 claim.field_path = ACUTE_FIELD_PATH
             elif rescue:
                 claim.field_path = RESCUE_FIELD_PATH
+            if sidecar_index is not None:
+                sidecar_index.apply(claim)
             self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
             claims.append(claim)
 
         # ── LLM-only claims: verbatim quote required, never auto-accepted ──
         from services.chain_llm import locate_quote
         for it in llm_only:
+            if it.field_path.startswith("medication.") and is_eeg_study_token(_ev_drug_name(it.ev)):
+                continue
             ev = dict(it.ev)
             span = locate_quote(ev.get("evidence_text") or "", text)
             grounded = False
@@ -354,17 +461,25 @@ class ChainPipeline:
                 stats.n_acute_rerouted += 1
             elif rescue:
                 stats.n_rescue_routed += 1
+            llm_reasons = ([ReasonCode.ACUTE_ADMINISTRATION] if acute else
+                           [ReasonCode.RESCUE_ROLE] if rescue else [])
+            if self.cfg.unknown_silent_review:
+                from services.chain_llm import is_unknown_value
+                if is_unknown_value(it.field_path, ev.get("value")):
+                    llm_reasons.append(ReasonCode.UNKNOWN_SILENT)
+                    stats.n_unknown_silent += 1
             claim = self._evidence_to_claim(
                 ev=ev, source_text=text, document_id=document_id,
                 section=_section_hint(it.module), field_type=it.field_path,
                 detectors=["llm"],
-                initial_reasons=([ReasonCode.ACUTE_ADMINISTRATION] if acute else
-                                 [ReasonCode.RESCUE_ROLE] if rescue else []),
+                initial_reasons=llm_reasons,
             )
             if acute:
                 claim.field_path = ACUTE_FIELD_PATH
             elif rescue:
                 claim.field_path = RESCUE_FIELD_PATH
+            if sidecar_index is not None:
+                sidecar_index.apply(claim)
             if span is None:
                 stats.n_llm_unsupported += 1
             else:
@@ -373,9 +488,30 @@ class ChainPipeline:
             self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
             claims.append(claim)
 
+        if sidecar_index is not None:
+            stats.n_sidecar_agree = sidecar_index.n_agree
+            stats.n_sidecar_mismatch = sidecar_index.n_mismatch
+            for it in sidecar_index.leftovers():
+                if it.field_path.startswith("medication.") and is_eeg_study_token(_ev_drug_name(it.ev)):
+                    continue
+                ev = dict(it.ev)
+                name = str(ev.get("reader") or "ctakes")
+                claim = self._evidence_to_claim(
+                    ev=ev, source_text=text, document_id=document_id,
+                    section=_section_hint(it.module), field_type=it.field_path,
+                    detectors=[name],
+                )
+                claim.field_path = it.field_path
+                stats.n_sidecar_only += 1
+                self._finish(claim, field_type=it.field_path, stats=stats, ledger=ledger)
+                claims.append(claim)
+
         self._apply_ontology_select(claims, text, stats)
         for claim in claims:
             self._set_code_accepted(claim)
+        if self.cfg.export_codes:
+            from services.o_code_maps import attach_export_codes
+            attach_export_codes(claims)
 
         if return_claims:
             return stats, claims
@@ -427,7 +563,7 @@ class ChainPipeline:
 
     def _finish(self, claim: Claim, *, field_type: str, stats: ExtractionStats, ledger: Any) -> None:
         """Verify, tally and publish one claim."""
-        self._verify(claim, field_type=field_type)
+        self._verify(claim, field_type=field_type, source_text=getattr(self, "_source_text", "") or "")
         stats.tally(claim.validator_verdict, claim.reason_codes)
         if ledger is not None:
             ledger.publish(claim)
@@ -515,7 +651,7 @@ class ChainPipeline:
         ontology_match = "none"
         ontology_candidates: list[dict] = []
 
-        if mention_text and self._candidate_service is not None:
+        if mention_text and self._candidate_service is not None and field_type not in _ENUM_ONLY_PATHS:
             from services.onto_select import snapshot
             cands = self._candidate_service.get_candidates(
                 mention=mention_text, field_type=field_type, k=5,
@@ -634,7 +770,7 @@ class ChainPipeline:
 
     # ---- Verify --------------------------------------------------------
 
-    def _verify(self, claim: Claim, *, field_type: str) -> None:
+    def _verify(self, claim: Claim, *, field_type: str, source_text: str = "") -> None:
         """Apply hard + policy checks; mutate claim.validator_verdict in place.
 
         Hard failures → REJECT.  Policy flags → REVIEW.  Otherwise ACCEPT.
@@ -675,8 +811,20 @@ class ChainPipeline:
             claim.reason_codes = reasons
             return
 
+        # Policy: the note documents PNES; a person decides which events the seizure cell describes
+        if ReasonCode.PNES_DOCUMENTED in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
         # Policy: the LLM listed drugs and did not list this one
         if ReasonCode.SPECIALIST_ONLY_UNCONFIRMED in reasons:
+            claim.validator_verdict = ValidatorVerdict.REVIEW
+            claim.reason_codes = reasons
+            return
+
+        # Policy: one reader said unknown and the other was silent
+        if ReasonCode.UNKNOWN_SILENT in reasons:
             claim.validator_verdict = ValidatorVerdict.REVIEW
             claim.reason_codes = reasons
             return
@@ -688,8 +836,17 @@ class ChainPipeline:
             return
 
         # Policy: a fact only the LLM proposed is never auto-accepted
+        # unless this field is on the measured llm_if_silent_accept list (not the default).
         if claim.detectors == ["llm"]:
-            reasons.append(ReasonCode.LLM_ONLY)
+            if claim.field_path not in (self.cfg.llm_if_silent_accept or ()):
+                reasons.append(ReasonCode.LLM_ONLY)
+                claim.validator_verdict = ValidatorVerdict.REVIEW
+                claim.reason_codes = reasons
+                return
+
+        # Policy: extra detector alone never auto-accepts (does not count as a second reader).
+        if not any(d in (SPECIALIST_DETECTOR, "llm") for d in (claim.detectors or [])):
+            reasons.append(ReasonCode.SIDECAR_ONLY)
             claim.validator_verdict = ValidatorVerdict.REVIEW
             claim.reason_codes = reasons
             return
@@ -721,6 +878,16 @@ class ChainPipeline:
             claim.validator_verdict = ValidatorVerdict.REVIEW
             claim.reason_codes = reasons
             return
+
+        # Opt-in: quote is in the note but does not assert this cell (precision, not a bigger model).
+        if self.cfg.quote_entail:
+            from services.quote_entail import quote_entails
+            if not quote_entails(claim.field_path or field_type, claim.value,
+                                 claim.mention.text, source_text):
+                reasons.append(ReasonCode.QUOTE_NOT_ENTAILED)
+                claim.validator_verdict = ValidatorVerdict.REVIEW
+                claim.reason_codes = reasons
+                return
 
         # Otherwise accept
         reasons.append(ReasonCode.ACCEPT_SPECIALIST_LLM_AGREE if "llm" in claim.detectors

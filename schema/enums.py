@@ -48,6 +48,12 @@ class EpilepsyType(str, Enum):
     UNKNOWN = "unknown"
 
 
+# One wording for both readers (the model prompt v2 and the EpExtra rule).
+UNKNOWN_EPILEPSY_TYPE_DEFINITION = (
+    "the note says the patient has epilepsy but does not name its type "
+    "(focal, generalized, or combined focal and generalized)")
+
+
 class SeizureType(str, Enum):
     """ILAE 2017 basic seizure types."""
     FOCAL_AWARE = "focal_aware"
@@ -133,6 +139,34 @@ class IedType(str, Enum):
     SHARP_AND_SLOW = "sharp_and_slow"
     GENERALIZED_SPIKE_WAVE_3HZ = "generalized_spike_wave_3hz"
     OTHER = "other"
+
+
+class FrequencyBand(str, Enum):
+    """EEG frequency band (SACAR / ACNS). Filled from a Hz figure or a band word."""
+    DELTA = "delta"
+    THETA = "theta"
+    ALPHA = "alpha"
+    BETA = "beta"
+    GAMMA = "gamma"
+
+
+class IedRecurrence(str, Enum):
+    """How often the discharge occurs in the record (SACAR recurrence; ACNS quantity words)."""
+    RARE = "rare"
+    OCCASIONAL = "occasional"
+    INTERMITTENT = "intermittent"
+    FREQUENT = "frequent"
+    ABUNDANT = "abundant"
+    CONTINUOUS = "continuous"
+
+
+class IedDispersal(str, Enum):
+    """How widely the discharge is seen (SACAR dispersal). Not inferred from lobe alone."""
+    FOCAL = "focal"
+    REGIONAL = "regional"
+    MULTIFOCAL = "multifocal"
+    HEMISPHERIC = "hemispheric"
+    GENERALIZED = "generalized"
 
 
 class MriFinding(str, Enum):

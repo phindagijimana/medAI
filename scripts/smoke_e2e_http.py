@@ -131,7 +131,7 @@ def run():
 
     print("\n== /  and /extract/ui ==")
     r = c.get("/")
-    check("root redirects", r.status_code == 302 and "/extract/ui" in r.headers.get("Location", ""))
+    check("root redirects", r.status_code == 302 and "/leo/ui" in r.headers.get("Location", ""))
     r = c.get("/extract/ui")
     check("ui renders", r.status_code == 200 and b"MedAI-EPI" in r.data)
 

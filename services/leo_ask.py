@@ -17,6 +17,10 @@ Answers are constrained to the requested type (yes/no, number, one of a list, or
 schema-constrained decoding.  Long notes are split and the per-chunk answers combined: the answer
 given most often wins, a tie goes to the earliest chunk.  Not scored against gold; nothing here has
 a measured accuracy.
+
+Optional ``guideline_rag`` (``--ask-rag``) retrieves ILAE/ACNS paraphrases for guideline-judgment
+questions only (Kwan DRE, first-feature, LTM study vs drug).  It is never used by the extract
+readers.  The quote must still come from the note.
 """
 
 from __future__ import annotations
@@ -76,6 +80,7 @@ class AskResult:
     char_start: Optional[int] = None
     char_end: Optional[int] = None
     n_chunks: int = 1
+    rag_ids: tuple[str, ...] = ()
 
     def as_dict(self) -> dict:
         return dict(self.__dict__)
@@ -99,13 +104,22 @@ def answer_model(spec: AskSpec):
                         quote=(Optional[str], Field(default=None, max_length=240)))
 
 
-def build_ask_prompt(note: str, spec: AskSpec) -> str:
+def build_ask_prompt(note: str, spec: AskSpec, passages: Optional[list] = None) -> str:
     kinds = {
         "yes_no": 'Answer "yes", "no" or "not_documented".',
         "choice": f"Answer with exactly one of: {', '.join(spec.choices)}, or not_documented.",
         "number": "Answer with a number, or null if the note does not state one.",
         "text": "Answer in at most one short sentence, in the note's own words where possible.",
     }[spec.answer_type]
+    rag = ""
+    if passages:
+        from services.guideline_rag import format_passages
+        rag = (
+            "Guideline excerpts (for applying a published definition only). "
+            "They are not the patient's record. The quote MUST copy words from the Note, "
+            "never from the guideline.\n"
+            f"{format_passages(passages)}\n\n"
+        )
     return (
         "You answer one question about one clinical note about a patient with epilepsy.\n"
         "Use only what the note says. Do not guess, diagnose or infer from general knowledge.\n"
@@ -113,6 +127,7 @@ def build_ask_prompt(note: str, spec: AskSpec) -> str:
         'Every answer needs "quote": the exact words copied from the note that support it.\n'
         "Reply with ONE JSON object: "
         '{"answer": ..., "quote": ...} and nothing else.\n\n'
+        f"{rag}"
         f"Question: {spec.question}\n{kinds}\n\n"
         f'Note:\n"""\n{note}\n"""\nJSON:\n'
     )
@@ -131,18 +146,20 @@ class Asker:
     """Runs questions on a loaded backend (``Med42Backend`` or anything with ``generate_constrained``)."""
 
     def __init__(self, backend: Any, *, chunk_max_chars: int = 8000, overlap_chars: int = 400,
-                 max_new_tokens: int = 320):
+                 max_new_tokens: int = 320, guideline_rag: bool = False):
         self.backend = backend
         self.chunk_max_chars = chunk_max_chars
         self.overlap_chars = overlap_chars
         self.max_new_tokens = max_new_tokens
         self.model_name = getattr(backend, "model_name", "")
+        self.guideline_rag = bool(guideline_rag)
 
-    def _once(self, note: str, spec: AskSpec) -> tuple[Optional[str], str]:
+    def _once(self, note: str, spec: AskSpec, passages: Optional[list] = None) -> tuple[Optional[str], str]:
         from services.extract import DecodingConfig
         decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
                                   max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
-        raw, _ = self.backend.generate_constrained(build_ask_prompt(note, spec), answer_model(spec), decoding)
+        raw, _ = self.backend.generate_constrained(
+            build_ask_prompt(note, spec, passages=passages), answer_model(spec), decoding)
         from services.flat_extract import _json_obj
         obj = _json_obj(raw) or {}
         return _norm_answer(obj.get("answer")), (str(obj.get("quote") or "")).strip()
@@ -151,26 +168,32 @@ class Asker:
         from services.chain_llm import locate_quote
         if not note or not note.strip():
             return AskResult(spec.id, spec.question, None, "", "error", "empty_note")
+        passages: list = []
+        if self.guideline_rag:
+            from services.guideline_rag import retrieve
+            passages = retrieve(spec.question, spec_id=spec.id)
+        rag_ids = tuple(p.id for p in passages)
         try:
             if len(note) <= self.chunk_max_chars:
-                parts = [self._once(note, spec)]
+                parts = [self._once(note, spec, passages)]
             else:
                 from services.chunker import chunk_text
                 chunks = chunk_text(note, max_chars=self.chunk_max_chars, overlap_chars=self.overlap_chars, pack=True)
-                parts = [self._once(c.text, spec) for c in chunks]
+                parts = [self._once(c.text, spec, passages) for c in chunks]
         except Exception as e:                               # a model error must not stop a batch
             logger.exception("ask failed")
             return AskResult(spec.id, spec.question, None, "", "error", f"{type(e).__name__}: {e}")
         n = len(parts)
         stated = [(a, q) for a, q in parts if a and a.lower() != NOT_DOCUMENTED]
         if not stated:
-            return AskResult(spec.id, spec.question, NOT_DOCUMENTED, "", "not_documented", n_chunks=n)
+            return AskResult(spec.id, spec.question, NOT_DOCUMENTED, "", "not_documented", n_chunks=n,
+                             rag_ids=rag_ids)
         names = _drug_names(spec.question)
         if names:
             on_topic = [(a, q) for a, q in stated if _quote_on_topic(q, names, note)]
             if not on_topic:
                 return AskResult(spec.id, spec.question, stated[0][0], stated[0][1], "rejected", "quote_off_topic",
-                                 n_chunks=n)
+                                 n_chunks=n, rag_ids=rag_ids)
             stated = on_topic
         counts: dict[str, list] = {}
         for a, q in stated:
@@ -179,9 +202,9 @@ class Asker:
         span = locate_quote(quote, note) if quote else None
         if span is None:
             return AskResult(spec.id, spec.question, answer, quote, "rejected",
-                             "offsets_unresolved" if quote else "no_quote", n_chunks=n)
+                             "offsets_unresolved" if quote else "no_quote", n_chunks=n, rag_ids=rag_ids)
         return AskResult(spec.id, spec.question, answer, note[span[0]:span[1]], "needs_review", "llm_only",
-                         span[0], span[1], n)
+                         span[0], span[1], n, rag_ids)
 
 
 __all__ = ["Asker", "AskResult", "AskSpec", "answer_model", "build_ask_prompt", "ASK_PROMPT_VERSION", "NOT_DOCUMENTED"]

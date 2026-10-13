@@ -46,6 +46,8 @@ def main(argv=None) -> int:
     ap.add_argument("--offline", action="store_true")
     ap.add_argument("--out", default=OUT_DEFAULT)
     ap.add_argument("--mode", choices=("cpu", "gpu"), default="cpu")
+    ap.add_argument("--dump-misses", action="store_true",
+                    help="write <out>.misses.csv: lexical rank-1 misses (in top-5 vs not)")
     args = ap.parse_args(argv)
 
     from services.ontology_candidates import OntologyCandidateService
@@ -68,6 +70,7 @@ def main(argv=None) -> int:
         selector = OntologySelector(rt.backend)
 
     n = lex_hit = ceil_hit = ov_hit = sel_hit = fuzzy = exact_n = 0
+    misses: list[dict] = []
     by_letter: dict[str, list] = defaultdict(list)
     for g in gold:
         by_letter[g["pid"]].append(g)
@@ -82,8 +85,22 @@ def main(argv=None) -> int:
             cands = svc.get_candidates(g["mention"], g["field_type"], k=10)[:SELECT_K]
             scorable = [c for c in cands if c.system in ("HPO", "SNOMED", "RxNorm", "UMLS")]
             n += 1
+            gold_rank = next((i + 1 for i, c in enumerate(scorable) if is_hit(c, g["cui"])), None)
+            top = scorable[0] if scorable else None
             if scorable and is_hit(scorable[0], g["cui"]):
                 lex_hit += 1
+            else:
+                misses.append({
+                    "pid": g["pid"], "mention": g["mention"], "cui": g["cui"],
+                    "field_type": g["field_type"] or "", "entity": g.get("entity") or "",
+                    "bucket": "in_top5" if gold_rank else "not_in_top5",
+                    "gold_rank": gold_rank or "",
+                    "top_system": getattr(top, "system", "") if top else "",
+                    "top_id": getattr(top, "id", "") if top else "",
+                    "top_label": getattr(top, "label", "") if top else "",
+                    "top_score": round(float(getattr(top, "rank_score", 0) or 0), 3) if top else "",
+                    "top_match": getattr(top, "match_type", "") if top else "",
+                })
             if any(is_hit(c, g["cui"]) for c in scorable):
                 ceil_hit += 1
             if scorable:
@@ -143,6 +160,28 @@ def main(argv=None) -> int:
           "", f"Gate (pick-from-list > lexical rank-1): **{'pass' if report['gate_pass'] else 'fail'}**.",
           "Ceiling 0.74 vs lexical 0.56 is the room Arm E has. The CPU heuristic is not the model; `--mode gpu` is the real gate.", ""]
     Path(str(out) + ".md").write_text("\n".join(md), encoding="utf-8")
+    if args.dump_misses:
+        import csv
+        miss_path = Path(str(out) + ".misses.csv")
+        cols = ["pid", "mention", "cui", "field_type", "entity", "bucket", "gold_rank",
+                "top_system", "top_id", "top_label", "top_score", "top_match"]
+        with miss_path.open("w", encoding="utf-8", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=cols)
+            w.writeheader()
+            w.writerows(misses)
+        from collections import Counter
+        by_bucket = Counter(m["bucket"] for m in misses)
+        by_mention = Counter(m["mention"].lower() for m in misses)
+        by_top = Counter(m["top_label"].lower() for m in misses if m["top_label"])
+        extra = ["", f"Lexical rank-1 misses: {len(misses)} "
+                 f"(in top-5: {by_bucket.get('in_top5', 0)}; not in top-5: {by_bucket.get('not_in_top5', 0)}).",
+                 f"Wrote {miss_path}.", "",
+                 "Most frequent missed mentions:",
+                 *[f"- {k} ({v})" for k, v in by_mention.most_common(15)],
+                 "", "Most frequent wrong rank-1 labels:",
+                 *[f"- {k} ({v})" for k, v in by_top.most_common(15)], ""]
+        Path(str(out) + ".md").write_text("\n".join(md + extra), encoding="utf-8")
+        print("\n".join(extra))
     print("\n".join(md))
     return 0
 

@@ -3,7 +3,8 @@
 the 40 held-out F-S letters.  See ``services/flat_extract.py`` for why these
 replace the per-module M-prompts for the base model.
 
-One manifest per (letter, arm): ``prompt_id = flat_phenotype.<arm>.v1``.
+One manifest per (letter, arm): ``prompt_id = flat_phenotype.<arm>.<version>``
+(MEDAI_FLAT_PROMPT_VERSION, default v1; v2 adds an "unknown" epilepsy type).
 Resumable.  Arm L2 = k retrieved F-S training letters (MEDAI_FEWSHOT_K, default 3);
 the letter itself is excluded from its own examples, so development letters
 (MEDAI_PIDS=EA0081,...) can be run too.  MEDAI_CORPUS=synth: US-style synthetic evaluation notes (``services.synth_eval``; manifests keyed
@@ -104,7 +105,7 @@ def main() -> int:
         else:
             raw, n_tok = backend.generate(prompt, decoding)
         dur = time.time() - t0
-        fp = parse_flat(raw)
+        fp = parse_flat(raw, FLAT_PROMPT_VERSION)
         RunManifest(
             run_id=f"flat-{arm}-{pid}-{started.strftime('%H%M%S')}",
             started_at=started.isoformat(),

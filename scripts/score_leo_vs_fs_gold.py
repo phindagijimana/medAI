@@ -45,6 +45,10 @@ from scripts.score_llm_arms_vs_fs_gold import (  # noqa: E402
     _f1, _load_fs_gold_for_doc, _pred_current_asms, _pred_ev_value,
     _pred_seizfreq, _score_multiset, _score_scalar,
 )
+from services.seizure_class import ONSET_CLASS_PATH, onset_class  # noqa: E402
+from services.seizure_free import (  # noqa: E402
+    LAST_SEIZURE_PATH, SEIZURE_FREE_PATH, date_matches, seizure_free_value,
+)
 
 FS_GOLD_DIR = REPO / "data" / "fonferko_shadrach_2024" / "zenodo_8356494" / "Json"
 FS_TEXT_DIR = (REPO / "data" / "fonferko_shadrach_2024" / "zenodo_8381080"
@@ -64,7 +68,15 @@ SYSTEMS = ["llm", "specialist", "leo_auto", "leo_review"]
 # Why: the gold type is a keyword rule over the diagnosis text and defaults to "unknown" when the
 # text names no type (plain "epilepsy"): 25 of 38 held-out letters.  The base-model prompt has no
 # "unknown" value, so the native view caps every LLM arm.
-EXTRA_FIELDS = ["epilepsy_type|typed", "epilepsy_type|abstain"]
+#   predominant_seizure_type|class  onset class only (focal / generalized / unknown onset), the level Fang et al.
+#   2025 scored; LEO systems read the fused seizure_onset_class claim (services.seizure_class).
+#   seizure_free  letter-level: gold true when every non-negated SeizureFrequency entity has 0 seizures, false when
+#   any has a positive or unspecified-but-present count; LEO systems read the fused seizure_free claim.
+#   date_of_last_seizure  gold = YearDate(-MonthDate) of "0 seizures since <date>" entities (one per seizure
+#   type); a predicted date is right if it matches any of them at the gold's precision (services.seizure_free).
+#   Like the other scalars, only letters with a gold date are scored.
+EXTRA_FIELDS = ["epilepsy_type|typed", "epilepsy_type|abstain", "predominant_seizure_type|class",
+                "seizure_free", "date_of_last_seizure"]
 
 
 # The arm scorer's gold normaliser emits three seizure-type labels that are not
@@ -152,7 +164,10 @@ def native_from_module_dicts(pheno: Optional[dict]) -> dict:
         "seizure_frequency.count_max": sf["count_max"],
         "epilepsy_type": _pred_ev_value(cs, "epilepsy_type") if cs else None,
         "predominant_seizure_type": _pred_ev_value(cs, "predominant_seizure_type") if cs else None,
+        "seizure_onset_class": onset_class(_pred_ev_value(cs, "predominant_seizure_type")) if cs else None,
         "age_at_onset_years": _pred_ev_value(cs, "age_at_onset_years") if cs else None,
+        "seizure_free": seizure_free_value((cs.get("seizure_frequency") or {}).get("value")) if cs else None,
+        "date_of_last_seizure": None,
     }
 
 
@@ -192,13 +207,17 @@ def native_from_claims(claims: list, verdicts: set[str],
             if "seizure_frequency" not in picked or rank[v] < picked["seizure_frequency"][0]:
                 picked["seizure_frequency"] = (rank[v], cand)
         elif fp in ("clinical_seizure.epilepsy_type", "clinical_seizure.predominant_seizure_type",
-                    "clinical_seizure.age_at_onset_years"):
+                    "clinical_seizure.age_at_onset_years", ONSET_CLASS_PATH, SEIZURE_FREE_PATH,
+                    LAST_SEIZURE_PATH):
             key = fp.split(".", 1)[1]
             if key not in picked or rank[v] < picked[key][0]:
                 picked[key] = (rank[v], val)
-    for key in ("epilepsy_type", "predominant_seizure_type", "age_at_onset_years"):
+    for key in ("epilepsy_type", "predominant_seizure_type", "age_at_onset_years", "seizure_onset_class",
+                "seizure_free", "date_of_last_seizure"):
         if key in picked:
             out[key] = picked[key][1]
+    if out.get("seizure_onset_class") is None:
+        out["seizure_onset_class"] = onset_class(out.get("predominant_seizure_type"))
     if "seizure_frequency" in picked:
         out.update(picked["seizure_frequency"][1])
     return out
@@ -224,6 +243,9 @@ def score_doc(pred: dict, gold: dict) -> dict[str, tuple[int, int, int]]:
     put("epilepsy_type", _score_scalar(pred.get("epilepsy_type"), gold.get("epilepsy_type")))
     put("predominant_seizure_type",
         _score_scalar(pred.get("predominant_seizure_type"), gold.get("predominant_seizure_type")))
+    if gold.get("predominant_seizure_type") is not None:
+        put("predominant_seizure_type|class",
+            _score_scalar(pred.get("seizure_onset_class"), onset_class(gold.get("predominant_seizure_type"))))
     g_et, p_et = gold.get("epilepsy_type"), pred.get("epilepsy_type")
     if g_et is not None:
         put("epilepsy_type|abstain", _score_scalar(p_et if p_et is not None else "unknown", g_et))
@@ -231,7 +253,35 @@ def score_doc(pred: dict, gold: dict) -> dict[str, tuple[int, int, int]]:
             put("epilepsy_type|typed", _score_scalar(None if p_et == "unknown" else p_et, g_et))
     put("age_at_onset_years",
         _score_scalar(pred.get("age_at_onset_years"), gold.get("age_at_onset_years"), tolerance=1.0))
+    if gold.get("seizure_free") is not None:
+        put("seizure_free", _score_scalar(pred.get("seizure_free"), gold["seizure_free"]))
+    g_dates, p_date = gold.get("last_seizure_dates") or [], pred.get("date_of_last_seizure")
+    if g_dates:
+        hit = p_date is not None and any(date_matches(str(p_date), g) for g in g_dates)
+        put("date_of_last_seizure", (int(hit), int(p_date is not None and not hit), int(not hit)))
     return res
+
+
+def fs_seizure_free_gold(doc_id: str) -> tuple[Optional[bool], list[str]]:
+    """(letter is seizure free, dates of \"0 seizures since\") from the F-S SeizureFrequency entities."""
+    f = FS_GOLD_DIR / f"{doc_id}.json"
+    if not f.exists():
+        return None, []
+    zero = positive = False
+    dates: list[str] = []
+    for ent in json.loads(f.read_text(encoding="utf-8")):
+        a = ent.get("attributes") or {}
+        if ent.get("entity") != "SeizureFrequency" or (a.get("Negation") or "").lower() == "negated":
+            continue
+        n = a.get("NumberOfSeizures")
+        if n == "0":
+            zero = True
+            if a.get("TimeSince_or_TimeOfEvent") == "Since" and a.get("YearDate"):
+                m = a.get("MonthDate")
+                dates.append(a["YearDate"] + (f"-{int(m):02d}" if m and str(m).isdigit() else ""))
+        elif n or a.get("LowerNumberOfSeizures") or a.get("FrequencyChange"):
+            positive = True
+    return (False if positive else (True if zero else None)), dates
 
 
 def micro(per_doc: list[dict[str, tuple[int, int, int]]], idx: Optional[list[int]] = None):
@@ -260,28 +310,46 @@ def per_field(per_doc):
 
 def bootstrap(per_doc_by_sys: dict[str, list], pairs: list[tuple[str, str]],
               n: int = 2000, seed: int = 0) -> dict:
-    """Doc-level bootstrap: CI per system micro-F1 and paired differences."""
+    """Doc-level bootstrap: CI per system micro-P/R/F1 and paired differences.
+
+    ``diff`` remains F1 (existing callers). ``diff_p`` / ``diff_r`` are C1 / C3.
+    """
     rng = random.Random(seed)
     m = len(next(iter(per_doc_by_sys.values())))
+    ps = {s: [] for s in per_doc_by_sys}
+    rs = {s: [] for s in per_doc_by_sys}
     f1s = {s: [] for s in per_doc_by_sys}
     diffs = {p: [] for p in pairs}
+    diffs_p = {p: [] for p in pairs}
+    diffs_r = {p: [] for p in pairs}
     for _ in range(n):
         idx = [rng.randrange(m) for _ in range(m)]
-        cur = {s: micro(pd, idx)[2] for s, pd in per_doc_by_sys.items()}
-        for s, v in cur.items():
-            f1s[s].append(v)
+        cur = {s: micro(pd, idx) for s, pd in per_doc_by_sys.items()}
+        for s, (p, r, f1) in cur.items():
+            ps[s].append(p)
+            rs[s].append(r)
+            f1s[s].append(f1)
         for a, b in pairs:
-            diffs[(a, b)].append(cur[a] - cur[b])
+            diffs[(a, b)].append(cur[a][2] - cur[b][2])
+            diffs_p[(a, b)].append(cur[a][0] - cur[b][0])
+            diffs_r[(a, b)].append(cur[a][1] - cur[b][1])
 
     def ci(xs):
         xs = sorted(xs)
         return xs[int(0.025 * len(xs))], xs[min(len(xs) - 1, int(0.975 * len(xs)))]
 
+    def pack(d):
+        return {f"{a}-{b}": {"mean": sum(v) / len(v), "ci": ci(v),
+                             "p_le_0": sum(1 for x in v if x <= 0) / len(v)}
+                for (a, b), v in d.items()}
+
     return {
+        "p_ci": {s: ci(v) for s, v in ps.items()},
+        "r_ci": {s: ci(v) for s, v in rs.items()},
         "f1_ci": {s: ci(v) for s, v in f1s.items()},
-        "diff": {f"{a}-{b}": {"mean": sum(v) / len(v), "ci": ci(v),
-                              "p_le_0": sum(1 for x in v if x <= 0) / len(v)}
-                 for (a, b), v in diffs.items()},
+        "diff": pack(diffs),
+        "diff_p": pack(diffs_p),
+        "diff_r": pack(diffs_r),
     }
 
 
@@ -405,6 +473,9 @@ def main(argv=None) -> int:
                     help="rescue drugs do not count as current ASMs (default: they do, as in the F-S gold)")
     ap.add_argument("--no-ground", action="store_true",
                     help="do not locate spans for LLM-only values (reproduces the leo-v0.2 numbers)")
+    ap.add_argument("--quote-entail", action="store_true",
+                    help="opt-in: ACCEPT → REVIEW when the quote's sentence does not assert the cell "
+                         "(default off; D22). Does not overwrite headline files unless --out is set.")
     args = ap.parse_args(argv)
     global RESCUE_AS_CURRENT
     if args.maintenance_only:
@@ -419,6 +490,8 @@ def main(argv=None) -> int:
         g["current_asms"] = [canon_drug(x) for x in g.get("current_asms") or []]
         st = g.get("predominant_seizure_type")
         g["predominant_seizure_type"] = GOLD_SEIZURE_TYPE_TO_ENUM.get(st, st)
+    for p in pids:
+        gold[p]["seizure_free"], gold[p]["last_seizure_dates"] = fs_seizure_free_gold(p)
     texts = {p: (FS_TEXT_DIR / f"{p}.txt").read_text(encoding="utf-8") for p in pids}
 
     base = ChainPipeline()
@@ -445,6 +518,7 @@ def main(argv=None) -> int:
             candidate_service=base._candidate_service, llm_reasoner=reasoner,
         )
         pipe.cfg.ground_llm_values = not args.no_ground
+        pipe.cfg.quote_entail = bool(args.quote_entail)
         pipe.cfg.disagree_primary = {
             _CLAIM_PATH.get(f, f): "llm" for f in args.disagree_llm.split(",") if f}
         per_doc: dict[str, list] = {s: [] for s in SYSTEMS}

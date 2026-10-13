@@ -98,7 +98,7 @@ def _vote(values: list):
 def aggregate(preds: list[dict]) -> dict:
     """Patient prediction from per-note predictions given in visit order."""
     out: dict = {"current_asms": sorted({d for p in preds for d in p.get("current_asms") or []})}
-    for k in ("epilepsy_type", "predominant_seizure_type", "age_at_onset_years"):
+    for k in ("epilepsy_type", "predominant_seizure_type", "seizure_onset_class", "age_at_onset_years"):
         out[k] = _vote([p.get(k) for p in preds])
     freq_keys = ("seizure_frequency.period", "seizure_frequency.count_min", "seizure_frequency.count_max")
     triples = [tuple(p.get(k) for k in freq_keys) for p in preds]

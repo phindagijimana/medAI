@@ -31,12 +31,18 @@ Semantics captured
    over spike, sharp wave, spike-and-wave, polyspike, 3-Hz spike-wave,
    generalised spike-wave.
 3. Localisation of each IED: nearest lobar word ± 80 chars; laterality ± 80
-   chars; dominant Hz within ± 30 chars.
+   chars; dominant Hz within ± 30 chars. If no word gives the lobe or side,
+   scalp electrode names in the same window do ("maximal at T8" → right
+   temporal; ``rules/eeg_electrodes.py``). Frequency band, recurrence and
+   dispersal come from the same window (``rules/eeg_attributes.py``).
 4. ``ied_present``: True iff any positive IED detected; False iff an
    explicit negation ("no epileptiform discharges").
 5. Sentence context: EEG-related keyword must appear in a nearby sentence
    (EEG, video-EEG, ambulatory EEG, background rhythm).
 6. ConText — negated → skip IED; family → skip.
+7. EEG reports (TUH-style headers): findings from description / impression
+   only, not history or the introduction (``rules/eeg_sections.py``). Clinic
+   letters have no those headers and are unchanged.
 
 Cite: Fonferko-Shadrach et al. 2019; 2024. ACNS EEG terminology (Hirsch 2013).
 """
@@ -47,6 +53,9 @@ import re
 from typing import Any, Optional
 
 from rules.base_rule import BaseFieldRule
+from rules.eeg_attributes import ied_attributes
+from rules.eeg_electrodes import electrode_location
+from rules.eeg_sections import in_finding_section
 from schema.enums import (
     Certainty,
     EegBackground,
@@ -66,9 +75,9 @@ from services.medcat_extractor import LinkedEntity
 
 _EEG_CONTEXT_RE = re.compile(
     r"\bEEG\b|electroencephalogr|video[- ]?EEG|ambulatory\s+EEG|"
-    r"scalp\s+EEG|routine\s+EEG|prolonged\s+EEG|"
+    r"scalp\s+EEG|routine\s+EEG|prolonged\s+EEG|\bLTM\b|\bcEEG\b|"
     r"posterior\s+dominant\s+rhythm|background\s+rhythm|"
-    r"epileptiform\s+discharg|interictal",
+    r"epileptiform\s+discharg|interictal|periodic\s+discharges?",
     re.IGNORECASE,
 )
 
@@ -101,6 +110,14 @@ _IED_FALLBACK: list[tuple[re.Pattern[str], IedType]] = [
                 re.IGNORECASE), IedType.SPIKE_AND_WAVE),
     (re.compile(r"sharp[- ]and[- ]slow", re.IGNORECASE), IedType.SHARP_AND_SLOW),
     (re.compile(r"sharp\s+waves?", re.IGNORECASE), IedType.SHARP_WAVE),
+    # ACNS 2012/2013 critical-care terms (Hirsch et al.): LPDs replace PLEDs;
+    # schema has no LPD enum, so they count as an IED of type other.
+    (re.compile(
+        r"\bLPDs?\b|lateralized\s+periodic\s+discharges?|"
+        r"\bPLEDs?\b|periodic\s+lateralized\s+epileptiform|"
+        r"\bGPDs?\b|generalized\s+periodic\s+discharges?|"
+        r"\bGPEDs?\b|BiPDs?|BIPLEDs?",
+        re.IGNORECASE), IedType.OTHER),
     (re.compile(r"(?<!poly)(?<![- ])\bspikes?\b(?![- ]?(?:and[- ]?wave|wave))",
                 re.IGNORECASE), IedType.SPIKE),
 ]
@@ -142,6 +159,33 @@ def _preceded_by_neg(text: str, start: int, back: int = 30) -> bool:
     return bool(_NEG_RE.search(text[max(0, start - back):start]))
 
 
+_SENT_NEG_RE = re.compile(
+    r"\b(?:no|without|absent|never|not|negative\s+for)\b", re.IGNORECASE)
+_SENT_CONJ_RE = re.compile(r"\b(?:but|however|although|except)\b", re.IGNORECASE)
+
+
+def _ied_sentence_span(text: str, start: int, end: int) -> tuple[int, int]:
+    cuts = [text.rfind(c, 0, start) for c in (".", "\n", ";", "!")]
+    left = max(cuts) + 1
+    rights = [i for i in (text.find(c, end) for c in (".", "\n", ";", "!")) if i != -1]
+    right = min(rights) if rights else len(text)
+    return left, right
+
+
+def _sentence_negates_ied(text: str, start: int, end: int) -> bool:
+    """Skip IEDs under a same-sentence 'no … LPDs/spikes' list (Hirsch terms sit far from 'no')."""
+    left, _right = _ied_sentence_span(text, start, end)
+    pre = text[left:start]
+    last = None
+    for m in _SENT_NEG_RE.finditer(pre):
+        last = m
+    if last is None:
+        return False
+    if _SENT_CONJ_RE.search(pre[last.end():]):
+        return False
+    return True
+
+
 def _nearest(text: str, start: int, end: int, word_map: dict, window: int = 80):
     ctx_start = max(0, start - window)
     ctx_end = min(len(text), end + window)
@@ -154,6 +198,22 @@ def _nearest(text: str, start: int, end: int, word_map: dict, window: int = 80):
         return None
     hits.sort()
     return hits[0][1]
+
+
+def _location(text: str, start: int, end: int, window: int = 80):
+    """Side and lobe from location words; electrode names fill what the words leave empty.
+
+    On a generalized discharge the electrodes give its predominance, not a focus, so they
+    never add a lobe there ("generalized spike-and-wave, bifrontal at Fp1/Fp2").
+    """
+    lat = _nearest(text, start, end, _LATERALITY_MAP, window)
+    lobe = _nearest(text, start, end, _LOBE_MAP, window)
+    if lat is None or lobe is None:
+        e_lat, e_lobe = electrode_location(text, start, end, window)
+        lat = lat or e_lat
+        if lat != Laterality.DIFFUSE:
+            lobe = lobe or e_lobe
+    return lat, lobe
 
 
 def _eeg_context_present(sentence: str, doc_text: str) -> bool:
@@ -179,6 +239,8 @@ class EegBackgroundRule(BaseFieldRule):
                 continue
             if not _eeg_context_present(e.sentence_text, getattr(doc, "text", "")):
                 continue
+            if not in_finding_section(getattr(doc, "text", "") or "", e.char_start, e.char_end):
+                continue
             return self._make_evidence(value, e, meta)
 
         # Fallback regex.
@@ -186,6 +248,8 @@ class EegBackgroundRule(BaseFieldRule):
         for pat, value in _BACKGROUND_FALLBACK:
             m = pat.search(text)
             if not m:
+                continue
+            if not in_finding_section(text, m.start(), m.end()):
                 continue
             window = text[max(0, m.start() - 200):min(len(text), m.end() + 200)]
             if not _EEG_CONTEXT_RE.search(window):
@@ -218,14 +282,17 @@ def _collect_ieds(entities, doc):
             continue
         if e.is_negated or e.is_family:
             continue
+        if _sentence_negates_ied(text, e.char_start, e.char_end):
+            continue
+        if not in_finding_section(text, e.char_start, e.char_end):
+            continue
         if not _eeg_context_present(e.sentence_text, text):
             continue
         try:
             ied_type = IedType(e.enum_value)
         except ValueError:
             continue
-        lat = _nearest(text, e.char_start, e.char_end, _LATERALITY_MAP)
-        lobe = _nearest(text, e.char_start, e.char_end, _LOBE_MAP)
+        lat, lobe = _location(text, e.char_start, e.char_end)
         hz = None
         hz_m = _HZ_RE.search(text[max(0, e.char_start - 30):e.char_end + 30])
         if hz_m:
@@ -248,13 +315,14 @@ def _collect_ieds(entities, doc):
     # Fallback regex sweep.
     for pat, ied_type in _IED_FALLBACK:
         for m in pat.finditer(text):
-            if _preceded_by_neg(text, m.start()):
+            if _preceded_by_neg(text, m.start()) or _sentence_negates_ied(text, m.start(), m.end()):
+                continue
+            if not in_finding_section(text, m.start(), m.end()):
                 continue
             window = text[max(0, m.start() - 200):min(len(text), m.end() + 200)]
             if not _EEG_CONTEXT_RE.search(window):
                 continue
-            lat = _nearest(text, m.start(), m.end(), _LATERALITY_MAP)
-            lobe = _nearest(text, m.start(), m.end(), _LOBE_MAP)
+            lat, lobe = _location(text, m.start(), m.end())
             hz = None
             hz_m = _HZ_RE.search(text[max(0, m.start() - 30):m.end() + 30])
             if hz_m:
@@ -298,10 +366,11 @@ class IedPresentRule(BaseFieldRule):
         # Explicit negation.
         m = re.search(
             r"no\s+(?:epileptiform\s+discharg(?:es)?|interictal\s+"
-            r"epileptiform\s+activity|spikes?|sharp\s+waves?)",
+            r"epileptiform\s+activity|spikes?|sharp\s+waves?|"
+            r"LPDs?|PLEDs?|GPDs?|GPEDs?|BiPDs?|BIPLEDs?)",
             text, re.IGNORECASE,
         )
-        if m and _EEG_CONTEXT_RE.search(
+        if m and in_finding_section(text, m.start(), m.end()) and _EEG_CONTEXT_RE.search(
                 text[max(0, m.start() - 200):min(len(text), m.end() + 200)]):
             return Evidence[bool](
                 value=False,
@@ -324,13 +393,18 @@ class IedFindingsRule(BaseFieldRule):
         hits = _collect_ieds(entities, doc)
         if not hits:
             return None
+        text = getattr(doc, "text", "") or ""
         out: list[Evidence] = []
         for ied_type, cs, ce, quote, lat, lobe, hz, is_hyp, is_hist in hits:
+            band, rec, disp = ied_attributes(text, cs, ce, hz)
             finding = IedFinding(
                 ied_type=ied_type,
                 localization=lobe,
                 laterality=lat,
                 dominant_frequency_hz=hz,
+                frequency_band=band,
+                recurrence=rec,
+                dispersal=disp,
             )
             certainty = Certainty.POSSIBLE if is_hyp else Certainty.DEFINITE
             temporal = (TemporalStatus.HISTORICAL if is_hist

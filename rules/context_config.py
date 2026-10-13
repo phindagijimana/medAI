@@ -101,6 +101,17 @@ _US_ADDITIONS: list[tuple[str, str, str, dict[str, str]]] = [
     ("no longer on",           "HISTORICAL",        "FORWARD",  {"source": "phase8-us-clinical"}),
     ("stopped",                "HISTORICAL",        "FORWARD",  {"source": "phase8-us-clinical"}),
     ("discontinued",           "HISTORICAL",        "FORWARD",  {"source": "phase8-us-clinical"}),
+    # i2b2 / ConText leftover: discontinued or planned, not current
+    # (Uzuner et al. 2010; Chapman NegEx 2001 lineage). "home meds" stay
+    # current outpatient — do not add as HISTORICAL.
+    ("d/c'd",                  "HISTORICAL",        "FORWARD",  {"source": "i2b2-uzuner-2010"}),
+    ("dc'd",                   "HISTORICAL",        "FORWARD",  {"source": "i2b2-uzuner-2010"}),
+    ("d/ced",                  "HISTORICAL",        "FORWARD",  {"source": "i2b2-uzuner-2010"}),
+    ("was d/c'd",              "HISTORICAL",        "BACKWARD", {"source": "i2b2-uzuner-2010"}),
+    ("was dc'd",               "HISTORICAL",        "BACKWARD", {"source": "i2b2-uzuner-2010"}),
+    ("will start",             "HYPOTHETICAL",      "FORWARD",  {"source": "i2b2-uzuner-2010"}),
+    ("will begin",             "HYPOTHETICAL",      "FORWARD",  {"source": "i2b2-uzuner-2010"}),
+    ("plan to start",          "HYPOTHETICAL",      "FORWARD",  {"source": "i2b2-uzuner-2010"}),
     ("she stopped",            "HISTORICAL",        "FORWARD",  {"source": "phase8-us-clinical"}),
     ("he stopped",             "HISTORICAL",        "FORWARD",  {"source": "phase8-us-clinical"}),
     ("years ago",              "HISTORICAL",        "BACKWARD", {"source": "phase8-us-clinical"}),

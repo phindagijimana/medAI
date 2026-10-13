@@ -153,6 +153,25 @@ def test_kepra_and_zobisamide_synonyms():
     assert "zonisamide" in zobi.label.lower()
 
 
+def test_gtc_outranks_clonic_parent():
+    svc = OntologyCandidateService()
+    top = _top(svc, "generalised tonic clonic seizures", "clinical_seizure.predominant_seizure_type")
+    assert "clonic seizure" != top.label.lower()
+    assert "tonic" in top.label.lower() and "clonic" in top.label.lower()
+
+
+def test_sodium_valproate_keeps_valproic_acid_cui():
+    svc = OntologyCandidateService(use_releases=False)
+    top = _top(svc, "sodium valproate", "medication.current_asms")
+    assert top.id == "C0037567" or "valpro" in top.label.lower()
+
+
+def test_jme_abbreviation_retrieves_the_syndrome():
+    svc = OntologyCandidateService(use_releases=False)
+    top = _top(svc, "JME", "clinical_seizure.epilepsy_type")
+    assert top.id == "C0270853" or "juvenile myoclonic" in top.label.lower()
+
+
 def test_etiology_searches_comorbidity_dict():
     svc = OntologyCandidateService(use_releases=False)
     top = _top(svc, "psychogenic non-epileptic seizures", "clinical_seizure.etiology_details_text")
@@ -163,6 +182,10 @@ def test_extract_coded_paths_are_routed():
     from services.leo_catalog import EXTRACT
     from services.ontology_candidates import _FIELD_ONTOLOGY_ROUTE
     skip = {
+        "clinical_seizure.seizure_onset_class",
+        "clinical_seizure.seizure_free",
+        "clinical_seizure.date_of_last_seizure",
+        "clinical_seizure.pnes_status",
         "clinical_seizure.age_at_onset_years",
         "clinical_seizure.seizure_frequency",
         "clinical_seizure.semiology_text",

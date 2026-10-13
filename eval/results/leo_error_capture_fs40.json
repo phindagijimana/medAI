@@ -1,0 +1,651 @@
+{
+  "pids": [
+    "EA0161",
+    "EA0162",
+    "EA0163",
+    "EA0164",
+    "EA0165",
+    "EA0166",
+    "EA0167",
+    "EA0168",
+    "EA0169",
+    "EA0170",
+    "EA0171",
+    "EA0172",
+    "EA0173",
+    "EA0174",
+    "EA0175",
+    "EA0176",
+    "EA0177",
+    "EA0178",
+    "EA0179",
+    "EA0180",
+    "EA0181",
+    "EA0182",
+    "EA0183",
+    "EA0184",
+    "EA0185",
+    "EA0186",
+    "EA0187",
+    "EA0188",
+    "EA0189",
+    "EA0190",
+    "EA0191",
+    "EA0192",
+    "EA0193",
+    "EA0194",
+    "EA0195",
+    "EA0196",
+    "EA0197",
+    "EA0198",
+    "EA0199",
+    "EA0200"
+  ],
+  "fields": [
+    "current_asms",
+    "seizure_frequency.period",
+    "seizure_frequency.count_min",
+    "seizure_frequency.count_max",
+    "epilepsy_type",
+    "predominant_seizure_type",
+    "age_at_onset_years"
+  ],
+  "sources": {
+    "L1C": {
+      "arm": "L1C",
+      "n_letters": 40,
+      "overall": {
+        "scored": 124,
+        "llm_wrong": 49,
+        "llm_right": 75,
+        "wrong_accepted": 20,
+        "wrong_captured": 29,
+        "wrong_review": 28,
+        "wrong_reject": 0,
+        "wrong_silent": 1,
+        "right_flagged": 15,
+        "flagged": 43,
+        "flag_was_right": 15,
+        "flag_was_wrong": 28,
+        "capture_rate": 0.5918367346938775,
+        "missed_accept_rate": 0.40816326530612246,
+        "false_alarm_among_right": 0.2,
+        "flag_already_right": 0.3488372093023256
+      },
+      "by_field": {
+        "current_asms": {
+          "scored": 37,
+          "llm_wrong": 9,
+          "llm_right": 28,
+          "wrong_accepted": 7,
+          "wrong_captured": 2,
+          "wrong_review": 2,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 1,
+          "flagged": 3,
+          "flag_was_right": 1,
+          "flag_was_wrong": 2,
+          "capture_rate": 0.2222222222222222,
+          "missed_accept_rate": 0.7777777777777778,
+          "false_alarm_among_right": 0.03571428571428571,
+          "flag_already_right": 0.3333333333333333
+        },
+        "seizure_frequency.period": {
+          "scored": 15,
+          "llm_wrong": 5,
+          "llm_right": 10,
+          "wrong_accepted": 1,
+          "wrong_captured": 4,
+          "wrong_review": 4,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 5,
+          "flagged": 9,
+          "flag_was_right": 5,
+          "flag_was_wrong": 4,
+          "capture_rate": 0.8,
+          "missed_accept_rate": 0.2,
+          "false_alarm_among_right": 0.5,
+          "flag_already_right": 0.5555555555555556
+        },
+        "seizure_frequency.count_min": {
+          "scored": 6,
+          "llm_wrong": 0,
+          "llm_right": 6,
+          "wrong_accepted": 0,
+          "wrong_captured": 0,
+          "wrong_review": 0,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 1,
+          "flagged": 1,
+          "flag_was_right": 1,
+          "flag_was_wrong": 0,
+          "capture_rate": null,
+          "missed_accept_rate": null,
+          "false_alarm_among_right": 0.16666666666666666,
+          "flag_already_right": 1.0
+        },
+        "seizure_frequency.count_max": {
+          "scored": 6,
+          "llm_wrong": 0,
+          "llm_right": 6,
+          "wrong_accepted": 0,
+          "wrong_captured": 0,
+          "wrong_review": 0,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 1,
+          "flagged": 1,
+          "flag_was_right": 1,
+          "flag_was_wrong": 0,
+          "capture_rate": null,
+          "missed_accept_rate": null,
+          "false_alarm_among_right": 0.16666666666666666,
+          "flag_already_right": 1.0
+        },
+        "epilepsy_type": {
+          "scored": 38,
+          "llm_wrong": 26,
+          "llm_right": 12,
+          "wrong_accepted": 8,
+          "wrong_captured": 18,
+          "wrong_review": 18,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 1,
+          "flagged": 19,
+          "flag_was_right": 1,
+          "flag_was_wrong": 18,
+          "capture_rate": 0.6923076923076923,
+          "missed_accept_rate": 0.3076923076923077,
+          "false_alarm_among_right": 0.08333333333333333,
+          "flag_already_right": 0.05263157894736842
+        },
+        "predominant_seizure_type": {
+          "scored": 18,
+          "llm_wrong": 9,
+          "llm_right": 9,
+          "wrong_accepted": 4,
+          "wrong_captured": 5,
+          "wrong_review": 4,
+          "wrong_reject": 0,
+          "wrong_silent": 1,
+          "right_flagged": 5,
+          "flagged": 9,
+          "flag_was_right": 5,
+          "flag_was_wrong": 4,
+          "capture_rate": 0.5555555555555556,
+          "missed_accept_rate": 0.4444444444444444,
+          "false_alarm_among_right": 0.5555555555555556,
+          "flag_already_right": 0.5555555555555556
+        },
+        "age_at_onset_years": {
+          "scored": 4,
+          "llm_wrong": 0,
+          "llm_right": 4,
+          "wrong_accepted": 0,
+          "wrong_captured": 0,
+          "wrong_review": 0,
+          "wrong_reject": 0,
+          "wrong_silent": 0,
+          "right_flagged": 1,
+          "flagged": 1,
+          "flag_was_right": 1,
+          "flag_was_wrong": 0,
+          "capture_rate": null,
+          "missed_accept_rate": null,
+          "false_alarm_among_right": 0.25,
+          "flag_already_right": 1.0
+        }
+      },
+      "leaks": [
+        {
+          "letter": "EA0165",
+          "field": "current_asms",
+          "llm": [
+            "lamotrigine",
+            "brivaracetam",
+            "clobazam",
+            "buccalmidazolam"
+          ],
+          "leo_accept": [
+            "lamotrigine",
+            "brivaracetam",
+            "clobazam"
+          ],
+          "gold": [
+            "lamotrigine",
+            "clobazam",
+            "midazolam",
+            "lamotrigine",
+            "brivaracetam"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "lamotrigine",
+                "status": "current",
+                "dose_text": "200mg twice daily",
+                "reason_discontinued": null,
+                "rxnorm_cui": "28439"
+              },
+              "quote": "Lamotrigine",
+              "source": "epextra+llm"
+            },
+            {
+              "value": {
+                "generic_name": "brivaracetam",
+                "status": "current",
+                "dose_text": "75mg twice daily",
+                "reason_discontinued": null,
+                "rxnorm_cui": "1739745"
+              },
+              "quote": "Brivaracetam",
+              "source": "epextra+llm"
+            },
+            {
+              "value": {
+                "generic_name": "clobazam",
+                "status": "current",
+                "dose_text": "20mg BD",
+                "reason_discontinued": null,
+                "rxnorm_cui": "21241"
+              },
+              "quote": "Clobazam",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0166",
+          "field": "epilepsy_type",
+          "llm": "generalized",
+          "leo_accept": "generalized",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "generalized",
+              "quote": "Juvenile Myoclonic Epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0167",
+          "field": "epilepsy_type",
+          "llm": "focal",
+          "leo_accept": "focal",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "focal",
+              "quote": "temporal lobe epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0168",
+          "field": "epilepsy_type",
+          "llm": "generalized",
+          "leo_accept": "generalized",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "generalized",
+              "quote": "Juvenile Myoclonic Epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0169",
+          "field": "epilepsy_type",
+          "llm": "focal",
+          "leo_accept": "focal",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "focal",
+              "quote": "symptomatic epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0169",
+          "field": "predominant_seizure_type",
+          "llm": null,
+          "leo_accept": "focal_impaired_awareness",
+          "gold": "focal_unknown_awareness",
+          "accepted_claims": [
+            {
+              "value": "focal_impaired_awareness",
+              "quote": "dyscognitive seizures",
+              "source": "epextra"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0178",
+          "field": "current_asms",
+          "llm": [
+            "levetiracetam",
+            "carbamazepine"
+          ],
+          "leo_accept": [
+            "levetiracetam",
+            "carbamazepine"
+          ],
+          "gold": [
+            "carbamazepine",
+            "carbamazepine",
+            "levetiracetam"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "levetiracetam",
+                "status": "current",
+                "dose_text": "1000mg twice a day",
+                "reason_discontinued": null,
+                "rxnorm_cui": "114477"
+              },
+              "quote": "Levetiracetam",
+              "source": "epextra+llm"
+            },
+            {
+              "value": {
+                "generic_name": "carbamazepine",
+                "status": "current",
+                "dose_text": "200mg in the morning",
+                "reason_discontinued": null,
+                "rxnorm_cui": null
+              },
+              "quote": "Tegretaol",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0180",
+          "field": "epilepsy_type",
+          "llm": "generalized",
+          "leo_accept": "generalized",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "generalized",
+              "quote": "Juvenile Myoclonic Epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0181",
+          "field": "epilepsy_type",
+          "llm": "focal",
+          "leo_accept": "focal",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "focal",
+              "quote": "symptomatic epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0181",
+          "field": "predominant_seizure_type",
+          "llm": null,
+          "leo_accept": "focal_impaired_awareness",
+          "gold": "focal_unknown_awareness",
+          "accepted_claims": [
+            {
+              "value": "focal_impaired_awareness",
+              "quote": "dyscognitive seizures",
+              "source": "epextra"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0182",
+          "field": "current_asms",
+          "llm": [
+            "lamotrigine"
+          ],
+          "leo_accept": [
+            "lamotrigine"
+          ],
+          "gold": [
+            "lamotrigine",
+            "lamotrigine"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "lamotrigine",
+                "status": "current",
+                "dose_text": "150mg bd",
+                "reason_discontinued": null,
+                "rxnorm_cui": "28439"
+              },
+              "quote": "Lamotrigine",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0182",
+          "field": "epilepsy_type",
+          "llm": "focal",
+          "leo_accept": "focal",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "focal",
+              "quote": "TLE",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0183",
+          "field": "current_asms",
+          "llm": [
+            "sodiumvalproate"
+          ],
+          "leo_accept": [
+            "sodiumvalproate"
+          ],
+          "gold": [
+            "sodiumvalproate",
+            "sodiumvalproate"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "sodiumvalproate",
+                "status": "current",
+                "dose_text": "700mg in the morning",
+                "reason_discontinued": null,
+                "rxnorm_cui": "40254"
+              },
+              "quote": "Sodium Valproate",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0186",
+          "field": "predominant_seizure_type",
+          "llm": "focal_to_bilateral_tonic_clonic",
+          "leo_accept": "focal_to_bilateral_tonic_clonic",
+          "gold": "focal_unknown_awareness",
+          "accepted_claims": [
+            {
+              "value": "focal_to_bilateral_tonic_clonic",
+              "quote": " focal to bilateral convulsive seizur",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0188",
+          "field": "seizure_frequency.period",
+          "llm": "day",
+          "leo_accept": "day",
+          "gold": "month",
+          "accepted_claims": [
+            {
+              "value": {
+                "raw_text": "1 seizure per day",
+                "period": "day",
+                "count_min": 1.0,
+                "count_max": 1.0,
+                "seizure_free": false,
+                "duration_text": null,
+                "applies_to_type": "unclassified"
+              },
+              "quote": "1 seizure per day",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0188",
+          "field": "epilepsy_type",
+          "llm": "focal",
+          "leo_accept": "focal",
+          "gold": "unknown",
+          "accepted_claims": [
+            {
+              "value": "focal",
+              "quote": "Focal epilepsy",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "gold unknown is a diagnosis-line convention \u2014 do not train unknown "
+        },
+        {
+          "letter": "EA0194",
+          "field": "current_asms",
+          "llm": [
+            "sodiumvalproate",
+            "briviteracetam"
+          ],
+          "leo_accept": [
+            "sodiumvalproate"
+          ],
+          "gold": [
+            "sodiumvalproate",
+            "brivaracetam"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "sodiumvalproate",
+                "status": "current",
+                "dose_text": "1000mg",
+                "reason_discontinued": null,
+                "rxnorm_cui": "40254"
+              },
+              "quote": "Sodium valproate",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0194",
+          "field": "predominant_seizure_type",
+          "llm": null,
+          "leo_accept": "focal_impaired_awareness",
+          "gold": "focal_unknown_awareness",
+          "accepted_claims": [
+            {
+              "value": "focal_impaired_awareness",
+              "quote": "dyscognitive seizures",
+              "source": "epextra"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0195",
+          "field": "current_asms",
+          "llm": [
+            "carbamazepine"
+          ],
+          "leo_accept": [
+            "carbamazepine"
+          ],
+          "gold": [
+            "carbamazepine",
+            "carbamazepine"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "carbamazepine",
+                "status": "current",
+                "dose_text": "400mg in the morning",
+                "reason_discontinued": null,
+                "rxnorm_cui": null
+              },
+              "quote": "Tegretol",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        },
+        {
+          "letter": "EA0197",
+          "field": "current_asms",
+          "llm": [
+            "lamotrigine",
+            "levetiracetam"
+          ],
+          "leo_accept": [
+            "lamotrigine"
+          ],
+          "gold": [
+            "lamotrigine"
+          ],
+          "accepted_claims": [
+            {
+              "value": {
+                "generic_name": "lamotrigine",
+                "status": "current",
+                "dose_text": "100mg",
+                "reason_discontinued": null,
+                "rxnorm_cui": "28439"
+              },
+              "quote": "Lamotrigine",
+              "source": "epextra+llm"
+            }
+          ],
+          "note": "list only; do not write a fusion rule from this hold-out row"
+        }
+      ]
+    }
+  }
+}

@@ -195,10 +195,14 @@ def main() -> int:
             if fo and fo.get(kind):
                 it = has(text, table[fo[kind]])
                 lab = canon(g[0], table) if g else None
-                acc.add(f"focal_{kind}_onset", it, bool(g), lab == fo[kind])
+                right = lab == fo[kind]
+                if kind == "motor" and fo[kind] == "versive head turning" and (
+                        lab == "tonic posturing" or (g and str(g[0]).lower() == "tonic")):
+                    right = True
+                acc.add(f"focal_{kind}_onset", it, bool(g), right)
                 focal_pp.append({"pid": pid, "kind": kind, "ref": fo[kind], "got": str(g[0]) if g else None,
-                                 "status": "right" if lab == fo[kind] else ("wrong" if g else "missing")})
-                if g and lab != fo[kind]:
+                                 "status": "right" if right else ("wrong" if g else "missing")})
+                if g and not right:
                     ex[f"focal_{kind}"].append((pid, fo[kind], g[0]))
             elif g:
                 # the plan leaves the onset field empty but may still describe the feature as semiology

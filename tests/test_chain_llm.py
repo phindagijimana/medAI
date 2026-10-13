@@ -6,7 +6,7 @@ import pytest
 
 from schema.claim import ReasonCode, ValidatorVerdict
 from services.chain_llm import (
-    flatten, fuse, is_nullish, locate_quote, values_agree,
+    flatten, fuse, is_nullish, is_unknown_value, locate_quote, values_agree,
 )
 from services.chain_pipeline import ChainPipeline
 
@@ -96,6 +96,47 @@ def test_llm_nullish_value_is_not_a_dissent_or_a_claim():
     llm = flatten(pheno(clinical_seizure={"epilepsy_type": ev("unspecified", "epilepsy")}))
     f = fuse(spec, llm)
     assert f.specialist[0].status == "specialist_only" and f.llm_only == []
+
+
+def test_unknown_is_a_value_on_epilepsy_type():
+    assert is_unknown_value("clinical_seizure.epilepsy_type", "unknown")
+    assert not is_unknown_value("clinical_seizure.epilepsy_type", "focal")
+    spec = flatten(pheno(clinical_seizure={"epilepsy_type": ev("unknown", "epilepsy")}))
+    llm = flatten(pheno(clinical_seizure={"epilepsy_type": ev("unknown", "epilepsy")}))
+    f = fuse(spec, llm)
+    assert f.specialist[0].status == "agree"
+
+
+def test_unknown_plus_silent_is_review_not_accept():
+    """Development-letter rule: one reader unknown, the other silent → REVIEW. Not hold-out."""
+    note = "Assessment: 34 year old with epilepsy. Takes levetiracetam 500 mg twice daily."
+    spec = pheno(clinical_seizure={"epilepsy_type": ev("unknown", "epilepsy",
+                                                      char_start=note.index("epilepsy"),
+                                                      char_end=note.index("epilepsy") + 8)})
+    pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
+                         candidate_service=_NoCandidates(),
+                         llm_reasoner=lambda t, d, dd: pheno())
+    pipe.cfg.enable_preprocessing = False
+    stats, claims = pipe.extract(note, document_id="D1", return_claims=True)
+    et = next(c for c in claims if c.field_path == "clinical_seizure.epilepsy_type")
+    assert et.validator_verdict == ValidatorVerdict.REVIEW
+    assert ReasonCode.UNKNOWN_SILENT in et.reason_codes
+    assert stats.n_unknown_silent == 1
+
+
+def test_unknown_plus_silent_can_be_switched_off():
+    note = "Assessment: 34 year old with epilepsy. Takes levetiracetam 500 mg twice daily."
+    spec = pheno(clinical_seizure={"epilepsy_type": ev("unknown", "epilepsy",
+                                                      char_start=note.index("epilepsy"),
+                                                      char_end=note.index("epilepsy") + 8)})
+    pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
+                         candidate_service=_NoCandidates(),
+                         llm_reasoner=lambda t, d, dd: pheno())
+    pipe.cfg.enable_preprocessing = False
+    pipe.cfg.unknown_silent_review = False
+    _, claims = pipe.extract(note, document_id="D1", return_claims=True)
+    et = next(c for c in claims if c.field_path == "clinical_seizure.epilepsy_type")
+    assert ReasonCode.UNKNOWN_SILENT not in et.reason_codes
 
 
 # ── locate_quote ─────────────────────────────────────────────────────────
@@ -264,3 +305,58 @@ def test_disagree_primary_llm_swaps_value_and_keeps_alternative():
     c = next(c for c in claims if c.field_path == "clinical_seizure.age_at_onset_years")
     assert c.detectors == ["llm"] and float(c.value) == 34 and c.alternative in ("10", "10.0")
     assert c.validator_verdict == ValidatorVerdict.REVIEW
+
+
+def test_ltm_is_not_kept_as_a_drug():
+    note = NOTE + " If seizures persist, escalate to LTM."
+    llm = pheno(medication={"current_asms": [
+        ev({"generic_name": "ltm"}, "escalate to LTM"),
+    ]})
+    spec = pheno(
+        clinical_seizure={"epilepsy_type": ev("focal", "focal epilepsy")},
+        medication={"current_asms": [ev({"generic_name": "ltm"}, "escalate to LTM")]},
+    )
+    pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
+                         candidate_service=_NoCandidates(), llm_reasoner=lambda t, d, dd: llm)
+    pipe.cfg.enable_preprocessing = False
+    _, claims = pipe.extract(note, document_id="D1", return_claims=True)
+    meds = [c for c in claims if "medication" in c.field_path]
+    names = []
+    for c in meds:
+        v = c.value
+        names.append((v.get("generic_name") if isinstance(v, dict) else v) or "")
+    assert not any(str(n).lower() == "ltm" for n in names)
+
+
+def test_ied_silent_accepts_llm_only_ied_when_rules_silent():
+    note = "EEG showed left temporal sharp waves."
+    spec = pheno(clinical_seizure={"epilepsy_type": ev("focal", "focal epilepsy")})
+    llm = pheno(
+        clinical_seizure={"epilepsy_type": ev("focal", "focal epilepsy")},
+        eeg={"ied_present": ev(True, "sharp waves")},
+    )
+    pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
+                         candidate_service=_NoCandidates(), llm_reasoner=lambda t, d, dd: llm)
+    pipe.cfg.enable_preprocessing = False
+    pipe.cfg.llm_if_silent_accept = ("eeg.ied_present",)
+    _, claims = pipe.extract(note, document_id="D1", return_claims=True)
+    ied = next(c for c in claims if c.field_path == "eeg.ied_present")
+    assert ied.detectors == ["llm"]
+    assert ied.validator_verdict == ValidatorVerdict.ACCEPT
+    assert ReasonCode.LLM_ONLY not in ied.reason_codes
+
+
+def test_ied_silent_off_keeps_llm_only_ied_in_review():
+    note = "EEG showed left temporal sharp waves."
+    spec = pheno(clinical_seizure={"epilepsy_type": ev("focal", "focal epilepsy")})
+    llm = pheno(
+        clinical_seizure={"epilepsy_type": ev("focal", "focal epilepsy")},
+        eeg={"ied_present": ev(True, "sharp waves")},
+    )
+    pipe = ChainPipeline(assembler=_Assembler(spec), extractor=object(),
+                         candidate_service=_NoCandidates(), llm_reasoner=lambda t, d, dd: llm)
+    pipe.cfg.enable_preprocessing = False
+    _, claims = pipe.extract(note, document_id="D1", return_claims=True)
+    ied = next(c for c in claims if c.field_path == "eeg.ied_present")
+    assert ied.validator_verdict == ValidatorVerdict.REVIEW
+    assert ReasonCode.LLM_ONLY in ied.reason_codes

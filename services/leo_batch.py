@@ -17,6 +17,9 @@ Output (``write_outputs``)
           <out>.provenance.json      versions, settings, counts, input hash (no note text)
     xlsx  <out>.xlsx                 sheets "LEO" (as the csv), "Claims", "About" (settings and definitions)
 
+A pasted note uses the same files (``outputs_from_paste``): one row, ``note_id`` + ``text``, then
+``epilepsy_type``, ``epilepsy_type_status``, … — not the on-screen Phenotype/Value/Status table.
+
 The output holds verbatim note text (the evidence columns).  It is as sensitive as the input.
 """
 
@@ -158,6 +161,58 @@ def run_table(df: pd.DataFrame, rt: LeoRuntime, *, phenotypes: list[Phenotype], 
     return table, claims, prov
 
 
+def outputs_from_paste(*, text: str, doc_id: str, row: dict, claims: list[dict],
+                       asks_out: list[dict], phenotypes: list[Phenotype], asks: list[AskSpec],
+                       versions: dict, llm_used: bool, n_chunks: int = 1,
+                       include_review: bool = True, n_review: int | None = None,
+                       error: str = "") -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Same wide table as a one-row spreadsheet job, from a paste /extract result."""
+    base = pd.DataFrame([{"note_id": doc_id, "text": text}])
+    existing = set(base.columns)
+    pheno_cols = wide_columns(phenotypes)
+    ask_cols: list[str] = []
+    for a in asks:
+        ask_cols += [a.id, f"{a.id}_status", f"{a.id}_evidence", f"{a.id}_question"]
+    meta_cols = ["leo_doc_id", "leo_status", "leo_llm_used", "leo_n_chunks", "leo_n_claims", "leo_n_review"]
+    rename = {c: _unique(c, existing) for c in meta_cols + pheno_cols + ask_cols}
+    claims = list(claims or [])
+    if n_review is None:
+        n_review = sum(1 for c in claims if str(c.get("verdict") or "").lower() in ("review", "needs_review"))
+    leo_row = {rename["leo_doc_id"]: doc_id,
+               rename["leo_status"]: ("error: " + error) if error else "ok",
+               rename["leo_llm_used"]: llm_used, rename["leo_n_chunks"]: n_chunks,
+               rename["leo_n_claims"]: len(claims), rename["leo_n_review"]: n_review}
+    row = row or {}
+    for c in pheno_cols:
+        leo_row[rename[c]] = row.get(c, "")
+    by_id = {a.get("spec_id"): a for a in (asks_out or []) if isinstance(a, dict)}
+    for a in asks:
+        x = by_id.get(a.id)
+        leo_row[rename[a.id]] = _safe((x or {}).get("answer") or "")
+        leo_row[rename[f"{a.id}_status"]] = (x or {}).get("status", "")
+        leo_row[rename[f"{a.id}_evidence"]] = _safe((x or {}).get("quote", ""))
+        leo_row[rename[f"{a.id}_question"]] = a.question
+    leo = pd.DataFrame([leo_row], columns=[rename[c] for c in meta_cols + pheno_cols + ask_cols])
+    table = pd.concat([base, leo], axis=1)
+    claims_df = pd.DataFrame([{k: (c or {}).get(k, "") for k in CLAIM_COLUMNS} for c in claims],
+                             columns=CLAIM_COLUMNS)
+    t0 = datetime.now(timezone.utc)
+    prov = {
+        "tool": "LEO (MedAI-EPI)", "created_utc": t0.isoformat(timespec="seconds"),
+        "started_utc": t0.isoformat(timespec="seconds"), **versions,
+        "rows_requested": 1, "rows_processed": 1, "rows_error": int(bool(error)),
+        "rows_with_llm": int(bool(llm_used)), "include_review_values": include_review,
+        "phenotypes": [p.id for p in phenotypes],
+        "phenotypes_not_measured": [p.id for p in phenotypes if p.evidence != "measured"],
+        "questions": [{"id": a.id, "question": a.question, "type": a.answer_type} for a in asks],
+        "column_map": rename, "text_column": "text", "id_column": "note_id", "date_column": "",
+        "input": "paste",
+        "note": ("Rules only (no LLM): nothing was cross-checked, so every value is marked needs_review."
+                 if not llm_used else "LLM + specialist; verdicts follow docs/LEO_ROUTING_RULES.md."),
+    }
+    return table, claims_df, prov
+
+
 def input_hash(path: str | Path) -> str:
     p = Path(path)
     h = hashlib.sha256()
@@ -187,8 +242,14 @@ def _about_rows(prov: dict, phenotypes: list[Phenotype]) -> list[list[str]]:
               "Accuracy was tested on synthetic notes only (40 UK-style letters, 30 synthetic US-style patients), never on real "
               "clinical notes. Figures: docs/EVAL_PROTOCOL_LEO.md and the Evidence page of the app. 'measured' = accuracy tested "
               "against reference annotations; 'rules_only' = the specialist alone was scored on synthetic notes or F-S letters, no LLM; 'indirect' = only its effect on another field was tested; 'none' = not tested."]]
+    rows += [["", ""], ["What LEO does",
+              "Read a note, fill a phenotype table, and attach the note's own words, which reader said it (model, rules, or both), "
+              "whether a person should look, and an ontology id the model is not allowed to invent. Fusion flags disagreement; "
+              "it does not silently guess. The recorded value on a clash is the rules' (D17); the other reader is in _alternative."]]
     rows += [["", ""], ["Column suffixes", "_status: accepted | needs_review | not_found.  _evidence: the note's own words.  "
-             "_source: specialist, llm.  _why: reason codes when review is needed."],
+             "_source: specialist, llm.  _why: reason codes when review is needed.  "
+             "_alternative: the other reader's value when the two disagree.  "
+             "visit_summary: under 50 words from this note's key cells (not a new reader; [?]=needs review)."],
              ["Warning", "Evidence columns contain note text. Treat this file like the input notes."]]
     return rows
 
@@ -218,5 +279,5 @@ def write_outputs(table: pd.DataFrame, claims: pd.DataFrame, prov: dict, out: st
     return [p1, p2, p3]
 
 
-__all__ = ["read_table", "detect_columns", "run_table", "write_outputs", "default_output", "input_hash",
-           "INPUT_SUFFIXES", "TEXT_COLS", "ID_COLS", "DATE_COLS"]
+__all__ = ["read_table", "detect_columns", "run_table", "outputs_from_paste", "write_outputs",
+           "default_output", "input_hash", "INPUT_SUFFIXES", "TEXT_COLS", "ID_COLS", "DATE_COLS"]

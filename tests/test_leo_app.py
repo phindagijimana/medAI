@@ -64,7 +64,8 @@ def test_evidence_levels_match_what_was_measured():
     from services.leo_catalog import EXTRACT, REFERENCES
     from services.leo_evidence import FIELD_MAP
     measured = [p.id for p in EXTRACT if p.evidence == "measured"]
-    assert measured == ["epilepsy_type", "seizure_type", "age_at_onset", "seizure_frequency", "current_asms"]
+    assert measured == ["epilepsy_type", "seizure_type", "seizure_onset_class", "age_at_onset",
+                        "seizure_frequency", "seizure_free", "date_of_last_seizure", "current_asms"]
     assert set(FIELD_MAP) == set(measured)                   # a "measured" label needs numbers behind it, and vice versa
     assert {p.id for p in EXTRACT if p.evidence == "indirect"} == {"acute_administration"}
     assert all(p.evidence in ("measured", "rules_only", "indirect", "none") for p in EXTRACT)
@@ -79,7 +80,7 @@ def test_evidence_levels_match_what_was_measured():
         "concordance", "concordance_notes"}
     assert all(r in REFERENCES for p in EXTRACT for r in p.refs)
     assert next(p for p in EXTRACT if p.id == "drug_resistance").derived
-    assert {p.id for p in EXTRACT if p.evidence == "none"} == {"mri_lesion"}
+    assert {p.id for p in EXTRACT if p.evidence == "none"} == {"mri_lesion", "pnes_status"}
 
 
 def test_custom_question_validation():
@@ -211,7 +212,11 @@ def test_note_to_row_with_llm_and_specialist(runtimes):
     assert set(row["current_asms"].split("; ")) >= {"lamotrigine", "lacosamide"}
     assert "valproate" not in row["current_asms"]          # the stopped drug stays out of the current list
     assert row["current_asms_status"] in ("accepted", "needs_review")
+    assert "epilepsy_type_alternative" in row
     assert all(k in res.claims[0] for k in ("field_path", "verdict", "evidence", "char_start"))
+    assert "focal" in row["visit_summary"] and "epilepsy" in row["visit_summary"]
+    assert "lamotrigine" in row["visit_summary"] and "ASM" in row["visit_summary"]
+    assert len(row["visit_summary"].split()) < 50
 
 
 def test_specialist_only_says_so(runtimes):
@@ -295,7 +300,7 @@ def client(tmp_path, monkeypatch, runtimes):
     import app as appmod
     import routes.leo as leo
     llm, cpu = runtimes
-    monkeypatch.setattr(leo, "_RUNTIMES", {"cpu:8000": cpu})
+    monkeypatch.setattr(leo, "_RUNTIMES", {leo._cache_key(False, {}): cpu})
     appmod.app.config["TESTING"] = True
     return appmod.app.test_client(), leo
 
@@ -306,13 +311,68 @@ def test_routes_catalogue_extract_and_batch(client, tmp_path):
     assert {p["id"] for p in cat["extract"]} >= {"epilepsy_type", "current_asms"} and cat["ask_templates"]
     ev = c.get("/leo/evidence").get_json()
     assert [d["id"] for d in ev["datasets"]] == ["fs", "synth"] and all(d["available"] for d in ev["datasets"])
-    assert set(ev["fields"]) == {"epilepsy_type", "seizure_type", "age_at_onset", "seizure_frequency", "current_asms"}
-    assert c.get("/leo/ui").status_code == 200 and b"Epilepsy phenotype extraction" in c.get("/leo/ui").data
+    assert set(ev["fields"]) == {"epilepsy_type", "seizure_type", "seizure_onset_class", "age_at_onset",
+                                 "seizure_frequency", "seizure_free", "date_of_last_seizure", "current_asms"}
+    ui = c.get("/leo/ui")
+    assert ui.status_code == 200 and b"Epilepsy phenotype extraction" in ui.data
+    assert b"Validator" in ui.data and b"accepted_audit" in ui.data
+    assert b'href="/extract/ui"' not in ui.data
+    assert b"A pasted note can\xe2\x80\x99t be reviewed in the Validator" in ui.data
+    assert b"no second reader" in ui.data and b"10% accepted audit" in ui.data
+    assert b"--quote-entail" in ui.data and b"--ask-rag" in ui.data and b"--export-codes" in ui.data
+    assert b"--ext-detector" in ui.data and b"Score labels (leo learn)" in ui.data
+    assert b"Optional extras" in ui.data and b'id="opt-card"' in ui.data
+    assert b"<summary>Optional (off by default)</summary>" not in ui.data
+    assert b"bin/leo user add" in ui.data and b"Research extract" in ui.data
+    assert b"leo-ack-v1" in ui.data and b"Research use acknowledgment" in ui.data
+    assert b"applied=false" in ui.data or b"applied=False" in ui.data or b"applied=false" in ui.data.lower()
+    home = c.get("/")
+    assert home.status_code == 302 and home.headers.get("Location") == "/leo/ui"
+    assert b"Permit use for training" in ui.data
+    assert b"btn('Accept')" in ui.data and b"btn('Correct')" in ui.data and b"btn('Deny')" in ui.data
+    assert b"Accept the rest of this note" in ui.data and b'id="rjump"' in ui.data and b'id="rfield"' in ui.data
+    assert b"wrong_value" in ui.data and b"Which reader was right" in ui.data
     g = c.get("/leo/guide")
     assert g.status_code == 302 and g.headers["Location"].endswith("docs/LEO_USER_GUIDE.md")
     r = c.post("/leo/extract", json={"source_text": NOTE, "phenotypes": ["core"], "llm": "off"})
     j = r.get_json()
     assert r.status_code == 200 and j["mode"] == "specialist_only" and j["row"]["epilepsy_type"] == "focal"
+    assert j.get("document_id")
+    assert b"Download CSV" in ui.data and b"Download Excel" in ui.data
+    assert b"/leo/extract/download" in ui.data
+    dl = c.post("/leo/extract/download", json={
+        "source_text": NOTE, "phenotypes": ["core"], "llm": "off", "format": "csv",
+        "row": j["row"], "claims": j["claims"], "asks": j["asks"], "document_id": j["document_id"],
+        "llm_used": j["llm_used"], "n_chunks": j["n_chunks"], "versions": j["versions"],
+    })
+    assert dl.status_code == 200 and dl.mimetype == "application/zip"
+    z = zipfile.ZipFile(io.BytesIO(dl.data))
+    names = sorted(z.namelist())
+    assert names[0].endswith(".claims.csv") and names[1].endswith(".csv") and names[2].endswith(".provenance.json")
+    paste_tbl = pd.read_csv(z.open(names[1]), dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    assert "Phenotype" not in paste_tbl.columns
+    assert paste_tbl["epilepsy_type"][0] == "focal"
+    assert paste_tbl["epilepsy_type_status"][0]
+    assert paste_tbl["note_id"][0] == j["document_id"] and NOTE[:20] in paste_tbl["text"][0]
+    xl = c.post("/leo/extract/download", json={"source_text": NOTE, "phenotypes": ["core"], "llm": "off",
+                                              "format": "xlsx"})
+    assert xl.status_code == 200
+    sheets = pd.read_excel(io.BytesIO(xl.data), sheet_name=None, dtype=str)
+    assert set(sheets) == {"LEO", "Claims", "About"} and sheets["LEO"]["epilepsy_type"][0] == "focal"
+    st = c.get("/leo/status").get_json()
+    assert st["llm_ready"] is False and st["readers"] == "rules_only" and st["login_required"] is False
+    assert "ctakes" in st["known_ext_detectors"] and st["load_med42"] is False
+    assert j["second_reader"] is False and j["flags"]["ext_detectors"] == []
+    assert j["flags"]["quote_entail"] is False and j["flags"]["ask_rag"] is False
+    assert c.post("/leo/extract", json={"source_text": NOTE, "phenotypes": ["core"], "llm": "off",
+                                        "ext_detectors": "b1"}).status_code == 400
+    res_only = c.post("/leo/extract", json={"source_text": NOTE, "phenotypes": ["core"], "llm": "off",
+                                           "research_extract": True}).get_json()
+    assert res_only["flags"]["research_extract"] is True and res_only["row"]["epilepsy_type"] == ""
+    parsed = leo._flags_from({"quote_entail": True, "ask_rag": True, "export_codes": True,
+                              "ext_detectors": "ctakes,freq", "research_extract": "on"})
+    assert parsed["quote_entail"] and parsed["ask_rag"] and parsed["export_codes"]
+    assert parsed["ext_detectors"] == ("ctakes", "freq") and parsed["research_extract"]
     assert c.post("/leo/extract", json={"source_text": NOTE, "phenotypes": ["nope"]}).status_code == 400
     assert c.post("/leo/extract", json={"source_text": ""}).status_code == 400
     # questions need a loaded model
@@ -329,6 +389,7 @@ def test_routes_catalogue_extract_and_batch(client, tmp_path):
             break
         time.sleep(0.5)
     assert st["state"] == "done", st
+    assert st["filename"] == "notes.csv"
     z = zipfile.ZipFile(io.BytesIO(c.get(f"/leo/jobs/{jid}/download").data))
     assert sorted(z.namelist()) == ["notes_leo.claims.csv", "notes_leo.csv", "notes_leo.provenance.json"]
     res = pd.read_csv(z.open("notes_leo.csv"), dtype=str, keep_default_na=False, encoding="utf-8-sig")
@@ -350,9 +411,16 @@ def test_evidence_numbers_are_read_from_the_result_files():
         assert d["systems"]["leo_review"]["micro_f1"] == round(src["systems"]["leo_review"]["micro_f1"], 3)
         assert d["text"] == "synthetic"
     fs = ev["fields"]["current_asms"][0]["fs"]["reviewed"]
-    raw = json.loads((le.RESULTS / "leo_vs_fs_gold_v05_default.json").read_text())
+    raw = json.loads((le.RESULTS / "leo_vs_fs_gold_v08.json").read_text())
     assert fs["f1"] == round(raw["sources"]["L1C"]["systems"]["leo_review"]["per_field"]["current_asms"]["f1"], 3)
     assert fs["n"] == 37
+    cls = ev["fields"]["seizure_onset_class"][0]["fs"]
+    assert cls["auto"]["n"] == 18 and cls["auto"]["f1"] == round(
+        raw["sources"]["L1C"]["systems"]["leo_auto"]["per_field"]["predominant_seizure_type|class"]["f1"], 3)
+    sf = ev["fields"]["seizure_free"][0]["fs"]
+    assert sf["llm_alone"]["n"] == 29 and sf["reviewed"]["f1"] == round(
+        raw["sources"]["L1C"]["systems"]["leo_review"]["per_field"]["seizure_free"]["f1"], 3)
+    assert ev["fields"]["date_of_last_seizure"][0]["fs"]["specialist_alone"]["n"] == 4
     assert any("synthetic" in c for c in ev["caveats"]) and any("No real clinical note" in c for c in ev["caveats"])
 
 
@@ -370,9 +438,156 @@ def test_shipped_configuration_is_the_scored_configuration():
     assert LeoRuntime(backend=None, use_llm=False).disagree_llm == ()
     assert parse_disagree_llm(None) == () and parse_disagree_llm("none") == () and parse_disagree_llm("") == ()
     assert parse_disagree_llm("candidate") == ("clinical_seizure.predominant_seizure_type",)
+    from services.leo_runtime import parse_llm_if_silent
+    assert parse_disagree_llm("ied-silent") == ()
+    assert parse_llm_if_silent("ied-silent") == ("eeg.ied_present",)
+    assert parse_llm_if_silent("candidate") == ()
+    silent = LeoRuntime(backend=None, use_llm=False, disagree_llm="ied-silent")
+    assert silent.disagree_llm == () and silent.llm_if_silent == ("eeg.ied_present",)
     assert parse_disagree_llm("epilepsy_type") == ("clinical_seizure.epilepsy_type",)
     assert LeoRuntime(backend=None, use_llm=False, disagree_llm=()).disagree_llm == ()
-    assert LeoRuntime(backend=None, use_llm=False).versions()["pipeline"] == "leo-v0.5"
+    assert LeoRuntime(backend=None, use_llm=False).versions()["pipeline"] == "leo-v0.9"
+
+
+def test_wide_row_shows_the_other_reader_on_disagreement():
+    from types import SimpleNamespace
+    from schema.claim import ReasonCode, ValidatorVerdict
+    from services.leo_catalog import Phenotype
+    from services.leo_tabular import wide_columns, wide_row
+
+    ph = Phenotype("epilepsy_type", "Epilepsy type", ("clinical_seizure.epilepsy_type",), "scalar", "x")
+    claim = SimpleNamespace(
+        field_path="clinical_seizure.epilepsy_type", value="focal",
+        validator_verdict=ValidatorVerdict.REVIEW, reason_codes=[ReasonCode.SOURCE_DISAGREEMENT],
+        detectors=["epextra"], alternative="generalized", mention=SimpleNamespace(text="focal epilepsy"),
+        concept=SimpleNamespace(system="", id="", label=""), code_accepted=False)
+    row = wide_row([claim], [ph])
+    assert row["epilepsy_type"] == "focal"
+    assert row["epilepsy_type_alternative"] == "generalized"
+    assert row["epilepsy_type_status"] == "needs_review"
+    assert "source_disagreement" in row["epilepsy_type_why"]
+    cols = wide_columns([ph])
+    assert cols.index("epilepsy_type_alternative") == cols.index("epilepsy_type_why") + 1
+    assert cols[0] == "visit_summary"
+    assert "focal" in row["visit_summary"] and "[?]" in row["visit_summary"]
+    assert len(row["visit_summary"].split()) < 50
+
+
+def test_visit_summary_is_this_notes_cells_and_not_a_phenotype():
+    from types import SimpleNamespace
+    from schema.claim import ReasonCode, ValidatorVerdict
+    from services.leo_catalog import Phenotype
+    from services.leo_review import infer_fields
+    from services.leo_tabular import visit_summary_from_row, wide_row
+
+    et = Phenotype("epilepsy_type", "Epilepsy type", ("clinical_seizure.epilepsy_type",), "scalar", "x")
+    sz = Phenotype("seizure_type", "Predominant seizure type", ("clinical_seizure.predominant_seizure_type",),
+                   "scalar", "x")
+    meds = Phenotype("current_asms", "Current ASMs", ("medication.current_asms",), "list", "x")
+    hs = Phenotype("hippocampal_sclerosis", "HS", ("mri.hippocampal_sclerosis",), "bool", "x")
+    semi = Phenotype("semiology", "Seizure semiology (text)", ("clinical_seizure.semiology_text",), "scalar", "x")
+    mention = SimpleNamespace(text="quote")
+    concept = SimpleNamespace(system="", id="", label="")
+
+    def claim(path, value, verdict=ValidatorVerdict.ACCEPT, reasons=()):
+        return SimpleNamespace(field_path=path, value=value, validator_verdict=verdict,
+                               reason_codes=list(reasons), detectors=["epextra", "llm"],
+                               alternative="", mention=mention, concept=concept, code_accepted=True)
+
+    row = wide_row([
+        claim("clinical_seizure.epilepsy_type", "focal"),
+        claim("clinical_seizure.predominant_seizure_type", "focal_aware", ValidatorVerdict.REVIEW,
+              [ReasonCode.SOURCE_DISAGREEMENT]),
+        claim("medication.current_asms", {"generic_name": "lamotrigine", "dose_text": "200 mg"}),
+        claim("mri.hippocampal_sclerosis", False),
+        claim("clinical_seizure.semiology_text", "staring then right-arm stiffening lasting two minutes"),
+    ], [et, sz, meds, hs, semi])
+    s = row["visit_summary"]
+    assert "focal epilepsy" in s and "focal aware" in s and "seizure" in s and "[?]" in s
+    assert "ASM" in s and "lamotrigine" in s and "HS" in s
+    assert "staring" not in s                         # long free text is not dumped into the glance
+    assert len(s.split()) < 50
+    blank = visit_summary_from_row({"epilepsy_type": "", "epilepsy_type_status": "not_found"})
+    assert blank == ""
+    import pandas as pd
+    fields = infer_fields(pd.DataFrame([row]))
+    assert "visit_summary" not in {f.id for f in fields}
+
+
+def test_visit_summary_omits_review_when_accepted_only():
+    from types import SimpleNamespace
+    from schema.claim import ReasonCode, ValidatorVerdict
+    from services.leo_catalog import Phenotype
+    from services.leo_tabular import wide_row
+
+    ph = Phenotype("epilepsy_type", "Epilepsy type", ("clinical_seizure.epilepsy_type",), "scalar", "x")
+    claim = SimpleNamespace(
+        field_path="clinical_seizure.epilepsy_type", value="focal",
+        validator_verdict=ValidatorVerdict.REVIEW, reason_codes=[ReasonCode.SOURCE_DISAGREEMENT],
+        detectors=["epextra"], alternative="generalized", mention=SimpleNamespace(text="focal epilepsy"),
+        concept=SimpleNamespace(system="", id="", label=""), code_accepted=False)
+    row = wide_row([claim], [ph], include_review=False)
+    assert row["epilepsy_type"] == "" and row["visit_summary"] == ""
+
+
+def test_visit_summary_stays_under_50_words():
+    from services.leo_tabular import visit_summary_from_row, _MAX_SUMMARY_WORDS
+
+    drugs = "; ".join(f"drug{i}" for i in range(40))
+    s = visit_summary_from_row({
+        "epilepsy_type": "combined generalized and focal", "epilepsy_type_status": "accepted",
+        "seizure_type": "focal_to_bilateral_tonic_clonic", "seizure_type_status": "needs_review",
+        "age_at_onset": "11", "age_at_onset_status": "accepted",
+        "seizure_frequency": "2 per month", "seizure_frequency_status": "accepted",
+        "current_asms": drugs, "current_asms_status": "accepted",
+        "prior_asms": drugs, "prior_asms_status": "accepted",
+        "failed_asms": drugs, "failed_asms_status": "accepted",
+        "rescue_medication": "midazolam; diazepam; lorazepam; clonazepam",
+        "rescue_medication_status": "accepted",
+        "eeg_study_type": "video-EEG", "eeg_study_type_status": "accepted",
+        "eeg_ied_present": "true", "eeg_ied_present_status": "accepted",
+        "hippocampal_sclerosis": "false", "hippocampal_sclerosis_status": "accepted",
+        "mri_normal": "false", "mri_normal_status": "accepted",
+        "surgery_history": "left ATL; VNS; RNS; DBS", "surgery_history_status": "needs_review",
+    })
+    assert s and len(s.split()) <= _MAX_SUMMARY_WORDS
+    assert len(s.split()) < 50
+    assert "current ASMs" in s and "drug0" in s
+    assert "drug3" not in s                          # lists capped at three names
+
+
+def test_visit_summary_keeps_field_keywords():
+    from services.leo_tabular import visit_summary_from_row
+
+    s = visit_summary_from_row({
+        "epilepsy_type": "focal", "epilepsy_type_status": "accepted",
+        "seizure_type": "focal_aware", "seizure_type_status": "accepted",
+        "age_at_onset": "11", "age_at_onset_status": "accepted",
+        "seizure_frequency": "2 per month", "seizure_frequency_status": "accepted",
+        "current_asms": "lamotrigine", "current_asms_status": "accepted",
+        "prior_asms": "carbamazepine", "prior_asms_status": "accepted",
+        "failed_asms": "phenytoin", "failed_asms_status": "accepted",
+        "rescue_medication": "midazolam", "rescue_medication_status": "accepted",
+        "eeg_study_type": "routine", "eeg_study_type_status": "accepted",
+        "eeg_ied_present": "true", "eeg_ied_present_status": "accepted",
+        "hippocampal_sclerosis": "false", "hippocampal_sclerosis_status": "accepted",
+        "mri_normal": "false", "mri_normal_status": "accepted",
+        "surgery_history": "left ATL", "surgery_history_status": "accepted",
+    })
+    for kw in ("epilepsy", "seizure", "onset", "frequency", "ASM", "rescue",
+               "EEG", "IED", "HS", "MRI", "surgery"):
+        assert kw in s, kw
+    assert len(s.split()) < 50
+
+
+def test_proposal_includes_the_other_reader():
+    from services import leo_review as lr
+    t = _tiny_table()
+    fields = lr.infer_fields(t)
+    assert [f.id for f in fields] == ["epilepsy_type", "age_at_onset"]   # _alternative is not a phenotype
+    p = lr.proposal(t, fields[0], 2)
+    assert p["value"] == "generalized" and p["alternative"] == "focal"
+    assert lr.proposal(t, fields[0], 1)["alternative"] == ""
 
 
 # ---- review: decisions recorded, then merged into the result ---------------------------------------------
@@ -383,6 +598,7 @@ def _tiny_table():
         "epilepsy_type": ["focal", "generalized", ""], "epilepsy_type_status": ["accepted", "needs_review", "not_found"],
         "epilepsy_type_evidence": ["focal epilepsy", "GTC", ""], "epilepsy_type_why": ["", "llm_only", ""],
         "epilepsy_type_source": ["llm+specialist", "llm", ""],
+        "epilepsy_type_alternative": ["", "focal", ""],
         "age_at_onset": ["11", "=SUM(1)", ""], "age_at_onset_status": ["needs_review", "needs_review", "not_found"],
         "age_at_onset_evidence": ["age 11", "x", ""], "age_at_onset_why": ["llm_only", "llm_only", ""],
         "age_at_onset_source": ["llm", "llm", ""],
@@ -422,13 +638,13 @@ def test_reviewed_csv_is_checked_against_the_table(tmp_path):
     pad = lambda *v: ",".join(v)
     def write(body):
         p = tmp_path / "r.csv"; p.write_text(hdr + "\n" + body + "\n", encoding="utf-8"); return p
-    ok = lr.read_reviewed(write(pad("2", "n2", "epilepsy_type", "", "", "", "", "", "", "Correct ", "focal", "", "", "", "") + "\n" +
-                                pad("1", "n1", "age_at_onset", "", "", "", "", "", "", "", "", "", "", "", "")), t)
+    ok = lr.read_reviewed(write(pad("2", "n2", "epilepsy_type", *[""] * 6, "Correct ", "focal", *[""] * 7) + "\n" +
+                                pad("1", "n1", "age_at_onset", *[""] * 15)), t)
     assert list(ok) == [(2, "epilepsy_type")] and ok[(2, "epilepsy_type")]["decision"] == "correct"      # blank decision = not yet decided
-    for body, why in ((pad("2", "n9", "epilepsy_type", *[""] * 6, "accept", *[""] * 5), "doc_id"),
-                      (pad("9", "n2", "epilepsy_type", *[""] * 6, "accept", *[""] * 5), "outside"),
-                      (pad("2", "n2", "epilepsy_type", *[""] * 6, "maybe", *[""] * 5), "decision"),
-                      (pad("2", "n2", "epilepsy_type", *[""] * 6, "correct", *[""] * 5), "needs final_value")):
+    for body, why in ((pad("2", "n9", "epilepsy_type", *[""] * 6, "accept", *[""] * 8), "doc_id"),
+                      (pad("9", "n2", "epilepsy_type", *[""] * 6, "accept", *[""] * 8), "outside"),
+                      (pad("2", "n2", "epilepsy_type", *[""] * 6, "maybe", *[""] * 8), "decision"),
+                      (pad("2", "n2", "epilepsy_type", *[""] * 6, "correct", *[""] * 8), "needs final_value")):
         with pytest.raises(ValueError, match=why):
             lr.read_reviewed(write(body), t)
 
@@ -459,9 +675,12 @@ def test_review_routes_save_decisions_and_export_merged(client):
     assert save(reviewer="", row=1, field="epilepsy_type", decision="accept").status_code == 400    # who reviewed it?
     assert save(row=1, field="nope", decision="accept").status_code == 400
     assert save(row=1, field="epilepsy_type", decision="correct", value="").status_code == 400
+    assert save(row=2, field="epilepsy_type", decision="correct", value="generalized").status_code == 400  # why required
     assert save(row=1, field="epilepsy_type", decision="accept").status_code == 200
-    assert save(row=2, field="epilepsy_type", decision="correct", value="generalized").status_code == 200
-    assert save(row=1, field="current_asms", decision="reject", comment="was about a sibling").status_code == 200
+    assert save(row=2, field="epilepsy_type", decision="correct", value="generalized",
+                why_tag="wrong_value").status_code == 200
+    assert save(row=1, field="current_asms", decision="reject", comment="was about a sibling",
+                why_tag="quote_does_not_support").status_code == 200
     assert save(row=2, field="current_asms", decision="accept").status_code == 200
     assert save(row=2, field="current_asms", decision="undo").status_code == 200
     assert save(row=1, field="epilepsy_type", decision="add", value="focal").status_code == 400
@@ -469,6 +688,17 @@ def test_review_routes_save_decisions_and_export_merged(client):
     assert miss["counts"]["add"] == 0 and "total" in miss["counts"]
     r = c.get(f"/leo/jobs/{jid}/review").get_json()
     assert r["counts"] == {"total": 4, "reviewed": 3, "accept": 1, "correct": 1, "reject": 1, "add": 0}
+    assert {f["id"] for f in r["fields"]} == {"epilepsy_type", "current_asms"} and "no_second_reader" in r["reasons"]
+    # note-at-a-time: the note list, one note's values, and filters
+    left = c.get(f"/leo/jobs/{jid}/review?notes=1&pending=1").get_json()
+    assert left["notes"] == [{"row": 2, "doc_id": "n2", "total": 1, "pending": 1}] and left["counts"]["reviewed"] == 3
+    one = c.get(f"/leo/jobs/{jid}/review?row=1").get_json()["items"]
+    assert len(one) == 2 and {i["row"] for i in one} == {1}
+    asms = c.get(f"/leo/jobs/{jid}/review?field=current_asms&notes=1").get_json()
+    assert asms["counts"]["total"] == 2 and [n["total"] for n in asms["notes"]] == [1, 1]
+    assert c.get(f"/leo/jobs/{jid}/review?reason=no_such_reason").get_json()["counts"]["total"] == 0
+    assert c.get(f"/leo/jobs/{jid}/review?row=x").status_code == 400
+    assert c.get(f"/leo/jobs/{jid}/review?scope=accepted_audit").status_code == 200
     jd = Path(os.environ["APP_HOME"]) / "data" / "leo_jobs" / jid
     log = [json.loads(x) for x in (jd / "notes_leo.reviews.jsonl").read_text().splitlines()]
     assert len(log) == 5 and log[0]["proposed_value"] == "focal" and log[0]["reviewer"] == "jd"        # history and the original proposal are kept
@@ -484,6 +714,62 @@ def test_review_routes_save_decisions_and_export_merged(client):
     n = c.get(f"/leo/jobs/{jid}/note/2").get_json()
     assert "lamotrigine" in n["text"] and c.get(f"/leo/jobs/{jid}/note/9").status_code == 404
     assert c.get("/leo/jobs/nope/review").status_code == 404
+    assert r.get("training_permit", {}).get("permitted") is False
+    from services import leo_learn as ll
+    reviewed = jd / "notes_leo.reviewed.csv"
+    md, learned = ll.run([reviewed], min_n=100)
+    assert learned["applied"] is False and learned["n_rows"] == 3
+    assert learned["loop_b"]["fields"]["epilepsy_type"]["accept"] == 1
+    assert learned["loop_b"]["fields"]["epilepsy_type"]["correct"] == 1
+    assert learned["loop_b"]["why"].get("quote_does_not_support") == 1
+    assert "extract unchanged" in md.lower() or "Does not change extract" in md or "D17 stays" in md
+    orig_after = pd.read_csv(jd / "notes_leo.csv", dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    assert orig_after["epilepsy_type"].tolist() == orig["epilepsy_type"].tolist()
+    learned = c.post(f"/leo/jobs/{jid}/learn", json={"loops": "all"})
+    assert learned.status_code == 200 and learned.get_json()["applied"] is False
+    assert learned.get_json()["n_rows"] == 3 and "100" in learned.get_json()["apply"]
+    assert c.post(f"/leo/jobs/{jid}/learn", json={"loops": "c"}).status_code == 400
+    empty = _run_job(c)
+    assert c.post(f"/leo/jobs/{empty}/learn", json={}).status_code == 409
+
+
+def test_permit_use_for_training_copies_reviews_and_can_be_withdrawn(client):
+    c, _ = client
+    jid = _run_job(c)
+    home = Path(os.environ["APP_HOME"])
+    arch = home / "data" / "leo_training" / jid
+    assert c.get(f"/leo/jobs/{jid}/training-permit").get_json()["permitted"] is False
+    assert c.post(f"/leo/jobs/{jid}/training-permit", json={"permit": True, "reviewer": ""}).status_code == 400
+    assert not arch.exists()
+    assert c.post(f"/leo/jobs/{jid}/review", json={"reviewer": "jd", "decisions": [
+        {"row": 1, "field": "epilepsy_type", "decision": "accept"}]}).status_code == 200
+    assert not arch.exists()          # still off: a review does not copy
+    on = c.post(f"/leo/jobs/{jid}/training-permit", json={"permit": True, "reviewer": "jd"})
+    assert on.status_code == 200 and on.get_json()["permitted"] is True
+    assert (arch / "reviewed.csv").is_file() and (arch / "reviews.jsonl").is_file()
+    assert (arch / "consent.json").is_file() and (arch / "notes.jsonl").is_file()
+    consent = json.loads((arch / "consent.json").read_text())
+    assert consent["reviewer"] == "jd" and consent["includes_note_text"] is True
+    notes = [json.loads(x) for x in (arch / "notes.jsonl").read_text().splitlines() if x.strip()]
+    assert notes and "lamotrigine" in notes[0]["text"]
+    assert c.post(f"/leo/jobs/{jid}/review", json={"reviewer": "jd", "decisions": [
+        {"row": 2, "field": "epilepsy_type", "decision": "reject", "why_tag": "wrong_value"}]}).status_code == 200
+    assert json.loads((arch / "consent.json").read_text())["n_decisions"] == 2
+    off = c.post(f"/leo/jobs/{jid}/training-permit", json={"permit": False, "reviewer": "jd"})
+    assert off.status_code == 200 and off.get_json()["permitted"] is False
+    assert not arch.exists()
+    assert c.post(f"/leo/jobs/{jid}/training-permit", json={"permit": True, "reviewer": "jd"}).status_code == 200
+    assert arch.is_dir()
+    assert c.delete(f"/leo/jobs/{jid}").status_code == 200
+    assert arch.is_dir()              # deleting the 24-hour job folder does not remove the training copy
+
+
+def test_training_archive_rejects_a_bad_job_id(tmp_path, monkeypatch):
+    monkeypatch.setenv("APP_HOME", str(tmp_path))
+    from services.leo_training_archive import job_dir, status
+    with pytest.raises(ValueError):
+        job_dir("not-a-job")
+    assert status("abcd")["permitted"] is False
 
 
 def test_review_merge_into_the_excel_output_keeps_the_other_sheets(client):
@@ -534,6 +820,33 @@ def test_reviewer_can_add_a_value_leo_missed():
         lr.make_event(lr.proposal(t, fields[0], 1), "add", "x", "jd", "", "leo-v0.5")
     with pytest.raises(ValueError, match="needs the value"):
         lr.make_event(lr.proposal(t, fields[0], 3), "add", "", "jd", "", "leo-v0.5")
+    with pytest.raises(ValueError, match="why"):
+        lr.make_event(lr.proposal(t, fields[0], 2), "reject", "", "jd", "nope", "leo-v0.5")
+    with pytest.raises(ValueError, match="which reader"):
+        lr.make_event(lr.proposal(t, fields[0], 2), "reject", "", "jd", "nope", "leo-v0.5",
+                      why_tag="wrong_value")
+    tagged = lr.make_event(lr.proposal(t, fields[0], 2), "reject", "", "jd", "nope", "leo-v0.5",
+                           why_tag="quote_does_not_support", reader_preferred="rules")
+    assert tagged["why_tag"] == "quote_does_not_support" and tagged["quote_ok"] == "no"
+    assert tagged["reader_preferred"] == "rules"
+    audit = lr.items(t, fields, {}, "accepted_audit", audit_seed="test")
+    assert all(it["status"] == "accepted" for it in audit)
+    assert len(audit) <= len(lr.items(t, fields, {}, "all"))
+
+
+def test_summarize_reviews_is_labels_only(tmp_path):
+    from services import leo_review as lr
+    p = tmp_path / "x.reviewed.csv"
+    rows = [{c: "" for c in lr.REVIEWED_COLUMNS} for _ in range(3)]
+    rows[0].update(field="seizure_type", decision="accept", why_tag="", reader_preferred="model", quote_ok="yes")
+    rows[1].update(field="seizure_type", decision="correct", why_tag="wrong_value", reader_preferred="rules", quote_ok="")
+    rows[2].update(field="epilepsy_type", decision="reject", why_tag="quote_does_not_support", reader_preferred="rules", quote_ok="no")
+    pd.DataFrame(rows, columns=lr.REVIEWED_COLUMNS).to_csv(p, index=False, encoding="utf-8-sig")
+    md = lr.summarize_reviews(p)
+    assert "seizure_type" in md and "epilepsy_type" in md
+    assert "wrong_value" in md and "Which reader was right" in md
+    assert "Does not change extract" in md
+    assert "leo learn" in md
 
 
 def test_job_folder_is_owner_only(tmp_path, monkeypatch):
@@ -559,6 +872,9 @@ def test_rollup_takes_the_latest_note_that_states_a_value_and_never_mixes_notes(
     assert r.loc["a", "epilepsy_type_from_row"] == 3 and r.loc["a", "epilepsy_type_from_date"] == "2024-03-01"
     assert r.loc["a", "epilepsy_type_status"] == "needs_review" and r.loc["a", "leo_notes"] == 3
     assert r.loc["b", "epilepsy_type_why"] == "no_second_reader"          # status and reason copied, never upgraded
+    assert "generalized" in r.loc["a", "visit_summary"] and "[?]" in r.loc["a", "visit_summary"]
+    assert "focal" in r.loc["b", "visit_summary"] and "[?]" in r.loc["b", "visit_summary"]
+    assert len(str(r.loc["a", "visit_summary"]).split()) < 50
     # without a date column the later row is the later note
     assert rollup(t, "patient").set_index("patient").loc["a", "epilepsy_type_from_row"] == 3
     with pytest.raises(ValueError):
@@ -903,7 +1219,7 @@ def test_background_jobs_with_the_model_run_inside_the_app_context(client, runti
     backend = object()
     monkeypatch.setattr(c.application, "med42_backend", backend, raising=False)
     monkeypatch.setattr(c.application, "ensure_med42_loaded", lambda: "ready")
-    monkeypatch.setitem(leo._RUNTIMES, f"llm:{id(backend)}:L1C:8000:ext{os.environ.get('MEDAI_LEO_EXT_READER', '1')}:r{os.environ.get('MEDAI_LEO_REQUIRE_SECOND_READER', '1')}:o{os.environ.get('MEDAI_LEO_ONTOLOGY_SELECT', '0')}", llm)
+    monkeypatch.setitem(leo._RUNTIMES, leo._cache_key(True, {}, backend), llm)
     csv = "patient_id,note_id,text\nP1,n1," + json.dumps(NOTE) + "\n"
     r = c.post("/leo/batch", data={"file": (io.BytesIO(csv.encode()), "a.csv"), "llm": "on"})
     assert r.status_code == 202 and r.get_json()["mode"] == "llm+specialist"

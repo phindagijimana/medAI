@@ -1,0 +1,1659 @@
+{
+ "patients": 37,
+ "notes": 113,
+ "arms": {
+  "rules_only": {
+   "stats": {
+    "mode": "specialist_only",
+    "model_load_seconds": 0.0,
+    "run_wall_seconds": 91.3,
+    "gpu_peak_mib_nvidia_smi": 0,
+    "rows_processed": 113,
+    "rows_error": 0,
+    "rows_with_llm": 0
+   },
+   "claim_stats": {
+    "all_claims_by_verdict": {
+     "review": 3140,
+     "reject": 75
+    },
+    "scored_path_claims_by_verdict": {
+     "review": 1737
+    },
+    "claim_level": {
+     "review": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 105,
+        "wrong": 5
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 24,
+        "correct": 79,
+        "unscorable": 4
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87,
+        "wrong": 4
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 96,
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 19,
+        "wrong": 11,
+        "unscorable": 30
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 20,
+        "correct": 33,
+        "unscorable": 5
+       },
+       "medication.current_asms": {
+        "correct": 201,
+        "wrong": 55
+       },
+       "medication.drug_resistance_status": {
+        "correct": 110,
+        "wrong": 1
+       },
+       "eeg.study_type": {
+        "correct": 95,
+        "wrong": 17
+       },
+       "eeg.background": {
+        "correct": 97,
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "correct": 29,
+        "wrong": 2
+       },
+       "eeg.ied_findings": {
+        "correct": 40,
+        "wrong": 11
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 15,
+        "wrong": 3
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 15,
+        "wrong": 17
+       },
+       "mri.overall_normal": {
+        "correct": 66
+       },
+       "mri.findings": {
+        "correct": 52,
+        "wrong": 55
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 25,
+        "wrong": 1
+       },
+       "medication.rescue_medication": {
+        "wrong": 35,
+        "correct": 183
+       },
+       "mri.hippocampal_sclerosis": {
+        "wrong": 13,
+        "correct": 29
+       },
+       "medication.surgery_history": {
+        "correct": 31,
+        "wrong": 10
+       }
+      },
+      "correct": 1407,
+      "wrong": 291,
+      "unscorable": 39,
+      "precision": 0.829,
+      "distinct_patient_path_value": {
+       "correct": 604,
+       "wrong": 218,
+       "precision": 0.735
+      }
+     },
+     "review|specialist_only": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 105,
+        "wrong": 5
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 24,
+        "correct": 79,
+        "unscorable": 4
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87,
+        "wrong": 4
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 96,
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 19,
+        "wrong": 11,
+        "unscorable": 30
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 20,
+        "correct": 33,
+        "unscorable": 5
+       },
+       "medication.current_asms": {
+        "correct": 201,
+        "wrong": 55
+       },
+       "medication.drug_resistance_status": {
+        "correct": 110,
+        "wrong": 1
+       },
+       "eeg.study_type": {
+        "correct": 95,
+        "wrong": 17
+       },
+       "eeg.background": {
+        "correct": 97,
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "correct": 29,
+        "wrong": 2
+       },
+       "eeg.ied_findings": {
+        "correct": 40,
+        "wrong": 11
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 15,
+        "wrong": 3
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 15,
+        "wrong": 17
+       },
+       "mri.overall_normal": {
+        "correct": 66
+       },
+       "mri.findings": {
+        "correct": 52,
+        "wrong": 55
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 25,
+        "wrong": 1
+       },
+       "medication.rescue_medication": {
+        "wrong": 35,
+        "correct": 183
+       },
+       "mri.hippocampal_sclerosis": {
+        "wrong": 13,
+        "correct": 29
+       },
+       "medication.surgery_history": {
+        "correct": 31,
+        "wrong": 10
+       }
+      },
+      "correct": 1407,
+      "wrong": 291,
+      "unscorable": 39,
+      "precision": 0.829,
+      "distinct_patient_path_value": {
+       "correct": 604,
+       "wrong": 218,
+       "precision": 0.735
+      }
+     }
+    }
+   },
+   "views": {
+    "all": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "wrong": 4,
+       "n": 34,
+       "correct": 30
+      },
+      "drug_resistance": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 18,
+       "n": 27,
+       "missing": 9
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_study_type": {
+       "correct": 31,
+       "n": 37,
+       "wrong": 6
+      },
+      "etiology_category": {
+       "correct": 35,
+       "n": 37,
+       "missing": 1,
+       "wrong": 1
+      },
+      "focal_motor_onset": {
+       "correct": 8,
+       "n": 12,
+       "wrong": 4
+      },
+      "focal_nonmotor_onset": {
+       "wrong": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "mri_finding": {
+       "correct": 18,
+       "n": 23,
+       "wrong": 3,
+       "missing": 2
+      },
+      "mri_focal_cortical_dysplasia": {
+       "correct": 8,
+       "n": 23,
+       "not_reported": 15
+      },
+      "mri_hippocampal_sclerosis": {
+       "not_reported": 7,
+       "n": 23,
+       "wrong": 5,
+       "correct": 11
+      },
+      "mri_normal": {
+       "correct": 21,
+       "n": 23,
+       "missing": 1,
+       "not_reported": 1
+      },
+      "rescue_drug": {
+       "correct": 22,
+       "n": 22
+      },
+      "semiology_aura_in_text": {
+       "correct": 7,
+       "n": 13,
+       "missing": 6
+      },
+      "semiology_motor_feature_in_text": {
+       "correct": 26,
+       "n": 34,
+       "missing": 8
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_reported_but_unsupported": 4,
+      "eeg_ictal_onset_reported_but_none": 14,
+      "focal_motor_in_semiology_not_onset (not an error)": 14,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 3,
+      "eeg_ied_reported_but_none": 2,
+      "focal_motor_reported_but_unsupported": 2
+     },
+     "rescue": {
+      "all": {
+       "tp": 22,
+       "fp": 16,
+       "fn": 0,
+       "precision": 0.579,
+       "recall": 1.0,
+       "f1": 0.733
+      },
+      "in_text": {
+       "tp": 22,
+       "fp": 16,
+       "fn": 0,
+       "precision": 0.579,
+       "recall": 1.0,
+       "f1": 0.733
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 1,
+       "fn": 0,
+       "precision": 0.917,
+       "recall": 1.0,
+       "f1": 0.957
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 71,
+      "fp": 32,
+      "fn": 8,
+      "precision": 0.689,
+      "recall": 0.899,
+      "f1": 0.78
+     }
+    }
+   },
+   "timing": {
+    "mean_s": 0.81,
+    "max_s": 8.55,
+    "min_s": 0.49,
+    "notes": 113,
+    "total_note_seconds": 91.3,
+    "errors": [],
+    "llm_used_notes": 0
+   }
+  },
+  "leo_llm": {
+   "stats": {
+    "mode": "llm+specialist",
+    "model_load_seconds": 5.0,
+    "run_wall_seconds": 7873.3,
+    "gpu_peak_mib_nvidia_smi": 16816,
+    "rows_processed": 113,
+    "rows_error": 0,
+    "rows_with_llm": 113,
+    "torch_max_memory_allocated_mib": 16024,
+    "torch_max_memory_reserved_mib": 16304,
+    "gpu_name": "NVIDIA L40S-24Q"
+   },
+   "claim_stats": {
+    "all_claims_by_verdict": {
+     "accept": 1942,
+     "review": 1852,
+     "reject": 207
+    },
+    "scored_path_claims_by_verdict": {
+     "accept": 1279,
+     "review": 733,
+     "reject": 59
+    },
+    "claim_level": {
+     "accept": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 102,
+        "wrong": 2
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 92,
+        "wrong": 1
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 8,
+        "unscorable": 1,
+        "wrong": 2
+       },
+       "medication.current_asms": {
+        "correct": 173,
+        "wrong": 25
+       },
+       "medication.drug_resistance_status": {
+        "correct": 110
+       },
+       "eeg.study_type": {
+        "correct": 87
+       },
+       "eeg.background": {
+        "correct": 89,
+        "wrong": 1
+       },
+       "eeg.ied_present": {
+        "correct": 29
+       },
+       "eeg.ied_findings": {
+        "correct": 38,
+        "wrong": 9
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 15
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 15
+       },
+       "mri.overall_normal": {
+        "correct": 58
+       },
+       "mri.findings": {
+        "correct": 48,
+        "wrong": 46
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 25,
+        "wrong": 1
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 78,
+        "wrong": 1,
+        "unscorable": 1
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 3,
+        "correct": 24,
+        "unscorable": 2
+       },
+       "medication.surgery_history": {
+        "correct": 24
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 25
+       },
+       "medication.rescue_medication": {
+        "correct": 54,
+        "wrong": 3
+       }
+      },
+      "correct": 1181,
+      "wrong": 94,
+      "unscorable": 4,
+      "precision": 0.926,
+      "distinct_patient_path_value": {
+       "correct": 515,
+       "wrong": 78,
+       "precision": 0.868
+      }
+     },
+     "accept|both": {
+      "by_path": {
+       "clinical_seizure.epilepsy_type": {
+        "correct": 100,
+        "wrong": 1
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 87
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 77
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 6,
+        "unscorable": 1,
+        "wrong": 1
+       },
+       "medication.current_asms": {
+        "correct": 173,
+        "wrong": 25
+       },
+       "medication.drug_resistance_status": {
+        "correct": 110
+       },
+       "eeg.study_type": {
+        "correct": 82
+       },
+       "eeg.background": {
+        "correct": 87
+       },
+       "eeg.ied_present": {
+        "correct": 29
+       },
+       "eeg.ied_findings": {
+        "correct": 15
+       },
+       "eeg.ictal_onset_lobe": {
+        "correct": 15
+       },
+       "eeg.ictal_onset_laterality": {
+        "correct": 15
+       },
+       "mri.overall_normal": {
+        "correct": 56
+       },
+       "mri.findings": {
+        "correct": 47,
+        "wrong": 4
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 25,
+        "wrong": 1
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 72,
+        "wrong": 1
+       },
+       "medication.surgery_history": {
+        "correct": 24
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 25
+       },
+       "medication.rescue_medication": {
+        "correct": 54,
+        "wrong": 3
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "correct": 23,
+        "unscorable": 2,
+        "wrong": 1
+       }
+      },
+      "correct": 1122,
+      "wrong": 37,
+      "unscorable": 3,
+      "precision": 0.968,
+      "distinct_patient_path_value": {
+       "correct": 481,
+       "wrong": 28,
+       "precision": 0.945
+      }
+     },
+     "review": {
+      "by_path": {
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 23,
+        "correct": 2,
+        "unscorable": 7
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 18,
+        "correct": 11,
+        "unscorable": 4
+       },
+       "eeg.ied_findings": {
+        "correct": 40,
+        "wrong": 5
+       },
+       "eeg.ied_present": {
+        "correct": 67,
+        "wrong": 2
+       },
+       "medication.rescue_medication": {
+        "wrong": 27,
+        "correct": 128
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "wrong": 4,
+        "correct": 22
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "wrong": 9,
+        "correct": 11,
+        "unscorable": 30
+       },
+       "medication.current_asms": {
+        "correct": 49,
+        "wrong": 51
+       },
+       "mri.findings": {
+        "wrong": 32,
+        "correct": 5
+       },
+       "mri.hippocampal_sclerosis": {
+        "wrong": 13,
+        "correct": 17
+       },
+       "medication.drug_resistance_status": {
+        "correct": 2,
+        "wrong": 1
+       },
+       "eeg.background": {
+        "correct": 16,
+        "wrong": 4
+       },
+       "medication.surgery_history": {
+        "wrong": 12,
+        "correct": 11
+       },
+       "eeg.study_type": {
+        "wrong": 17,
+        "correct": 8
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 18,
+        "wrong": 1
+       },
+       "mri.overall_normal": {
+        "correct": 18,
+        "wrong": 6
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 18,
+        "correct": 1
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 4,
+        "wrong": 5
+       },
+       "clinical_seizure.etiology_category": {
+        "wrong": 3,
+        "correct": 6
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 4,
+        "correct": 1
+       }
+      },
+      "correct": 437,
+      "wrong": 255,
+      "unscorable": 41,
+      "precision": 0.632,
+      "distinct_patient_path_value": {
+       "correct": 272,
+       "wrong": 199,
+       "precision": 0.577
+      }
+     },
+     "review|specialist_only": {
+      "by_path": {
+       "clinical_seizure.predominant_seizure_type": {
+        "wrong": 23,
+        "unscorable": 3,
+        "correct": 1
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 17,
+        "correct": 9,
+        "unscorable": 3
+       },
+       "medication.rescue_medication": {
+        "wrong": 22,
+        "correct": 128
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "wrong": 4
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "wrong": 9,
+        "correct": 11,
+        "unscorable": 29
+       },
+       "medication.current_asms": {
+        "correct": 23,
+        "wrong": 35
+       },
+       "mri.findings": {
+        "wrong": 5
+       },
+       "mri.hippocampal_sclerosis": {
+        "wrong": 9
+       },
+       "eeg.ied_findings": {
+        "wrong": 2,
+        "correct": 2
+       },
+       "medication.surgery_history": {
+        "wrong": 10,
+        "correct": 7
+       },
+       "eeg.study_type": {
+        "wrong": 17,
+        "correct": 8
+       },
+       "mri.overall_normal": {
+        "correct": 8
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 17
+       },
+       "eeg.background": {
+        "correct": 8,
+        "wrong": 2
+       },
+       "clinical_seizure.etiology_category": {
+        "wrong": 3,
+        "correct": 4
+       },
+       "medication.drug_resistance_status": {
+        "wrong": 1
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "wrong": 2
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 3,
+        "wrong": 3
+       }
+      },
+      "correct": 212,
+      "wrong": 184,
+      "unscorable": 35,
+      "precision": 0.535,
+      "distinct_patient_path_value": {
+       "correct": 126,
+       "wrong": 143,
+       "precision": 0.468
+      }
+     },
+     "review|model_only": {
+      "by_path": {
+       "eeg.ied_findings": {
+        "correct": 38,
+        "wrong": 3
+       },
+       "eeg.ied_present": {
+        "correct": 67
+       },
+       "clinical_seizure.age_at_onset_years": {
+        "correct": 22
+       },
+       "medication.drug_resistance_status": {
+        "correct": 2
+       },
+       "eeg.background": {
+        "correct": 8,
+        "wrong": 2
+       },
+       "medication.current_asms": {
+        "correct": 26,
+        "wrong": 16
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 13
+       },
+       "mri.focal_cortical_dysplasia": {
+        "correct": 18,
+        "wrong": 1
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "unscorable": 1,
+        "wrong": 1,
+        "correct": 2
+       },
+       "mri.overall_normal": {
+        "wrong": 6,
+        "correct": 10
+       },
+       "mri.findings": {
+        "wrong": 23,
+        "correct": 1
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 1,
+        "unscorable": 4
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 1,
+        "wrong": 2
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "unscorable": 1
+       },
+       "medication.surgery_history": {
+        "wrong": 2,
+        "correct": 4
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 2
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 1,
+        "correct": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 1,
+        "correct": 1
+       }
+      },
+      "correct": 217,
+      "wrong": 58,
+      "unscorable": 6,
+      "precision": 0.789,
+      "distinct_patient_path_value": {
+       "correct": 142,
+       "wrong": 50,
+       "precision": 0.74
+      }
+     },
+     "accept|specialist_only": {
+      "by_path": {
+       "mri.findings": {
+        "wrong": 42,
+        "correct": 1
+       },
+       "clinical_seizure.focal_nonmotor_onset": {
+        "wrong": 2,
+        "correct": 1
+       },
+       "eeg.ied_findings": {
+        "correct": 23,
+        "wrong": 9
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 15,
+        "wrong": 1
+       },
+       "clinical_seizure.epilepsy_type": {
+        "correct": 2,
+        "wrong": 1
+       },
+       "eeg.study_type": {
+        "correct": 5
+       },
+       "eeg.background": {
+        "wrong": 1,
+        "correct": 2
+       },
+       "clinical_seizure.predominant_seizure_type": {
+        "correct": 6,
+        "unscorable": 1
+       },
+       "clinical_seizure.focal_motor_onset": {
+        "correct": 2,
+        "wrong": 1
+       },
+       "mri.overall_normal": {
+        "correct": 2
+       }
+      },
+      "correct": 59,
+      "wrong": 57,
+      "unscorable": 1,
+      "precision": 0.509,
+      "distinct_patient_path_value": {
+       "correct": 49,
+       "wrong": 50,
+       "precision": 0.495
+      }
+     },
+     "review|both": {
+      "by_path": {
+       "medication.rescue_medication": {
+        "wrong": 5
+       },
+       "mri.findings": {
+        "correct": 4,
+        "wrong": 4
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 4,
+        "wrong": 4
+       }
+      },
+      "correct": 8,
+      "wrong": 13,
+      "unscorable": 0,
+      "precision": 0.381,
+      "distinct_patient_path_value": {
+       "correct": 6,
+       "wrong": 6,
+       "precision": 0.5
+      }
+     },
+     "reject": {
+      "by_path": {
+       "mri.focal_cortical_dysplasia": {
+        "correct": 11,
+        "wrong": 2
+       },
+       "mri.findings": {
+        "wrong": 12
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 10
+       },
+       "mri.overall_normal": {
+        "wrong": 7,
+        "correct": 1
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 1
+       },
+       "eeg.background": {
+        "correct": 1
+       },
+       "eeg.ied_present": {
+        "correct": 8
+       },
+       "medication.current_asms": {
+        "wrong": 2,
+        "correct": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 1
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 1
+       },
+       "eeg.ied_findings": {
+        "correct": 1
+       }
+      },
+      "correct": 34,
+      "wrong": 25,
+      "unscorable": 0,
+      "precision": 0.576,
+      "distinct_patient_path_value": {
+       "correct": 32,
+       "wrong": 21,
+       "precision": 0.604
+      }
+     },
+     "reject|model_only": {
+      "by_path": {
+       "mri.focal_cortical_dysplasia": {
+        "correct": 11,
+        "wrong": 2
+       },
+       "mri.findings": {
+        "wrong": 12
+       },
+       "mri.hippocampal_sclerosis": {
+        "correct": 10
+       },
+       "mri.overall_normal": {
+        "wrong": 7,
+        "correct": 1
+       },
+       "clinical_seizure.etiology_category": {
+        "correct": 1
+       },
+       "eeg.background": {
+        "correct": 1
+       },
+       "eeg.ied_present": {
+        "correct": 8
+       },
+       "medication.current_asms": {
+        "wrong": 2,
+        "correct": 1
+       },
+       "eeg.ictal_onset_laterality": {
+        "wrong": 1
+       },
+       "eeg.ictal_onset_lobe": {
+        "wrong": 1
+       },
+       "eeg.ied_findings": {
+        "correct": 1
+       }
+      },
+      "correct": 34,
+      "wrong": 25,
+      "unscorable": 0,
+      "precision": 0.576,
+      "distinct_patient_path_value": {
+       "correct": 32,
+       "wrong": 21,
+       "precision": 0.604
+      }
+     }
+    }
+   },
+   "views": {
+    "all": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "wrong": 4,
+       "n": 34,
+       "correct": 30
+      },
+      "drug_resistance": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 27,
+       "n": 27
+      },
+      "eeg_ied_lobe": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_ied_side": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "wrong": 1
+      },
+      "etiology_category": {
+       "correct": 35,
+       "n": 37,
+       "missing": 1,
+       "wrong": 1
+      },
+      "focal_motor_onset": {
+       "correct": 8,
+       "n": 12,
+       "wrong": 4
+      },
+      "focal_nonmotor_onset": {
+       "wrong": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "mri_finding": {
+       "correct": 18,
+       "n": 23,
+       "wrong": 5
+      },
+      "mri_focal_cortical_dysplasia": {
+       "correct": 17,
+       "n": 23,
+       "not_reported": 6
+      },
+      "mri_hippocampal_sclerosis": {
+       "not_reported": 2,
+       "n": 23,
+       "wrong": 4,
+       "correct": 17
+      },
+      "mri_normal": {
+       "correct": 23,
+       "n": 23
+      },
+      "rescue_drug": {
+       "correct": 22,
+       "n": 22
+      },
+      "semiology_aura_in_text": {
+       "correct": 7,
+       "n": 13,
+       "missing": 6
+      },
+      "semiology_motor_feature_in_text": {
+       "correct": 26,
+       "n": 34,
+       "missing": 8
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_reported_but_unsupported": 5,
+      "eeg_ictal_onset_reported_but_none": 15,
+      "focal_motor_in_semiology_not_onset (not an error)": 14,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 4,
+      "eeg_ied_reported_but_none": 2,
+      "focal_motor_reported_but_unsupported": 2
+     },
+     "rescue": {
+      "all": {
+       "tp": 22,
+       "fp": 12,
+       "fn": 0,
+       "precision": 0.647,
+       "recall": 1.0,
+       "f1": 0.786
+      },
+      "in_text": {
+       "tp": 22,
+       "fp": 12,
+       "fn": 0,
+       "precision": 0.647,
+       "recall": 1.0,
+       "f1": 0.786
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.786,
+       "recall": 1.0,
+       "f1": 0.88
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.786,
+       "recall": 1.0,
+       "f1": 0.88
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 75,
+      "fp": 54,
+      "fn": 4,
+      "precision": 0.581,
+      "recall": 0.949,
+      "f1": 0.721
+     }
+    },
+    "accepted": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 35,
+       "n": 37,
+       "wrong": 2
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "drug_resistance": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 18,
+       "n": 27,
+       "missing": 9
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_study_type": {
+       "correct": 36,
+       "n": 37,
+       "missing": 1
+      },
+      "etiology_category": {
+       "correct": 34,
+       "n": 37,
+       "missing": 2,
+       "wrong": 1
+      },
+      "focal_motor_onset": {
+       "correct": 4,
+       "n": 12,
+       "missing": 5,
+       "wrong": 3
+      },
+      "focal_nonmotor_onset": {
+       "wrong": 2,
+       "n": 15,
+       "correct": 11,
+       "missing": 2
+      },
+      "mri_finding": {
+       "correct": 17,
+       "n": 23,
+       "wrong": 4,
+       "missing": 2
+      },
+      "mri_focal_cortical_dysplasia": {
+       "correct": 8,
+       "n": 23,
+       "not_reported": 15
+      },
+      "mri_hippocampal_sclerosis": {
+       "not_reported": 7,
+       "n": 23,
+       "missing": 5,
+       "correct": 11
+      },
+      "mri_normal": {
+       "correct": 18,
+       "n": 23,
+       "missing": 4,
+       "not_reported": 1
+      },
+      "rescue_drug": {
+       "correct": 22,
+       "n": 22
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 22,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.88,
+       "recall": 1.0,
+       "f1": 0.936
+      },
+      "in_text": {
+       "tp": 22,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.88,
+       "recall": 1.0,
+       "f1": 0.936
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 72,
+      "fp": 16,
+      "fn": 7,
+      "precision": 0.818,
+      "recall": 0.911,
+      "f1": 0.862
+     }
+    },
+    "crosschecked": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 34,
+       "n": 37,
+       "missing": 2,
+       "wrong": 1
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "drug_resistance": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 18,
+       "n": 27,
+       "missing": 9
+      },
+      "eeg_ied_lobe": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_ied_side": {
+       "correct": 12,
+       "n": 12
+      },
+      "eeg_study_type": {
+       "correct": 35,
+       "n": 37,
+       "missing": 2
+      },
+      "etiology_category": {
+       "correct": 28,
+       "n": 37,
+       "missing": 9
+      },
+      "focal_motor_onset": {
+       "correct": 3,
+       "n": 12,
+       "missing": 7,
+       "wrong": 2
+      },
+      "focal_nonmotor_onset": {
+       "missing": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "mri_finding": {
+       "correct": 18,
+       "n": 23,
+       "missing": 4,
+       "wrong": 1
+      },
+      "mri_focal_cortical_dysplasia": {
+       "correct": 8,
+       "n": 23,
+       "not_reported": 15
+      },
+      "mri_hippocampal_sclerosis": {
+       "not_reported": 7,
+       "n": 23,
+       "missing": 5,
+       "correct": 11
+      },
+      "mri_normal": {
+       "correct": 18,
+       "n": 23,
+       "missing": 4,
+       "not_reported": 1
+      },
+      "rescue_drug": {
+       "correct": 22,
+       "n": 22
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 22,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.88,
+       "recall": 1.0,
+       "f1": 0.936
+      },
+      "in_text": {
+       "tp": 22,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.88,
+       "recall": 1.0,
+       "f1": 0.936
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 0,
+       "fn": 0,
+       "precision": 1.0,
+       "recall": 1.0,
+       "f1": 1.0
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 72,
+      "fp": 16,
+      "fn": 7,
+      "precision": 0.818,
+      "recall": 0.911,
+      "f1": 0.862
+     }
+    },
+    "model": {
+     "outcomes": {
+      "core_age_at_onset": {
+       "correct": 37,
+       "n": 37
+      },
+      "core_epilepsy_type": {
+       "correct": 34,
+       "n": 37,
+       "wrong": 2,
+       "missing": 1
+      },
+      "core_seizure_type": {
+       "missing": 3,
+       "n": 34,
+       "correct": 31
+      },
+      "drug_resistance": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_background_normal_vs_slowing": {
+       "correct": 37,
+       "n": 37
+      },
+      "eeg_ictal_lobe": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ictal_side": {
+       "correct": 5,
+       "n": 5
+      },
+      "eeg_ied_found": {
+       "correct": 27,
+       "n": 27
+      },
+      "eeg_ied_lobe": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_ied_side": {
+       "correct": 17,
+       "n": 17
+      },
+      "eeg_study_type": {
+       "correct": 35,
+       "n": 37,
+       "missing": 2
+      },
+      "etiology_category": {
+       "correct": 28,
+       "n": 37,
+       "missing": 9
+      },
+      "focal_motor_onset": {
+       "correct": 3,
+       "n": 12,
+       "missing": 7,
+       "wrong": 2
+      },
+      "focal_nonmotor_onset": {
+       "missing": 4,
+       "n": 15,
+       "correct": 11
+      },
+      "mri_finding": {
+       "correct": 18,
+       "n": 23,
+       "wrong": 5
+      },
+      "mri_focal_cortical_dysplasia": {
+       "correct": 17,
+       "n": 23,
+       "not_reported": 6
+      },
+      "mri_hippocampal_sclerosis": {
+       "not_reported": 2,
+       "n": 23,
+       "missing": 4,
+       "correct": 17
+      },
+      "mri_normal": {
+       "correct": 21,
+       "n": 23,
+       "missing": 2
+      },
+      "rescue_drug": {
+       "correct": 22,
+       "n": 22
+      },
+      "semiology_aura_in_text": {
+       "missing": 13,
+       "n": 13
+      },
+      "semiology_motor_feature_in_text": {
+       "missing": 34,
+       "n": 34
+      },
+      "surgery_procedure": {
+       "correct": 11,
+       "n": 11
+      }
+     },
+     "spurious": {
+      "focal_nonmotor_in_semiology_not_onset (not an error)": 2,
+      "focal_motor_in_semiology_not_onset (not an error)": 1,
+      "focal_nonmotor_reported_but_unsupported": 2,
+      "eeg_ictal_onset_reported_but_none": 1
+     },
+     "rescue": {
+      "all": {
+       "tp": 22,
+       "fp": 6,
+       "fn": 0,
+       "precision": 0.786,
+       "recall": 1.0,
+       "f1": 0.88
+      },
+      "in_text": {
+       "tp": 22,
+       "fp": 6,
+       "fn": 0,
+       "precision": 0.786,
+       "recall": 1.0,
+       "f1": 0.88
+      }
+     },
+     "surgery": {
+      "all": {
+       "tp": 11,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.846,
+       "recall": 1.0,
+       "f1": 0.917
+      },
+      "in_text": {
+       "tp": 11,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.846,
+       "recall": 1.0,
+       "f1": 0.917
+      }
+     },
+     "current_asms_patient_union": {
+      "tp": 75,
+      "fp": 32,
+      "fn": 4,
+      "precision": 0.701,
+      "recall": 0.949,
+      "f1": 0.806
+     }
+    }
+   },
+   "timing": {
+    "mean_s": 69.67,
+    "max_s": 134.25,
+    "min_s": 41.66,
+    "notes": 113,
+    "total_note_seconds": 7873.1,
+    "errors": [],
+    "llm_used_notes": 113
+   }
+  }
+ }
+}

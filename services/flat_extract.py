@@ -27,14 +27,24 @@ This module has no torch dependency.
 from __future__ import annotations
 
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-FLAT_PROMPT_VERSION = "v1"
+from schema.enums import UNKNOWN_EPILEPSY_TYPE_DEFINITION
+
+# v1: epilepsy_type has no "unknown" (every stored run and reported table).
+# v2: adds "unknown" = UNKNOWN_EPILEPSY_TYPE_DEFINITION, the same wording EpExtra uses.
+# A stored manifest is parsed with the version it was run under.
+FLAT_PROMPT_VERSIONS = ("v1", "v2")
+FLAT_PROMPT_VERSION = os.environ.get("MEDAI_FLAT_PROMPT_VERSION", "v1")
+if FLAT_PROMPT_VERSION not in FLAT_PROMPT_VERSIONS:
+    raise ValueError(f"MEDAI_FLAT_PROMPT_VERSION must be one of {FLAT_PROMPT_VERSIONS}")
 FLAT_ARMS = ("L0", "L1", "L2", "L0C", "L1C", "L2C")
 
 EPILEPSY_TYPES = ("focal", "generalized", "combined_focal_generalized")
+EPILEPSY_TYPES_V2 = EPILEPSY_TYPES + ("unknown",)
 SEIZURE_TYPES = (
     "focal_aware", "focal_impaired_awareness", "focal_unknown_awareness",
     "focal_to_bilateral_tonic_clonic", "generalized_tonic_clonic",
@@ -57,12 +67,22 @@ FLAT_FIELD_PATHS = frozenset({
     "medication.current_asms",
 })
 
+def epilepsy_types(version: Optional[str] = None) -> tuple[str, ...]:
+    return EPILEPSY_TYPES_V2 if (version or FLAT_PROMPT_VERSION) == "v2" else EPILEPSY_TYPES
+
+
+_EPI_LINE = {
+    "v1": f"- epilepsy_type: one of {list(EPILEPSY_TYPES)} or null",
+    "v2": (f"- epilepsy_type: one of {list(EPILEPSY_TYPES_V2)} or null. \"unknown\" means "
+           f"{UNKNOWN_EPILEPSY_TYPE_DEFINITION}; null means the note does not say the patient has epilepsy"),
+}
+
 _INSTRUCTIONS = f"""You extract facts about one patient's epilepsy from a clinic note.
 Reply with ONE JSON object and nothing else. Use null for anything the note does not state.
 Every non-null value needs "quote": the exact words copied from the note that support it.
 
 Fields:
-- epilepsy_type: one of {list(EPILEPSY_TYPES)} or null
+{{epi_line}}
 - predominant_seizure_type: one of {list(SEIZURE_TYPES)} or null
 - age_at_onset_years: a number or null
 - seizure_frequency: count_min, count_max (numbers or null), period (one of {list(PERIODS)} or null), seizure_free (true/false/null)
@@ -97,32 +117,34 @@ _EXAMPLES = [
 ]
 
 
-_BANK = None
+_BANKS: dict = {}
 
 
-def _bank():
-    global _BANK
-    if _BANK is None:
+def _bank(version: str = "v1"):
+    if version not in _BANKS:
         from services.fewshot_bank import ExemplarBank
-        _BANK = ExemplarBank()
-    return _BANK
+        _BANKS[version] = ExemplarBank(unknown_epilepsy=version == "v2")
+    return _BANKS[version]
 
 
-def build_flat_prompt(note: str, arm: str = "L0", *, exclude: str = "", k: int = 3) -> str:
-    arm = arm[:-1] if arm.endswith("C") else arm      # L1C/L2C share the L1/L2 prompt text
+def build_flat_prompt(note: str, arm: str = "L0", *, exclude: str = "", k: int = 3,
+                      version: Optional[str] = None) -> str:
     """Prompt text for arm L0 (zero-shot), L1 (two fixed examples) or L2 (k retrieved F-S training letters).
 
     ``exclude`` removes one letter id from the L2 bank (used when running on a
-    development letter, so a letter is never its own example).
+    development letter, so a letter is never its own example).  ``version``
+    defaults to ``FLAT_PROMPT_VERSION``.
     """
+    arm = arm[:-1] if arm.endswith("C") else arm      # L1C/L2C share the L1/L2 prompt text
+    version = version or FLAT_PROMPT_VERSION
     if arm not in ("L0", "L1", "L2"):
         raise ValueError(f"arm must be one of {FLAT_ARMS}, got {arm!r}")
-    parts = [_INSTRUCTIONS]
+    parts = [_INSTRUCTIONS.replace("{epi_line}", _EPI_LINE[version])]
     if arm == "L1":
         for text, ans in _EXAMPLES:
             parts.append(f'Example note:\n"""\n{text}\n"""\nJSON:\n{json.dumps(ans)}\n')
     elif arm == "L2":
-        for ex in _bank().select(note, k=k, exclude=exclude):
+        for ex in _bank(version).select(note, k=k, exclude=exclude):
             parts.append(f'Example note:\n"""\n{ex.text.strip()}\n"""\nJSON:\n{json.dumps(ex.answer)}\n')
     parts.append(f'Note:\n"""\n{note}\n"""\nJSON:\n')
     return "\n".join(parts)
@@ -130,13 +152,13 @@ def build_flat_prompt(note: str, arm: str = "L0", *, exclude: str = "", k: int =
 
 # ─── Constrained-decoding schema ─────────────────────────────────────────
 
-def _flat_answer_model():
+def _flat_answer_model(version: str):
     """Pydantic model of the flat JSON answer (built lazily; used by ``generate_constrained``)."""
     from typing import Literal
 
     from pydantic import BaseModel, Field
 
-    Epi = Literal[EPILEPSY_TYPES]            # type: ignore[valid-type]
+    Epi = Literal[epilepsy_types(version)]   # type: ignore[valid-type]
     Sz = Literal[SEIZURE_TYPES]              # type: ignore[valid-type]
     Per = Literal[PERIODS]                   # type: ignore[valid-type]
     Quote = Optional[str]
@@ -175,14 +197,14 @@ def _flat_answer_model():
     return FlatAnswer
 
 
-_FLAT_ANSWER = None
+_FLAT_ANSWER: dict = {}
 
 
-def flat_answer_model():
-    global _FLAT_ANSWER
-    if _FLAT_ANSWER is None:
-        _FLAT_ANSWER = _flat_answer_model()
-    return _FLAT_ANSWER
+def flat_answer_model(version: Optional[str] = None):
+    version = version or FLAT_PROMPT_VERSION
+    if version not in _FLAT_ANSWER:
+        _FLAT_ANSWER[version] = _flat_answer_model(version)
+    return _FLAT_ANSWER[version]
 
 
 # ─── Parsing ─────────────────────────────────────────────────────────────
@@ -234,12 +256,13 @@ def _norm_enum(v: Any) -> Optional[str]:
     return re.sub(r"[\s\-]+", "_", v.strip().lower())
 
 
-def parse_flat(raw: str) -> FlatParse:
+def parse_flat(raw: str, version: str = "v1") -> FlatParse:
     """Flat JSON text -> ``{module: {field: Evidence-dict}}`` for the fuser.
 
     Values outside the closed vocabularies are dropped (counted), numbers
     are coerced, and a value without a quote is dropped: LEO cannot check
-    it, and the compendium requires a span for every claim.
+    it, and the compendium requires a span for every claim.  ``version`` is
+    the prompt version the answer was generated under (v1 drops "unknown").
     """
     obj = _json_obj(raw)
     if obj is None:
@@ -267,7 +290,7 @@ def parse_flat(raw: str) -> FlatParse:
         cs[key] = _ev(val, quote)
         out.n_fields_kept += 1
 
-    scalar("epilepsy_type", EPILEPSY_TYPES)
+    scalar("epilepsy_type", epilepsy_types(version))
     scalar("predominant_seizure_type", SEIZURE_TYPES)
 
     age = obj.get("age_at_onset_years")
@@ -321,5 +344,6 @@ def parse_flat(raw: str) -> FlatParse:
     return out
 
 
-__all__ = ["flat_answer_model", "FLAT_ARMS", "FLAT_PROMPT_VERSION", "FlatParse", "build_flat_prompt", "parse_flat",
-           "EPILEPSY_TYPES", "SEIZURE_TYPES", "PERIODS", "FLAT_FIELD_PATHS"]
+__all__ = ["flat_answer_model", "FLAT_ARMS", "FLAT_PROMPT_VERSION", "FLAT_PROMPT_VERSIONS", "FlatParse",
+           "build_flat_prompt", "parse_flat", "epilepsy_types",
+           "EPILEPSY_TYPES", "EPILEPSY_TYPES_V2", "SEIZURE_TYPES", "PERIODS", "FLAT_FIELD_PATHS"]

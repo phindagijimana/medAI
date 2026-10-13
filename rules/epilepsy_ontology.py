@@ -1764,7 +1764,8 @@ FOCAL_MOTOR_ONSET_ONTOLOGY: dict[str, ConceptEntry] = {
         label="Focal tonic seizure (ILAE 2017)",
         synonyms=[
             "focal tonic", "focal tonic seizure", "asymmetric tonic posturing",
-            "focal tonic posturing",
+            "focal tonic posturing", "versive", "versive head turning",
+            "forced head turning", "head version",
         ],
         source_provenance=["ExECT-V2 seed C0752324", "ILAE 2017"],
     ),
@@ -2219,6 +2220,12 @@ CAUSATIVE_ANTIBODY_ONTOLOGY: dict[str, ConceptEntry] = {
 # ---------------------------------------------------------------------------
 
 ETIOLOGY_DETAILS_ONTOLOGY: dict[str, ConceptEntry] = {
+    "juvenile_myoclonic_epilepsy": ConceptEntry(
+        cui="C0270853", sctid=None,
+        label="Juvenile myoclonic epilepsy",
+        synonyms=["JME", "juvenile myoclonic epilepsy", "Janz syndrome"],
+        source_provenance=["ExECT-V2 seed C0270853", "ILAE 2017", "F-S gold mention JME"],
+    ),
     "hippocampal_sclerosis": ConceptEntry(
         cui="C4749367", sctid="448705004",
         label="Hippocampal sclerosis (structural etiology detail)",

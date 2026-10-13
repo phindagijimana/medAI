@@ -240,19 +240,18 @@ class MedCATExtractor:
         self,
         text: str,
         nlp,
+        *,
+        engine: str = "medspacy",
     ) -> tuple[list[LinkedEntity], "any"]:
-        """Extract entities and attach medspaCy ConText attributes.
+        """Extract entities and attach context attributes.
 
-        Convenience one-shot: runs MedCAT, builds a spaCy ``Doc`` on the
-        same text via ``nlp``, injects our MedCAT entities as ``doc.ents``
-        BEFORE the ConText component runs, so ConText decorates them.
-
-        Returns ``(entities, doc)``. ``entities`` is the ``LinkedEntity``
-        list with ``is_negated`` / ``is_historical`` / ``is_hypothetical``
-        / ``is_family`` / ``sentence_text`` / ``sentence_start`` populated.
+        Default ``engine='medspacy'`` is the shipped ConText pass. ``sentence``
+        and ``negex`` are in-E ablations (``services.context_engine``); they
+        do not add a third phenotype arm.
         """
+        from services.context_engine import attach_entity_context
         entities = self.extract(text)
-        doc = attach_medspacy_context(entities, text, nlp)
+        doc = attach_entity_context(entities, text, nlp, engine)
         return entities, doc
 
     # ---- Internals ------------------------------------------------------

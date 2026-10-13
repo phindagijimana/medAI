@@ -1,7 +1,7 @@
 # MedAI-EPI Paper 1 (Shape A) — Study Protocol
 
-**Version:** 0.1, 2026-09-22
-**Status:** Awaiting PI sign-off. Superseded when signed and dated.
+**Version:** 0.1, 2026-09-22  
+**Status:** **Superseded** by `docs/EVAL_PROTOCOL_LEO.md` (frozen 2026-10-01) and `writing/MedAI_EPI_Manuscript_LEO.md`. Kept as history of the M0/M1/M2 research questions. Do not use RQ-A1–A6 as the submission hypotheses.
 
 ## 1. Rationale
 

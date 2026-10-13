@@ -6,9 +6,9 @@ names and the plain-language caveats.  Every number comes from a scorer output i
 file and system it came from are returned with it.  If a file is missing the phenotype is reported as
 "no evidence file", never as a guess.
 
-The configuration scored is the configuration shipped: pipeline leo-v0.5, arm L1C (base Med42-8B, two
-fixed examples, schema-constrained decoding), the rules' value shown on a disagreement (D17).  A test checks that
-the files exist and that the arm is L1C.
+The numbers printed here come from the frozen L1C D17 files (``leo_vs_fs_gold_v08``,
+``leo_vs_synth_gold_v07_maint``). Live runtime is ``leo-v0.9`` (unknown+silent REVIEW; cluster-if
+not current). Headline extras stay frozen. A test checks that the files exist and that the arm is L1C.
 """
 
 from __future__ import annotations
@@ -21,21 +21,22 @@ RESULTS = Path(__file__).resolve().parent.parent / "eval" / "results"
 
 DATASETS: dict[str, dict[str, Any]] = {
     "fs": {
-        "file": "leo_vs_fs_gold_v05_default.json", "source": "L1C",
+        "file": "leo_vs_fs_gold_v08.json", "source": "L1C",
         "label": "40 held-out clinic letters (Fonferko-Shadrach, UK style)",
         "unit": "letters", "text": "synthetic",
         "gold": "clinician-adjudicated annotations from the ExECT corpus (the epilepsy type in the gold is a keyword "
                 "rule over the diagnosis text)",
         "convention": "a rescue drug counts as a current ASM (the F-S gold convention)",
-        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.1-10.7; scored with the shipped configuration (no override), section 10.9",
+        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.1-10.7; scored with the shipped configuration (no override), "
+                    "sections 10.9 and 10.41",
     },
     "synth": {
-        "file": "leo_vs_synth_gold_v05_maint.json", "source": "L1C",
+        "file": "leo_vs_synth_gold_v07_maint.json", "source": "L1C",
         "label": "30 synthetic US-style patients (143 notes)",
         "unit": "patients", "text": "synthetic",
         "gold": "the generator's own ground truth, aggregated over each patient's notes",
         "convention": "rescue drugs do not count as current ASMs",
-        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.4, 10.7",
+        "protocol": "docs/EVAL_PROTOCOL_LEO.md 10.4, 10.7, 10.41",
     },
 }
 
@@ -45,11 +46,15 @@ FIELD_MAP: dict[str, list[tuple[str, str, str]]] = {
                       ("epilepsy_type|typed", "only where the reference names a type",
                        "Records whose reference is 'unknown' are left out; a predicted 'unknown' counts as no answer.")],
     "seizure_type": [("predominant_seizure_type", "predominant seizure type", "")],
+    "seizure_onset_class": [("predominant_seizure_type|class", "focal / generalized / unknown onset", "")],
     "age_at_onset": [("age_at_onset_years", "within 1 year", "")],
     "seizure_frequency": [("seizure_frequency.period", "period", ""),
                           ("seizure_frequency.count_min", "count, lower bound", ""),
                           ("seizure_frequency.count_max", "count, upper bound", "")],
     "current_asms": [("current_asms", "drug names", "")],
+    "seizure_free": [("seizure_free", "seizure free now (yes / no)", "")],
+    "date_of_last_seizure": [("date_of_last_seizure", "date at the reference's precision",
+                              "Any of the reference's per-seizure-type dates counts as a match.")],
 }
 
 CAVEATS = [
@@ -81,7 +86,7 @@ def _pf(src: dict, system: str, key: str) -> Optional[dict]:
 def evidence() -> dict:
     """The full evidence object for the UI and ``GET /leo/evidence``."""
     out: dict[str, Any] = {"datasets": [], "fields": {}, "claim_precision": {}, "caveats": CAVEATS,
-                           "config": "leo-v0.5, arm L1C (Med42-8B, schema-constrained); on a disagreement the rules' value is shown and the model's is kept as the alternative"}
+                           "config": "runtime leo-v0.9; scored files L1C D17 (frozen v08/v07). Rules shown on disagreement; model kept as alternative"}
     srcs: dict[str, Optional[dict]] = {}
     for did, d in DATASETS.items():
         raw = _load(d["file"])

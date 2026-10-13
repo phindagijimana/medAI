@@ -224,7 +224,6 @@ _UI_HTML = r"""<!DOCTYPE html>
   </div>
   <div>
     <a href="/extract/registry" target="_blank">Prompt registry</a>
-    <a href="/leo/ui">LEO (phenotypes, spreadsheets)</a>
     <a href="/extract/ui/review">Review queue</a>
     <a href="/extract/health" target="_blank">Health</a>
     <span id="status-badge" class="status-loading">Loading backend…</span>

@@ -22,7 +22,7 @@ def test_phenotypes_lists_everything(capsys):
     out = capsys.readouterr().out
     assert "current_asms" in out and "PANELS" in out and "status_epilepticus" in out
     assert leo_cli.main(["phenotypes", "--json"]) == 0
-    assert len(json.loads(capsys.readouterr().out)["extract"]) == 41
+    assert len(json.loads(capsys.readouterr().out)["extract"]) == 45
 
 
 def test_batch_local_cpu_adds_columns_and_keeps_input(tmp_path, capsys):
@@ -77,6 +77,12 @@ def test_slurm_script_gpu_and_cpu(tmp_path, monkeypatch):
     leo_cli._submit("t", ["batch", "x", "--local", "--mode", "cpu"], gpu=False, partition="general", hours=2)
     c = next(tmp_path.glob("t_*.sh")).read_text()
     assert "gres" not in c and "--time=02:00:00" in c
+    for f in tmp_path.glob("t_*.sh"):
+        f.unlink()
+    leo_cli._submit("t", ["check", "--gpu"], gpu=True, partition="gpu", hours=1,
+                    gres="gpu:a100:1", cpus=4, mem="32G")
+    a = next(tmp_path.glob("t_*.sh")).read_text()
+    assert "--gres=gpu:a100:1" in a and "--cpus-per-task=4" in a and "--mem=32G" in a
 
 
 def test_batch_default_submits_gpu_job(tmp_path, monkeypatch):

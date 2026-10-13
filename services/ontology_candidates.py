@@ -231,11 +231,19 @@ def _tokens(s: str) -> set[str]:
     return {_SINGULAR.get(t.lower(), t.lower()) for t in _WORD_RE.findall(s or "")}
 
 
+def _mention_extra_ontologies(mention_norm: str) -> tuple[str, ...]:
+    """When the mention is a known syndrome abbreviation, also search EtiologyDetails."""
+    if mention_norm in {"jme", "juvenile myoclonic epilepsy", "janz syndrome"}:
+        return ("EtiologyDetails",)
+    return ()
+
+
 def _normalize(s: str) -> str:
-    t = (s or "").strip().lower()
+    t = (s or "").strip().lower().replace("-", " ")
     for uk, us in _SPELLING:
         t = t.replace(uk, us)
-    return t
+    t = t.replace("tonic chronic", "tonic clonic")
+    return " ".join(_SINGULAR.get(w, w) for w in t.split())
 
 
 def _jaccard(a: set[str], b: set[str]) -> float:
@@ -379,6 +387,13 @@ class OntologyCandidateService:
 
         # Which ontology dicts to search, in priority order.
         search_dicts = self._route_dicts(field_type)
+        extras = _mention_extra_ontologies(mention_norm)
+        if extras:
+            pool = {**self._enum_ontologies, **self._extra_ontologies}
+            have = {n for n, _ in search_dicts}
+            for name in extras:
+                if name in pool and name not in have:
+                    search_dicts.append((name, pool[name]))
 
         seen_ids: set[tuple[str, str]] = set()
         seen_curated: set[tuple[str, str, str]] = set()
@@ -512,10 +527,7 @@ class OntologyCandidateService:
                 toks |= _tokens(_normalize(s))
             return len(mention_toks & toks)
 
-        if out and max(c.rank_score for c in out) < 0.9:
-            out.sort(key=lambda c: (-c.rank_score, -_overlap(c), priority.get(c.system, 8)))
-        else:
-            out.sort(key=lambda c: (-c.rank_score, priority.get(c.system, 8)))
+        out.sort(key=lambda c: (-c.rank_score, -_overlap(c), priority.get(c.system, 8)))
         return out[:k]
 
     # ---- helpers -------------------------------------------------------
@@ -581,7 +593,9 @@ class OntologyCandidateService:
         if len(mention_norm) >= min_sub and label_norm and mention_norm in label_norm:
             return _specificity_penalty(mention_toks, label_norm, 0.7, "substring_label")
         if len(label_norm) >= min_sub and label_norm in mention_norm:
-            return _specificity_penalty(mention_toks, label_norm, 0.7, "substring_label_rev")
+            extra = mention_toks - _tokens(label_norm) - {"of", "the", "a", "an", "with", "and", "to"}
+            score = 0.7 * (0.55 if extra else 1.0)
+            return _specificity_penalty(mention_toks, label_norm, score, "substring_label_rev")
         for s in syn_norms:
             if len(s) >= min_sub and len(mention_norm) >= min_sub and (mention_norm in s or s in mention_norm):
                 return _specificity_penalty(mention_toks, label_norm, 0.5, "substring_synonym")
@@ -591,6 +605,8 @@ class OntologyCandidateService:
             j = _jaccard(mention_toks, _tokens(s))
             if j > best_j:
                 best_j = j
+        if best_j >= 0.85:
+            return _specificity_penalty(mention_toks, label_norm, 0.88, "jaccard_high")
         if best_j >= 0.5:
             return _specificity_penalty(
                 mention_toks, label_norm, 0.3 + 0.2 * (best_j - 0.5), "jaccard")
@@ -599,12 +615,18 @@ class OntologyCandidateService:
 
 def _specificity_penalty(mention_toks: set[str], label_norm: str,
                          score: float, mtype: str) -> tuple[float, str]:
-    """Demote generic parents (HPO 'Seizure', 'epilepsy') when the mention names a child."""
+    """Demote generic parents when the mention names a child, and extra-specific
+    children when the mention does not (e.g. 'GTC' vs 'GTC on awakening')."""
     label_toks = _tokens(label_norm)
+    stop = {"of", "the", "a", "an", "with", "and", "to", "on"}
     generic = label_norm in _GENERIC_LABELS or (bool(label_toks) and label_toks <= _GENERIC_TOKS)
-    extra = mention_toks - _GENERIC_TOKS - {"of", "the", "a", "an", "with", "and"}
+    extra = mention_toks - _GENERIC_TOKS - stop
     if generic and extra:
         return (score * 0.55, mtype)
+    if mtype not in ("exact_label", "exact_synonym", "jaccard_high"):
+        extra_label = label_toks - mention_toks - _GENERIC_TOKS - stop
+        if extra_label:
+            return (score * 0.6, mtype)
     return (score, mtype)
 
 

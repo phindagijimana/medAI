@@ -40,8 +40,8 @@ Semantics captured
    should not receive focal_motor_onset = tonic.
 
 Cite: Fisher R S et al. 2017 (Epilepsia 58:522-30 seizure classification;
-Epilepsia 58:531-42 operational classification). Fonferko-Shadrach et al.
-2019; 2024.
+Epilepsia 58:531-42 operational classification — onset is the first
+prominent feature, not later evolution). Fonferko-Shadrach et al. 2019; 2024.
 """
 
 from __future__ import annotations
@@ -78,7 +78,9 @@ _FOCAL_MOTOR_FALLBACK: list[tuple[re.Pattern[str], FocalMotorOnset]] = [
                 re.IGNORECASE), FocalMotorOnset.HYPERKINETIC),
     (re.compile(r"\bmyoclonic\b|\bmyoclonus\b|myoclonic\s+jerks?",
                 re.IGNORECASE), FocalMotorOnset.MYOCLONIC),
-    (re.compile(r"\btonic\b(?!\s*[- ]?clonic)|stiffen(?:ing|ed)\b",
+    (re.compile(r"\btonic\b(?!\s*[- ]?clonic)|stiffen(?:ing|ed)\b|"
+                r"tonic\s+postur|"
+                r"\bversive\b|head\s+(?:turn(?:ing)?|version)|forced\s+head\s+turn",
                 re.IGNORECASE), FocalMotorOnset.TONIC),
 ]
 
@@ -157,7 +159,8 @@ _NEG_PRE = re.compile(
 
 # ILAE 2017: onset is the first prominent feature, not later evolution.
 _EVOLUTION_RE = re.compile(
-    r"\b(?:then|followed\s+by|progress(?:es|ed|ing)?\s+to|evolves?\s+(?:to|into)|"
+    r"\b(?:then|followed\s+by|thereafter|subsequently|after\s+that|"
+    r"progress(?:es|ed|ing)?\s+to|evolves?\s+(?:to|into)|"
     r"secondarily(?:\s+generaliz(?:es|ed|ing)?)?|later(?:\s+in\s+the\s+seizure)?)\b",
     re.IGNORECASE,
 )

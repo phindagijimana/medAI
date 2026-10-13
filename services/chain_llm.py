@@ -57,6 +57,25 @@ LLM_DETECTOR = "llm"
 # as a dissenting value.
 _NULLISH = {"", "unknown", "unspecified", "unclassified", "not_documented",
             "not documented", "unclear", "n/a", "na"}
+# Fields where "unknown" is a real answer (schema.enums.UNKNOWN_EPILEPSY_TYPE_DEFINITION), not an empty one.
+_UNKNOWN_IS_VALUE = frozenset({"clinical_seizure.epilepsy_type"})
+# Paths where a lone "unknown" is abstention, not a research-extract fact (silent + unknown → REVIEW).
+UNKNOWN_SILENT_PATHS = frozenset({
+    "clinical_seizure.epilepsy_type",
+    "clinical_seizure.seizure_onset_class",
+})
+
+
+def is_unknown_value(field_path: str, value: Any) -> bool:
+    """True when the asserted value is the schema 'unknown' / unknown-onset abstention."""
+    if not isinstance(value, str):
+        return False
+    n = _norm_str(value)
+    if field_path == "clinical_seizure.epilepsy_type":
+        return n == "unknown"
+    if field_path == "clinical_seizure.seizure_onset_class":
+        return n in ("unknown", "unknown_onset")
+    return False
 
 # Numeric fields (ages, counts) agree within this absolute tolerance.  It is
 # the same tolerance the field scorers use (``tol1``), so "agree" here means
@@ -252,11 +271,14 @@ def fuse(specialist: Iterable[FieldItem], llm: Iterable[FieldItem]) -> Fusion:
     (the specialist value is kept; the LLM value becomes the alternative).
     List fields (medications, comorbidities, ...): items pair up greedily
     by :func:`values_agree`; unpaired specialist items are specialist-only
-    and unpaired LLM items are LLM-only.  Nullish LLM values are dropped.
+    and unpaired LLM items are LLM-only.  Nullish LLM values are dropped,
+    except "unknown" epilepsy type (``_UNKNOWN_IS_VALUE``).
     """
     llm_by_path: dict[str, list[FieldItem]] = {}
     for it in llm:
-        if is_nullish(it.ev.get("value")):
+        v = it.ev.get("value")
+        if is_nullish(v) and not (it.field_path in _UNKNOWN_IS_VALUE and isinstance(v, str)
+                                  and _norm_str(v) == "unknown"):
             continue
         llm_by_path.setdefault(it.field_path, []).append(it)
 
@@ -533,8 +555,9 @@ class FlatLiveReasoner:
         self.arm = arm
         self.max_new_tokens = max_new_tokens
         from services.flat_extract import FLAT_PROMPT_VERSION
+        self.version = FLAT_PROMPT_VERSION
         self.info = LLMRunInfo(model=getattr(backend, "model_name", ""),
-                               prompt=f"flat_phenotype.{arm}.{FLAT_PROMPT_VERSION}")
+                               prompt=f"flat_phenotype.{arm}.{self.version}")
         self.n_calls = 0
         self.last_ok = False
 
@@ -549,17 +572,17 @@ class FlatLiveReasoner:
         self.last_ok = False
         decoding = DecodingConfig(do_sample=False, temperature=None, top_p=None,
                                   max_new_tokens=self.max_new_tokens, seed=0, constrained=False)
-        prompt = build_flat_prompt(text, self.arm)
+        prompt = build_flat_prompt(text, self.arm, version=self.version)
         try:
             if self.arm.endswith("C"):
-                raw, _ = self.backend.generate_constrained(prompt, flat_answer_model(), decoding)
+                raw, _ = self.backend.generate_constrained(prompt, flat_answer_model(self.version), decoding)
             else:
                 raw, _ = self.backend.generate(prompt, decoding)
         except Exception:
             logger.exception("flat LLM generation failed; continuing specialist-only")
             return None
         self.n_calls += 1
-        parsed = parse_flat(raw)
+        parsed = parse_flat(raw, self.version)
         if not parsed.parse_ok:
             return None
         self.last_ok = True
@@ -953,7 +976,8 @@ class ManifestLLMReasoner:
         flat = next((m for k, m in mods.items() if k == "flat_phenotype"), None)
         if flat is not None:
             from services.flat_extract import parse_flat
-            return parse_flat(flat.get("raw_response", "")).modules or None
+            return parse_flat(flat.get("raw_response", ""),
+                              flat.get("prompt_version") or "v1").modules or None
         if "epilepsy_phenotype" in mods:
             # In-contract output of a tuned adapter: one full-phenotype generation.
             from services.ft_extract import split_phenotype

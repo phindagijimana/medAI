@@ -1,6 +1,6 @@
 ## Per-field F1 breakdown — pilot corpus — base_rerun
 
-*Aggregated across all render-arm / cond / extraction-arm cells per variant. Manifests: `/mnt/nfs/home/URMC-SH/pndagiji/Documents/med42_service/data/run_manifests_pilot`.*
+*Aggregated across all render-arm / cond / extraction-arm cells per variant. Manifests: `data/run_manifests_pilot`.*
 
 | variant | field | n | HIT | MISS | mismatch | P | R | F1 |
 |---|---|---:|---:|---:|---:|---:|---:|---:|

@@ -2,7 +2,7 @@
 
 Status: 2026-10-02. Decision: **deferred by the project lead.** These three items are not part of the MVP and are not scheduled. This page records what exists today, what is missing, what each item depends on, and what must not be claimed until they are done.
 
-Related: `FUTURE_WORK.md` (LEO in the app, items 5 and 6), `LEO_USER_GUIDE.md` (sections 8, 9, 11), `EVAL_PROTOCOL_LEO.md`, `DISAGREEMENT_ADJUDICATION.md`, `US_ANNOTATION_PLAN.md`, `CORPUS_OUTREACH.md`.
+Related: `FUTURE_WORK.md` (LEO in the app, items 5 and 6), `LEO_USER_GUIDE.md`, `IMPLEMENTATION.md`, `EVAL_PROTOCOL_LEO.md`, `DISAGREEMENT_ADJUDICATION.md`, `US_ANNOTATION_PLAN.md`, `CORPUS_OUTREACH.md`.
 
 ## The one sentence that applies to everything
 
@@ -21,7 +21,7 @@ Related: `FUTURE_WORK.md` (LEO in the app, items 5 and 6), `LEO_USER_GUIDE.md` (
 
 ## 2. Learning from review decisions
 
-**Deferred.** Depends on real review data (and so on item 3). Nothing in LEO learns from review today; the decisions are stored, not used. Item 1 (add a missed value) is now in the tool, so once real reviews exist the recall step is no longer blocked on software.
+**Analysis CLI shipped; apply still deferred until real IRB reviews.** `bin/leo learn` scores Loop A (routing) and Loop B (accept thresholds) from `reviewed.csv` / `data/leo_training/`. Extract does not read those files. `leo learn --apply` is refused. A policy JSON is emitted only after the ≥100/field CI gate; you apply it later with `--disagree-llm policy:FILE` on a new `leo-v0.x`. Loop C (few-shot / LoRA / BIO) is paused. Reviewers can opt in (**Permit use for training**) to copy a job into `data/leo_training/` (survives the 24-hour job folder). Item 1 (add a missed value) is in the tool.
 
 Order of work once data exists, each step shipped as a new pipeline version with the evaluation re-run, never as a live change:
 
@@ -32,13 +32,15 @@ Order of work once data exists, each step shipped as a new pipeline version with
 | c | Recalibrate which claims are auto-accepted, and the per-field disagreement policy (`DISAGREEMENT_ADJUDICATION.md`), from decisions, then test on notes the rules never saw | a held-out set fixed in advance; a rule written before looking, so the thresholds are not tuned on the test notes |
 | d | Retrain an adapter on corrected values and their quotes | IRB approval and secure compute for training on note text; a frozen evaluation set that no corrected note comes from |
 
+Full click-loop: `docs/ACTIVE_LEARNING_PLAN.md`. Trigger: `bin/leo learn FILE.reviewed.csv` (A/B built; C paused; extract unchanged).
+
 Requirements that apply to every step:
 
 - **Reviewer reliability.** At least a subset reviewed by two people, with agreement reported (kappa), because a single reviewer's decisions are a noisy label.
 - **No leakage.** Notes used to calibrate or train are never the notes used to report accuracy.
 - **Synthetic corrections do not count.** Corrections made on synthetic notes say nothing about real notes and must not be used to retrain a model or tune a threshold.
 - **Selection bias.** Reviewers see the values LEO flagged (and, if they choose, a sample of the accepted ones). Rates computed from flagged values alone do not describe the accepted values; a random sample of accepted values must be audited as well.
-- **Privacy.** Review files contain note text and are PHI (`LEO_USER_GUIDE.md` section 9).
+- **Privacy.** Review files contain note text and are PHI (`LEO_USER_GUIDE.md` §7).
 
 ## 3. Real clinical notes
 

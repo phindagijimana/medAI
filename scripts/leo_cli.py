@@ -8,6 +8,7 @@
     leo batch IN [-o OUT]             spreadsheet in -> spreadsheet out with phenotype columns
     leo extract NOTE | -              one note, result as a table row (CSV or JSON)
     leo ask NOTE "question"           one question about one note, with a checked quote
+    leo learn FILE.reviewed.csv       Loop A/B from validator clicks (routing + thresholds; not extract)
     leo phenotypes                    what can be extracted, panels, question templates
     leo evidence                      what has been measured, with n and the limits
 
@@ -55,6 +56,21 @@ def _say(ok: bool | None, what: str, detail: str = "") -> None:
 
 def _slurm_ok() -> bool:
     return subprocess.run(["which", "sbatch"], capture_output=True).returncode == 0
+
+
+def _slurm_resource_args(sp) -> None:
+    """Site-specific Slurm resources. Defaults match this cluster (L40S 24G)."""
+    sp.add_argument("--gres", default="",
+                    help="Slurm GPU GRES (default gpu:l40s.24g:1, or MEDAI_LEO_GRES). Ignored on --cpu.")
+    sp.add_argument("--cpus", type=int, default=None, help="Slurm --cpus-per-task (default 8 GPU / 16 CPU)")
+    sp.add_argument("--mem", default="", help="Slurm --mem (default 64G GPU / 48G CPU)")
+
+
+def _slurm_kw(args, *, gpu: bool, partition: str, hours: int) -> dict:
+    return dict(gpu=gpu, partition=partition, hours=hours,
+                gres=getattr(args, "gres", None) or None,
+                cpus=getattr(args, "cpus", None),
+                mem=getattr(args, "mem", None) or None)
 
 
 def _cuda() -> bool:
@@ -108,39 +124,65 @@ def _model_argv(args) -> list[str]:
         argv.append("--no-ontology-select")
     elif getattr(args, "ontology_select", False):
         argv.append("--ontology-select")
+    for name in getattr(args, "ext_detector", None) or []:
+        argv += ["--ext-detector", name]
+    if getattr(args, "quote_entail", False):
+        argv.append("--quote-entail")
+    if getattr(args, "ask_rag", False):
+        argv.append("--ask-rag")
+    if getattr(args, "export_codes", False):
+        argv.append("--export-codes")
+    engine = getattr(args, "context_engine", None) or ""
+    if engine and engine != "medspacy":
+        argv += ["--context-engine", engine]
     return argv
 
 
 def _runtime(args):
-    from services.leo_runtime import LeoRuntime, parse_disagree_llm
+    from services.leo_runtime import LeoRuntime
     mode = _mode(getattr(args, "mode", "auto"))
     adapter = _adapter_dir(args)
     arm = getattr(args, "arm", "") or ("L0C" if adapter else "L1C")
+    from services.ext_detectors import parse_ext_detectors
+    detectors = parse_ext_detectors(getattr(args, "ext_detector", None) or None)
     return LeoRuntime.load(mode=mode, arm=arm, adapter_dir=adapter,
                            chunk_max_chars=getattr(args, "chunk_chars", 8000),
-                           disagree_llm=parse_disagree_llm(getattr(args, "disagree_llm", None)),
+                           disagree_llm=getattr(args, "disagree_llm", None),
                            ext_reader=_ext_reader_arg(args),
                            ontology_select=(False if getattr(args, "no_ontology_select", False)
-                                            else True if getattr(args, "ontology_select", False) else None))
+                                            else True if getattr(args, "ontology_select", False) else None),
+                           ext_detectors=detectors,
+                           quote_entail=True if getattr(args, "quote_entail", False) else None,
+                           ask_rag=True if getattr(args, "ask_rag", False) else None,
+                           export_codes=True if getattr(args, "export_codes", False) else None,
+                           context_engine=getattr(args, "context_engine", None) or None)
 
 
-def _submit(name: str, argv: list[str], *, gpu: bool, partition: str, hours: int, extra_env: dict | None = None) -> str:
+def _slurm_gres(explicit: str | None = None) -> str:
+    return (explicit or os.environ.get("MEDAI_LEO_GRES") or "gpu:l40s.24g:1").strip()
+
+
+def _submit(name: str, argv: list[str], *, gpu: bool, partition: str, hours: int,
+            extra_env: dict | None = None, gres: str | None = None,
+            cpus: int | None = None, mem: str | None = None) -> str:
     """Write a Slurm script that runs `leo <argv> --local` and submit it.  Returns the job id."""
     if not _slurm_ok():
         raise SystemExit("sbatch not found: not on a Slurm cluster. Use --local.")
     JOBDIR.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     script = JOBDIR / f"{name}_{ts}.sh"
-    gres = "#SBATCH --gres=gpu:l40s.24g:1\n" if gpu else ""
+    gres_line = f"#SBATCH --gres={_slurm_gres(gres)}\n" if gpu else ""
+    ncpus = cpus if cpus is not None else (8 if gpu else 16)
+    memory = mem or ("64G" if gpu else "48G")
     env_lines = "".join(f"export {k}={shlex.quote(v)}\n" for k, v in (extra_env or {}).items())
     cmd = " ".join(shlex.quote(a) for a in [str(PY), str(REPO / "scripts" / "leo_cli.py"), *argv])
     script.write_text(f"""#!/bin/bash
 #SBATCH --job-name=leo-{name}
 #SBATCH --partition={partition}
-{gres}#SBATCH --nodes=1
+{gres_line}#SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task={8 if gpu else 16}
-#SBATCH --mem={'64G' if gpu else '48G'}
+#SBATCH --cpus-per-task={ncpus}
+#SBATCH --mem={memory}
 #SBATCH --time={hours:02d}:00:00
 #SBATCH --output={JOBDIR}/%x_%j.out
 #SBATCH --error={JOBDIR}/%x_%j.err
@@ -254,7 +296,8 @@ def cmd_batch(args) -> int:
                 argv += ["--question-type", args.question_type[i]]
         if args.accepted_only:
             argv.append("--accepted-only")
-        jid = _submit("batch", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
+        jid = _submit("batch", argv, **_slurm_kw(args, gpu=not args.cpu,
+                                                 partition=args.partition or "interactive", hours=args.hours))
         if args.wait:
             _wait(jid)
         return 0
@@ -347,7 +390,8 @@ def cmd_run(args) -> int:
             if val:
                 argv += [flag, val]
         argv += _model_argv(args)
-        jid = _submit("run", argv, gpu=not args.cpu, partition=args.partition or "interactive", hours=args.hours)
+        jid = _submit("run", argv, **_slurm_kw(args, gpu=not args.cpu,
+                                               partition=args.partition or "interactive", hours=args.hours))
         if args.wait:
             _wait(jid)
         return 0
@@ -372,20 +416,37 @@ def cmd_run(args) -> int:
 def cmd_review(args) -> int:
     """Write a reviewed.csv to fill in (Excel works), listing the values that need review."""
     from services import leo_review as lr
+    if getattr(args, "summarize", False):
+        if not args.table:
+            raise SystemExit("leo review --summarize needs a reviewed.csv")
+        print(lr.summarize_reviews(Path(args.table).expanduser()), end="")
+        return 0
+    if not args.table:
+        raise SystemExit("leo review needs a LEO result table")
     tp = Path(args.table).expanduser()
     table = lr.load_table(tp)
     fields = lr.infer_fields(table)
     if not fields:
         raise SystemExit(f"{tp.name} does not look like a LEO result (no <field>_status columns)")
-    if getattr(args, "all", False) and getattr(args, "misses", False):
-        raise SystemExit("use --all or --misses, not both")
-    df = lr.template(table, fields, "misses" if getattr(args, "misses", False) else ("all" if args.all else "flagged"))
+    scopes = [getattr(args, "all", False), getattr(args, "misses", False), getattr(args, "accepted_audit", False)]
+    if sum(bool(x) for x in scopes) > 1:
+        raise SystemExit("use only one of --all, --misses, --accepted-audit")
+    if getattr(args, "misses", False):
+        scope = "misses"
+    elif getattr(args, "accepted_audit", False):
+        scope = "accepted_audit"
+    elif args.all:
+        scope = "all"
+    else:
+        scope = "flagged"
+    df = lr.template(table, fields, scope, audit_seed=tp.name)
     out = Path(args.output) if args.output else tp.with_name(tp.stem + ".reviewed.csv")
     if out.exists() and not args.force:
         raise SystemExit(f"{out} exists; use --force to overwrite (decisions in it would be lost)")
     df.to_csv(out, index=False, encoding="utf-8-sig")
     print(f"[leo] wrote {out}: {len(df)} value(s) to review")
-    print("[leo] fill `decision` (accept | correct | reject | add) and, for correct or add, `final_value`; then run: "
+    print("[leo] fill `decision` (accept | correct | reject | add), `why_tag` (required for correct/reject), "
+          "and `reader_preferred` on disagreements; then: "
           f"leo merge {tp} {out}")
     return 0
 
@@ -411,6 +472,36 @@ def cmd_rollup(args) -> int:
     return 0
 
 
+def cmd_learn(args) -> int:
+    """Loop A/B from reviewed.csv. Does not change extract. Loop C is paused."""
+    from services import leo_learn as ll
+    if getattr(args, "lora", False) or getattr(args, "few_shot", False) or getattr(args, "bio", False):
+        raise SystemExit(ll.PAUSED_C)
+    if getattr(args, "apply", False):
+        raise SystemExit(ll.APPLY_REFUSED)
+    loop = (getattr(args, "loop", "all") or "all").lower()
+    if loop in ("c", "lora", "few-shot", "fewshot", "bio"):
+        raise SystemExit(ll.PAUSED_C)
+    paths = [Path(p).expanduser() for p in (args.tables or [])]
+    if getattr(args, "archive", False):
+        paths.extend(ll.archive_reviewed_paths())
+    if not paths:
+        raise SystemExit("leo learn needs a reviewed.csv or --archive (data/leo_training/)")
+    report, result = ll.run(paths, min_n=getattr(args, "min_n", ll.MIN_N), loops=loop)
+    print(report, end="")
+    emit = getattr(args, "emit_policy", None)
+    if emit is not None:
+        dest = Path(emit).expanduser() if emit not in ("", "auto") else paths[0].with_name(
+            paths[0].stem.replace(".reviewed", "") + ".policy.json")
+        if dest.suffix.lower() != ".json":
+            dest = dest.with_suffix(".policy.json")
+        written = ll.write_policy(dest, result.get("policy") or {})
+        n = len(result.get("policy") or {})
+        print(f"[leo] wrote {written} ({n} field(s) → model). Does not change D17. "
+              f"Apply only on a new leo-v0.x: --disagree-llm policy:{written}")
+    return 0
+
+
 def cmd_disagreements(args) -> int:
     """Export model-vs-rules disagreements for blind adjudication, or score an adjudicated sheet."""
     from services import leo_disagree as ld
@@ -423,6 +514,15 @@ def cmd_disagreements(args) -> int:
                 x = r[f"{reader}_right"]
                 rate = "n/a" if x["rate"] is None else f"{x['rate']:.2f} [{x['ci95'][0]:.2f}, {x['ci95'][1]:.2f}]"
                 print(f"    {reader:<6} right {x['k']}/{x['n']}  {rate}")
+        return 0
+    if getattr(args, "emit_policy", None):
+        import json
+        res = ld.score_cases(ld.load(Path(args.emit_policy).expanduser()), args.shown)
+        pol = ld.policy_from_scores(res, min_n=getattr(args, "min_n", 100))
+        dest = Path(args.output) if args.output else Path(args.emit_policy).with_suffix(".policy.json")
+        dest.write_text(json.dumps(pol, indent=2), encoding="utf-8")
+        print(f"[leo] wrote {dest} ({len(pol)} fields → model). Apply with --disagree-llm policy:{dest} "
+              "(does not change D17 unless you pass that flag).")
         return 0
     if getattr(args, "score_codes", None):
         res = ld.score_code_cases(ld.load(Path(args.score_codes).expanduser()))
@@ -533,6 +633,9 @@ def cmd_start(args) -> int:
             env["MEDAI_LEO_ONTOLOGY_SELECT"] = "0"
         elif getattr(args, "ontology_select", False):
             env["MEDAI_LEO_ONTOLOGY_SELECT"] = "1"
+        dets = getattr(args, "ext_detector", None) or []
+        if dets:
+            env["MEDAI_LEO_EXT_DETECTOR"] = ",".join(dets)
         STATE.write_text(json.dumps({"node": os.uname().nodename, "port": args.port, "mode": mode,
                                      "job": os.environ.get("SLURM_JOB_ID", ""), "started": datetime.now().isoformat()}))
         host = env["SERVICE_HOST"]
@@ -552,7 +655,8 @@ def cmd_start(args) -> int:
         os.execve(str(PY), [str(PY), "app.py"], env)
     argv = ["start", "--local", "--port", str(args.port), "--mode", "cpu" if args.cpu else "gpu"]
     argv += _model_argv(args)
-    _submit("server", argv, gpu=not args.cpu, partition=args.partition or "general", hours=args.hours)
+    _submit("server", argv, **_slurm_kw(args, gpu=not args.cpu,
+                                        partition=args.partition or "general", hours=args.hours))
     print("[leo] when it starts, `leo status` shows the URL and the SSH tunnel command.")
     return 0
 
@@ -648,7 +752,8 @@ def cmd_install(args) -> int:
 
 def cmd_check(args) -> int:
     if args.slurm:
-        jid = _submit("check", ["check", "--gpu"] + _model_argv(args), gpu=True, partition="interactive", hours=1)
+        jid = _submit("check", ["check", "--gpu"] + _model_argv(args),
+                      **_slurm_kw(args, gpu=True, partition=args.partition or "interactive", hours=args.hours or 1))
         if args.wait:
             _wait(jid)
             out = JOBDIR / f"leo-check_{jid}.out"
@@ -732,7 +837,8 @@ def _common(sp, *, model=True):
         sp.add_argument("--disagree-llm", default=None,
                         help="fields where the model's value is shown when model and rules disagree "
                              "(default: none, the rules' value is shown and the model's goes to the 'alternative'; "
-                             "'candidate' = seizure type, not validated on real notes)")
+                             "'candidate' = seizure type, not validated on real notes; "
+                             "'ied-silent' = accept LLM-only IED when rules were silent, still D17 on disagreement)")
         sp.add_argument("--no-ext-reader", action="store_true",
                         help="do not run the extra model calls (X1C/P1C/F1C; default: on, off with --h2/--adapter)")
         sp.add_argument("--ext-reader", action="store_true",
@@ -741,6 +847,24 @@ def _common(sp, *, model=True):
                         help="exact ontology hits only (this is the default: the GPU selector scored worse than lexical rank-1)")
         sp.add_argument("--ontology-select", action="store_true",
                         help="ask the model to pick an ontology code from the retrieved top-5 (GPU gate failed; opt-in)")
+        sp.add_argument("--ext-detector", action="append", default=[],
+                        help="opt-in extra detector on overlapping fields (repeatable). "
+                             "Known: ctakes, freq, stated-type, hs, fail-reason, "
+                             "rescue-if, ictal, eeg-done, dre, first-feature. "
+                             "No new training. Does not change default ACCEPT/REVIEW. "
+                             "Off unless passed. b1/xie/decker/engel are blocked.")
+        sp.add_argument("--ask-rag", action="store_true",
+                        help="retrieve ILAE/ACNS passages into ask_/audit questions only "
+                             "(Kwan DRE, first-feature, LTM study vs drug). Never into extract. "
+                             "Quote must still come from the note.")
+        sp.add_argument("--export-codes", action="store_true",
+                        help="after extract, attach ICD-10-CM G40.x / Orphanet / SCORE / EpSO "
+                             "ids on existing values (O, not E). Does not change ACCEPT/REVIEW.")
+        sp.add_argument("--context-engine", choices=("medspacy", "sentence", "negex"), default="medspacy",
+                        help="in-E ConText ablation (default medspacy). Not a third phenotype arm.")
+        sp.add_argument("--quote-entail", action="store_true",
+                        help="flag claims whose quote is in the note but does not assert the cell "
+                             "(REVIEW quote_not_entailed). Off by default; does not change D17.")
 
 
 def main(argv=None) -> int:
@@ -757,6 +881,9 @@ def main(argv=None) -> int:
     sp.add_argument("--wait", action="store_true")
     sp.add_argument("--adapter", default="")
     sp.add_argument("--h2", action="store_true")
+    sp.add_argument("--partition", default="")
+    sp.add_argument("--hours", type=int, default=1)
+    _slurm_resource_args(sp)
     sp.set_defaults(fn=cmd_check)
 
     sp = sub.add_parser("start", help="start the web app (default: Slurm GPU job)")
@@ -775,8 +902,16 @@ def main(argv=None) -> int:
                     help="run X1C, P1C and F1C even with an adapter")
     sp.add_argument("--no-ontology-select", action="store_true")
     sp.add_argument("--ontology-select", action="store_true")
+    sp.add_argument("--ext-detector", action="append", default=[],
+                    help="opt-in extra detector: ctakes, freq, stated-type, hs, "
+                         "fail-reason, rescue-if, ictal, eeg-done, dre, first-feature")
+    sp.add_argument("--ask-rag", action="store_true")
+    sp.add_argument("--export-codes", action="store_true")
+    sp.add_argument("--context-engine", choices=("medspacy", "sentence", "negex"), default="medspacy")
+    sp.add_argument("--quote-entail", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=24)
+    _slurm_resource_args(sp)
     sp.set_defaults(fn=cmd_start)
 
     sp = sub.add_parser("user", help="logins for the web app: add | remove | list | audit")
@@ -804,6 +939,7 @@ def main(argv=None) -> int:
     sp.add_argument("--wait", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=4)
+    _slurm_resource_args(sp)
     _common(sp)
     sp.set_defaults(fn=cmd_batch)
 
@@ -825,14 +961,19 @@ def main(argv=None) -> int:
     sp.add_argument("--wait", action="store_true")
     sp.add_argument("--partition", default="")
     sp.add_argument("--hours", type=int, default=4)
+    _slurm_resource_args(sp)
     _common(sp)
     sp.set_defaults(fn=cmd_run)
 
-    sp = sub.add_parser("review", help="make a reviewed.csv to fill in from a result table")
-    sp.add_argument("table", help="a LEO result (.csv or .xlsx)")
+    sp = sub.add_parser("review", help="make a reviewed.csv to fill in, or summarise validator clicks")
+    sp.add_argument("table", nargs="?", default="", help="a LEO result, or a reviewed.csv with --summarize")
     sp.add_argument("-o", "--output", default=None, help="default: <table>.reviewed.csv")
     sp.add_argument("--all", action="store_true", help="list accepted values too, not only those needing review")
     sp.add_argument("--misses", action="store_true", help="list values LEO marked not_found, to add a missed value")
+    sp.add_argument("--accepted-audit", action="store_true",
+                    help="list a deterministic 10%% sample of auto-accepted cells")
+    sp.add_argument("--summarize", action="store_true",
+                    help="print Accept/Correct/Deny and reader votes from a reviewed.csv (does not change extract)")
     sp.add_argument("--force", action="store_true")
     sp.set_defaults(fn=cmd_review)
 
@@ -851,6 +992,22 @@ def main(argv=None) -> int:
     sp.add_argument("-o", "--output", default=None, help="default: <table>.patients.csv")
     sp.set_defaults(fn=cmd_rollup)
 
+    sp = sub.add_parser("learn", help="Loop A/B from validator files (does not change extract; LoRA paused)")
+    sp.add_argument("tables", nargs="*", help="one or more reviewed.csv files")
+    sp.add_argument("--archive", action="store_true",
+                    help="also read permitted copies in data/leo_training/")
+    sp.add_argument("--loop", choices=("a", "b", "all"), default="all",
+                    help="a = routing; b = accept thresholds; all = A then B (default)")
+    sp.add_argument("--min-n", type=int, default=100,
+                    help="min scored disagreements per field for a routing policy (default 100)")
+    sp.add_argument("--emit-policy", nargs="?", const="auto", default=None,
+                    help="write the routing JSON (empty if the CI gate is not met)")
+    sp.add_argument("--apply", action="store_true", help="refused: learning is not wired to extract")
+    sp.add_argument("--lora", action="store_true", help="refused: Loop C paused")
+    sp.add_argument("--few-shot", action="store_true", help="refused: Loop C paused")
+    sp.add_argument("--bio", action="store_true", help="refused: Loop C paused")
+    sp.set_defaults(fn=cmd_learn)
+
     sp = sub.add_parser("disagreements", help="export model-vs-rules disagreements for blind adjudication, or score them")
     sp.add_argument("table", nargs="?", help="RESULT.claims.csv from a run")
     sp.add_argument("-o", "--output", default=None, help="default: <result>.disagreements.csv")
@@ -862,6 +1019,10 @@ def main(argv=None) -> int:
                     help="disagree = model vs rules; accepted = sample of accepted values; codes = ontology picks")
     sp.add_argument("-n", type=int, default=50, help="accepted sample size")
     sp.add_argument("--score-codes", default=None, help="an adjudicated code sheet to tally")
+    sp.add_argument("--emit-policy", default=None,
+                    help="adjudicated sheet → JSON of fields where the model should be shown "
+                         "(DISAGREEMENT_ADJUDICATION §3.7; default min 100 scored cases)")
+    sp.add_argument("--min-n", type=int, default=100, help="min scored cases per field for --emit-policy")
     sp.set_defaults(fn=cmd_disagreements)
 
     sp = sub.add_parser("extract", help="one note")

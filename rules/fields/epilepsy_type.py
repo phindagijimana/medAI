@@ -24,14 +24,15 @@ Reimplemented independently in Python; no verbatim JAPE/Groovy code retained.
 Semantics captured
 ------------------
 1. Direct: LinkedEntity where ``enum_class == "EpilepsyType"``.
-2. Derived: if none present but a SeizureType extract exists → infer by ILAE
-   2017 decision tree:
-     - Any focal_* seizure and no generalized_* → focal.
-     - Any generalized_* and no focal_* → generalized.
-     - Both present → combined_focal_generalized.
-     - Only unknown_onset_* / unclassified → unknown.
-3. Explicit "focal epilepsy" / "generalized epilepsy" / "combined focal and
+2. Explicit "focal epilepsy" / "generalized epilepsy" / "combined focal and
    generalized" / "unknown-onset epilepsy" via regex fallback.
+3. Derived from SeizureType extracts by the ILAE 2017 decision tree — off by
+   default (``INFER_FROM_SEIZURE_TYPES``): focal seizures do not name the
+   epilepsy type.
+4. Unknown: the note says the patient has epilepsy but names no type
+   (``schema.enums.UNKNOWN_EPILEPSY_TYPE_DEFINITION``; the model prompt v2
+   uses the same wording).  "Epilepsy nurse / clinic", a relative's epilepsy
+   and doubt ("?epilepsy", "possible epilepsy") do not count.
 4. ConText — negated → return None; hypothetical → certainty POSSIBLE;
    family → return None (family history, not the patient's).
 
@@ -48,6 +49,10 @@ from schema.enums import Certainty, EpilepsyType, SeizureType, TemporalStatus
 from schema.evidence import Evidence
 from services.medcat_extractor import LinkedEntity
 
+
+# Off: a type inferred from seizure types is not a type the note names
+# (schema.enums.UNKNOWN_EPILEPSY_TYPE_DEFINITION, same wording as the model prompt v2).
+INFER_FROM_SEIZURE_TYPES = False
 
 # ---------------------------------------------------------------------------
 # Explicit-phrase fallback patterns
@@ -80,6 +85,30 @@ _EXPLICIT_PATTERNS: list[tuple[re.Pattern[str], EpilepsyType]] = [
         r"unclassified\s+epilepsy|unknown[- ]onset\s+epilepsy",
         re.IGNORECASE), EpilepsyType.UNKNOWN),
 ]
+
+
+# "Has epilepsy" with no named type -> unknown (schema.enums.UNKNOWN_EPILEPSY_TYPE_DEFINITION).
+_EPILEPSY_MENTION = re.compile(r"\bepilep(?:sy|sies)\b", re.IGNORECASE)
+_NOT_A_DIAGNOSIS_AFTER = re.compile(
+    r"^[ \t]*(?:specialist[ \t]+)?(?:nurses?|clinic|service|team|society|action|surgery|"
+    r"monitoring|unit|centre|center|medication|drugs?|charity|syndrome)\b", re.IGNORECASE)
+_NOT_THE_PATIENTS_BEFORE = re.compile(
+    r"(?:\bno\b|\bnot\b|\bwithout\b|\bdenies\b|\bquery\b|\?|\bpossible\b|\bprobable\b|"
+    r"\bsuspected\b|\bunlikely\b|\bruled?\s+out\b|\brisk\s+of\b|\bdiagnosis\s+of\s+epilepsy\s+is\s+not\b|"
+    r"\bmother\b|\bfather\b|\bbrother\b|\bsister\b|\bson\b|\bdaughter\b|\bfamily\b|\bcousin\b|"
+    r"\buncle\b|\baunt\b)[^.\n]{0,40}$", re.IGNORECASE)
+
+
+def _stated_epilepsy(text: str) -> Optional[re.Match[str]]:
+    """First mention that says the patient has epilepsy (not a service, relative or doubt)."""
+    for m in _EPILEPSY_MENTION.finditer(text or ""):
+        if _NOT_A_DIAGNOSIS_AFTER.match(text[m.end():m.end() + 30]):
+            continue
+        line_start = max(text.rfind("\n", 0, m.start()), text.rfind(".", 0, m.start())) + 1
+        if _NOT_THE_PATIENTS_BEFORE.search(text[line_start:m.start()]):
+            continue
+        return m
+    return None
 
 
 def _infer_from_seizure_types(entities: list[LinkedEntity]) -> Optional[tuple[EpilepsyType, LinkedEntity]]:
@@ -162,15 +191,26 @@ class EpilepsyTypeRule(BaseFieldRule):
             )
 
         # 3. Derived from SeizureType entities.
-        inferred = _infer_from_seizure_types(entities)
-        if inferred is None:
+        inferred = _infer_from_seizure_types(entities) if INFER_FROM_SEIZURE_TYPES else None
+        if inferred is not None and inferred[1] is not None:
+            value, anchor = inferred
+            return self._make_evidence(value, anchor, meta, certainty=Certainty.PROBABLE)
+
+        # 4. The note says the patient has epilepsy but names no type -> unknown.
+        m = _stated_epilepsy(text)
+        if m is None:
             return None
-        value, anchor = inferred
-        if anchor is not None:
-            ev = self._make_evidence(value, anchor, meta, certainty=Certainty.PROBABLE)
-            return ev
-        # No anchor entity → return None (schema requires evidence_text).
-        return None
+        return Evidence[EpilepsyType](
+            value=EpilepsyType.UNKNOWN,
+            certainty=Certainty.DEFINITE,
+            temporal_status=TemporalStatus.CURRENT,
+            evidence_text=m.group(0),
+            source_doc_id=meta["doc_id"],
+            source_doc_type=meta["doc_type"],
+            source_date=meta["doc_date"],
+            char_start=m.start(),
+            char_end=m.end(),
+        )
 
 
 # ---------------------------------------------------------------------------

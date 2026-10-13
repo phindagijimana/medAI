@@ -64,10 +64,7 @@ BASE = "https://www.mtsamples.com"
 INDEX_URL = f"{BASE}/site/pages/browse.asp?Type=42-Neurology"
 ROBOTS_URL = f"{BASE}/robots.txt"
 
-USER_AGENT = (
-    "MedAI-EPI-research/0.1 (academic epilepsy NLP eval; "
-    "contact phindagiji@gmail.com)"
-)
+USER_AGENT = "MedAI-EPI-research/0.1 (academic epilepsy NLP eval; no personal contact)"
 
 # Epilepsy keyword filter. Case-insensitive; word-boundary anchored to
 # avoid false positives (e.g. "MRI brain" matches only when both words

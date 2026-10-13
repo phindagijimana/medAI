@@ -473,6 +473,8 @@ def test_onset_stated_is_reported(run_p2):
     assert ph.clinical_seizure.focal_motor_onset.value == _FM.CLONIC
     ph = run_p2("Focal seizures start with a sudden wave of fear, then lip smacking.")
     assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.EMOTIONAL
+    ph = run_p2("Focal seizures begin with versive head turning, then hyperkinetic movements.")
+    assert ph.clinical_seizure.focal_motor_onset.value == _FM.TONIC
 
 
 def test_later_evolution_is_not_onset(run_p2):
@@ -493,3 +495,29 @@ def test_planned_or_negated_or_family_is_not_reported(run_p2):
 def test_aura_is_nonmotor_onset(run_p2):
     ph = run_p2("Focal aware seizures. Aura of an unusual smell, then impaired awareness.")
     assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.SENSORY
+
+
+# Held-out literature leftover cues (not used to tune v4_ext EEG skips).
+
+def test_acns_ltm_is_prolonged(run_p2):
+    ph = run_p2("LTM was performed over 48 hours. No seizures were captured.")
+    assert ph.eeg.study_type.value == _EegST.PROLONGED
+
+
+def test_acns_lpds_mark_ied_present(run_p2):
+    ph = run_p2("EEG showed left temporal LPDs.")
+    assert ph.eeg.ied_present.value is True
+
+
+def test_exect_pending_eeg_skipped(run_p2):
+    ph = run_p2("Routine EEG is pending.")
+    assert ph.eeg.study_type.value is None
+
+
+def test_fisher_thereafter_is_not_onset(run_p2):
+    ph = run_p2(
+        "Focal seizures begin with an epigastric rising sensation, "
+        "thereafter clonic jerking of the arm."
+    )
+    assert ph.clinical_seizure.focal_motor_onset.value is None
+    assert ph.clinical_seizure.focal_nonmotor_onset.value == _FN.AUTONOMIC

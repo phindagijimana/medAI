@@ -40,7 +40,7 @@ from typing import Any, Optional
 
 from services.flat_extract import _ev, _json_obj, _norm_enum
 
-EXT_PROMPT_VERSION = "v1"
+EXT_PROMPT_VERSION = "v1.1"
 EXT_ARM = "X1C"
 
 # Vocabularies: value ids of schema/enums.py, so the fuser can pair them with the specialist's values.
@@ -93,7 +93,8 @@ Items:
 - interictal_sites: where the discharges were, up to 3 entries: lobe one of {list(LOBES)} or null, side one of {list(SIDES)} or null
 - ictal_onset: where a recorded seizure STARTED on EEG (not the interictal discharges, not the MRI): lobe and side, same values
 - focal_motor_onset: how a focal seizure BEGINS, if the first prominent feature is motor: one of {list(FOCAL_MOTOR_ONSETS)} or null
-  (automatisms = chewing, lip smacking, picking; clonic = rhythmic jerking; tonic = stiffening; hyperkinetic = thrashing, pedalling)
+  (automatisms = chewing, lip smacking, picking; clonic = rhythmic jerking; tonic = stiffening, posturing, or versive / forced head turning;
+  hyperkinetic = thrashing, pedalling; epileptic_spasms = spasms, infantile spasms). Versive head turning is tonic, not hyperkinetic.
 - focal_nonmotor_onset: how a focal seizure BEGINS, if the first prominent feature is not motor: one of {list(FOCAL_NONMOTOR_ONSETS)} or null
   (autonomic = epigastric rising, flushing, pallor; behavior_arrest = staring, arrest; cognitive = deja vu, speech or memory
   disturbance; emotional = fear, joy; sensory = tingling, visual, smell, sound)

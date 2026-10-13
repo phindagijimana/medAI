@@ -19,6 +19,7 @@ from __future__ import annotations
 import pandas as pd
 
 from services.leo_review import NOT_REVIEWABLE, Field, infer_fields
+from services.leo_tabular import visit_summary_from_row
 
 
 def rollup(table: pd.DataFrame, patient_col: str, date_col: str = "", fields: list[Field] | None = None) -> pd.DataFrame:
@@ -45,6 +46,7 @@ def rollup(table: pd.DataFrame, patient_col: str, date_col: str = "", fields: li
                         f"{f.value}_from_date": "" if pd.isna(pick["_when"]) else str(pick["_when"].date()),
                         f"{f.value}_why": pick.get(f.why, "") if f.why else "",
                         f"{f.value}_evidence": pick.get(f.evidence, "")})
+        rec["visit_summary"] = visit_summary_from_row(rec)
         out.append(rec)
     return pd.DataFrame(out)
 

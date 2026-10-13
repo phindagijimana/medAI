@@ -188,3 +188,32 @@ def score_code_cases(sheet: pd.DataFrame) -> dict:
     return {"n_cases": int(len(df)), "n_scored": n, **t,
             "selector_ok": {"k": k, "n": n, "rate": round(k / n, 3) if n else None,
                             "ci95": [round(lo, 3), round(hi, 3)]}}
+
+
+def policy_from_scores(scores: dict, *, min_n: int = 100) -> dict[str, str]:
+    """Per DISAGREEMENT_ADJUDICATION §3.7: show the model only if it is right more often
+    than the rules and the lower CI of the model's rate is above the rules' rate, on ≥ min_n
+    scored cases. Default LEO does not apply this. Empty on typical synthetic sheets (n≪100).
+    """
+    out: dict[str, str] = {}
+    for path, res in (scores or {}).items():
+        n = int(res.get("n_scored") or 0)
+        if n < min_n:
+            continue
+        mr, rr = res.get("model_right") or {}, res.get("rules_right") or {}
+        m_rate, r_rate = mr.get("rate"), rr.get("rate")
+        ci = mr.get("ci95") or [0, 0]
+        if m_rate is None or r_rate is None:
+            continue
+        if (mr.get("k") or 0) > (rr.get("k") or 0) and ci[0] > r_rate:
+            out[str(path)] = "llm"
+    return out
+
+
+def load_shown_policy(path: str | Path) -> tuple[str, ...]:
+    """JSON ``{field_path: \"llm\"|\"rules\"}`` → paths where the model is shown. D17 stays unless loaded."""
+    import json
+    raw = json.loads(Path(path).expanduser().read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise ValueError("disagree policy file must be a JSON object of field_path → llm|rules")
+    return tuple(p for p, v in raw.items() if str(v).strip().lower() in ("llm", "model"))

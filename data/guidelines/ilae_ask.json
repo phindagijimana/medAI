@@ -1,0 +1,41 @@
+{
+  "version": "2026-10-07",
+  "role": "ask_/audit RAG only. Never stuffed into L1C/X1C/P1C/F1C extract prompts. Quote must still come from the note.",
+  "passages": [
+    {
+      "id": "kwan_2010_dre",
+      "source": "Kwan 2010",
+      "cite": "Kwan P et al. Definition of drug resistant epilepsy: consensus proposal by the ad hoc Task Force of the ILAE Commission on Therapeutic Strategies. Epilepsia. 2010;51(6):1069-1077.",
+      "topics": ["drug-resistant", "drug resistant", "DRE", "intractable", "refractory", "two trials", "tolerated", "adequate", "failed ASM"],
+      "text": "ILAE 2010: drug-resistant epilepsy is failure of two tolerated, appropriately chosen and used antiseizure-medication schedules (monotherapy or combination) to achieve sustained seizure freedom. A trial that was not tolerated or not adequate does not count. ICD 'intractable' is a billing word, not this definition."
+    },
+    {
+      "id": "fisher_2017_first_feature",
+      "source": "Fisher 2017",
+      "cite": "Fisher RS et al. Instruction manual for the ILAE 2017 operational classification of seizure types. Epilepsia. 2017;58(4):531-542.",
+      "topics": ["first feature", "onset", "evolution", "begins with", "followed by", "then", "aura then"],
+      "text": "ILAE 2017: seizure type is classified by the first feature of the seizure, not by later evolution. Words such as 'followed by' or 'then' name spread, not onset. Do not relabel a sensory start as a motor seizure because a motor phase came later."
+    },
+    {
+      "id": "scheffer_2017_epilepsy_type",
+      "source": "Scheffer 2017",
+      "cite": "Scheffer IE et al. ILAE classification of the epilepsies: Position paper of the ILAE Commission for Classification and Terminology. Epilepsia. 2017;58(4):512-521.",
+      "topics": ["epilepsy type", "focal epilepsy", "generalized epilepsy", "combined", "unknown epilepsy", "syndrome"],
+      "text": "ILAE 2017 epilepsies: type is focal, generalized, combined focal and generalized, or unknown, from the seizure types that occur. A named syndrome is a further layer, not a replacement for copying the note's own words into the extract table."
+    },
+    {
+      "id": "acns_ltm_study",
+      "source": "ACNS Hirsch 2013/2021",
+      "cite": "Hirsch LJ et al. American Clinical Neurophysiology Society's Standardized Critical Care EEG Terminology. J Clin Neurophysiol. 2013;30(1):1-27. Update 2021.",
+      "topics": ["LTM", "long-term monitoring", "cEEG", "continuous EEG", "video-EEG", "study vs drug"],
+      "text": "ACNS: LTM, cEEG, video-EEG and ICU EEG name EEG studies (long-term or continuous monitoring), not antiseizure drugs. A sentence that 'escalates to LTM' is planning a study. Do not treat LTM as a medication name."
+    },
+    {
+      "id": "acns_lpd_term",
+      "source": "ACNS Hirsch 2013/2021",
+      "cite": "Hirsch LJ et al. ACNS Standardized Critical Care EEG Terminology. 2013 and 2021 update.",
+      "topics": ["LPD", "LPDs", "GPD", "BiPD", "PLEDs", "periodic discharges"],
+      "text": "ACNS: LPDs, GPDs and BiPDs are EEG pattern names (lateralized / generalized / bilateral independent periodic discharges). SCORE maps those patterns after they are extracted. A clinic letter that says 'no LPDs' is negation, not a finding."
+    }
+  ]
+}

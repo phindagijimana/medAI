@@ -42,7 +42,9 @@ Semantics captured
    - ``is_hypothetical`` → keep but downgrade ``certainty`` to POSSIBLE.
 
 Cite: Fonferko-Shadrach et al. 2019 BMC Med Res Methodol 19:52; 2024 J Biomed
-Semantics 15:12 (ExECT-V2).
+Semantics 15:12 (ExECT-V2). Leftover historical names (psychomotor,
+complex-partial, partial-onset, secondarily generalized seizures) map to
+existing ILAE 2017 enums (Fisher 2017; Berg et al. 2010).
 """
 
 from __future__ import annotations
@@ -62,15 +64,16 @@ from services.medcat_extractor import LinkedEntity
 _FALLBACK_SEIZURE_PATTERNS: list[tuple[re.Pattern[str], SeizureType]] = [
     (re.compile(
         r"focal[- ]?to[- ]?bilateral\s+tonic[- ]?clonic\s+seizures?|"
-        r"secondar(?:ily|y)\s+generali[sz]ed\s+tonic[- ]?clonic\s+seizures?|"
+        r"secondar(?:ily|y)\s+generali[sz]ed\s+(?:tonic[- ]?clonic\s+)?seizures?|"
         r"\bFBTC\b",
         re.IGNORECASE), SeizureType.FOCAL_TO_BILATERAL_TONIC_CLONIC),
     (re.compile(
         r"focal\s+impaired[- ]awareness\s+seizures?|"
-        r"complex\s+partial\s+seizures?|\bCPS\b",
+        r"complex[- ]partial\s+seizures?|\bCPS\b|"
+        r"psychomotor\s+seizures?",
         re.IGNORECASE), SeizureType.FOCAL_IMPAIRED_AWARENESS),
     (re.compile(
-        r"focal\s+aware\s+seizures?|simple\s+partial\s+seizures?|\bSPS\b",
+        r"focal\s+aware\s+seizures?|simple[- ]partial\s+seizures?|\bSPS\b",
         re.IGNORECASE), SeizureType.FOCAL_AWARE),
     (re.compile(
         r"typical\s+absence\s+seizures?|3[- ]?Hz\s+spike[- ]?wave\s+absences?",
@@ -92,8 +95,9 @@ _FALLBACK_SEIZURE_PATTERNS: list[tuple[re.Pattern[str], SeizureType]] = [
      SeizureType.GENERALIZED_TONIC),
     (re.compile(r"generali[sz]ed\s+seizures?", re.IGNORECASE),
      SeizureType.UNKNOWN_ONSET_TONIC_CLONIC),  # ambiguous → default to TC-flavour
-    (re.compile(r"focal\s+seizures?|partial\s+seizures?",
-                re.IGNORECASE), SeizureType.FOCAL_UNKNOWN_AWARENESS),
+    (re.compile(
+        r"focal\s+seizures?|partial[- ]onset\s+seizures?|partial\s+seizures?",
+        re.IGNORECASE), SeizureType.FOCAL_UNKNOWN_AWARENESS),
 ]
 
 

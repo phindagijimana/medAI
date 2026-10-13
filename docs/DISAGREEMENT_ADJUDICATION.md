@@ -10,6 +10,7 @@ When Med42-8B (the model) and EpExtra (the rules) give different values for a si
 |---|---|---|
 | **Default (pilot)** | the rules' value, every field | all pilot work, and any run whose disagreements will be adjudicated |
 | `--disagree-llm candidate` | the model's value for seizure type, the rules' value elsewhere | only to reproduce the synthetic results below; not validated on real notes |
+| `--disagree-llm ied-silent` | rules' value on disagreement (D17 unchanged); **accept** LLM-only `eeg.ied_present` when the rules were silent | measured on v4_ext (IED-found 27/27 vs 18/27 default accepted); not the shipped default |
 | `--disagree-llm FIELD,...` | the model's value for the named fields | experiments |
 
 Why the default is "rules everywhere" and not the candidate policy:
@@ -44,6 +45,8 @@ Details and files: `EVAL_PROTOCOL_LEO.md` 10.13 and `eval/results/leo_vs_*_candi
 6. **Score**: `bin/leo disagreements --score SHEET_WITH_KEY --shown rules` prints, per field, how often the rules were right, how often the model was right, and the counts for both/neither/unclear, with Wilson 95% intervals.
 7. **Decide per field**, fixed in advance: switch a field to the model's value only if the model is right more often than the rules with the lower end of its interval above the rules' rate (or the model's rate exceeds the rules' by a margin written in the protocol), on at least 100 scored cases for that field. Otherwise keep the rules' value. Fields below 100 cases stay on the default.
 8. **Version it.** A change of policy is a new pipeline version (`leo-v0.6`) with the evaluation re-run; it is never a live change. Record it as a dated deviation (D-number) in `EVAL_PROTOCOL_LEO.md`.
+
+Tooling (does not flip D17): `bin/leo disagreements --emit-policy SHEET -o policy.json` writes the fields that meet this gate (`min_n` default 100) from a **blind** sheet. Validator clicks (`reader_preferred`) use the same gate: `bin/leo learn FILE.reviewed.csv --loop a --emit-policy`. Apply only with `--disagree-llm policy:policy.json` on a new pipeline version. `leo learn --apply` is refused. `docs/ACTIVE_LEARNING_PLAN.md`.
 
 How many cases: the standard error of a proportion near 0.8 with 100 cases is about 0.04, so a 0.1 difference between readers is detectable; smaller differences need hundreds. Disagreements are a minority of values: the synthetic runs produced 22 disagreement claims over 143 notes and 132 over 399 notes, across all fields. Reaching 100 cases for one field may therefore take several hundred notes; real notes may differ.
 

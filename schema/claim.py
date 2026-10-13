@@ -101,6 +101,14 @@ class ReasonCode(str, Enum):
     RESCUE_ROLE = "rescue_role"
     # The model ran, but no reader covers this field: a single-reader claim, never auto-accepted
     NO_SECOND_READER = "no_second_reader"
+    # Extra detector only (cTAKES-style sidecar); never auto-accepted
+    SIDECAR_ONLY = "sidecar_only"
+    # The note documents psychogenic non-epileptic / dissociative seizures: seizure cells are not auto-accepted
+    PNES_DOCUMENTED = "pnes_documented"
+    # Quote is in the note but does not assert this cell (opt-in --quote-entail)
+    QUOTE_NOT_ENTAILED = "quote_not_entailed"
+    # One reader asserted "unknown" and the other was silent — not 2-of-2 on a phenotype
+    UNKNOWN_SILENT = "unknown_silent"
     # Ontology: the selector abstained or the retriever had no exact hit (code stays MEDAI-ENUM)
     ONTOLOGY_ABSTAIN = "ontology_abstain"
     # Ontology: the selector picked a retrieved candidate (informational)
@@ -211,6 +219,13 @@ class Claim(BaseModel):
             "null when the detectors agree or only one fired."
         ),
     )
+    sidecar_alternative: Optional[str] = Field(
+        None,
+        description=(
+            "Value from an opt-in extra detector (e.g. ctakes) when it disagrees with "
+            "the shown E/L value. Does not change ACCEPT/REVIEW. Null when no sidecar ran."
+        ),
+    )
 
     # Ontology arm (retriever + optional Arm E selector).  extra=forbid, so these are explicit.
     ontology_match: str = Field(
@@ -225,6 +240,11 @@ class Claim(BaseModel):
         False,
         description="True only when the value is accepted AND the code is an exact hit or a selector pick "
                     "(never MEDAI-ENUM)",
+    )
+    export_codes: list[dict] = Field(
+        default_factory=list,
+        description="Post-extract maps (ICD-10-CM G40.x, Orphanet, SCORE, EpSO). Empty unless --export-codes. "
+                    "Never used as extract gazetteers; does not replace concept.",
     )
 
     validator_verdict: ValidatorVerdict = ValidatorVerdict.REVIEW

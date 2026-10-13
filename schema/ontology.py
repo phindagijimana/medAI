@@ -48,6 +48,9 @@ from .enums import (
     EtiologyCategory,
     FocalMotorOnset,
     FocalNonmotorOnset,
+    FrequencyBand,
+    IedDispersal,
+    IedRecurrence,
     IedType,
     IlaeOutcome,
     Laterality,
@@ -134,6 +137,9 @@ class IedFinding(BaseModel):
     localization: LobarLocalization | None = None
     laterality: Laterality | None = None
     dominant_frequency_hz: float | None = Field(default=None, gt=0, lt=100)  # v0.2
+    frequency_band: FrequencyBand | None = None       # SACAR / ACNS; optional
+    recurrence: IedRecurrence | None = None           # SACAR recurrence
+    dispersal: IedDispersal | None = None             # SACAR dispersal
 
 
 class SurgeryHistoryItem(BaseModel):

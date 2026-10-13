@@ -78,6 +78,13 @@ MetaCAT Presence marks seizure mentions as negated (e.g. "EEG showed …" and
   represented. MedCAT's MetaCAT papers train on human-labelled data [M2].
   Until then, ConText stays.
 
+## Ablation inside E (not a third arm)
+
+Opt-in `--context-engine {medspacy,sentence,negex}` (`MEDAI_LEO_CONTEXT_ENGINE`) swaps the
+preprocessor on the same phenotype fields: medspaCy ConText (default, this document),
+`rules.sentence_context`, or Chapman NegEx. Score IED present / current vs prior ASM — not
+“ConText F1 vs EpExtra F1.” Default `medspacy` ≡ previous E. See `docs/ROLE_PLACEMENTS.md`.
+
 Reproduce:
 ```bash
 for c in fs_test_40 synth_v1_eval_100; do

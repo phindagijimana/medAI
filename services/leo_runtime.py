@@ -72,9 +72,12 @@ _SHORT_PATH = {
 }
 
 
+IED_SILENT_PATHS: tuple[str, ...] = ("eeg.ied_present",)
+
+
 def parse_disagree_llm(value) -> tuple[str, ...]:
     """``None`` -> default (no override); ``""``/``none`` -> no override; ``candidate`` -> the candidate policy;
-    otherwise comma-separated field names or claim paths."""
+    ``ied-silent`` -> no display override (D17); otherwise comma-separated field names or claim paths."""
     if value is None:
         return DEFAULT_DISAGREE_LLM
     if isinstance(value, (tuple, list)):
@@ -86,19 +89,44 @@ def parse_disagree_llm(value) -> tuple[str, ...]:
         return ()
     if names == ["candidate"]:
         return CANDIDATE_DISAGREE_LLM
+    if names[0] in ("ied-silent", "ied_silent") and len(names) == 1:
+        return ()
+    if names[0].startswith("policy:") or names[0].startswith("@"):
+        from services.leo_disagree import load_shown_policy
+        path = names[0].split(":", 1)[-1].lstrip("@")
+        return load_shown_policy(path)
     return tuple(_SHORT_PATH.get(n, n) for n in names)
+
+
+def parse_llm_if_silent(value) -> tuple[str, ...]:
+    """Measured option: accept LLM-only IED when the specialist was silent. Default off."""
+    if value is None:
+        return ()
+    if isinstance(value, (tuple, list)):
+        names = [str(v).strip() for v in value]
+    else:
+        names = [v.strip() for v in str(value).split(",")]
+    names = [n for n in names if n]
+    if names == ["ied-silent"] or names == ["ied_silent"]:
+        return IED_SILENT_PATHS
+    return ()
 
 
 class LeoRuntime:
     def __init__(self, *, backend: Any = None, arm: str = "L1C", chunk_max_chars: int = 8000,
                  use_llm: bool = True, disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None,
                  adapter_label: str = "", ext_reader: Optional[bool] = None,
-                 require_second_reader: Optional[bool] = None, ontology_select: Optional[bool] = None):
+                 require_second_reader: Optional[bool] = None, ontology_select: Optional[bool] = None,
+                 ext_detectors: Optional[tuple[str, ...]] = None,
+                 ask_rag: Optional[bool] = None, export_codes: Optional[bool] = None,
+                 context_engine: Optional[str] = None,
+                 quote_entail: Optional[bool] = None):
         self.backend = backend
         self.arm = arm
         self.chunk_max_chars = chunk_max_chars
         self.use_llm = bool(use_llm and backend is not None)
         self.disagree_llm = parse_disagree_llm(disagree_llm)
+        self.llm_if_silent = parse_llm_if_silent(disagree_llm)
         self.ledger = ledger
         self.adapter_label = adapter_label
         if ext_reader is None:
@@ -113,6 +141,17 @@ class LeoRuntime:
                                       if require_second_reader is None else bool(require_second_reader))
         self.ontology_select = bool(self.use_llm and (env_flag("MEDAI_LEO_ONTOLOGY_SELECT", default=False)
                                                       if ontology_select is None else ontology_select))
+        if ext_detectors is None:
+            from services.ext_detectors import parse_ext_detectors
+            ext_detectors = parse_ext_detectors()
+        self.ext_detectors = tuple(ext_detectors or ())
+        self.ask_rag = bool(env_flag("MEDAI_LEO_ASK_RAG", default=False) if ask_rag is None else ask_rag)
+        self.export_codes = bool(env_flag("MEDAI_LEO_EXPORT_CODES", default=False)
+                                 if export_codes is None else export_codes)
+        from services.context_engine import parse_context_engine
+        self.context_engine = parse_context_engine(context_engine)
+        self.quote_entail = bool(env_flag("MEDAI_LEO_QUOTE_ENTAIL", default=False)
+                                 if quote_entail is None else quote_entail)
         self._pipeline = None
         self._reasoner = None
         self._asker: Optional[Asker] = None
@@ -125,12 +164,18 @@ class LeoRuntime:
              disagree_llm: tuple[str, ...] = DEFAULT_DISAGREE_LLM, ledger: Any = None, model_name: str = "",
              cache_dir: str = "", ext_reader: Optional[bool] = None,
              require_second_reader: Optional[bool] = None,
-             ontology_select: Optional[bool] = None) -> "LeoRuntime":
+             ontology_select: Optional[bool] = None,
+             ext_detectors: Optional[tuple[str, ...]] = None,
+             ask_rag: Optional[bool] = None, export_codes: Optional[bool] = None,
+             context_engine: Optional[str] = None,
+             quote_entail: Optional[bool] = None) -> "LeoRuntime":
         """``mode`` = ``gpu`` (load Med42-8B; fails loudly without CUDA) or ``cpu`` (no LLM)."""
         if mode == "cpu":
             return cls(backend=None, use_llm=False, chunk_max_chars=chunk_max_chars,
                        disagree_llm=disagree_llm, ledger=ledger, ext_reader=False,
-                       require_second_reader=require_second_reader, ontology_select=False)
+                       require_second_reader=require_second_reader, ontology_select=False,
+                       ext_detectors=ext_detectors, ask_rag=False, export_codes=export_codes,
+                       context_engine=context_engine, quote_entail=quote_entail)
         if mode != "gpu":
             raise ValueError("mode must be 'gpu' or 'cpu'")
         import os
@@ -160,7 +205,9 @@ class LeoRuntime:
                    disagree_llm=disagree_llm, ledger=ledger,
                    adapter_label=Path(adapter_dir).name if adapter_dir else "",
                    ext_reader=ext_reader, require_second_reader=require_second_reader,
-                   ontology_select=ontology_select)
+                   ontology_select=ontology_select, ext_detectors=ext_detectors,
+                   ask_rag=ask_rag, export_codes=export_codes, context_engine=context_engine,
+                   quote_entail=quote_entail)
 
     # ---- components ------------------------------------------------------
 
@@ -173,6 +220,11 @@ class LeoRuntime:
         cfg = ChainPipelineConfig(llm_arm=self.arm if self.use_llm else "")
         cfg.require_second_reader_for_uncovered_fields = self.require_second_reader
         cfg.ontology_select = self.ontology_select
+        cfg.llm_if_silent_accept = self.llm_if_silent
+        cfg.ext_detectors = self.ext_detectors
+        cfg.export_codes = self.export_codes
+        cfg.context_engine = self.context_engine
+        cfg.quote_entail = self.quote_entail
         for path in self.disagree_llm:
             cfg.disagree_primary[path] = "llm"
         reasoner = None
@@ -203,7 +255,8 @@ class LeoRuntime:
     @property
     def asker(self) -> Optional[Asker]:
         if self._asker is None and self.backend is not None:
-            self._asker = Asker(self.backend, chunk_max_chars=self.chunk_max_chars)
+            self._asker = Asker(self.backend, chunk_max_chars=self.chunk_max_chars,
+                                guideline_rag=self.ask_rag)
         return self._asker
 
     def versions(self) -> dict:
@@ -216,7 +269,12 @@ class LeoRuntime:
                 "adapter": self.adapter_label, "chunk_max_chars": self.chunk_max_chars,
                 "disagree_llm_fields": list(self.disagree_llm),
                 "require_second_reader": self.require_second_reader,
-                "ontology_select": self.ontology_select}
+                "ontology_select": self.ontology_select,
+                "ext_detectors": list(self.ext_detectors),
+                "ask_rag": self.ask_rag,
+                "export_codes": self.export_codes,
+                "context_engine": self.context_engine,
+                "quote_entail": self.quote_entail}
 
     # ---- work ------------------------------------------------------------
 

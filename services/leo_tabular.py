@@ -7,8 +7,14 @@ Wide row, per selected phenotype ``<id>``:
     <id>_evidence   the note's own words (several claims joined with " | ")
     <id>_source     which channel produced it: specialist, llm, or specialist+llm
     <id>_why        reason codes when the status is needs_review (e.g. source_disagreement, llm_only)
+    <id>_alternative the other reader's value when the two disagree (model, if the rules are shown)
+    <id>_sidecar    extra detector value when it disagrees with the shown cell (opt-in ``--ext-detector``)
     <id>_detail     lists only: name (dose) per drug
     seizure_frequency also gets _count_min, _count_max, _period, _seizure_free
+
+``visit_summary`` is a very short glance of this note (at most 50 words), built from the cells
+already in the row. It is not a new extractor and is not scored. Review items are marked ``[?]``.
+Long free-text and extra list items are omitted.
 
 ``accepted``  = every claim for this phenotype passed LEO's automatic checks (specialist and LLM agree, or one
 source made the claim and nothing contradicted it).  It is not a guarantee: see services/leo_evidence.py for
@@ -30,9 +36,24 @@ from services.leo_catalog import Phenotype
 
 CLAIM_COLUMNS = ["document_id", "row_index", "field_path", "value", "verdict", "reason_codes", "evidence",
                  "char_start", "char_end", "section", "assertion", "experiencer", "temporality", "source",
-                 "alternative", "concept_system", "concept_id", "concept_label", "ontology_match",
-                 "code_accepted", "ontology_candidates"]
+                 "alternative", "sidecar_alternative", "concept_system", "concept_id", "concept_label", "ontology_match",
+                 "code_accepted", "ontology_candidates", "export_codes"]
 _MAX_CELL = 2000
+_MAX_SUMMARY_WORDS = 49   # strictly under 50 words
+_MAX_SUMMARY_LIST = 3
+
+# Glance order. Not a phenotype catalogue; derived from cells already on the row.
+VISIT_SUMMARY_ORDER: tuple[str, ...] = (
+    "epilepsy_type", "seizure_type", "age_at_onset", "seizure_frequency",
+    "current_asms", "prior_asms", "failed_asms", "rescue_medication",
+    "eeg_study_type", "eeg_ied_present", "hippocampal_sclerosis", "mri_normal",
+    "surgery_history",
+)
+_BOOL_GLANCE = {
+    "hippocampal_sclerosis": ("HS", "no HS"),
+    "eeg_ied_present": ("EEG IED", "no IED"),
+    "mri_normal": ("MRI normal", "MRI not normal"),
+}
 
 
 def _safe(s: Any) -> Any:
@@ -137,21 +158,23 @@ def claim_rows(claims: Iterable[Any], document_id: str, row_index: int, *, singl
             "evidence": _safe(c.mention.text), "char_start": c.mention.start, "char_end": c.mention.end,
             "section": c.section, "assertion": c.assertion.value, "experiencer": c.experiencer.value,
             "temporality": c.temporality.status.value, "source": _sources(c), "alternative": _safe(c.alternative or ""),
+            "sidecar_alternative": _safe(getattr(c, "sidecar_alternative", None) or ""),
             "concept_system": getattr(c.concept, "system", "") or "",
             "concept_id": getattr(c.concept, "id", "") or "",
             "concept_label": getattr(c.concept, "label", "") or "",
             "ontology_match": getattr(c, "ontology_match", "") or "",
             "code_accepted": bool(getattr(c, "code_accepted", False)),
             "ontology_candidates": _safe(_cands_cell(getattr(c, "ontology_candidates", None))),
+            "export_codes": _safe(_cands_cell(getattr(c, "export_codes", None))),
         })
     return out
 
 
 def wide_columns(phenotypes: list[Phenotype]) -> list[str]:
-    cols: list[str] = []
+    cols: list[str] = ["visit_summary"]
     for p in phenotypes:
         cols += [p.id, f"{p.id}_status", f"{p.id}_evidence", f"{p.id}_source", f"{p.id}_why",
-                 f"{p.id}_code", f"{p.id}_system", f"{p.id}_code_status"]
+                 f"{p.id}_alternative", f"{p.id}_sidecar", f"{p.id}_code", f"{p.id}_system", f"{p.id}_code_status"]
         if p.kind == "list":
             cols.append(f"{p.id}_detail")
         if p.kind == "frequency":
@@ -175,7 +198,8 @@ def wide_row(claims: list[Any], phenotypes: list[Phenotype], *, include_review: 
         mine = [c for c in claims if c.field_path in p.field_paths and c.validator_verdict.value != "reject"]
         mine.sort(key=lambda c: 0 if ok(c) else 1)
         row.update({p.id: "", f"{p.id}_status": "not_found", f"{p.id}_evidence": "", f"{p.id}_source": "",
-                    f"{p.id}_why": "", f"{p.id}_code": "", f"{p.id}_system": "", f"{p.id}_code_status": ""})
+                    f"{p.id}_why": "", f"{p.id}_alternative": "", f"{p.id}_sidecar": "", f"{p.id}_code": "",
+                    f"{p.id}_system": "", f"{p.id}_code_status": ""})
         if p.kind == "list":
             row[f"{p.id}_detail"] = ""
         if p.kind == "frequency":
@@ -222,6 +246,24 @@ def wide_row(claims: list[Any], phenotypes: list[Phenotype], *, include_review: 
                     row[f"{p.id}_seizure_free"] = bool(v.get("seizure_free"))
         row[f"{p.id}_status"] = "accepted" if all_ok else "needs_review"
         row[f"{p.id}_why"] = ";".join(why)
+        alts = []
+        for c in mine:
+            a = getattr(c, "alternative", None)
+            if a in (None, ""):
+                continue
+            t = a if isinstance(a, str) else _value_text(p, a)
+            if t and t != row.get(p.id) and t not in alts:
+                alts.append(t)
+        row[f"{p.id}_alternative"] = _safe("; ".join(alts))
+        sides = []
+        for c in mine:
+            a = getattr(c, "sidecar_alternative", None)
+            if a in (None, ""):
+                continue
+            t = a if isinstance(a, str) else _value_text(p, a)
+            if t and t not in sides:
+                sides.append(t)
+        row[f"{p.id}_sidecar"] = _safe("; ".join(sides))
         code_src = None
         if p.kind == "list":
             for c in mine:
@@ -232,6 +274,7 @@ def wide_row(claims: list[Any], phenotypes: list[Phenotype], *, include_review: 
             code_src = mine[0] if mine else None
         cid, csys, cst = _code_triple(code_src, include_review=include_review)
         row[f"{p.id}_code"], row[f"{p.id}_system"], row[f"{p.id}_code_status"] = cid, csys, cst
+    row["visit_summary"] = visit_summary_from_row(row, phenotypes)
     return row
 
 
@@ -249,10 +292,114 @@ def _code_triple(c: Any, *, include_review: bool) -> tuple[str, str, str]:
     return str(cid), str(sys), status
 
 
+def _bool_glance(pid: str, val: str) -> Optional[str]:
+    v = val.strip().lower()
+    pair = _BOOL_GLANCE.get(pid)
+    if pair:
+        if v in ("true", "1", "yes"):
+            return pair[0]
+        if v in ("false", "0", "no"):
+            return pair[1]
+        return None
+    if v in ("true", "1", "yes"):
+        return pid.replace("_", " ")
+    if v in ("false", "0", "no"):
+        return "no " + pid.replace("_", " ")
+    return None
+
+
+def _pretty(val: str) -> str:
+    return val.replace("_", " ").strip()
+
+
+def _has_kw(text: str, *needles: str) -> bool:
+    low = text.lower()
+    return any(n.lower() in low for n in needles)
+
+
+def _list_short(val: str, n: int = _MAX_SUMMARY_LIST) -> str:
+    parts = [p.strip() for p in val.replace("|", ";").split(";") if p.strip()]
+    extra = len(parts) - n
+    shown = ", ".join(parts[:n])
+    if extra > 0:
+        shown += f" +{extra}"
+    return shown
+
+
+def _at_most_words(text: str, n: int = _MAX_SUMMARY_WORDS) -> str:
+    words = text.split()
+    if len(words) <= n:
+        return text
+    return " ".join(words[:n]).rstrip(";,.") + "…"
+
+
+def _summary_phrase(row: dict, pid: str) -> str:
+    status = str(row.get(f"{pid}_status") or "")
+    if status in ("", "not_found", "not_documented", "error"):
+        return ""
+    raw = row.get(pid)
+    if raw in (None, ""):
+        return ""
+    val = str(raw).strip()
+    if not val:
+        return ""
+    mark = " [?]" if status == "needs_review" else ""
+    body = _bool_glance(pid, val)
+    if body is not None:
+        return body + mark
+    pretty = _pretty(val)
+    if pid == "epilepsy_type":
+        if not _has_kw(pretty, "epilepsy"):
+            pretty = pretty + " epilepsy"
+        return pretty + mark
+    if pid == "seizure_type":
+        if not _has_kw(pretty, "seizure"):
+            pretty = pretty + " seizure"
+        return pretty + mark
+    if pid == "age_at_onset":
+        return f"onset {pretty} y" + mark
+    if pid == "seizure_frequency":
+        if _has_kw(pretty, "seizure free", "seizure-free"):
+            return pretty + mark
+        if not _has_kw(pretty, "frequency"):
+            pretty = "frequency " + pretty
+        return pretty + mark
+    if pid == "current_asms":
+        return "current ASMs " + _list_short(pretty) + mark
+    if pid == "prior_asms":
+        return "prior ASMs " + _list_short(pretty) + mark
+    if pid == "failed_asms":
+        return "failed ASMs " + _list_short(pretty) + mark
+    if pid == "rescue_medication":
+        return "rescue " + _list_short(pretty) + mark
+    if pid == "eeg_study_type":
+        if not _has_kw(pretty, "eeg", "emu"):
+            pretty = "EEG " + pretty
+        return pretty + mark
+    if pid == "surgery_history":
+        return "surgery " + _list_short(pretty) + mark
+    return pretty + mark
+
+
+def visit_summary_from_row(row: dict, phenotypes: Optional[list[Phenotype]] = None) -> str:
+    """Under 50 words from this visit's extracted cells. Not a new reader; not scored."""
+    selected = {p.id for p in phenotypes} if phenotypes else None
+    bits: list[str] = []
+    for pid in VISIT_SUMMARY_ORDER:
+        if selected is not None and pid not in selected:
+            continue
+        bit = _summary_phrase(row, pid)
+        if bit:
+            bits.append(bit)
+    text = _at_most_words("; ".join(bits))
+    return _safe(text) if text else ""
+
+
 class _Generic:
     kind = "scalar"
 
 
 _GENERIC: Any = _Generic()
 
-__all__ = ["CLAIM_COLUMNS", "claim_rows", "wide_columns", "wide_row", "display_drug"]
+__all__ = ["CLAIM_COLUMNS", "claim_rows", "wide_columns", "wide_row", "display_drug",
+           "visit_summary_from_row", "VISIT_SUMMARY_ORDER", "_MAX_SUMMARY_WORDS"]

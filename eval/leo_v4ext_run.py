@@ -37,6 +37,8 @@ def main() -> int:
     ap.add_argument("--phenotypes", default="all")
     ap.add_argument("--no-ext-reader", action="store_true",
                     help="core L1C reader only (the previous GPU run; default is L1C+X1C+P1C+F1C)")
+    ap.add_argument("--ext-detector", action="append", default=[],
+                    help="opt-in sidecar (repeatable). Does not overwrite headline v4ext_* files.")
     args = ap.parse_args()
 
     from services import leo_batch as lb
@@ -63,7 +65,12 @@ def main() -> int:
     if args.mode == "gpu":
         threading.Thread(target=sampler, daemon=True).start()
     t_load = time.time()
-    rt = LeoRuntime.load(mode=args.mode, arm="L1C", ext_reader=not args.no_ext_reader)
+    from services.ext_detectors import parse_ext_detectors
+    dets = parse_ext_detectors(args.ext_detector or None)
+    rt = LeoRuntime.load(mode=args.mode, arm="L1C", ext_reader=not args.no_ext_reader,
+                         ext_detectors=dets)
+    if dets:
+        print(f"[drv] ext_detectors={list(dets)}", flush=True)
     load_s = round(time.time() - t_load, 1)
     print(f"[drv] mode={rt.mode} model load {load_s}s", flush=True)
 
@@ -78,7 +85,8 @@ def main() -> int:
             "field_path": c.field_path, "value": dump(c.value), "verdict": c.validator_verdict.value,
             "reasons": [r.value for r in c.reason_codes], "detectors": list(c.detectors or []),
             "evidence": c.mention.text, "assertion": c.assertion.value,
-            "temporality": c.temporality.status.value, "section": c.section} for c in claims]
+            "temporality": c.temporality.status.value, "section": c.section,
+            "sidecar_alternative": getattr(c, "sidecar_alternative", None)} for c in claims]
         return stats, claims
 
     pipe.extract = wrapped

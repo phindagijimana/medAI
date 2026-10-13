@@ -19,6 +19,8 @@ and SHA-256 checksums are in `data/ontologies/MANIFEST.json`
 | WHO ATC | ATC rows inside RxNorm 2026-09-08 (`SAB=ATC`) | WHO Collaborating Centre for Drug Statistics Methodology | ATC/DDD Index terms of use | Choosing the drugs: N03A Antiepileptics |
 | ILAE classification | 2017 operational classification (see 4.1) | Published papers | — | Enum values for seizure and epilepsy type |
 
+Post-extract export maps (opt-in `--export-codes`, not retrieval sources, not E gazetteers): ICD-10-CM G40.x category, Orphanet ORPHA ids for named syndromes, SCORE labels for already-extracted EEG findings, EpSO class labels for ILAE enums. EPIO remains the live EpSO-family retriever. See `docs/ROLE_PLACEMENTS.md` and `services/o_code_maps.py`. SCOPE D3–D5 *retrieval* is still deferred.
+
 Licensed content (SNOMED CT, RxNorm, UMLS) stays under `data/ontologies/`,
 which git ignores except `MANIFEST.json`. Files that quote SNOMED descriptions
 (e.g. `data/ontologies/curated_code_review.csv`) also stay there. The UMLS API

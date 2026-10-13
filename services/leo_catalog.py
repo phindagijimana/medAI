@@ -7,7 +7,7 @@ Two kinds of predefined phenotype, kept apart because they carry different evide
   ``measured`` (own accuracy against gold, numbers in ``services.leo_evidence``), ``rules_only`` (the
   specialist alone was scored against synthetic or F-S gold, no LLM; ``eval/results/leo_extra_phenotypes.md`` and
   ``leo_plan_phenotypes.md``),
-  ``indirect`` (only its effect on another field was measured) or ``none`` (nothing measured).  Five are ``measured``.  The
+  ``indirect`` (only its effect on another field was measured) or ``none`` (nothing measured).  Six are ``measured``.  The
   level is shown in the UI, ``leo phenotypes`` and the About sheet.
 * **ask** phenotypes are questions put to the LLM alone, with a verbatim quote that is checked
   against the note.  Nothing cross-checks them, so LEO marks every answer for review.  Users can
@@ -66,12 +66,18 @@ EXTRACT: tuple[Phenotype, ...] = (
     Phenotype("epilepsy_type", "Epilepsy type", ("clinical_seizure.epilepsy_type",), "scalar",
               "Focal, generalized, combined generalized and focal, or unknown (ILAE 2017 epilepsy types).", _M,
               ("core", "seizure"), ("ilae2017_epilepsies",),
-              "The F-S gold says unknown when the diagnosis line names no type (25 of 38 letters), and LEO often "
-              "states a type there; whether those are errors was not adjudicated (see Evidence)."),
+              "Unknown means the note says epilepsy but names no type (25 of 38 F-S letters). The rules give "
+              "unknown there; the model (prompt v1) cannot, so those cells go to review (see Evidence)."),
     Phenotype("seizure_type", "Predominant seizure type", ("clinical_seizure.predominant_seizure_type",),
               "scalar", "The seizure type the note treats as the main one, using ILAE 2017 operational names.",
               _M, ("core", "seizure"), ("ilae2017_seizure",),
               "Small samples; the specialist and the LLM often disagree on this field."),
+    Phenotype("seizure_onset_class", "Seizure onset class", ("clinical_seizure.seizure_onset_class",),
+              "scalar", "Focal, generalized or unknown onset: the first level of the ILAE 2017 seizure type.",
+              _M, ("seizure",), ("ilae2017_seizure",),
+              "Taken from each reader's seizure type and fused on its own, so it can be accepted when the readers "
+              "agree on the class but not on the subtype. Only 18 of 40 held-out letters have a gold seizure type.",
+              derived=True),
     Phenotype("other_seizure_types", "Other seizure types", ("clinical_seizure.other_seizure_types",),
               "list", "Further ILAE 2017 seizure types named besides the predominant one.",
               _R, ("seizure",), ("ilae2017_seizure",),
@@ -86,6 +92,24 @@ EXTRACT: tuple[Phenotype, ...] = (
     Phenotype("seizure_frequency", "Current seizure frequency", ("clinical_seizure.seizure_frequency",),
               "frequency", "How often seizures occur now: counts per day, week, month or year, or seizure free.",
               _M, ("core", "seizure")),
+    Phenotype("seizure_free", "Seizure free now", ("clinical_seizure.seizure_free",), "bool",
+              "Whether the patient is currently seizure free (no seizures of any type), read from each reader's "
+              "current seizure frequency.", _M, ("seizure",), (),
+              "Fused on its own, so the readers can agree the patient is not seizure free while disagreeing on the "
+              "rate. 29 of 40 held-out F-S letters have a gold value; the model alone reads it better than the rules "
+              "(see Evidence).", derived=True),
+    Phenotype("pnes_status", "PNES documented", ("clinical_seizure.pnes_status",), "scalar",
+              "Whether the note documents psychogenic non-epileptic (dissociative, functional) seizures: PNES only, "
+              "PNES with epilepsy, or PNES raised as a possibility.", "none", ("seizure",), (),
+              "Rules only, no gold label. When PNES is documented, seizure-count cells (and, for PNES only, seizure "
+              "type, onset class and epilepsy type) are never auto-accepted. On the 160 F-S development letters the "
+              "flag matched a manual reading of all 16 letters that mention PNES."),
+    Phenotype("date_of_last_seizure", "Date of last seizure", ("clinical_seizure.date_of_last_seizure",), "scalar",
+              "The latest explicit date of a last seizure (\"last event July 2016\", \"no seizures since Christmas "
+              "2015\"), at the precision the note gives.", _M, ("seizure",), (),
+              "Rules only; the model does not read it, so it is always reviewed when the model ran. Explicit dates only: "
+              "\"seizure free for 7 months\" gives no date. Only 4 held-out F-S letters have a gold date (3 right); "
+              "all 14 development letters right (eval/results/leo_last_seizure_fs200.md)."),
     Phenotype("current_asms", "Current maintenance ASMs", ("medication.current_asms",), "list",
               "Daily anti-seizure medicines the patient takes now. Rescue and one-off doses are separate.",
               _M, ("core", "medication"), (),
@@ -145,8 +169,10 @@ EXTRACT: tuple[Phenotype, ...] = (
               "Whether interictal epileptiform discharges are reported.", _R, ("eeg",), (),
               _EXT + "Right for 17 of 27 patients that have IEDs in the plan (4 extra reports where the plan has none; 10.17)."),
     Phenotype("eeg_ied_findings", "Interictal discharge site", ("eeg.ied_findings",), "list",
-              "Lobe and side of interictal epileptiform discharges.", _R, ("eeg",), (),
-              _EXT + "Lobe right for 8 of 12, side 8 of 12 (10.17)."),
+              "Lobe and side of interictal epileptiform discharges, plus frequency band, recurrence and "
+              "dispersal when the note states them.", _R, ("eeg",), (),
+              _EXT + "Lobe right for 8 of 12, side 8 of 12 (10.17). Band / recurrence / dispersal are "
+              "rules-only extras (SACAR schema); TUH external score is blocked on a data-use agreement (10.46)."),
     Phenotype("eeg_ictal_onset", "EEG ictal onset", ("eeg.ictal_onset_lobe", "eeg.ictal_onset_laterality"),
               "scalar", "Lobe and side of seizure onset on EEG.", _R, ("eeg",), (),
               _EXT + "Right for 4 of 5 recorded onsets, but still reported for 13 patients where the plan has none (20 "
@@ -225,7 +251,7 @@ EXTRACT: tuple[Phenotype, ...] = (
 
 PANELS: dict[str, tuple[str, str]] = {
     # id -> (label, tag in Phenotype.tags)
-    "core": ("Core: type, onset, frequency, current ASMs (the five fields with measured accuracy)", "core"),
+    "core": ("Core: type, onset, frequency, current ASMs (measured accuracy)", "core"),
     "seizure": ("Seizure history", "seizure"),
     "medication": ("Medication roles", "medication"),
     "etiology": ("Etiology", "etiology"),
@@ -266,6 +292,18 @@ ASK_TEMPLATES: tuple[AskSpec, ...] = tuple(
          "Psychiatric comorbidity"),
         ("seizure_free_duration", "For how many months has the patient been seizure free, if stated?", "number", (),
          "Seizure-free duration (months)"),
+        ("dre_kwan",
+         "Does this ASM history meet the ILAE 2010 definition of drug-resistant epilepsy "
+         "(two adequate, tolerated trials that failed to achieve seizure freedom)?",
+         "yes_no", (), "ILAE 2010 drug-resistant epilepsy (ask/audit)"),
+        ("first_feature",
+         "Is the described onset the first feature of the seizure, or later evolution?",
+         "choice", ("first_feature", "later_evolution", "not_documented"),
+         "ILAE 2017 first feature vs evolution (ask/audit)"),
+        ("ltm_sense",
+         "In this note, is LTM (or cEEG / long-term monitoring) an EEG study or a drug?",
+         "choice", ("eeg_study", "drug", "not_documented"),
+         "ACNS LTM study vs drug (ask/audit)"),
     ))
 
 _BY_ID = {p.id: p for p in EXTRACT}

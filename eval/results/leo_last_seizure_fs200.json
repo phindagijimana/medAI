@@ -1,0 +1,235 @@
+{
+  "summary": {
+    "dev": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0,
+      "n": 14,
+      "p": 1.0,
+      "r": 1.0,
+      "f1": 1.0
+    },
+    "held_out": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 1,
+      "n": 4,
+      "p": 0.75,
+      "r": 0.75,
+      "f1": 0.75
+    }
+  },
+  "rows": [
+    {
+      "pid": "EA0005",
+      "split": "dev",
+      "gold": [
+        "2016-07"
+      ],
+      "pred": "2016-07",
+      "ok": true,
+      "quote": "last event July 2016"
+    },
+    {
+      "pid": "EA0011",
+      "split": "dev",
+      "gold": [
+        "2017-12",
+        "2017-12",
+        "2017"
+      ],
+      "pred": "2017-12",
+      "ok": true,
+      "quote": "last event around Christmas 2017"
+    },
+    {
+      "pid": "EA0020",
+      "split": "dev",
+      "gold": [
+        "2016-08",
+        "2016-11"
+      ],
+      "pred": "2016-11",
+      "ok": true,
+      "quote": "no absences since November 2016"
+    },
+    {
+      "pid": "EA0046",
+      "split": "dev",
+      "gold": [
+        "2019-10"
+      ],
+      "pred": "2019-10",
+      "ok": true,
+      "quote": "last event October 2019"
+    },
+    {
+      "pid": "EA0056",
+      "split": "dev",
+      "gold": [
+        "2009-12"
+      ],
+      "pred": "2009-12",
+      "ok": true,
+      "quote": "last one was on Christmas day 2009"
+    },
+    {
+      "pid": "EA0057",
+      "split": "dev",
+      "gold": [
+        "2009-12"
+      ],
+      "pred": "2009-12",
+      "ok": true,
+      "quote": "last one was on Christmas day 2009"
+    },
+    {
+      "pid": "EA0059",
+      "split": "dev",
+      "gold": [
+        "2015",
+        "2017"
+      ],
+      "pred": "2017",
+      "ok": true,
+      "quote": "last event 2017"
+    },
+    {
+      "pid": "EA0060",
+      "split": "dev",
+      "gold": [
+        "2010-02"
+      ],
+      "pred": "2010-02",
+      "ok": true,
+      "quote": "last event Feb 2010"
+    },
+    {
+      "pid": "EA0093",
+      "split": "dev",
+      "gold": [
+        "2015-12"
+      ],
+      "pred": "2015-12",
+      "ok": true,
+      "quote": "no seizures since Christmas 2015"
+    },
+    {
+      "pid": "EA0098",
+      "split": "dev",
+      "gold": [
+        "2019-09"
+      ],
+      "pred": "2019-09",
+      "ok": true,
+      "quote": "Most recent seizure September 2019"
+    },
+    {
+      "pid": "EA0127",
+      "split": "dev",
+      "gold": [
+        "2005-02"
+      ],
+      "pred": "2005-02",
+      "ok": true,
+      "quote": "last seizure was in February 2005"
+    },
+    {
+      "pid": "EA0133",
+      "split": "dev",
+      "gold": [
+        "2015"
+      ],
+      "pred": "2015",
+      "ok": true,
+      "quote": "last event 2015"
+    },
+    {
+      "pid": "EA0138",
+      "split": "dev",
+      "gold": [
+        "2013"
+      ],
+      "pred": "2013",
+      "ok": true,
+      "quote": "last event 2013"
+    },
+    {
+      "pid": "EA0144",
+      "split": "dev",
+      "gold": [
+        "2012-10"
+      ],
+      "pred": "2012-10",
+      "ok": true,
+      "quote": "last event October 2012"
+    },
+    {
+      "pid": "EA0180",
+      "split": "held_out",
+      "gold": [
+        "2015-11"
+      ],
+      "pred": "2015",
+      "ok": false,
+      "quote": "last seizure was Novemebr 2015"
+    },
+    {
+      "pid": "EA0190",
+      "split": "held_out",
+      "gold": [
+        "2018",
+        "2018"
+      ],
+      "pred": "2018",
+      "ok": true,
+      "quote": "last event 2018"
+    },
+    {
+      "pid": "EA0193",
+      "split": "held_out",
+      "gold": [
+        "2007-06"
+      ],
+      "pred": "2007-06-03",
+      "ok": true,
+      "quote": "last event 3rd June 2007"
+    },
+    {
+      "pid": "EA0194",
+      "split": "held_out",
+      "gold": [
+        "2019-05"
+      ],
+      "pred": "2019-05-23",
+      "ok": true,
+      "quote": "last event 23 May 2019"
+    }
+  ],
+  "no_gold_dates": [
+    {
+      "pid": "EA0045",
+      "split": "dev",
+      "pred": "2018-08-31",
+      "quote": "last episode was on 31st August 2018"
+    },
+    {
+      "pid": "EA0071",
+      "split": "dev",
+      "pred": "2006",
+      "quote": "last seizure before this was in 2006"
+    },
+    {
+      "pid": "EA0099",
+      "split": "dev",
+      "pred": "2019-04",
+      "quote": "last event April 2019"
+    },
+    {
+      "pid": "EA0168",
+      "split": "held_out",
+      "pred": "2015",
+      "quote": "last seizure was Novemebr 2015"
+    }
+  ]
+}

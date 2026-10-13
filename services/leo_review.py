@@ -4,9 +4,12 @@ A reviewer looks at one value at a time (one phenotype or question answer in one
 
     accept    the value is right                      final value = LEO's value
     correct   the value is wrong, here is the right   final value = what the reviewer typed
-    reject    the value is wrong or unsupported       final value = blank
+    reject    the value is wrong or unsupported       final value = blank  (Deny in the Validator)
     add       LEO missed a value the note states      final value = what the reviewer typed
               (only for ``not_found``; put the supporting words in ``comment``)
+
+Optional tags (stored on the same files; extract does not read them): ``why_tag``, ``reader_preferred``
+(rules/model/both/neither on a disagreement), ``quote_ok``. Deny and Correct need ``why_tag``.
 
 Decisions are kept in two files next to the result (both contain note text, so treat them like the input):
 
@@ -34,6 +37,7 @@ reviewed; they still say nothing about notes nobody looked at.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import threading
 from dataclasses import dataclass
@@ -48,9 +52,13 @@ from services.leo_tabular import _safe
 DECISIONS = ("accept", "correct", "reject", "add")
 FLAGGED = ("needs_review", "rejected")                  # statuses a reviewer should look at
 NOT_REVIEWABLE = ("", "not_found", "not_documented", "error")
+WHY_TAGS = ("wrong_value", "wrong_status", "quote_does_not_support", "wrong_reader",
+            "copy_forward", "missed", "other")
+READER_PREFERRED = ("rules", "model", "both", "neither")
+SCOPES = ("flagged", "misses", "all", "accepted_audit")
 REVIEWED_COLUMNS = ["row", "doc_id", "field", "label", "proposed_value", "proposed_status", "proposed_why",
                     "proposed_evidence", "proposed_source", "decision", "final_value", "reviewer",
-                    "reviewed_utc", "comment", "leo_version"]
+                    "reviewed_utc", "comment", "why_tag", "reader_preferred", "quote_ok", "leo_version"]
 MAX_VALUE = 500
 MAX_COMMENT = 500
 _LOCK = threading.Lock()
@@ -102,38 +110,66 @@ def reviewable(status: str, scope: str) -> bool:
         return status == "not_found"
     if scope == "all":
         return status not in NOT_REVIEWABLE
-    raise ValueError("scope must be flagged, misses or all")
+    if scope == "accepted_audit":
+        return status == "accepted"
+    raise ValueError("scope must be flagged, misses, all or accepted_audit")
 
 
-def proposal(table: pd.DataFrame, f: Field, row: int) -> dict:
+def in_accepted_audit(doc_id: str, field: str, row: int, seed: str = "") -> bool:
+    """Deterministic ~10% sample of auto-accepted cells (audit of silent errors)."""
+    raw = f"{seed}|{doc_id}|{row}|{field}".encode()
+    return int(hashlib.md5(raw).hexdigest()[:8], 16) % 10 == 0
+
+
+def _column_reader(table: pd.DataFrame):
+    """cell(i, col) backed by per-column string lists, built on first use (fast for whole-table scans)."""
+    cache: dict = {}
+
+    def cell(i: int, col: str) -> str:
+        if not col or col not in table.columns:
+            return ""
+        if col not in cache:
+            cache[col] = table[col].astype(str).tolist()
+        return cache[col][i]
+    return cell
+
+
+def proposal(table: pd.DataFrame, f: Field, row: int, cell=None) -> dict:
     """What LEO proposed for field ``f`` in 1-based ``row``."""
+    cell = cell or (lambda i, col: _cell(table, i, col))
     i, dc = row - 1, doc_column(table)
-    code_col, sys_col, cst_col = f"{f.id}_code", f"{f.id}_system", f"{f.id}_code_status"
-    return {"row": row, "doc_id": _cell(table, i, dc) or f"row{row}", "field": f.id, "label": f.label,
-            "value": _cell(table, i, f.value), "status": _cell(table, i, f.status),
-            "why": _cell(table, i, f.why), "evidence": _cell(table, i, f.evidence),
-            "source": _cell(table, i, f.source),
-            "code": _cell(table, i, code_col) if code_col in table.columns else "",
-            "code_system": _cell(table, i, sys_col) if sys_col in table.columns else "",
-            "code_status": _cell(table, i, cst_col) if cst_col in table.columns else ""}
+    return {"row": row, "doc_id": cell(i, dc) or f"row{row}", "field": f.id, "label": f.label,
+            "value": cell(i, f.value), "status": cell(i, f.status),
+            "why": cell(i, f.why), "evidence": cell(i, f.evidence),
+            "source": cell(i, f.source),
+            "alternative": cell(i, f"{f.id}_alternative"),
+            "code": cell(i, f"{f.id}_code"),
+            "code_system": cell(i, f"{f.id}_system"),
+            "code_status": cell(i, f"{f.id}_code_status")}
 
 
-def items(table: pd.DataFrame, fields: list[Field], latest: dict, scope: str = "flagged") -> list[dict]:
+def items(table: pd.DataFrame, fields: list[Field], latest: dict, scope: str = "flagged",
+          audit_seed: str = "") -> list[dict]:
     """Values to review (in table order), each with the current decision if there is one."""
-    if scope not in ("flagged", "misses", "all"):
-        raise ValueError("scope must be flagged, misses or all")
+    if scope not in SCOPES:
+        raise ValueError("scope must be flagged, misses, all or accepted_audit")
     out = []
+    cell = _column_reader(table)
     lcol = next((c for c in table.columns if c.startswith("leo_status")), "")
     for i in range(len(table)):
-        if lcol and _cell(table, i, lcol).startswith("error"):
+        if lcol and cell(i, lcol).startswith("error"):
             continue
         for f in fields:
-            if f.status not in table.columns or not reviewable(_cell(table, i, f.status), scope):
+            if f.status not in table.columns or not reviewable(cell(i, f.status), scope):
                 continue
-            it = proposal(table, f, i + 1)
+            it = proposal(table, f, i + 1, cell)
+            if scope == "accepted_audit" and not in_accepted_audit(it["doc_id"], f.id, i + 1, audit_seed):
+                continue
             ev = latest.get((i + 1, f.id))
             it.update({"decision": ev["decision"] if ev else "", "final": ev["final_value"] if ev else "",
-                       "comment": ev["comment"] if ev else ""})
+                       "comment": ev["comment"] if ev else "",
+                       "why_tag": ev.get("why_tag", "") if ev else "",
+                       "reader_preferred": ev.get("reader_preferred", "") if ev else ""})
             out.append(it)
     return out
 
@@ -148,7 +184,8 @@ def counts(its: list[dict]) -> dict:
     return c
 
 
-def make_event(prop: dict, decision: str, value: str, reviewer: str, comment: str, version: str) -> dict:
+def make_event(prop: dict, decision: str, value: str, reviewer: str, comment: str, version: str,
+               why_tag: str = "", reader_preferred: str = "") -> dict:
     """A decision record.  ``decision='undo'`` withdraws an earlier decision."""
     reviewer = (reviewer or "").strip()
     if not reviewer:
@@ -159,6 +196,7 @@ def make_event(prop: dict, decision: str, value: str, reviewer: str, comment: st
     if decision not in DECISIONS + ("undo",):
         raise ValueError(f"decision must be one of {', '.join(DECISIONS)}")
     value, comment = (value or "").strip(), (comment or "").strip()
+    why_tag, reader_preferred = (why_tag or "").strip().lower(), (reader_preferred or "").strip().lower()
     if len(value) > MAX_VALUE or len(comment) > MAX_COMMENT:
         raise ValueError("value or comment is too long")
     if decision == "correct":
@@ -171,13 +209,32 @@ def make_event(prop: dict, decision: str, value: str, reviewer: str, comment: st
             raise ValueError("adding a missed value needs the value")
         if (prop.get("status") or "") != "not_found":
             raise ValueError("add is for a missed value; use correct to change one LEO found")
+        if not why_tag:
+            why_tag = "missed"
+    if decision != "undo":
+        if why_tag and why_tag not in WHY_TAGS:
+            raise ValueError(f"why must be one of {', '.join(WHY_TAGS)}")
+        if decision in ("correct", "reject") and not why_tag:
+            raise ValueError("choose why before Deny or Correct (wrong_value, wrong_status, "
+                             "quote_does_not_support, wrong_reader, copy_forward, missed, other)")
+        if reader_preferred and reader_preferred not in READER_PREFERRED:
+            raise ValueError(f"reader_preferred must be one of {', '.join(READER_PREFERRED)}")
+        if (prop.get("alternative") or "") and decision in ("accept", "correct", "reject") and not reader_preferred:
+            raise ValueError("this cell is a disagreement; say which reader was right (rules, model, both, neither)")
+    if why_tag == "quote_does_not_support":
+        quote_ok = "no"
+    elif decision == "accept":
+        quote_ok = "yes"
+    else:
+        quote_ok = ""
     final = {"accept": prop["value"], "correct": value, "reject": "", "undo": "", "add": value}[decision]
     return {"row": prop["row"], "doc_id": prop["doc_id"], "field": prop["field"], "label": prop["label"],
             "proposed_value": prop["value"], "proposed_status": prop["status"], "proposed_why": prop["why"],
             "proposed_evidence": prop["evidence"], "proposed_source": prop["source"], "decision": decision,
             "final_value": final, "reviewer": reviewer,
             "reviewed_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "comment": comment, "leo_version": version}
+            "comment": comment, "why_tag": why_tag, "reader_preferred": reader_preferred,
+            "quote_ok": quote_ok, "leo_version": version}
 
 
 class ReviewStore:
@@ -248,7 +305,10 @@ def read_reviewed(path: str | Path, table: Optional[pd.DataFrame] = None) -> dic
         if dec in ("correct", "add") and not final:
             raise ValueError(f"{p.name} line {n + 2}: a {'correction' if dec == 'correct' else 'missed value'} needs final_value")
         out[(row, str(r["field"]).strip())] = {"decision": dec, "final_value": final,
-                                                "reviewer": str(r.get("reviewer", "")), "comment": str(r.get("comment", ""))}
+                                                "reviewer": str(r.get("reviewer", "")), "comment": str(r.get("comment", "")),
+                                                "why_tag": str(r.get("why_tag", "")).strip(),
+                                                "reader_preferred": str(r.get("reader_preferred", "")).strip(),
+                                                "quote_ok": str(r.get("quote_ok", "")).strip()}
     return out
 
 
@@ -302,15 +362,17 @@ def reviewed_frame(latest: dict) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=REVIEWED_COLUMNS)
 
 
-def template(table: pd.DataFrame, fields: list[Field], scope: str = "flagged") -> pd.DataFrame:
+def template(table: pd.DataFrame, fields: list[Field], scope: str = "flagged",
+             audit_seed: str = "") -> pd.DataFrame:
     """A reviewed.csv to fill in by hand: one row per value to review, decision left blank.
     Fill ``decision`` (accept / correct / reject / add) and, for correct or add, ``final_value``; then ``merge_files``."""
     rows = []
-    for it in items(table, fields, {}, scope):
+    for it in items(table, fields, {}, scope, audit_seed=audit_seed):
         rows.append({"row": it["row"], "doc_id": it["doc_id"], "field": it["field"], "label": it["label"],
                      "proposed_value": it["value"], "proposed_status": it["status"], "proposed_why": it["why"],
                      "proposed_evidence": it["evidence"], "proposed_source": it["source"], "decision": "",
-                     "final_value": "", "reviewer": "", "reviewed_utc": "", "comment": "", "leo_version": ""})
+                     "final_value": "", "reviewer": "", "reviewed_utc": "", "comment": "",
+                     "why_tag": "", "reader_preferred": "", "quote_ok": "", "leo_version": ""})
     return pd.DataFrame(rows, columns=REVIEWED_COLUMNS)
 
 
@@ -365,6 +427,52 @@ def merge_files(table_path: str | Path, reviewed_path: str | Path, out: Optional
     return write_merged(merged, reviewed_frame(latest), out, source_xlsx=tp if tp.suffix.lower() == ".xlsx" else None)
 
 
+def summarize_reviews(path: str | Path) -> str:
+    """Per-field Accept/Correct/Deny rates and disagreement reader votes. Labels only; does not change extract."""
+    p = Path(path)
+    df = pd.read_csv(p, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    if "decision" not in df.columns or "field" not in df.columns:
+        raise ValueError(f"{p.name} is not a reviewed.csv")
+    df = df[df["decision"].str.strip().str.lower().isin(DECISIONS)].copy()
+    if df.empty:
+        return f"{p.name}: no decisions yet."
+    lines = [f"# Validator summary ({p.name})", "",
+             "Labels only. Does not change extract or D17. Few-shot and LoRA/BIO are paused.", ""]
+    lines.append("| field | n | accept | correct | reject | add |")
+    lines.append("|---|---:|---:|---:|---:|---:|")
+    for field, g in df.groupby(df["field"].str.strip(), sort=True):
+        d = g["decision"].str.strip().str.lower()
+        lines.append(f"| `{field}` | {len(g)} | {int((d=='accept').sum())} | {int((d=='correct').sum())} | "
+                     f"{int((d=='reject').sum())} | {int((d=='add').sum())} |")
+    if "why_tag" in df.columns:
+        tags = df["why_tag"].str.strip().str.lower()
+        tags = tags[tags != ""]
+        if len(tags):
+            lines += ["", "Why tags:"]
+            for t, n in tags.value_counts().items():
+                lines.append(f"- `{t}`: {n}")
+    if "reader_preferred" in df.columns:
+        rp = df[df["reader_preferred"].str.strip() != ""]
+        if len(rp):
+            lines += ["", "Which reader was right (disagreements):"]
+            lines.append("| field | rules | model | both | neither |")
+            lines.append("|---|---:|---:|---:|---:|")
+            for field, g in rp.groupby(rp["field"].str.strip(), sort=True):
+                v = g["reader_preferred"].str.strip().str.lower()
+                lines.append(f"| `{field}` | {int((v=='rules').sum())} | {int((v=='model').sum())} | "
+                             f"{int((v=='both').sum())} | {int((v=='neither').sum())} |")
+            lines.append("")
+            lines.append("To score routing and thresholds: `leo learn FILE.reviewed.csv`. "
+                         "A policy file is written only with `--emit-policy` after the ≥100/field CI gate. D17 stays until then.")
+    if "quote_ok" in df.columns:
+        q = df["quote_ok"].str.strip().str.lower()
+        n_yes, n_no = int((q == "yes").sum()), int((q == "no").sum())
+        if n_yes or n_no:
+            lines += ["", f"Quote support: yes {n_yes}, no {n_no} (feeds Loop B / quote-entail, not live)."]
+    return "\n".join(lines) + "\n"
+
+
 __all__ = ["Field", "fields_from", "infer_fields", "items", "counts", "proposal", "make_event", "ReviewStore",
            "read_reviewed", "merge", "merge_files", "template", "write_merged", "reviewed_frame", "load_table",
-           "REVIEWED_COLUMNS", "DECISIONS", "FLAGGED"]
+           "summarize_reviews", "in_accepted_audit",
+           "REVIEWED_COLUMNS", "DECISIONS", "FLAGGED", "WHY_TAGS", "READER_PREFERRED", "SCOPES"]
