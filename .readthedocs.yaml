@@ -1,0 +1,16 @@
+# Read the Docs — same pattern as QSIPrep (https://qsiprep.readthedocs.io)
+# Import github.com/phindagijimana/medAI at https://readthedocs.org
+# The slug you choose becomes https://<slug>.readthedocs.io
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.12"
+
+mkdocs:
+  configuration: mkdocs.yml
+
+python:
+  install:
+    - requirements: docs_site/requirements.txt

@@ -25,9 +25,9 @@ bin/leo batch notes.csv --local --mode gpu # Med42 + EpExtra if CUDA is visible
 
 `--local --mode auto` uses the GPU when `torch.cuda.is_available()`, else CPU, and says so. Dual-reader extract **needs a GPU**. Manifest replay is for scoring, not a user substitute for Med42.
 
-## This HPC (URMC Slurm)
+## Example Slurm site
 
-Login node has no GPU. Default `leo batch` / `leo start` submits a job.
+Login node has no GPU. Default `leo batch` / `leo start` submits a job. Override `--partition` / `--gres` for your cluster.
 
 | Flag | Job | Partition default | Resources |
 |---|---|---|---|
@@ -45,10 +45,8 @@ Override site names: `--partition`, `--hours`, `--gres`, `--cpus`, `--mem`, or `
 
 ## Another cluster
 
-Keep `--local` on an interactive GPU allocation, **or** set `--gres` / `MEDAI_LEO_GRES` to that site’s name (`gpu:a100:1`, `gpu:1`, …). Change `--partition` to theirs. Weights and CDB must be on a filesystem the compute node can read (this repo on NFS is fine here).
+Keep `--local` on an interactive GPU allocation, **or** set `--gres` / `MEDAI_LEO_GRES` to that site’s name (`gpu:a100:1`, `gpu:1`, …). Change `--partition` to theirs. Weights and CDB must be on a filesystem the compute node can read.
 
 ## Ready?
 
 Yes for a researcher who can: create `venv-medcat`, place Med42 weights, keep UMLS in `.env`, and either sit on a GPU workstation or submit Slurm with the right GRES. CPU-only is ready today and is **not** a research extract. Confirm with `bin/leo check` and, on GPU, `bin/leo check --gpu` / `--slurm`.
-
-**Verified 2026-10-10 on this cluster.** Login node: `leo install --check-only` and `leo check` (rules only) passed; GPU not visible (expected). Slurm job **183916** (`interactive`, `--gres=gpu:l40s.24g:1`, 8 CPU, 64G, 1:40 wall): `leo check --gpu` **ALL CHECKS PASSED** on the allocated GPU node (L40S-24Q). Sample note: epilepsy_type focal, onset 11, frequency 2/month, current ASMs lamotrigine + lacosamide (stopped valproate not listed).

@@ -26,6 +26,7 @@ venv/
 ENV/
 env/
 .venv
+.venv-docs/
 
 # IDE
 .vscode/
@@ -64,8 +65,12 @@ data/rag_cache/
 !SELF_HOSTING.md
 !RELEASE_NOTES.md
 !docs/*.md
+!docs_site/*.md
 !eval/results/*.md
 !rules/*.md
+
+# MkDocs build (Read the Docs)
+site/
 
 # Paper drafts and submission packet — stay on disk, not GitHub
 writing/

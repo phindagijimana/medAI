@@ -1,0 +1,48 @@
+site_name: LEO
+site_description: Research phenotyping for epilepsy notes (MedAI-EPI)
+docs_dir: docs_site
+repo_url: https://github.com/phindagijimana/medAI
+repo_name: phindagijimana/medAI
+edit_uri: blob/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+nav:
+  - Home: index.md
+  - User guide: LEO_USER_GUIDE.md
+  - Hosting: LEO_HOSTING.md
+  - Interpreting results: INTERPRETING_RESULTS.md
+  - Routing rules: LEO_ROUTING_RULES.md
+  - Design: IMPLEMENTATION.md
+  - Weaknesses: WEAKNESSES.md
+  - Learning: ACTIVE_LEARNING_PLAN.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+strict: true

@@ -36,11 +36,15 @@ Operator and protocol docs. These **are** tracked (`!docs/*.md`). Manuscript dra
 - **`SCOPE_DECISIONS.md`**: deferred scope items (ILAE 2025, NINDS CDE, ICD-10-CM, EpSO, ORDO, definition of current ASM)
 - **`CHAIN_OF_THREE_ALIGNMENT.md`**: mapping of the Chain-of-Three design to the code, with change log
 
-## Public Documentation
+## Public documentation
 
-Main documentation (tracked in GitHub):
-- `../README.md`: Project overview and quick start
-- `../DEPLOYMENT.md`: Complete deployment guide
+Operator pages on this site / Read the Docs (MkDocs; `docs_dir` is `docs_site/`, symlinks into `docs/`):
+
+- `index.md` — landing
+- `LEO_USER_GUIDE.md`, `LEO_HOSTING.md`, `INTERPRETING_RESULTS.md`
+- `LEO_ROUTING_RULES.md`, `IMPLEMENTATION.md`, `WEAKNESSES.md`, `ACTIVE_LEARNING_PLAN.md`
+
+Not on the HTML site: `EVAL_PROTOCOL_LEO.md`, paper drafts (`writing/`, `paper_doc/`), hold-out leak tables. Import `phindagijimana/medAI` at readthedocs.org after this config is on `main`.
 
 ## Usage
 
