@@ -1287,3 +1287,13 @@ CPU only. Headline extras / v05 files not overwritten. D17 and `--quote-entail` 
 *p* = 0 is not a replacement for frozen extras oracle **0.796**. The rise is mostly `unknown_silent` putting gold-`unknown` into the review set. Not minutes.
 
 **Not done:** D17 flip; `--quote-entail` default; entail lexicon on hold-out; train `unknown`; Loop A/B apply; real notes; agent. Headline F1 unchanged.
+
+### 10.51 Research-extract strata and quote-entail letter-bootstrap (2026-10-13)
+
+CPU only. Stored L1C. `scripts/score_leo_extract_strata_fs.py`. Frozen extras / `leo_quote_entail_fs40` not overwritten.
+
+Convention rule (fixed): `epilepsy_type` and gold `unknown` and pred `focal`/`generalized`. Current-chain extract **74/84 = 0.881** [0.805, 0.946]; convention **0/8**; residual **74/76 = 0.974** [0.933, 1.000]. Residual misses: EA0186 FBTCS vs FUA; EA0188 day vs month (both entail). Tables: `leo_extract_strata_fs40.md`.
+
+Quote-entail bootstrap (same 40; exploratory): Δ auto-P +0.044 [−0.008, 0.106] includes 0; Δ auto-R −0.081 [−0.124, −0.040]; residual Δ extract-PPV −0.005 [−0.017, 0.000]; 12 gold-correct demoted. **Default stays off.** `leo_quote_entail_bootstrap_fs40.md`.
+
+**Not done:** D17 flip; `--quote-entail` default; train `unknown`; recode gold; Loop A/B apply. Headline 71/82 untouched.

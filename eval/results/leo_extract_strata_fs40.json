@@ -1,0 +1,269 @@
+{
+  "arm": "L1C",
+  "dir": "data/run_manifests_fs_test_flat_c",
+  "n_letters": 40,
+  "rule": "epilepsy_type gold==unknown and pred in {focal, generalized, combined}",
+  "frozen_headline": "71/82 = 0.866 (leo_paper_extras_fs40; do not replace)",
+  "strata_default": {
+    "all": {
+      "name": "all",
+      "correct": 74,
+      "scored": 84,
+      "precision": 0.8809523809523809,
+      "bootstrap": {
+        "mean": 0.8803634087166271,
+        "ci": [
+          0.8048780487804879,
+          0.9456521739130435
+        ]
+      }
+    },
+    "convention": {
+      "name": "convention",
+      "correct": 0,
+      "scored": 8,
+      "precision": 0.0,
+      "bootstrap": {
+        "mean": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "residual": {
+      "name": "residual",
+      "correct": 74,
+      "scored": 76,
+      "precision": 0.9736842105263158,
+      "bootstrap": {
+        "mean": 0.9729533135602375,
+        "ci": [
+          0.9333333333333333,
+          1.0
+        ]
+      }
+    }
+  },
+  "strata_quote_entail": {
+    "all": {
+      "name": "all",
+      "correct": 62,
+      "scored": 69,
+      "precision": 0.8985507246376812,
+      "bootstrap": {
+        "mean": 0.8970904585204861,
+        "ci": [
+          0.8055555555555556,
+          0.9705882352941176
+        ]
+      }
+    },
+    "convention": {
+      "name": "convention",
+      "correct": 0,
+      "scored": 5,
+      "precision": 0.0,
+      "bootstrap": {
+        "mean": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "residual": {
+      "name": "residual",
+      "correct": 62,
+      "scored": 64,
+      "precision": 0.96875,
+      "bootstrap": {
+        "mean": 0.9694639866448286,
+        "ci": [
+          0.9193548387096774,
+          1.0
+        ]
+      }
+    }
+  },
+  "auto_off": {
+    "p": 0.8645833333333334,
+    "r": 0.564625850340136,
+    "f1": 0.6831275720164608
+  },
+  "auto_on": {
+    "p": 0.9102564102564102,
+    "r": 0.48299319727891155,
+    "f1": 0.6311111111111111
+  },
+  "paired_auto": {
+    "delta_p": {
+      "mean": 0.0444015209602559,
+      "ci": [
+        -0.008051846032992915,
+        0.10569663692518871
+      ],
+      "p_le_0": 0.0595
+    },
+    "delta_r": {
+      "mean": -0.08132168011615522,
+      "ci": [
+        -0.12408759124087593,
+        -0.04026845637583898
+      ],
+      "p_le_0": 1.0
+    },
+    "delta_f1": {
+      "mean": -0.05247053365295441,
+      "ci": [
+        -0.09533759550912224,
+        -0.015638766519823655
+      ],
+      "p_le_0": 0.9975
+    }
+  },
+  "paired_extract_ppv": {
+    "all": {
+      "mean": 0.016927254899160846,
+      "ci": [
+        -0.019642857142857184,
+        0.06029411764705883
+      ],
+      "p_le_0": 0.2075
+    },
+    "convention": {
+      "mean": 0.0,
+      "ci": [
+        0.0,
+        0.0
+      ],
+      "p_le_0": 1.0
+    },
+    "residual": {
+      "mean": -0.005354464176212057,
+      "ci": [
+        -0.01741654571843254,
+        0.0
+      ],
+      "p_le_0": 1.0
+    }
+  },
+  "routing_entail_on": {
+    "demoted": 24,
+    "gold_correct_demoted": 12
+  },
+  "misses_default": [
+    {
+      "pid": "EA0166",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": false,
+      "quote": "Juvenile Myoclonic Epilepsy"
+    },
+    {
+      "pid": "EA0167",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": true,
+      "quote": "temporal lobe epilepsy"
+    },
+    {
+      "pid": "EA0168",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": true,
+      "quote": "Juvenile Myoclonic Epilepsy"
+    },
+    {
+      "pid": "EA0169",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": false,
+      "quote": "symptomatic epilepsy"
+    },
+    {
+      "pid": "EA0180",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "generalized",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": true,
+      "quote": "Juvenile Myoclonic Epilepsy"
+    },
+    {
+      "pid": "EA0181",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": false,
+      "quote": "symptomatic epilepsy"
+    },
+    {
+      "pid": "EA0182",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": true,
+      "quote": "TLE"
+    },
+    {
+      "pid": "EA0186",
+      "field": "clinical_seizure.predominant_seizure_type",
+      "pred": "focal_to_bilateral_tonic_clonic",
+      "gold": "focal_unknown_awareness",
+      "ok": false,
+      "bucket": "residual",
+      "quote_entails": true,
+      "quote": " focal to bilateral convulsive seizur"
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.epilepsy_type",
+      "pred": "focal",
+      "gold": "unknown",
+      "ok": false,
+      "bucket": "convention",
+      "quote_entails": true,
+      "quote": "Focal epilepsy"
+    },
+    {
+      "pid": "EA0188",
+      "field": "clinical_seizure.seizure_frequency",
+      "pred": {
+        "period": "day",
+        "count_min": 1.0,
+        "count_max": 1.0
+      },
+      "gold": {
+        "seizure_period": "month"
+      },
+      "ok": false,
+      "bucket": "residual",
+      "quote_entails": true,
+      "quote": "1 seizure per day"
+    }
+  ],
+  "decision": "KEEP default off. Residual \u0394 extract-PPV CI includes 0 or the cost is 12 gold-correct demotions. Exploratory on the same 40 letters as 10.49; not a confirmatory flip.",
+  "flip_default": false,
+  "bootstrap": {
+    "n": 2000,
+    "seed": 0
+  }
+}

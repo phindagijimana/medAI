@@ -98,10 +98,19 @@ A worked check that **field error moves a cohort number**: `scripts/cohort_demo.
 
 Do not compute incidence, survival, trial eligibility or surgical decisions from unreviewed cells.
 
+## 7. Research-extract strata and quote-entail CI (2026-10-13)
+
+Views only. Frozen extras stay **71/82 = 0.866**. Current-chain extract is 74/84 = 0.881 (`leo_extract_strata_fs40.md`). Do not mix the two rows.
+
+Convention rule (fixed): `epilepsy_type` and gold is `unknown` and pred is `focal` / `generalized`. That slice is 0/8. Residual extract PPV is **74/76 = 0.974** [0.933, 1.000]. The two residual misses (EA0186 seizure type; EA0188 frequency) both entail. Do not recode gold; do not train `unknown`.
+
+`--quote-entail` on the same 40 letters (`leo_quote_entail_bootstrap_fs40.md`): Δ auto-P +0.044 [−0.008, 0.106] includes 0; Δ auto-R −0.081 [−0.124, −0.040]; residual Δ extract-PPV −0.005 [−0.017, 0.000]; 12 gold-correct cells demoted. **Default stays off.** Same hold-out as 10.49 — description, not a confirmatory flip.
+
 ## Change log
 
 | date | change |
 |---|---|
+| 2026-10-13 | Extract strata + quote-entail letter-bootstrap (10.51). Frozen 71/82 untouched. Default `--quote-entail` stays off. |
 | 2026-10-09 | Unsupported claims (C5, F1 win, trust, real notes, “safe”, O raises C1) tabulated in `writing/contributions.md` §3.1. |
 | 2026-10-10 | Manuscript + TRIPOD-LLM + `writing/supplement_leo_accept_errors.md` updated from the rematch. D17 / quote-entail default / train-unknown / Loop A/B apply stay No. Frozen extras 0.796 / 71/82 untouched. |
 | 2026-10-10 | v0.9 rematch (10.50): leak list 20 cells; noisy curve run. D17 / quote-entail default / train-unknown / Loop A/B apply stay No. Frozen extras 0.796 / 71/82 untouched. |

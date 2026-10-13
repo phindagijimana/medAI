@@ -1,0 +1,19 @@
+{
+  "decision": "KEEP default off. Residual Δ extract-PPV does not rise; 12 gold-correct demotions. Exploratory on the same 40 as 10.49.",
+  "flip_default": false,
+  "note": "Current leo-v0.9 chain. Do not overwrite leo_quote_entail_fs40 or leo_paper_extras_fs40.",
+  "auto_off": {"p": 0.8645833333333334, "r": 0.564625850340136, "f1": 0.6831275720164608},
+  "auto_on": {"p": 0.9102564102564102, "r": 0.48299319727891155, "f1": 0.6311111111111111},
+  "paired_auto": {
+    "delta_p": {"mean": 0.0444015209602559, "ci": [-0.008051846032992915, 0.10569663692518871], "p_le_0": 0.0595},
+    "delta_r": {"mean": -0.08132168011615522, "ci": [-0.12408759124087593, -0.04026845637583898], "p_le_0": 1.0},
+    "delta_f1": {"mean": -0.05247053365295441, "ci": [-0.09533759550912224, -0.015638766519823655], "p_le_0": 0.9975}
+  },
+  "paired_extract_ppv": {
+    "all": {"mean": 0.016927254899160846, "ci": [-0.019642857142857184, 0.06029411764705883], "p_le_0": 0.2075},
+    "convention": {"mean": 0.0, "ci": [0.0, 0.0], "p_le_0": 1.0},
+    "residual": {"mean": -0.005354464176212057, "ci": [-0.01741654571843254, 0.0], "p_le_0": 1.0}
+  },
+  "routing_entail_on": {"demoted": 24, "gold_correct_demoted": 12},
+  "bootstrap": {"n": 2000, "seed": 0}
+}
