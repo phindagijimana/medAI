@@ -6,17 +6,19 @@ Full documentation at [https://medai.readthedocs.io](https://medai.readthedocs.i
 
 > **Research use only.** Does not diagnose or recommend treatment. Tested on **synthetic notes only**. Real notes need IRB and approved compute.
 
-## About
+## What LEO does
 
-LEO reads a clinical note and fills a phenotype table: value, quote from the note, which reader said it (model, rules, or both), and whether a person should look.
+LEO (Language, EpExtra, Ontology) is a research tool for epilepsy clinic letters. It reads a note and fills a phenotype table: seizure and epilepsy type, medications and status, EEG and MRI cues, and related fields. Every cell carries a value, a quote from the note, which reader produced it, and whether a person should look. The aim is a table a study can defend — agreed cells kept, clashes visible — not a silent guess at a complete phenotype.
 
-The main features of this software are:
+A letter often supports more than one reading of the same sentence (current versus prior, plan versus fact, the patient’s drug versus family history). LEO therefore runs two different readers: a constrained clinical language model (Med42-8B) and deterministic ExECT-style rules. Cells where they agree become the research extract. Cells where they clash go to a review queue; the rules value is shown and the model value is kept as an alternative. An ontology layer can attach published codes after extract. It does not vote, and it is not used to raise precision.
+
+This has been tested on **synthetic** clinician-authored letters only. It does not diagnose or recommend treatment. Accepted cells still miss gold about one time in six or seven (concordant PPV 71/82 = 0.866 on the 40-letter set). CPU-only runs have one reader and are not a research extract. Why the three parts exist: [Theory and Science](THEORY.md). How to quote a number: [Interpreting results](INTERPRETING_RESULTS.md).
+
+## In practice
 
 1. **Two readers, one table.** Constrained Med42-8B plus ExECT-style rules (EpExtra). Agree → accept. Clash → review; the **rules** are shown (D17); the model value is kept as `alternative`.
 2. **One note = one row.** Roll-up is optional and is not the extract. The research extract is `accepted` **and** both readers.
 3. **A Validator, not a chat.** Accept / Correct / Deny / add missed values. `leo learn` scores routing later; it does not change the extract.
-
-Accepted cells are not “safe” (concordant PPV ~0.85–0.87 on the 40-letter gold). CPU-only has one reader and is **not** a research extract.
 
 Code: [github.com/phindagijimana/medAI](https://github.com/phindagijimana/medAI).
 
