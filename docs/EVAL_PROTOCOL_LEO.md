@@ -1297,3 +1297,29 @@ Convention rule (fixed): `epilepsy_type` and gold `unknown` and pred `focal`/`ge
 Quote-entail bootstrap (same 40; exploratory): Δ auto-P +0.044 [−0.008, 0.106] includes 0; Δ auto-R −0.081 [−0.124, −0.040]; residual Δ extract-PPV −0.005 [−0.017, 0.000]; 12 gold-correct demoted. **Default stays off.** `leo_quote_entail_bootstrap_fs40.md`.
 
 **Not done:** D17 flip; `--quote-entail` default; train `unknown`; recode gold; Loop A/B apply. Headline 71/82 untouched.
+
+### 10.52 Hard slices on polish90 (2026-10-13)
+
+D14. CPU. Existing L1C manifests + EpExtra. `MEDAI_SYNTH_SET=polish90` `scripts/score_leo_vs_synth_gold.py --slices --out eval/results/leo_vs_synth_gold_slices_polish90`. No rule change.
+
+Plan tags (90 polish training patients, 443 notes): 65 prior / 39 denied / 36 hedged / 23 hypothetical / 83 any. `slices30` remains a 4–5-patient smoke test (`leo_vs_synth_gold_slices30.*`).
+
+L1C covers 277/443 notes (5/90 patients complete). Do not read L1C / LEO F1 on this set as a complete-patient result.
+
+**EpExtra on all notes** (`leo_vs_synth_gold_slices_polish90_eonly.*`). Rules were developed on this corpus. Not unused-set confirmation. Not a headline. Frozen extras stay 71/82.
+
+| group | n | micro-F1 [95% CI] | stopped-drug leak |
+|---|---:|---|---|
+| all | 90 | 0.939 [0.916, 0.960] | 17/131 |
+| prior | 65 | 0.940 [0.915, 0.962] | 17/131 |
+| denied | 39 | 0.945 [0.911, 0.971] | 11/59 |
+| hedged | 36 | 0.933 [0.902, 0.962] | 13/53 |
+| hypothetical | 23 | 0.936 [0.888, 0.974] | 0/28 |
+| any distractor | 83 | 0.938 [0.916, 0.960] | 17/131 |
+| no distractor | 7 | 0.951 [0.854, 1.000] | — |
+
+Reading. All-field F1 does not drop on the tagged slices versus the pool. 17 of 131 plan-prior drugs appear in `current_asms` (0.13). Hypothetical plans leak 0/28. Do not retune E from this look.
+
+L1C replay on the same 90 (`leo_vs_synth_gold_slices_polish90.md`) is incomplete (277 notes). Specialist F1 on those notes is 0.914 (recall loss from missing notes), not comparable to the 0.939 all-notes row.
+
+**Not done:** D17 flip; `--quote-entail` default; train `unknown`; E lexicon retune; overwrite extras / v05.

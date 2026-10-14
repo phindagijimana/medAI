@@ -195,6 +195,12 @@
     <label><input type="checkbox" id="opt-research"> Research extract (values both readers accepted)</label>
   </div>
   <p class="small" id="researchHint" hidden>Keeps only values both readers accepted, so it is empty on CPU.</p>
+  <h3>Current ASM view</h3>
+  <p class="hint">Does not change extract. A clinician still picks the study headline. Default is maintenance.</p>
+  <div class="row">
+    <label><input type="radio" name="opt-asm" value="maintenance" checked> Maintenance only (daily ASMs; rescue stays in its column)</label>
+    <label><input type="radio" name="opt-asm" value="rescue-as-current"> Include rescue (ExECT / F-S gold convention)</label>
+  </div>
   <h3>Extra detectors <code>--ext-detector</code></h3>
   <div id="dets" class="optgrid"></div>
 </section>
@@ -292,6 +298,12 @@
     <label><input type="checkbox" id="j-rag" disabled> Ask-RAG (needs Med42)</label>
     <label><input type="checkbox" id="j-codes"> Export codes</label>
     <label><input type="checkbox" id="j-research"> Research extract (values both readers accepted)</label>
+  </div>
+  <h3>Current ASM view</h3>
+  <p class="hint">Display only. Extract columns stay as they are.</p>
+  <div class="row">
+    <label><input type="radio" name="j-asm" value="maintenance" checked> Maintenance only</label>
+    <label><input type="radio" name="j-asm" value="rescue-as-current"> Include rescue (ExECT / F-S gold)</label>
   </div>
   <div id="jdets" class="optgrid"></div>
   <div class="row" style="margin-top:14px">
@@ -507,7 +519,9 @@ function flagFields(prefix) {
   const rag = prefix === 'j' ? $('#j-rag').checked : $('#opt-rag').checked;
   const codes = prefix === 'j' ? $('#j-codes').checked : $('#opt-codes').checked;
   const research = prefix === 'j' ? $('#j-research').checked : $('#opt-research').checked;
-  return {ext_detectors: dets, quote_entail: qe, ask_rag: rag && LLM_READY, export_codes: codes, research_extract: research};
+  const asm = document.querySelector(prefix === 'j' ? 'input[name="j-asm"]:checked' : 'input[name="opt-asm"]:checked');
+  return {ext_detectors: dets, quote_entail: qe, ask_rag: rag && LLM_READY, export_codes: codes, research_extract: research,
+          asm_view: (asm && asm.value) || 'maintenance'};
 }
 const selected = () => [...document.querySelectorAll('.ph:checked')].map(c => c.value);
 function questions() {
@@ -595,9 +609,14 @@ async function runPaste() {
   const r = await fetch('/leo/extract', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
   const j = await r.json(); if (!r.ok) { say(j.error, true); finish(); return; }
   LAST_PASTE = j;
-  const rows = j.phenotypes.map(p => ({phenotype: p.label, value: j.row[p.id], status: j.row[p.id + '_status'],
+  const rows = j.phenotypes.map(p => {
+    let value = j.row[p.id];
+    if (p.id === 'current_asms' && j.row.current_asms_view != null && j.row.asm_view === 'rescue-as-current')
+      value = j.row.current_asms_view;
+    return {phenotype: p.label, value: value, status: j.row[p.id + '_status'],
     evidence: j.row[p.id + '_evidence'], source: j.row[p.id + '_source'], why: why(j.row[p.id + '_why']),
-    alternative: j.row[p.id + '_alternative'] || ''}));
+    alternative: j.row[p.id + '_alternative'] || ''};
+  });
   j.asks.forEach(a => rows.push({phenotype: a.question, value: a.answer, status: a.status, evidence: a.quote, source: 'model', why: why(a.reason), alternative: ''}));
   $('#out').hidden = false; $('#legend').hidden = false; $('#rlink').hidden = true;
   const csv = el('button', {type: 'button', class: 'ghost', text: 'Download CSV'});
@@ -627,7 +646,7 @@ async function runFile() {
   const fd = new FormData(); fd.append('file', f); fd.append('phenotypes', selected().join(',')); fd.append('questions', JSON.stringify(questions()));
   fd.append('llm', $('#llm').value); fd.append('format', $('#fmt').value); fd.append('include_review', $('#increv').checked ? '1' : '0');
   const flags = flagFields('e');
-  Object.keys(flags).forEach(k => fd.append(k, k === 'ext_detectors' ? flags[k] : (flags[k] ? '1' : '0')));
+  Object.keys(flags).forEach(k => fd.append(k, (k === 'ext_detectors' || k === 'asm_view') ? flags[k] : (flags[k] ? '1' : '0')));
   fd.append('text_col', $('#textcol').value); fd.append('id_col', $('#idcol').value); fd.append('sheet', $('#sheet').value);
   const r = await fetch('/leo/batch', {method: 'POST', body: fd}); const j = await r.json();
   if (!r.ok) { say(j.error, true); finish(); return; }

@@ -91,7 +91,7 @@ The extract is a rectangular table (per note, or per patient via `bin/leo rollup
 | Medication / DRE | Current ASM lists, polytherapy, an ILAE 2010-style resistance label | Resistance is inferred; it is not a trial-adequacy audit (Kwan et al. 2010). |
 | Imaging–EEG | MRI normal/HS/FCD, IEDs, ictal onset, derived concordance | Mostly rules-only synthetic scores; concordance inherits three localizations. |
 | Surgery / devices | Resection, VNS, RNS, DBS as listed | Over-calls plans as history. |
-| Longitudinal | Per-note rows: drug and frequency change across visits | Roll-up hides change; its accuracy is unmeasured. `visit_summary` is under 50 words from that row’s cells, not a second extract. |
+| Longitudinal | Per-note rows: drug and frequency change across visits | Roll-up hides change; `<field>_conflict` flags an earlier different value. Accuracy unmeasured. `visit_summary` is under 50 words from that row’s cells, not a second extract. |
 | Linkage | Etiology specifics; NINDS CDE correspondence | Needs IRB. Mapping: `docs/NINDS_CDE_MAPPING.md` (not an exporter). |
 
 A worked check that **field error moves a cohort number**: `scripts/cohort_demo.py` (onset-age median/IQR, polytherapy ≥2 ASMs, temporal-lobe mention on the F-S letters; gold vs extract). That is utility of the *table*, not a leaderboard.
@@ -106,10 +106,24 @@ Convention rule (fixed): `epilepsy_type` and gold is `unknown` and pred is `foca
 
 `--quote-entail` on the same 40 letters (`leo_quote_entail_bootstrap_fs40.md`): Δ auto-P +0.044 [−0.008, 0.106] includes 0; Δ auto-R −0.081 [−0.124, −0.040]; residual Δ extract-PPV −0.005 [−0.017, 0.000]; 12 gold-correct cells demoted. **Default stays off.** Same hold-out as 10.49 — description, not a confirmatory flip.
 
+## 8. Hard slices (robustness, not a headline)
+
+D14: score patients whose generation plan marks stopped drugs, denied, hedged or hypothetical findings. All-field F1 plus stopped-drug leak (plan `PRIOR_ASMS` ∩ predicted `current_asms`). Do not retune E from these rows. Frozen extras stay 71/82.
+
+| Set | Role | n patients | prior / denied / hedged / hypothetical / any |
+|---|---|---:|---|
+| `slices30` (`leo_vs_synth_gold_slices30.*`) | Smoke. Only 10 `polish_val` patients have tags | 30 (10 tagged) | 5 / 4 / 5 / 4 / 10 |
+| `polish90` (`MEDAI_SYNTH_SET=polish90`) | Intended n. Adapter **trained** on these; rules developed here. L1C only | 90 | 65 / 39 / 36 / 23 / 83 |
+
+L1C manifests on polish90 cover **277 / 443** notes (5 / 90 patients have every note). Do not read L1C / LEO slice F1 on that set as a complete-patient result. The full-coverage table is EpExtra on all notes (`leo_vs_synth_gold_slices_polish90_eonly.*`; short table `leo_vs_synth_gold_slices_polish90.tables.md`).
+
+EpExtra seven-field micro-F1 stays in 0.933–0.945 on the tagged slices versus 0.939 [0.916, 0.960] on all 90. Stopped-drug leak is **17/131** (0.13) overall; 0/28 on hypothetical; 13/53 on hedged. That is robustness of E on a corpus E was written against, not an unused-set confirmation. Do not retune E.
+
 ## Change log
 
 | date | change |
 |---|---|
+| 2026-10-13 | Hard-slice n on polish90 (D14). E-all-notes is the full-coverage table; L1C 277/443 incomplete. Frozen 71/82 untouched. |
 | 2026-10-13 | Extract strata + quote-entail letter-bootstrap (10.51). Frozen 71/82 untouched. Default `--quote-entail` stays off. |
 | 2026-10-09 | Unsupported claims (C5, F1 win, trust, real notes, “safe”, O raises C1) tabulated in `writing/contributions.md` §3.1. |
 | 2026-10-10 | Manuscript + TRIPOD-LLM + `writing/supplement_leo_accept_errors.md` updated from the rematch. D17 / quote-entail default / train-unknown / Loop A/B apply stay No. Frozen extras 0.796 / 71/82 untouched. |

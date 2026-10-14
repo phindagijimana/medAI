@@ -102,12 +102,14 @@ def _flags_from(src: Any) -> dict:
     else:
         dets = parse_ext_detectors(list(raw or []))
     research = _truthy(src.get("research_extract") if hasattr(src, "get") else False)
+    from services.leo_asm_view import parse_asm_view
     return {
         "ext_detectors": tuple(dets or ()),
         "quote_entail": _truthy(src.get("quote_entail") if hasattr(src, "get") else False),
         "ask_rag": _truthy(src.get("ask_rag") if hasattr(src, "get") else False),
         "export_codes": _truthy(src.get("export_codes") if hasattr(src, "get") else False),
         "research_extract": research,
+        "asm_view": parse_asm_view(src.get("asm_view") if hasattr(src, "get") else None),
     }
 
 
@@ -119,6 +121,7 @@ def _flags_public(flags: dict | None) -> dict:
         "ask_rag": bool(flags.get("ask_rag")),
         "export_codes": bool(flags.get("export_codes")),
         "research_extract": bool(flags.get("research_extract")),
+        "asm_view": flags.get("asm_view") or "maintenance",
     }
 
 
@@ -255,6 +258,8 @@ def extract_one():
                           include_review=include_review)
     if res.error:
         return _bad(f"extraction failed: {res.error}", 500)
+    from services.leo_asm_view import apply_asm_view_row
+    res.row = apply_asm_view_row(res.row, flags["asm_view"])
     pub = _flags_public(flags)
     pub["ask_rag"] = bool(rt.ask_rag)
     pub["quote_entail"] = bool(rt.quote_entail)
@@ -338,6 +343,8 @@ def extract_download():
         n_review = p.get("n_review")
         n_review = int(n_review) if n_review is not None else None
         auth.audit("download", job="paste", file=_safe_stem(str(doc_id)))
+    from services.leo_asm_view import apply_asm_view_row
+    row = apply_asm_view_row(dict(row), flags["asm_view"])
     table, claims_df, prov = lb.outputs_from_paste(
         text=text, doc_id=str(doc_id), row=row, claims=list(claims or []),
         asks_out=list(asks_out or []), phenotypes=phen, asks=asks, versions=versions,
@@ -398,6 +405,10 @@ def _run_job(job_id: str) -> None:
             df, rt, phenotypes=job["phen"], asks=job["asks"], text_col=cols["text"], id_col=cols["id"],
             date_col=cols["date"], include_review=job["include_review"], limit=job["limit"],
             progress=progress, cancel=lambda: job.get("cancel", False))
+        from services.leo_asm_view import apply_asm_view
+        view = (job.get("flags") or {}).get("asm_view") or "maintenance"
+        table = apply_asm_view(table, view)
+        prov["asm_view"] = view
         prov["input_sha256"] = lb.input_hash(job["input"])
         prov["input_file"] = job["filename"]
         out = jd / f"{Path(job['filename']).stem}_leo.{job['format']}"
@@ -564,6 +575,10 @@ def _run_spec_job(job_id: str) -> None:
             job["done"] = i
 
         table, claims, prov = lj.run_spec(spec, df, rt, progress=progress, cancel=lambda: job.get("cancel", False))
+        from services.leo_asm_view import apply_asm_view
+        view = (job.get("flags") or {}).get("asm_view") or "maintenance"
+        table = apply_asm_view(table, view)
+        prov["asm_view"] = view
         prov["input_sha256"] = lb.input_hash(job["input"])
         prov["input_file"] = job["filename"]
         out = jd / f"{Path(job['filename']).stem}_leo.{spec.output_format}"

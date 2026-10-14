@@ -23,6 +23,8 @@ bin/leo merge notes_leo.csv notes_leo.reviewed.csv
 bin/leo learn notes_leo.reviewed.csv   # Loop A/B; does not change extract
 bin/leo disagreements notes_leo.claims.csv   # model-vs-rules for blind adjudication
 bin/leo rollup notes_leo.csv --patient-col patient_id [--date-col visit_date]
+bin/leo batch notes.xlsx --asm-view rescue-as-current   # display only; extract unchanged
+bin/leo asm-view notes_leo.csv --view maintenance       # rewrite current_asms_view on an existing table
 ```
 
 Web: `bin/leo user add NAME` (turns login on), `bin/leo start`, `bin/leo status`, `bin/leo stop`. Page: `/leo/ui`.
@@ -49,7 +51,9 @@ For each phenotype `X`: `X`, `X_status` (`accepted` / `needs_review` / `not_foun
 
 **Research extract** (GPU): `accepted` **and** `specialist+llm`. That is the table whose accuracy is scored (71/82 = 0.866 on the 40-letter gold). `--accepted-only` is coarser. Do not treat CPU output as accepted facts. `needs_review` is still shown; use `--accepted-only` to blank it. Accepted is an agree-band filter, not a claim the cell is safe or that a clinician trusts it (`docs/INTERPRETING_RESULTS.md`).
 
-`bin/leo rollup` takes, per field, the latest note that states a value. It hides visit-to-visit change. Unmeasured.
+`bin/leo rollup` takes, per field, the latest note that states a value. If earlier notes stated a different value, `<field>_conflict` is `yes` and `<field>_changed_from` lists those values. Same value restated, or silence, is not a conflict. Unmeasured; not a new extract.
+
+**Current ASM view** (display only; D17 unchanged): `--asm-view maintenance` (default) leaves `current_asms` as the daily regimen. `--asm-view rescue-as-current` writes `current_asms_view` = current ∪ rescue (ExECT / F-S gold). The extracted columns are not overwritten. A clinician still picks the study headline. Same radios on `/leo/ui`. Re-apply on an existing file with `bin/leo asm-view`.
 
 ## 4. What to extract
 

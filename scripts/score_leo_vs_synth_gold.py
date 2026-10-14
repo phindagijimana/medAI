@@ -108,6 +108,67 @@ def aggregate(preds: list[dict]) -> dict:
     return out
 
 
+def _slice_groups(patients: list[str], plans: dict, strata: dict) -> dict[str, list[str]]:
+    groups = {"all": list(patients)}
+    for sname, plist in strata.items():
+        groups[sname] = [p for p in patients if p in set(plist)]
+    for name in list(SLICE_TAGS) + ["any_distractor"]:
+        groups[f"slice:{name}"] = [p for p in patients if plans[p]["tags"].get(name)]
+    groups["slice:no_distractor"] = [p for p in patients
+                                     if plans[p]["tags"] and not plans[p]["tags"]["any_distractor"]]
+    return groups
+
+
+def specialist_all_notes(patients, by_patient, spec_claims, gold, plans, strata, n_boot: int) -> dict:
+    """EpExtra on every note (no LLM). Used when L1C manifests do not cover the set."""
+    spec_patient = {
+        p: aggregate([fs.native_from_claims(spec_claims[v], {"accept", "review"}, "epextra")
+                      for v in by_patient[p] if v in spec_claims])
+        for p in patients
+    }
+    sources = {}
+    for gname, subset in _slice_groups(patients, plans, strata).items():
+        if len(subset) < 3:
+            continue
+        per_doc = {"specialist": [fs.score_doc(spec_patient[p], gold[p]) for p in subset]}
+        boot = fs.bootstrap(per_doc, [], n=n_boot)
+        p_, r_, f1_ = fs.micro(per_doc["specialist"])
+        prior_total = sum(len(plans[p]["prior_drugs"]) for p in subset)
+        leaked = sum(len(set(plans[p]["prior_drugs"]) & set(spec_patient[p]["current_asms"] or []))
+                     for p in subset)
+        sources[gname] = {
+            "n_patients": len(subset),
+            "n_notes": sum(len(by_patient[p]) for p in subset),
+            "micro_p": p_, "micro_r": r_, "micro_f1": f1_,
+            "f1_ci": list(boot["f1_ci"]["specialist"]),
+            "per_field": fs.per_field(per_doc["specialist"]),
+            "prior_leak": {"leaked": leaked, "prior_drugs": prior_total,
+                           "rate": (leaked / prior_total) if prior_total else None},
+        }
+    return {"reader": "epextra_all_notes", "n_patients": len(patients), "sources": sources}
+
+
+def write_specialist_slices_md(report: dict, path: Path) -> None:
+    L = ["# EpExtra hard slices (all notes, no LLM)", "",
+         "Patient-level micro-F1 on seven fields. Specialist only. "
+         "Not a headline; rules were developed on this corpus. "
+         "Stopped-drug leak = plan `PRIOR_ASMS` ∩ predicted `current_asms`.", ""]
+    for gname, b in report["sources"].items():
+        leak = b.get("prior_leak") or {}
+        leak_s = (f"; stopped-drug leak {leak['leaked']}/{leak['prior_drugs']}"
+                  if leak.get("prior_drugs") else "")
+        L += [f"## {gname}  ({b['n_patients']} patients, {b['n_notes']} notes{leak_s})", "",
+              "| system | micro P | micro R | micro F1 | 95% CI |",
+              "|---|---:|---:|---:|---|",
+              f"| specialist | {b['micro_p']:.3f} | {b['micro_r']:.3f} | {b['micro_f1']:.3f} | "
+              f"[{b['f1_ci'][0]:.3f}, {b['f1_ci'][1]:.3f}] |", ""]
+        L += ["Per-field F1:", "", "| field | n | specialist |", "|---|---:|---:|"]
+        for fld, row in (b.get("per_field") or {}).items():
+            L.append(f"| `{fld}` | {row.get('n', 0)} | {row.get('f1', 0):.3f} |")
+        L.append("")
+    path.write_text("\n".join(L) + "\n", encoding="utf-8")
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -148,6 +209,26 @@ def main(argv=None) -> int:
 
     plans = {p: plan_tags(plan_for(corpus_of_patient[p], p)) for p in patients}
 
+    out = Path(args.out)
+    out = out if out.is_absolute() else REPO / out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if args.slices:
+        e_rep = specialist_all_notes(patients, by_patient, spec_claims, gold, plans,
+                                     strata, args.bootstrap)
+        e_out = out.with_name(out.name + "_eonly")
+        e_out.with_suffix(".json").write_text(json.dumps(e_rep, indent=2, default=str),
+                                             encoding="utf-8")
+        write_specialist_slices_md(e_rep, e_out.with_suffix(".md"))
+        print(f"\nwrote specialist-all-notes slices {e_out.with_suffix('.json')} "
+              f"and {e_out.with_suffix('.md')}", flush=True)
+        for gname, b in e_rep["sources"].items():
+            leak = b.get("prior_leak") or {}
+            extra = (f"  stopped-drug leak {leak['leaked']}/{leak['prior_drugs']}"
+                     if leak.get("prior_drugs") else "")
+            print(f"E {gname:<22} n={b['n_patients']:<3} "
+                  f"P {b['micro_p']:.3f} R {b['micro_r']:.3f} F1 {b['micro_f1']:.3f} "
+                  f"CI [{b['f1_ci'][0]:.3f}, {b['f1_ci'][1]:.3f}]{extra}", flush=True)
+
     # claim_correct is looked up at module level inside the fs bootstrap helpers
     report: dict = {"strata": {k: v for k, v in strata.items()}, "rescue_as_current": fs.RESCUE_AS_CURRENT,
                     "sources": {}}
@@ -155,7 +236,10 @@ def main(argv=None) -> int:
         label, mdir, arm = fs.parse_llm(spec)
         reasoner = ManifestLLMReasoner([mdir], arm=arm, doc_id_map=lambda d: f"synth-{d}")
         covered = [v for v in visits if reasoner.has(v)]
-        print(f"\n=== {label}: {arm} from {mdir} covers {len(covered)}/{len(visits)} notes ===", flush=True)
+        n_full = sum(1 for p in patients if by_patient[p]
+                     and all(v in set(covered) for v in by_patient[p]))
+        print(f"\n=== {label}: {arm} from {mdir} covers {len(covered)}/{len(visits)} notes "
+              f"({n_full}/{len(patients)} patients with every note) ===", flush=True)
         if not covered:
             continue
         pipe = ChainPipeline(extractor=base._extractor, assembler=cached,

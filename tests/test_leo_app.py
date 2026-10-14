@@ -322,6 +322,7 @@ def test_routes_catalogue_extract_and_batch(client, tmp_path):
     assert b"--quote-entail" in ui.data and b"--ask-rag" in ui.data and b"--export-codes" in ui.data
     assert b"--ext-detector" in ui.data and b"Score labels (leo learn)" in ui.data
     assert b"Optional extras" in ui.data and b'id="opt-card"' in ui.data
+    assert b"Current ASM view" in ui.data and b"rescue-as-current" in ui.data
     assert b"<summary>Optional (off by default)</summary>" not in ui.data
     assert b"bin/leo user add" in ui.data and b"Research extract" in ui.data
     assert b"leo-ack-v1" in ui.data and b"Research use acknowledgment" in ui.data
@@ -338,6 +339,7 @@ def test_routes_catalogue_extract_and_batch(client, tmp_path):
     j = r.get_json()
     assert r.status_code == 200 and j["mode"] == "specialist_only" and j["row"]["epilepsy_type"] == "focal"
     assert j.get("document_id")
+    assert j["flags"]["asm_view"] == "maintenance" and "current_asms_view" in j["row"]
     assert b"Download CSV" in ui.data and b"Download Excel" in ui.data
     assert b"/leo/extract/download" in ui.data
     dl = c.post("/leo/extract/download", json={
@@ -370,9 +372,12 @@ def test_routes_catalogue_extract_and_batch(client, tmp_path):
                                            "research_extract": True}).get_json()
     assert res_only["flags"]["research_extract"] is True and res_only["row"]["epilepsy_type"] == ""
     parsed = leo._flags_from({"quote_entail": True, "ask_rag": True, "export_codes": True,
-                              "ext_detectors": "ctakes,freq", "research_extract": "on"})
+                              "ext_detectors": "ctakes,freq", "research_extract": "on",
+                              "asm_view": "rescue-as-current"})
     assert parsed["quote_entail"] and parsed["ask_rag"] and parsed["export_codes"]
     assert parsed["ext_detectors"] == ("ctakes", "freq") and parsed["research_extract"]
+    assert parsed["asm_view"] == "rescue-as-current"
+    assert leo._flags_from({}).get("asm_view") == "maintenance"
     assert c.post("/leo/extract", json={"source_text": NOTE, "phenotypes": ["nope"]}).status_code == 400
     assert c.post("/leo/extract", json={"source_text": ""}).status_code == 400
     # questions need a loaded model
@@ -871,6 +876,9 @@ def test_rollup_takes_the_latest_note_that_states_a_value_and_never_mixes_notes(
     assert r.loc["a", "epilepsy_type"] == "generalized"          # 2024-06 is silent; 2024-03 is the latest that states one
     assert r.loc["a", "epilepsy_type_from_row"] == 3 and r.loc["a", "epilepsy_type_from_date"] == "2024-03-01"
     assert r.loc["a", "epilepsy_type_status"] == "needs_review" and r.loc["a", "leo_notes"] == 3
+    assert r.loc["a", "epilepsy_type_conflict"] == "yes" and r.loc["a", "epilepsy_type_changed_from"] == "focal"
+    assert r.loc["a", "leo_n_conflicts"] == 1 and "epilepsy_type" in r.loc["a", "leo_conflict_fields"]
+    assert r.loc["b", "epilepsy_type_conflict"] == "no" and r.loc["b", "leo_n_conflicts"] == 0
     assert r.loc["b", "epilepsy_type_why"] == "no_second_reader"          # status and reason copied, never upgraded
     assert "generalized" in r.loc["a", "visit_summary"] and "[?]" in r.loc["a", "visit_summary"]
     assert "focal" in r.loc["b", "visit_summary"] and "[?]" in r.loc["b", "visit_summary"]
@@ -879,6 +887,14 @@ def test_rollup_takes_the_latest_note_that_states_a_value_and_never_mixes_notes(
     assert rollup(t, "patient").set_index("patient").loc["a", "epilepsy_type_from_row"] == 3
     with pytest.raises(ValueError):
         rollup(t, "nope")
+    same = pd.DataFrame({
+        "patient": ["c", "c"], "visit": ["2024-01-01", "2024-06-01"],
+        "epilepsy_type": ["focal", "Focal"],
+        "epilepsy_type_status": ["accepted", "accepted"],
+        "epilepsy_type_evidence": ["focal", "focal"], "epilepsy_type_why": ["", ""],
+    })
+    s = rollup(same, "patient", "visit").set_index("patient")
+    assert s.loc["c", "epilepsy_type_conflict"] == "no" and s.loc["c", "epilepsy_type_changed_from"] == ""
 
 
 # ---- model-vs-rules disagreements: blind export and scoring --------------------------------------------

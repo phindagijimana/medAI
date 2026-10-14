@@ -16,6 +16,8 @@ bin/leo batch notes.xlsx --local
 bin/leo start                    # web UI at /leo/ui
 bin/leo review notes_leo.csv
 bin/leo merge notes_leo.csv notes_leo.reviewed.csv
+bin/leo rollup notes_leo.csv --patient-col patient_id
+bin/leo asm-view notes_leo.csv --view maintenance
 ```
 
 GPU extract needs Med42-8B weights, the epilepsy CDB, and a UMLS key in `.env` (never committed). CPU-only is **not** a research extract.

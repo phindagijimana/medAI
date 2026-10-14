@@ -26,7 +26,7 @@ Why-tags that feed the loops: `wrong_value` / `wrong_status` / `quote_does_not_s
 | **H2 LoRA fused worse (C5)** | `--h2` off fusion; not supported vs L2C | Loop C only after A/B, frozen hold-out, adapter must agree with E on E-easy cells |
 | **Unsupported paper claims** | C5, F1 win, trust, real notes, “safe”, O raises C1 — reported, not claimed | Do not bury; do not retitle as an F1 win |
 | **CPU: nothing accepted** | Documented; `--accepted-only` empty | Use GPU for research extract |
-| **Roll-up hides change** | Per-note default; `visit_summary` display-only | Do not treat roll-up as scored; conflict flags still open |
+| **Roll-up hides change** | Per-note default; `visit_summary` display-only; `<field>_conflict` / `_changed_from` on `leo rollup` | Do not treat roll-up as scored; clinician still chooses “latest” |
 | **Ontology picker lost to first-hit** | Exact match only; picker **off** | `--export-codes` after extract; do not put ICD/SCORE in E |
 | **Engel / outcome** | No catalogue column; `--ext-detector engel` raises | New field first, then a reader — not a sidecar onto `surgery_history` |
 | **Single-reviewer noise** | Tags + comment stored | Two-reader kappa on a subset before Loop A ships |

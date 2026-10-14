@@ -284,7 +284,8 @@ def cmd_batch(args) -> int:
         for flag, val in (("-o", args.output), ("--format", args.format), ("--phenotypes", args.phenotypes),
                           ("--text-col", args.text_col), ("--id-col", args.id_col), ("--date-col", args.date_col),
                           ("--sheet", args.sheet),
-                          ("--limit", str(args.limit) if args.limit else ""), ("--chunk-chars", str(args.chunk_chars))):
+                          ("--limit", str(args.limit) if args.limit else ""), ("--chunk-chars", str(args.chunk_chars)),
+                          ("--asm-view", getattr(args, "asm_view", "") or "")):
             if val:
                 argv += [flag, str(Path(val).resolve()) if flag == "-o" else val]
         argv += _model_argv(args)
@@ -320,6 +321,10 @@ def cmd_batch(args) -> int:
     table, claims, prov = lb.run_table(df, rt, phenotypes=phen, asks=asks, text_col=cols["text"], id_col=cols["id"],
                                        date_col=cols["date"], include_review=not args.accepted_only, limit=args.limit,
                                        progress=prog)
+    from services.leo_asm_view import apply_asm_view, parse_asm_view
+    view = parse_asm_view(getattr(args, "asm_view", None))
+    table = apply_asm_view(table, view)
+    prov["asm_view"] = view
     prov["input_sha256"] = lb.input_hash(inp)
     prov["input_file"] = inp.name
     paths = lb.write_outputs(table, claims, prov, out, fmt, phen)
@@ -468,7 +473,26 @@ def cmd_rollup(args) -> int:
     out = rollup(lr.load_table(src), args.patient_col, args.date_col)
     dest = Path(args.output) if args.output else src.with_name(src.stem + ".patients.csv")
     out.to_csv(dest, index=False, encoding="utf-8-sig")
-    print(f"[leo] wrote {dest} ({len(out)} patients). Per field: the latest note that states a value; see docs/LEO_USER_GUIDE.md.")
+    n = int(out["leo_n_conflicts"].sum()) if "leo_n_conflicts" in out.columns else 0
+    print(f"[leo] wrote {dest} ({len(out)} patients, {n} field conflicts). "
+          f"Per field: latest stated value; <field>_conflict / _changed_from mark earlier disagreements. "
+          f"See docs/LEO_USER_GUIDE.md.")
+    return 0
+
+
+def cmd_asm_view(args) -> int:
+    """Rewrite current_asms_view on an existing extract. Does not change extract columns."""
+    from services import leo_review as lr
+    from services.leo_asm_view import apply_asm_view, parse_asm_view
+    src = Path(args.table).expanduser()
+    view = parse_asm_view(args.view)
+    out = apply_asm_view(lr.load_table(src), view)
+    dest = Path(args.output) if args.output else src
+    if dest.suffix.lower() in (".xlsx", ".xlsm"):
+        out.to_excel(dest, index=False)
+    else:
+        out.to_csv(dest, index=False, encoding="utf-8-sig")
+    print(f"[leo] wrote {dest} with asm_view={view} (current_asms and rescue_medication unchanged).")
     return 0
 
 
@@ -571,6 +595,8 @@ def cmd_extract(args) -> int:
     res = rt.extract_note(text, doc_id=args.document_id, phenotypes=phen, asks=asks)
     if res.error:
         raise SystemExit(f"extraction failed: {res.error}")
+    from services.leo_asm_view import apply_asm_view_row, parse_asm_view
+    res.row = apply_asm_view_row(res.row, parse_asm_view(getattr(args, "asm_view", None)))
     if args.json:
         print(json.dumps({"mode": rt.mode, "row": res.row, "claims": res.claims, "asks": res.asks,
                           "versions": rt.versions()}, indent=2, default=str))
@@ -865,6 +891,11 @@ def _common(sp, *, model=True):
         sp.add_argument("--quote-entail", action="store_true",
                         help="flag claims whose quote is in the note but does not assert the cell "
                              "(REVIEW quote_not_entailed). Off by default; does not change D17.")
+        sp.add_argument("--asm-view", default="maintenance",
+                        choices=("maintenance", "rescue-as-current"),
+                        help="display convention for current ASMs (default: maintenance). "
+                             "rescue-as-current unions rescue into current_asms_view (ExECT / F-S gold). "
+                             "Does not change extract or D17.")
 
 
 def main(argv=None) -> int:
@@ -991,6 +1022,13 @@ def main(argv=None) -> int:
     sp.add_argument("--date-col", default="", help="note date column (default: later row = later note)")
     sp.add_argument("-o", "--output", default=None, help="default: <table>.patients.csv")
     sp.set_defaults(fn=cmd_rollup)
+
+    sp = sub.add_parser("asm-view", help="choose maintenance vs rescue-as-current display on an existing table")
+    sp.add_argument("table", help="a LEO result (.csv or .xlsx)")
+    sp.add_argument("--view", default="maintenance", choices=("maintenance", "rescue-as-current"),
+                    help="maintenance = daily ASMs only (default). rescue-as-current = ExECT / F-S gold")
+    sp.add_argument("-o", "--output", default=None, help="default: overwrite the table")
+    sp.set_defaults(fn=cmd_asm_view)
 
     sp = sub.add_parser("learn", help="Loop A/B from validator files (does not change extract; LoRA paused)")
     sp.add_argument("tables", nargs="*", help="one or more reviewed.csv files")
